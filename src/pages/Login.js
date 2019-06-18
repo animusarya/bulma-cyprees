@@ -6,6 +6,16 @@ import { Button } from '../components/elements';
 
 const Container = styled.section`
   
+.logo {
+  width: 32px;
+  height: 32px;
+}
+ span {
+  color: ${props => props.theme.primaryColor};
+ }
+ .subtitle {
+  margin-top: 0px !important;
+ }
 .form {
   margin: 19% 4%;
 }
@@ -19,8 +29,6 @@ const Container = styled.section`
       border-color: #dbdbdb;
     }
   }
-
-
 `;
 
 export default () => (
@@ -36,10 +44,14 @@ export default () => (
           </div>
           <div className="column">
             <div className="form">
-              <h1 className="title has-text-weight-semibold has-text-black is-size-3">
-                itelliShere
+              <h1 className="title has-text-weight-normal has-text-black is-size-3">
+                <span>
+                  <img src="/images/favicon.ico" className="logo" />
+                </span>{' '}
+                Itelli
+                <span className="has-text-weight-normal is-size-3">Share</span>
               </h1>
-              <h2 className="subtitle has-text-weight-semibold  has-text-black is-size-4">
+              <h2 className="subtitle has-text-weight-semibold  has-text-black is-size-5">
                 Super Admin
               </h2>
               <div>
@@ -56,7 +68,13 @@ export default () => (
                   </div>
                 </div>
               </div>
-              <Button>Login</Button>
+              <div>
+                <div className="field">
+                  <p className="control">
+                    <Button>Login</Button>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

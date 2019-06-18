@@ -7,10 +7,11 @@ const Container = styled.div`
   background-color: white;
   border: 1px solid #c1d625;
   padding: 0px 30px;
-  color: #c1d625;
+  margin-top: 21px;
+  color: ${props => props.theme.primaryColor};
   :hover {
-    border-color: #c1d625;
-    color: #c1d625;
+    border-color: ${props => props.theme.primaryColor};
+    color: ${props => props.theme.primaryColor};
   }
 `;
 
