@@ -2,17 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  margin-top: 12px;
   background-color: #25313f;
   .media {
     padding: 4px 10px;
   }
-  .icon {
-    margin: 6px 15px;
+  .description {
+    padding: 9px 13px;
   }
 `;
 
-const Header = () => (
+const Footer = () => (
   <Container>
     <div className="columns">
       <div className="column">
@@ -31,13 +30,12 @@ const Header = () => (
         </div>
       </div>
       <div className="column">
-        <i
-          className="icon fa fa-power-off is-pulled-right"
-          aria-hidden="true"
-        />
+        <p className="description is-pulled-right is-size-7 has-text-white">
+          (c) 2019 Copyright All Right Reserved
+        </p>
       </div>
     </div>
   </Container>
 );
 
-export default Header;
+export default Footer;

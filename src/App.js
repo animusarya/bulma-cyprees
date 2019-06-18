@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import theme, { GlobalStyle } from './utils/theme';
 import apolloClient, { persistor } from './utils/apolloClient';
 
-import { Login, Home, About, Contact, Error404 } from './pages';
+import { Login, ClientList, Home, About, Contact, Error404 } from './pages';
 
 class App extends React.Component {
   state = { loaded: false };
@@ -33,6 +33,7 @@ class App extends React.Component {
                 <Route path="/about" component={About} />
                 <Route path="/contact" component={Contact} />
                 <Route path="/Login" component={Login} />
+                <Route path="/ClientList" component={ClientList} />
                 <Route component={Error404} />
               </Switch>
             </BrowserRouter>

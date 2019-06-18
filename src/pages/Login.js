@@ -3,18 +3,20 @@ import styled from 'styled-components';
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
 import { Button } from '../components/elements';
+import Footer from '../components/Footer';
 
 const Container = styled.section`
   
 .logo {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
 }
  span {
   color: ${props => props.theme.primaryColor};
  }
  .subtitle {
-  margin-top: 0px !important;
+  margin-top: 20px !important;
+  margin-bottom: 19px;
  }
 .form {
   margin: 19% 4%;
@@ -44,13 +46,21 @@ export default () => (
           </div>
           <div className="column">
             <div className="form">
-              <h1 className="title has-text-weight-normal has-text-black is-size-3">
-                <span>
-                  <img src="/images/favicon.ico" className="logo" />
-                </span>{' '}
-                Itelli
-                <span className="has-text-weight-normal is-size-3">Share</span>
-              </h1>
+              <div className="media">
+                <div className="">
+                  <figure className="image is-32x32">
+                    <img src="/images/favicon.ico" className="logo" />
+                  </figure>
+                </div>
+                <div className="media-content">
+                  <p className="title has-text-weight-normal has-text-black is-size-3">
+                    Intelli
+                    <span className="has-text-weight-normal is-size-3">
+                      Share
+                    </span>
+                  </p>
+                </div>
+              </div>
               <h2 className="subtitle has-text-weight-semibold  has-text-black is-size-5">
                 Super Admin
               </h2>
@@ -79,6 +89,7 @@ export default () => (
           </div>
         </div>
       </div>
+      <Footer />
     </Container>
   </Layout>
 );
