@@ -2,14 +2,25 @@ import React from 'react';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
+import { Button } from '../components/elements';
 
 const Container = styled.section`
-  .title {
-    font-size: 23px;
+  
+.form {
+  margin: 19% 4%;
+}
+.input {
+    border-top: hidden;
+    border-left: hidden;
+    border-right: hidden;
+    border-radius: 3px
+    -webkit-box-shadow: none;
+    :focus {
+      border-color: #dbdbdb;
+    }
   }
-  .subtitle {
-    font-size: 17px;
-  }
+
+
 `;
 
 export default () => (
@@ -19,12 +30,12 @@ export default () => (
       <div className="container">
         <div className="columns">
           <div className="column">
-            <figure className="image is-4by3">
-              <img src="/images/flat.jpg" alt="logo" />
+            <figure className="image is-4by2">
+              <img src="/images/black.jpg" alt="logo" />
             </figure>
           </div>
           <div className="column">
-            <div>
+            <div className="form">
               <h1 className="title has-text-weight-semibold has-text-black is-size-3">
                 itelliShere
               </h1>
@@ -33,27 +44,19 @@ export default () => (
               </h2>
               <div>
                 <div className="field">
-                  <label className="label">Name</label>
+                  <label className="label">Username:</label>
                   <div className="control">
-                    <input
-                      className="input"
-                      type="text"
-                      placeholder="e.g Alex Smith"
-                    />
+                    <input className="input" type="text" />
                   </div>
                 </div>
-
                 <div className="field">
-                  <label className="label">Email</label>
+                  <label className="label">password:</label>
                   <div className="control">
-                    <input
-                      className="input"
-                      type="email"
-                      placeholder="e.g. alexsmith@gmail.com"
-                    />
+                    <input className="input" type="text" />
                   </div>
                 </div>
               </div>
+              <Button>Login</Button>
             </div>
           </div>
         </div>
