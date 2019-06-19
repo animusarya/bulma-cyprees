@@ -1,46 +1,38 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`
+import Logo from '../components/elements/Logo';
+
+
+const Navbar = styled.nav`
   margin-top: 12px;
   background-color: #25313f;
-  .media {
-    padding: 4px 10px;
-  }
-  .icon {
-    margin: 6px 15px;
-  }
-  span {
-    color: ${props => props.theme.primaryColor};
-   }
+ .icon {
+   margin-right: 1%;
+ }
+ .navbar-end {
+  padding-right: 1%;
+ }
 `;
 
 const Header = () => (
-  <Container>
-    <div className="columns">
-      <div className="column">
-        <div className="media">
-          <div className="">
-            <figure className="image is-32x32">
-              <img src="/images/favicon.ico" className="logo" />
-            </figure>
-          </div>
-          <div className="media-content">
-            <p className="title has-text-weight-normal has-text-white is-size-4">
-              Intelli
-              <span className="has-text-weight-normal is-size-4">Share</span>
-            </p>
+    <Navbar className="navbar" role="navigation" aria-label="main navigation">
+      <div className="navbar-brand">
+        <a className="navbar-item" href="https://bulma.io">
+        <Logo />
+        </a>
+      </div>
+      <div id="navbarBasicExample" className="navbar-menu">
+        <div className="navbar-end">
+          <div className="navbar-item">
+            <i
+                className="icon fa fa-power-off"
+                aria-hidden="true"
+              />
           </div>
         </div>
       </div>
-      <div className="column">
-        <i
-          className="icon fa fa-power-off is-pulled-right"
-          aria-hidden="true"
-        />
-      </div>
-    </div>
-  </Container>
+    </Navbar>
 );
 
 export default Header;

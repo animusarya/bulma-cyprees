@@ -8,5 +8,5 @@ export default ({ children }) => (
   <div className="container">
     <Helmet title={config.siteName} />
     {children}
-  </div>
+    </div>
 );

@@ -1,9 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import Layout from '../components/Layout';
 import Seo from '../components/Seo';
+
+
+import Layout from '../components/Layout';
 import { Button } from '../components/elements';
 import Footer from '../components/Footer';
+import PageHeading from '../components/elements/PageHeading';
+import { Heading } from '../components/elements';
+
 
 const Container = styled.section`
 .logo {
@@ -17,8 +22,10 @@ const Container = styled.section`
   margin-top: 20px !important;
   margin-bottom: 19px;
  }
-.form {
-  margin: 19% 4%;
+.login {
+  display: flex;
+  align-items: center;
+  margin-left:5%;
 }
 .input {
     border-top: hidden;
@@ -30,11 +37,31 @@ const Container = styled.section`
       border-color: #dbdbdb;
     }
   }
+  .form {
+    width: 90%;
+  }
+  .media {
+    margin-bottom: 10%;
+  }
+  .forgetpassword {
+    color: ${props => props.theme.primaryColor};
+    border : none;
+  }
+  .button-field {
+    margin-top: 3%;
+  }
+  .loginfooter {
+    margin: 6% 0% 4% 0%;
+  }
+  h5 {
+    line-height: 0.5;
+  }
 `;
 
 export default () => (
   <Layout>
     <Seo title="Login" description="Some description here." />
+    <PageHeading title="Login Super Admin"/>
     <Container className="section">
       <div className="container">
         <div className="columns">
@@ -43,7 +70,7 @@ export default () => (
               <img src="/images/black.jpg" alt="logo" />
             </figure>
           </div>
-          <div className="column">
+          <div className="column login">
             <div className="form">
               <div className="media">
                 <div className="">
@@ -60,9 +87,6 @@ export default () => (
                   </p>
                 </div>
               </div>
-              <h2 className="subtitle has-text-weight-semibold  has-text-black is-size-5">
-                Super Admin
-              </h2>
               <div>
                 <div className="field">
                   <label className="label">Username:</label>
@@ -78,7 +102,8 @@ export default () => (
                 </div>
               </div>
               <div>
-                <div className="field">
+                <div className="button-field">
+                  <a class="forgetpassword">forgot Password</a>
                   <p className="control">
                     <Button>Login</Button>
                   </p>
@@ -89,6 +114,11 @@ export default () => (
         </div>
       </div>
       <Footer />
+      <div className="loginfooter">
+        <Heading title="Notes" className="has-text-weight-bold"/>
+      </div>
+      <h5 class="subtitle is-5">This is also serve  <strong>Client</strong> Admin screen</h5>  
+      <h5 class="subtitle is-5">(Our Client)</h5>
     </Container>
   </Layout>
 );
