@@ -6,7 +6,8 @@ import Header from '../components/Header';
 import { Heading } from '../components/elements';
 
 const Container = styled.section`
-  
+  padding: 0px 0px;
+  margin: 12px 12px;
 .logo {
   width: 28px;
   height: 28px;
@@ -49,9 +50,13 @@ const Container = styled.section`
     margin-right: 12px;
     width: 13px;
   }
-.IconPlus {
-  margin: 3px 6px;
-}
+  .IconPlus {
+    margin: 3px 6px;
+  }
+  .media {
+    margin-top: 0px;
+    padding-top: 12px;
+  }
  
 `;
 
