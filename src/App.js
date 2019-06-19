@@ -32,8 +32,13 @@ class App extends React.Component {
                 <Route exact path="/" component={Home} />
                 <Route path="/about" component={About} />
                 <Route path="/contact" component={Contact} />
-                <Route path="/Login" component={Login} />
-                <Route path="/ClientList" component={ClientList} />
+                <Route path="/login" component={Login} />
+                <Route path="/client-list" component={ClientList} />
+                {/* <Route path="/super-admin/dashboard" component={DashboardSuperAdmin} />
+                <Route path="/super-admin/clients" component={ClientsSuperAdmin} />
+                <Route path="/admin/dashboard" component={DashboardAdmin} />
+                <Route path="/admin/projects" component={ProjectsAdmin} />
+                <Route path="/cleints/files" component={FilesClients} /> */}
                 <Route component={Error404} />
               </Switch>
             </BrowserRouter>
