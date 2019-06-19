@@ -6,7 +6,6 @@ import { Button } from '../components/elements';
 import Footer from '../components/Footer';
 
 const Container = styled.section`
-  
 .logo {
   width: 28px;
   height: 28px;
