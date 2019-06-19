@@ -8,7 +8,7 @@ export const colors = {
   black: '#000000',
   blue: '#100065',
   pumpkin: '#fffff',
-  regentGray: '#9a9a9b',
+  Gray: '#9a9a9b',
   grayChateau: '#8f8f8f',
   blueColor: '#633991',
   backgroundColor: '#f9f9ff'
@@ -25,6 +25,7 @@ export const sizes = {
 const theme = {
   primaryColor: '#C3D422',
   SecodryColor: '#C3D422',
+  GrayColor: 'gainsboro',
   secondaryColor: colors.riptide,
   primaryFontFamily: '"Quicksand", sans-serif',
   secondaryFontFamily: '"Open Sans", sans-serif',

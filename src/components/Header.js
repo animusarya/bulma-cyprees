@@ -10,6 +10,9 @@ const Container = styled.div`
   .icon {
     margin: 6px 15px;
   }
+  span {
+    color: ${props => props.theme.primaryColor};
+   }
 `;
 
 const Header = () => (
