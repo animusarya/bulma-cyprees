@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Seo from '../components/Seo';
 import Layout from '../components/Layout';
 import LoginForm from '../components/LoginForm';
+import Footer from '../components/Footer';
 import loginBg from '../assets/images/login-bg.jpg';
 import logo from '../assets/images/logo.png';
 
@@ -31,5 +32,6 @@ export default () => (
         </FormContainer>
       </div>
     </div>
+    <Footer />
   </Layout>
 );
