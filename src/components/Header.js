@@ -18,7 +18,7 @@ const Navbar = styled.nav`
 const Header = () => (
     <Navbar className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <a className="navbar-item" href="https://bulma.io">
+        <a className="navbar-item" href="https://www.intellishare.com">
         <Logo />
         </a>
       </div>

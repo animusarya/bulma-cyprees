@@ -5,8 +5,21 @@ import { ThemeProvider } from 'styled-components';
 
 import theme, { GlobalStyle } from './utils/theme';
 import apolloClient, { persistor } from './utils/apolloClient';
-
-import { Login, ClientList, Home, About, Contact, Error404 } from './pages';
+import { 
+	Home, 
+	Login, 
+	About, 
+	Contact, 
+	Error404,
+	
+	DashboardSuperAdmin,
+	ClientsSuperAdmin
+	
+	DashboardAdmin,
+	ProjectsAdmin,
+	
+	ClientDashboard,
+} from './pages';
 
 class App extends React.Component {
   state = { loaded: false };
@@ -30,15 +43,14 @@ class App extends React.Component {
             <BrowserRouter>
               <Switch>
                 <Route exact path="/" component={Home} />
-                <Route path="/about" component={About} />
-                <Route path="/contact" component={Contact} />
-                <Route path="/login" component={Login} />
-                <Route path="/client-list" component={ClientList} />
-                {/* <Route path="/super-admin/dashboard" component={DashboardSuperAdmin} />
+                <Route exact path="/about" component={About} />
+                <Route exact path="/contact" component={Contact} />
+                <Route exact path="/login" component={Login} />
+                <Route path="/super-admin/dashboard" component={DashboardSuperAdmin} />
                 <Route path="/super-admin/clients" component={ClientsSuperAdmin} />
                 <Route path="/admin/dashboard" component={DashboardAdmin} />
                 <Route path="/admin/projects" component={ProjectsAdmin} />
-                <Route path="/cleints/files" component={FilesClients} /> */}
+                <Route path="/cleint/dashboard" component={ClientDashboard} />
                 <Route component={Error404} />
               </Switch>
             </BrowserRouter>
