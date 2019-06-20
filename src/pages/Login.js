@@ -2,26 +2,23 @@ import React from 'react';
 import styled from 'styled-components';
 import Seo from '../components/Seo';
 
-
 import Layout from '../components/Layout';
 import { Button } from '../components/elements';
 import Footer from '../components/Footer';
 import PageHeading from '../components/elements/PageHeading';
-import { Heading } from '../components/elements';
-
 
 const Container = styled.section`
 .logo {
   width: 28px;
   height: 28px;
 }
- span {
+span {
   color: ${props => props.theme.primaryColor};
- }
- .subtitle {
+}
+.subtitle {
   margin-top: 20px !important;
   margin-bottom: 19px;
- }
+}
 .login {
   display: flex;
   align-items: center;
@@ -31,7 +28,7 @@ const Container = styled.section`
     border-top: hidden;
     border-left: hidden;
     border-right: hidden;
-    border-radius: 3px
+    border-radius: 3px;
     -webkit-box-shadow: none;
     :focus {
       border-color: #dbdbdb;
@@ -75,7 +72,7 @@ export default () => (
               <div className="media">
                 <div className="">
                   <figure className="image is-32x32">
-                    <img src="/images/favicon.ico" className="logo" />
+                    <img src="/images/favicon.ico" className="logo" alt="logo" />
                   </figure>
                 </div>
                 <div className="media-content">
@@ -103,7 +100,7 @@ export default () => (
               </div>
               <div>
                 <div className="button-field">
-                  <a class="forgetpassword">forgot Password</a>
+                  <a className="forgetpassword" href="#">forgot Password</a>
                   <p className="control">
                     <Button>Login</Button>
                   </p>
@@ -114,11 +111,6 @@ export default () => (
         </div>
       </div>
       <Footer />
-      <div className="loginfooter">
-        <Heading title="Notes" className="has-text-weight-bold"/>
-      </div>
-      <h5 class="subtitle is-5">This is also serve  <strong>Client</strong> Admin screen</h5>  
-      <h5 class="subtitle is-5">(Our Client)</h5>
     </Container>
   </Layout>
 );

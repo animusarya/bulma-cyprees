@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 
-const Container = styled.div`
+const Container = styled.button`
   background-color: white;
   border: 1px solid #c1d625;
   padding: 0px 30px;

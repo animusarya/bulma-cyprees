@@ -1,5 +1,5 @@
 import Error404 from './404'
-import Home from './Home';;
+import Home from './Home';
 import Login from './Login';
 import About from './About';
 import Contact from './Contact';
@@ -10,20 +10,20 @@ import ClientsSuperAdmin from './ClientsSuperAdmin';
 import DashboardAdmin from './DashboardAdmin';
 import ProjectsAdmin from './ProjectsAdmin';
 
-import ClientDashboard from './ClientDashboard';
+import DashboardClient from './DashboardClient';
 
-export { 
+export {
 	Home,
 	Login,
 	About,
 	Contact,
 	Error404,
-	
+
 	DashboardSuperAdmin,
-	ClientsSuperAdmin
-	
+	ClientsSuperAdmin,
+
 	DashboardAdmin,
 	ProjectsAdmin,
-	
-	ClientDashboard,
+
+	DashboardClient,
 };

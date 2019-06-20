@@ -5,20 +5,20 @@ import { ThemeProvider } from 'styled-components';
 
 import theme, { GlobalStyle } from './utils/theme';
 import apolloClient, { persistor } from './utils/apolloClient';
-import { 
-	Home, 
-	Login, 
-	About, 
-	Contact, 
+import {
+	Home,
+	Login,
+	About,
+	Contact,
 	Error404,
-	
+
 	DashboardSuperAdmin,
-	ClientsSuperAdmin
-	
+	ClientsSuperAdmin,
+
 	DashboardAdmin,
 	ProjectsAdmin,
-	
-	ClientDashboard,
+
+	DashboardClient,
 } from './pages';
 
 class App extends React.Component {
@@ -50,7 +50,7 @@ class App extends React.Component {
                 <Route path="/super-admin/clients" component={ClientsSuperAdmin} />
                 <Route path="/admin/dashboard" component={DashboardAdmin} />
                 <Route path="/admin/projects" component={ProjectsAdmin} />
-                <Route path="/cleint/dashboard" component={ClientDashboard} />
+                <Route path="/cleint/dashboard" component={DashboardClient} />
                 <Route component={Error404} />
               </Switch>
             </BrowserRouter>

@@ -12,17 +12,17 @@ const Container = styled.section`
   width: 28px;
   height: 28px;
 }
- span {
+span {
   color: ${props => props.theme.primaryColor};
- }
- .subtitle {
+}
+.subtitle {
   margin-top: 20px !important;
   margin-bottom: 19px;
- }
- .SideBar {
+}
+.SideBar {
   background-color: ${props => props.theme.GrayColor};
 }
- 
+
 .form {
   margin: 19% 4%;
 }
@@ -30,7 +30,7 @@ const Container = styled.section`
     border-top: hidden;
     border-left: hidden;
     border-right: hidden;
-    border-radius: 3px
+    border-radius: 3px;
     -webkit-box-shadow: none;
     :focus {
       border-color: #dbdbdb;
@@ -57,10 +57,10 @@ const Container = styled.section`
     margin-top: 0px;
     padding-top: 12px;
   }
- 
+
 `;
 
-export default () => (
+const ClientSuperAdmin = () => (
   <Layout>
     <Seo title="ClientList" description="Some description here." />
     <Header />
@@ -85,32 +85,36 @@ export default () => (
             <Heading title="Client" />
             <div>
               <table className="table is-striped">
-                <tr className="TableHead">
-                  <th className="is-size-7 has-text-grey has-text-weight-light">
-                    Name
-                  </th>
-                  <th className="has-text-right is-size-7 has-text-grey has-text-weight-light">
-                    Delete
-                  </th>
-                </tr>
-                <tr>
-                  <td className="is-size-7">January</td>
-                  <td className="has-text-right">
-                    <i className="TrashIcon fas fa-trash-alt" />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="is-size-7">February</td>
-                  <td className="has-text-right">
-                    <i className="TrashIcon fas fa-trash-alt" />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="is-size-7">February</td>
-                  <td className="has-text-right">
-                    <i className="TrashIcon fas fa-trash-alt" />
-                  </td>
-                </tr>
+                <thead>
+                  <tr className="TableHead">
+                    <th className="is-size-7 has-text-grey has-text-weight-light">
+                      Name
+                    </th>
+                    <th className="has-text-right is-size-7 has-text-grey has-text-weight-light">
+                      Delete
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="is-size-7">January</td>
+                    <td className="has-text-right">
+                      <i className="TrashIcon fas fa-trash-alt" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="is-size-7">February</td>
+                    <td className="has-text-right">
+                      <i className="TrashIcon fas fa-trash-alt" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="is-size-7">February</td>
+                    <td className="has-text-right">
+                      <i className="TrashIcon fas fa-trash-alt" />
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </div>
@@ -119,3 +123,5 @@ export default () => (
     </Container>
   </Layout>
 );
+
+export default ClientSuperAdmin;
