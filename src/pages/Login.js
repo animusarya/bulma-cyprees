@@ -13,7 +13,7 @@ const FormContainer = styled.div`
   padding: 0 3rem;
 `;
 const Logo = styled.img`
-  width: 350px;
+  width: 300px;
   height: auto;
   margin-bottom: 2rem;
 `;

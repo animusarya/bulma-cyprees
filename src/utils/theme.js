@@ -13,9 +13,15 @@ export default theme;
 
 export const GlobalStyle = createGlobalStyle`
   body {
-    margin: 0;
-    padding: 0;
     height: 100vh;
     color: ${theme.fontDark};
+  }
+  #root {
+    height: 100vh;
+  }
+  .table {
+    thead {
+      background-color: #ecedf0;
+    }
   }
 `;
