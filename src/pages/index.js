@@ -5,7 +5,6 @@ import About from './About';
 import Contact from './Contact';
 
 import DashboardSuperAdmin from './DashboardSuperAdmin';
-import ClientsSuperAdmin from './ClientsSuperAdmin';
 
 import DashboardAdmin from './DashboardAdmin';
 import ProjectsAdmin from './ProjectsAdmin';
@@ -20,7 +19,6 @@ export {
 	Error404,
 
 	DashboardSuperAdmin,
-	ClientsSuperAdmin,
 
 	DashboardAdmin,
 	ProjectsAdmin,

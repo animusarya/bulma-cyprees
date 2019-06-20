@@ -13,7 +13,6 @@ import {
 	Error404,
 
 	DashboardSuperAdmin,
-	ClientsSuperAdmin,
 
 	DashboardAdmin,
 	ProjectsAdmin,
@@ -46,11 +45,10 @@ class App extends React.Component {
                 <Route exact path="/about" component={About} />
                 <Route exact path="/contact" component={Contact} />
                 <Route exact path="/login" component={Login} />
-                <Route path="/super-admin/dashboard" component={DashboardSuperAdmin} />
-                <Route path="/super-admin/clients" component={ClientsSuperAdmin} />
-                <Route path="/admin/dashboard" component={DashboardAdmin} />
-                <Route path="/admin/projects" component={ProjectsAdmin} />
-                <Route path="/cleint/dashboard" component={DashboardClient} />
+                <Route exact path="/super-admin/dashboard" component={DashboardSuperAdmin} />
+                <Route exact path="/admin/dashboard" component={DashboardAdmin} />
+                <Route exact path="/admin/projects" component={ProjectsAdmin} />
+                <Route exact path="/cleint/dashboard" component={DashboardClient} />
                 <Route component={Error404} />
               </Switch>
             </BrowserRouter>
