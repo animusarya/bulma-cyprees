@@ -5,19 +5,22 @@ import { ThemeProvider } from 'styled-components';
 
 import theme, { GlobalStyle } from './utils/theme';
 import apolloClient, { persistor } from './utils/apolloClient';
+import ProjectsClient from './pages/ProjectsClient';
+import InfoProjectsClient from './pages/InfoProjectsClient';
+
 import {
 	Home,
 	Login,
 	About,
 	Contact,
-	Error404,
-
-	DashboardSuperAdmin,
+  Error404,
+  
+  DashboardSuperAdmin,
 
 	DashboardAdmin,
-	ProjectsAdmin,
-
-	DashboardClient,
+  ProjectsAdmin,
+  
+  DashboardClient,
 } from './pages';
 
 class App extends React.Component {
@@ -46,6 +49,8 @@ class App extends React.Component {
                 <Route exact path="/contact" component={Contact} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/super-admin/dashboard" component={DashboardSuperAdmin} />
+                <Route exact path="/super-admin/dashboard/clients-projects" component={ProjectsClient} />
+                <Route exact path="/super-admin/dashboard/clients-projects/info-clients-projects" component={InfoProjectsClient} />
                 <Route exact path="/admin/dashboard" component={DashboardAdmin} />
                 <Route exact path="/admin/projects" component={ProjectsAdmin} />
                 <Route exact path="/cleint/dashboard" component={DashboardClient} />

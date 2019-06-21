@@ -3,11 +3,12 @@ import styled from 'styled-components';
 
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
-import { Heading } from '../components/elements';
+import { Heading, } from '../components/elements';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import MainColumn from '../components/MainColumn';
 import CopyRight from '../components/CopyRight';
+import  Title  from '../components/elements/Title';
 
 const Container = styled.div`
   td {
@@ -16,10 +17,10 @@ const Container = styled.div`
  
 `;
 
-const DashboardSuperAdmin = () => {
+const InfoProjectsClient = () => {
   return (
     <Layout>
-      <Seo title="Dashboard Super Admin" description="Page description" />
+      <Seo title="Information Projects Clients" description="Page description" />
       <Header />
       <Container className="columns">
         <div className="column is-one-fifth">
@@ -27,7 +28,8 @@ const DashboardSuperAdmin = () => {
         </div>
         <div className="column">
           <MainColumn>
-            <Heading>Clients</Heading>
+            <Heading>Clients > rob@colliers.com > Project Arden</Heading>
+            <Title>Project Information</Title>
             <table className="table is-fullwidth is-hoverable">
               <thead>
                 <tr>
@@ -60,4 +62,4 @@ const DashboardSuperAdmin = () => {
   );
 };
 
-export default DashboardSuperAdmin;
+export default InfoProjectsClient;

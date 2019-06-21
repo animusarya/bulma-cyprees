@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const Container = styled.aside`
   background-color: #f4f4f6;
   min-height: 100vh;
+  margin-bottom: 0px!important;
   li {
     background-color: #e2e4e6;
     cursor: pointer;
