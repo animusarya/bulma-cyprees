@@ -3,6 +3,7 @@ import Home from './Home';
 import Login from './Login';
 import About from './About';
 import Contact from './Contact';
+import Test from './Test';
 
 import DashboardSuperAdmin from './DashboardSuperAdmin';
 
@@ -16,6 +17,7 @@ export {
 	Login,
 	About,
 	Contact,
+	Test,
 	Error404,
 
 	DashboardSuperAdmin,

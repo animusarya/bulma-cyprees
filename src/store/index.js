@@ -1,14 +1,9 @@
-import { mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
+import { createStore } from 'easy-peasy';
+import schema from './schema';
 
-import globalType from './global/schema';
-import globalData from './global/resolvers';
-import globalDefaults from './global/defaults';
+const store = createStore(schema, {
+  name: 'MyAwesomeStore',
+  devTools: true
+});
 
-const resolvers = mergeResolvers([globalData]);
-const typeDefs = mergeTypes([globalType]);
-
-const defaults = {
-  ...globalDefaults
-};
-
-export { resolvers, typeDefs, defaults };
+export default store;
