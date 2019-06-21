@@ -53,3 +53,15 @@ const client = new ApolloClient({
 // persistor.purge(); // clear local storage
 
 export default client;
+import { Provider, createClient } from 'urql';
+
+const client = createClient({
+  url: 'http://localhost:1234/graphql', // Your GraphQL endpoint here
+});
+
+ReactDOM.render(
+  <Provider value={client}>
+    <YourApp />
+  </Provider>,
+  document.body
+);
