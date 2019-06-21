@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { ApolloProvider } from 'react-apollo';
 import { ThemeProvider } from 'styled-components';
 import { StoreProvider } from 'easy-peasy';
+import { Provider as UrqlProvider } from 'urql';
 
 import theme, { GlobalStyle } from './utils/theme';
-import apolloClient, { persistor } from './utils/apolloClient';
+import urqlGraphql from './utils/urqlGraphql';
 import ProjectsClient from './pages/ProjectsClient';
 import InfoProjectsClient from './pages/InfoProjectsClient';
 import store from './store';
@@ -30,8 +30,6 @@ class App extends React.Component {
   state = { loaded: false };
 
   async componentDidMount() {
-    await persistor.restore();
-    this.client = apolloClient;
     this.setState({ loaded: true });
   }
 
@@ -42,7 +40,7 @@ class App extends React.Component {
     }
 
     return (
-      <ApolloProvider client={this.client}>
+      <UrqlProvider value={urqlGraphql}>
         <StoreProvider store={store}>
           <ThemeProvider theme={theme}>
             <React.Fragment>
@@ -66,7 +64,7 @@ class App extends React.Component {
             </React.Fragment>
           </ThemeProvider>
         </StoreProvider>
-      </ApolloProvider>
+      </UrqlProvider>
     );
   }
 }
