@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useMutation } from "urql";
 import gql from 'graphql-tag';
+import { useStoreActions } from 'easy-peasy';
 
 import Seo from '../components/Seo';
 import Layout from '../components/Layout';
@@ -35,10 +36,12 @@ const Logo = styled.img`
 
 const Login = () => {
   const [res, executeMutation] = useMutation(mutation);
+  const togggleLoggedIn = useStoreActions(actions => actions.isLoggedIn.togggle);
 
   if (res.data) {
     const { jwt, user } =  res.data.login;
     window.localStorage.setItem('token', jwt);
+    togggleLoggedIn(true);
     setTimeout(() => {
       let sendTo = '/client/dashboard';
       if (user.type === 'super-admin') {

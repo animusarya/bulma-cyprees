@@ -1,12 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { StoreProvider } from 'easy-peasy';
+import { StoreProvider, useStoreState } from 'easy-peasy';
 import { Provider as UrqlProvider } from 'urql';
+import { PersistGate } from "redux-persist/integration/react";
 
 import theme, { GlobalStyle } from './utils/theme';
 import urqlGraphql from './utils/urqlGraphql';
-import store from './store';
+import { store, persistor } from './store';
 import { Loading } from './components/elements';
 
 import Home from './pages/Home';
@@ -27,7 +28,9 @@ import Projects from './pages/admin/Projects';
 
 import DashboardClient from './pages/client/Dashboard';
 
-const PrivateRoute = ({ component: Component, isLoggedIn, ...rest }) => {
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  const isLoggedIn = useStoreState(state => state.isLoggedIn.value);
+
   return (
     <Route
       {...rest}
@@ -42,10 +45,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    const token = window.localStorage.getItem('token');
     this.state = {
       loaded: false,
-      isLoggedIn: !!token
     };
   }
 
@@ -54,38 +55,40 @@ class App extends React.Component {
   }
 
   render() {
-    const { loaded, isLoggedIn } = this.state;
+    const { loaded } = this.state;
     if (!loaded) {
       return <Loading />;
     }
 
     return (
       <UrqlProvider value={urqlGraphql}>
-        <StoreProvider store={store}>
-          <ThemeProvider theme={theme}>
-            <React.Fragment>
-              <BrowserRouter>
-                <Switch>
-                  <Route exact path="/" component={Home} />
-                  <Route exact path="/about" component={About} />
-                  <Route exact path="/contact" component={Contact} />
-                  <Route exact path="/login" component={Login} />
-                  <PrivateRoute exact path="/super-admin/dashboard" component={DashboardSuperAdmin} isLoggedIn={isLoggedIn} />
-                  <PrivateRoute exact path="/super-admin/client/projects" component={ClientProjects} isLoggedIn={isLoggedIn} />
-                  <PrivateRoute exact path="/super-admin/project/info" component={ProjectInfo} isLoggedIn={isLoggedIn} />
-                  <PrivateRoute exact path="/super-admin/pricing" component={Pricing} isLoggedIn={isLoggedIn} />
-                  <PrivateRoute exact path="/super-admin/discounts" component={Discounts} isLoggedIn={isLoggedIn} />
-                  <PrivateRoute exact path="/admin/dashboard" component={DashboardAdmin} isLoggedIn={isLoggedIn} />
-                  <PrivateRoute exact path="/admin/projects" component={Projects} isLoggedIn={isLoggedIn} />
-                  <PrivateRoute exact path="/client/dashboard" component={DashboardClient} isLoggedIn={isLoggedIn} />
-                  <Route exact path="/test" component={Test} />
-                  <Route component={Error404} />
-                </Switch>
-              </BrowserRouter>
-              <GlobalStyle />
-            </React.Fragment>
-          </ThemeProvider>
-        </StoreProvider>
+        <PersistGate loading={<Loading />} persistor={persistor}>
+          <StoreProvider store={store}>
+            <ThemeProvider theme={theme}>
+              <React.Fragment>
+                <BrowserRouter>
+                  <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/about" component={About} />
+                    <Route exact path="/contact" component={Contact} />
+                    <Route exact path="/login" component={Login} />
+                    <PrivateRoute exact path="/super-admin/dashboard" component={DashboardSuperAdmin} />
+                    <PrivateRoute exact path="/super-admin/client/projects" component={ClientProjects} />
+                    <PrivateRoute exact path="/super-admin/project/info" component={ProjectInfo} />
+                    <PrivateRoute exact path="/super-admin/pricing" component={Pricing} />
+                    <PrivateRoute exact path="/super-admin/discounts" component={Discounts} />
+                    <PrivateRoute exact path="/admin/dashboard" component={DashboardAdmin} />
+                    <PrivateRoute exact path="/admin/projects" component={Projects} />
+                    <PrivateRoute exact path="/client/dashboard" component={DashboardClient} />
+                    <Route exact path="/test" component={Test} />
+                    <Route component={Error404} />
+                  </Switch>
+                </BrowserRouter>
+                <GlobalStyle />
+              </React.Fragment>
+            </ThemeProvider>
+          </StoreProvider>
+        </PersistGate>
       </UrqlProvider>
     );
   }
