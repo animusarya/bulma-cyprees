@@ -1,12 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useMutation } from "urql";
+import gql from 'graphql-tag';
 
 import Seo from '../components/Seo';
 import Layout from '../components/Layout';
+import { Message } from '../components/elements'
 import LoginForm from '../components/LoginForm';
 import Footer from '../components/Footer';
 import loginBg from '../assets/images/login-bg.jpg';
 import logo from '../assets/images/logo.png';
+
+const mutation = gql`
+  mutation login($email: String!, $password: String!) {
+    login(input: { email: $email, password: $password }) {
+      jwt
+      user {
+        id
+        type
+      }
+    }
+  }
+`;
 
 const FormContainer = styled.div`
   margin-top: 10rem;
@@ -18,20 +33,41 @@ const Logo = styled.img`
   margin-bottom: 2rem;
 `;
 
-export default () => (
-  <Layout>
-    <Seo title="Login" description="Some description here." />
-    <div className="columns">
-      <div className="column">
-        <img src={loginBg} alt="login banner" />
+const Login = () => {
+  const [res, executeMutation] = useMutation(mutation);
+
+  if (res.data) {
+    const { jwt, user } =  res.data.login;
+    window.localStorage.setItem('token', jwt);
+    setTimeout(() => {
+      let sendTo = '/client/dashboard';
+      if (user.type === 'super-admin') {
+        sendTo = '/super-admin/dashboard';
+      } else if (user.type === 'admin') {
+        sendTo = '/admin/dashboard';
+      }
+      window.location.replace(sendTo);
+    }, 1000);
+  }
+
+  return (
+    <Layout>
+      <Seo title="Login" description="Some description here." />
+      <div className="columns">
+        <div className="column">
+          <img src={loginBg} alt="login banner" />
+        </div>
+        <div className="column">
+          <FormContainer>
+            <Logo src={logo} alt="logo banner" />
+            <LoginForm onSubmit={data => executeMutation(data)} />
+            {res.error && <Message type="error">{res.error.message}</Message>}
+          </FormContainer>
+        </div>
       </div>
-      <div className="column">
-        <FormContainer>
-          <Logo src={logo} alt="logo banner" />
-          <LoginForm />
-        </FormContainer>
-      </div>
-    </div>
-    <Footer />
-  </Layout>
-);
+      <Footer />
+    </Layout>
+  );
+}
+
+export default Login;

@@ -1,13 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useQuery } from "urql";
+import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
-import { Heading } from '../../components/elements';
+import { Heading, Loading, Message } from '../../components/elements';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
+
+const getAdmins = gql`
+  query GetAdmins {
+    users {
+      id
+      email
+      profile {
+        fullName
+        company
+        telephone
+      }
+    }
+  }
+`;
 
 const Container = styled.div`
   td {
@@ -16,6 +32,11 @@ const Container = styled.div`
 `;
 
 const Dashboard = () => {
+  const [res] = useQuery({
+    query: getAdmins,
+  });
+  // console.log('res', res);
+
   return (
     <Layout>
       <Seo title="Dashboard Super Admin" description="Page description" />
@@ -27,30 +48,30 @@ const Dashboard = () => {
         <div className="column">
           <MainColumn>
             <Heading>Clients</Heading>
-            <table className="table is-fullwidth is-hoverable">
-              <thead>
-                <tr>
-                  <th>Email</th>
-                  <th>Name</th>
-                  <th>Company</th>
-                  <th>Telephone</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>john@doe.com</td>
-                  <td>John Doe</td>
-                  <td>My John Limited</td>
-                  <td>011-232102</td>
-                </tr>
-                <tr>
-                  <td>john@doe.com</td>
-                  <td>John Doe</td>
-                  <td>My John Limited</td>
-                  <td>011-232102</td>
-                </tr>
-              </tbody>
-            </table>
+            {res.error && <Message type="error">{res.error.message}</Message>}
+            {res.fetching && <Loading />}
+            {res.data && (
+              <table className="table is-fullwidth is-hoverable">
+                <thead>
+                  <tr>
+                    <th>Email</th>
+                    <th>Name</th>
+                    <th>Company</th>
+                    <th>Telephone</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {res.data.users.map(user => (
+                    <tr key={user.id}>
+                      <td>{user.email}</td>
+                      <td>{user.profile && user.profile.fullName}</td>
+                      <td>{user.profile && user.profile.company}</td>
+                      <td>{user.profile && user.profile.telephone}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </MainColumn>
         </div>
       </Container>

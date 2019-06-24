@@ -8,7 +8,7 @@ const client = createClient({
     if (token) {
       return {
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `${token}`
         }
       };
     }
