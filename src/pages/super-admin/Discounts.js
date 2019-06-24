@@ -1,28 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Layout from '../components/Layout';
-import Seo from '../components/Seo';
-import { Heading, Button, } from '../components/elements';
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import MainColumn from '../components/MainColumn';
-import CopyRight from '../components/CopyRight';
-import Title from '../components/elements/Title';
-import HorizontalInput from '../components/elements/HorizontalInput';
+import Layout from '../../components/Layout';
+import Seo from '../../components/Seo';
+import { Heading, Button, Title, InputGroup } from '../../components/elements';
+import Header from '../../components/Header';
+import Sidebar from '../../components/Sidebar';
+import MainColumn from '../../components/MainColumn';
+import CopyRight from '../../components/CopyRight';
 
 const Container = styled.div`
-
- .pound-icon {
-  font-size: 0.85rem!important;
-}
-td.actions {
-  color:  ${props => props.theme.primaryColor};
-}
-
+  .pound-icon {
+    font-size: 0.85rem!important;
+  }
+  td.actions {
+    color:  ${props => props.theme.primaryColor};
+  }
 `;
 
-const DiscountProjectsClient = () => {
+const Discounts = () => {
   return (
     <Layout>
       <Seo title="Projects Clients " description="Page description" />
@@ -35,36 +31,36 @@ const DiscountProjectsClient = () => {
           <MainColumn>
             <Heading>Discount Codes</Heading>
             <Title>Create Discount Code</Title>
-            <HorizontalInput label="Discount Code" placeholder="50SAVE"/>
-            <HorizontalInput label="Percentage" placeholder="50%"/>
+            <InputGroup isHorizontal label="Discount Code" placeholder="50SAVE"/>
+            <InputGroup isHorizontal label="Percentage" placeholder="50%"/>
             <div className="is-pulled-right">
               <Button >
                   Add
               </Button>
-            </div>  
+            </div>
             <div>
-                <Title margin="4rem">Discount Codes</Title>
-                <table className="table is-fullwidth is-hoverable">
+              <Title margin="4rem">Discount Codes</Title>
+              <table className="table is-fullwidth is-hoverable">
                 <thead>
-                    <tr>
+                  <tr>
                     <th className="has-text-left">Code</th>
                     <th className="has-text-left">Password</th>
                     <th className="has-text-right">Delete</th>
-                    </tr>
+                  </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                  <tr>
                     <td>50SAVE</td>
                     <td></td>
                     <td className="is-uppercase actions has-text-right">delete</td>
-                    </tr>
-                    <tr>
+                  </tr>
+                  <tr>
                     <td>100SAVE</td>
                     <td></td>
                     <td className="is-uppercase actions has-text-right">delete</td>
-                    </tr>
+                  </tr>
                 </tbody>
-                </table>
+              </table>
             </div>
           </MainColumn>
         </div>
@@ -74,4 +70,4 @@ const DiscountProjectsClient = () => {
   );
 };
 
-export default DiscountProjectsClient;
+export default Discounts;

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Layout from '../components/Layout';
-import Seo from '../components/Seo';
+import Layout from '../../components/Layout';
+import Seo from '../../components/Seo';
 
-const ProjectsAdmin = () => {
+const Projects = () => {
   return (
     <Layout>
       <Seo title="Projects Admin" description="Page description" />
@@ -17,4 +17,4 @@ const ProjectsAdmin = () => {
   );
 };
 
-export default ProjectsAdmin;
+export default Projects;

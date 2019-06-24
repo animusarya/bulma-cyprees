@@ -6,28 +6,25 @@ import { Provider as UrqlProvider } from 'urql';
 
 import theme, { GlobalStyle } from './utils/theme';
 import urqlGraphql from './utils/urqlGraphql';
-import ProjectsClient from './pages/ProjectsClient';
-import InfoProjectsClient from './pages/InfoProjectsClient';
-import PricingProjectClients from './pages/PricingProjectClients';
-import DiscountProjectsClient from './pages/DiscountProjectsClient';
-
 import store from './store';
 
-import {
-	Home,
-	Login,
-	About,
-	Contact,
-  Error404,
-  Test,
+import Home from './pages/Home';
+import Error404 from './pages/404';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Login from './pages/Login';
+import Test from './pages/Test';
 
-  DashboardSuperAdmin,
+import DashboardSuperAdmin from './pages/super-admin/Dashboard';
+import Discounts from './pages/super-admin/Discounts';
+import ClientProjects from  './pages/super-admin/ClientProjects';
+import ProjectInfo from  './pages/super-admin/ProjectInfo';
+import Pricing from  './pages/super-admin/Pricing';
 
-	DashboardAdmin,
-  ProjectsAdmin,
+import DashboardAdmin from './pages/admin/Dashboard';
+import Projects from './pages/admin/Projects';
 
-  DashboardClient,
-} from './pages';
+import DashboardClient from './pages/client/Dashboard';
 
 class App extends React.Component {
   state = { loaded: false };
@@ -54,12 +51,12 @@ class App extends React.Component {
                   <Route exact path="/contact" component={Contact} />
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/super-admin/dashboard" component={DashboardSuperAdmin} />
-                  <Route exact path="/super-admin/dashboard/clients-projects" component={ProjectsClient} />
-                  <Route exact path="/super-admin/dashboard/clients-projects/info-clients-projects" component={InfoProjectsClient} />
-                  <Route exact path="/super-admin/dashboard/clients-projects/info-clients-projects/pricing" component={PricingProjectClients} />
-                  <Route exact path="/super-admin/dashboard/clients-projects/info-clients-projects/pricing/discount" component={DiscountProjectsClient} />
+                  <Route exact path="/super-admin/client/projects" component={ClientProjects} />
+                  <Route exact path="/super-admin/project/info" component={ProjectInfo} />
+                  <Route exact path="/super-admin/pricing" component={Pricing} />
+                  <Route exact path="/super-admin/discounts" component={Discounts} />
                   <Route exact path="/admin/dashboard" component={DashboardAdmin} />
-                  <Route exact path="/admin/projects" component={ProjectsAdmin} />
+                  <Route exact path="/admin/projects" component={Projects} />
                   <Route exact path="/cleint/dashboard" component={DashboardClient} />
                   <Route exact path="/test" component={Test} />
                   <Route component={Error404} />

@@ -1,22 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Layout from '../components/Layout';
-import Seo from '../components/Seo';
-import { Heading } from '../components/elements';
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import MainColumn from '../components/MainColumn';
-import CopyRight from '../components/CopyRight';
+import Layout from '../../components/Layout';
+import Seo from '../../components/Seo';
+import { Heading } from '../../components/elements';
+import Header from '../../components/Header';
+import Sidebar from '../../components/Sidebar';
+import MainColumn from '../../components/MainColumn';
+import CopyRight from '../../components/CopyRight';
 
 const Container = styled.div`
-
- .pound-icon {
-  font-size: 0.85rem!important;
-}
-td.actions {
-  color:  ${props => props.theme.primaryColor};
-}
+  .pound-icon {
+    font-size: 0.85rem!important;
+  }
+  td.actions {
+    color:  ${props => props.theme.primaryColor};
+  }
 `;
 
 const ProjectsClient = () => {

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Layout from '../components/Layout';
-import Seo from '../components/Seo';
+import Layout from '../../components/Layout';
+import Seo from '../../components/Seo';
 
-const DashboardAdmin = () => {
+const Dashboard = () => {
   return (
     <Layout>
       <Seo title="Dashboard Admin" description="Page description" />
@@ -17,4 +17,4 @@ const DashboardAdmin = () => {
   );
 };
 
-export default DashboardAdmin;
+export default Dashboard;

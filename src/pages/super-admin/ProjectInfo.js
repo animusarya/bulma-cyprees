@@ -1,16 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Layout from '../components/Layout';
-import Seo from '../components/Seo';
-import { Heading, Button,  } from '../components/elements';
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import MainColumn from '../components/MainColumn';
-import CopyRight from '../components/CopyRight';
-import  Title  from '../components/elements/Title';
-import HorizontalInput from '../components/elements/HorizontalInput';
-import CheckBox from '../components/elements/CheckBox';
+import Layout from '../../components/Layout';
+import Seo from '../../components/Seo';
+import { Heading, Button, Title, InputGroup, CheckBox } from '../../components/elements';
+import Header from '../../components/Header';
+import Sidebar from '../../components/Sidebar';
+import MainColumn from '../../components/MainColumn';
+import CopyRight from '../../components/CopyRight';
 
 const Container = styled.div`
   .project-info {
@@ -19,7 +16,6 @@ const Container = styled.div`
   .action {
     color:  ${props => props.theme.primaryColor};
   }
- 
   .modules {
     margin-top: 4rem;
   }
@@ -28,7 +24,7 @@ const Container = styled.div`
   }
 `;
 
-const InfoProjectsClient = () => {
+const ProjectInfo = () => {
   return (
     <Layout>
       <Seo title="Information Projects Clients" description="Page description" />
@@ -39,7 +35,7 @@ const InfoProjectsClient = () => {
         </div>
         <div className="column">
           <MainColumn>
-            <Heading>Clients > rob@colliers.com > Project Arden</Heading>
+            <Heading>Clients &gt; rob@colliers.com &gt; Project Arden</Heading>
             <Title>Project Information</Title>
             <div className="project-info">
               <div className="field is-horizontal">
@@ -49,13 +45,13 @@ const InfoProjectsClient = () => {
                 <div className="field-body">
                   <div className="field">
                     <p className="control">
-                      <input className="input is-static input-field" type="email" value="intellishare.online/colliers" readonly/>
+                      <input className="input is-static input-field" type="email" value="intellishare.online/colliers" readOnly/>
                     </p>
                   </div>
                 </div>
               </div>
 
-              <HorizontalInput label="Custom URL" placeholder="www.colliers.co.uk/arden"/>
+              <InputGroup isHorizontal label="Custom URL" placeholder="www.colliers.co.uk/arden"/>
               <div className="field is-horizontal">
                 <div className="field-label is-normal">
                   <label className="label has-text-left has-text-weight-semibold">Project Size</label>
@@ -63,17 +59,16 @@ const InfoProjectsClient = () => {
                 <div className="field-body">
                   <div className="field">
                     <p className="control">
-                      <input className="input is-static" type="email" value="5Gb" readonly/>
+                      <input className="input is-static" type="email" value="5Gb" readOnly/>
                     </p>
                   </div>
                 </div>
               </div>
               <div className="is-pulled-right">
-                <Button 
-                >
+                <Button>
                   Save
                 </Button>
-              </div>  
+              </div>
           </div>
           <Title>Admin Users</Title>
             <table className="table is-fullwidth is-hoverable">
@@ -104,18 +99,16 @@ const InfoProjectsClient = () => {
             </table>
             <div className="field is-grouped is-pulled-right">
               <p className="control">
-                <Button 
-                  >
-                    Add
+                <Button>
+                  Add
                 </Button>
               </p>
               <p className="control">
-                <Button 
-                  >
+                <Button>
                   Save
                 </Button>
-              </p> 
-            </div>  
+              </p>
+            </div>
             <div className="modules">
               <Title>Modules</Title>
               <CheckBox text="Events" margin="37px" />
@@ -129,4 +122,4 @@ const InfoProjectsClient = () => {
   );
 };
 
-export default InfoProjectsClient;
+export default ProjectInfo;

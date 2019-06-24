@@ -1,31 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Layout from '../components/Layout';
-import Seo from '../components/Seo';
-import { Heading, Button, } from '../components/elements';
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import MainColumn from '../components/MainColumn';
-import CopyRight from '../components/CopyRight';
-import Title from '../components/elements/Title';
+import Layout from '../../components/Layout';
+import Seo from '../../components/Seo';
+import { Heading, Button, Title } from '../../components/elements';
+import Header from '../../components/Header';
+import Sidebar from '../../components/Sidebar';
+import MainColumn from '../../components/MainColumn';
+import CopyRight from '../../components/CopyRight';
 
 const Container = styled.div`
-
- .pound-icon {
-  font-size: 0.85rem!important;
-}
-td.actions {
-  color:  ${props => props.theme.primaryColor};
-}
-input {
+  .pound-icon {
+    font-size: 0.85rem!important;
+  }
+  td.actions {
+    color:  ${props => props.theme.primaryColor};
+  }
+  input {
     width: 60%;
     border-radius: 0px;
     border: 1px solid ${props => props.theme.primaryColor};
-}
+  }
 `;
 
-const PricingProjectClients = () => {
+const Pricing = () => {
   return (
     <Layout>
       <Seo title="Projects Clients " description="Page description" />
@@ -41,7 +39,6 @@ const PricingProjectClients = () => {
             <table className="table is-fullwidth is-hoverable">
               <thead>
                 <tr>
-                  
                   <th>Duration</th>
                   <th>Price</th>
                   <th className="has-text-right">Edit</th>
@@ -77,18 +74,16 @@ const PricingProjectClients = () => {
             </table>
             <div className="field is-grouped is-pulled-right">
               <p className="control">
-                <Button 
-                  >
-                    Add
+                <Button>
+                  Add
                 </Button>
               </p>
               <p className="control">
-                <Button 
-                  >
+                <Button>
                   Save
                 </Button>
-              </p> 
-            </div>  
+              </p>
+            </div>
           </MainColumn>
         </div>
       </Container>
@@ -97,4 +92,4 @@ const PricingProjectClients = () => {
   );
 };
 
-export default PricingProjectClients;
+export default Pricing;

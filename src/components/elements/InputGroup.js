@@ -10,8 +10,8 @@ const Input = styled.input`
   border-bottom: ${props => `1px solid ${props.theme.borderColor}`};
 `;
 
-const InputGroup = ({ label, errors, ...otherProps}) => (
-  <div className="field">
+const InputGroup = ({ label, errors, isHorizontal, ...otherProps}) => (
+  <div className={`field ${isHorizontal ? 'is-horizontal' : ''}`}>
     {label && <label className="label">{label}</label>}
     <div className="control">
       <Input
