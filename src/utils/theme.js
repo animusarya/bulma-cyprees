@@ -24,9 +24,5 @@ export const GlobalStyle = createGlobalStyle`
       background-color: #ecedf0;
     }
   }
-  .columns, .column {
-    margin-bottom: 0px!important;
-    padding-bottom: 0px!important;
-
-  }
+  
 `;

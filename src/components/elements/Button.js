@@ -7,7 +7,14 @@ const Container = styled.button`
     color: ${props => props.theme.primaryColor};
     padding-left: 1.45em;
     padding-right: 1.45em;
+    margin-bottom: 2rem;
+    :hover {
+      border-color: ${props => props.theme.primaryColor};
+      color: ${props => props.theme.primaryColor};
+      background: transparent;
+    }
   }
+
 `;
 
 const Button = ({ children, ...otherProps}) => (

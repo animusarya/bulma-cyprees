@@ -13,7 +13,7 @@ const Container = styled.div`
   td {
     color:  ${props => props.theme.primaryColor};
   }
- 
+  
 `;
 
 const DashboardSuperAdmin = () => {

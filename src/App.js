@@ -8,6 +8,9 @@ import theme, { GlobalStyle } from './utils/theme';
 import urqlGraphql from './utils/urqlGraphql';
 import ProjectsClient from './pages/ProjectsClient';
 import InfoProjectsClient from './pages/InfoProjectsClient';
+import PricingProjectClients from './pages/PricingProjectClients';
+import DiscountProjectsClient from './pages/DiscountProjectsClient';
+
 import store from './store';
 
 import {
@@ -53,6 +56,8 @@ class App extends React.Component {
                   <Route exact path="/super-admin/dashboard" component={DashboardSuperAdmin} />
                   <Route exact path="/super-admin/dashboard/clients-projects" component={ProjectsClient} />
                   <Route exact path="/super-admin/dashboard/clients-projects/info-clients-projects" component={InfoProjectsClient} />
+                  <Route exact path="/super-admin/dashboard/clients-projects/info-clients-projects/pricing" component={PricingProjectClients} />
+                  <Route exact path="/super-admin/dashboard/clients-projects/info-clients-projects/pricing/discount" component={DiscountProjectsClient} />
                   <Route exact path="/admin/dashboard" component={DashboardAdmin} />
                   <Route exact path="/admin/projects" component={ProjectsAdmin} />
                   <Route exact path="/cleint/dashboard" component={DashboardClient} />

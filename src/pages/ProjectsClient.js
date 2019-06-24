@@ -16,7 +16,6 @@ const Container = styled.div`
 }
 td.actions {
   color:  ${props => props.theme.primaryColor};
-
 }
 `;
 
