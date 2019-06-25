@@ -19,9 +19,9 @@ import Test from './pages/Test';
 
 import DashboardSuperAdmin from './pages/super-admin/Dashboard';
 import Discounts from './pages/super-admin/Discounts';
-import ClientProjects from  './pages/super-admin/ClientProjects';
-import ProjectInfo from  './pages/super-admin/ProjectInfo';
-import Pricing from  './pages/super-admin/Pricing';
+import ClientProjects from './pages/super-admin/ClientProjects';
+import ProjectInfo from './pages/super-admin/ProjectInfo';
+import Pricing from './pages/super-admin/Pricing';
 
 import DashboardAdmin from './pages/admin/Dashboard';
 import Projects from './pages/admin/Projects';
