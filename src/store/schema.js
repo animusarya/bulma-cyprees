@@ -9,8 +9,8 @@ const schema = {
   },
   todos: {
     items: [
-      { id:1 ,name:'milk' },
-      { id:2 ,name:'bread' }
+      { id: 1, name: 'milk' },
+      { id: 2, name: 'bread' }
     ],
     addTodo: action((state, payload) => {
       state.items.push(payload);

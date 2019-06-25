@@ -7,8 +7,7 @@ import {
   Heading,
   Button,
   Title,
-  InputGroup,
-  CheckBox
+  InputGroup
 } from '../../components/elements';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';

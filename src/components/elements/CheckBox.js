@@ -5,7 +5,7 @@ const Container = styled.div`
 input{
   height: 2.5rem;
   width: 2.5rem;
-  margin-left: ${props=>props.margin};
+  margin-left: ${props => props.margin};
   @media only screen and (max-width: 600px) {
   margin-left: 0px;
   }
@@ -23,7 +23,7 @@ input{
 }
 `;
 
-const CheckBox = ({text, margin}) => (
+const CheckBox = ({ text, margin }) => (
   <Container margin={margin}>
     <div className="columns is-horizontal is-mobile">
       <div className="column is-1-desktop  has-text-left text has-text-weight-semibold	">

@@ -43,7 +43,7 @@ const Dashboard = () => {
       <Header />
       <Container className="columns">
         <div className="column is-one-fifth">
-          <Sidebar/>
+          <Sidebar />
         </div>
         <div className="column">
           <MainColumn>

@@ -12,7 +12,7 @@ const Container = styled.button`
     height: ${props => (props.paddingless ? '2em' : '')};
     background-color: transparent;
     :hover {
-      border-color: ${props =>props.paddingless ? '#transparent' : props.theme.primaryColor};
+      border-color: ${props => props.paddingless ? '#transparent' : props.theme.primaryColor};
       color: ${props => props.theme.primaryColor};
       background: transparent;
     }

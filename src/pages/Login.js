@@ -39,7 +39,7 @@ const Login = () => {
   const togggleLoggedIn = useStoreActions(actions => actions.isLoggedIn.togggle);
 
   if (res.data) {
-    const { jwt, user } =  res.data.login;
+    const { jwt, user } = res.data.login;
     window.localStorage.setItem('token', jwt);
     togggleLoggedIn(true);
     setTimeout(() => {

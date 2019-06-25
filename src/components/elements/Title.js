@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Container = styled.h2`
   margin-bottom: 1.3rem;
   color:  ${props => props.theme.secondaryColor};
-  margin-top: ${props=> props.margin ? props.margin: 'auto'}
+  margin-top: ${props => props.margin ? props.margin : 'auto'}
 `;
 
 const Title = ({ children, margin }) => (

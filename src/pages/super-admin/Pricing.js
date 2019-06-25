@@ -13,7 +13,6 @@ const Container = styled.div`
   .pound-icon {
     font-size: 0.85rem!important;
   }
- 
   input {
     width: 60%;
     border-radius: 0px;
@@ -24,11 +23,11 @@ const Container = styled.div`
 const Pricing = () => {
   return (
     <Layout>
-      <Seo title="Projects Clients " description="Page description" />
+      <Seo title="Projects Clients" description="Page description" />
       <Header />
       <Container className="columns">
         <div className="column is-one-fifth">
-          <Sidebar/>
+          <Sidebar />
         </div>
         <div className="column">
           <MainColumn>
@@ -63,8 +62,8 @@ const Pricing = () => {
                   <td className="has-text-right"><Button secondary paddingless>DELETE</Button></td>
                 </tr>
                 <tr>
-                  <td><input className="input" type="text" placeholder=""/></td>
-                  <td><input className="input" type="text" placeholder=""/></td>
+                  <td><input className="input" type="text" placeholder="" /></td>
+                  <td><input className="input" type="text" placeholder="" /></td>
                   <td className="has-text-right"><Button secondary paddingless>EDIT</Button></td>
                   <td className="has-text-right"><Button secondary paddingless>DELETE</Button></td>
                 </tr>
