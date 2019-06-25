@@ -35,7 +35,6 @@ const Container = styled.div`
   .pound-icon {
     font-size: 0.85rem!important;
   }
- 
   input {
     width: 60%;
     border-radius: 0px;
@@ -50,7 +49,7 @@ const Pricing = () => {
   });
   return (
     <Layout>
-      <Seo title="Projects Clients " description="Page description" />
+      <Seo title="Projects Clients" description="Page description" />
       <Header />
       <Container className="columns">
         <div className="column is-one-fifth">
