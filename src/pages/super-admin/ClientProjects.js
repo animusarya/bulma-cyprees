@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
-import { Heading } from '../../components/elements';
+import { Heading, Button, } from '../../components/elements';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
@@ -12,9 +12,6 @@ import CopyRight from '../../components/CopyRight';
 const Container = styled.div`
   .pound-icon {
     font-size: 0.85rem!important;
-  }
-  td.actions {
-    color:  ${props => props.theme.primaryColor};
   }
 `;
 
@@ -47,14 +44,14 @@ const ProjectsClient = () => {
               <tbody>
                 <tr>
                   <td><strong>Project Arden</strong></td>
-                  <td><i className="fas fa-pound-sign pound-icon"></i>300</td>
+                  <td><i className="fas fa-pound-sign pound-icon"></i>30</td>
                   <td>Bi-Annually</td>
                   <td>10 Jun 19</td>
                   <td>10 Oct 19</td>
-                  <td className="is-uppercase actions">manage</td>
-                  <td className="is-uppercase actions">renew</td>
-                  <td className="is-uppercase actions">delete</td>
-                  <td className="is-uppercase actions">export</td>
+                  <td ><Button secondary paddingless>MANAGE</Button></td>
+                  <td ><Button secondary paddingless>RENEW</Button></td>
+                  <td ><Button secondary paddingless>DELETE</Button></td>
+                  <td ><Button secondary paddingless >EXPORT</Button></td>
                 </tr>
                 <tr>
                   <td><strong>Hotel California</strong></td>
@@ -62,21 +59,21 @@ const ProjectsClient = () => {
                   <td>Monthly</td>
                   <td>3 May 18</td>
                   <td>3 May 19</td>
-                  <td className="is-uppercase actions">manage</td>
-                  <td className="is-uppercase actions">renew</td>
-                  <td className="is-uppercase actions">delete</td>
-                  <td className="is-uppercase actions">export</td>
+                  <td ><Button secondary paddingless>MANAGE</Button></td>
+                  <td ><Button secondary paddingless>RENEW</Button></td>
+                  <td ><Button secondary paddingless>DELETE</Button></td>
+                  <td ><Button secondary paddingless >EXPORT</Button></td>
                 </tr>
                 <tr>
                   <td><strong>Project lion</strong></td>
-                  <td><i className="fas fa-pound-sign pound-icon"></i>600</td>
+                  <td><i className="fas fa-pound-sign pound-icon"></i>60</td>
                   <td>Annually</td>
                   <td>22 Oct 17</td>
                   <td>22 Oct 18</td>
-                  <td className="is-uppercase actions">manage</td>
-                  <td className="is-uppercase actions">renew</td>
-                  <td className="is-uppercase actions">delete</td>
-                  <td className="is-uppercase actions">export</td>
+                  <td ><Button secondary paddingless>MANAGE</Button></td>
+                  <td ><Button secondary paddingless>RENEW</Button></td>
+                  <td ><Button secondary paddingless>DELETE</Button></td>
+                  <td ><Button secondary paddingless >EXPORT</Button></td>
                 </tr>
               </tbody>
             </table>
