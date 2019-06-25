@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
-import { Heading, Title, Message, Loading } from '../../components/elements';
+import { Heading, Title, Button, Message, Loading } from '../../components/elements';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
@@ -81,7 +81,7 @@ const Discounts = () => {
                       <tr key={item.id}>
                         <td>{item.name}{item.code}</td>
                         <td>{item.percentage}%</td>
-                        <td className="is-uppercase actions has-text-right">delete</td>
+                        <td className="has-text-right"><Button secondary paddingless>DELETE</Button></td>
                       </tr>
                     ))}
                   </tbody>

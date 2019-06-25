@@ -35,9 +35,7 @@ const Container = styled.div`
   .pound-icon {
     font-size: 0.85rem!important;
   }
-  td.actions {
-    color:  ${props => props.theme.primaryColor};
-  }
+ 
   input {
     width: 60%;
     border-radius: 0px;
