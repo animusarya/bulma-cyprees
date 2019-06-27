@@ -30,7 +30,11 @@ const Test = () => {
       <Seo title="Test" description="Some description here." />
       <div className="container">
         Test page
-        <button type="button" onClick={() => addTodo({ id: 3, name: 'Learn Easy Peasy' })}>add item</button>
+        <button
+          type="button"
+          onClick={() => addTodo({ id: 3, name: 'Learn Easy Peasy' })}>
+          add item
+        </button>
         <ul>
           {todos.map(item => (
             <li key={item.id}>{item.name}</li>
@@ -39,6 +43,6 @@ const Test = () => {
       </div>
     </Layout>
   );
-}
+};
 
 export default Test;

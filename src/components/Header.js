@@ -22,7 +22,12 @@ const Header = () => (
         <a className="navbar-item" href="/">
           <Logo src={logoAlt} alt="logo" />
         </a>
-        <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <a
+          role="button"
+          className="navbar-burger burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -32,9 +37,7 @@ const Header = () => (
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <a className="button is-text">
-                Logout
-              </a>
+              <a className="button is-text">Logout</a>
             </div>
           </div>
         </div>

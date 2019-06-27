@@ -13,7 +13,7 @@ const LoginForm = props => {
     isSubmitting,
     handleChange,
     handleBlur,
-    handleSubmit
+    handleSubmit,
   } = props;
 
   return (
@@ -25,7 +25,8 @@ const LoginForm = props => {
         value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={errors.email && touched.email ? errors.email : undefined} />
+        errors={errors.email && touched.email ? errors.email : undefined}
+      />
       <InputGroup
         label="Password:"
         name="password"
@@ -34,12 +35,13 @@ const LoginForm = props => {
         value={values.password}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={errors.password && touched.password ? errors.password : undefined} />
+        errors={
+          errors.password && touched.password ? errors.password : undefined
+        }
+      />
       <div className="field">
         <div className="control">
-          <Button disabled={isSubmitting}>
-            Login
-          </Button>
+          <Button disabled={isSubmitting}>Login</Button>
         </div>
       </div>
     </form>
@@ -53,20 +55,20 @@ LoginForm.propTypes = {
   isSubmitting: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleBlur: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 export default withFormik({
   mapPropsToValues: () => ({
     email: '',
-    password: ''
+    password: '',
   }),
   validationSchema: yup.object().shape({
     email: yup
       .string()
       .email('Invalid email address')
       .required('Email is required!'),
-    password: yup.string().required('Password is required!')
+    password: yup.string().required('Password is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
@@ -75,5 +77,5 @@ export default withFormik({
       setSubmitting(false);
     });
   },
-  displayName: 'LoginForm' // helps with React DevTools
+  displayName: 'LoginForm', // helps with React DevTools
 })(LoginForm);

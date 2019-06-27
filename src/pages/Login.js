@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useMutation } from "urql";
+import { useMutation } from 'urql';
 import gql from 'graphql-tag';
 import { useStoreActions } from 'easy-peasy';
 
 import Seo from '../components/Seo';
 import Layout from '../components/Layout';
-import { Message } from '../components/elements'
+import { Message } from '../components/elements';
 import LoginForm from '../components/LoginForm';
 import Footer from '../components/Footer';
 import loginBg from '../assets/images/login-bg.jpg';
@@ -37,7 +37,9 @@ const Logo = styled.img`
 
 const Login = () => {
   const [res, executeMutation] = useMutation(mutation);
-  const togggleLoggedIn = useStoreActions(actions => actions.isLoggedIn.togggle);
+  const togggleLoggedIn = useStoreActions(
+    actions => actions.isLoggedIn.togggle,
+  );
   const updateUser = useStoreActions(actions => actions.user.update);
 
   if (res.data) {
@@ -74,6 +76,6 @@ const Login = () => {
       <Footer />
     </Layout>
   );
-}
+};
 
 export default Login;

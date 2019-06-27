@@ -10,8 +10,8 @@ const getSchemaOrgJSONLD = ({ url, title }) => [
     '@type': 'WebSite',
     url,
     name: title,
-    alternateName: config.siteName
-  }
+    alternateName: config.siteName,
+  },
 ];
 
 const Seo = ({ title, description, url, image }) => {
@@ -21,7 +21,7 @@ const Seo = ({ title, description, url, image }) => {
     url,
     pageTitle,
     image,
-    description
+    description,
   });
 
   return (
@@ -56,14 +56,14 @@ const Seo = ({ title, description, url, image }) => {
 Seo.defaultProps = {
   url: config.siteUrl,
   image: `${config.siteUrl}/${config.logo}`,
-  description: 'POS System'
+  description: 'POS System',
 };
 
 Seo.propTypes = {
   title: PropTypes.any.isRequired,
   description: PropTypes.any,
   url: PropTypes.string,
-  image: PropTypes.string
+  image: PropTypes.string,
 };
 
 export default Seo;

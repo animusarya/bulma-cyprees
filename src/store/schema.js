@@ -5,31 +5,25 @@ const schema = {
     value: false,
     togggle: action((state, payload) => {
       state.value = payload;
-    })
+    }),
   },
   user: {
     data: {},
     update: action((state, payload) => {
       state.data = payload;
-    })
+    }),
   },
   todos: {
-    items: [
-      { id: 1, name: 'milk' },
-      { id: 2, name: 'bread' }
-    ],
+    items: [{ id: 1, name: 'milk' }, { id: 2, name: 'bread' }],
     addTodo: action((state, payload) => {
       state.items.push(payload);
     }),
-    getById: selector(
-      [state => state.items],
-      (stateResolvers, runtimeArgs) => {
-        const [items] = stateResolvers;
-        const [id] = runtimeArgs;
-        return items.find(todo => todo.id === id);
-      }
-    )
-  }
+    getById: selector([state => state.items], (stateResolvers, runtimeArgs) => {
+      const [items] = stateResolvers;
+      const [id] = runtimeArgs;
+      return items.find(todo => todo.id === id);
+    }),
+  },
 };
 
 export default schema;

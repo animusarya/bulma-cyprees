@@ -8,13 +8,12 @@ const client = createClient({
     if (token) {
       return {
         headers: {
-          Authorization: `${token}`
-        }
+          Authorization: `${token}`,
+        },
       };
     }
     return {};
-  }
+  },
 });
 
 export default client;
-

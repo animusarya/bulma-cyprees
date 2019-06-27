@@ -13,7 +13,7 @@ const DiscountForm = props => {
     isSubmitting,
     handleChange,
     handleBlur,
-    handleSubmit
+    handleSubmit,
   } = props;
 
   return (
@@ -26,7 +26,8 @@ const DiscountForm = props => {
         value={values.name}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={errors.name && touched.name ? errors.name : undefined} />
+        errors={errors.name && touched.name ? errors.name : undefined}
+      />
       <InputGroup
         isHorizontal
         label="Discount Code"
@@ -35,7 +36,8 @@ const DiscountForm = props => {
         value={values.code}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={errors.code && touched.code ? errors.code : undefined} />
+        errors={errors.code && touched.code ? errors.code : undefined}
+      />
       <InputGroup
         isHorizontal
         type="number"
@@ -45,12 +47,15 @@ const DiscountForm = props => {
         value={values.percentage}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={errors.percentage && touched.percentage ? errors.percentage : undefined} />
+        errors={
+          errors.percentage && touched.percentage
+            ? errors.percentage
+            : undefined
+        }
+      />
       <div className="field">
         <div className="is-pulled-right">
-          <Button disabled={isSubmitting}>
-            Submit
-          </Button>
+          <Button disabled={isSubmitting}>Submit</Button>
         </div>
       </div>
     </form>
@@ -64,19 +69,19 @@ DiscountForm.propTypes = {
   isSubmitting: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleBlur: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 export default withFormik({
   mapPropsToValues: () => ({
     name: '',
     code: '',
-    percentage: ''
+    percentage: '',
   }),
   validationSchema: yup.object().shape({
     name: yup.string().required('Name is required!'),
     code: yup.string().required('Code is required!'),
-    percentage: yup.string().required('Percentage is required!')
+    percentage: yup.string().required('Percentage is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
@@ -85,5 +90,5 @@ export default withFormik({
       setSubmitting(false);
     });
   },
-  displayName: 'DiscountForm' // helps with React DevTools
+  displayName: 'DiscountForm', // helps with React DevTools
 })(DiscountForm);

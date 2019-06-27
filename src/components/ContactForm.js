@@ -11,7 +11,7 @@ const ContactForm = props => {
     isSubmitting,
     handleChange,
     handleBlur,
-    handleSubmit
+    handleSubmit,
   } = props;
 
   return (
@@ -69,8 +69,7 @@ const ContactForm = props => {
           <button
             type="submit"
             className="button is-link"
-            disabled={isSubmitting}
-          >
+            disabled={isSubmitting}>
             Submit
           </button>
         </div>
@@ -86,14 +85,14 @@ ContactForm.propTypes = {
   isSubmitting: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleBlur: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 export default withFormik({
   mapPropsToValues: () => ({
     name: '',
     email: '',
-    message: ''
+    message: '',
   }),
   validationSchema: yup.object().shape({
     name: yup.string().required('Full name is required!'),
@@ -101,12 +100,12 @@ export default withFormik({
       .string()
       .email('Invalid email address')
       .required('Email is required!'),
-    message: yup.string().required('Message is required!')
+    message: yup.string().required('Message is required!'),
   }),
   handleSubmit: (values, { setSubmitting, props }) => {
     // console.log('handle submit', values, props);
     props.addContact(values);
     setSubmitting(false);
   },
-  displayName: 'ContactUs' // helps with React DevTools
+  displayName: 'ContactUs', // helps with React DevTools
 })(ContactForm);
