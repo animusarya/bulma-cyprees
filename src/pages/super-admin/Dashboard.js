@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useQuery } from "urql";
 import gql from 'graphql-tag';
+import { Link } from "react-router-dom";
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -63,7 +64,7 @@ const Dashboard = () => {
                 <tbody>
                   {res.data.users.map(user => (
                     <tr key={user.id}>
-                      <td>{user.email}</td>
+                      <td><Link to={`/super-admin/client/projects/${user.id}`}>{user.email}</Link></td>
                       <td>{user.profile && user.profile.fullName}</td>
                       <td>{user.profile && user.profile.company}</td>
                       <td>{user.profile && user.profile.telephone}</td>

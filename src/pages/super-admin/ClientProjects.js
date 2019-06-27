@@ -12,17 +12,17 @@ import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 
 const clientProjectsQuery = gql`
-  {
-  projects {
-    id
-    name
-    subscriptionAmount
-    subscriptionDurationInMonths
-    subscriptionStartsAt
-    subscriptionEndsAt
-    subscriptionlastRenewedAt
+  query Projects($clientId: ID) {
+    projects(clientId: $clientId) {
+      id
+      name
+      subscriptionAmount
+      subscriptionDurationInMonths
+      subscriptionStartsAt
+      subscriptionEndsAt
+      subscriptionlastRenewedAt
+    }
   }
-}
 `;
 
 const Container = styled.div`
@@ -31,10 +31,13 @@ const Container = styled.div`
   }
 `;
 
-const ProjectsClient = () => {
+const ProjectsClient = ({ match }) => {
   const [result] = useQuery({
     query: clientProjectsQuery,
+    variables: { clientId: match.params.clientId }
   });
+  // console.log('clientId', match.params.clientId);
+
   return (
     <Layout>
       <Seo title="Projects Clients " description="Page description" />
@@ -48,7 +51,7 @@ const ProjectsClient = () => {
             <Heading>Clients &gt; rob@colliers.com</Heading>
             {result.error && <Message type="error">{result.error.message}</Message>}
             {result.fetching && <Loading />}
-            {result.data && (
+            {result.data && result.data.projects && (
               <table className="table is-fullwidth is-hoverable">
                 <thead>
                   <tr>

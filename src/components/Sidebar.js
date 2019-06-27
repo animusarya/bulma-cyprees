@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
+import { useStoreState } from 'easy-peasy';
 
 const Container = styled.aside`
   background-color: #f4f4f6;
@@ -14,20 +16,40 @@ const Container = styled.aside`
   }
 `;
 
-const Sidebar = () => (
-  <Container className="menu">
-    <ul className="menu-list">
-      <li>
-        <a href="/super-admin/Dashboard">Clients</a>
-      </li>
-      <li>
-        <a href="/super-admin/Pricing">Set Pricing</a>
-      </li>
-      <li>
-        <a href="/super-admin/Discounts">Discount Codes</a>
-      </li>
-    </ul>
-  </Container>
-);
+const Sidebar = () => {
+  const userData = useStoreState(state => state.user.data);
+
+  return (
+    <Container className="menu">
+      {userData.type === 'superAdmin' && (
+        <ul className="menu-list">
+          <li>
+            <Link to="/super-admin/dashboard">Clients</Link>
+          </li>
+          <li>
+            <Link to="/super-admin/pricing">Set Pricing</Link>
+          </li>
+          <li>
+            <Link to="/super-admin/discounts">Discount Codes</Link>
+          </li>
+        </ul>
+      )}
+      {userData.type === 'admin' && (
+        <ul className="menu-list">
+          <li>
+            <Link to="/admin/dashboard">Projects</Link>
+          </li>
+        </ul>
+      )}
+      {userData.type === 'client' && (
+        <ul className="menu-list">
+          <li>
+            <Link to="/client/dashboard">Files</Link>
+          </li>
+        </ul>
+      )}
+    </Container>
+  );
+};
 
 export default Sidebar;
