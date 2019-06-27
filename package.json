@@ -10,6 +10,7 @@
     "lint-two": "NODE_ENV=production lint-staged"
   },
   "dependencies": {
+    "dayjs": "^1.8.14",
     "easy-peasy": "^2.5.0",
     "formik": "^1.5.2",
     "graphql": "^14.3.1",

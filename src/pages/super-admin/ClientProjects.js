@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useQuery } from "urql";
 import gql from 'graphql-tag';
+import dayjs from 'dayjs'
+import { Link } from "react-router-dom";
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -69,11 +71,11 @@ const ProjectsClient = ({ match }) => {
                 <tbody>
                   {result.data.projects.map(project => (
                     <tr key={project.id}>
-                      <td><strong>{project.name}</strong></td>
+                      <td><strong><Link to={`/super-admin/project/info/${project.id}`}>{project.name}</Link></strong></td>
                       <td><i className="fas fa-pound-sign pound-icon"></i>{project.subscriptionAmount}</td>
                       <td>{project.subscriptionDurationInMonths}</td>
-                      <td>{project.subscriptionStartsAt}</td>
-                      <td>{project.subscriptionStartsAt}</td>
+                      <td>{dayjs(project.subscriptionStartsAt).format('DD-MM-YYYY')}</td>
+                      <td>{dayjs(project.subscriptionEndsAt).format('DD-MM-YYYY')}</td>
                       <td className="is-uppercase actions">manage</td>
                       <td className="is-uppercase actions">renew</td>
                       <td className="is-uppercase actions">delete</td>

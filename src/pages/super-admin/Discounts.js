@@ -71,27 +71,12 @@ const Discounts = () => {
           <MainColumn>
             <Heading>Discount Codes</Heading>
             <Title>Create Discount Code</Title>
-<<<<<<< HEAD
-            <DiscountForm onSubmit={data => executeMutation(data)} />
-            {res.error && <Message type="error">{res.error.message}</Message>}
-            <div>
-              <Title margintop="4rem">Discount Codes</Title>
-              {res.error && <Message type="error">{res.error.message}</Message>}
-              {res.fetching && <Loading />}
-              {result.data && (
-                <table className="table is-fullwidth is-hoverable">
-                  <thead>
-                    <tr>
-                      <th className="has-text-left">Code</th>
-                      <th className="has-text-left">Percentage</th>
-                      <th className="has-text-right">Delete</th>
-=======
             <DiscountForm
               onSubmit={async (data) => {
                 await executeMutationAdd(data);
                 executeQuery({ requestPolicy: 'network-only' });
               }}
-              />
+            />
             {resAdd.error && <Message type="error">{resAdd.error.message}</Message>}
             {resRemove.error && <Message type="error">{resRemove.error.message}</Message>}
             {result.error && <Message type="error">{result.error.message}</Message>}
@@ -115,7 +100,7 @@ const Discounts = () => {
                           secondary
                           paddingless
                           onClick={() => {
-                            swal("Are you confirm to delete this item?", {buttons: ["Cancel", "Confirm"],})
+                            swal("Are you confirm to delete this item?", { buttons: ["Cancel", "Confirm"], })
                               .then(async (value) => {
                                 if (value) {
                                   await executeMutationRemove({ id: item.id });
@@ -126,7 +111,6 @@ const Discounts = () => {
                           DELETE
                         </Button>
                       </td>
->>>>>>> e0ce3619867d15e2662958a7bb1a472a3da5d806
                     </tr>
                   ))}
                 </tbody>
