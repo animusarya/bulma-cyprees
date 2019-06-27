@@ -74,7 +74,7 @@ class App extends React.Component {
                     <Route exact path="/login" component={Login} />
                     <PrivateRoute
                       exact
-                      path="/super-admin/dashboard"
+                      path="/super-admin/dashboard/:userId"
                       component={DashboardSuperAdmin}
                     />
                     <PrivateRoute

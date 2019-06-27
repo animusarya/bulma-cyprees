@@ -1,18 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useMutation } from "urql";
+import gql from 'graphql-tag';
+import AdminUsers from '../../components/AdminUsers';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
+import ProjectInfoForm from '../../components/ProjectInfoForm';
 import {
   Heading,
-  Button,
   Title,
-  InputGroup
+  Message
 } from '../../components/elements';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
+
+const projectInfoMutation = gql`
+  mutation createProjectInfo($customDomain: String!) {
+    createProjectInfo(input: { customDomain: $customDomain }) {
+      id
+      customDomain
+    }
+  }
+`;
 
 const Container = styled.div`
   .project-info {
@@ -27,6 +39,7 @@ const Container = styled.div`
 `;
 
 const ProjectInfo = () => {
+  const [res, executeMutation] = useMutation(projectInfoMutation);
   return (
     <Layout>
       <Seo
@@ -62,12 +75,8 @@ const ProjectInfo = () => {
                   </div>
                 </div>
               </div>
-
-              <InputGroup
-                isHorizontal
-                label="Custom URL"
-                placeholder="www.colliers.co.uk/arden"
-              />
+              <ProjectInfoForm onSubmit={data => executeMutation(data)} />
+              {res.error && <Message type="error">{res.error.message}</Message>}
               <div className="field is-horizontal">
                 <div className="field-label is-normal">
                   <label className="label has-text-left has-text-weight-semibold">
@@ -87,45 +96,8 @@ const ProjectInfo = () => {
                   </div>
                 </div>
               </div>
-              <div className="is-pulled-right">
-                <Button>Save</Button>
-              </div>
             </div>
-            <Title>Admin Users</Title>
-            <table className="table is-fullwidth is-hoverable">
-              <thead>
-                <tr>
-                  <th>Users</th>
-                  <th>Password</th>
-                  <th className="has-text-right">Delete</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>rob@collier.com</td>
-                  <td>***********</td>
-                  <td className="has-text-right"><Button secondary paddingless>DELETE</Button></td>
-                </tr>
-                <tr>
-                  <td>rob@collier.com</td>
-                  <td>***********</td>
-                  <td className="has-text-right"><Button secondary paddingless>DELETE</Button></td>
-                </tr>
-                <tr>
-                  <td>rob@collier.com</td>
-                  <td>***********</td>
-                  <td className="has-text-right"><Button secondary paddingless>DELETE</Button></td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="field is-grouped is-pulled-right">
-              <p className="control">
-                <Button>Add</Button>
-              </p>
-              <p className="control">
-                <Button>Save</Button>
-              </p>
-            </div>
+            <AdminUsers />
           </MainColumn>
         </div>
       </Container>

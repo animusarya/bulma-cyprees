@@ -85,18 +85,6 @@ const Pricing = () => {
                 </tbody>
               </table>
             )}
-            {/* <div className="field is-grouped is-pulled-right">
-              <p className="control">
-                <Button>
-                  Add
-                </Button>
-              </p>
-              <p className="control">
-                <Button>
-                  Save
-                </Button>
-              </p>
-              </div> ) */}
           </MainColumn>
         </div>
       </Container>
