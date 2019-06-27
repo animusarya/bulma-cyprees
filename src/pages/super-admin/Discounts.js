@@ -76,7 +76,7 @@ const Discounts = () => {
                 await executeMutationAdd(data);
                 executeQuery({ requestPolicy: 'network-only' });
               }}
-              />
+            />
             {resAdd.error && <Message type="error">{resAdd.error.message}</Message>}
             {resRemove.error && <Message type="error">{resRemove.error.message}</Message>}
             {result.error && <Message type="error">{result.error.message}</Message>}
@@ -100,7 +100,7 @@ const Discounts = () => {
                           secondary
                           paddingless
                           onClick={() => {
-                            swal("Are you confirm to delete this item?", {buttons: ["Cancel", "Confirm"],})
+                            swal("Are you confirm to delete this item?", { buttons: ["Cancel", "Confirm"], })
                               .then(async (value) => {
                                 if (value) {
                                   await executeMutationRemove({ id: item.id });

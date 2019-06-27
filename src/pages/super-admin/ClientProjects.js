@@ -1,19 +1,21 @@
-import React from "react";
-import styled from "styled-components";
-import { useQuery } from "urql";
-import gql from "graphql-tag";
+import React from 'react';
+import styled from 'styled-components';
+import { useQuery } from 'urql';
+import gql from 'graphql-tag';
+import dayjs from 'dayjs';
+import { Link } from 'react-router-dom';
 
-import Layout from "../../components/Layout";
-import Seo from "../../components/Seo";
-import { Heading, Message, Loading } from "../../components/elements";
-import Header from "../../components/Header";
-import Sidebar from "../../components/Sidebar";
-import MainColumn from "../../components/MainColumn";
-import CopyRight from "../../components/CopyRight";
+import Layout from '../../components/Layout';
+import Seo from '../../components/Seo';
+import { Heading, Message, Loading } from '../../components/elements';
+import Header from '../../components/Header';
+import Sidebar from '../../components/Sidebar';
+import MainColumn from '../../components/MainColumn';
+import CopyRight from '../../components/CopyRight';
 
 const clientProjectsQuery = gql`
-  {
-    projects {
+  query Projects($clientId: ID) {
+    projects(clientId: $clientId) {
       id
       name
       subscriptionAmount
@@ -31,10 +33,13 @@ const Container = styled.div`
   }
 `;
 
-const ProjectsClient = () => {
+const ProjectsClient = ({ match }) => {
   const [result] = useQuery({
-    query: clientProjectsQuery
+    query: clientProjectsQuery,
+    variables: { clientId: match.params.clientId },
   });
+  // console.log('clientId', match.params.clientId);
+
   return (
     <Layout>
       <Seo title="Projects Clients " description="Page description" />
@@ -50,7 +55,7 @@ const ProjectsClient = () => {
               <Message type="error">{result.error.message}</Message>
             )}
             {result.fetching && <Loading />}
-            {result.data && (
+            {result.data && result.data.projects && (
               <table className="table is-fullwidth is-hoverable">
                 <thead>
                   <tr>
@@ -69,15 +74,25 @@ const ProjectsClient = () => {
                   {result.data.projects.map(project => (
                     <tr key={project.id}>
                       <td>
-                        <strong>{project.name}</strong>
+                        <strong>
+                          <Link to={`/super-admin/project/info/${project.id}`}>
+                            {project.name}
+                          </Link>
+                        </strong>
                       </td>
                       <td>
                         <i className="fas fa-pound-sign pound-icon"></i>
                         {project.subscriptionAmount}
                       </td>
                       <td>{project.subscriptionDurationInMonths}</td>
-                      <td>{project.subscriptionStartsAt}</td>
-                      <td>{project.subscriptionStartsAt}</td>
+                      <td>
+                        {dayjs(project.subscriptionStartsAt).format(
+                          'DD-MM-YYYY'
+                        )}
+                      </td>
+                      <td>
+                        {dayjs(project.subscriptionEndsAt).format('DD-MM-YYYY')}
+                      </td>
                       <td className="is-uppercase actions">manage</td>
                       <td className="is-uppercase actions">renew</td>
                       <td className="is-uppercase actions">delete</td>

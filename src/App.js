@@ -73,13 +73,13 @@ class App extends React.Component {
                     <Route exact path="/contact" component={Contact} />
                     <Route exact path="/login" component={Login} />
                     <PrivateRoute exact path="/super-admin/dashboard" component={DashboardSuperAdmin} />
-                    <PrivateRoute exact path="/super-admin/client/projects" component={ClientProjects} />
+                    <PrivateRoute exact path="/super-admin/client/projects/:clientId" component={ClientProjects} />
                     <PrivateRoute exact path="/super-admin/project/info" component={ProjectInfo} />
                     <PrivateRoute exact path="/super-admin/pricing" component={Pricing} />
                     <PrivateRoute exact path="/super-admin/discounts" component={Discounts} />
                     <PrivateRoute exact path="/admin/dashboard" component={DashboardAdmin} />
                     <PrivateRoute exact path="/admin/projects" component={Projects} />
-                    <PrivateRoute exact path="/client/dashboard" component={DashboardClient} />
+                    <Route exact path="/client/dashboard" component={DashboardClient} />
                     <Route exact path="/test" component={Test} />
                     <Route component={Error404} />
                   </Switch>
