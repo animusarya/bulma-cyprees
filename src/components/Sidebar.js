@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 const Container = styled.aside`
   background-color: #f4f4f6;
@@ -18,13 +19,13 @@ const Sidebar = () => (
   <Container className="menu">
     <ul className="menu-list">
       <li>
-        <a href="/super-admin/dashboard">Clients</a>
+        <Link to="/super-admin/dashboard">Clients</Link>
       </li>
       <li>
-        <a href="/super-admin/pricing">Set Pricing</a>
+        <Link to="/super-admin/pricing">Set Pricing</Link>
       </li>
       <li>
-        <a href="/super-admin/discounts">Discount Codes</a>
+        <Link to="/super-admin/discounts">Discount Codes</Link>
       </li>
     </ul>
   </Container>
