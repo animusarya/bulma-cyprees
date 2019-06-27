@@ -1,39 +1,39 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import { useQuery } from "urql";
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
-import Layout from '../../components/Layout';
-import Seo from '../../components/Seo';
-import { Heading, Message, Loading } from '../../components/elements';
-import Header from '../../components/Header';
-import Sidebar from '../../components/Sidebar';
-import MainColumn from '../../components/MainColumn';
-import CopyRight from '../../components/CopyRight';
+import Layout from "../../components/Layout";
+import Seo from "../../components/Seo";
+import { Heading, Message, Loading } from "../../components/elements";
+import Header from "../../components/Header";
+import Sidebar from "../../components/Sidebar";
+import MainColumn from "../../components/MainColumn";
+import CopyRight from "../../components/CopyRight";
 
 const clientProjectsQuery = gql`
   {
-  projects {
-    id
-    name
-    subscriptionAmount
-    subscriptionDurationInMonths
-    subscriptionStartsAt
-    subscriptionEndsAt
-    subscriptionlastRenewedAt
+    projects {
+      id
+      name
+      subscriptionAmount
+      subscriptionDurationInMonths
+      subscriptionStartsAt
+      subscriptionEndsAt
+      subscriptionlastRenewedAt
+    }
   }
-}
 `;
 
 const Container = styled.div`
   .pound-icon {
-    font-size: 0.85rem!important;
+    font-size: 0.85rem !important;
   }
 `;
 
 const ProjectsClient = () => {
   const [result] = useQuery({
-    query: clientProjectsQuery,
+    query: clientProjectsQuery
   });
   return (
     <Layout>
@@ -46,7 +46,9 @@ const ProjectsClient = () => {
         <div className="column">
           <MainColumn>
             <Heading>Clients &gt; rob@colliers.com</Heading>
-            {result.error && <Message type="error">{result.error.message}</Message>}
+            {result.error && (
+              <Message type="error">{result.error.message}</Message>
+            )}
             {result.fetching && <Loading />}
             {result.data && (
               <table className="table is-fullwidth is-hoverable">
@@ -66,8 +68,13 @@ const ProjectsClient = () => {
                 <tbody>
                   {result.data.projects.map(project => (
                     <tr key={project.id}>
-                      <td><strong>{project.name}</strong></td>
-                      <td><i className="fas fa-pound-sign pound-icon"></i>{project.subscriptionAmount}</td>
+                      <td>
+                        <strong>{project.name}</strong>
+                      </td>
+                      <td>
+                        <i className="fas fa-pound-sign pound-icon"></i>
+                        {project.subscriptionAmount}
+                      </td>
                       <td>{project.subscriptionDurationInMonths}</td>
                       <td>{project.subscriptionStartsAt}</td>
                       <td>{project.subscriptionStartsAt}</td>
