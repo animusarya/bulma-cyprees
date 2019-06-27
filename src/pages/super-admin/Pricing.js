@@ -1,13 +1,35 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useQuery, useMutation } from "urql";
+import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
-import { Heading, Button, Title } from '../../components/elements';
+import { Heading, Title, Message, Loading } from '../../components/elements';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
+import PricingForm from '../../components/PricingForm';
+
+const pricingsQuery = gql`{
+  packages {
+    id
+    name
+    price
+  }
+}
+`;
+
+const pricingMutation = gql`
+  mutation createPackage($name: String!, $price: Float!) {
+  createPackage(input: { name: $name, price: $price }) {
+    id
+    name
+    price
+  }
+}
+`;
 
 const Container = styled.div`
   .pound-icon {
@@ -21,6 +43,10 @@ const Container = styled.div`
 `;
 
 const Pricing = () => {
+  const [res, executeMutation] = useMutation(pricingMutation);
+  const [result] = useQuery({
+    query: pricingsQuery,
+  });
   return (
     <Layout>
       <Seo title="Projects Clients" description="Page description" />
@@ -32,44 +58,34 @@ const Pricing = () => {
         <div className="column">
           <MainColumn>
             <Heading>Set Pricing</Heading>
+            <PricingForm onSubmit={data => executeMutation(data)} />
+            {res.error && <Message type="error">{res.error.message}</Message>}
             <Title>Plans</Title>
-            <table className="table is-fullwidth is-hoverable">
-              <thead>
-                <tr>
-                  <th>Duration</th>
-                  <th>Price</th>
-                  <th className="has-text-right">Edit</th>
-                  <th className="has-text-right">Delete</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Monthly</td>
-                  <td><i className="fas fa-pound-sign pound-icon"></i>300</td>
-                  <td className="has-text-right"><Button secondary paddingless>EDIT</Button></td>
-                  <td className="has-text-right"><Button secondary paddingless>DELETE</Button></td>
-                </tr>
-                <tr>
-                  <td>Bi-Annually</td>
-                  <td><i className="fas fa-pound-sign pound-icon"></i>180</td>
-                  <td className="has-text-right"><Button secondary paddingless>EDIT</Button></td>
-                  <td className="has-text-right"><Button secondary paddingless>DELETE</Button></td>
-                </tr>
-                <tr>
-                  <td>Annually</td>
-                  <td><i className="fas fa-pound-sign pound-icon"></i>360</td>
-                  <td className="has-text-right"><Button secondary paddingless>EDIT</Button></td>
-                  <td className="has-text-right"><Button secondary paddingless>DELETE</Button></td>
-                </tr>
-                <tr>
-                  <td><input className="input" type="text" placeholder="" /></td>
-                  <td><input className="input" type="text" placeholder="" /></td>
-                  <td className="has-text-right"><Button secondary paddingless>EDIT</Button></td>
-                  <td className="has-text-right"><Button secondary paddingless>DELETE</Button></td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="field is-grouped is-pulled-right">
+            {res.error && <Message type="error">{res.error.message}</Message>}
+            {res.fetching && <Loading />}
+            {result.data && (
+              <table className="table is-fullwidth is-hoverable">
+                <thead>
+                  <tr>
+                    <th>Duration</th>
+                    <th>Price</th>
+                    <th className="has-text-right">Edit</th>
+                    <th className="has-text-right">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {result.data.discounts.map(item => (
+                    <tr key={item.id}>
+                      <td>{item.name}</td>
+                      <td><i className="fas fa-pound-sign pound-icon"></i>{item.price}</td>
+                      <td className="is-uppercase actions has-text-right">edit</td>
+                      <td className="is-uppercase actions has-text-right">delete</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+            {/* <div className="field is-grouped is-pulled-right">
               <p className="control">
                 <Button>
                   Add
@@ -80,7 +96,7 @@ const Pricing = () => {
                   Save
                 </Button>
               </p>
-            </div>
+              </div> ) */}
           </MainColumn>
         </div>
       </Container>
