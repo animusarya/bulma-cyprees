@@ -79,7 +79,7 @@ class App extends React.Component {
                     <PrivateRoute exact path="/super-admin/discounts" component={Discounts} />
                     <PrivateRoute exact path="/admin/dashboard" component={DashboardAdmin} />
                     <PrivateRoute exact path="/admin/projects" component={Projects} />
-                    <PrivateRoute exact path="/client/dashboard" component={DashboardClient} />
+                    <Route exact path="/client/dashboard" component={DashboardClient} />
                     <Route exact path="/test" component={Test} />
                     <Route component={Error404} />
                   </Switch>

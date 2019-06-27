@@ -64,7 +64,7 @@ const Discounts = () => {
             <DiscountForm onSubmit={data => executeMutation(data)} />
             {res.error && <Message type="error">{res.error.message}</Message>}
             <div>
-              <Title margin="4rem">Discount Codes</Title>
+              <Title margintop="4rem">Discount Codes</Title>
               {res.error && <Message type="error">{res.error.message}</Message>}
               {res.fetching && <Loading />}
               {result.data && (
