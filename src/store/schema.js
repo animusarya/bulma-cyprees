@@ -7,6 +7,12 @@ const schema = {
       state.value = payload;
     })
   },
+  user: {
+    data: {},
+    update: action((state, payload) => {
+      state.data = payload;
+    })
+  },
   todos: {
     items: [
       { id: 1, name: 'milk' },
