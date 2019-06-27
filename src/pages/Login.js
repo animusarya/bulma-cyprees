@@ -18,6 +18,7 @@ const mutation = gql`
       jwt
       user {
         id
+        email
         type
       }
     }
@@ -37,14 +38,16 @@ const Logo = styled.img`
 const Login = () => {
   const [res, executeMutation] = useMutation(mutation);
   const togggleLoggedIn = useStoreActions(actions => actions.isLoggedIn.togggle);
+  const updateUser = useStoreActions(actions => actions.user.update);
 
   if (res.data) {
     const { jwt, user } = res.data.login;
     window.localStorage.setItem('token', jwt);
     togggleLoggedIn(true);
+    updateUser(user);
     setTimeout(() => {
       let sendTo = '/client/dashboard';
-      if (user.type === 'super-admin') {
+      if (user.type === 'superAdmin') {
         sendTo = '/super-admin/dashboard';
       } else if (user.type === 'admin') {
         sendTo = '/admin/dashboard';
