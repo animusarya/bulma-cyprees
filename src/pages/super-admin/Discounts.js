@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useQuery, useMutation } from "urql";
 import gql from 'graphql-tag';
+import swal from 'sweetalert';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -34,6 +35,14 @@ const createDiscountMutation = gql`
   }
 `;
 
+const removeDiscountMutation = gql`
+  mutation removeDiscount($id: ID!) {
+    removeDiscount(id: $id) {
+      success
+    }
+  }
+`;
+
 const Container = styled.div`
   .pound-icon {
     font-size: 0.85rem !important;
@@ -44,8 +53,9 @@ const Container = styled.div`
 `;
 
 const Discounts = () => {
-  const [res, executeMutation] = useMutation(createDiscountMutation);
-  const [result] = useQuery({
+  const [resAdd, executeMutationAdd] = useMutation(createDiscountMutation);
+  const [resRemove, executeMutationRemove] = useMutation(removeDiscountMutation);
+  const [result, executeQuery] = useQuery({
     query: discountsQuery,
   });
 
@@ -61,33 +71,51 @@ const Discounts = () => {
           <MainColumn>
             <Heading>Discount Codes</Heading>
             <Title>Create Discount Code</Title>
-            <DiscountForm onSubmit={data => executeMutation(data)} />
-            {res.error && <Message type="error">{res.error.message}</Message>}
-            <div>
-              <Title margin="4rem">Discount Codes</Title>
-              {res.error && <Message type="error">{res.error.message}</Message>}
-              {res.fetching && <Loading />}
-              {result.data && (
-                <table className="table is-fullwidth is-hoverable">
-                  <thead>
-                    <tr>
-                      <th className="has-text-left">Code</th>
-                      <th className="has-text-left">Percentage</th>
-                      <th className="has-text-right">Delete</th>
+            <DiscountForm
+              onSubmit={async (data) => {
+                await executeMutationAdd(data);
+                executeQuery({ requestPolicy: 'network-only' });
+              }}
+              />
+            {resAdd.error && <Message type="error">{resAdd.error.message}</Message>}
+            {resRemove.error && <Message type="error">{resRemove.error.message}</Message>}
+            {result.error && <Message type="error">{result.error.message}</Message>}
+            {resAdd.fetching || resRemove.fetching || result.fetching ? <Loading /> : null}
+            {result.data && result.data.discounts.length > 0 && (
+              <table className="table is-fullwidth is-hoverable">
+                <thead>
+                  <tr>
+                    <th className="has-text-left">Code</th>
+                    <th className="has-text-left">Percentage</th>
+                    <th className="has-text-right">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {result.data.discounts.map(item => (
+                    <tr key={item.id}>
+                      <td>{item.name}{item.code}</td>
+                      <td>{item.percentage}%</td>
+                      <td className="has-text-right">
+                        <Button
+                          secondary
+                          paddingless
+                          onClick={() => {
+                            swal("Are you confirm to delete this item?", {buttons: ["Cancel", "Confirm"],})
+                              .then(async (value) => {
+                                if (value) {
+                                  await executeMutationRemove({ id: item.id });
+                                  executeQuery({ requestPolicy: 'network-only' });
+                                }
+                              });
+                          }}>
+                          DELETE
+                        </Button>
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {result.data.discounts.map(item => (
-                      <tr key={item.id}>
-                        <td>{item.name}{item.code}</td>
-                        <td>{item.percentage}%</td>
-                        <td className="has-text-right"><Button secondary paddingless>DELETE</Button></td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
-            </div>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </MainColumn>
         </div>
       </Container>

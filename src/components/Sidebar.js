@@ -18,13 +18,13 @@ const Sidebar = () => (
   <Container className="menu">
     <ul className="menu-list">
       <li>
-        <a href="/super-admin/Dashboard">Clients</a>
+        <a href="/super-admin/dashboard">Clients</a>
       </li>
       <li>
-        <a href="/super-admin/Pricing">Set Pricing</a>
+        <a href="/super-admin/pricing">Set Pricing</a>
       </li>
       <li>
-        <a href="/super-admin/Discounts">Discount Codes</a>
+        <a href="/super-admin/discounts">Discount Codes</a>
       </li>
     </ul>
   </Container>
