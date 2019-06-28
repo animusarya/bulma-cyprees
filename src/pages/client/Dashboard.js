@@ -11,9 +11,6 @@ const Container = styled.div`
   thead {
     background: transparent;
   }
-  title {
-    margin-bottom: 0.3rem;
-  }
 `;
 
 const Dashboard = () => {

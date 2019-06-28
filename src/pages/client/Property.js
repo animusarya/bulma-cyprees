@@ -1,18 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import Layout from '../../components/Layout';
-import Seo from '../../components/Seo';
-import ClientHeader from '../../components/ClientHeader';
-import { Heading, Title, Button } from '../../components/elements';
-import ClientFooter from '../../components/ClientFooter';
+import Layout from "../../components/Layout";
+import Seo from "../../components/Seo";
+import ClientHeader from "../../components/ClientHeader";
+import { Heading, Title, Button } from "../../components/elements";
+import ClientFooter from "../../components/ClientFooter";
 
 const Container = styled.div`
   thead {
     background: transparent;
-  }
-  title {
-    margin-bottom: 0.3rem;
   }
 `;
 
