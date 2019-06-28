@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery, useMutation } from "urql";
+import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
@@ -12,28 +12,29 @@ import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 import PricingForm from '../../components/PricingForm';
 
-const pricingsQuery = gql`{
-  packages {
-    id
-    name
-    price
+const pricingsQuery = gql`
+  {
+    packages {
+      id
+      name
+      price
+    }
   }
-}
 `;
 
 const pricingMutation = gql`
   mutation createPackage($name: String!, $price: Float!) {
-  createPackage(input: { name: $name, price: $price }) {
-    id
-    name
-    price
+    createPackage(input: { name: $name, price: $price }) {
+      id
+      name
+      price
+    }
   }
-}
 `;
 
 const Container = styled.div`
   .pound-icon {
-    font-size: 0.85rem!important;
+    font-size: 0.85rem !important;
   }
   input {
     width: 60%;
@@ -77,26 +78,21 @@ const Pricing = () => {
                   {result.data.discounts.map(item => (
                     <tr key={item.id}>
                       <td>{item.name}</td>
-                      <td><i className="fas fa-pound-sign pound-icon"></i>{item.price}</td>
-                      <td className="is-uppercase actions has-text-right">edit</td>
-                      <td className="is-uppercase actions has-text-right">delete</td>
+                      <td>
+                        <i className="fas fa-pound-sign pound-icon"></i>
+                        {item.price}
+                      </td>
+                      <td className="is-uppercase actions has-text-right">
+                        edit
+                      </td>
+                      <td className="is-uppercase actions has-text-right">
+                        delete
+                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             )}
-            {/* <div className="field is-grouped is-pulled-right">
-              <p className="control">
-                <Button>
-                  Add
-                </Button>
-              </p>
-              <p className="control">
-                <Button>
-                  Save
-                </Button>
-              </p>
-              </div> ) */}
           </MainColumn>
         </div>
       </Container>
