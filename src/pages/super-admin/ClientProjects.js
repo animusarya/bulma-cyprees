@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery } from 'urql';
+import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
-import { Heading, Message, Loading } from '../../components/elements';
+import { Heading, Message, Loading, Button } from '../../components/elements';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
@@ -27,9 +28,33 @@ const clientProjectsQuery = gql`
   }
 `;
 
+const removeProjectClientMutation = gql`
+  mutation removeProjectClient($id: ID!, $clientId: ID) {
+    removeProjectClient(id: $id, clientId: $clientId) {
+      success
+    }
+  }
+`;
+
+const renewProjectClientMutation = gql`
+  mutation renewProjectClient($id: ID!) {
+    renewProjectClient(id: $id) {
+      id
+      subscriptionlastRenewedAt
+    }
+  }
+`;
+
 const Container = styled.div`
   .pound-icon {
     font-size: 0.85rem !important;
+  }
+`;
+
+const LinkWrapper = styled(Link)`
+  color: ${props => props.theme.primaryColor};
+  :hover {
+    color: ${props => props.theme.primaryColor};
   }
 `;
 
@@ -38,6 +63,12 @@ const ProjectsClient = ({ match }) => {
     query: clientProjectsQuery,
     variables: { clientId: match.params.clientId },
   });
+  const [resRemove, executeMutationRemove] = useMutation(
+    removeProjectClientMutation,
+  );
+  const [resRenew, executeMutationRenew] = useMutation(
+    renewProjectClientMutation,
+  );
   // console.log('clientId', match.params.clientId);
 
   return (
@@ -74,11 +105,7 @@ const ProjectsClient = ({ match }) => {
                   {result.data.projects.map(project => (
                     <tr key={project.id}>
                       <td>
-                        <strong>
-                          <Link to={`/super-admin/project/info/${project.id}`}>
-                            {project.name}
-                          </Link>
-                        </strong>
+                        <strong>{project.name}</strong>
                       </td>
                       <td>
                         <i className="fas fa-pound-sign pound-icon"></i>
@@ -87,21 +114,82 @@ const ProjectsClient = ({ match }) => {
                       <td>{project.subscriptionDurationInMonths}</td>
                       <td>
                         {dayjs(project.subscriptionStartsAt).format(
-                          'DD-MM-YYYY'
+                          'DD-MM-YYYY',
                         )}
                       </td>
                       <td>
                         {dayjs(project.subscriptionEndsAt).format('DD-MM-YYYY')}
                       </td>
-                      <td className="is-uppercase actions">manage</td>
-                      <td className="is-uppercase actions">renew</td>
-                      <td className="is-uppercase actions">delete</td>
-                      <td className="is-uppercase actions">export</td>
+                      <td className="is-uppercase actions">
+                        {' '}
+                        <LinkWrapper
+                          to={`/super-admin/project/info/${project.id}`}>
+                          manage{' '}
+                        </LinkWrapper>
+                      </td>
+                      <td className="is-uppercase actions">
+                        <Button
+                          secondary
+                          paddingless
+                          onClick={() => {
+                            swal(
+                              'Are you sure you want to renew this client?',
+                              {
+                                buttons: ['Cancel', 'Confirm'],
+                              },
+                            ).then(async value => {
+                              if (value) {
+                                await executeMutationRenew({ id: project.id });
+                              }
+                            });
+                          }}>
+                          RENEW
+                        </Button>
+                      </td>
+                      <td className="is-uppercase actions">
+                        <Button
+                          secondary
+                          paddingless
+                          onClick={() => {
+                            swal('Are you confirm to delete this item?', {
+                              buttons: ['Cancel', 'Confirm'],
+                            }).then(async value => {
+                              if (value) {
+                                await executeMutationRemove({ id: project.id });
+                              }
+                            });
+                          }}>
+                          DELETE
+                        </Button>
+                      </td>
+                      <td className="is-uppercase actions">
+                        <Button
+                          secondary
+                          paddingless
+                          onClick={() => {
+                            // swal('Are you confirm to delete this item?', {
+                            //   buttons: ['Cancel', 'Confirm'],
+                            // }).then(async value => {
+                            //   if (value) {
+                            //     await executeMutationRemove({ id: project.id });
+                            //   }
+                            // });
+                          }}>
+                          EXPORT
+                        </Button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             )}
+            {resRemove.error && (
+              <Message type="error">{resRemove.error.message}</Message>
+            )}
+            {resRenew.error && (
+              <Message type="error">{resRenew.error.message}</Message>
+            )}
+            {resRemove.fetching || resRenew.fetching ? <Loading /> : null}
           </MainColumn>
         </div>
       </Container>

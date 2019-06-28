@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import MainColumn from './MainColumn';
 import logoBg from '../assets/images/login-bg.jpg';
 import logo from '../assets/images/logo.png';
-import { Title } from './elements';
 
 const Container = styled.div`
   nav {
