@@ -3,12 +3,15 @@
   "extends": ["airbnb", "prettier", "prettier/react"],
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": ["error", {
-      "singleQuote": true,
-      "trailingComma": "all",
-      "bracketSpacing": true,
-      "jsxBracketSameLine": true
-    }],
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": "all",
+        "bracketSpacing": true,
+        "jsxBracketSameLine": true
+      }
+    ],
     "react/jsx-filename-extension": [
       1,
       {
