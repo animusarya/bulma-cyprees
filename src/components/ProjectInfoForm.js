@@ -28,6 +28,10 @@ const ProjectInfoForm = props => {
         onBlur={handleBlur}
         errors={errors.name && touched.name ? errors.name : undefined} /> */}
       <InputGroup
+        width
+        isRight
+        isTop
+        isLeft
         isHorizontal
         label="Custom URL"
         placeholder="www.colliers.co.uk/arden"

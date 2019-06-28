@@ -1,17 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useMutation } from "urql";
+import { useMutation } from 'urql';
 import gql from 'graphql-tag';
 import AdminUsers from '../../components/AdminUsers';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import ProjectInfoForm from '../../components/ProjectInfoForm';
-import {
-  Heading,
-  Title,
-  Message
-} from '../../components/elements';
+import { Heading, Title, Message } from '../../components/elements';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';

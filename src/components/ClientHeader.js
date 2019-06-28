@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import logo from '../assets/images/logo.png';
-import { Title } from './elements';
 
 const Container = styled.div`
   .columns {

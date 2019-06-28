@@ -10,7 +10,7 @@ const Container = styled.div`
   thead {
     background: transparent;
   }
-  Title {
+  title {
     margin-bottom: 0.3rem;
   }
 `;
@@ -25,7 +25,7 @@ const Dashboard = () => {
           <div className="columns">
             <div className="column is-three-fifths is-offset-one-fifth">
               <Heading>Overview</Heading>
-              <Title marginbottom='0rem'>Property</Title>
+              <Title marginbottom="0rem">Property</Title>
               <table className="table is-fullwidth is-hoverable">
                 <thead>
                   <tr>
@@ -40,16 +40,25 @@ const Dashboard = () => {
                     <td>Land Registry Certificate No.4 </td>
                     <td>Financial</td>
                     <td>40 mins ago</td>
-                    <td><Button secondary paddingless>DELETE</Button></td>                  </tr>
+                    <td>
+                      <Button secondary paddingless>
+                        DELETE
+                      </Button>
+                    </td>{' '}
+                  </tr>
                   <tr>
                     <td>Land Registry Certificate No.4 </td>
                     <td>Financial</td>
                     <td>40 mins ago</td>
-                    <td><Button secondary paddingless>DELETE</Button></td>
+                    <td>
+                      <Button secondary paddingless>
+                        DELETE
+                      </Button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
-              <Title marginbottom='0rem'>Legal</Title>
+              <Title marginbottom="0rem">Legal</Title>
               <table className="table is-fullwidth is-hoverable">
                 <thead>
                   <tr>
@@ -64,16 +73,25 @@ const Dashboard = () => {
                     <td>Land Registry Certificate No.4 </td>
                     <td>Financial</td>
                     <td>40 mins ago</td>
-                    <td><Button secondary paddingless>DELETE</Button></td>                  </tr>
+                    <td>
+                      <Button secondary paddingless>
+                        DELETE
+                      </Button>
+                    </td>{' '}
+                  </tr>
                   <tr>
                     <td>Land Registry Certificate No.4 </td>
                     <td>Financial</td>
                     <td>40 mins ago</td>
-                    <td><Button secondary paddingless>DELETE</Button></td>
+                    <td>
+                      <Button secondary paddingless>
+                        DELETE
+                      </Button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
-              <Title marginbottom='0rem'>Operational</Title>
+              <Title marginbottom="0rem">Operational</Title>
               <table className="table is-fullwidth is-hoverable">
                 <thead>
                   <tr>
@@ -88,12 +106,21 @@ const Dashboard = () => {
                     <td>Land Registry Certificate No.4 </td>
                     <td>Financial</td>
                     <td>40 mins ago</td>
-                    <td><Button secondary paddingless>DELETE</Button></td>                  </tr>
+                    <td>
+                      <Button secondary paddingless>
+                        DELETE
+                      </Button>
+                    </td>{' '}
+                  </tr>
                   <tr>
                     <td>Land Registry Certificate No.4 </td>
                     <td>Financial</td>
                     <td>40 mins ago</td>
-                    <td><Button secondary paddingless>DELETE</Button></td>
+                    <td>
+                      <Button secondary paddingless>
+                        DELETE
+                      </Button>
+                    </td>
                   </tr>
                 </tbody>
               </table>

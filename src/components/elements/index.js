@@ -6,12 +6,4 @@ import CheckBox from './CheckBox';
 import Message from './Message';
 import Loading from './Loading';
 
-export {
-  InputGroup,
-  Button,
-  Heading,
-  Title,
-  CheckBox,
-  Message,
-  Loading,
-}
+export { InputGroup, Button, Heading, Title, CheckBox, Message, Loading };

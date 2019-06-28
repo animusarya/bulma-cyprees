@@ -74,11 +74,7 @@ const ProjectsClient = ({ match }) => {
                   {result.data.projects.map(project => (
                     <tr key={project.id}>
                       <td>
-                        <strong>
-                          <Link to={`/super-admin/project/info/${project.id}`}>
-                            {project.name}
-                          </Link>
-                        </strong>
+                        <strong>{project.name}</strong>
                       </td>
                       <td>
                         <i className="fas fa-pound-sign pound-icon"></i>
@@ -87,13 +83,18 @@ const ProjectsClient = ({ match }) => {
                       <td>{project.subscriptionDurationInMonths}</td>
                       <td>
                         {dayjs(project.subscriptionStartsAt).format(
-                          'DD-MM-YYYY'
+                          'DD-MM-YYYY',
                         )}
                       </td>
                       <td>
                         {dayjs(project.subscriptionEndsAt).format('DD-MM-YYYY')}
                       </td>
-                      <td className="is-uppercase actions">manage</td>
+                      <td className="is-uppercase actions">
+                        {' '}
+                        <Link to={`/super-admin/project/info/${project.id}`}>
+                          manage{' '}
+                        </Link>
+                      </td>
                       <td className="is-uppercase actions">renew</td>
                       <td className="is-uppercase actions">delete</td>
                       <td className="is-uppercase actions">export</td>
