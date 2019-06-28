@@ -27,6 +27,7 @@ import DashboardAdmin from './pages/admin/Dashboard';
 import Projects from './pages/admin/Projects';
 
 import DashboardClient from './pages/client/Dashboard';
+import Property from './pages/client/Property';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const isLoggedIn = useStoreState(state => state.isLoggedIn.value);
@@ -112,6 +113,7 @@ class App extends React.Component {
                       path="/client/dashboard"
                       component={DashboardClient}
                     />
+                    <Route exact path="/client/property" component={Property} />
                     <Route exact path="/test" component={Test} />
                     <Route component={Error404} />
                   </Switch>

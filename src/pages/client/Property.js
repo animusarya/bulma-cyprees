@@ -16,7 +16,7 @@ const Container = styled.div`
   }
 `;
 
-const Dashboard = () => {
+const Property = () => {
   return (
     <Layout>
       <Seo title="Client Dashboard" description="Page description" />
@@ -25,13 +25,13 @@ const Dashboard = () => {
         <div className="container">
           <div className="columns">
             <div className="column is-three-fifths is-offset-one-fifth">
-              <Heading>Overview</Heading>
-              <Title marginbottom="0rem">Property</Title>
+              <Heading>Property</Heading>
+              <Title marginbottom="0rem">Sub Section 1</Title>
               <table className="table is-fullwidth is-hoverable">
                 <thead>
                   <tr>
                     <th>Document</th>
-                    <th>Section</th>
+                    <th>Type</th>
                     <th>Uploaded</th>
                     <th>Action</th>
                   </tr>
@@ -59,16 +59,8 @@ const Dashboard = () => {
                   </tr>
                 </tbody>
               </table>
-              <Title marginbottom="0rem">Legal</Title>
+              <Title marginbottom="0rem">Sub Section 2</Title>
               <table className="table is-fullwidth is-hoverable">
-                <thead>
-                  <tr>
-                    <th>Document</th>
-                    <th>Section</th>
-                    <th>Uploaded</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
                 <tbody>
                   <tr>
                     <td>Land Registry Certificate No.4 </td>
@@ -79,39 +71,6 @@ const Dashboard = () => {
                         DELETE
                       </Button>
                     </td>
-                  </tr>
-                  <tr>
-                    <td>Land Registry Certificate No.4 </td>
-                    <td>Financial</td>
-                    <td>40 mins ago</td>
-                    <td>
-                      <Button secondary paddingless>
-                        DELETE
-                      </Button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <Title marginbottom="0rem">Operational</Title>
-              <table className="table is-fullwidth is-hoverable">
-                <thead>
-                  <tr>
-                    <th>Document</th>
-                    <th>Section</th>
-                    <th>Uploaded</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Land Registry Certificate No.4 </td>
-                    <td>Financial</td>
-                    <td>40 mins ago</td>
-                    <td>
-                      <Button secondary paddingless>
-                        DELETE
-                      </Button>
-                    </td>{' '}
                   </tr>
                   <tr>
                     <td>Land Registry Certificate No.4 </td>
@@ -134,4 +93,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Property;
