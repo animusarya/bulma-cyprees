@@ -18,12 +18,12 @@ const Test = () => {
 
   const id = 3;
   const singleItem = useStoreState(state => state.todos.getById(id), [id]);
-  // console.log('singleItem', singleItem);
+  console.log('singleItem', singleItem);
 
   const [result] = useQuery({
     query: getHello,
   });
-  // console.log('result', result);
+  console.log('result', result);
 
   return (
     <Layout>
