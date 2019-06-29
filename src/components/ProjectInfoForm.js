@@ -39,7 +39,8 @@ const ProjectInfoForm = props => {
         value={values.code}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={errors.code && touched.code ? errors.code : undefined} />
+        errors={errors.code && touched.code ? errors.code : undefined}
+      />
       {/* <InputGroup
         isHorizontal
         label="Project Size"
