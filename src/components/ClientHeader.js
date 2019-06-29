@@ -1,17 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-<<<<<<< HEAD
-import MainColumn from "./MainColumn";
-import logoBg from "../assets/images/login-bg.jpg";
-import logo from "../assets/images/logo.png";
-import { Title } from "./elements";
-=======
 import MainColumn from './MainColumn';
 import logoBg from '../assets/images/login-bg.jpg';
 import logo from '../assets/images/logo.png';
->>>>>>> 6efd685c9094ef1e9cf3ac5c4a3b01c588ff963b
+import { Title } from './elements';
 
 const Container = styled.div`
   .column {
@@ -68,8 +62,7 @@ const ClientHeader = () => (
       <NavbarMenu
         className="navbar"
         role="navigation"
-        aria-label="main navigation"
-      >
+        aria-label="main navigation">
         <div className="navbar-brand">
           <Link
             to="/"
@@ -77,8 +70,7 @@ const ClientHeader = () => (
             className="navbar-burger burger has-text-white"
             aria-label="menu"
             aria-expanded="false"
-            data-target="navbarBasicExample"
-          >
+            data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
