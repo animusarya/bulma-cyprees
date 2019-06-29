@@ -2,10 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+<<<<<<< HEAD
 import MainColumn from "./MainColumn";
 import logoBg from "../assets/images/login-bg.jpg";
 import logo from "../assets/images/logo.png";
 import { Title } from "./elements";
+=======
+import MainColumn from './MainColumn';
+import logoBg from '../assets/images/login-bg.jpg';
+import logo from '../assets/images/logo.png';
+>>>>>>> 6efd685c9094ef1e9cf3ac5c4a3b01c588ff963b
 
 const Container = styled.div`
   .column {

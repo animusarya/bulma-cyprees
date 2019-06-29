@@ -1,12 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery, useMutation } from "urql";
+import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
-import { Heading, Title, Button, Message, Loading } from '../../components/elements';
+import {
+  Heading,
+  Title,
+  Button,
+  Message,
+  Loading,
+} from '../../components/elements';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
@@ -26,7 +32,9 @@ const discountsQuery = gql`
 
 const createDiscountMutation = gql`
   mutation createDiscount($name: String!, $percentage: Int!, $code: String!) {
-    createDiscount(input: { name: $name, percentage: $percentage, code: $code }) {
+    createDiscount(
+      input: { name: $name, percentage: $percentage, code: $code }
+    ) {
       id
       name
       percentage
@@ -48,13 +56,15 @@ const Container = styled.div`
     font-size: 0.85rem !important;
   }
   td.actions {
-    color:  ${props => props.theme.primaryColor};
+    color: ${props => props.theme.primaryColor};
   }
 `;
 
 const Discounts = () => {
   const [resAdd, executeMutationAdd] = useMutation(createDiscountMutation);
-  const [resRemove, executeMutationRemove] = useMutation(removeDiscountMutation);
+  const [resRemove, executeMutationRemove] = useMutation(
+    removeDiscountMutation,
+  );
   const [result, executeQuery] = useQuery({
     query: discountsQuery,
   });
@@ -72,15 +82,23 @@ const Discounts = () => {
             <Heading>Discount Codes</Heading>
             <Title>Create Discount Code</Title>
             <DiscountForm
-              onSubmit={async (data) => {
+              onSubmit={async data => {
                 await executeMutationAdd(data);
                 executeQuery({ requestPolicy: 'network-only' });
               }}
             />
-            {resAdd.error && <Message type="error">{resAdd.error.message}</Message>}
-            {resRemove.error && <Message type="error">{resRemove.error.message}</Message>}
-            {result.error && <Message type="error">{result.error.message}</Message>}
-            {resAdd.fetching || resRemove.fetching || result.fetching ? <Loading /> : null}
+            {resAdd.error && (
+              <Message type="error">{resAdd.error.message}</Message>
+            )}
+            {resRemove.error && (
+              <Message type="error">{resRemove.error.message}</Message>
+            )}
+            {result.error && (
+              <Message type="error">{result.error.message}</Message>
+            )}
+            {resAdd.fetching || resRemove.fetching || result.fetching ? (
+              <Loading />
+            ) : null}
             {result.data && result.data.discounts.length > 0 && (
               <table className="table is-fullwidth is-hoverable">
                 <thead>
@@ -93,20 +111,24 @@ const Discounts = () => {
                 <tbody>
                   {result.data.discounts.map(item => (
                     <tr key={item.id}>
-                      <td>{item.name}{item.code}</td>
+                      <td>
+                        {item.name}
+                        {item.code}
+                      </td>
                       <td>{item.percentage}%</td>
                       <td className="has-text-right">
                         <Button
                           secondary
                           paddingless
                           onClick={() => {
-                            swal("Are you confirm to delete this item?", { buttons: ["Cancel", "Confirm"], })
-                              .then(async (value) => {
-                                if (value) {
-                                  await executeMutationRemove({ id: item.id });
-                                  executeQuery({ requestPolicy: 'network-only' });
-                                }
-                              });
+                            swal('Are you confirm to delete this item?', {
+                              buttons: ['Cancel', 'Confirm'],
+                            }).then(async value => {
+                              if (value) {
+                                await executeMutationRemove({ id: item.id });
+                                executeQuery({ requestPolicy: 'network-only' });
+                              }
+                            });
                           }}>
                           DELETE
                         </Button>
@@ -122,7 +144,6 @@ const Discounts = () => {
       <CopyRight />
     </Layout>
   );
-}
-
+};
 
 export default Discounts;
