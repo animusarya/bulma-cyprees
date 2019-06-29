@@ -48,7 +48,7 @@ const AdminUsersForm = props => {
       />
       <div className="field">
         <div className="control">
-          <Button secondary paddingless marginreq disabled={isSubmitting}>
+          <Button secondary marginreq disabled={isSubmitting}>
             ADD
           </Button>
         </div>
