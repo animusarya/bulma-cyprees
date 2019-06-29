@@ -19,17 +19,27 @@ const PricingForm = props => {
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
+        isWidth
+        fullWidth
+        border
+        isHorizontal
         name="name"
         label="Title"
+        placeholder="Monthly/Bi-Annually/Annually"
         value={values.name}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={errors.name && touched.name ? errors.name : undefined}
       />
       <InputGroup
+        isWidth
+        fullWidth
+        border
+        isHorizontal
         type="number"
         name="durationInMonths"
-        label="Duration (in months)"
+        label="Duration"
+        placeholder="MM"
         value={values.durationInMonths}
         onChange={handleChange}
         onBlur={handleBlur}
@@ -40,9 +50,14 @@ const PricingForm = props => {
         }
       />
       <InputGroup
+        isWidth
+        fullWidth
+        border
+        isHorizontal
         type="number"
         name="price"
         label="Price (£)"
+        placeholder="100"
         value={values.price}
         onChange={handleChange}
         onBlur={handleBlur}

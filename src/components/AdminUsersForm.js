@@ -24,27 +24,12 @@ const AdminUsersForm = props => {
   return (
     <FormWrapper onSubmit={handleSubmit} className="is-flex">
       <InputGroup
-        isRight
-        isTop
-        isLeft
+        border
         name="email"
         value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={errors.email && touched.email ? errors.email : undefined}
-      />
-      <InputGroup
-        isRight
-        isTop
-        isLeft
-        name="password"
-        type="password"
-        value={values.password}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={
-          errors.password && touched.password ? errors.password : undefined
-        }
       />
       <div className="field">
         <div className="control">
@@ -70,14 +55,12 @@ AdminUsersForm.propTypes = {
 export default withFormik({
   mapPropsToValues: () => ({
     email: '',
-    password: '',
   }),
   validationSchema: yup.object().shape({
     email: yup
       .string()
       .email('Invalid email address')
       .required('Email is required!'),
-    password: yup.string().required('Password is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {

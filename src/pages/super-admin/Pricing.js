@@ -2,10 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
+import swal from 'sweetalert';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
-import { Heading, Title, Message, Loading } from '../../components/elements';
+import {
+  Heading,
+  Title,
+  Message,
+  Loading,
+  Button,
+} from '../../components/elements';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
@@ -38,12 +45,19 @@ const pricingMutation = gql`
   }
 `;
 
+const removePriceMutation = gql`
+  mutation removePricing($id: ID!) {
+    removePricing(id: $id) {
+      success
+    }
+  }
+`;
+
 const Container = styled.div`
   .pound-icon {
     font-size: 0.85rem !important;
   }
   input {
-    width: 60%;
     border-radius: 0px;
     border: 1px solid ${props => props.theme.primaryColor};
   }
@@ -54,6 +68,7 @@ const Pricing = () => {
   const [result] = useQuery({
     query: pricingsQuery,
   });
+  const [resRemove, executeMutationRemove] = useMutation(removePriceMutation);
 
   return (
     <Layout>
@@ -68,9 +83,11 @@ const Pricing = () => {
             <Heading>Set Pricing</Heading>
             <PricingForm onSubmit={data => executeMutation(data)} />
             {res.error && <Message type="error">{res.error.message}</Message>}
-            {res.error && <Message type="error">{res.error.message}</Message>}
+            {resRemove.error && (
+              <Message type="error">{resRemove.error.message}</Message>
+            )}
             {res.fetching && <Loading />}
-            {result.data && result.data.discounts && (
+            {result.data && result.data.packages && (
               <React.Fragment>
                 <Title>Plans</Title>
                 <table className="table is-fullwidth is-hoverable">
@@ -83,7 +100,7 @@ const Pricing = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {result.data.discounts.map(item => (
+                    {result.data.packages.map(item => (
                       <tr key={item.id}>
                         <td>{item.name}</td>
                         <td>
@@ -94,7 +111,20 @@ const Pricing = () => {
                           edit
                         </td>
                         <td className="is-uppercase actions has-text-right">
-                          delete
+                          <Button
+                            secondary
+                            paddingless
+                            onClick={() => {
+                              swal('Are you confirm to delete this item?', {
+                                buttons: ['Cancel', 'Confirm'],
+                              }).then(async value => {
+                                if (value) {
+                                  await executeMutationRemove({ id: item.id });
+                                }
+                              });
+                            }}>
+                            DELETE
+                          </Button>
                         </td>
                       </tr>
                     ))}

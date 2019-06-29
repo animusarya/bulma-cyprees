@@ -49,7 +49,6 @@ const AdminUsers = () => {
         <thead>
           <tr>
             <th className="has-text-left">User</th>
-            <th className="has-text-left">Password</th>
             <th className="has-text-right">Delete</th>
           </tr>
         </thead>
