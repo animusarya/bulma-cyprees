@@ -23,7 +23,6 @@ const clientProjectsQuery = gql`
       subscriptionDurationInMonths
       subscriptionStartsAt
       subscriptionEndsAt
-      subscriptionlastRenewedAt
     }
   }
 `;
@@ -113,15 +112,20 @@ const ProjectsClient = ({ match }) => {
                       </td>
                       <td>{project.subscriptionDurationInMonths}</td>
                       <td>
-                        {dayjs(project.subscriptionStartsAt).format(
-                          'DD-MM-YYYY',
-                        )}
+                        {dayjs(project.subscriptionStartsAt).isValid()
+                          ? dayjs(project.subscriptionStartsAt).format(
+                            'DD-MM-YYYY',
+                          )
+                          : null}
                       </td>
                       <td>
-                        {dayjs(project.subscriptionEndsAt).format('DD-MM-YYYY')}
+                        {dayjs(project.subscriptionEndsAt).isValid()
+                          ? dayjs(project.subscriptionEndsAt).format(
+                            'DD-MM-YYYY',
+                          )
+                          : '-'}
                       </td>
                       <td className="is-uppercase actions">
-                        {' '}
                         <LinkWrapper
                           to={`/super-admin/project/info/${project.id}`}>
                           manage{' '}

@@ -19,16 +19,45 @@ const PricingForm = props => {
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
+        isWidth
+        fullWidth
+        border
+        isHorizontal
         name="name"
-        label="Duration"
+        label="Title"
+        placeholder="Monthly/Bi-Annually/Annually"
         value={values.name}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={errors.name && touched.name ? errors.name : undefined}
       />
       <InputGroup
+        isWidth
+        fullWidth
+        border
+        isHorizontal
+        type="number"
+        name="durationInMonths"
+        label="Duration"
+        placeholder="MM"
+        value={values.durationInMonths}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.durationInMonths && touched.durationInMonths
+            ? errors.durationInMonths
+            : undefined
+        }
+      />
+      <InputGroup
+        isWidth
+        fullWidth
+        border
+        isHorizontal
+        type="number"
         name="price"
-        label="price"
+        label="Price (£)"
+        placeholder="100"
         value={values.price}
         onChange={handleChange}
         onBlur={handleBlur}
@@ -56,6 +85,7 @@ PricingForm.propTypes = {
 export default withFormik({
   mapPropsToValues: () => ({
     name: '',
+    durationInMonths: '',
     price: '',
   }),
   validationSchema: yup.object().shape({

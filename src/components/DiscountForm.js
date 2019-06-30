@@ -19,6 +19,9 @@ const DiscountForm = props => {
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
+        fullWidth
+        isWidth
+        border
         isHorizontal
         label="Discount Name"
         placeholder="Summer Discount"
@@ -29,6 +32,9 @@ const DiscountForm = props => {
         errors={errors.name && touched.name ? errors.name : undefined}
       />
       <InputGroup
+        fullWidth
+        isWidth
+        border
         isHorizontal
         label="Discount Code"
         placeholder="SAVE50"
@@ -39,6 +45,9 @@ const DiscountForm = props => {
         errors={errors.code && touched.code ? errors.code : undefined}
       />
       <InputGroup
+        fullWidth
+        isWidth
+        border
         isHorizontal
         type="number"
         label="Percentage"

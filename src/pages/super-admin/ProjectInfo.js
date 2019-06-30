@@ -7,7 +7,7 @@ import AdminUsers from '../../components/AdminUsers';
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import ProjectInfoForm from '../../components/ProjectInfoForm';
-import { Heading, Title, Message } from '../../components/elements';
+import { Heading, Title, Message, Loading } from '../../components/elements';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
@@ -52,46 +52,9 @@ const ProjectInfo = () => {
             <Heading>Clients &gt; rob@colliers.com &gt; Project Arden</Heading>
             <Title>Project Information</Title>
             <div className="project-info">
-              <div className="field is-horizontal">
-                <div className="field-label is-normal">
-                  <label className="label has-text-left has-text-weight-semibold	">
-                    Default URL
-                  </label>
-                </div>
-                <div className="field-body">
-                  <div className="field">
-                    <p className="control">
-                      <input
-                        className="input is-static input-field"
-                        type="email"
-                        value="intellishare.online/colliers"
-                        readOnly
-                      />
-                    </p>
-                  </div>
-                </div>
-              </div>
               <ProjectInfoForm onSubmit={data => executeMutation(data)} />
               {res.error && <Message type="error">{res.error.message}</Message>}
-              <div className="field is-horizontal">
-                <div className="field-label is-normal">
-                  <label className="label has-text-left has-text-weight-semibold">
-                    Project Size
-                  </label>
-                </div>
-                <div className="field-body">
-                  <div className="field">
-                    <p className="control">
-                      <input
-                        className="input is-static"
-                        type="email"
-                        value="5Gb"
-                        readOnly
-                      />
-                    </p>
-                  </div>
-                </div>
-              </div>
+              {res.fetching ? <Loading /> : null}
             </div>
             <AdminUsers />
           </MainColumn>

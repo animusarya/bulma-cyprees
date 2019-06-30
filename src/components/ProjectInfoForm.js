@@ -18,37 +18,57 @@ const ProjectInfoForm = props => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* <InputGroup
+      <InputGroup
+        isWidth
+        fullWidth
+        border
         isHorizontal
         label="Default URL"
         placeholder="intellishare.online/colliers"
-        name="name"
-        value={values.name}
+        name="defaultDomain"
+        value={values.defaultDomain}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={errors.name && touched.name ? errors.name : undefined} /> */}
+        errors={
+          errors.defaultDomain && touched.defaultDomain
+            ? errors.defaultDomain
+            : undefined
+        }
+      />
       <InputGroup
-        width
-        isRight
-        isTop
-        isLeft
+        isWidth
+        fullWidth
+        border
         isHorizontal
         label="Custom URL"
         placeholder="www.colliers.co.uk/arden"
-        name="code"
-        value={values.code}
+        name="customDomain"
+        value={values.customDomain}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={errors.code && touched.code ? errors.code : undefined} />
-      {/* <InputGroup
+        errors={
+          errors.customDomain && touched.customDomain
+            ? errors.customDomain
+            : undefined
+        }
+      />
+      <InputGroup
+        isWidth
+        fullWidth
+        border
         isHorizontal
         label="Project Size"
         placeholder="5GB"
-        name="percentage"
-        value={values.percentage}
+        name="projectSize"
+        value={values.projectSize}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={errors.percentage && touched.percentage ? errors.percentage : undefined} /> */}
+        errors={
+          errors.projectSize && touched.projectSize
+            ? errors.projectSize
+            : undefined
+        }
+      />
       <div className="field">
         <div className="is-pulled-right">
           <Button disabled={isSubmitting}>Save</Button>
@@ -70,14 +90,14 @@ ProjectInfoForm.propTypes = {
 
 export default withFormik({
   mapPropsToValues: () => ({
-    name: '',
-    code: '',
+    defaultDomain: '',
+    customDomain: '',
     percentage: '',
   }),
   validationSchema: yup.object().shape({
-    name: yup.string().required('Name is required!'),
-    code: yup.string().required('Custom Domain is required!'),
-    percentage: yup.string().required('Percentage is required!'),
+    defaultDomain: yup.string().required('Default URL is required!'),
+    customDomain: yup.string().required('Custom URL is required!'),
+    projectSize: yup.string().required('This field is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
