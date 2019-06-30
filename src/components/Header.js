@@ -15,6 +15,15 @@ const Logo = styled.img`
   height: auto;
 `;
 
+const Button = styled.a`
+  background-color: transparent;
+  border: transparent;
+  color: #fff;
+  :hover {
+    color: #fff;
+  }
+`;
+
 const Header = () => (
   <Container>
     <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -37,7 +46,9 @@ const Header = () => (
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <a className="button is-text">Logout</a>
+              <Button className="button is-text-white">
+                <i className="fas fa-power-off"></i>
+              </Button>
             </div>
           </div>
         </div>
