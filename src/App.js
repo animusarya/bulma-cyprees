@@ -15,6 +15,7 @@ import Error404 from './pages/404';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import Test from './pages/Test';
 
 import DashboardSuperAdmin from './pages/super-admin/Dashboard';
@@ -73,6 +74,7 @@ class App extends React.Component {
                     <Route exact path="/about" component={About} />
                     <Route exact path="/contact" component={Contact} />
                     <Route exact path="/login" component={Login} />
+                    <Route exact path="/register" component={Register} />
                     <PrivateRoute
                       exact
                       path="/super-admin/dashboard"

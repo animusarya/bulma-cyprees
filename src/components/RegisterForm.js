@@ -19,13 +19,16 @@ const RegisterForm = props => {
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
-        label="Name:"
-        name="name"
+        label="Full Name:"
+        name="fullName"
+        type="text"
         placeholder="John Doe"
-        value={values.name}
+        value={values.fullName}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={errors.name && touched.name ? errors.name : undefined}
+        errors={
+          errors.fullName && touched.fullName ? errors.fullName : undefined
+        }
       />
       <InputGroup
         label="Email:"
@@ -89,16 +92,24 @@ export default withFormik({
     confirmPassword: '',
   }),
   validationSchema: yup.object().shape({
-    name: yup
-      .string()
-      .name('Invalid Name')
-      .required('name is required!'),
+    fullName: yup.string().required('name is required!'),
     email: yup
       .string()
       .email('Invalid email address')
       .required('Email is required!'),
-    password: yup.string().required('Password is required!'),
-    confirmPassword: yup.string().required('This filed is required!'),
+    password: yup
+      .string()
+      .required('Password is required!')
+      .min(2, 'Seems a bit short...'),
+    confirmPassword: yup
+      .string()
+      .required('This filed is required!')
+      .label('Confirm password')
+      .test('passwords-match', 'Passwords must match ya fool', function (
+        values,
+      ) {
+        return this.parent.password === values;
+      }),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
