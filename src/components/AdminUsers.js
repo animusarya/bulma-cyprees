@@ -61,7 +61,6 @@ const AdminUsers = () => {
             {result.data.project.map(item => (
               <tr key={item.id}>
                 <td>{item.email}</td>
-                <td>{}</td>
                 <td className="has-text-right">
                   <Button
                     secondary

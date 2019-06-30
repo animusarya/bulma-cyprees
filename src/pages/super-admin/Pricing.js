@@ -86,7 +86,9 @@ const Pricing = () => {
             {resRemove.error && (
               <Message type="error">{resRemove.error.message}</Message>
             )}
-            {res.fetching && <Loading />}
+            {res.fetching || result.fetching || resRemove.fetching ? (
+              <Loading />
+            ) : null}
             {result.data && result.data.packages && (
               <React.Fragment>
                 <Title>Plans</Title>
