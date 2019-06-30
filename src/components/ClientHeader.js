@@ -8,11 +8,16 @@ import logo from '../assets/images/logo.png';
 import { Title } from './elements';
 
 const Container = styled.div`
-  nav {
-    padding: 0px 15% 0% 16%;
+  .column {
+    display: flex;
+    justify-content: space-between;
   }
-  .arden {
-    padding-right: 17.5%;
+  .is-text {
+    padding: 0px;
+  }
+  .icon {
+    margin-left: 1rem !important;
+    font-size: 8px !important;
   }
 `;
 const NavbarMenu = styled.nav`
@@ -36,24 +41,23 @@ const HeroImg = styled.img`
 const ClientHeader = () => (
   <Container>
     <MainColumn marginleft="8%" marginRight="8%" paddingless>
-      <nav className="navbar" role="navigation" aria-label="main navigation">
-        <div className="navbar-brand">
-          <Link to="/client/dashboard" className="navbar-item">
-            <Logo src={logo} alt="logo" />
-          </Link>
-        </div>
-        <div className="navbar-end">
-          <div className="navbar-item">
-            <div>
-              <Link to="/" className="button is-text">
-                Welcome Jonathan
-              </Link>
+      <div className="columns">
+        <div className="column is-8 is-offset-2">
+          <div>
+            <Link to="/client/dashboard" className="navbar-item">
+              <Logo src={logo} alt="logo" />
+            </Link>
+          </div>
+          <div>
+            <Link to="/" className="button is-text is-size-7">
+              Welcome Jonathan
+              <i className="fas fa-power-off icon"></i>
+            </Link>
+            <div className="has-text-right">
+              <Title marginbottom="0px">Project Arden</Title>
             </div>
           </div>
         </div>
-      </nav>
-      <div className="has-text-right arden">
-        <Title>Project Arden</Title>
       </div>
       <NavbarMenu
         className="navbar"
