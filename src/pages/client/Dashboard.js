@@ -40,7 +40,7 @@ const Dashboard = () => {
                     <td>40 mins ago</td>
                     <td>
                       <Button secondary paddingless>
-                        DELETE
+                        Download
                       </Button>
                     </td>
                   </tr>
@@ -50,7 +50,7 @@ const Dashboard = () => {
                     <td>40 mins ago</td>
                     <td>
                       <Button secondary paddingless>
-                        DELETE
+                        Download
                       </Button>
                     </td>
                   </tr>
@@ -73,7 +73,7 @@ const Dashboard = () => {
                     <td>40 mins ago</td>
                     <td>
                       <Button secondary paddingless>
-                        DELETE
+                        Download
                       </Button>
                     </td>
                   </tr>
@@ -83,7 +83,7 @@ const Dashboard = () => {
                     <td>40 mins ago</td>
                     <td>
                       <Button secondary paddingless>
-                        DELETE
+                        Download
                       </Button>
                     </td>
                   </tr>
@@ -106,7 +106,7 @@ const Dashboard = () => {
                     <td>40 mins ago</td>
                     <td>
                       <Button secondary paddingless>
-                        DELETE
+                        Download
                       </Button>
                     </td>{' '}
                   </tr>
@@ -116,7 +116,7 @@ const Dashboard = () => {
                     <td>40 mins ago</td>
                     <td>
                       <Button secondary paddingless>
-                        DELETE
+                        Download
                       </Button>
                     </td>
                   </tr>

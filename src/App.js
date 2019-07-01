@@ -30,7 +30,7 @@ import DashboardAdmin from './pages/admin/Dashboard';
 import Projects from './pages/admin/Projects';
 
 import DashboardClient from './pages/client/Dashboard';
-import Property from './pages/client/Property';
+import Property from './pages/client/DataRoom';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const isLoggedIn = useStoreState(state => state.isLoggedIn.value);
