@@ -37,7 +37,7 @@ const Sidebar = () => {
       {userData.type === 'admin' && (
         <ul className="menu-list">
           <li>
-            <Link to="/admin/dashboard">Projects</Link>
+            <Link to="/admin/dashboard">Create Projects</Link>
           </li>
         </ul>
       )}
