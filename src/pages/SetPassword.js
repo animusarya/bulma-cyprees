@@ -6,19 +6,21 @@ import gql from 'graphql-tag';
 import Seo from '../components/Seo';
 import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
-import RegisterForm from '../components/RegisterForm';
+import SetPasswordForm from '../components/SetPasswordForm';
 import Footer from '../components/Footer';
 import loginBg from '../assets/images/login-bg.jpg';
 import logo from '../assets/images/logo.png';
 
-const registerMutation = gql`
-  mutation register($email: String!, $password: String!) {
-    register(input: { email: $email, password: $password }) {
+const setPasswordMutation = gql`
+  mutation setPassword($password: String!, $confirmPassword: String!) {
+    setPassword(
+      input: { password: $password, confirmPassword: $confirmPassword }
+    ) {
       jwt
       user {
         id
-        email
-        type
+        # email
+        # type
       }
     }
   }
@@ -34,20 +36,20 @@ const Logo = styled.img`
   margin-bottom: 2rem;
 `;
 
-const Register = () => {
-  const [res, executeMutation] = useMutation(registerMutation);
+const SetPassword = () => {
+  const [res, executeMutation] = useMutation(setPasswordMutation);
 
   return (
     <Layout>
-      <Seo title="Register" description="Some description here." />
+      <Seo title="SetPassword" description="Some description here." />
       <div className="columns">
         <div className="column">
-          <img src={loginBg} alt="Register banner" />
+          <img src={loginBg} alt="SetPassword banner" />
         </div>
         <div className="column">
           <FormContainer>
             <Logo src={logo} alt="logo banner" />
-            <RegisterForm onSubmit={data => executeMutation(data)} />
+            <SetPasswordForm onSubmit={data => executeMutation(data)} />
             {res.error && <Message type="error">{res.error.message}</Message>}
             {res.fetching ? <Loading /> : null}
           </FormContainer>
@@ -58,4 +60,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default SetPassword;

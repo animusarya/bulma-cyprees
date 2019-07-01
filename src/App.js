@@ -17,6 +17,7 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
+import SetPassword from './pages/SetPassword';
 import Test from './pages/Test';
 
 import DashboardSuperAdmin from './pages/super-admin/Dashboard';
@@ -76,6 +77,7 @@ class App extends React.Component {
                     <Route exact path="/contact" component={Contact} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/register" component={Register} />
+                    <Route exact path="/set-password" component={SetPassword} />
                     <Route
                       exact
                       path="/forgot-password"
