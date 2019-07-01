@@ -2,15 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
-import styled from 'styled-components';
 
 import { InputGroup, Button } from './elements';
 
-const FormWrapper = styled.form`
-  justify-content: space-between;
-`;
-
-const AdminUsersForm = props => {
+const ForgotPasswordForm = props => {
   const {
     values,
     touched,
@@ -22,10 +17,11 @@ const AdminUsersForm = props => {
   } = props;
 
   return (
-    <FormWrapper onSubmit={handleSubmit} className="is-flex">
+    <form onSubmit={handleSubmit}>
       <InputGroup
-        border
+        label="Email:"
         name="email"
+        placeholder="john@doe.com"
         value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}
@@ -33,16 +29,14 @@ const AdminUsersForm = props => {
       />
       <div className="field">
         <div className="control">
-          <Button secondary marginreq disabled={isSubmitting}>
-            ADD
-          </Button>
+          <Button disabled={isSubmitting}>Reset Password</Button>
         </div>
       </div>
-    </FormWrapper>
+    </form>
   );
 };
 
-AdminUsersForm.propTypes = {
+ForgotPasswordForm.propTypes = {
   values: PropTypes.object.isRequired,
   touched: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -54,7 +48,10 @@ AdminUsersForm.propTypes = {
 
 export default withFormik({
   mapPropsToValues: () => ({
+    name: '',
     email: '',
+    password: '',
+    confirmPassword: '',
   }),
   validationSchema: yup.object().shape({
     email: yup
@@ -69,5 +66,5 @@ export default withFormik({
       setSubmitting(false);
     });
   },
-  displayName: 'AdminUsersForm', // helps with React DevTools
-})(AdminUsersForm);
+  displayName: 'ForgotPasswordForm', // helps with React DevTools
+})(ForgotPasswordForm);
