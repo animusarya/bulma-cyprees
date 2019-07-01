@@ -105,9 +105,7 @@ export default withFormik({
       .string()
       .required('This filed is required!')
       .label('Confirm password')
-      .test('passwords-match', 'Passwords must match ya fool', function (
-        values,
-      ) {
+      .test('passwords-match', 'Passwords not matched!', function(values) {
         return this.parent.password === values;
       }),
   }),
