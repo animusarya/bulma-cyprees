@@ -16,6 +16,10 @@ const Container = styled.aside`
   }
 `;
 
+const Icon = styled.i`
+  margin-right: 5%;
+`;
+
 const Sidebar = () => {
   const userData = useStoreState(state => state.user.data);
 
@@ -37,7 +41,14 @@ const Sidebar = () => {
       {userData.type === 'admin' && (
         <ul className="menu-list">
           <li>
-            <Link to="/admin/dashboard">Create Projects</Link>
+            <Link to="/admin/dashboard">
+              <Icon className="fas fa-plus-circle"></Icon>Create Projects
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/dashboard">
+              <Icon className="fas fa-folder-open"></Icon>Manage Projects
+            </Link>
           </li>
         </ul>
       )}
