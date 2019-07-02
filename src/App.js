@@ -127,7 +127,7 @@ class App extends React.Component {
                     />
                     <PrivateRoute
                       exact
-                      path="/admin/manage-emails"
+                      path="/admin/emails"
                       component={ManageEmail}
                     />
                     <Route
