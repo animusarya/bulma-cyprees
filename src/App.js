@@ -29,6 +29,7 @@ import Pricing from './pages/super-admin/Pricing';
 import DashboardAdmin from './pages/admin/Dashboard';
 import AccountCreated from './pages/admin/AccountCreated';
 import Projects from './pages/admin/Projects';
+import ManageEmail from './pages/admin/ManageEmail';
 
 import DashboardClient from './pages/client/Dashboard';
 import Property from './pages/client/DataRoom';
@@ -123,6 +124,11 @@ class App extends React.Component {
                       exact
                       path="/admin/projects"
                       component={Projects}
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/admin/manage-emails"
+                      component={ManageEmail}
                     />
                     <Route
                       exact
