@@ -12,6 +12,9 @@ const Container = styled.div`
   .content {
     align-self: center;
   }
+  .subtitle {
+    margin-bottom: 2rem !important;
+  }
 `;
 
 const AccountCreated = () => (
@@ -25,8 +28,8 @@ const AccountCreated = () => (
       <div className="column content">
         <div className="hero-body">
           <div className="has-text-centered">
-            <p className="title">Account Created</p>
-            <p className="subtitle">
+            <p className="title is-size-2">Account Created</p>
+            <p className="subtitle is-size-6 has-text-weight-semibold">
               Thank you for registering, you are now signed in.
             </p>
             <Button>Create a new project</Button>

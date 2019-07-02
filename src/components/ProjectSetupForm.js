@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
+import styled from 'styled-components';
 
 import { InputGroup, Button } from './elements';
+import Subtitle from './elements/Subtitle';
 
 const ProjectSetupForm = props => {
   const {
@@ -16,13 +18,25 @@ const ProjectSetupForm = props => {
     handleSubmit,
   } = props;
 
+  const Form = styled.form`
+    input {
+      border-color: ${props => props.theme.primaryColor};
+      box-shadow: none;
+      :hover {
+        border-color: ${props => props.theme.primaryColor};
+      }
+    }
+    .columns {
+      margin-top: 1.5rem;
+    }
+  `;
+
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <InputGroup
         fullWidth
         isWidth
         border
-        isHorizontal
         label="Project Name"
         placeholder="Project Arden"
         name="name"
@@ -36,7 +50,6 @@ const ProjectSetupForm = props => {
         fullWidth
         isWidth
         border
-        isHorizontal
         label="Default URL"
         name="defaultUrl"
         value={values.defaultUrl}
@@ -50,9 +63,7 @@ const ProjectSetupForm = props => {
       />
       <InputGroup
         fullWidth
-        isWidth
         border
-        isHorizontal
         type="text"
         label="Custom Domain Name"
         placeholder="www.projectname.co.uk"
@@ -71,9 +82,8 @@ const ProjectSetupForm = props => {
         fullWidth
         isWidth
         border
-        isHorizontal
         label="Project Plan"
-        placeholder="Monthly Monthlt £30 | 6Months (£180) | Annually (£360)"
+        placeholder="Monthly | £30 | 6Months (£180) | Annually (£360)"
         name="percentage"
         value={values.percentage}
         onChange={handleChange}
@@ -84,16 +94,20 @@ const ProjectSetupForm = props => {
             : undefined
         }
       />
-      <div>
-        <p>Amount due today</p>
-        <p>£30</p>
+      <div className="columns">
+        <div className="column">
+          <Subtitle>Amount due today</Subtitle>
+        </div>
+        <div className="column">
+          <p className="is-size-3 is-pulled-right has-text-weight-bold">£30</p>
+        </div>
       </div>
       <div className="field">
         <div className="is-pulled-right">
           <Button disabled={isSubmitting}>Continue</Button>
         </div>
       </div>
-    </form>
+    </Form>
   );
 };
 

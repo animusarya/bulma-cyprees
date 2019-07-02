@@ -10,7 +10,15 @@ import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
 
-const Container = styled.div``;
+const Container = styled.div`
+  input {
+    border-color: ${props => props.theme.primaryColor};
+    border-radius: 0px;
+    :hover {
+      border-color: ${props => props.theme.primaryColor};
+    }
+  }
+`;
 
 const Dashboard = () => (
   <Layout>
@@ -24,7 +32,18 @@ const Dashboard = () => (
         <AdminHeader />
         <MainColumn>
           <Heading>Dashboard</Heading>
-          <Title>Client activity</Title>
+          <div className="columns">
+            <div className="column">
+              <Title>Client activity</Title>
+            </div>
+            <div className="column is-one-fifth">
+              <input
+                className="input"
+                type="text"
+                placeholder="Search by Client"
+              />
+            </div>
+          </div>
           <table className="table is-fullwidth is-hoverable">
             <thead>
               <tr>
