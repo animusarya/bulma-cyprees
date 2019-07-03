@@ -2,13 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import MainColumn from './MainColumn';
 import logoBg from '../assets/images/login-bg.jpg';
 import logo from '../assets/images/logo.png';
 import { Title, Button } from './elements';
 
 const Container = styled.div`
-  margin-top: 1.9rem;
+  margin-top: 1rem;
   .column {
     display: flex;
     justify-content: space-between;
@@ -64,69 +63,69 @@ const Hero = styled.section`
 
 const ClientHeader = () => (
   <Container>
-    <MainColumn marginleft="0%" marginRight="0%" paddingless>
-      <div className="columns">
-        <div className="column is-8 is-offset-2">
-          <div className="logo-edit">
-            <Link to="/client/dashboard" className="navbar-item">
-              <Logo src={logo} alt="logo" />
-            </Link>
-            <Button paddingless secondary className="edit">
-              Edit
-            </Button>
-          </div>
-          <div>
-            <div className="has-text-right">
-              <Title marginbottom="0px">[ Project Name here ]</Title>
-            </div>
+    <div className="columns">
+      <div className="column is-8 is-offset-2">
+        <div className="logo-edit">
+          <Link to="/client/dashboard" className="navbar-item">
+            <Logo src={logo} alt="logo" />
+          </Link>
+          <Button paddingless secondary className="edit">
+            Edit
+          </Button>
+        </div>
+        <div>
+          <div className="has-text-right">
+            <Title marginbottom="0px">[ Project Name here ]</Title>
           </div>
         </div>
       </div>
-      <NavbarMenu
-        className="navbar"
-        role="navigation"
-        aria-label="main navigation">
-        <div className="navbar-brand">
-          <Link
-            to="/"
-            role="button"
-            className="navbar-burger burger has-text-white"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
+    </div>
+    <NavbarMenu
+      className="navbar"
+      role="navigation"
+      aria-label="main navigation">
+      <div className="navbar-brand">
+        <Link
+          to="/"
+          role="button"
+          className="navbar-burger burger has-text-white"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </Link>
+      </div>
+      <div id="navbarBasicExample" className="navbar-menu">
+        <div className="navbar-start">
+          <Link to="/" className="navbar-item has-text-white">
+            Property
+          </Link>
+          <Link to="/" className="navbar-item has-text-white">
+            Property Details
+          </Link>
+          <Link to="/" className="navbar-item has-text-white">
+            + Add Page
           </Link>
         </div>
-        <div id="navbarBasicExample" className="navbar-menu">
-          <div className="navbar-start">
-            <Link to="/" className="navbar-item has-text-white">
-              Property
-            </Link>
-            <Link to="/" className="navbar-item has-text-white">
-              Property Details
-            </Link>
-            <Link to="/" className="navbar-item has-text-white">
-              + Add Page
-            </Link>
+      </div>
+    </NavbarMenu>
+    <Hero className="hero">
+      <HeroImg src={logoBg} alt="logo-bg" />
+      <div className="hero-body has-text-centered">
+        <Button paddingless secondary>
+          <div className="edit-banner">
+            <h6 className="title is-6 has-text-weight-semibold">
+              Change banner
+            </h6>
+            <h6 className="subtitle is-size-7 is-italic">
+              image size 1600 x 400px
+            </h6>
           </div>
-        </div>
-      </NavbarMenu>
-      <Hero className="hero">
-        <HeroImg src={logoBg} alt="logo-bg" />
-        <div className="hero-body has-text-centered">
-          <Button paddingless secondary>
-            <div className="edit-banner">
-              <h6 className="title is-6 has-text-weight-semibold">Change banner</h6>
-              <h6 className="subtitle is-size-7 is-italic">
-                image size 1600 x 400px
-              </h6>
-            </div>
-          </Button>
-        </div>
-      </Hero>
-    </MainColumn>
+        </Button>
+      </div>
+    </Hero>
   </Container>
 );
 
