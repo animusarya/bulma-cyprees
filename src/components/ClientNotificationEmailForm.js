@@ -1,10 +1,17 @@
 import React from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
 import { InputGroup, Button } from './elements';
 
+const Form = styled.form`
+  .button-field {
+    display: flex;
+    justify-content: flex-end;
+  }
+`;
 const ClientNotificationEmailForm = props => {
   const {
     values,
@@ -17,14 +24,14 @@ const ClientNotificationEmailForm = props => {
   } = props;
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <InputGroup
         fullWidth
         isWidth
         border
         isHorizontal
-        label="Discount Name"
-        placeholder="Welcome to Project Arden"
+        label="Subject of email"
+        placeholder="Project Arden Notification"
         name="subject"
         value={values.subject}
         onChange={handleChange}
@@ -37,6 +44,10 @@ const ClientNotificationEmailForm = props => {
         border
         isHorizontal
         label="Email message"
+        placeholder="Lorem Ipsum is simply dummy text of the printing
+         and typesetting industry. Lorem Ipsum has been the 
+         industry's standard dummy text ever since the 1500s,
+          when an unknown"
         name="message"
         className="textarea"
         value={values.message}
@@ -44,12 +55,12 @@ const ClientNotificationEmailForm = props => {
         onBlur={handleBlur}
         errors={errors.message && touched.message ? errors.message : undefined}
       />
-      <div className="field">
-        <div className="is-pulled-right">
+      <div className="button-field">
+        <div className="">
           <Button disabled={isSubmitting}>Update Template</Button>
         </div>
       </div>
-    </form>
+    </Form>
   );
 };
 
