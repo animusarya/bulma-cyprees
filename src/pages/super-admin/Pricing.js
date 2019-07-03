@@ -46,8 +46,8 @@ const pricingMutation = gql`
 `;
 
 const removePriceMutation = gql`
-  mutation removePricing($id: ID!) {
-    removePricing(id: $id) {
+  mutation removePackage($id: ID!) {
+    removePackage(id: $id) {
       success
     }
   }
