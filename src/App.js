@@ -19,6 +19,7 @@ import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
 import SetPassword from './pages/SetPassword';
 import Test from './pages/Test';
+import Test2 from './pages/Test2';
 
 import DashboardSuperAdmin from './pages/super-admin/Dashboard';
 import Discounts from './pages/super-admin/Discounts';
@@ -139,6 +140,7 @@ class App extends React.Component {
                     />
                     <Route exact path="/client/property" component={Property} />
                     <Route exact path="/test" component={Test} />
+                    <Route exact path="/test2" component={Test2} />
                     <Route component={Error404} />
                   </Switch>
                 </BrowserRouter>
