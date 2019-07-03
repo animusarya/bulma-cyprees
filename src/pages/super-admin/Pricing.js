@@ -65,7 +65,7 @@ const Container = styled.div`
 
 const Pricing = () => {
   const [res, executeMutation] = useMutation(pricingMutation);
-  const [result] = useQuery({
+  const [result, executeQuery] = useQuery({
     query: pricingsQuery,
   });
   const [resRemove, executeMutationRemove] = useMutation(removePriceMutation);
@@ -122,6 +122,9 @@ const Pricing = () => {
                               }).then(async value => {
                                 if (value) {
                                   await executeMutationRemove({ id: item.id });
+                                  executeQuery({
+                                    requestPolicy: 'network-only',
+                                  });
                                 }
                               });
                             }}>
