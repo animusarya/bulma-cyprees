@@ -28,10 +28,8 @@ import Pricing from './pages/super-admin/Pricing';
 
 import DashboardAdmin from './pages/admin/Dashboard';
 import AccountCreated from './pages/admin/AccountCreated';
-import ProjectSetup from './pages/admin/ProjectSetup';
-import Payments from './pages/admin/Payments';
-import PaymentConfirmation from './pages/admin/PaymentConfirmation';
 import Projects from './pages/admin/Projects';
+import CreateProject from './pages/admin/CreateProject';
 import ManageEmail from './pages/admin/ManageEmail';
 
 import DashboardClient from './pages/client/Dashboard';
@@ -120,19 +118,13 @@ class App extends React.Component {
                     />
                     <Route
                       exact
-                      path="/admin/creat/account"
+                      path="/admin/create/account"
                       component={AccountCreated}
                     />
                     <Route
                       exact
-                      path="/admin/project/setup"
-                      component={ProjectSetup}
-                    />
-                    <Route exact path="/admin/payments" component={Payments} />
-                    <Route
-                      exact
-                      path="/admin/payment/confirmation"
-                      component={PaymentConfirmation}
+                      path="/admin/project/create"
+                      component={CreateProject}
                     />
                     <PrivateRoute
                       exact
