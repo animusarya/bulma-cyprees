@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-import { InputGroup, Button } from './elements';
+import { InputGroup, Button, TextAreaGroup } from './elements';
 
 const Form = styled.form`
   .button-field {
@@ -38,7 +38,7 @@ const ClientWelcomeEmailForm = props => {
         onBlur={handleBlur}
         errors={errors.subject && touched.subject ? errors.subject : undefined}
       />
-      <InputGroup
+      <TextAreaGroup
         fullWidth
         isWidth
         border

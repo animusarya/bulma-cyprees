@@ -131,11 +131,7 @@ class App extends React.Component {
                       path="/admin/projects"
                       component={Projects}
                     />
-                    <PrivateRoute
-                      exact
-                      path="/admin/emails"
-                      component={ManageEmail}
-                    />
+                    <Route exact path="/admin/emails" component={ManageEmail} />
                     <Route
                       exact
                       path="/client/dashboard"
