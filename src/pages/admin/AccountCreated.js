@@ -33,8 +33,8 @@ const AccountCreated = () => (
             <p className="subtitle is-size-6 has-text-weight-semibold">
               Thank you for registering, you are now signed in.
             </p>
-            <Button Link to="/admin/project/create">
-              Create a new project
+            <Button>
+              <Link to="/admin/project/create">Create a new project</Link>
             </Button>
           </div>
         </div>
