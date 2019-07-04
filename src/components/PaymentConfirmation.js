@@ -14,7 +14,9 @@ const PaymentConfirmation = () => (
   <Container>
     <div className="hero-body">
       <div className="has-text-centered">
-        <p className="title is-size-2">Payment Successful</p>
+        <p className="title is-size-2 has-text-weight-normal">
+          Payment Successful
+        </p>
         <p className="subtitle is-size-6 has-text-weight-semibold">
           Your new Project has been setup.
         </p>
