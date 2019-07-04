@@ -1,30 +1,32 @@
 import React from 'react';
+import styled from 'styled-components';
+
+import Subtitle from './elements/Subtitle';
+import { Button } from './elements';
+
+const Container = styled.div`
+  background-color: #25313f;
+`;
 
 const Modal = ({ isShowing, hide }) => {
   return isShowing ? (
-    <React.Fragment>
-      <div className="modal-overlay" />
-      <div
-        className="modal-wrapper"
-        aria-modal
-        aria-hidden
-        tabIndex={-1}
-        role="dialog">
-        <div className="modal">
-          <div className="modal-header">
-            <button
-              type="button"
-              className="modal-close-button"
-              data-dismiss="modal"
-              aria-label="Close"
-              onClick={hide}>
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <p>Hi this is modal</p>
+    <Container>
+      <div className="modal-background" />
+      <div className="modal-content">
+        <Subtitle>Apply Branding</Subtitle>
+        <div className="box">
+          <Button type="submit" onClick={() => isShowing}>
+            OK
+          </Button>
         </div>
       </div>
-    </React.Fragment>
+      <button
+        type="submit"
+        className="modal-close is-large"
+        aria-label="close"
+        onClick={() => hide}
+      />
+    </Container>
   ) : null;
 };
 

@@ -20,7 +20,7 @@ const Container = styled.div`
     line-height: 1;
   }
   .steps-title {
-    margin-bottom : 2%;
+    margin-bottom: 2%;
   }
 `;
 
