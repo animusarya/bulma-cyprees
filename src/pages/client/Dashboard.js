@@ -1,11 +1,42 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useQuery, useMutation } from 'urql';
+import gql from 'graphql-tag';
+import swal from 'sweetalert';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import ClientHeader from '../../components/ClientHeader';
-import { Heading, Title, Button } from '../../components/elements';
+import {
+  Heading,
+  Title,
+  Button,
+  Message,
+  Loading,
+} from '../../components/elements';
 import ClientFooter from '../../components/ClientFooter';
+
+// TODO: fix this when query available
+
+const clientDashboardQuery = gql`
+  query projects($clientId: ID!) {
+    projects(clientId: $clientId) {
+      id
+      document
+      section
+      uploaded
+    }
+  }
+`;
+
+const downloadMutation = gql`
+  mutation download($id: ID!) {
+    download(id: $id) {
+      id
+      download
+    }
+  }
+`;
 
 const Container = styled.div`
   thead {
@@ -13,7 +44,13 @@ const Container = styled.div`
   }
 `;
 
-const Dashboard = () => {
+const Dashboard = ({ match }) => {
+  const [result] = useQuery({
+    query: clientDashboardQuery,
+    variables: { clientId: match.params.clientId },
+  });
+  const [resDownload, executeMutationDownload] = useMutation(downloadMutation);
+
   return (
     <Layout>
       <Seo title="Client Dashboard" description="Page description" />
@@ -24,104 +61,149 @@ const Dashboard = () => {
             <div className="column is-three-fifths is-offset-one-fifth">
               <Heading>Overview</Heading>
               <Title marginbottom="0rem">Property</Title>
-              <table className="table is-fullwidth is-hoverable">
-                <thead>
-                  <tr>
-                    <th>Document</th>
-                    <th>Section</th>
-                    <th>Uploaded</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Land Registry Certificate No.4 </td>
-                    <td>Financial</td>
-                    <td>40 mins ago</td>
-                    <td>
-                      <Button secondary paddingless>
-                        Download
-                      </Button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Land Registry Certificate No.4 </td>
-                    <td>Financial</td>
-                    <td>40 mins ago</td>
-                    <td>
-                      <Button secondary paddingless>
-                        Download
-                      </Button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              {result.error && (
+                <Message type="error">{result.error.message}</Message>
+              )}
+              {result.fetching && <Loading />}
+              {result.data && result.data.projects && (
+                <table className="table is-fullwidth is-hoverable">
+                  <thead>
+                    <tr>
+                      <th>Document</th>
+                      <th>Section</th>
+                      <th>Uploaded</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {result.data.projects.map(project => (
+                      <tr>
+                        <td>{project.document}</td>
+                        <td>{project.section}</td>
+                        <td>{project.uploaded}</td>
+                        <td>
+                          <Button
+                            secondary
+                            paddingless
+                            onClick={() => {
+                              swal('Are you sure you want to download?', {
+                                buttons: ['Cancel', 'Confirm'],
+                              }).then(async value => {
+                                if (value) {
+                                  await executeMutationDownload({
+                                    id: project.id,
+                                  });
+                                }
+                              });
+                            }}>
+                            Download
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+              {resDownload.error && (
+                <Message type="error">{resDownload.error.message}</Message>
+              )}
+              {resDownload.fetching ? <Loading /> : null}
               <Title marginbottom="0rem">Legal</Title>
-              <table className="table is-fullwidth is-hoverable">
-                <thead>
-                  <tr>
-                    <th>Document</th>
-                    <th>Section</th>
-                    <th>Uploaded</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Land Registry Certificate No.4 </td>
-                    <td>Financial</td>
-                    <td>40 mins ago</td>
-                    <td>
-                      <Button secondary paddingless>
-                        Download
-                      </Button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Land Registry Certificate No.4 </td>
-                    <td>Financial</td>
-                    <td>40 mins ago</td>
-                    <td>
-                      <Button secondary paddingless>
-                        Download
-                      </Button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              {result.error && (
+                <Message type="error">{result.error.message}</Message>
+              )}
+              {result.fetching && <Loading />}
+              {result.data && result.data.projects && (
+                <table className="table is-fullwidth is-hoverable">
+                  <thead>
+                    <tr>
+                      <th>Document</th>
+                      <th>Section</th>
+                      <th>Uploaded</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {result.data.projects.map(project => (
+                      <tr>
+                        <td>{project.document}</td>
+                        <td>{project.section}</td>
+                        <td>{project.uploaded}</td>
+                        <td>
+                          <Button
+                            secondary
+                            paddingless
+                            onClick={() => {
+                              swal('Are you sure you want to download?', {
+                                buttons: ['Cancel', 'Confirm'],
+                              }).then(async value => {
+                                if (value) {
+                                  await executeMutationDownload({
+                                    id: project.id,
+                                  });
+                                }
+                              });
+                            }}>
+                            Download
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+              {resDownload.error && (
+                <Message type="error">{resDownload.error.message}</Message>
+              )}
+              {resDownload.fetching ? <Loading /> : null}
               <Title marginbottom="0rem">Operational</Title>
-              <table className="table is-fullwidth is-hoverable">
-                <thead>
-                  <tr>
-                    <th>Document</th>
-                    <th>Section</th>
-                    <th>Uploaded</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Land Registry Certificate No.4 </td>
-                    <td>Financial</td>
-                    <td>40 mins ago</td>
-                    <td>
-                      <Button secondary paddingless>
-                        Download
-                      </Button>
-                    </td>{' '}
-                  </tr>
-                  <tr>
-                    <td>Land Registry Certificate No.4 </td>
-                    <td>Financial</td>
-                    <td>40 mins ago</td>
-                    <td>
-                      <Button secondary paddingless>
-                        Download
-                      </Button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              {result.error && (
+                <Message type="error">{result.error.message}</Message>
+              )}
+              {result.fetching && <Loading />}
+              {result.data && result.data.projects && (
+                <table className="table is-fullwidth is-hoverable">
+                  <thead>
+                    <tr>
+                      <th>Document</th>
+                      <th>Section</th>
+                      <th>Uploaded</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {result.data.projects.map(project => (
+                      <tr>
+                        <td>{project.document}</td>
+                        <td>{project.section}</td>
+                        <td>{project.uploaded}</td>
+                        <td>
+                          <Button
+                            secondary
+                            paddingless
+                            onClick={() => {
+                              swal('Are you sure you want to download?', {
+                                buttons: ['Cancel', 'Confirm'],
+                              }).then(async value => {
+                                if (value) {
+                                  await executeMutationDownload({
+                                    id: project.id,
+                                  });
+                                }
+                              });
+                            }}>
+                            Download
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+              {resDownload.error && (
+                <Message type="error">{resDownload.error.message}</Message>
+              )}
+              {resDownload.fetching ? <Loading /> : null}
             </div>
           </div>
         </div>

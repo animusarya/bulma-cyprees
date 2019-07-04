@@ -53,6 +53,18 @@ const removePriceMutation = gql`
   }
 `;
 
+// TODO: Fix this mutation when available in API
+
+const editPriceMutation = gql`
+  mutation editPackage($id: ID!) {
+    editPackage(id: $id) {
+      id
+      name
+      price
+    }
+  }
+`;
+
 const Container = styled.div`
   .pound-icon {
     font-size: 0.85rem !important;
@@ -69,6 +81,7 @@ const Pricing = () => {
     query: pricingsQuery,
   });
   const [resRemove, executeMutationRemove] = useMutation(removePriceMutation);
+  const [resEdit, executeMutationEdit] = useMutation(editPriceMutation);
 
   return (
     <Layout>
@@ -86,7 +99,13 @@ const Pricing = () => {
             {resRemove.error && (
               <Message type="error">{resRemove.error.message}</Message>
             )}
-            {res.fetching || result.fetching || resRemove.fetching ? (
+            {resEdit.error && (
+              <Message type="error">{resEdit.error.message}</Message>
+            )}
+            {res.fetching ||
+            result.fetching ||
+            resRemove.fetching ||
+            resEdit.fetching ? (
               <Loading />
             ) : null}
             {result.data && result.data.packages && (
@@ -110,7 +129,23 @@ const Pricing = () => {
                           {item.price}
                         </td>
                         <td className="is-uppercase actions has-text-right">
-                          edit
+                          <Button
+                            secondary
+                            paddingless
+                            onClick={() => {
+                              swal('Are you confirm to edit this item?', {
+                                buttons: ['Cancel', 'Confirm'],
+                              }).then(async value => {
+                                if (value) {
+                                  await executeMutationEdit({ id: item.id });
+                                  executeQuery({
+                                    requestPolicy: 'network-only',
+                                  });
+                                }
+                              });
+                            }}>
+                            EDIT
+                          </Button>
                         </td>
                         <td className="is-uppercase actions has-text-right">
                           <Button
