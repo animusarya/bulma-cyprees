@@ -15,7 +15,7 @@ import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 
 const clientProjectsQuery = gql`
-  query Projects($clientId: ID) {
+  query projects($clientId: ID!) {
     projects(clientId: $clientId) {
       id
       name
@@ -28,7 +28,7 @@ const clientProjectsQuery = gql`
 `;
 
 const removeProjectClientMutation = gql`
-  mutation removeProjectClient($id: ID!, $clientId: ID) {
+  mutation removeProjectClient($id: ID!, $clientId: ID!) {
     removeProjectClient(id: $id, clientId: $clientId) {
       success
     }
@@ -114,15 +114,15 @@ const ProjectsClient = ({ match }) => {
                       <td>
                         {dayjs(project.subscriptionStartsAt).isValid()
                           ? dayjs(project.subscriptionStartsAt).format(
-                            'DD-MM-YYYY',
-                          )
+                              'DD-MM-YYYY',
+                            )
                           : null}
                       </td>
                       <td>
                         {dayjs(project.subscriptionEndsAt).isValid()
                           ? dayjs(project.subscriptionEndsAt).format(
-                            'DD-MM-YYYY',
-                          )
+                              'DD-MM-YYYY',
+                            )
                           : '-'}
                       </td>
                       <td className="is-uppercase actions">
@@ -159,7 +159,10 @@ const ProjectsClient = ({ match }) => {
                               buttons: ['Cancel', 'Confirm'],
                             }).then(async value => {
                               if (value) {
-                                await executeMutationRemove({ id: project.id });
+                                await executeMutationRemove({
+                                  id: project.id,
+                                  clientId: project.clientId,
+                                });
                               }
                             });
                           }}>

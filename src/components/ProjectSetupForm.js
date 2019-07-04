@@ -20,10 +20,10 @@ const ProjectSetupForm = props => {
 
   const Form = styled.form`
     input {
-      border-color: ${props => props.theme.primaryColor};
+      border-color: ${propsInput => propsInput.theme.primaryColor};
       box-shadow: none;
       :hover {
-        border-color: ${props => props.theme.primaryColor};
+        border-color: ${propsInput => propsInput.theme.primaryColor};
       }
     }
     .columns {
@@ -67,14 +67,12 @@ const ProjectSetupForm = props => {
         type="text"
         label="Custom Domain Name"
         placeholder="www.projectname.co.uk"
-        name="customDomain"
-        value={values.customDomain}
+        name="customUrl"
+        value={values.customUrl}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
-          errors.customDomain && touched.customDomain
-            ? errors.customDomain
-            : undefined
+          errors.customUrl && touched.customUrl ? errors.customUrl : undefined
         }
       />
       {/* later on this field will be replaced with select field */}
@@ -84,15 +82,11 @@ const ProjectSetupForm = props => {
         border
         label="Project Plan"
         placeholder="Monthly | £30 | 6Months (£180) | Annually (£360)"
-        name="percentage"
-        value={values.percentage}
+        name="plan"
+        value={values.plan}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={
-          errors.percentage && touched.percentage
-            ? errors.percentage
-            : undefined
-        }
+        errors={errors.plan && touched.plan ? errors.plan : undefined}
       />
       <div className="columns">
         <div className="column">

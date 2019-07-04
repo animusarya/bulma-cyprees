@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -12,12 +11,11 @@ import ClientWelcomeEmailForm from '../../components/ClientWelcomeEmailForm';
 import ClientNotificationEmailForm from '../../components/ClientNotificationEmailForm';
 import AdminHeader from '../../components/AdminHeader';
 
-const Container = styled.div``;
 const ManageEmail = () => (
   <Layout>
     <Seo title="Dashboard Super Admin" description="Page description" />
     <Header />
-    <Container className="columns">
+    <div className="columns">
       <div className="column is-one-fifth">
         <Sidebar />
       </div>
@@ -35,7 +33,7 @@ const ManageEmail = () => (
           </div>
         </MainColumn>
       </div>
-    </Container>
+    </div>
     <CopyRight />
   </Layout>
 );

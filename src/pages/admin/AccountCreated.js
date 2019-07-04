@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -32,7 +33,9 @@ const AccountCreated = () => (
             <p className="subtitle is-size-6 has-text-weight-semibold">
               Thank you for registering, you are now signed in.
             </p>
-            <Button>Create a new project</Button>
+            <Button Link to="">
+              Create a new project
+            </Button>
           </div>
         </div>
       </div>

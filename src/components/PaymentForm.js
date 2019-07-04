@@ -46,72 +46,77 @@ const ProjectSetupForm = props => {
             isWidth
             border
             placeholder="Country"
-            name="name"
+            name="country"
             type="text"
-            value={values.name}
+            value={values.country}
             onChange={handleChange}
             onBlur={handleBlur}
-            errors={errors.name && touched.name ? errors.name : undefined}
+            errors={
+              errors.country && touched.country ? errors.country : undefined
+            }
           />
           <InputGroup
             fullWidth
             isWidth
             border
-            placeholder="Address Line 1*"
-            name="name"
+            placeholder="Address Line 1"
+            name="address"
             type="text"
-            value={values.name}
+            value={values.address}
             onChange={handleChange}
             onBlur={handleBlur}
-            errors={errors.name && touched.name ? errors.name : undefined}
+            errors={
+              errors.address && touched.address ? errors.address : undefined
+            }
           />
           <InputGroup
             fullWidth
             isWidth
             border
             placeholder="Address Line 2"
-            name="name"
+            name="secondaryAddress"
             type="text"
-            value={values.name}
+            value={values.secondaryAddress}
             onChange={handleChange}
             onBlur={handleBlur}
-            errors={errors.name && touched.name ? errors.name : undefined}
           />
           <InputGroup
             fullWidth
             isWidth
             border
-            placeholder="City*"
-            name="name"
+            placeholder="City"
+            name="city"
             type="text"
-            value={values.name}
+            value={values.city}
             onChange={handleChange}
             onBlur={handleBlur}
-            errors={errors.name && touched.name ? errors.name : undefined}
+            errors={errors.city && touched.city ? errors.city : undefined}
           />
           <InputGroup
             fullWidth
             isWidth
             border
             placeholder="State"
-            name="name"
+            name="state"
             type="text"
-            value={values.name}
+            value={values.state}
             onChange={handleChange}
             onBlur={handleBlur}
-            errors={errors.name && touched.name ? errors.name : undefined}
+            errors={errors.state && touched.state ? errors.state : undefined}
           />
           <InputGroup
             fullWidth
             isWidth
             border
             placeholder="Postcode"
-            name="name"
+            name="postcode"
             type="text"
-            value={values.name}
+            value={values.postcode}
             onChange={handleChange}
             onBlur={handleBlur}
-            errors={errors.name && touched.name ? errors.name : undefined}
+            errors={
+              errors.postcode && touched.postcode ? errors.postcode : undefined
+            }
           />
           <Subtitle>Payment Method</Subtitle>
           <InputGroup
@@ -119,24 +124,30 @@ const ProjectSetupForm = props => {
             isWidth
             border
             placeholder="Name on card"
-            name="name"
+            name="cardName"
             type="text"
-            value={values.name}
+            value={values.cardName}
             onChange={handleChange}
             onBlur={handleBlur}
-            errors={errors.name && touched.name ? errors.name : undefined}
+            errors={
+              errors.cardName && touched.cardName ? errors.cardName : undefined
+            }
           />
           <InputGroup
             fullWidth
             isWidth
             border
             placeholder="Credit Card Number"
-            name="name"
-            type="text"
-            value={values.name}
+            name="creditCard"
+            type="number"
+            value={values.creditCard}
             onChange={handleChange}
             onBlur={handleBlur}
-            errors={errors.name && touched.name ? errors.name : undefined}
+            errors={
+              errors.creditCard && touched.creditCard
+                ? errors.creditCard
+                : undefined
+            }
           />
           <div className="columns">
             <div className="column">
@@ -145,12 +156,14 @@ const ProjectSetupForm = props => {
                 isWidth
                 border
                 placeholder="Expiry Month"
-                name="name"
+                name="expiry"
                 type="text"
-                value={values.name}
+                value={values.expiry}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                errors={errors.name && touched.name ? errors.name : undefined}
+                errors={
+                  errors.expiry && touched.expiry ? errors.expiry : undefined
+                }
               />
             </div>
             <div className="column">
@@ -158,13 +171,13 @@ const ProjectSetupForm = props => {
                 fullWidth
                 isWidth
                 border
-                placeholder="CVC"
-                name="name"
-                type="text"
-                value={values.name}
+                placeholder="CVV"
+                name="cvv"
+                type="number"
+                value={values.cvv}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                errors={errors.name && touched.name ? errors.name : undefined}
+                errors={errors.cvv && touched.cvv ? errors.cvv : undefined}
               />
             </div>
           </div>
@@ -176,12 +189,16 @@ const ProjectSetupForm = props => {
             isWidth
             border
             placeholder="Project Arden"
-            name="name"
+            name="projectName"
             type="text"
-            value={values.name}
+            value={values.projectName}
             onChange={handleChange}
             onBlur={handleBlur}
-            errors={errors.name && touched.name ? errors.name : undefined}
+            errors={
+              errors.projectName && touched.projectName
+                ? errors.projectName
+                : undefined
+            }
           />
           <InputGroup
             fullWidth
@@ -189,24 +206,26 @@ const ProjectSetupForm = props => {
             border
             label="Project Plan"
             placeholder="Monthly | £30 | 6Months (£180) | Annually (£360)"
-            name="name"
+            name="projectPlan"
             type="text"
-            value={values.name}
+            value={values.projectPlan}
             onChange={handleChange}
             onBlur={handleBlur}
-            errors={errors.name && touched.name ? errors.name : undefined}
+            errors={
+              errors.projectPlan && touched.projectPlan
+                ? errors.projectPlan
+                : undefined
+            }
           />
           <InputGroup
             fullWidth
             border
             label="Do you have a discount code?"
-            placeholder="1S50"
-            name="name"
+            name="discount"
             type="text"
-            value={values.name}
+            value={values.discount}
             onChange={handleChange}
             onBlur={handleBlur}
-            errors={errors.name && touched.name ? errors.name : undefined}
           />
           <div className="columns">
             <div className="column">
@@ -248,16 +267,30 @@ ProjectSetupForm.propTypes = {
 
 export default withFormik({
   mapPropsToValues: () => ({
-    name: '',
-    defaultUrl: '',
-    customUrl: '',
-    plan: '',
+    country: '',
+    address: '',
+    city: '',
+    state: '',
+    postcode: '',
+    cardName: '',
+    creditCard: '',
+    expiry: '',
+    cvv: '',
+    projectName: '',
+    projectPlan: '',
   }),
   validationSchema: yup.object().shape({
-    name: yup.string().required('Name is required!'),
-    defaultUrl: yup.string().required('Default URL is required!'),
-    customUrl: yup.string().required('Custom URL is required!'),
-    plan: yup.string().required('This field is required!'),
+    country: yup.string().required('Country is required!'),
+    address: yup.string().required('Address is required!'),
+    city: yup.string().required('City is required!'),
+    state: yup.string().required('State is required!'),
+    postcode: yup.number().required('Post Code is required!'),
+    cardName: yup.string().required('Name is required!'),
+    creditCard: yup.number().required('Credit Card Number is required!'),
+    expiry: yup.string().required('This field is required!'),
+    cvv: yup.number().required('CVV is required!'),
+    projectName: yup.string().required('Project Summary is required!'),
+    projectPlan: yup.string().required('This field is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
