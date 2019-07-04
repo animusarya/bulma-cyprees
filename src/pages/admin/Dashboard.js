@@ -9,6 +9,7 @@ import { Heading, Title } from '../../components/elements';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
+import ProjectsProperty from '../../components/ProjectsProperty';
 
 const Container = styled.div`
   input {
@@ -66,6 +67,7 @@ const Dashboard = () => (
               </tr>
             </tbody>
           </table>
+          <ProjectsProperty />
         </MainColumn>
       </div>
     </Container>
