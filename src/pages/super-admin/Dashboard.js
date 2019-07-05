@@ -11,6 +11,7 @@ import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
+import Dropzone from 'react-dropzone';
 
 const getAdmins = gql`
   query GetAdmins {
@@ -79,6 +80,7 @@ const Dashboard = () => {
             )}
           </MainColumn>
         </div>
+        <Dropzone />
       </Container>
       <CopyRight />
     </Layout>

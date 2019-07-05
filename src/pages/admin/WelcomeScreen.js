@@ -56,14 +56,20 @@ const WelcomeScreen = () => (
                     </span>
                   </p>
                   <p>
-                    2. Click the <strong className="has-text-weight-bold">Add Page</strong>
+                    2. Click the{' '}
+                    <strong className="has-text-weight-bold">Add Page</strong>
                   </p>
                   <p>
                     3. Set your outgoing email messages under{' '}
-                    <strong className="has-text-weight-bold">Manage Emails</strong>
+                    <strong className="has-text-weight-bold">
+                      Manage Emails
+                    </strong>
                   </p>
                   <p>
-                    4. Add your Clients under <strong className="has-text-weight-bold">Manage Clients</strong>
+                    4. Add your Clients under{' '}
+                    <strong className="has-text-weight-bold">
+                      Manage Clients
+                    </strong>
                   </p>
                 </div>
               </div>
