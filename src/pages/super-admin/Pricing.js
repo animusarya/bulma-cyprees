@@ -53,11 +53,11 @@ const removePriceMutation = gql`
   }
 `;
 
-// TODO: Fix this mutation when available in API
+// TODO: Fix this mutation
 
-const editPriceMutation = gql`
-  mutation editPackage($id: ID!) {
-    editPackage(id: $id) {
+const updatePackageMutation = gql`
+  mutation updatePackage($id: ID!, $input: PackageInput!) {
+    updatePackage(id: $id, input: $input) {
       id
       name
       price
@@ -81,7 +81,7 @@ const Pricing = () => {
     query: pricingsQuery,
   });
   const [resRemove, executeMutationRemove] = useMutation(removePriceMutation);
-  const [resEdit, executeMutationEdit] = useMutation(editPriceMutation);
+  const [resEdit, executeMutationEdit] = useMutation(updatePackageMutation);
 
   return (
     <Layout>
