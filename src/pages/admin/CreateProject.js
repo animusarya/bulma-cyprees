@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useMutation } from 'urql';
 import gql from 'graphql-tag';
 
@@ -10,6 +10,7 @@ import CopyRight from '../../components/CopyRight';
 import ProjectSetup from '../../components/ProjectSetup';
 import Payments from '../../components/Payments';
 import PaymentConfirmation from '../../components/PaymentConfirmation';
+import ProgressBar from '../../components/ProgressBar';
 
 const ProjectSetupMutation = gql`
   mutation createProject(
@@ -35,6 +36,8 @@ const ProjectSetupMutation = gql`
 `;
 
 const CreateProject = () => {
+  const [activeStep] = useState(1);
+
   const [resAdd, executeMutationAdd] = useMutation(ProjectSetupMutation);
 
   return (
@@ -46,9 +49,18 @@ const CreateProject = () => {
           <Sidebar />
         </div>
         <div className="column">
-          <ProjectSetup />
-          <Payments />
-          <PaymentConfirmation />
+          <div>
+            <ProgressBar activeStep={activeStep} />
+          </div>
+          <div>
+            <ProjectSetup />
+          </div>
+          <div>
+            <Payments />
+          </div>
+          <div>
+            <PaymentConfirmation />
+          </div>
         </div>
       </div>
       <CopyRight />
