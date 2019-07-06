@@ -105,7 +105,7 @@ const ClientHeader = () => {
         </div>
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
-            <Link to="/" className="navbar-item has-text-white">
+            <Link to="/admin/add/files" className="navbar-item has-text-white">
               Property
             </Link>
             <Link to="/" className="navbar-item has-text-white">
