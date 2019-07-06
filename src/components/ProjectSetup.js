@@ -2,9 +2,9 @@ import React from 'react';
 import { useMutation } from 'urql';
 import gql from 'graphql-tag';
 
-import Title from './elements/Title';
 import MainColumn from './MainColumn';
 import ProjectSetupForm from './ProjectSetupForm';
+import { Title, Message, Loading } from './elements';
 
 const ProjectSetupMutation = gql`
   mutation createProject(
@@ -36,7 +36,9 @@ const ProjectSetup = () => {
     <MainColumn>
       <div className="column is-half">
         <Title>01 Project Setup</Title>
-        <ProjectSetupForm />
+        <ProjectSetupForm onSubmit={data => executeMutationAdd(data)} />
+        {resAdd.error && <Message type="error">{resAdd.error.message}</Message>}
+        {resAdd.fetching ? <Loading /> : null}
       </div>
     </MainColumn>
   );

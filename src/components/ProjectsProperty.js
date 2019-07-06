@@ -96,12 +96,12 @@ const ProjectsProperty = () => {
       {resSync.error && <Message type="error">{resSync.error.message}</Message>}
       {resSort.error && <Message type="error">{resSort.error.message}</Message>}
       {resDel.fetching ||
-        resRemove.fetching ||
-        result.fetching ||
-        resSync.fetching ||
-        resSort.fetching ? (
-          <Loading />
-        ) : null}
+      resRemove.fetching ||
+      result.fetching ||
+      resSync.fetching ||
+      resSort.fetching ? (
+        <Loading />
+      ) : null}
       {result.data && result.data.discounts.length > 0 && (
         <table className="table is-fullwidth is-hoverable">
           <thead>
