@@ -49,7 +49,7 @@ const ProjectsProperty = () => (
           </td>
           <td className="has-text-centered">
             <Button secondary paddingless>
-              <i className="far fa-trash-alt"></i>{' '}
+              <i className="far fa-trash-alt"></i>
             </Button>
           </td>
         </tr>

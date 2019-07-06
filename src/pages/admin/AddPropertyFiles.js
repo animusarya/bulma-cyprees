@@ -10,16 +10,8 @@ import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
 import ProjectsProperty from '../../components/ProjectsProperty';
 
-const Container = styled.div`
-  input {
-    border-color: ${props => props.theme.primaryColor};
-    border-radius: 0px;
-    :hover {
-      border-color: ${props => props.theme.primaryColor};
-    }
-  }
-`;
-const AddFiles = () => {
+const Container = styled.div``;
+const AddPropertyFiles = () => {
   return (
     <Layout>
       <Seo title="Dashboard Admin" description="Page description" />
@@ -40,4 +32,4 @@ const AddFiles = () => {
   );
 };
 
-export default AddFiles;
+export default AddPropertyFiles;
