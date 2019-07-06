@@ -13,6 +13,7 @@ import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
 
 // TODO: Fix this
+
 const dashboardQuery = gql`
   query projects($clientId: ID!) {
     projects(clientId: $clientId) {
