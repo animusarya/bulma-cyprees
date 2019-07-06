@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useMutation } from 'urql';
-import gql from 'graphql-tag';
 
 import Seo from '../../components/Seo';
 import Layout from '../../components/Layout';
@@ -12,33 +10,8 @@ import Payments from '../../components/Payments';
 import PaymentConfirmation from '../../components/PaymentConfirmation';
 import ProgressBar from '../../components/ProgressBar';
 
-const ProjectSetupMutation = gql`
-  mutation createProject(
-    $id: ID!
-    $name: String!
-    $customDomain: String
-    $subscriptionAmount: Float
-  ) {
-    createProject(
-      input: {
-        id: $id
-        name: $name
-        customDomain: $customDomain
-        subscriptionAmount: $subscriptionAmount
-      }
-    ) {
-      id
-      name
-      customDomain
-      subscriptionAmount
-    }
-  }
-`;
-
 const CreateProject = () => {
   const [activeStep] = useState(1);
-
-  const [resAdd, executeMutationAdd] = useMutation(ProjectSetupMutation);
 
   return (
     <Layout>
