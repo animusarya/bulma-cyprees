@@ -33,6 +33,7 @@ import Projects from './pages/admin/Projects';
 import CreateProject from './pages/admin/CreateProject';
 import ManageEmail from './pages/admin/ManageEmail';
 import WelcomeScreen from './pages/admin/WelcomeScreen';
+import AddFiles from './pages/admin/AddFiles';
 
 import DashboardClient from './pages/client/Dashboard';
 import Property from './pages/client/DataRoom';
@@ -134,6 +135,7 @@ class App extends React.Component {
                       component={Projects}
                     />
                     <Route exact path="/admin/emails" component={ManageEmail} />
+                    <Route exact path="/admin/add/files" component={AddFiles} />
                     <Route
                       exact
                       path="/admin/project/{id}"

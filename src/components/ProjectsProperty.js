@@ -39,7 +39,7 @@ const ProjectsProperty = () => (
             </Button>
           </td>
           <td>Sale details</td>
-          <td className="has-text-centered is-uppercase">.pdf</td>
+          <td className="has-text-centered is-uppercase">pdf</td>
           <td className="has-text-centered">3 days ago</td>
           <td className="has-text-centered"> 5 June 2019 - 12:30pm</td>
           <td className="has-text-centered">
