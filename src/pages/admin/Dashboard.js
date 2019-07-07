@@ -12,7 +12,7 @@ import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
 
-// TODO: Fix this
+// TODO: Fix this when API data available
 
 const dashboardQuery = gql`
   query projects($clientId: ID!) {

@@ -34,6 +34,7 @@ import ManageEmail from './pages/admin/ManageEmail';
 import WelcomeScreen from './pages/admin/WelcomeScreen';
 import AddPropertyFiles from './pages/admin/AddPropertyFiles';
 import ManageClients from './pages/admin/ManageClients';
+import Help from './pages/admin/Help';
 
 import DashboardClient from './pages/client/Dashboard';
 import Property from './pages/client/DataRoom';
@@ -145,6 +146,7 @@ class App extends React.Component {
                       path="/admin/project/{id}"
                       component={WelcomeScreen}
                     />
+                    <Route exact path="/admin/help" component={Help} />
                     <Route
                       exact
                       path="/client/dashboard"
