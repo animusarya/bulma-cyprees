@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
@@ -22,6 +22,8 @@ const Icon = styled.i`
 
 const Sidebar = () => {
   const userData = useStoreState(state => state.user.data);
+  const [isToggledOn, setToggle] = useState(false);
+  const toggle = () => setToggle(!isToggledOn);
 
   return (
     <Container className="menu">
@@ -46,9 +48,31 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/admin/dashboard">
+            <Link to="/admin/dashboard" onClick={toggle}>
               <Icon className="fas fa-folder-open"></Icon>Manage Projects
             </Link>
+            {isToggledOn ? (
+              <React.Fragment>
+                <Link to="/">
+                  <Icon className="fas fa-plus-circle"></Icon>Dashboard
+                </Link>
+                <Link to="/">
+                  <Icon className="fas fa-plus-circle"></Icon>Manage Pages
+                </Link>
+                <Link to="/">
+                  <Icon className="fas fa-plus-circle"></Icon>Manage Emails
+                </Link>
+                <Link to="/">
+                  <Icon className="fas fa-plus-circle"></Icon>Manage Clients
+                </Link>
+                <Link to="/">
+                  <Icon className="fas fa-plus-circle"></Icon>Project Settings
+                </Link>
+                <Link to="/">
+                  <Icon className="fas fa-plus-circle"></Icon>Help
+                </Link>
+              </React.Fragment>
+            ) : null}
           </li>
         </ul>
       )}
