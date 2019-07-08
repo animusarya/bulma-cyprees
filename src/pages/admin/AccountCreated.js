@@ -18,6 +18,13 @@ const Container = styled.div`
   }
 `;
 
+const LinkWrapper = styled(Link)`
+  color: ${props => props.theme.primaryColor};
+  :hover {
+    color: ${props => props.theme.primaryColor};
+  }
+`;
+
 const AccountCreated = () => (
   <Layout>
     <Seo title="Dashboard Admin" description="Page description" />
@@ -34,7 +41,9 @@ const AccountCreated = () => (
               Thank you for registering, you are now signed in.
             </p>
             <Button>
-              <Link to="/admin/project/create">Create a new project</Link>
+              <LinkWrapper to="/admin/project/create">
+                Create a new project
+              </LinkWrapper>
             </Button>
           </div>
         </div>

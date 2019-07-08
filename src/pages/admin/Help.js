@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -11,16 +10,6 @@ import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
 import video from '../../assets/images/videoplayback.mp4';
 
-const Container = styled.div`
-  input {
-    border-color: ${props => props.theme.primaryColor};
-    border-radius: 0px;
-    :hover {
-      border-color: ${props => props.theme.primaryColor};
-    }
-  }
-`;
-
 const Width = '340px';
 
 const Help = () => {
@@ -28,7 +17,7 @@ const Help = () => {
     <Layout>
       <Seo title="Dashboard Admin" description="Page description" />
       <Header />
-      <Container className="columns">
+      <div className="columns">
         <div className="column is-one-fifth">
           <Sidebar />
         </div>
@@ -66,7 +55,7 @@ const Help = () => {
             </div>
           </MainColumn>
         </div>
-      </Container>
+      </div>
       <CopyRight />
     </Layout>
   );

@@ -43,33 +43,33 @@ const Sidebar = () => {
       {userData.type === 'admin' && (
         <ul className="menu-list">
           <li>
-            <Link to="/admin/project/create">
+            <Link to="/admin/create/account">
               <Icon className="fas fa-plus-circle"></Icon>Create Project
             </Link>
           </li>
           <li>
-            <Link to="/admin/dashboard" onClick={toggle}>
+            <Link to="/admin/manage/project" onClick={toggle}>
               <Icon className="fas fa-folder-open"></Icon>Manage Projects
             </Link>
             {isToggledOn ? (
               <React.Fragment>
-                <Link to="/">
-                  <Icon className="fas fa-plus-circle"></Icon>Dashboard
+                <Link to="/admin/dashboard">
+                  <Icon className="fas fa-th-large"></Icon>Dashboard
+                </Link>
+                <Link to="/admin/project/{id}">
+                  <Icon className="far fa-file"></Icon>Manage Pages
+                </Link>
+                <Link to="/admin/manage/emails">
+                  <Icon className="far fa-envelope"></Icon>Manage Emails
+                </Link>
+                <Link to="/admin/manage/clients">
+                  <Icon className="fas fa-user-friends"></Icon>Manage Clients
                 </Link>
                 <Link to="/">
-                  <Icon className="fas fa-plus-circle"></Icon>Manage Pages
+                  <Icon className="fas fa-cogs"></Icon>Project Settings
                 </Link>
-                <Link to="/">
-                  <Icon className="fas fa-plus-circle"></Icon>Manage Emails
-                </Link>
-                <Link to="/">
-                  <Icon className="fas fa-plus-circle"></Icon>Manage Clients
-                </Link>
-                <Link to="/">
-                  <Icon className="fas fa-plus-circle"></Icon>Project Settings
-                </Link>
-                <Link to="/">
-                  <Icon className="fas fa-plus-circle"></Icon>Help
+                <Link to="/admin/help">
+                  <Icon className="far fa-question-circle"></Icon>Help
                 </Link>
               </React.Fragment>
             ) : null}
