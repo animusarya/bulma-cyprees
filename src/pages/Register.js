@@ -28,6 +28,7 @@ const FormContainer = styled.div`
   margin-top: 10rem;
   padding: 0 3rem;
 `;
+
 const Logo = styled.img`
   width: 300px;
   height: auto;

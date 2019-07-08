@@ -129,8 +129,8 @@ const ClientHeader = () => {
                 image size 1600 x 400px
               </h6>
             </div>
+            <Modal isShowing={isShowing} hide={toggle} />
           </Button>
-          <Modal isShowing={isShowing} hide={toggle} />
         </div>
       </Hero>
     </Container>

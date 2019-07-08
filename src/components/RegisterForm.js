@@ -100,7 +100,7 @@ export default withFormik({
     password: yup
       .string()
       .required('Password is required!')
-      .min(2, 'Seems a bit short...'),
+      .min(6, 'Seems a bit short...'),
     confirmPassword: yup
       .string()
       .required('This filed is required!')
