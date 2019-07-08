@@ -7,6 +7,7 @@ const Container = styled.div`
   align-self: center;
   .subtitle {
     margin-bottom: 2rem !important;
+    margin-top: 1.5rem !important;
   }
 `;
 

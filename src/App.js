@@ -30,6 +30,7 @@ import Pricing from './pages/super-admin/Pricing';
 import DashboardAdmin from './pages/admin/Dashboard';
 import AccountCreated from './pages/admin/AccountCreated';
 import CreateProject from './pages/admin/CreateProject';
+import ManageProject from './pages/admin/ManageProject';
 import ManageEmail from './pages/admin/ManageEmail';
 import WelcomeScreen from './pages/admin/WelcomeScreen';
 import AddPropertyFiles from './pages/admin/AddPropertyFiles';
@@ -130,7 +131,16 @@ class App extends React.Component {
                       path="/admin/project/create"
                       component={CreateProject}
                     />
-                    <Route exact path="/admin/emails" component={ManageEmail} />
+                    <Route
+                      exact
+                      path="/admin/manage/project"
+                      component={ManageProject}
+                    />
+                    <Route
+                      exact
+                      path="/admin/manage/emails"
+                      component={ManageEmail}
+                    />
                     <Route
                       exact
                       path="/admin/add/files"
