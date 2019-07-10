@@ -52,7 +52,7 @@ const Container = styled.div`
 const ManageProject = ({ match }) => {
   const [result] = useQuery({
     query: clientProjectsQuery,
-    variables: { clientId: match.params.clientId },
+    variables: { clientId: match.params.id },
   });
   const [resRemove, executeMutationRemove] = useMutation(
     removeProjectClientMutation,
@@ -63,7 +63,7 @@ const ManageProject = ({ match }) => {
 
   return (
     <Layout>
-      <Seo title="Dashboard Admin" description="Page description" />
+      <Seo title="Manage Project" description="Page description" />
       <Header />
       <Container className="columns">
         <div className="column is-one-fifth">
@@ -71,7 +71,7 @@ const ManageProject = ({ match }) => {
         </div>
         <div className="column">
           <MainColumn>
-            <Heading>Manage Projects</Heading>
+            <Heading>Manage Project</Heading>
             {result.error && (
               <Message type="error">{result.error.message}</Message>
             )}

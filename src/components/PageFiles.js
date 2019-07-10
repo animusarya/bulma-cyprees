@@ -56,7 +56,8 @@ const Container = styled.div`
     display: flex;
   }
 `;
-const ProjectsProperty = () => {
+
+const PageFiles = () => {
   const [resRemove, executeMutationRemove] = useMutation(removeMutation);
   const [resDel, executeMutationDel] = useMutation(delMutation);
   const [resSync, executeMutationSync] = useMutation(syncMutation);
@@ -180,4 +181,4 @@ const ProjectsProperty = () => {
   );
 };
 
-export default ProjectsProperty;
+export default PageFiles;

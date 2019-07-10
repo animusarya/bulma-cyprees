@@ -8,10 +8,11 @@ import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
-import ProjectsProperty from '../../components/ProjectsProperty';
+// import ProjectsProperty from '../../components/ProjectsProperty';
 
 const Container = styled.div``;
-const AddPropertyFiles = () => {
+
+const ProjectPages = () => {
   return (
     <Layout>
       <Seo title="Dashboard Admin" description="Page description" />
@@ -23,7 +24,9 @@ const AddPropertyFiles = () => {
         <div className="column">
           <AdminHeader />
           <MainColumn>
-            <ProjectsProperty />
+            <p>DESIGN MISSING, NEED LIST OF PAGES</p>
+            <p>USER TABLES</p>
+            {/* <ProjectsProperty /> */}
           </MainColumn>
         </div>
       </Container>
@@ -32,4 +35,4 @@ const AddPropertyFiles = () => {
   );
 };
 
-export default AddPropertyFiles;
+export default ProjectPages;

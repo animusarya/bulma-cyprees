@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
@@ -22,8 +22,9 @@ const Icon = styled.i`
 
 const Sidebar = () => {
   const userData = useStoreState(state => state.user.data);
-  const [isToggledOn, setToggle] = useState(false);
-  const toggle = () => setToggle(!isToggledOn);
+  const isProjectOpen = false;
+  // const [isToggledOn, setToggle] = useState(false);
+  // const toggle = () => setToggle(!isToggledOn);
 
   return (
     <Container className="menu">
@@ -43,37 +44,37 @@ const Sidebar = () => {
       {userData.type === 'admin' && (
         <ul className="menu-list">
           <li>
-            <Link to="/admin/create/account">
+            <Link to="/admin/project/create">
               <Icon className="fas fa-plus-circle"></Icon>Create Project
             </Link>
           </li>
           <li>
-            <Link to="/admin/manage/project" onClick={toggle}>
+            <Link to="/admin/dashboard">
               <Icon className="fas fa-folder-open"></Icon>Manage Projects
             </Link>
-            {isToggledOn ? (
-              <React.Fragment>
-                <Link to="/admin/dashboard">
-                  <Icon className="fas fa-th-large"></Icon>Dashboard
-                </Link>
-                <Link to="/admin/project/{id}">
-                  <Icon className="far fa-file"></Icon>Manage Pages
-                </Link>
-                <Link to="/admin/manage/emails">
-                  <Icon className="far fa-envelope"></Icon>Manage Emails
-                </Link>
-                <Link to="/admin/manage/clients">
-                  <Icon className="fas fa-user-friends"></Icon>Manage Clients
-                </Link>
-                <Link to="/">
-                  <Icon className="fas fa-cogs"></Icon>Project Settings
-                </Link>
-                <Link to="/admin/help">
-                  <Icon className="far fa-question-circle"></Icon>Help
-                </Link>
-              </React.Fragment>
-            ) : null}
           </li>
+          {isProjectOpen ? (
+            <React.Fragment>
+              <Link to="/admin/dashboard">
+                <Icon className="fas fa-th-large"></Icon>Dashboard
+              </Link>
+              <Link to="/admin/project/{id}">
+                <Icon className="far fa-file"></Icon>Manage Pages
+              </Link>
+              <Link to="/admin/manage/emails">
+                <Icon className="far fa-envelope"></Icon>Manage Emails
+              </Link>
+              <Link to="/admin/manage/clients">
+                <Icon className="fas fa-user-friends"></Icon>Manage Clients
+              </Link>
+              <Link to="/">
+                <Icon className="fas fa-cogs"></Icon>Project Settings
+              </Link>
+              <Link to="/admin/help">
+                <Icon className="far fa-question-circle"></Icon>Help
+              </Link>
+            </React.Fragment>
+          ) : null}
         </ul>
       )}
       {userData.type === 'client' && (

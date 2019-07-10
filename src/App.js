@@ -28,14 +28,14 @@ import ProjectInfo from './pages/super-admin/ProjectInfo';
 import Pricing from './pages/super-admin/Pricing';
 
 import DashboardAdmin from './pages/admin/Dashboard';
-// import AccountCreated from './pages/admin/AccountCreated';
 import CreateProject from './pages/admin/CreateProject';
-import ManageProject from './pages/admin/ManageProject';
 import ManageEmail from './pages/admin/ManageEmail';
-import WelcomeScreen from './pages/admin/WelcomeScreen';
-import AddPropertyFiles from './pages/admin/AddPropertyFiles';
+import ProjectDashboard from './pages/admin/ProjectDashboard';
+import ProjectPages from './pages/admin/ProjectPages';
 import ManageClients from './pages/admin/ManageClients';
+import ManagePage from './pages/admin/ManagePage';
 import Help from './pages/admin/Help';
+import ManageProject from './pages/admin/ManageProject'; // TODO: WHY THIS PAGE IS HERE?
 
 import DashboardClient from './pages/client/Dashboard';
 import Property from './pages/client/DataRoom';
@@ -134,28 +134,33 @@ class App extends React.Component {
                     <Route
                       exact
                       path="/admin/project/:id"
-                      component={ManageProject}
+                      component={ProjectDashboard}
                     />
                     <Route
                       exact
-                      path="/admin/manage/emails"
+                      path="/admin/project/:id/pages"
+                      component={ProjectPages}
+                    />
+                    <Route
+                      exact
+                      path="/admin/project/:id/pages/:id"
+                      component={ManagePage}
+                    />
+                    <Route
+                      exact
+                      path="/admin/project/:id/emails"
                       component={ManageEmail}
                     />
                     <Route
                       exact
-                      path="/admin/add/files"
-                      component={AddPropertyFiles}
-                    />
-                    <Route
-                      exact
-                      path="/admin/manage/clients"
+                      path="/admin/project/:id/clients"
                       component={ManageClients}
                     />
-                    <Route
+                    {/* <Route
                       exact
                       path="/admin/project/{id}"
                       component={WelcomeScreen}
-                    />
+                    /> */}
                     <Route exact path="/admin/help" component={Help} />
                     <Route
                       exact
