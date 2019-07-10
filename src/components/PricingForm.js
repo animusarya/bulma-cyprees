@@ -83,10 +83,10 @@ PricingForm.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({
-    name: '',
-    durationInMonths: '',
-    price: '',
+  mapPropsToValues: ({ initialValues }) => ({
+    name: initialValues.name || '',
+    durationInMonths: initialValues.durationInMonths || '',
+    price: initialValues.price || '',
   }),
   validationSchema: yup.object().shape({
     name: yup.string().required('Duration is required!'),

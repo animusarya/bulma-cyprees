@@ -14,6 +14,15 @@ import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 
+const userQuery = gql`
+  query user($id: ID!) {
+    user(id: $id) {
+      id
+      email
+    }
+  }
+`;
+
 const clientProjectsQuery = gql`
   query projects($clientId: ID!) {
     projects(clientId: $clientId) {
@@ -27,9 +36,9 @@ const clientProjectsQuery = gql`
   }
 `;
 
-const removeProjectClientMutation = gql`
-  mutation removeProjectClient($id: ID!, $clientId: ID!) {
-    removeProjectClient(id: $id, clientId: $clientId) {
+const removeProjectMutation = gql`
+  mutation removeProject($id: ID!) {
+    removeProject(id: $id) {
       success
     }
   }
@@ -58,21 +67,24 @@ const LinkWrapper = styled(Link)`
 `;
 
 const ProjectsClient = ({ match }) => {
-  const [result] = useQuery({
+  const [resultUser] = useQuery({
+    query: userQuery,
+    variables: { id: match.params.clientId },
+  });
+  const [result, executeQuery] = useQuery({
     query: clientProjectsQuery,
     variables: { clientId: match.params.clientId },
   });
-  const [resRemove, executeMutationRemove] = useMutation(
-    removeProjectClientMutation,
-  );
+  const [resRemove, executeMutationRemove] = useMutation(removeProjectMutation);
   const [resRenew, executeMutationRenew] = useMutation(
     renewProjectClientMutation,
   );
-  // console.log('clientId', match.params.clientId);
+  const user = resultUser.data ? resultUser.data.user : {};
+  // console.log('clientId', resultUser);
 
   return (
     <Layout>
-      <Seo title="Projects Clients " description="Page description" />
+      <Seo title="User's Projects" description="Page description" />
       <Header />
       <Container className="columns">
         <div className="column is-one-fifth">
@@ -80,7 +92,7 @@ const ProjectsClient = ({ match }) => {
         </div>
         <div className="column">
           <MainColumn>
-            <Heading>Clients &gt; rob@colliers.com</Heading>
+            <Heading>Users &gt; {user.email}</Heading>
             {result.error && (
               <Message type="error">{result.error.message}</Message>
             )}
@@ -127,7 +139,7 @@ const ProjectsClient = ({ match }) => {
                       </td>
                       <td className="is-uppercase actions">
                         <LinkWrapper
-                          to={`/super-admin/project/info/${project.id}`}>
+                          to={`/super-admin/client/${match.params.clientId}/project/${project.id}/info`}>
                           manage{' '}
                         </LinkWrapper>
                       </td>
@@ -162,6 +174,9 @@ const ProjectsClient = ({ match }) => {
                                 await executeMutationRemove({
                                   id: project.id,
                                   clientId: project.clientId,
+                                });
+                                executeQuery({
+                                  requestPolicy: 'network-only',
                                 });
                               }
                             });

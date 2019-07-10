@@ -98,12 +98,12 @@ class App extends React.Component {
                     />
                     <PrivateRoute
                       exact
-                      path="/super-admin/client/projects/:clientId"
+                      path="/super-admin/client/:clientId/projects"
                       component={ClientProjects}
                     />
                     <PrivateRoute
                       exact
-                      path="/super-admin/project/info/:projectId"
+                      path="/super-admin/client/:clientId/project/:projectId/info"
                       component={ProjectInfo}
                     />
                     <PrivateRoute

@@ -23,17 +23,26 @@ const ProjectInfoForm = props => {
         fullWidth
         border
         isHorizontal
-        label="Default URL"
-        placeholder="intellishare.online/colliers"
-        name="defaultDomain"
-        value={values.defaultDomain}
+        label="Project Name"
+        placeholder="Colliers"
+        name="name"
+        value={values.name}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={
-          errors.defaultDomain && touched.defaultDomain
-            ? errors.defaultDomain
-            : undefined
-        }
+        errors={errors.name && touched.name ? errors.name : undefined}
+      />
+      <InputGroup
+        isWidth
+        fullWidth
+        border
+        isHorizontal
+        label="Default URL"
+        placeholder="intellishare.online/colliers"
+        name="slug"
+        value={values.slug}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={errors.slug && touched.slug ? errors.slug : undefined}
       />
       <InputGroup
         isWidth
@@ -53,6 +62,7 @@ const ProjectInfoForm = props => {
         }
       />
       <InputGroup
+        readOnly
         isWidth
         fullWidth
         border
@@ -89,15 +99,16 @@ ProjectInfoForm.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({
-    defaultDomain: '',
-    customDomain: '',
-    percentage: '',
+  mapPropsToValues: ({ initialValues }) => ({
+    name: initialValues.name || '',
+    slug: initialValues.slug || '',
+    customDomain: initialValues.customDomain || '',
+    percentage: initialValues.percentage || '',
   }),
   validationSchema: yup.object().shape({
-    defaultDomain: yup.string().required('Default URL is required!'),
+    name: yup.string().required('Name is required!'),
+    slug: yup.string().required('Default URL is required!'),
     customDomain: yup.string().required('Custom URL is required!'),
-    projectSize: yup.string().required('This field is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {

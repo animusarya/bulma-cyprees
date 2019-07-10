@@ -65,7 +65,7 @@ const Dashboard = () => {
                   {res.data.users.map(user => (
                     <tr key={user.id}>
                       <td>
-                        <Link to={`/super-admin/client/projects/${user.id}`}>
+                        <Link to={`/super-admin/client/${user.id}/projects`}>
                           {user.email}
                         </Link>
                       </td>

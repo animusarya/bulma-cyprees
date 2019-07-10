@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
+import { isEmpty } from 'lodash';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -25,6 +26,7 @@ const pricingsQuery = gql`
       id
       name
       price
+      durationInMonths
     }
   }
 `;
@@ -80,6 +82,7 @@ const Pricing = () => {
   const [result, executeQuery] = useQuery({
     query: pricingsQuery,
   });
+  const [editClient, setEditClient] = useState({});
   const [resRemove, executeMutationRemove] = useMutation(removePriceMutation);
   const [resEdit, executeMutationEdit] = useMutation(updatePackageMutation);
 
@@ -94,7 +97,26 @@ const Pricing = () => {
         <div className="column">
           <MainColumn>
             <Heading>Set Pricing</Heading>
-            <PricingForm onSubmit={data => executeMutation(data)} />
+            <PricingForm
+              enableReinitialize
+              initialValues={editClient}
+              onSubmit={data => {
+                if (isEmpty(editClient)) {
+                  // add item
+                  return executeMutation(data);
+                }
+                // edit item
+                const editItem = editClient;
+                setTimeout(() => {
+                  swal('Item updated successfully!');
+                  executeQuery({
+                    requestPolicy: 'network-only',
+                  });
+                  setEditClient({});
+                }, 3000);
+                return executeMutationEdit({ id: editItem.id, input: data });
+              }}
+            />
             {res.error && <Message type="error">{res.error.message}</Message>}
             {resRemove.error && (
               <Message type="error">{resRemove.error.message}</Message>
@@ -132,18 +154,7 @@ const Pricing = () => {
                           <Button
                             secondary
                             paddingless
-                            onClick={() => {
-                              swal('Are you confirm to edit this item?', {
-                                buttons: ['Cancel', 'Confirm'],
-                              }).then(async value => {
-                                if (value) {
-                                  await executeMutationEdit({ id: item.id });
-                                  executeQuery({
-                                    requestPolicy: 'network-only',
-                                  });
-                                }
-                              });
-                            }}>
+                            onClick={() => setEditClient(item)}>
                             EDIT
                           </Button>
                         </td>
