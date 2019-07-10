@@ -8,6 +8,23 @@ import { InputGroup, Button } from './elements';
 import theme from '../utils/theme';
 import Subtitle from './elements/Subtitle';
 
+const Form = styled.form`
+  input {
+    border-color: ${theme.primaryColor};
+    box-shadow: none;
+    :hover {
+      border-color: ${theme.primaryColor};
+    }
+  }
+  .columns {
+    margin-top: 1.5rem;
+  }
+  .notify {
+    display: inline-flex;
+    font-size: 10px;
+  }
+`;
+
 const ProjectSetupForm = props => {
   const {
     values,
@@ -19,23 +36,6 @@ const ProjectSetupForm = props => {
     handleSubmit,
     subscription,
   } = props;
-
-  const Form = styled.form`
-    input {
-      border-color: ${theme.primaryColor};
-      box-shadow: none;
-      :hover {
-        border-color: ${theme.primaryColor};
-      }
-    }
-    .columns {
-      margin-top: 1.5rem;
-    }
-    .notify {
-      display: inline-flex;
-      font-size: 10px;
-    }
-  `;
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -61,13 +61,15 @@ const ProjectSetupForm = props => {
             isWidth
             border
             placeholder="Address Line 1"
-            name="address"
+            name="addressLine1"
             type="text"
-            value={values.address}
+            value={values.addressLine1}
             onChange={handleChange}
             onBlur={handleBlur}
             errors={
-              errors.address && touched.address ? errors.address : undefined
+              errors.addressLine1 && touched.addressLine1
+                ? errors.addressLine1
+                : undefined
             }
           />
           <InputGroup
@@ -75,11 +77,16 @@ const ProjectSetupForm = props => {
             isWidth
             border
             placeholder="Address Line 2"
-            name="secondaryAddress"
+            name="addressLine2"
             type="text"
-            value={values.secondaryAddress}
+            value={values.addressLine2}
             onChange={handleChange}
             onBlur={handleBlur}
+            errors={
+              errors.addressLine2 && touched.addressLine2
+                ? errors.addressLine2
+                : undefined
+            }
           />
           <InputGroup
             fullWidth
@@ -125,13 +132,14 @@ const ProjectSetupForm = props => {
             isWidth
             border
             placeholder="Name on card"
-            name="cardName"
-            type="text"
-            value={values.cardName}
+            name="paymentCardName"
+            value={values.paymentCardName}
             onChange={handleChange}
             onBlur={handleBlur}
             errors={
-              errors.cardName && touched.cardName ? errors.cardName : undefined
+              errors.paymentCardName && touched.paymentCardName
+                ? errors.paymentCardName
+                : undefined
             }
           />
           <InputGroup
@@ -139,14 +147,15 @@ const ProjectSetupForm = props => {
             isWidth
             border
             placeholder="Credit Card Number"
-            name="creditCard"
+            name="paymentCardNumber"
             type="number"
-            value={values.creditCard}
+            maxLength={12}
+            value={values.paymentCardNumber}
             onChange={handleChange}
             onBlur={handleBlur}
             errors={
-              errors.creditCard && touched.creditCard
-                ? errors.creditCard
+              errors.paymentCardNumber && touched.paymentCardNumber
+                ? errors.paymentCardNumber
                 : undefined
             }
           />
@@ -157,13 +166,34 @@ const ProjectSetupForm = props => {
                 isWidth
                 border
                 placeholder="Expiry Month"
-                name="expiry"
-                type="text"
-                value={values.expiry}
+                name="paymentCardExpiryMonth"
+                type="number"
+                maxLength={2}
+                value={values.paymentCardExpiryMonth}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 errors={
-                  errors.expiry && touched.expiry ? errors.expiry : undefined
+                  errors.paymentCardExpiryMonth &&
+                  touched.paymentCardExpiryMonth
+                    ? errors.paymentCardExpiryMonth
+                    : undefined
+                }
+              />
+              <InputGroup
+                type="number"
+                maxLength={3}
+                fullWidth
+                isWidth
+                border
+                placeholder="CVV"
+                name="paymentCardCvv"
+                value={values.paymentCardCvv}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                errors={
+                  errors.paymentCardCvv && touched.paymentCardCvv
+                    ? errors.paymentCardCvv
+                    : undefined
                 }
               />
             </div>
@@ -172,13 +202,18 @@ const ProjectSetupForm = props => {
                 fullWidth
                 isWidth
                 border
-                placeholder="CVV"
-                name="cvv"
+                placeholder="Expiry Year"
+                name="paymentCardExpiryYear"
                 type="number"
-                value={values.cvv}
+                maxLength={4}
+                value={values.paymentCardExpiryYear}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                errors={errors.cvv && touched.cvv ? errors.cvv : undefined}
+                errors={
+                  errors.paymentCardExpiryYear && touched.paymentCardExpiryYear
+                    ? errors.paymentCardExpiryYear
+                    : undefined
+                }
               />
             </div>
           </div>
@@ -186,6 +221,7 @@ const ProjectSetupForm = props => {
         <div className="column">
           <Subtitle>Project Summary</Subtitle>
           <InputGroup
+            readOnly
             fullWidth
             isWidth
             border
@@ -202,6 +238,7 @@ const ProjectSetupForm = props => {
             }
           />
           <InputGroup
+            readOnly
             fullWidth
             isWidth
             border
@@ -267,31 +304,36 @@ ProjectSetupForm.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({
+  mapPropsToValues: ({ initialValues }) => ({
     country: '',
-    address: '',
+    addressLine1: '',
+    addressLine2: '',
     city: '',
     state: '',
     postcode: '',
-    cardName: '',
-    creditCard: '',
-    expiry: '',
-    cvv: '',
-    projectName: '',
+    paymentCardName: '',
+    paymentCardNumber: '',
+    paymentCardExpiryMonth: '',
+    paymentCardExpiryYear: '',
+    paymentCardCvv: '',
+    projectName: initialValues.name || '',
     projectPlan: '',
   }),
   validationSchema: yup.object().shape({
     country: yup.string().required('Country is required!'),
-    address: yup.string().required('Address is required!'),
+    addressLine1: yup.string().required('Address is required!'),
     city: yup.string().required('City is required!'),
     state: yup.string().required('State is required!'),
     postcode: yup.number().required('Post Code is required!'),
-    cardName: yup.string().required('Name is required!'),
-    creditCard: yup.number().required('Credit Card Number is required!'),
-    expiry: yup.string().required('This field is required!'),
-    cvv: yup.number().required('CVV is required!'),
-    projectName: yup.string().required('Project Summary is required!'),
-    projectPlan: yup.string().required('This field is required!'),
+    paymentCardName: yup.string().required('Card Name is required!'),
+    paymentCardNumber: yup.number().required('Card Number is required!'),
+    paymentCardExpiryMonth: yup
+      .number()
+      .required('Card Expiry Month is required!'),
+    paymentCardExpiryYear: yup
+      .number()
+      .required('Card Expiry Year is required!'),
+    paymentCardCvv: yup.number().required('Card CVV is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {

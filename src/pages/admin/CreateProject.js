@@ -26,25 +26,25 @@ const packagesQuery = gql`
   }
 `;
 
-const ProjectSetupMutation = gql`
+const createProjectMutation = gql`
   mutation createProject(
-    $id: ID!
     $name: String!
-    $customDomain: String
-    $subscriptionAmount: Float
+    $slug: String!
+    $customDomain: String!
+    $subscriptionId: String!
+    $billingAddress: Address!
   ) {
     createProject(
       input: {
-        id: $id
         name: $name
+        slug: $slug
         customDomain: $customDomain
-        subscriptionAmount: $subscriptionAmount
+        subscriptionId: $subscriptionId
+        billingAddress: $billingAddress
       }
     ) {
       id
       name
-      customDomain
-      subscriptionAmount
     }
   }
 `;
@@ -57,7 +57,7 @@ const CreateProject = () => {
     query: packagesQuery,
   });
   const { packages } = packagesData.data || {};
-  const [resAdd, executeMutationAdd] = useMutation(ProjectSetupMutation);
+  const [resAdd, executeMutationAdd] = useMutation(createProjectMutation);
   // console.log('CreateProject', subscription);
 
   return (
@@ -93,17 +93,32 @@ const CreateProject = () => {
                   enableReinitialize
                   initialValues={project}
                   subscription={subscription}
-                  onSubmit={data => {
+                  onSubmit={async data => {
+                    const inputData = {
+                      ...project,
+                      billingAddress: {
+                        country: data.country,
+                        addressLine1: data.addressLine1,
+                        addressLine2: data.addressLine2,
+                        city: data.city,
+                        state: data.state,
+                        postcode: data.postcode,
+                      },
+                    };
+                    // console.log('newData', inputData);
+
                     // TODO: send card details to stripe
 
                     // send success data to server
-                    return executeMutationAdd({ ...project, ...data });
-                    // TODO: setActiveStep(3);
+                    const projectCreated = await executeMutationAdd(inputData);
+
+                    setActiveStep(3);
+                    setProject(projectCreated);
                   }}
                 />
               </div>
             )}
-            {activeStep === 3 && <PaymentConfirmation />}
+            {activeStep === 3 && <PaymentConfirmation project={project} />}
             {resAdd.error && (
               <Message type="error">{resAdd.error.message}</Message>
             )}

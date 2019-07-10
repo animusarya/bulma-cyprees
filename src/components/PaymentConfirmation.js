@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import Button from './elements/Button';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   align-self: center;
@@ -11,7 +10,7 @@ const Container = styled.div`
   }
 `;
 
-const PaymentConfirmation = () => (
+const PaymentConfirmation = ({ project }) => (
   <Container>
     <div className="hero-body">
       <div className="has-text-centered">
@@ -21,7 +20,7 @@ const PaymentConfirmation = () => (
         <p className="subtitle is-size-6 has-text-weight-semibold">
           Your new Project has been setup.
         </p>
-        <Button>Start your new project</Button>
+        <Link to={`/admin/project/${project.id}`}>Start your new project</Link>
       </div>
     </div>
   </Container>

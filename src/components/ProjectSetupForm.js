@@ -63,12 +63,14 @@ const ProjectSetupForm = props => {
         type="text"
         label="Custom Domain Name"
         placeholder="www.projectname.co.uk"
-        name="customUrl"
-        value={values.customUrl}
+        name="customDomain"
+        value={values.customDomain}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
-          errors.customUrl && touched.customUrl ? errors.customUrl : undefined
+          errors.customDomain && touched.customDomain
+            ? errors.customDomain
+            : undefined
         }
       />
       {/* later on this field will be replaced with select field */}
@@ -119,13 +121,13 @@ export default withFormik({
   mapPropsToValues: () => ({
     name: '',
     slug: '',
-    customUrl: '',
+    customDomain: '',
     subscriptionId: '',
   }),
   validationSchema: yup.object().shape({
     name: yup.string().required('Name is required!'),
     slug: yup.string().required('Default URL is required!'),
-    customUrl: yup.string().required('Custom URL is required!'),
+    customDomain: yup.string().required('Custom URL is required!'),
     subscriptionId: yup.string().required('Subscription is required!'),
   }),
 
