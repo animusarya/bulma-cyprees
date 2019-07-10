@@ -17,6 +17,7 @@ const ProjectSetupForm = props => {
     handleChange,
     handleBlur,
     handleSubmit,
+    subscription,
   } = props;
 
   const Form = styled.form`
@@ -233,7 +234,7 @@ const ProjectSetupForm = props => {
             </div>
             <div className="column">
               <p className="is-size-3 is-pulled-right has-text-weight-bold">
-                £30
+                £{subscription.price}
               </p>
             </div>
           </div>

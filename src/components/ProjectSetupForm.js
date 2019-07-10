@@ -4,8 +4,20 @@ import { withFormik } from 'formik';
 import * as yup from 'yup';
 import styled from 'styled-components';
 
-import { InputGroup, Button } from './elements';
-import Subtitle from './elements/Subtitle';
+import { InputGroup, Button, SelectGroup } from './elements';
+
+const Form = styled.form`
+  input {
+    border-color: ${propsInput => propsInput.theme.primaryColor};
+    box-shadow: none;
+    :hover {
+      border-color: ${propsInput => propsInput.theme.primaryColor};
+    }
+  }
+  .columns {
+    margin-top: 1.5rem;
+  }
+`;
 
 const ProjectSetupForm = props => {
   const {
@@ -16,20 +28,8 @@ const ProjectSetupForm = props => {
     handleChange,
     handleBlur,
     handleSubmit,
+    packages,
   } = props;
-
-  const Form = styled.form`
-    input {
-      border-color: ${propsInput => propsInput.theme.primaryColor};
-      box-shadow: none;
-      :hover {
-        border-color: ${propsInput => propsInput.theme.primaryColor};
-      }
-    }
-    .columns {
-      margin-top: 1.5rem;
-    }
-  `;
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -51,15 +51,11 @@ const ProjectSetupForm = props => {
         isWidth
         border
         label="Default URL"
-        name="defaultUrl"
-        value={values.defaultUrl}
+        name="slug"
+        value={values.slug}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={
-          errors.defaultUrl && touched.defaultUrl
-            ? errors.defaultUrl
-            : undefined
-        }
+        errors={errors.slug && touched.slug ? errors.slug : undefined}
       />
       <InputGroup
         fullWidth
@@ -76,26 +72,30 @@ const ProjectSetupForm = props => {
         }
       />
       {/* later on this field will be replaced with select field */}
-      <InputGroup
+      <SelectGroup
         fullWidth
         isWidth
         border
         label="Project Plan"
         placeholder="Monthly | £30 | 6Months (£180) | Annually (£360)"
-        name="plan"
-        value={values.plan}
+        name="subscriptionId"
+        value={values.subscriptionId}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={errors.plan && touched.plan ? errors.plan : undefined}
+        errors={
+          errors.subscriptionId && touched.subscriptionId
+            ? errors.subscriptionId
+            : undefined
+        }
+        options={
+          packages
+            ? packages.map(item => ({
+                value: item.id,
+                title: `${item.name} - ${item.durationInMonths} months (£${item.price})`,
+              }))
+            : []
+        }
       />
-      <div className="columns">
-        <div className="column">
-          <Subtitle>Amount due today</Subtitle>
-        </div>
-        <div className="column">
-          <p className="is-size-3 is-pulled-right has-text-weight-bold">£30</p>
-        </div>
-      </div>
       <div className="field">
         <div className="is-pulled-right">
           <Button disabled={isSubmitting}>Continue</Button>
@@ -118,22 +118,21 @@ ProjectSetupForm.propTypes = {
 export default withFormik({
   mapPropsToValues: () => ({
     name: '',
-    defaultUrl: '',
+    slug: '',
     customUrl: '',
-    plan: '',
+    subscriptionId: '',
   }),
   validationSchema: yup.object().shape({
     name: yup.string().required('Name is required!'),
-    defaultUrl: yup.string().required('Default URL is required!'),
+    slug: yup.string().required('Default URL is required!'),
     customUrl: yup.string().required('Custom URL is required!'),
-    plan: yup.string().required('This field is required!'),
+    subscriptionId: yup.string().required('Subscription is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
     // console.log('handle submit', values, props);
-    props.onSubmit(values).finally(() => {
-      setSubmitting(false);
-    });
+    props.onSubmit(values);
+    setSubmitting(false);
   },
   displayName: 'ProjectSetupForm', // helps with React DevTools
 })(ProjectSetupForm);

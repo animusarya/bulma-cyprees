@@ -1,17 +1,64 @@
 import React, { useState } from 'react';
+import { useQuery, useMutation } from 'urql';
+import gql from 'graphql-tag';
+import { find } from 'lodash';
 
 import Seo from '../../components/Seo';
 import Layout from '../../components/Layout';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import CopyRight from '../../components/CopyRight';
-import ProjectSetup from '../../components/ProjectSetup';
-import Payments from '../../components/Payments';
+import PaymentForm from '../../components/PaymentForm';
 import PaymentConfirmation from '../../components/PaymentConfirmation';
 import ProgressBar from '../../components/ProgressBar';
+import MainColumn from '../../components/MainColumn';
+import ProjectSetupForm from '../../components/ProjectSetupForm';
+import { Title, Message, Loading } from '../../components/elements';
+
+const packagesQuery = gql`
+  query packages {
+    packages {
+      id
+      name
+      durationInMonths
+      price
+    }
+  }
+`;
+
+const ProjectSetupMutation = gql`
+  mutation createProject(
+    $id: ID!
+    $name: String!
+    $customDomain: String
+    $subscriptionAmount: Float
+  ) {
+    createProject(
+      input: {
+        id: $id
+        name: $name
+        customDomain: $customDomain
+        subscriptionAmount: $subscriptionAmount
+      }
+    ) {
+      id
+      name
+      customDomain
+      subscriptionAmount
+    }
+  }
+`;
 
 const CreateProject = () => {
-  const [activeStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(1);
+  const [project, setProject] = useState({});
+  const [subscription, setSubscription] = useState({});
+  const [packagesData] = useQuery({
+    query: packagesQuery,
+  });
+  const { packages } = packagesData.data || {};
+  const [resAdd, executeMutationAdd] = useMutation(ProjectSetupMutation);
+  // console.log('CreateProject', subscription);
 
   return (
     <Layout>
@@ -22,18 +69,46 @@ const CreateProject = () => {
           <Sidebar />
         </div>
         <div className="column">
-          <div>
+          <MainColumn>
             <ProgressBar activeStep={activeStep} />
-          </div>
-          <div>
-            <ProjectSetup />
-          </div>
-          <div>
-            <Payments />
-          </div>
-          <div>
-            <PaymentConfirmation />
-          </div>
+            {activeStep === 1 && (
+              <div className="column is-half">
+                <Title>01 Project Setup</Title>
+                <ProjectSetupForm
+                  packages={packages}
+                  onSubmit={data => {
+                    setProject({ ...data });
+                    setSubscription(
+                      find(packages, { id: data.subscriptionId }),
+                    );
+                    setActiveStep(2);
+                  }}
+                />
+              </div>
+            )}
+            {activeStep === 2 && (
+              <div className="column">
+                <Title>02 Payment</Title>
+                <PaymentForm
+                  enableReinitialize
+                  initialValues={project}
+                  subscription={subscription}
+                  onSubmit={data => {
+                    // TODO: send card details to stripe
+
+                    // send success data to server
+                    return executeMutationAdd({ ...project, ...data });
+                    // TODO: setActiveStep(3);
+                  }}
+                />
+              </div>
+            )}
+            {activeStep === 3 && <PaymentConfirmation />}
+            {resAdd.error && (
+              <Message type="error">{resAdd.error.message}</Message>
+            )}
+            {resAdd.fetching ? <Loading /> : null}
+          </MainColumn>
         </div>
       </div>
       <CopyRight />

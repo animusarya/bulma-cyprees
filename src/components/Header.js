@@ -93,7 +93,7 @@ const Header = () => {
             <div className="navbar-menu">
               <div className="navbar-end">
                 <div className="navbar-item">
-                  <div className="name">Robert Smithson</div>
+                  <div className="name">{userData.email}</div>
                   <div className="buttons">
                     <Button className="button">
                       <i className="fas fa-cog"></i>

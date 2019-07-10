@@ -75,7 +75,7 @@ const ProjectInfo = ({ match }) => {
   const [res, executeMutation] = useMutation(updateProjectMutation);
   const user = resultUser.data ? resultUser.data.user : {};
   const project = resultProject.data ? resultProject.data.project : {};
-  console.log('ProjectInfo', project);
+  // console.log('ProjectInfo', project);
 
   return (
     <Layout>

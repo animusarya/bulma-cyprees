@@ -41,15 +41,15 @@ const Progress = styled.div`
 
 const ProgressBar = ({ activeStep }) => (
   <Progress>
-    <div className={`step one ${activeStep === 2 ? 'active' : ''}`}>
+    <div className={`step one ${activeStep === 1 ? 'active' : ''}`}>
       <div className="progress" />
       <span className="has-text-weight-bold">01. Project Setup</span>
     </div>
-    <div className={`step two ${activeStep === 3 ? 'active' : ''}`}>
+    <div className={`step two ${activeStep === 2 ? 'active' : ''}`}>
       <div className="progress" />
       <span className="has-text-weight-bold">02. Payment</span>
     </div>
-    <div className={`step three ${activeStep === 4 ? 'active' : ''}`}>
+    <div className={`step three ${activeStep === 3 ? 'active' : ''}`}>
       <div className="progress" />
       <span className="has-text-weight-bold">03. Confirmation</span>
     </div>

@@ -7,6 +7,7 @@ import CheckBox from './CheckBox';
 import Message from './Message';
 import Loading from './Loading';
 import TextAreaGroup from './TextArea';
+import SelectGroup from './SelectGroup';
 
 export {
   InputGroup,
@@ -18,4 +19,5 @@ export {
   Message,
   Loading,
   TextAreaGroup,
+  SelectGroup,
 };

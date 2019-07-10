@@ -28,7 +28,7 @@ import ProjectInfo from './pages/super-admin/ProjectInfo';
 import Pricing from './pages/super-admin/Pricing';
 
 import DashboardAdmin from './pages/admin/Dashboard';
-import AccountCreated from './pages/admin/AccountCreated';
+// import AccountCreated from './pages/admin/AccountCreated';
 import CreateProject from './pages/admin/CreateProject';
 import ManageProject from './pages/admin/ManageProject';
 import ManageEmail from './pages/admin/ManageEmail';
@@ -121,11 +121,11 @@ class App extends React.Component {
                       path="/admin/dashboard"
                       component={DashboardAdmin}
                     />
-                    <Route
+                    {/* <Route
                       exact
                       path="/admin/create/account"
                       component={AccountCreated}
-                    />
+                    /> */}
                     <Route
                       exact
                       path="/admin/project/create"
