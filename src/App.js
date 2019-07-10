@@ -38,7 +38,7 @@ import Help from './pages/admin/Help';
 import ManageProject from './pages/admin/ManageProject'; // TODO: WHY THIS PAGE IS HERE?
 
 import DashboardClient from './pages/client/Dashboard';
-import Property from './pages/client/DataRoom';
+import Page from './pages/client/Page';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const isLoggedIn = useStoreState(state => state.isLoggedIn.value);
@@ -167,7 +167,7 @@ class App extends React.Component {
                       path="/client/dashboard"
                       component={DashboardClient}
                     />
-                    <Route exact path="/client/property" component={Property} />
+                    <Route exact path="/client/page/:id" component={Page} />
                     <Route exact path="/test" component={Test} />
                     <Route exact path="/test2" component={Test2} />
                     <Route component={Error404} />

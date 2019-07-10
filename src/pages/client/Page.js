@@ -42,7 +42,7 @@ const Container = styled.div`
   }
 `;
 
-const Dataroom = ({ match }) => {
+const Page = ({ match }) => {
   const [result] = useQuery({
     query: clientDashboardQuery,
     variables: { clientId: match.params.clientId },
@@ -163,4 +163,4 @@ const Dataroom = ({ match }) => {
   );
 };
 
-export default Dataroom;
+export default Page;
