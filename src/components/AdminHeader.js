@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import logoBg from '../assets/images/login-bg.jpg';
 import logo from '../assets/images/logo.png';
 import { Title, Button } from './elements';
-
-import Modal from './Modal';
-import useModal from './UseModal';
+import AddPageModal from './AddPageModal';
 
 const Container = styled.div`
   margin-top: 1rem;
@@ -65,7 +63,7 @@ const Hero = styled.section`
 `;
 
 const AdminHeader = ({ project }) => {
-  const { isShowing, toggle } = useModal();
+  const [addPageModal, setAddPageModal] = useState(false);
 
   return (
     <Container>
@@ -107,7 +105,7 @@ const AdminHeader = ({ project }) => {
           <div className="navbar-start">
             <a
               className="navbar-item has-text-white"
-              onClick={() => alert('open modal ')}>
+              onClick={() => setAddPageModal(true)}>
               + Add Page
             </a>
           </div>
@@ -116,7 +114,7 @@ const AdminHeader = ({ project }) => {
       <Hero className="hero">
         <HeroImg src={logoBg} alt="logo-bg" />
         <div className="hero-body has-text-centered">
-          <Button paddingless secondary onClick={toggle}>
+          <Button paddingless secondary onClick={() => {}}>
             <div className="edit-banner">
               <h6 className="title is-6 has-text-weight-semibold">
                 Change banner
@@ -125,10 +123,14 @@ const AdminHeader = ({ project }) => {
                 image size 1600 x 400px
               </h6>
             </div>
-            <Modal isShowing={isShowing} hide={toggle} />
           </Button>
         </div>
       </Hero>
+      <AddPageModal
+        isActive={addPageModal}
+        project={project}
+        handleChange={value => setAddPageModal(value)}
+      />
     </Container>
   );
 };
