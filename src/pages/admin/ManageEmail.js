@@ -18,29 +18,32 @@ const projectQuery = gql`
     project(id: $id) {
       id
       name
-      slug
+      welcomeEmailTemplate {
+        subject
+        body
+      }
+      clientEmailTemplate {
+        subject
+        body
+      }
     }
   }
 `;
 
-// TODO: Fix this when real mutataions available
-
 const clientWelcomeEmailMutation = gql`
-  mutation removeProjectClient($id: ID!, $subject: String!, $message: String!) {
-    removeProjectClient(id: $id, subject: $subject, message: $message) {
-      id
+  mutation welcomeEmailTemplate($subject: String!, $body: String!) {
+    welcomeEmailTemplate(subject: $subject, body: $body) {
       subject
-      message
+      body
     }
   }
 `;
 
 const clientNotificationEmailMutation = gql`
-  mutation removeProjectClient($id: ID!, $subject: String!, $message: String!) {
-    removeProjectClient(id: $id, subject: $subject, message: $message) {
-      id
+  mutation clientEmailTemplate($subject: String!, $body: String!) {
+    clientEmailTemplate(subject: $subject, body: $body) {
       subject
-      message
+      body
     }
   }
 `;
@@ -59,7 +62,7 @@ const ManageEmail = ({ match }) => {
   const [resNotification, executeMutationNotification] = useMutation(
     clientNotificationEmailMutation,
   );
-  console.log('resultProject', project);
+  // console.log('resultProject', project);
 
   return (
     <Layout>

@@ -35,7 +35,7 @@ import ProjectPages from './pages/admin/ProjectPages';
 import ManageClients from './pages/admin/ManageClients';
 import ManagePage from './pages/admin/ManagePage';
 import Help from './pages/admin/Help';
-import ManageProject from './pages/admin/ManageProject'; // TODO: WHY THIS PAGE IS HERE?
+import ProjectUpdate from './pages/admin/ProjectUpdate'; // TODO: WHY THIS PAGE IS HERE?
 
 import DashboardClient from './pages/client/Dashboard';
 import Page from './pages/client/Page';
@@ -155,6 +155,11 @@ class App extends React.Component {
                       exact
                       path="/admin/project/:id/clients"
                       component={ManageClients}
+                    />
+                    <Route
+                      exact
+                      path="/admin/project/:id/update"
+                      component={ProjectUpdate}
                     />
                     {/* <Route
                       exact

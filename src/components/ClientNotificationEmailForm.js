@@ -44,12 +44,12 @@ const ClientNotificationEmailForm = props => {
         border
         isHorizontal
         label="Email message"
-        name="message"
+        name="body"
         className="textarea"
-        value={values.message}
+        value={values.body}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={errors.message && touched.message ? errors.message : undefined}
+        errors={errors.body && touched.body ? errors.body : undefined}
       />
       <div className="button-field">
         <div className="">
@@ -73,11 +73,11 @@ ClientNotificationEmailForm.propTypes = {
 export default withFormik({
   mapPropsToValues: () => ({
     subject: '',
-    message: '',
+    body: '',
   }),
   validationSchema: yup.object().shape({
     subject: yup.string().required('Subject is required!'),
-    message: yup.string().required('Message is required!'),
+    body: yup.string().required('Message is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
