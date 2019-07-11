@@ -7,7 +7,6 @@ import Sidebar from '../../components/Sidebar';
 import { Heading, Subtitle } from '../../components/elements';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
-import AdminHeader from '../../components/AdminHeader';
 import video from '../../assets/images/videoplayback.mp4';
 
 const Width = '340px';
@@ -22,7 +21,6 @@ const Help = () => {
           <Sidebar />
         </div>
         <div className="column">
-          <AdminHeader />
           <MainColumn>
             <Heading>Help</Heading>
             <div className="columns">

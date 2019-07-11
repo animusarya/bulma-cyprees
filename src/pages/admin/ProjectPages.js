@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useQuery } from 'urql';
+import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -10,9 +12,30 @@ import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
 // import ProjectsProperty from '../../components/ProjectsProperty';
 
+const projectQuery = gql`
+  query project($id: ID!) {
+    project(id: $id) {
+      id
+      name
+      slug
+    }
+  }
+`;
+
 const Container = styled.div``;
 
-const ProjectPages = () => {
+const ProjectPages = ({ match }) => {
+  // fetch project data from api
+  const [resultProject] = useQuery({
+    query: projectQuery,
+    variables: { id: match.params.id },
+  });
+  const project =
+    resultProject.data && resultProject.data.project
+      ? resultProject.data.project
+      : {};
+  console.log('resultProject', project);
+
   return (
     <Layout>
       <Seo title="Dashboard Admin" description="Page description" />
@@ -22,7 +45,7 @@ const ProjectPages = () => {
           <Sidebar />
         </div>
         <div className="column">
-          <AdminHeader />
+          <AdminHeader project={project} />
           <MainColumn>
             <p>DESIGN MISSING, NEED LIST OF PAGES</p>
             <p>USER TABLES</p>

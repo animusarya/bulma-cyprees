@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMutation } from 'urql';
+import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
@@ -12,6 +12,16 @@ import CopyRight from '../../components/CopyRight';
 import ClientWelcomeEmailForm from '../../components/ClientWelcomeEmailForm';
 import ClientNotificationEmailForm from '../../components/ClientNotificationEmailForm';
 import AdminHeader from '../../components/AdminHeader';
+
+const projectQuery = gql`
+  query project($id: ID!) {
+    project(id: $id) {
+      id
+      name
+      slug
+    }
+  }
+`;
 
 // TODO: Fix this when real mutataions available
 
@@ -35,11 +45,22 @@ const clientNotificationEmailMutation = gql`
   }
 `;
 
-const ManageEmail = () => {
+const ManageEmail = ({ match }) => {
+  // fetch project data from api
+  const [resultProject] = useQuery({
+    query: projectQuery,
+    variables: { id: match.params.id },
+  });
+  const project =
+    resultProject.data && resultProject.data.project
+      ? resultProject.data.project
+      : {};
   const [res, executeMutation] = useMutation(clientWelcomeEmailMutation);
   const [resNotification, executeMutationNotification] = useMutation(
     clientNotificationEmailMutation,
   );
+  console.log('resultProject', project);
+
   return (
     <Layout>
       <Seo title="Dashboard Super Admin" description="Page description" />
@@ -49,7 +70,7 @@ const ManageEmail = () => {
           <Sidebar />
         </div>
         <div className="column">
-          <AdminHeader />
+          <AdminHeader project={project} />
           <MainColumn paddingtop="1rem">
             <Heading>Manage Outgoing Email Content</Heading>
             <Title>Client Welcome Email (For Unregistered clients)</Title>

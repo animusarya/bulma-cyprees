@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useQuery } from 'urql';
 import gql from 'graphql-tag';
+import { useStoreActions } from 'easy-peasy';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -47,7 +48,11 @@ const Dashboard = () => {
     query: projectsQuery,
   });
   const projects = (resultProjects.data && resultProjects.data.projects) || [];
-  console.log('resultProjects', projects);
+  const updateProject = useStoreActions(
+    actions => actions.active.updateProject,
+  );
+  updateProject(null);
+  // console.log('resultProjects', projects);
 
   return (
     <Layout>

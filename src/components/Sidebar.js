@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
+import { isNull } from 'lodash';
 
 const Container = styled.aside`
   background-color: #f4f4f6;
@@ -22,7 +23,7 @@ const Icon = styled.i`
 
 const Sidebar = () => {
   const userData = useStoreState(state => state.user.data);
-  const isProjectOpen = false;
+  const activeProject = useStoreState(state => state.active.project);
   // const [isToggledOn, setToggle] = useState(false);
   // const toggle = () => setToggle(!isToggledOn);
 
@@ -53,21 +54,21 @@ const Sidebar = () => {
               <Icon className="fas fa-folder-open"></Icon>Manage Projects
             </Link>
           </li>
-          {isProjectOpen ? (
+          {!isNull(activeProject) ? (
             <React.Fragment>
-              <Link to="/admin/dashboard">
+              <Link to={`/admin/project/${activeProject}`}>
                 <Icon className="fas fa-th-large"></Icon>Dashboard
               </Link>
-              <Link to="/admin/project/{id}">
+              <Link to={`/admin/project/${activeProject}/pages`}>
                 <Icon className="far fa-file"></Icon>Manage Pages
               </Link>
-              <Link to="/admin/manage/emails">
+              <Link to={`/admin/project/${activeProject}/emails`}>
                 <Icon className="far fa-envelope"></Icon>Manage Emails
               </Link>
-              <Link to="/admin/manage/clients">
+              <Link to={`/admin/project/${activeProject}/clients`}>
                 <Icon className="fas fa-user-friends"></Icon>Manage Clients
               </Link>
-              <Link to="/">
+              <Link to={`/admin/project/${activeProject}/settings`}>
                 <Icon className="fas fa-cogs"></Icon>Project Settings
               </Link>
               <Link to="/admin/help">

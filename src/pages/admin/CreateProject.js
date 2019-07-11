@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
 import { find } from 'lodash';
+import { useStoreActions } from 'easy-peasy';
 
 import Seo from '../../components/Seo';
 import Layout from '../../components/Layout';
@@ -58,6 +59,10 @@ const CreateProject = () => {
   });
   const { packages } = packagesData.data || {};
   const [resAdd, executeMutationAdd] = useMutation(createProjectMutation);
+  const updateProject = useStoreActions(
+    actions => actions.active.updateProject,
+  );
+  updateProject(null);
   // console.log('CreateProject', subscription);
 
   return (

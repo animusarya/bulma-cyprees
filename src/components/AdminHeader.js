@@ -64,7 +64,7 @@ const Hero = styled.section`
   }
 `;
 
-const ClientHeader = () => {
+const AdminHeader = ({ project }) => {
   const { isShowing, toggle } = useModal();
 
   return (
@@ -81,7 +81,7 @@ const ClientHeader = () => {
           </div>
           <div>
             <div className="has-text-right">
-              <Title marginbottom="0px">[ Project Name here ]</Title>
+              <Title marginbottom="0px">{project.name}</Title>
             </div>
           </div>
         </div>
@@ -105,15 +105,11 @@ const ClientHeader = () => {
         </div>
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
-            <Link to="/admin/add/files" className="navbar-item has-text-white">
-              Property
-            </Link>
-            <Link to="/" className="navbar-item has-text-white">
-              Property Details
-            </Link>
-            <Link to="/" className="navbar-item has-text-white">
+            <a
+              className="navbar-item has-text-white"
+              onClick={() => alert('open modal ')}>
               + Add Page
-            </Link>
+            </a>
           </div>
         </div>
       </NavbarMenu>
@@ -137,4 +133,4 @@ const ClientHeader = () => {
   );
 };
 
-export default ClientHeader;
+export default AdminHeader;

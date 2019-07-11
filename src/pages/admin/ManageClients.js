@@ -20,6 +20,24 @@ import {
 } from '../../components/elements';
 import ManageAdminClientForm from '../../components/ManageAdminClientForm';
 
+const projectQuery = gql`
+  query project($id: ID!) {
+    project(id: $id) {
+      id
+      name
+      slug
+      customDomain
+      clients {
+        id
+        email
+        status
+        hasAccess
+        notifyStatus
+      }
+    }
+  }
+`;
+
 // TODO: fix these queries when available with API
 
 const addClientMutation = gql`
@@ -45,16 +63,6 @@ const noftifyMutation = gql`
     notify(email: $email) {
       id
       email
-    }
-  }
-`;
-
-const Query = gql`
-  {
-    clients {
-      id
-      name
-      status
     }
   }
 `;
@@ -119,18 +127,27 @@ const Container = styled.div`
   }
 `;
 
-const ManageClients = () => {
+const ManageClients = ({ match }) => {
+  // fetch project data from api
+  const [resultProject, executeQuery] = useQuery({
+    query: projectQuery,
+    variables: { id: match.params.id },
+  });
+  // console.log('resultProject', project);
   const [res, executeMutation] = useMutation(addClientMutation);
   const [resCsv, executeMutationCsv] = useMutation(importCsvMutation);
   const [resNotify, executeMutationNotify] = useMutation(noftifyMutation);
-  const [result, executeQuery] = useQuery({
-    query: Query,
-  });
   const [resResendEmail, executeMutationResendEmail] = useMutation(
     resendEmailMutation,
   );
   const [resCheck, executeMutationCheck] = useMutation(checkMutation);
   const [resTrash, executeMutationTrash] = useMutation(trashMutation);
+
+  const project =
+    resultProject.data && resultProject.data.project
+      ? resultProject.data.project
+      : {};
+  console.log('resultProject clients', project);
 
   return (
     <Layout>
@@ -141,7 +158,7 @@ const ManageClients = () => {
           <Sidebar />
         </div>
         <div className="column">
-          <AdminHeader />
+          <AdminHeader project={project} />
           <MainColumn>
             <Title>Clients</Title>
             <Subtitle className="subtitle">Add Client</Subtitle>
@@ -209,7 +226,7 @@ const ManageClients = () => {
                 (Last update 12 Feb 2019)
               </span>
             </Subtitle>
-            {result.data && result.data.clients.length > 0 && (
+            {project.clients && project.clients.length > 0 && (
               <table className="table is-fullwidth is-hoverable">
                 <thead>
                   <tr>
@@ -223,7 +240,7 @@ const ManageClients = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {result.data.clients.map(item => (
+                  {project.clients.map(item => (
                     <tr key={item.id}>
                       <td>Janathan</td>
                       <td>j@designcity.co.uk</td>

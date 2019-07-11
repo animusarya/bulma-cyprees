@@ -1,3 +1,5 @@
+/* eslint no-param-reassign: 0 */
+
 import { action, selector } from 'easy-peasy';
 
 const schema = {
@@ -11,6 +13,12 @@ const schema = {
     data: {},
     update: action((state, payload) => {
       state.data = payload;
+    }),
+  },
+  active: {
+    project: null,
+    updateProject: action((state, payload) => {
+      state.project = payload;
     }),
   },
   todos: {

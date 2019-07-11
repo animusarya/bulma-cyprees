@@ -62,18 +62,19 @@ const Dashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {res.data.users.map(user => (
-                    <tr key={user.id}>
-                      <td>
-                        <Link to={`/super-admin/client/${user.id}/projects`}>
-                          {user.email}
-                        </Link>
-                      </td>
-                      <td>{user.profile && user.profile.fullName}</td>
-                      <td>{user.profile && user.profile.company}</td>
-                      <td>{user.profile && user.profile.telephone}</td>
-                    </tr>
-                  ))}
+                  {res.data.users &&
+                    res.data.users.map(user => (
+                      <tr key={user.id}>
+                        <td>
+                          <Link to={`/super-admin/client/${user.id}/projects`}>
+                            {user.email}
+                          </Link>
+                        </td>
+                        <td>{user.profile && user.profile.fullName}</td>
+                        <td>{user.profile && user.profile.company}</td>
+                        <td>{user.profile && user.profile.telephone}</td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             )}

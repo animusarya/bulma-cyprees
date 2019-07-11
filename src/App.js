@@ -143,7 +143,7 @@ class App extends React.Component {
                     />
                     <Route
                       exact
-                      path="/admin/project/:id/pages/:id"
+                      path="/admin/project/:id/pages/:pageId"
                       component={ManagePage}
                     />
                     <Route

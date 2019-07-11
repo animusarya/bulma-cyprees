@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useQuery } from 'urql';
+import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -11,9 +13,30 @@ import AdminHeader from '../../components/AdminHeader';
 import PageFiles from '../../components/PageFiles';
 import PageContent from '../../components/PageContent';
 
+const projectQuery = gql`
+  query project($id: ID!) {
+    project(id: $id) {
+      id
+      name
+      slug
+    }
+  }
+`;
+
 const Container = styled.div``;
 
-const ManagePage = () => {
+const ManagePage = ({ match }) => {
+  // fetch project data from api
+  const [resultProject] = useQuery({
+    query: projectQuery,
+    variables: { id: match.params.id },
+  });
+  const project =
+    resultProject.data && resultProject.data.project
+      ? resultProject.data.project
+      : {};
+  console.log('resultProject', project);
+
   return (
     <Layout>
       <Seo title="Dashboard Admin" description="Page description" />
@@ -23,7 +46,7 @@ const ManagePage = () => {
           <Sidebar />
         </div>
         <div className="column">
-          <AdminHeader />
+          <AdminHeader project={project} />
           <MainColumn>
             <h1>IF FILES PAGE</h1>
             <PageFiles />
