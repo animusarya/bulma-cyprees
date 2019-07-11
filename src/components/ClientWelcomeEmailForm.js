@@ -72,9 +72,13 @@ ClientWelcomeEmailForm.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({
-    subject: '',
-    body: '',
+  mapPropsToValues: ({ initialValues }) => ({
+    subject: initialValues.welcomeEmailTemplate
+      ? initialValues.welcomeEmailTemplate.subject
+      : '',
+    body: initialValues.welcomeEmailTemplate
+      ? initialValues.welcomeEmailTemplate.body
+      : '',
   }),
   validationSchema: yup.object().shape({
     subject: yup.string().required('Subject is required!'),

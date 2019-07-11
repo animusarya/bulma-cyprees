@@ -18,6 +18,7 @@ const projectQuery = gql`
     project(id: $id) {
       id
       name
+      slug
       welcomeEmailTemplate {
         subject
         body
@@ -30,20 +31,11 @@ const projectQuery = gql`
   }
 `;
 
-const clientWelcomeEmailMutation = gql`
-  mutation welcomeEmailTemplate($subject: String!, $body: String!) {
-    welcomeEmailTemplate(subject: $subject, body: $body) {
-      subject
-      body
-    }
-  }
-`;
-
-const clientNotificationEmailMutation = gql`
-  mutation clientEmailTemplate($subject: String!, $body: String!) {
-    clientEmailTemplate(subject: $subject, body: $body) {
-      subject
-      body
+const updateProjectMutation = gql`
+  mutation updateProject($id: ID!, $input: ProjectUpdateInput!) {
+    updateProject(id: $id, input: $input) {
+      id
+      name
     }
   }
 `;
@@ -58,10 +50,8 @@ const ManageEmail = ({ match }) => {
     resultProject.data && resultProject.data.project
       ? resultProject.data.project
       : {};
-  const [res, executeMutation] = useMutation(clientWelcomeEmailMutation);
-  const [resNotification, executeMutationNotification] = useMutation(
-    clientNotificationEmailMutation,
-  );
+
+  const [res, executeMutation] = useMutation(updateProjectMutation);
   // console.log('resultProject', project);
 
   return (
@@ -79,22 +69,33 @@ const ManageEmail = ({ match }) => {
             <Title>Client Welcome Email (For Unregistered clients)</Title>
             <div>
               <ClientWelcomeEmailForm
+                enableReinitialize
+                initialValues={project}
                 onSubmit={async data => {
-                  await executeMutation(data);
+                  await executeMutation({
+                    id: project.id,
+                    input: {
+                      welcomeEmailTemplate: data,
+                    },
+                  });
                 }}
               />
             </div>
             <div>
               <Title>Client Notification Email</Title>
               <ClientNotificationEmailForm
+                enableReinitialize
+                initialValues={project}
                 onSubmit={async data => {
-                  await executeMutationNotification(data);
+                  await executeMutation({
+                    id: project.id,
+                    input: {
+                      clientEmailTemplate: data,
+                    },
+                  });
                 }}
               />
               {res.error && <Message type="error">{res.error.message}</Message>}
-              {resNotification.error && (
-                <Message type="error">{resNotification.error.message}</Message>
-              )}
             </div>
           </MainColumn>
         </div>
