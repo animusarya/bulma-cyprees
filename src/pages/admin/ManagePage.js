@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useQuery } from 'urql';
 import gql from 'graphql-tag';
 
@@ -23,8 +22,6 @@ const projectQuery = gql`
   }
 `;
 
-const Container = styled.div``;
-
 const ManagePage = ({ match }) => {
   // fetch project data from api
   const [resultProject] = useQuery({
@@ -35,13 +32,13 @@ const ManagePage = ({ match }) => {
     resultProject.data && resultProject.data.project
       ? resultProject.data.project
       : {};
-  console.log('resultProject', project);
+  // console.log('resultProject', project);
 
   return (
     <Layout>
       <Seo title="Dashboard Admin" description="Page description" />
       <Header />
-      <Container className="columns">
+      <div className="columns">
         <div className="column is-one-fifth">
           <Sidebar />
         </div>
@@ -54,7 +51,7 @@ const ManagePage = ({ match }) => {
             <PageContent />
           </MainColumn>
         </div>
-      </Container>
+      </div>
       <CopyRight />
     </Layout>
   );

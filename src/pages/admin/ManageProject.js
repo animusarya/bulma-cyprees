@@ -13,18 +13,20 @@ import CopyRight from '../../components/CopyRight';
 import MainColumn from '../../components/MainColumn';
 import { Heading, Button, Message, Loading } from '../../components/elements';
 
-const clientProjectsQuery = gql`
-  query projects($clientId: ID!) {
-    projects(clientId: $clientId) {
+const projectPageQuery = gql`
+  query page($id: ID!) {
+    page(id: $id) {
       id
       name
-      subscriptionAmount
-      subscriptionDurationInMonths
-      subscriptionStartsAt
-      subscriptionEndsAt
+      slug
+      type
+      status
+      createdAt
     }
   }
 `;
+
+// TODO: Fix these tomorrow
 
 const removeProjectClientMutation = gql`
   mutation removeProjectClient($id: ID!, $clientId: ID!) {
@@ -51,7 +53,7 @@ const Container = styled.div`
 
 const ManageProject = ({ match }) => {
   const [result] = useQuery({
-    query: clientProjectsQuery,
+    query: projectPageQuery,
     variables: { clientId: match.params.id },
   });
   const [resRemove, executeMutationRemove] = useMutation(
@@ -76,51 +78,33 @@ const ManageProject = ({ match }) => {
               <Message type="error">{result.error.message}</Message>
             )}
             {result.fetching && <Loading />}
-            {result.data && result.data.projects && (
+            {result.data && result.data.page && (
               <table className="table is-fullwidth is-hoverable">
                 <thead>
                   <tr>
-                    <th>Projects</th>
-                    <th className="has-text-centered">Plan</th>
-                    <th className="has-text-centered">Duration</th>
-                    <th className="has-text-centered">Start</th>
-                    <th className="has-text-centered">Expires</th>
-                    <th>Manage</th>
-                    <th>Renew</th>
+                    <th>Name</th>
+                    <th className="has-text-centered">Type</th>
+                    <th className="has-text-centered">Status</th>
+                    <th className="has-text-centered">Created At</th>
+                    <th>edit</th>
                     <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {result.data.projects.map(project => (
-                    <tr key={project.id}>
+                  {result.data.page.map(pageData => (
+                    <tr key={pageData.id}>
                       <td className="has-text-weight-semibold">
-                        {project.name}
+                        {pageData.name}
                       </td>
                       <td className="has-text-centered">
                         <i className="fas fa-pound-sign pound-icon"></i>
-                        {project.subscriptionAmount}
+                        {pageData.type}
                       </td>
+                      <td className="has-text-centered">{pageData.status}</td>
                       <td className="has-text-centered">
-                        {project.subscriptionDurationInMonths}
-                      </td>
-                      <td className="has-text-centered">
-                        {dayjs(project.subscriptionStartsAt).isValid()
-                          ? dayjs(project.subscriptionStartsAt).format(
-                              'DD-MM-YYYY',
-                            )
+                        {dayjs(pageData.createdAt).isValid()
+                          ? dayjs(pageData.createdAt).format('DD-MM-YYYY')
                           : null}
-                      </td>
-                      <td className="has-text-centered">
-                        {dayjs(project.subscriptionEndsAt).isValid()
-                          ? dayjs(project.subscriptionEndsAt).format(
-                              'DD-MM-YYYY',
-                            )
-                          : '-'}
-                      </td>
-                      <td>
-                        <Button secondary paddingless>
-                          MANAGE
-                        </Button>
                       </td>
                       <td>
                         <Button
@@ -134,11 +118,11 @@ const ManageProject = ({ match }) => {
                               },
                             ).then(async value => {
                               if (value) {
-                                await executeMutationRenew({ id: project.id });
+                                await executeMutationRenew({ id: pageData.id });
                               }
                             });
                           }}>
-                          RENEW
+                          EDIT
                         </Button>
                       </td>
                       <td>
@@ -151,8 +135,8 @@ const ManageProject = ({ match }) => {
                             }).then(async value => {
                               if (value) {
                                 await executeMutationRemove({
-                                  id: project.id,
-                                  clientId: project.clientId,
+                                  id: pageData.id,
+                                  clientId: pageData.clientId,
                                 });
                               }
                             });
