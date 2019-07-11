@@ -11,13 +11,7 @@ import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
-import {
-  Title,
-  Subtitle,
-  Button,
-  Message,
-  Loading,
-} from '../../components/elements';
+import { Subtitle, Button, Message, Loading } from '../../components/elements';
 import ManageAdminClientForm from '../../components/ManageAdminClientForm';
 
 const projectQuery = gql`
@@ -26,7 +20,7 @@ const projectQuery = gql`
       id
       name
       slug
-      customDomain
+      updatedAt
       clients {
         id
         email
@@ -41,10 +35,9 @@ const projectQuery = gql`
 // TODO: fix these queries when available with API
 
 const addClientMutation = gql`
-  mutation addClient($email: String!) {
-    addClient(email: $email) {
+  mutation addProjectClient($id: ID!, $input: ProjectClientInput!) {
+    addProjectClient(id: $id, input: $input) {
       id
-      email
     }
   }
 `;
@@ -83,9 +76,9 @@ const checkMutation = gql`
   }
 `;
 
-const trashMutation = gql`
-  mutation trashMutation($email: String!) {
-    trashMutation(email: $email) {
+const removeClientMutation = gql`
+  mutation removeProjectClient($id: ID!, $clientId: ID!) {
+    removeProjectClient(id: $id, clientId: $clientId) {
       success
     }
   }
@@ -134,24 +127,26 @@ const ManageClients = ({ match }) => {
     variables: { id: match.params.id },
   });
   // console.log('resultProject', project);
-  const [res, executeMutation] = useMutation(addClientMutation);
+  const [res, executeAddClientMutation] = useMutation(addClientMutation);
   const [resCsv, executeMutationCsv] = useMutation(importCsvMutation);
   const [resNotify, executeMutationNotify] = useMutation(noftifyMutation);
   const [resResendEmail, executeMutationResendEmail] = useMutation(
     resendEmailMutation,
   );
   const [resCheck, executeMutationCheck] = useMutation(checkMutation);
-  const [resTrash, executeMutationTrash] = useMutation(trashMutation);
+  const [resTrash, executeRemoveClientMutation] = useMutation(
+    removeClientMutation,
+  );
 
   const project =
     resultProject.data && resultProject.data.project
       ? resultProject.data.project
       : {};
-  console.log('resultProject clients', project);
+  // console.log('resultProject clients', project);
 
   return (
     <Layout>
-      <Seo title="Dashboard Admin" description="Page description" />
+      <Seo title="Project Clients" description="Page description" />
       <Header />
       <Container className="columns">
         <div className="column is-one-fifth">
@@ -160,10 +155,13 @@ const ManageClients = ({ match }) => {
         <div className="column">
           <AdminHeader project={project} />
           <MainColumn>
-            <Title>Clients</Title>
             <Subtitle className="subtitle">Add Client</Subtitle>
             <div className="field is-grouped">
-              <ManageAdminClientForm onSubmit={data => executeMutation(data)} />
+              <ManageAdminClientForm
+                onSubmit={data =>
+                  executeAddClientMutation({ id: project.id, input: data })
+                }
+              />
               {res.error && <Message type="error">{res.error.message}</Message>}
               {resCsv.error && (
                 <Message type="error">{resCsv.error.message}</Message>
@@ -192,38 +190,19 @@ const ManageClients = ({ match }) => {
                 <Button
                   secondary
                   paddingless
-                  onClick={() => {
-                    swal('Are you want to import details?', {
-                      buttons: ['Cancel', 'Confirm'],
-                    }).then(async value => {
-                      if (value) {
-                        await executeMutationCsv();
-                      }
-                    });
+                  onClick={async () => {
+                    // TODO: show file picker then send data
+                    alert('Show file picker');
+                    await executeMutationCsv();
                   }}>
                   Import CSV
                 </Button>
               </p>
             </div>
-            <div className="notify-title">
-              <Subtitle>Clients Tools</Subtitle>
-              <Button
-                onClick={() => {
-                  swal('Are you sure to notify all clients?', {
-                    buttons: ['Cancel', 'Confirm'],
-                  }).then(async value => {
-                    if (value) {
-                      await executeMutationNotify();
-                    }
-                  });
-                }}>
-                Notify All Clients
-              </Button>
-            </div>
             <Subtitle>
               Manage Clients{' '}
               <span className="has-text-weight-normal">
-                (Last update 12 Feb 2019)
+                (Last update {project.updatedAt})
               </span>
             </Subtitle>
             {project.clients && project.clients.length > 0 && (
@@ -242,9 +221,9 @@ const ManageClients = ({ match }) => {
                 <tbody>
                   {project.clients.map(item => (
                     <tr key={item.id}>
-                      <td>Janathan</td>
-                      <td>j@designcity.co.uk</td>
-                      <td>Pending</td>
+                      <td>-</td>
+                      <td>{item.email}</td>
+                      <td>{item.status}</td>
                       <td className="has-text-centered">
                         <Button
                           secondary
@@ -281,17 +260,20 @@ const ManageClients = ({ match }) => {
                           <i className="far fa-check-square"></i>
                         </Button>
                       </td>
-                      <td className="has-text-centered">Opted Out</td>
+                      <td className="has-text-centered">{item.notifyStatus}</td>
                       <td className="has-text-centered">
                         <Button
                           secondary
                           paddingless
                           onClick={() => {
-                            swal('Are you confirm to delete this item?', {
+                            swal('Are you confirm to remove this client?', {
                               buttons: ['Cancel', 'Confirm'],
                             }).then(async value => {
                               if (value) {
-                                await executeMutationTrash({ id: item.id });
+                                await executeRemoveClientMutation({
+                                  id: project.id,
+                                  clientId: item.id,
+                                });
                                 executeQuery({ requestPolicy: 'network-only' });
                               }
                             });
@@ -304,6 +286,21 @@ const ManageClients = ({ match }) => {
                 </tbody>
               </table>
             )}
+            <div className="notify-title">
+              <Subtitle>Clients Tools</Subtitle>
+              <Button
+                onClick={() => {
+                  swal('Are you sure to notify all clients?', {
+                    buttons: ['Cancel', 'Confirm'],
+                  }).then(async value => {
+                    if (value) {
+                      await executeMutationNotify();
+                    }
+                  });
+                }}>
+                Notify All Clients
+              </Button>
+            </div>
           </MainColumn>
         </div>
       </Container>

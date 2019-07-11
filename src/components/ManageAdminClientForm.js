@@ -41,7 +41,10 @@ const ManageAdminClientForm = props => {
       </div>
       <div className="field">
         <div className="control">
-          <Buttonstyled type="submit" className="button" disabled={isSubmitting}>
+          <Buttonstyled
+            type="submit"
+            className="button"
+            disabled={isSubmitting}>
             <i className="fas fa-plus"></i>
           </Buttonstyled>
         </div>
@@ -72,8 +75,9 @@ export default withFormik({
   }),
   handleSubmit: (values, { setSubmitting, props }) => {
     // console.log('handle submit', values, props);
-    props.addContact(values);
-    setSubmitting(false);
+    props.onSubmit(values).finally(() => {
+      setSubmitting(false);
+    });
   },
   displayName: 'ManageAdminClientForm', // helps with React DevTools
 })(ManageAdminClientForm);

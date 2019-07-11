@@ -29,6 +29,7 @@ const SelectGroup = ({
   isWidth,
   isHorizontal,
   options,
+  border,
   ...otherProps
 }) => (
   <Group
