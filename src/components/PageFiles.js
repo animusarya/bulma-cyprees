@@ -117,7 +117,10 @@ const PageFiles = ({ project, page, history }) => {
       {resRemove.error && (
         <Message type="error">{resRemove.error.message}</Message>
       )}
-      {resFileUpload.fetching || resDel.fetching || resRemove.fetching ? (
+      {resultFile.fetching ||
+      resFileUpload.fetching ||
+      resDel.fetching ||
+      resRemove.fetching ? (
         <Loading />
       ) : null}
       {files.length > 0 && (

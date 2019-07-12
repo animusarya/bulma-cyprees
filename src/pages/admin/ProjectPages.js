@@ -3,6 +3,7 @@ import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 import dayjs from 'dayjs';
+import { Link } from 'react-router-dom';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -12,23 +13,47 @@ import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
 import { Heading, Button, Message, Loading } from '../../components/elements';
-// import ProjectsProperty from '../../components/ProjectsProperty';
 
-const pageQuery = gql`
-  query page($id: ID!) {
-    page(id: $id) {
+const projectQuery = gql`
+  query project($id: ID!) {
+    project(id: $id) {
       id
       name
       slug
+    }
+  }
+`;
+
+const pagesQuery = gql`
+  query pages($projectId: ID!) {
+    pages(projectId: $projectId) {
+      id
+      name
+      slug
+      type
       status
+      createdAt
     }
   }
 `;
 
 const removeMutation = gql`
-  mutation removeProject($id: ID!, $clientId: ID!) {
-    removeProject(id: $id, clientId: $clientId) {
+  mutation removePage($id: ID!) {
+    removePage(id: $id) {
       success
+    }
+  }
+`;
+
+const updatePageMutation = gql`
+  mutation updatePage($id: ID!, $input: PageInput!) {
+    updatePage(id: $id, input: $input) {
+      id
+      name
+      slug
+      type
+      status
+      createdAt
     }
   }
 `;
@@ -36,16 +61,22 @@ const removeMutation = gql`
 const ProjectPages = ({ match }) => {
   // fetch project data from api
   const [resultProject] = useQuery({
-    query: pageQuery,
+    query: projectQuery,
     variables: { id: match.params.id },
   });
+  const [resultPages, executeQuery] = useQuery({
+    query: pagesQuery,
+    variables: { projectId: match.params.id },
+  });
+  const [resRemove, executeMutationRemove] = useMutation(removeMutation);
+
   const project =
     resultProject.data && resultProject.data.project
       ? resultProject.data.project
       : {};
-  // console.log('resultProject', project);
-
-  const [resRemove, executeMutationRemove] = useMutation(removeMutation);
+  const pages =
+    resultPages.data && resultPages.data.pages ? resultPages.data.pages : {};
+  console.log('pages', pages);
 
   return (
     <Layout>
@@ -62,44 +93,38 @@ const ProjectPages = ({ match }) => {
             {resultProject.error && (
               <Message type="error">{resultProject.error.message}</Message>
             )}
-            {resultProject.fetching && <Loading />}
-            {resultProject.data && resultProject.data.projects && (
+            {resultPages.error && (
+              <Message type="error">{resultPages.error.message}</Message>
+            )}
+            {(resultPages.fetching || resultProject.fetching) && <Loading />}
+            {pages.length > 0 && (
               <table className="table is-fullwidth is-hoverable">
                 <thead>
                   <tr>
-                    <th>Projects</th>
-                    <th className="has-text-centered">Plan</th>
-                    <th className="has-text-centered">Duration</th>
-                    <th>Manage</th>
+                    <th>Name</th>
+                    <th className="has-text-centered">Type</th>
+                    <th className="has-text-centered">Status</th>
+                    <th className="has-text-centered">Created At</th>
+                    <th>edit</th>
                     <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {resultProject.data.projects.map(projectData => (
-                    <tr key={projectData.id}>
-                      <td className="has-text-weight-semibold">
-                        {projectData.name}
-                      </td>
+                  {pages.map(page => (
+                    <tr key={page.id}>
+                      <td className="has-text-weight-semibold">{page.name}</td>
+                      <td className="has-text-centered">{page.type}</td>
+                      <td className="has-text-centered">{page.status}</td>
                       <td className="has-text-centered">
-                        <i className="fas fa-pound-sign pound-icon"></i>
-                        {projectData.subscriptionAmount}
-                      </td>
-                      <td className="has-text-centered">
-                        {projectData.subscriptionDurationInMonths}
-                      </td>
-                      <td className="has-text-centered">
-                        {dayjs(projectData.subscriptionStartsAt).isValid()
-                          ? dayjs(projectData.subscriptionStartsAt).format(
-                            'DD-MM-YYYY',
-                          )
+                        {dayjs(page.createdAt).isValid()
+                          ? dayjs(page.createdAt).format('DD-MM-YYYY')
                           : null}
                       </td>
-                      <td className="has-text-centered">
-                        {dayjs(projectData.subscriptionEndsAt).isValid()
-                          ? dayjs(projectData.subscriptionEndsAt).format(
-                            'DD-MM-YYYY',
-                          )
-                          : '-'}
+                      <td>
+                        <Link
+                          to={`/admin/project/${project.id}/pages/${page.id}`}>
+                          EDIT
+                        </Link>
                       </td>
                       <td>
                         <Button
@@ -111,8 +136,7 @@ const ProjectPages = ({ match }) => {
                             }).then(async value => {
                               if (value) {
                                 await executeMutationRemove({
-                                  id: project.id,
-                                  clientId: project.clientId,
+                                  id: page.id,
                                 });
                               }
                             });
@@ -128,10 +152,7 @@ const ProjectPages = ({ match }) => {
             {resRemove.error && (
               <Message type="error">{resRemove.error.message}</Message>
             )}
-            {resultProject.error && (
-              <Message type="error">{resultProject.error.message}</Message>
-            )}
-            {resRemove.fetching || resultProject.fetching ? <Loading /> : null}
+            {resRemove.fetching ? <Loading /> : null}
           </MainColumn>
         </div>
       </div>

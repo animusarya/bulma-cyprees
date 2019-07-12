@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useQuery } from 'urql';
 import gql from 'graphql-tag';
 
@@ -12,6 +11,7 @@ import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
 import PageFiles from '../../components/PageFiles';
 import PageContent from '../../components/PageContent';
+import { Message, Loading } from '../../components/elements';
 
 const projectQuery = gql`
   query project($id: ID!) {
@@ -33,8 +33,6 @@ const pageQuery = gql`
     }
   }
 `;
-
-const Container = styled.div``;
 
 const ManagePage = ({ match }) => {
   // fetch project data from api
@@ -58,13 +56,20 @@ const ManagePage = ({ match }) => {
     <Layout>
       <Seo title="Dashboard Admin" description="Page description" />
       <Header />
-      <Container className="columns">
+      <div className="columns">
         <div className="column is-one-fifth">
           <Sidebar />
         </div>
         <div className="column">
           <AdminHeader project={project} />
           <MainColumn>
+            {resultProject.error && (
+              <Message type="error">{resultProject.error.message}</Message>
+            )}
+            {resultPage.error && (
+              <Message type="error">{resultPage.error.message}</Message>
+            )}
+            {(resultPage.fetching || resultProject.fetching) && <Loading />}
             {page.type === 'dataroom' && (
               <PageFiles project={project} page={page} />
             )}
@@ -73,7 +78,7 @@ const ManagePage = ({ match }) => {
             )}
           </MainColumn>
         </div>
-      </Container>
+      </div>
       <CopyRight />
     </Layout>
   );
