@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
+import { Dropzone } from '../components/elements';
 
 const getHello = gql`
   {
@@ -13,6 +14,18 @@ const getHello = gql`
 `;
 
 const Test = () => {
+  return (
+    <Layout>
+      <Seo title="Test" description="Some description here." />
+      <div className="container">
+        <Dropzone onUpload={data => console.log('onUpload', data)} />
+        Test page
+      </div>
+    </Layout>
+  );
+};
+
+const Test2 = () => {
   const todos = useStoreState(state => state.todos.items);
   const addTodo = useStoreActions(actions => actions.todos.addTodo);
 
@@ -29,6 +42,7 @@ const Test = () => {
     <Layout>
       <Seo title="Test" description="Some description here." />
       <div className="container">
+        <Dropzone onUpload={data => console.log('onUpload', data)} />
         Test page
         <button
           type="button"

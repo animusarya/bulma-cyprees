@@ -18,6 +18,7 @@
     "graphql": "^14.3.1",
     "graphql-tag": "^2.10.1",
     "html-to-draftjs": "^1.4.0",
+    "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.13",
     "merge-graphql-schemas": "^1.5.8",
     "prop-types": "^15.7.2",
