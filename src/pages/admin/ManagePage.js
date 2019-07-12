@@ -11,6 +11,7 @@ import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
 import PageFiles from '../../components/PageFiles';
 import PageContent from '../../components/PageContent';
+import { Message, Loading } from '../../components/elements';
 
 const projectQuery = gql`
   query project($id: ID!) {
@@ -22,17 +23,34 @@ const projectQuery = gql`
   }
 `;
 
+const pageQuery = gql`
+  query page($id: ID!) {
+    page(id: $id) {
+      id
+      name
+      slug
+      type
+    }
+  }
+`;
+
 const ManagePage = ({ match }) => {
   // fetch project data from api
   const [resultProject] = useQuery({
     query: projectQuery,
     variables: { id: match.params.id },
   });
+  const [resultPage] = useQuery({
+    query: pageQuery,
+    variables: { id: match.params.pageId },
+  });
   const project =
     resultProject.data && resultProject.data.project
       ? resultProject.data.project
       : {};
-  // console.log('resultProject', project);
+  const page =
+    resultPage.data && resultPage.data.page ? resultPage.data.page : {};
+  console.log('resultProject', project, page);
 
   return (
     <Layout>
@@ -45,10 +63,19 @@ const ManagePage = ({ match }) => {
         <div className="column">
           <AdminHeader project={project} />
           <MainColumn>
-            <h1>IF FILES PAGE</h1>
-            <PageFiles />
-            <h1>IF CONTENT PAGE</h1>
-            <PageContent />
+            {resultProject.error && (
+              <Message type="error">{resultProject.error.message}</Message>
+            )}
+            {resultPage.error && (
+              <Message type="error">{resultPage.error.message}</Message>
+            )}
+            {(resultPage.fetching || resultProject.fetching) && <Loading />}
+            {page.type === 'dataroom' && (
+              <PageFiles project={project} page={page} />
+            )}
+            {page.type === 'content' && (
+              <PageContent project={project} page={page} />
+            )}
           </MainColumn>
         </div>
       </div>

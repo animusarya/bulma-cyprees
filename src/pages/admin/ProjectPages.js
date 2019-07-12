@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 import dayjs from 'dayjs';
-import { isEmpty } from 'lodash';
+import { Link } from 'react-router-dom';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -13,12 +13,20 @@ import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
 import { Heading, Button, Message, Loading } from '../../components/elements';
-import ProjectForm from '../../components/ProjectForm';
-// import ProjectsProperty from '../../components/ProjectsProperty';
 
-const projectPageQuery = gql`
-  query page($id: ID!) {
-    page(id: $id) {
+const projectQuery = gql`
+  query project($id: ID!) {
+    project(id: $id) {
+      id
+      name
+      slug
+    }
+  }
+`;
+
+const pagesQuery = gql`
+  query pages($projectId: ID!) {
+    pages(projectId: $projectId) {
       id
       name
       slug
@@ -51,17 +59,24 @@ const updatePageMutation = gql`
 `;
 
 const ProjectPages = ({ match }) => {
-  const [resultProject, executeQuery] = useQuery({
-    query: projectPageQuery,
+  // fetch project data from api
+  const [resultProject] = useQuery({
+    query: projectQuery,
     variables: { id: match.params.id },
   });
+  const [resultPages, executeQuery] = useQuery({
+    query: pagesQuery,
+    variables: { projectId: match.params.id },
+  });
+  const [resRemove, executeMutationRemove] = useMutation(removeMutation);
+
   const project =
     resultProject.data && resultProject.data.project
       ? resultProject.data.project
       : {};
-  const [resRemove, executeMutationRemove] = useMutation(removeMutation);
-  const [resUpdate, executeMutationUpdate] = useMutation(updatePageMutation);
-  const [editPage, setPageData] = useState({});
+  const pages =
+    resultPages.data && resultPages.data.pages ? resultPages.data.pages : {};
+  console.log('pages', pages);
 
   return (
     <Layout>
@@ -75,31 +90,14 @@ const ProjectPages = ({ match }) => {
           <AdminHeader project={project} />
           <MainColumn>
             <Heading>Manage Pages</Heading>
-            <ProjectForm
-              enableReinitialize
-              initialValues={editPage}
-              onSubmit={data => {
-                if (isEmpty(editPage)) {
-                  // add item
-                  return executeMutationUpdate(data);
-                }
-                // edit item
-                const editData = editPage;
-                setTimeout(() => {
-                  swal('Item updated successfully!');
-                  executeQuery({
-                    requestPolicy: 'network-only',
-                  });
-                  setPageData({});
-                }, 3000);
-                return executeMutationUpdate({ id: editData.id, input: data });
-              }}
-            />
             {resultProject.error && (
               <Message type="error">{resultProject.error.message}</Message>
             )}
-            {resultProject.fetching && <Loading />}
-            {resultProject.data && resultProject.data.page && (
+            {resultPages.error && (
+              <Message type="error">{resultPages.error.message}</Message>
+            )}
+            {(resultPages.fetching || resultProject.fetching) && <Loading />}
+            {pages.length > 0 && (
               <table className="table is-fullwidth is-hoverable">
                 <thead>
                   <tr>
@@ -112,30 +110,21 @@ const ProjectPages = ({ match }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {resultProject.data.page.map(pageData => (
-                    <tr key={pageData.id}>
-                      <td className="has-text-weight-semibold">
-                        {pageData.name}
-                      </td>
+                  {pages.map(page => (
+                    <tr key={page.id}>
+                      <td className="has-text-weight-semibold">{page.name}</td>
+                      <td className="has-text-centered">{page.type}</td>
+                      <td className="has-text-centered">{page.status}</td>
                       <td className="has-text-centered">
-                        <i className="fas fa-pound-sign pound-icon"></i>
-                        {pageData.type}
-                      </td>
-                      <td className="has-text-centered">{pageData.status}</td>
-                      <td className="has-text-centered">
-                        {dayjs(pageData.createdAt).isValid()
-                          ? dayjs(pageData.createdAt).format('DD-MM-YYYY')
+                        {dayjs(page.createdAt).isValid()
+                          ? dayjs(page.createdAt).format('DD-MM-YYYY')
                           : null}
                       </td>
                       <td>
-                        <Button
-                          secondary
-                          paddingless
-                          onClick={() => {
-                            setPageData(pageData);
-                          }}>
+                        <Link
+                          to={`/admin/project/${project.id}/pages/${page.id}`}>
                           EDIT
-                        </Button>
+                        </Link>
                       </td>
                       <td>
                         <Button
@@ -147,7 +136,7 @@ const ProjectPages = ({ match }) => {
                             }).then(async value => {
                               if (value) {
                                 await executeMutationRemove({
-                                  id: pageData.id,
+                                  id: page.id,
                                 });
                               }
                             });
@@ -163,10 +152,7 @@ const ProjectPages = ({ match }) => {
             {resRemove.error && (
               <Message type="error">{resRemove.error.message}</Message>
             )}
-            {resUpdate.error && (
-              <Message type="error">{resUpdate.error.message}</Message>
-            )}
-            {resRemove.fetching || resUpdate.fetching ? <Loading /> : null}
+            {resRemove.fetching ? <Loading /> : null}
           </MainColumn>
         </div>
       </div>
