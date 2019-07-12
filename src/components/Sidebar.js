@@ -28,7 +28,7 @@ const Sidebar = () => {
   // const toggle = () => setToggle(!isToggledOn);
 
   return (
-    <Container className="menu">
+    <Container className="menu is-hidden-mobile">
       {userData.type === 'superAdmin' && (
         <ul className="menu-list">
           <li>

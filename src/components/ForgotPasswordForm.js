@@ -48,10 +48,7 @@ ForgotPasswordForm.propTypes = {
 
 export default withFormik({
   mapPropsToValues: () => ({
-    name: '',
     email: '',
-    password: '',
-    confirmPassword: '',
   }),
   validationSchema: yup.object().shape({
     email: yup
