@@ -3,50 +3,45 @@ import styled from 'styled-components';
 import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
+import { withRouter } from 'react-router';
 
-import { Title, Button, Message, Loading } from './elements';
+import { Title, Button, Message, Loading, Dropzone } from './elements';
 
-// TODO: fix these mutations and queries when available
-
-const Query = gql`
-  {
-    discounts {
+const filesQuery = gql`
+  query files($pageId: ID!) {
+    files(pageId: $pageId) {
       id
       name
-      code
-      percentage
+      fileType
+      section
+      url
+      order
+      createdAt
     }
   }
 `;
 
-const removeMutation = gql`
-  mutation removeDiscount($id: ID!) {
-    removeDiscount(id: $id) {
+const removePageMutation = gql`
+  mutation removePage($id: ID!) {
+    removePage(id: $id) {
       success
     }
   }
 `;
 
-const delMutation = gql`
-  mutation removeDiscount($id: ID!) {
-    removeDiscount(id: $id) {
+const removeFileMutation = gql`
+  mutation removeFile($id: ID!) {
+    removeFile(id: $id) {
       success
     }
   }
 `;
 
-const syncMutation = gql`
-  mutation removeDiscount($id: ID!) {
-    removeDiscount(id: $id) {
-      success
-    }
-  }
-`;
-
-const sortMutation = gql`
-  mutation removeDiscount($id: ID!) {
-    removeDiscount(id: $id) {
-      success
+const uploadFileMutation = gql`
+  mutation uploadFile($input: FileInput!) {
+    uploadFile(input: $input) {
+      id
+      name
     }
   }
 `;
@@ -57,20 +52,27 @@ const Container = styled.div`
   }
 `;
 
-const PageFiles = () => {
-  const [resRemove, executeMutationRemove] = useMutation(removeMutation);
-  const [resDel, executeMutationDel] = useMutation(delMutation);
-  const [resSync, executeMutationSync] = useMutation(syncMutation);
-  const [resSort, executeMutationSort] = useMutation(sortMutation);
-  const [result, executeQuery] = useQuery({
-    query: Query,
+const PageFiles = ({ project, page, history }) => {
+  const [resultFile, executeQuery] = useQuery({
+    query: filesQuery,
+    variables: { pageId: page.id },
   });
+  const [resFileUpload, executeFileUploadMutation] = useMutation(
+    uploadFileMutation,
+  );
+  const [resRemove, executePageRemoveMutation] = useMutation(
+    removePageMutation,
+  );
+  const [resDel, executeMutationDelete] = useMutation(removeFileMutation);
+  const files =
+    resultFile.data && resultFile.data.files ? resultFile.data.files : {};
+  console.log('resultFile', files);
 
   return (
     <Container>
       <div className="columns">
         <div className="column">
-          <Title>Property</Title>
+          <Title>{page.title}</Title>
         </div>
         <div className="column is-one-fifth">
           <Button
@@ -79,31 +81,46 @@ const PageFiles = () => {
                 buttons: ['Cancel', 'Confirm'],
               }).then(async value => {
                 if (value) {
-                  await executeMutationRemove();
-                  executeQuery({ requestPolicy: 'network-only' });
+                  await executePageRemoveMutation({
+                    id: page.id,
+                  });
+                  // redirect back to project page
+                  history.push(`/admin/project/${project.id}/pages`);
                 }
               });
             }}>
-            Delete Tab
+            Delete Page
           </Button>
         </div>
       </div>
-      <div>Drag and drop</div>
+      <Dropzone
+        onUpload={async data => {
+          console.log('onUpload', data);
+          await executeFileUploadMutation({
+            input: {
+              name: 'abc',
+              fileType: 'image',
+              project: '5d25a3322c16470708e28c2a',
+              page: '5d27266725bc811f1e0805da',
+              url: 'tets-test-url',
+            },
+          });
+          await executeQuery({
+            requestPolicy: 'network-only',
+          });
+        }}
+      />
+      {resFileUpload.error && (
+        <Message type="error">{resFileUpload.error.message}</Message>
+      )}
       {resDel.error && <Message type="error">{resDel.error.message}</Message>}
       {resRemove.error && (
         <Message type="error">{resRemove.error.message}</Message>
       )}
-      {result.error && <Message type="error">{result.error.message}</Message>}
-      {resSync.error && <Message type="error">{resSync.error.message}</Message>}
-      {resSort.error && <Message type="error">{resSort.error.message}</Message>}
-      {resDel.fetching ||
-      resRemove.fetching ||
-      result.fetching ||
-      resSync.fetching ||
-      resSort.fetching ? (
+      {resFileUpload.fetching || resDel.fetching || resRemove.fetching ? (
         <Loading />
       ) : null}
-      {result.data && result.data.discounts.length > 0 && (
+      {files.length > 0 && (
         <table className="table is-fullwidth is-hoverable">
           <thead>
             <tr>
@@ -117,63 +134,55 @@ const PageFiles = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="has-text-centered">
-                <Button
-                  secondary
-                  paddingless
-                  onClick={() => {
-                    swal('Are you confirm to delete this item?', {
-                      buttons: ['Cancel', 'Confirm'],
-                    }).then(async value => {
-                      if (value) {
-                        await executeMutationSort();
-                        executeQuery({ requestPolicy: 'network-only' });
-                      }
-                    });
-                  }}>
-                  <i className="far fa-hand-pointer"></i>
-                </Button>
-              </td>
-              <td>Sale details</td>
-              <td className="has-text-centered is-uppercase">pdf</td>
-              <td className="has-text-centered">3 days ago</td>
-              <td className="has-text-centered"> 5 June 2019 - 12:30pm</td>
-              <td className="has-text-centered">
-                <Button
-                  secondary
-                  paddingless
-                  onClick={() => {
-                    swal('Are you confirm to delete this item?', {
-                      buttons: ['Cancel', 'Confirm'],
-                    }).then(async value => {
-                      if (value) {
-                        await executeMutationSync();
-                        executeQuery({ requestPolicy: 'network-only' });
-                      }
-                    });
-                  }}>
-                  <i className="fas fa-sync-alt"></i>
-                </Button>
-              </td>
-              <td className="has-text-centered">
-                <Button
-                  secondary
-                  paddingless
-                  onClick={() => {
-                    swal('Are you confirm to delete this item?', {
-                      buttons: ['Cancel', 'Confirm'],
-                    }).then(async value => {
-                      if (value) {
-                        await executeMutationDel();
-                        executeQuery({ requestPolicy: 'network-only' });
-                      }
-                    });
-                  }}>
-                  <i className="far fa-trash-alt"></i>
-                </Button>
-              </td>
-            </tr>
+            {files.map(file => (
+              <tr key={file.id}>
+                <td className="has-text-centered">
+                  <Button secondary paddingless>
+                    <i className="far fa-hand-pointer"></i>
+                  </Button>
+                </td>
+                <td>{file.name}</td>
+                <td className="has-text-centered is-uppercase">
+                  {file.fileType}
+                </td>
+                <td className="has-text-centered">{file.section}</td>
+                <td className="has-text-centered">{file.createdAt}</td>
+                <td className="has-text-centered">
+                  <Button
+                    secondary
+                    paddingless
+                    onClick={() => {
+                      swal('Are you confirm to delete this item?', {
+                        buttons: ['Cancel', 'Confirm'],
+                      }).then(async value => {
+                        if (value) {
+                          // await executeMutationSync();
+                        }
+                      });
+                    }}>
+                    <i className="fas fa-sync-alt"></i>
+                  </Button>
+                </td>
+                <td className="has-text-centered">
+                  <Button
+                    secondary
+                    paddingless
+                    onClick={() => {
+                      swal('Are you confirm to delete this item?', {
+                        buttons: ['Cancel', 'Confirm'],
+                      }).then(async value => {
+                        if (value) {
+                          await executeMutationDelete({
+                            id: file.id,
+                          });
+                        }
+                      });
+                    }}>
+                    <i className="far fa-trash-alt"></i>
+                  </Button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       )}
@@ -181,4 +190,4 @@ const PageFiles = () => {
   );
 };
 
-export default PageFiles;
+export default withRouter(PageFiles);

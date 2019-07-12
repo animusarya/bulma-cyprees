@@ -8,6 +8,7 @@ import Message from './Message';
 import Loading from './Loading';
 import TextAreaGroup from './TextArea';
 import SelectGroup from './SelectGroup';
+import Dropzone from './Dropzone';
 
 export {
   InputGroup,
@@ -20,4 +21,5 @@ export {
   Loading,
   TextAreaGroup,
   SelectGroup,
+  Dropzone,
 };

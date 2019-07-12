@@ -23,6 +23,17 @@ const projectQuery = gql`
   }
 `;
 
+const pageQuery = gql`
+  query page($id: ID!) {
+    page(id: $id) {
+      id
+      name
+      slug
+      type
+    }
+  }
+`;
+
 const Container = styled.div``;
 
 const ManagePage = ({ match }) => {
@@ -31,11 +42,17 @@ const ManagePage = ({ match }) => {
     query: projectQuery,
     variables: { id: match.params.id },
   });
+  const [resultPage] = useQuery({
+    query: pageQuery,
+    variables: { id: match.params.pageId },
+  });
   const project =
     resultProject.data && resultProject.data.project
       ? resultProject.data.project
       : {};
-  console.log('resultProject', project);
+  const page =
+    resultPage.data && resultPage.data.page ? resultPage.data.page : {};
+  console.log('resultProject', project, page);
 
   return (
     <Layout>
@@ -48,10 +65,12 @@ const ManagePage = ({ match }) => {
         <div className="column">
           <AdminHeader project={project} />
           <MainColumn>
-            <h1>IF FILES PAGE</h1>
-            <PageFiles />
-            <h1>IF CONTENT PAGE</h1>
-            <PageContent />
+            {page.type === 'dataroom' && (
+              <PageFiles project={project} page={page} />
+            )}
+            {page.type === 'content' && (
+              <PageContent project={project} page={page} />
+            )}
           </MainColumn>
         </div>
       </Container>
