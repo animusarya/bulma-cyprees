@@ -55,8 +55,6 @@ const removePriceMutation = gql`
   }
 `;
 
-// TODO: Fix this mutation
-
 const updatePackageMutation = gql`
   mutation updatePackage($id: ID!, $input: PackageInput!) {
     updatePackage(id: $id, input: $input) {

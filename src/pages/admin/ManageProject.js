@@ -26,21 +26,23 @@ const projectPageQuery = gql`
   }
 `;
 
-// TODO: Fix these tomorrow
-
-const removeProjectClientMutation = gql`
-  mutation removeProjectClient($id: ID!, $clientId: ID!) {
-    removeProjectClient(id: $id, clientId: $clientId) {
+const removeMutation = gql`
+  mutation removePage($id: ID!) {
+    removePage(id: $id) {
       success
     }
   }
 `;
 
-const renewProjectClientMutation = gql`
-  mutation renewProjectClient($id: ID!) {
-    renewProjectClient(id: $id) {
+const updatePageMutation = gql`
+  mutation updatePage($id: ID!, $input: PageInput!) {
+    updatePage(id: $id, input: $input) {
       id
-      subscriptionlastRenewedAt
+      name
+      slug
+      type
+      status
+      createdAt
     }
   }
 `;
@@ -54,14 +56,10 @@ const Container = styled.div`
 const ManageProject = ({ match }) => {
   const [result] = useQuery({
     query: projectPageQuery,
-    variables: { clientId: match.params.id },
+    variables: { id: match.params.id },
   });
-  const [resRemove, executeMutationRemove] = useMutation(
-    removeProjectClientMutation,
-  );
-  const [resRenew, executeMutationRenew] = useMutation(
-    renewProjectClientMutation,
-  );
+  const [resRemove, executeMutationRemove] = useMutation(removeMutation);
+  const [resUpdate, executeMutationUpdate] = useMutation(updatePageMutation);
 
   return (
     <Layout>
@@ -111,16 +109,7 @@ const ManageProject = ({ match }) => {
                           secondary
                           paddingless
                           onClick={() => {
-                            swal(
-                              'Are you sure you want to renew this client?',
-                              {
-                                buttons: ['Cancel', 'Confirm'],
-                              },
-                            ).then(async value => {
-                              if (value) {
-                                await executeMutationRenew({ id: pageData.id });
-                              }
-                            });
+                            executeMutationUpdate();
                           }}>
                           EDIT
                         </Button>
@@ -136,7 +125,6 @@ const ManageProject = ({ match }) => {
                               if (value) {
                                 await executeMutationRemove({
                                   id: pageData.id,
-                                  clientId: pageData.clientId,
                                 });
                               }
                             });
@@ -152,10 +140,10 @@ const ManageProject = ({ match }) => {
             {resRemove.error && (
               <Message type="error">{resRemove.error.message}</Message>
             )}
-            {resRenew.error && (
-              <Message type="error">{resRenew.error.message}</Message>
+            {resUpdate.error && (
+              <Message type="error">{resUpdate.error.message}</Message>
             )}
-            {resRemove.fetching || resRenew.fetching ? <Loading /> : null}
+            {resRemove.fetching || resUpdate.fetching ? <Loading /> : null}
           </MainColumn>
         </div>
       </Container>
