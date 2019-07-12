@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
@@ -55,6 +56,13 @@ const updatePageMutation = gql`
       status
       createdAt
     }
+  }
+`;
+
+const LinkWrapper = styled(Link)`
+  color: ${props => props.theme.primaryColor};
+  :hover {
+    color: ${props => props.theme.primaryColor};
   }
 `;
 
@@ -121,10 +129,10 @@ const ProjectPages = ({ match }) => {
                           : null}
                       </td>
                       <td>
-                        <Link
+                        <LinkWrapper
                           to={`/admin/project/${project.id}/pages/${page.id}`}>
                           EDIT
-                        </Link>
+                        </LinkWrapper>
                       </td>
                       <td>
                         <Button

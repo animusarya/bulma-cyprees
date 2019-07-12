@@ -8,8 +8,9 @@ import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import CopyRight from '../../components/CopyRight';
 import MainColumn from '../../components/MainColumn';
-import { Heading, Title } from '../../components/elements';
+import { Heading, Message, Loading } from '../../components/elements';
 import AdminHeader from '../../components/AdminHeader';
+import ProjectSettingForm from '../../components/ProjectSettingForm';
 
 const projectQuery = gql`
   query project($id: ID!) {
@@ -17,14 +18,6 @@ const projectQuery = gql`
       id
       name
       slug
-      welcomeEmailTemplate {
-        subject
-        body
-      }
-      clientEmailTemplate {
-        subject
-        body
-      }
     }
   }
 `;
@@ -34,6 +27,11 @@ const updateProjectMutation = gql`
     updateProject(id: $id, input: $input) {
       id
       name
+      clients {
+        id
+        email
+        status
+      }
     }
   }
 `;
@@ -63,19 +61,14 @@ const ProjectSetting = ({ match }) => {
           <MainColumn paddingtop="1rem">
             <Heading>Project Setting</Heading>
             <div>
-              {/* <ClientWelcomeEmailForm
-                enableReinitialize
-                initialValues={project}
-                onSubmit={async data => {
-                  await executeMutation({
-                    id: project.id,
-                    input: {
-                      welcomeEmailTemplate: data,
-                    },
-                  });
+              <ProjectSettingForm
+                onSubmit={data => {
+                  executeMutation(data);
                 }}
-              /> */}
+              />
             </div>
+            {res.error && <Message type="error">{res.error.message}</Message>}
+            {res.fetching ? <Loading /> : null}
           </MainColumn>
         </div>
       </div>
