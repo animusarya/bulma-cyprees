@@ -114,7 +114,7 @@ const AdminHeader = ({ project }) => {
       <Hero className="hero">
         <HeroImg src={logoBg} alt="logo-bg" />
         <div className="hero-body has-text-centered">
-          <Button paddingless secondary onClick={() => {}}>
+          <Button paddingless secondary onClick={() => { }}>
             <div className="edit-banner">
               <h6 className="title is-6 has-text-weight-semibold">
                 Change banner

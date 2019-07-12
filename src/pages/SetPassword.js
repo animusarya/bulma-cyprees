@@ -12,15 +12,11 @@ import loginBg from '../assets/images/login-bg.jpg';
 import logo from '../assets/images/logo.png';
 
 const setPasswordMutation = gql`
-  mutation setPassword($password: String!, $confirmPassword: String!) {
-    setPassword(
-      input: { password: $password, confirmPassword: $confirmPassword }
-    ) {
+  mutation setNewPassword($token: String!, $password: String!) {
+    setNewPassword(input: { token: $token, password: $password }) {
       jwt
       user {
         id
-        # email
-        # type
       }
     }
   }

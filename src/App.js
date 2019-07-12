@@ -36,6 +36,8 @@ import ManageClients from './pages/admin/ManageClients';
 import ManagePage from './pages/admin/ManagePage';
 import Help from './pages/admin/Help';
 import ProjectUpdate from './pages/admin/ProjectUpdate'; // TODO: WHY THIS PAGE IS HERE?
+import ProjectSetting from './pages/admin/ProjectSetting';
+import Settings from './pages/admin/Settings';
 
 import DashboardClient from './pages/client/Dashboard';
 import Page from './pages/client/Page';
@@ -168,6 +170,12 @@ class App extends React.Component {
                     /> */}
                     <PrivateRoute exact path="/admin/help" component={Help} />
                     <PrivateRoute
+                      exact
+                      path="/admin/project/:activeProject/settings"
+                      component={ProjectSetting}
+                    />
+                    <Route exact path="/admin/settings" component={Settings} />
+                    <Route
                       exact
                       path="/client/dashboard"
                       component={DashboardClient}
