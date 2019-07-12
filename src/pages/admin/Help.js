@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery, useMutation } from 'urql';
+import { useQuery } from 'urql';
 import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';

@@ -9,7 +9,6 @@ import Sidebar from '../../components/Sidebar';
 import CopyRight from '../../components/CopyRight';
 import MainColumn from '../../components/MainColumn';
 import { Heading, Message, Loading } from '../../components/elements';
-import AdminHeader from '../../components/AdminHeader';
 import SettingsForm from '../../components/SettingsForm';
 
 const settingMutation = gql`
@@ -38,12 +37,12 @@ const Settings = () => {
           <Sidebar />
         </div>
         <div className="column">
-          <AdminHeader />
           <MainColumn paddingtop="1rem">
-            <Heading>Setting</Heading>
+            <Heading>Settings</Heading>
             <div>
               <SettingsForm
                 onSubmit={data => {
+                  // console.log(data, 'data');
                   executeMutation(data);
                 }}
               />

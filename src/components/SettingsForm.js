@@ -55,7 +55,6 @@ const SettingsForm = props => {
         label="Company:"
         name="company"
         type="text"
-        placeholder=""
         value={values.company}
         onChange={handleChange}
         onBlur={handleBlur}
@@ -79,7 +78,7 @@ const SettingsForm = props => {
       />
       <div className="field">
         <div className="control is-pulled-right">
-          <Button disabled={isSubmitting}>Submit</Button>
+          <Button disabled={isSubmitting}>Update</Button>
         </div>
       </div>
     </form>

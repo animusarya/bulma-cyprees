@@ -25,10 +25,19 @@ const mutation = gql`
   }
 `;
 
-const FormContainer = styled.div`
-  margin-top: 10rem;
-  padding: 0 3rem;
+const Container = styled.div`
+  .column:last-child {
+    align-self: center;
+  }
 `;
+
+const FormContainer = styled.div`
+  padding: 0 3rem;
+  @media only screen and (max-width: 768px) {
+    padding: 2rem;
+  }
+`;
+
 const Logo = styled.img`
   width: 300px;
   height: auto;
@@ -61,7 +70,7 @@ const Login = () => {
   return (
     <Layout>
       <Seo title="Login" description="Some description here." />
-      <div className="columns">
+      <Container className="columns">
         <div className="column">
           <img src={loginBg} alt="login banner" />
         </div>
@@ -73,7 +82,7 @@ const Login = () => {
             {res.fetching ? <Loading /> : null}
           </FormContainer>
         </div>
-      </div>
+      </Container>
       <Footer />
     </Layout>
   );

@@ -24,9 +24,17 @@ const registerMutation = gql`
   }
 `;
 
+const Container = styled.div`
+  .column:last-child {
+    align-self: center;
+  }
+`;
+
 const FormContainer = styled.div`
-  margin-top: 10rem;
   padding: 0 3rem;
+  @media only screen and (max-width: 768px) {
+    padding: 2rem;
+  }
 `;
 
 const Logo = styled.img`
@@ -41,7 +49,7 @@ const Register = () => {
   return (
     <Layout>
       <Seo title="Register" description="Some description here." />
-      <div className="columns">
+      <Container className="columns">
         <div className="column">
           <img src={loginBg} alt="Register banner" />
         </div>
@@ -53,7 +61,7 @@ const Register = () => {
             {res.fetching ? <Loading /> : null}
           </FormContainer>
         </div>
-      </div>
+      </Container>
       <Footer />
     </Layout>
   );
