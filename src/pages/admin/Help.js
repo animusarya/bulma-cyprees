@@ -1,4 +1,6 @@
 import React from 'react';
+import { useQuery, useMutation } from 'urql';
+import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -9,9 +11,22 @@ import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 import video from '../../assets/images/videoplayback.mp4';
 
+const helpQuery = gql`
+  query support {
+    support {
+      id
+      name
+      embedCode
+    }
+  }
+`;
+
 const Width = '340px';
 
 const Help = () => {
+  const [result, executeQuery] = useQuery({
+    query: helpQuery,
+  });
   return (
     <Layout>
       <Seo title="Dashboard Admin" description="Page description" />

@@ -1,0 +1,122 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withFormik } from 'formik';
+import * as yup from 'yup';
+
+import { InputGroup, Button } from './elements';
+
+const SettingsForm = props => {
+  const {
+    values,
+    touched,
+    errors,
+    isSubmitting,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+  } = props;
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <InputGroup
+        fullWidth
+        isWidth
+        border
+        isHorizontal
+        label="Email:"
+        name="email"
+        placeholder="john@doe.com"
+        value={values.email}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={errors.email && touched.email ? errors.email : undefined}
+      />
+      <InputGroup
+        fullWidth
+        isWidth
+        border
+        isHorizontal
+        label="Full Name:"
+        name="fullName"
+        type="text"
+        placeholder=""
+        value={values.fullName}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.fullName && touched.fullName ? errors.fullName : undefined
+        }
+      />
+      <InputGroup
+        fullWidth
+        isWidth
+        border
+        isHorizontal
+        label="Company:"
+        name="company"
+        type="text"
+        placeholder=""
+        value={values.company}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={errors.company && touched.company ? errors.company : undefined}
+      />
+      <InputGroup
+        fullWidth
+        isWidth
+        border
+        isHorizontal
+        label="Telephone:"
+        name="telephone"
+        type="number"
+        placeholder=""
+        value={values.telephone}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.telephone && touched.telephone ? errors.telephone : undefined
+        }
+      />
+      <div className="field">
+        <div className="control is-pulled-right">
+          <Button disabled={isSubmitting}>Submit</Button>
+        </div>
+      </div>
+    </form>
+  );
+};
+
+SettingsForm.propTypes = {
+  values: PropTypes.object.isRequired,
+  touched: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+  isSubmitting: PropTypes.bool.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleBlur: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+};
+
+export default withFormik({
+  mapPropsToValues: () => ({
+    email: '',
+    fullName: '',
+    company: '',
+    telephone: '',
+  }),
+  validationSchema: yup.object().shape({
+    email: yup
+      .string()
+      .email('Invalid email address')
+      .required('Email is required!'),
+    fullName: yup.string().required('Full Name is required!'),
+    company: yup.string().required('Company is required!'),
+    telephone: yup.string().required('Telephone is required!'),
+  }),
+
+  handleSubmit: (values, { setSubmitting, props }) => {
+    // console.log('handle submit', values, props);
+    props.onSubmit(values);
+    setSubmitting(false);
+  },
+  displayName: 'SettingsForm', // helps with React DevTools
+})(SettingsForm);

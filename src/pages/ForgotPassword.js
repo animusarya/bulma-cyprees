@@ -13,7 +13,7 @@ import logo from '../assets/images/logo.png';
 
 const forgotPasswordMutation = gql`
   mutation forgotPassword($email: String!) {
-    login(input: { email: $email }) {
+    forgotPassword(input: { email: $email }) {
       success
     }
   }

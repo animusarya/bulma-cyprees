@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useStoreState } from 'easy-peasy';
+import { Link } from 'react-router-dom';
 
 import logoAlt from '../assets/images/logo-alt.png';
 
@@ -10,6 +11,12 @@ const Container = styled.div`
     background-color: ${props => props.theme.secondaryColor};
   }
   .name {
+    color: #e8e9ea;
+  }
+`;
+const LinkWrapper = styled(Link)`
+  color: #e8e9ea;
+  :hover {
     color: #e8e9ea;
   }
 `;
@@ -96,7 +103,9 @@ const Header = () => {
                   <div className="name">{userData.email}</div>
                   <div className="buttons">
                     <Button className="button">
-                      <i className="fas fa-cog"></i>
+                      <LinkWrapper to="/admin/settings">
+                        <i className="fas fa-cog"></i>
+                      </LinkWrapper>
                     </Button>
                     <Button className="button">
                       <i className="fas fa-power-off"></i>
