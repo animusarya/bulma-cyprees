@@ -19,7 +19,7 @@ const LoginForm = props => {
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
-        label="Email:"
+        label="Email"
         name="email"
         placeholder="john@doe.com"
         value={values.email}
@@ -28,7 +28,7 @@ const LoginForm = props => {
         errors={errors.email && touched.email ? errors.email : undefined}
       />
       <InputGroup
-        label="Password:"
+        label="Password"
         name="password"
         type="password"
         placeholder="*********"
