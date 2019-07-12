@@ -121,42 +121,42 @@ class App extends React.Component {
                       path="/admin/dashboard"
                       component={DashboardAdmin}
                     />
-                    {/* <Route
+                    {/* <PrivateRoute
                       exact
                       path="/admin/create/account"
                       component={AccountCreated}
                     /> */}
-                    <Route
+                    <PrivateRoute
                       exact
                       path="/admin/project/create"
                       component={CreateProject}
                     />
-                    <Route
+                    <PrivateRoute
                       exact
                       path="/admin/project/:id"
                       component={ProjectDashboard}
                     />
-                    <Route
+                    <PrivateRoute
                       exact
                       path="/admin/project/:id/pages"
                       component={ProjectPages}
                     />
-                    <Route
+                    <PrivateRoute
                       exact
                       path="/admin/project/:id/pages/:pageId"
                       component={ManagePage}
                     />
-                    <Route
+                    <PrivateRoute
                       exact
                       path="/admin/project/:id/emails"
                       component={ManageEmail}
                     />
-                    <Route
+                    <PrivateRoute
                       exact
                       path="/admin/project/:id/clients"
                       component={ManageClients}
                     />
-                    <Route
+                    <PrivateRoute
                       exact
                       path="/admin/project/:id/update"
                       component={ProjectUpdate}
@@ -166,13 +166,17 @@ class App extends React.Component {
                       path="/admin/project/{id}"
                       component={WelcomeScreen}
                     /> */}
-                    <Route exact path="/admin/help" component={Help} />
-                    <Route
+                    <PrivateRoute exact path="/admin/help" component={Help} />
+                    <PrivateRoute
                       exact
                       path="/client/dashboard"
                       component={DashboardClient}
                     />
-                    <Route exact path="/client/page/:id" component={Page} />
+                    <PrivateRoute
+                      exact
+                      path="/client/page/:id"
+                      component={Page}
+                    />
                     <Route exact path="/test" component={Test} />
                     <Route exact path="/test2" component={Test2} />
                     <Route component={Error404} />
