@@ -65,7 +65,7 @@ const ProjectSetting = ({ match }) => {
                 enableReinitialize
                 initialValues={project}
                 onSubmit={data => {
-                  executeMutation({ input: data });
+                  executeMutation({ id: project.id, input: data });
                 }}
               />
             </div>
