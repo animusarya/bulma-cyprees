@@ -27,7 +27,26 @@ const getAdmins = gql`
 `;
 
 const Container = styled.div`
+  .table {
+    @media only screen and (max-width: 768px) {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      overflow: scroll !important;
+    }
+  }
+
+  .column:last-child {
+    overflow-x: auto;
+  }
+
   td {
+    color: ${props => props.theme.primaryColor};
+  }
+`;
+
+const LinkWrapper = styled(Link)`
+  color: ${props => props.theme.primaryColor};
+  :hover {
     color: ${props => props.theme.primaryColor};
   }
 `;
@@ -66,9 +85,10 @@ const Dashboard = () => {
                     res.data.users.map(user => (
                       <tr key={user.id}>
                         <td>
-                          <Link to={`/super-admin/client/${user.id}/projects`}>
+                          <LinkWrapper
+                            to={`/super-admin/client/${user.id}/projects`}>
                             {user.email}
-                          </Link>
+                          </LinkWrapper>
                         </td>
                         <td>{user.profile && user.profile.fullName}</td>
                         <td>{user.profile && user.profile.company}</td>

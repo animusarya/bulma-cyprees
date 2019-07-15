@@ -12,16 +12,24 @@ import loginBg from '../assets/images/login-bg.jpg';
 import logo from '../assets/images/logo.png';
 
 const forgotPasswordMutation = gql`
-  mutation forgotPassword($email: String!) {
-    forgotPassword(input: { email: $email }) {
+  mutation forgotPassword($input: ForgotPasswordInput!) {
+    forgotPassword(input: $input) {
       success
     }
   }
 `;
 
+const Container = styled.div`
+  .column:last-child {
+    align-self: center;
+  }
+`;
+
 const FormContainer = styled.div`
-  margin-top: 10rem;
   padding: 0 3rem;
+  @media only screen and (max-width: 768px) {
+    padding: 2rem;
+  }
 `;
 const Logo = styled.img`
   width: 300px;
@@ -35,7 +43,7 @@ const ForgotPassword = () => {
   return (
     <Layout>
       <Seo title="Login" description="Some description here." />
-      <div className="columns">
+      <Container className="columns">
         <div className="column">
           <img src={loginBg} alt="login banner" />
         </div>
@@ -46,7 +54,7 @@ const ForgotPassword = () => {
             {res.error && <Message type="error">{res.error.message}</Message>}
           </FormContainer>
         </div>
-      </div>
+      </Container>
       <Footer />
     </Layout>
   );
