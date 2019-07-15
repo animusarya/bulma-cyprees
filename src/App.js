@@ -170,7 +170,7 @@ class App extends React.Component {
                     <PrivateRoute exact path="/admin/help" component={Help} />
                     <PrivateRoute
                       exact
-                      path="/admin/project/:activeProject/settings"
+                      path="/admin/project/:id/settings"
                       component={ProjectSetting}
                     />
                     <Route exact path="/admin/settings" component={Settings} />

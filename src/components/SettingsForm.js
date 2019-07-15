@@ -67,7 +67,6 @@ const SettingsForm = props => {
         isHorizontal
         label="Telephone:"
         name="telephone"
-        type="number"
         placeholder=""
         value={values.telephone}
         onChange={handleChange}
@@ -96,11 +95,11 @@ SettingsForm.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({
-    email: '',
-    fullName: '',
-    company: '',
-    telephone: '',
+  mapPropsToValues: ({ initialValues }) => ({
+    email: initialValues.email || '',
+    fullName: initialValues.profile ? initialValues.profile.fullName : '',
+    company: initialValues.profile ? initialValues.profile.company : '',
+    telephone: initialValues.profile ? initialValues.profile.telephone : '',
   }),
   validationSchema: yup.object().shape({
     email: yup

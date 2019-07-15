@@ -21,12 +21,11 @@ const helpQuery = gql`
   }
 `;
 
-const Width = '340px';
-
 const Help = () => {
-  const [executeQuery] = useQuery({
+  const [supportData] = useQuery({
     query: helpQuery,
   });
+  const support = supportData.data ? supportData.data.support : [];
 
   return (
     <Layout>
@@ -40,36 +39,13 @@ const Help = () => {
           <MainColumn>
             <Heading>Help</Heading>
             <div className="columns">
-              <div className="column">
-                <Subtitle>{executeQuery.name}</Subtitle>
-                <video muted controls width={Width}>
-                  <source
-                    src={`//www.youtube.com/embed/${executeQuery.embedCode}`}
-                    type="video/mp4"
-                  />
-                </video>
-              </div>
-              {/* <div className="column">
-                <Subtitle>How to upload a dataroom file</Subtitle>
-                <video muted controls width={Width}>
-                  <source src={video} type="video/mp4" />
-                </video>
-              </div> */}
+              {support.map(item => (
+                <div className="column" key={item.id}>
+                  <Subtitle>{item.name}</Subtitle>
+                  {item.embedCode}
+                </div>
+              ))}
             </div>
-            {/* <div className="columns">
-              <div className="column">
-                <Subtitle>How to add a client</Subtitle>
-                <video muted controls width={Width}>
-                  <source src={video} type="video/mp4" />
-                </video>
-              </div>
-              <div className="column">
-                <Subtitle>How to delete a client</Subtitle>
-                <video muted controls width={Width}>
-                  <source src={video} type="video/mp4" />
-                </video>
-              </div>
-            </div> */}
           </MainColumn>
         </div>
       </div>

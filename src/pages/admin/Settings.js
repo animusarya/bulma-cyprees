@@ -11,6 +11,20 @@ import MainColumn from '../../components/MainColumn';
 import { Heading, Message, Loading } from '../../components/elements';
 import SettingsForm from '../../components/SettingsForm';
 
+const meQuery = gql`
+  query me {
+    me {
+      id
+      email
+      profile {
+        fullName
+        company
+        telephone
+      }
+    }
+  }
+`;
+
 const settingMutation = gql`
   mutation updateMe($input: UpdateUserInput!) {
     updateMe(input: $input) {
@@ -26,7 +40,12 @@ const settingMutation = gql`
 `;
 
 const Settings = () => {
+  const [meData] = useQuery({
+    query: meQuery,
+  });
   const [res, executeMutation] = useMutation(settingMutation);
+  const me = meData.data ? meData.data.me : {};
+  // console.log('res', me);
 
   return (
     <Layout>
@@ -41,10 +60,9 @@ const Settings = () => {
             <Heading>Settings</Heading>
             <div>
               <SettingsForm
-                onSubmit={data => {
-                  // console.log(data, 'data');
-                  executeMutation(data);
-                }}
+                enableReinitialize
+                initialValues={me}
+                onSubmit={data => executeMutation({ input: data })}
               />
             </div>
             {res.error && <Message type="error">{res.error.message}</Message>}
