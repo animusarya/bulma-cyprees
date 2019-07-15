@@ -9,7 +9,7 @@ import Sidebar from '../../components/Sidebar';
 import { Heading, Subtitle } from '../../components/elements';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
-import video from '../../assets/images/videoplayback.mp4';
+// import video from '../../assets/images/videoplayback.mp4';
 
 const helpQuery = gql`
   query support {
@@ -24,9 +24,10 @@ const helpQuery = gql`
 const Width = '340px';
 
 const Help = () => {
-  const [result, executeQuery] = useQuery({
+  const [executeQuery] = useQuery({
     query: helpQuery,
   });
+
   return (
     <Layout>
       <Seo title="Dashboard Admin" description="Page description" />
@@ -40,19 +41,22 @@ const Help = () => {
             <Heading>Help</Heading>
             <div className="columns">
               <div className="column">
-                <Subtitle>How to add a page</Subtitle>
+                <Subtitle>{executeQuery.name}</Subtitle>
                 <video muted controls width={Width}>
-                  <source src={video} type="video/mp4" />
+                  <source
+                    src={`//www.youtube.com/embed/${executeQuery.embedCode}`}
+                    type="video/mp4"
+                  />
                 </video>
               </div>
-              <div className="column">
+              {/* <div className="column">
                 <Subtitle>How to upload a dataroom file</Subtitle>
                 <video muted controls width={Width}>
                   <source src={video} type="video/mp4" />
                 </video>
-              </div>
+              </div> */}
             </div>
-            <div className="columns">
+            {/* <div className="columns">
               <div className="column">
                 <Subtitle>How to add a client</Subtitle>
                 <video muted controls width={Width}>
@@ -65,7 +69,7 @@ const Help = () => {
                   <source src={video} type="video/mp4" />
                 </video>
               </div>
-            </div>
+            </div> */}
           </MainColumn>
         </div>
       </div>
