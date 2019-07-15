@@ -4,7 +4,7 @@ import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 
-import { Title, Button, Message, Loading } from './elements';
+import { Title, Button, Message, Loading, WysiwygEditor } from './elements';
 
 // TODO: fix these mutations and queries when available
 
@@ -88,7 +88,10 @@ const PageContent = () => {
           </Button>
         </div>
       </div>
-      <div>Drag and drop</div>
+      <WysiwygEditor
+        value="<p>Hey this <strong>editor</strong> rocks 😀</p>"
+        onChange={data => console.log(data)}
+      />
       {resDel.error && <Message type="error">{resDel.error.message}</Message>}
       {resRemove.error && (
         <Message type="error">{resRemove.error.message}</Message>

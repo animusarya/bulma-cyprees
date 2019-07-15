@@ -9,6 +9,7 @@ import Loading from './Loading';
 import TextAreaGroup from './TextArea';
 import SelectGroup from './SelectGroup';
 import Dropzone from './Dropzone';
+import WysiwygEditor from './WysiwygEditor';
 
 export {
   InputGroup,
@@ -22,4 +23,5 @@ export {
   TextAreaGroup,
   SelectGroup,
   Dropzone,
+  WysiwygEditor,
 };

@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
-import { Dropzone } from '../components/elements';
+import { Dropzone, WysiwygEditor } from '../components/elements';
 
 const getHello = gql`
   {
@@ -18,8 +18,14 @@ const Test = () => {
     <Layout>
       <Seo title="Test" description="Some description here." />
       <div className="container">
+        <h1>Test page</h1>
+        <hr />
         <Dropzone onUpload={data => console.log('onUpload', data)} />
-        Test page
+        <hr />
+        <WysiwygEditor
+          value="<p>Hey this <strong>editor</strong> rocks 😀</p>"
+          onChange={data => console.log(data)}
+        />
       </div>
     </Layout>
   );
@@ -42,7 +48,6 @@ const Test2 = () => {
     <Layout>
       <Seo title="Test" description="Some description here." />
       <div className="container">
-        <Dropzone onUpload={data => console.log('onUpload', data)} />
         Test page
         <button
           type="button"
