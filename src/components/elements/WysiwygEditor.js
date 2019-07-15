@@ -25,14 +25,18 @@ const WysiwygEditor = ({ onChange, value }) => {
     const editorState = EditorState.createWithContent(contentState);
     [editor, setEditor] = useState(editorState);
   }
-  const htmlContent = draftToHtml(convertToRaw(editor.getCurrentContent()));
-  onChange(htmlContent);
 
   return (
     <Container>
       <Editor
         editorState={editor}
-        onEditorStateChange={editorState => setEditor(editorState)}
+        onEditorStateChange={editorState => {
+          setEditor(editorState);
+          const htmlContent = draftToHtml(
+            convertToRaw(editorState.getCurrentContent()),
+          );
+          onChange(htmlContent);
+        }}
       />
     </Container>
   );

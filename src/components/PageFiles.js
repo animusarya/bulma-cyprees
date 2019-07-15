@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
-import { withRouter } from 'react-router';
 
 import { Title, Button, Message, Loading, Dropzone } from './elements';
+import DeletePageBtn from './DeletePageBtn';
 
 const filesQuery = gql`
   query files($pageId: ID!) {
@@ -17,14 +17,6 @@ const filesQuery = gql`
       url
       order
       createdAt
-    }
-  }
-`;
-
-const removePageMutation = gql`
-  mutation removePage($id: ID!) {
-    removePage(id: $id) {
-      success
     }
   }
 `;
@@ -52,7 +44,7 @@ const Container = styled.div`
   }
 `;
 
-const PageFiles = ({ project, page, history }) => {
+const PageFiles = ({ project, page }) => {
   const [resultFile, executeQuery] = useQuery({
     query: filesQuery,
     variables: { pageId: page.id },
@@ -60,13 +52,11 @@ const PageFiles = ({ project, page, history }) => {
   const [resFileUpload, executeFileUploadMutation] = useMutation(
     uploadFileMutation,
   );
-  const [resRemove, executePageRemoveMutation] = useMutation(
-    removePageMutation,
-  );
+
   const [resDel, executeMutationDelete] = useMutation(removeFileMutation);
   const files =
     resultFile.data && resultFile.data.files ? resultFile.data.files : {};
-  console.log('resultFile', files);
+  // console.log('resultFile', files);
 
   return (
     <Container>
@@ -75,22 +65,7 @@ const PageFiles = ({ project, page, history }) => {
           <Title>{page.title}</Title>
         </div>
         <div className="column is-one-fifth">
-          <Button
-            onClick={() => {
-              swal('Are you confirm to delete this item?', {
-                buttons: ['Cancel', 'Confirm'],
-              }).then(async value => {
-                if (value) {
-                  await executePageRemoveMutation({
-                    id: page.id,
-                  });
-                  // redirect back to project page
-                  history.push(`/admin/project/${project.id}/pages`);
-                }
-              });
-            }}>
-            Delete Page
-          </Button>
+          <DeletePageBtn project={project.id} pageId={page.id} />
         </div>
       </div>
       <Dropzone
@@ -114,13 +89,7 @@ const PageFiles = ({ project, page, history }) => {
         <Message type="error">{resFileUpload.error.message}</Message>
       )}
       {resDel.error && <Message type="error">{resDel.error.message}</Message>}
-      {resRemove.error && (
-        <Message type="error">{resRemove.error.message}</Message>
-      )}
-      {resultFile.fetching ||
-      resFileUpload.fetching ||
-      resDel.fetching ||
-      resRemove.fetching ? (
+      {resultFile.fetching || resFileUpload.fetching || resDel.fetching ? (
         <Loading />
       ) : null}
       {files.length > 0 && (
@@ -193,4 +162,4 @@ const PageFiles = ({ project, page, history }) => {
   );
 };
 
-export default withRouter(PageFiles);
+export default PageFiles;

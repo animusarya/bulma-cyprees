@@ -30,6 +30,7 @@ const pageQuery = gql`
       name
       slug
       type
+      content
     }
   }
 `;

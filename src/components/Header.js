@@ -26,7 +26,7 @@ const Logo = styled.img`
   height: auto;
 `;
 
-const Button = styled.a`
+const Button = styled.button`
   background-color: transparent;
   border: transparent;
   color: #e8e9ea;
