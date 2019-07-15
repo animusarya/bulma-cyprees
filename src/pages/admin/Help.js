@@ -9,7 +9,6 @@ import Sidebar from '../../components/Sidebar';
 import { Heading, Subtitle } from '../../components/elements';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
-// import video from '../../assets/images/videoplayback.mp4';
 
 const helpQuery = gql`
   query support {
