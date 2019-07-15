@@ -18,6 +18,8 @@ const projectQuery = gql`
       id
       name
       slug
+      status
+      customDomain
     }
   }
 `;
@@ -27,11 +29,9 @@ const updateProjectMutation = gql`
     updateProject(id: $id, input: $input) {
       id
       name
-      clients {
-        id
-        email
-        status
-      }
+      slug
+      status
+      customDomain
     }
   }
 `;
@@ -47,7 +47,7 @@ const ProjectSetting = ({ match }) => {
       : {};
 
   const [res, executeMutation] = useMutation(updateProjectMutation);
-
+  console.log(resultProject, 'resultProject');
   return (
     <Layout>
       <Seo title="Dashboard Super Admin" description="Page description" />
@@ -62,8 +62,10 @@ const ProjectSetting = ({ match }) => {
             <Heading>Project Setting</Heading>
             <div>
               <ProjectSettingForm
+                enableReinitialize
+                initialValues={project}
                 onSubmit={data => {
-                  executeMutation(data);
+                  executeMutation({ input: data });
                 }}
               />
             </div>

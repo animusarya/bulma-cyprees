@@ -37,13 +37,30 @@ const ProjectSetting = props => {
         isWidth
         border
         isHorizontal
-        label="Email ID"
+        label="Slug"
         placeholder=""
-        name="email"
-        value={values.email}
+        name="slug"
+        value={values.slug}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={errors.email && touched.email ? errors.email : undefined}
+        errors={errors.slug && touched.slug ? errors.slug : undefined}
+      />
+      <InputGroup
+        fullWidth
+        isWidth
+        border
+        isHorizontal
+        label="Custom Domain"
+        placeholder=""
+        name="customDomain"
+        value={values.customDomain}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.customDomain && touched.customDomain
+            ? errors.customDomain
+            : undefined
+        }
       />
       <SelectGroup
         fullWidth
@@ -59,7 +76,9 @@ const ProjectSetting = props => {
         errors={errors.status && touched.status ? errors.status : undefined}
         options={[
           { value: 'pending', title: 'Pending' },
-          { value: 'accepted', title: 'Accepted' },
+          { value: 'active', title: 'Accepted' },
+          { value: 'notActive', title: 'Not Active' },
+          { value: 'canceled', title: 'Cancelled' },
         ]}
       />
       <div className="button-field is-pulled-right">
@@ -80,15 +99,17 @@ ProjectSetting.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({
-    name: '',
-    email: '',
-    status: '',
+  mapPropsToValues: ({ initialValues }) => ({
+    name: initialValues.name || '',
+    slug: initialValues.slug || '',
+    status: initialValues.status || '',
+    customDomain: initialValues.customDomain || '',
   }),
   validationSchema: yup.object().shape({
     name: yup.string().required('Name is required!'),
-    email: yup.string().required('Email id is required!'),
+    slug: yup.string().required('slug is required!'),
     status: yup.string().required('Status is required!'),
+    customDomain: yup.string().required('Custom Domain is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
