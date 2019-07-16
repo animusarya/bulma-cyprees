@@ -153,7 +153,7 @@ const ManageClients = ({ match }) => {
 
   return (
     <Layout>
-      <Seo title="Project Clients" description="Page description" />
+      <Seo title="Manage Clients" description="Invite Your Clients" />
       <Header />
       <Container className="columns">
         <div className="column is-one-fifth">

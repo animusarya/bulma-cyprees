@@ -88,7 +88,7 @@ const ProjectPages = ({ match }) => {
 
   return (
     <Layout>
-      <Seo title="Dashboard Admin" description="Page description" />
+      <Seo title="Project Pages" description="" />
       <Header />
       <div className="columns">
         <div className="column is-one-fifth">

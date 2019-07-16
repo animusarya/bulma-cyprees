@@ -51,11 +51,11 @@ const ManagePage = ({ match }) => {
       : {};
   const page =
     resultPage.data && resultPage.data.page ? resultPage.data.page : {};
-  console.log('resultProject', project, page);
+  // console.log('resultProject', project, page);
 
   return (
     <Layout>
-      <Seo title="Dashboard Admin" description="Page description" />
+      <Seo title="Manage Page" description="Manage Page Type Content Here" />
       <Header />
       <div className="columns">
         <div className="column is-one-fifth">

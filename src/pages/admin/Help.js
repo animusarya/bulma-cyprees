@@ -28,7 +28,7 @@ const Help = () => {
 
   return (
     <Layout>
-      <Seo title="Dashboard Admin" description="Page description" />
+      <Seo title="Help" description="Manage Help Content" />
       <Header />
       <div className="columns">
         <div className="column is-one-fifth">

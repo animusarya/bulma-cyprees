@@ -56,7 +56,7 @@ const ManageEmail = ({ match }) => {
 
   return (
     <Layout>
-      <Seo title="Dashboard Super Admin" description="Page description" />
+      <Seo title="Manage Email" description="Manage Email Content" />
       <Header />
       <div className="columns">
         <div className="column is-one-fifth">

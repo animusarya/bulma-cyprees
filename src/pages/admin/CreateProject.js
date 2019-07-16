@@ -67,7 +67,7 @@ const CreateProject = () => {
 
   return (
     <Layout>
-      <Seo title="Dashboard Admin" description="Page description" />
+      <Seo title="Create Project" description="Create New Project" />
       <Header />
       <div className="columns">
         <div className="column is-one-fifth">

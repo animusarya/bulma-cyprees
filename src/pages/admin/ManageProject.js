@@ -63,7 +63,7 @@ const ManageProject = ({ match }) => {
 
   return (
     <Layout>
-      <Seo title="Manage Project" description="Page description" />
+      <Seo title="Manage Project" description="Manage Your Project" />
       <Header />
       <Container className="columns">
         <div className="column is-one-fifth">

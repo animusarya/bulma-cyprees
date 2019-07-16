@@ -50,7 +50,7 @@ const createProjectMutation = gql`
 `;
 
 const ProjectUpdate = () => {
-  const [activeStep, setActiveStep] = useState(1);
+  const [setActiveStep] = useState(1);
   const [project, setProject] = useState({});
   const [subscription, setSubscription] = useState({});
   const [packagesData] = useQuery({
@@ -66,7 +66,7 @@ const ProjectUpdate = () => {
 
   return (
     <Layout>
-      <Seo title="Dashboard Admin" description="Page description" />
+      <Seo title="Project Update" description="Update Your Projects" />
       <Header />
       <div className="columns">
         <div className="column is-one-fifth">

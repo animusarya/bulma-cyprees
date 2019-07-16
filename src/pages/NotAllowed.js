@@ -6,7 +6,7 @@ import Seo from '../components/Seo';
 const NotAllowed = () => {
   return (
     <Layout>
-      <Seo title="Not Allowed" description="You dont have permission" />
+      <Seo title="Not Allowed" description="You don't have permission" />
       <div className="section">
         <div className="container">
           <h2 className="title">Not Allowed</h2>

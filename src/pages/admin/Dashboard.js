@@ -54,7 +54,7 @@ const Dashboard = () => {
 
   return (
     <Layout>
-      <Seo title="Dashboard Admin" description="Page description" />
+      <Seo title="Dashboard Admin" description="List of Projects Here" />
       <Header />
       <Container className="columns">
         <div className="column is-one-fifth">

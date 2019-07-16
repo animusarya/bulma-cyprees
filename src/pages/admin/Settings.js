@@ -49,7 +49,7 @@ const Settings = () => {
 
   return (
     <Layout>
-      <Seo title="User Settings" description="Page description" />
+      <Seo title="Settings" description="Update User info" />
       <Header />
       <div className="columns">
         <div className="column is-one-fifth">
