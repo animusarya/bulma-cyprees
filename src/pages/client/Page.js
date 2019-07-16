@@ -40,7 +40,7 @@ const Page = ({ match }) => {
 
   return (
     <Layout>
-      <Seo title="Client Dashboard" description="Page description" />
+      <Seo title="Client Page" description="Page description" />
       <ClientHeader />
       <Container className="section">
         <div className="container">

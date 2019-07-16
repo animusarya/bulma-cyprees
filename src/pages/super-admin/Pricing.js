@@ -86,7 +86,7 @@ const Pricing = () => {
 
   return (
     <Layout>
-      <Seo title="Projects Clients" description="Page description" />
+      <Seo title="Projects Pricing" description="Page description" />
       <Header />
       <Container className="columns">
         <div className="column is-one-fifth">

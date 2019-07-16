@@ -84,7 +84,7 @@ const ProjectsClient = ({ match }) => {
 
   return (
     <Layout>
-      <Seo title="User's Projects" description="Page description" />
+      <Seo title="Client Projects" description="Page description" />
       <Header />
       <Container className="columns">
         <div className="column is-one-fifth">
