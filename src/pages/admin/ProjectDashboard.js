@@ -11,6 +11,7 @@ import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
+import AdminSubHeader from '../../components/AdminSubHeader';
 
 const projectQuery = gql`
   query project($id: ID!) {
@@ -57,7 +58,7 @@ const ProjectDashboard = ({ match }) => {
 
   return (
     <Layout>
-      <Seo title="Dashboard Admin" description="Page description" />
+      <Seo title="Project Dashboard" />
       <Header />
       <Container className="columns">
         <div className="column is-one-fifth">
@@ -65,6 +66,7 @@ const ProjectDashboard = ({ match }) => {
         </div>
         <div className="column">
           <AdminHeader project={project} />
+          <AdminSubHeader project={project} />
           <MainColumn>
             <div className="content">
               <div className="hero-body">

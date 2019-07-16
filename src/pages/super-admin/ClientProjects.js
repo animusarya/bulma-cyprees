@@ -104,8 +104,7 @@ const ProjectsClient = ({ match }) => {
                     <th>Projects</th>
                     <th>Plan</th>
                     <th>Duration</th>
-                    <th>Start</th>
-                    <th>Expires</th>
+                    <th>Started on</th>
                     <th>Manage</th>
                     <th>Renew</th>
                     <th>Delete</th>
@@ -118,24 +117,14 @@ const ProjectsClient = ({ match }) => {
                       <td>
                         <strong>{project.name}</strong>
                       </td>
-                      <td>
-                        <i className="fas fa-pound-sign pound-icon"></i>
-                        {project.subscriptionAmount}
-                      </td>
-                      <td>{project.subscriptionDurationInMonths}</td>
+                      <td>£{project.subscriptionAmount}</td>
+                      <td>{project.subscriptionDurationInMonths} months</td>
                       <td>
                         {dayjs(project.subscriptionStartsAt).isValid()
                           ? dayjs(project.subscriptionStartsAt).format(
                               'DD-MM-YYYY',
                             )
                           : null}
-                      </td>
-                      <td>
-                        {dayjs(project.subscriptionEndsAt).isValid()
-                          ? dayjs(project.subscriptionEndsAt).format(
-                              'DD-MM-YYYY',
-                            )
-                          : '-'}
                       </td>
                       <td className="is-uppercase actions">
                         <LinkWrapper

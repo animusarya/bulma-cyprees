@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useQuery } from 'urql';
 import gql from 'graphql-tag';
 import { useStoreActions } from 'easy-peasy';
+import dayjs from 'dayjs';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -28,9 +29,6 @@ const projectsQuery = gql`
 `;
 
 const Container = styled.div`
-  .content {
-    align-self: center;
-  }
   .subtitle {
     margin-bottom: 2rem !important;
   }
@@ -83,26 +81,23 @@ const Dashboard = () => {
                 <Heading>Dashboard</Heading>
                 <div className="columns">
                   <div className="column">
-                    <Title>Client activity</Title>
+                    <Title>Projects</Title>
                   </div>
                   <div className="column is-one-fifth">
                     <input
                       className="input"
                       type="text"
-                      placeholder="Search by Client"
+                      placeholder="Search Project"
                     />
                   </div>
                 </div>
-
                 <table className="table is-fullwidth is-hoverable">
                   <thead>
                     <tr>
                       <th>Name</th>
-                      <th>File</th>
-                      <th>Login amount</th>
-                      <th>Downloaded</th>
-                      <th>Date</th>
-                      <th>Time</th>
+                      <th>Plan</th>
+                      <th>Duration</th>
+                      <th>Started on</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -113,11 +108,15 @@ const Dashboard = () => {
                             {project.name}
                           </Link>
                         </td>
-                        <td>Sale details</td>
-                        <td>5 Times</td>
-                        <td>3 days ago</td>
-                        <td>Wed 5 June 2019</td>
-                        <td>10:42:9</td>
+                        <td>£{project.subscriptionAmount}</td>
+                        <td>{project.subscriptionDurationInMonths} months</td>
+                        <td>
+                          {dayjs(project.subscriptionStartsAt).isValid()
+                            ? dayjs(project.subscriptionStartsAt).format(
+                                'DD-MM-YYYY',
+                              )
+                            : null}
+                        </td>
                       </tr>
                     ))}
                   </tbody>

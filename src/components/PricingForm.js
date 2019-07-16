@@ -39,7 +39,7 @@ const PricingForm = props => {
         type="number"
         name="durationInMonths"
         label="Duration"
-        placeholder="MM"
+        placeholder="12"
         value={values.durationInMonths}
         onChange={handleChange}
         onBlur={handleBlur}

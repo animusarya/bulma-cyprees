@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useQuery } from 'urql';
 import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -17,6 +18,7 @@ const getAdmins = gql`
     users {
       id
       email
+      createdAt
       profile {
         fullName
         company
@@ -78,6 +80,7 @@ const Dashboard = () => {
                     <th>Name</th>
                     <th>Company</th>
                     <th>Telephone</th>
+                    <th>Created On</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -93,6 +96,7 @@ const Dashboard = () => {
                         <td>{user.profile && user.profile.fullName}</td>
                         <td>{user.profile && user.profile.company}</td>
                         <td>{user.profile && user.profile.telephone}</td>
+                        <td>{dayjs(user.createdAt).format('DD-MM-YYYY')}</td>
                       </tr>
                     ))}
                 </tbody>

@@ -12,6 +12,7 @@ import { Loading } from './components/elements';
 
 import Home from './pages/Home';
 import Error404 from './pages/404';
+import NotAllowed from './pages/NotAllowed';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
@@ -42,15 +43,22 @@ import Settings from './pages/admin/Settings';
 import DashboardClient from './pages/client/Dashboard';
 import Page from './pages/client/Page';
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ component: Component, access, ...rest }) => {
   const isLoggedIn = useStoreState(state => state.isLoggedIn.value);
+  const user = useStoreState(state => state.user.data);
 
   return (
     <Route
       {...rest}
-      render={props =>
-        isLoggedIn ? <Component {...props} /> : <Redirect to="/login" />
-      }
+      render={props => {
+        if (!isLoggedIn) {
+          return <Redirect to="/login" />;
+        }
+        if (access !== user.type) {
+          return <Redirect to="/not-allowed" />;
+        }
+        return <Component {...props} />;
+      }}
     />
   );
 };
@@ -93,10 +101,12 @@ class App extends React.Component {
                       path="/forgot-password"
                       component={ForgotPassword}
                     />
+                    <Route exact path="/not-allowed" component={NotAllowed} />
                     <PrivateRoute
                       exact
                       path="/super-admin/dashboard"
                       component={DashboardSuperAdmin}
+                      access="superAdmin"
                     />
                     <Route
                       exact
@@ -107,26 +117,31 @@ class App extends React.Component {
                       exact
                       path="/super-admin/client/:clientId/projects"
                       component={ClientProjects}
+                      access="superAdmin"
                     />
                     <PrivateRoute
                       exact
                       path="/super-admin/client/:clientId/project/:projectId/info"
                       component={ProjectInfo}
+                      access="superAdmin"
                     />
                     <PrivateRoute
                       exact
                       path="/super-admin/pricing"
                       component={Pricing}
+                      access="superAdmin"
                     />
                     <PrivateRoute
                       exact
                       path="/super-admin/discounts"
                       component={Discounts}
+                      access="superAdmin"
                     />
                     <PrivateRoute
                       exact
                       path="/admin/dashboard"
                       component={DashboardAdmin}
+                      access="admin"
                     />
                     {/* <PrivateRoute
                       exact
@@ -137,58 +152,78 @@ class App extends React.Component {
                       exact
                       path="/admin/project/create"
                       component={CreateProject}
+                      access="admin"
                     />
                     <PrivateRoute
                       exact
                       path="/admin/project/:id"
                       component={ProjectDashboard}
+                      access="admin"
                     />
                     <PrivateRoute
                       exact
                       path="/admin/project/:id/pages"
                       component={ProjectPages}
+                      access="admin"
                     />
                     <PrivateRoute
                       exact
                       path="/admin/project/:id/pages/:pageId"
                       component={ManagePage}
+                      access="admin"
                     />
                     <PrivateRoute
                       exact
                       path="/admin/project/:id/emails"
                       component={ManageEmail}
+                      access="admin"
                     />
                     <PrivateRoute
                       exact
                       path="/admin/project/:id/clients"
                       component={ManageClients}
+                      access="admin"
                     />
                     <PrivateRoute
                       exact
                       path="/admin/project/:id/update"
                       component={ProjectUpdate}
+                      access="admin"
                     />
                     {/* <Route
                       exact
                       path="/admin/project/{id}"
                       component={WelcomeScreen}
                     /> */}
-                    <PrivateRoute exact path="/admin/help" component={Help} />
+                    <PrivateRoute
+                      exact
+                      path="/admin/help"
+                      component={Help}
+                      access="admin"
+                    />
                     <PrivateRoute
                       exact
                       path="/admin/project/:id/settings"
                       component={ProjectSetting}
+                      access="admin"
                     />
-                    <Route exact path="/admin/settings" component={Settings} />
-                    <Route
+                    <PrivateRoute
+                      exact
+                      path="/admin/settings"
+                      component={Settings}
+                      access="admin"
+                    />
+                    <PrivateRoute
                       exact
                       path="/client/dashboard"
                       component={DashboardClient}
+                      access="client"
                     />
                     <PrivateRoute
                       exact
                       path="/client/page/:id"
                       component={Page}
+                      access="client"
                     />
                     <Route exact path="/test" component={Test} />
                     <Route component={Error404} />

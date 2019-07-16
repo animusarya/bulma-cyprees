@@ -50,7 +50,7 @@ const ProjectSetting = ({ match }) => {
   // console.log(resultProject, 'resultProject');
   return (
     <Layout>
-      <Seo title="Dashboard Super Admin" description="Page description" />
+      <Seo title="Project Settings" description="Page description" />
       <Header />
       <div className="columns">
         <div className="column is-one-fifth">
