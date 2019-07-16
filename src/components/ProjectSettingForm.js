@@ -37,7 +37,7 @@ const ProjectSetting = props => {
         isWidth
         border
         isHorizontal
-        label="Slug"
+        label="Project Title"
         placeholder=""
         name="slug"
         value={values.slug}

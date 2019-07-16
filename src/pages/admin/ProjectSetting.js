@@ -47,7 +47,7 @@ const ProjectSetting = ({ match }) => {
       : {};
 
   const [res, executeMutation] = useMutation(updateProjectMutation);
-  console.log(resultProject, 'resultProject');
+  // console.log(resultProject, 'resultProject');
   return (
     <Layout>
       <Seo title="Dashboard Super Admin" description="Page description" />
