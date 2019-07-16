@@ -53,9 +53,9 @@ const Header = () => {
             role="navigation"
             aria-label="main navigation">
             <div className="navbar-brand">
-              <a className="navbar-item" href="/">
+              <Link className="navbar-item" to="/super-admin/dashboard">
                 <Logo src={logoAlt} alt="logo" />
-              </a>
+              </Link>
               <a
                 role="button"
                 className="navbar-burger burger"
@@ -88,9 +88,9 @@ const Header = () => {
             role="navigation"
             aria-label="main navigation">
             <div className="navbar-brand">
-              <a className="navbar-item" href="/">
+              <Link className="navbar-item" to="/admin/dashboard">
                 <Logo src={logoAlt} alt="logo" />
-              </a>
+              </Link>
               <a
                 role="button"
                 className="navbar-burger burger"

@@ -104,7 +104,7 @@ const ProjectsClient = ({ match }) => {
                     <th>Projects</th>
                     <th>Plan</th>
                     <th>Duration</th>
-                    <th>Start on</th>
+                    <th>Started on</th>
                     <th>Manage</th>
                     <th>Renew</th>
                     <th>Delete</th>

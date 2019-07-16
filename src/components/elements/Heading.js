@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.h2`
-  margin-bottom: 1.4rem;
+  margin-bottom: 2.4rem !important;
 `;
 
 const Heading = ({ children }) => (
