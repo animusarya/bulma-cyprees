@@ -26,6 +26,7 @@ import Discounts from './pages/super-admin/Discounts';
 import ClientProjects from './pages/super-admin/ClientProjects';
 import ProjectInfo from './pages/super-admin/ProjectInfo';
 import Pricing from './pages/super-admin/Pricing';
+import HelpSuperAdmin from './pages/super-admin/Help';
 
 import DashboardAdmin from './pages/admin/Dashboard';
 import CreateProject from './pages/admin/CreateProject';
@@ -106,6 +107,11 @@ class App extends React.Component {
                       path="/super-admin/dashboard"
                       component={DashboardSuperAdmin}
                       access="superAdmin"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/super-admin/help"
+                      component={HelpSuperAdmin}
                     />
                     <PrivateRoute
                       exact
