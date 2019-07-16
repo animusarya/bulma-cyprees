@@ -40,6 +40,9 @@ const Sidebar = () => {
           <li>
             <Link to="/super-admin/discounts">Discount Codes</Link>
           </li>
+          <li>
+            <Link to="/super-admin/help">Manage Help</Link>
+          </li>
         </ul>
       )}
       {userData.type === 'admin' && (
