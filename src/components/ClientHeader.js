@@ -49,7 +49,7 @@ const ClientHeader = () => (
             </Link>
           </div>
           <div>
-            <Link to="/" className="button is-text is-size-7">
+            <Link to="/client/settings" className="button is-text is-size-7">
               Welcome Jonathan
               <i className="fas fa-power-off icon"></i>
             </Link>

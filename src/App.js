@@ -42,6 +42,7 @@ import Settings from './pages/admin/Settings';
 
 import DashboardClient from './pages/client/Dashboard';
 import Page from './pages/client/Page';
+import ClientSettings from './pages/client/Settings';
 
 const PrivateRoute = ({ component: Component, access, ...rest }) => {
   const isLoggedIn = useStoreState(state => state.isLoggedIn.value);
@@ -223,6 +224,12 @@ class App extends React.Component {
                       exact
                       path="/client/page/:id"
                       component={Page}
+                      access="client"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/client/settings"
+                      component={ClientSettings}
                       access="client"
                     />
                     <Route exact path="/test" component={Test} />
