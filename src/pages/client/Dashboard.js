@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useQuery } from 'urql';
 import gql from 'graphql-tag';
+import { useStoreActions } from 'easy-peasy';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -15,15 +16,33 @@ import {
 } from '../../components/elements';
 import ClientFooter from '../../components/ClientFooter';
 
-// TODO: fix this when query available
-
-const clientDashboardQuery = gql`
-  query projects($clientId: ID!) {
-    projects(clientId: $clientId) {
+const meQuery = gql`
+  query me {
+    me {
       id
-      document
-      section
-      uploaded
+      email
+      profile {
+        fullName
+      }
+      clientProject {
+        id
+        name
+        slug
+        logo
+        heroImage
+      }
+    }
+  }
+`;
+
+const pagesQuery = gql`
+  query pages($projectId: ID!) {
+    pages(id: $projectId) {
+      id
+      name
+      slug
+      content
+      type
     }
   }
 `;
@@ -34,11 +53,30 @@ const Container = styled.div`
   }
 `;
 
-const Dashboard = ({ match }) => {
-  const [result] = useQuery({
-    query: clientDashboardQuery,
-    variables: { clientId: match.params.clientId },
+const Dashboard = () => {
+  const [resultMe] = useQuery({
+    query: meQuery,
   });
+  const me = resultMe.data ? resultMe.data.me : {};
+  const project = me.clientProject || {};
+
+  // set active project
+  const updateProject = useStoreActions(
+    actions => actions.active.updateProject,
+  );
+  updateProject(project.id);
+
+  // fetch page data
+  const [resultPages] = useQuery({
+    query: pagesQuery,
+    variables: { projectId: project.id },
+  });
+  const pages = [];
+  console.log('resultPages', resultPages);
+
+  // fetch files for page
+
+  console.log('result', me, project);
 
   return (
     <Layout>
@@ -50,11 +88,14 @@ const Dashboard = ({ match }) => {
             <div className="column is-three-fifths is-offset-one-fifth">
               <Heading>Overview</Heading>
               <Title marginbottom="0rem">Property</Title>
-              {result.error && (
-                <Message type="error">{result.error.message}</Message>
+              {resultMe.error && (
+                <Message type="error">{resultMe.error.message}</Message>
               )}
-              {result.fetching && <Loading />}
-              {result.data && result.data.projects && (
+              {resultPages.error && (
+                <Message type="error">{resultPages.error.message}</Message>
+              )}
+              {(resultMe.fetching || resultPages.fetching) && <Loading />}
+              {pages && (
                 <table className="table is-fullwidth is-hoverable">
                   <thead>
                     <tr>
@@ -65,11 +106,11 @@ const Dashboard = ({ match }) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {result.data.projects.map(project => (
+                    {pages.map(page => (
                       <tr>
-                        <td>{project.document}</td>
-                        <td>{project.section}</td>
-                        <td>{project.uploaded}</td>
+                        <td>{page.document}</td>
+                        <td>{page.section}</td>
+                        <td>{page.uploaded}</td>
                         <td>
                           <Button
                             secondary
