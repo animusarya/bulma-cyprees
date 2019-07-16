@@ -23,7 +23,7 @@ const DiscountForm = props => {
         isWidth
         border
         isHorizontal
-        label="Discount Name"
+        label="Discount Title"
         placeholder="Summer Discount"
         name="name"
         value={values.name}

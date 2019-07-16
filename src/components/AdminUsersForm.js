@@ -26,6 +26,7 @@ const AdminUsersForm = props => {
       <InputGroup
         border
         name="email"
+        placeholder="john@doe.com"
         value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}

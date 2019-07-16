@@ -90,7 +90,9 @@ const ProjectInfo = ({ match }) => {
         </div>
         <div className="column">
           <MainColumn>
-            <Heading>Users &gt; {user.email} &gt; Project Arden</Heading>
+            <Heading>
+              Users &gt; {user.email} &gt; {project.name}
+            </Heading>
             <Title>Project Information</Title>
             <div className="project-info">
               <ProjectInfoForm

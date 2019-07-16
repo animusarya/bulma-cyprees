@@ -144,10 +144,7 @@ const Pricing = () => {
                     {result.data.packages.map(item => (
                       <tr key={item.id}>
                         <td>{item.name}</td>
-                        <td>
-                          <i className="fas fa-pound-sign pound-icon"></i>
-                          {item.price}
-                        </td>
+                        <td>£{item.price}</td>
                         <td className="is-uppercase actions has-text-right">
                           <Button
                             secondary

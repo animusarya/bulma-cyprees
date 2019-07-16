@@ -38,6 +38,11 @@ const Button = styled.button`
 
 const Header = () => {
   const userData = useStoreState(state => state.user.data);
+  const handleLogout = () => {
+    window.localStorage.clear();
+    window.location.reload(true);
+    window.location.replace('/');
+  };
 
   return (
     <div>
@@ -66,7 +71,7 @@ const Header = () => {
               <div className="navbar-end">
                 <div className="navbar-item">
                   <div className="buttons">
-                    <Button className="button">
+                    <Button className="button" onClick={() => handleLogout()}>
                       <i className="fas fa-power-off"></i>
                     </Button>
                   </div>
@@ -107,7 +112,7 @@ const Header = () => {
                         <i className="fas fa-cog"></i>
                       </LinkWrapper>
                     </Button>
-                    <Button className="button">
+                    <Button className="button" onClick={() => handleLogout()}>
                       <i className="fas fa-power-off"></i>
                     </Button>
                   </div>
