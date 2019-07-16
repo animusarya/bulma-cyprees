@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-import { InputGroup, Button, SelectGroup } from './elements';
+import { InputGroup, Button } from './elements';
 
 const ProjectSetting = props => {
   const {
@@ -37,7 +37,7 @@ const ProjectSetting = props => {
         isWidth
         border
         isHorizontal
-        label="Project Title"
+        label="Project URL"
         placeholder=""
         name="slug"
         value={values.slug}
@@ -62,25 +62,6 @@ const ProjectSetting = props => {
             : undefined
         }
       />
-      <SelectGroup
-        fullWidth
-        isWidth
-        border
-        isHorizontal
-        label="Status"
-        placeholder=""
-        name="status"
-        value={values.status}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={errors.status && touched.status ? errors.status : undefined}
-        options={[
-          { value: 'pending', title: 'Pending' },
-          { value: 'active', title: 'Accepted' },
-          { value: 'notActive', title: 'Not Active' },
-          { value: 'canceled', title: 'Cancelled' },
-        ]}
-      />
       <div className="button-field is-pulled-right">
         <Button disabled={isSubmitting}>Update</Button>
       </div>
@@ -102,13 +83,11 @@ export default withFormik({
   mapPropsToValues: ({ initialValues }) => ({
     name: initialValues.name || '',
     slug: initialValues.slug || '',
-    status: initialValues.status || '',
     customDomain: initialValues.customDomain || '',
   }),
   validationSchema: yup.object().shape({
     name: yup.string().required('Name is required!'),
     slug: yup.string().required('slug is required!'),
-    status: yup.string().required('Status is required!'),
     customDomain: yup.string().required('Custom Domain is required!'),
   }),
 

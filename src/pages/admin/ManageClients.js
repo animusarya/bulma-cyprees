@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
+import dayjs from 'dayjs';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -11,7 +12,13 @@ import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
-import { Subtitle, Button, Message, Loading } from '../../components/elements';
+import {
+  Heading,
+  Subtitle,
+  Button,
+  Message,
+  Loading,
+} from '../../components/elements';
 import ManageAdminClientForm from '../../components/ManageAdminClientForm';
 
 const projectQuery = gql`
@@ -155,6 +162,7 @@ const ManageClients = ({ match }) => {
         <div className="column">
           <AdminHeader project={project} />
           <MainColumn>
+            <Heading>Project Clients</Heading>
             <Subtitle className="subtitle">Add Client</Subtitle>
             <div className="field is-grouped">
               <ManageAdminClientForm
@@ -199,92 +207,101 @@ const ManageClients = ({ match }) => {
                 </Button>
               </p>
             </div>
-            <Subtitle>
-              Manage Clients{' '}
-              <span className="has-text-weight-normal">
-                (Last update {project.updatedAt})
-              </span>
-            </Subtitle>
             {project.clients && project.clients.length > 0 && (
-              <table className="table is-fullwidth is-hoverable">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Status</th>
-                    <th className="has-text-centered">Resend</th>
-                    <th className="has-text-centered">Access</th>
-                    <th className="has-text-centered">Notify Status </th>
-                    <th className="has-text-centered">Delete</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {project.clients.map(item => (
-                    <tr key={item.id}>
-                      <td>-</td>
-                      <td>{item.email}</td>
-                      <td>{item.status}</td>
-                      <td className="has-text-centered">
-                        <Button
-                          secondary
-                          paddingless
-                          onClick={() => {
-                            swal('You want to resend email?', {
-                              buttons: ['Cancel', 'Confirm'],
-                            }).then(async value => {
-                              if (value) {
-                                await executeMutationResendEmail({
-                                  id: item.id,
-                                });
-                                executeQuery({ requestPolicy: 'network-only' });
-                              }
-                            });
-                          }}>
-                          Resend Register Email
-                        </Button>
-                      </td>
-                      <td className="has-text-centered">
-                        <Button
-                          secondary
-                          paddingless
-                          onClick={() => {
-                            swal('Are you sure to change client access?', {
-                              buttons: ['Cancel', 'Confirm'],
-                            }).then(async value => {
-                              if (value) {
-                                await executeMutationCheck({ id: item.id });
-                                executeQuery({ requestPolicy: 'network-only' });
-                              }
-                            });
-                          }}>
-                          <i className="far fa-check-square"></i>
-                        </Button>
-                      </td>
-                      <td className="has-text-centered">{item.notifyStatus}</td>
-                      <td className="has-text-centered">
-                        <Button
-                          secondary
-                          paddingless
-                          onClick={() => {
-                            swal('Are you confirm to remove this client?', {
-                              buttons: ['Cancel', 'Confirm'],
-                            }).then(async value => {
-                              if (value) {
-                                await executeRemoveClientMutation({
-                                  id: project.id,
-                                  clientId: item.id,
-                                });
-                                executeQuery({ requestPolicy: 'network-only' });
-                              }
-                            });
-                          }}>
-                          <i className="far fa-trash-alt"></i>
-                        </Button>
-                      </td>
+              <React.Fragment>
+                <Subtitle>
+                  Manage Clients{' '}
+                  <span className="has-text-weight-normal">
+                    (Last update {dayjs(project.updatedAt).format('DD-MM-YYYY')}
+                    )
+                  </span>
+                </Subtitle>
+                <table className="table is-fullwidth is-hoverable">
+                  <thead>
+                    <tr>
+                      <th>Email</th>
+                      <th>Status</th>
+                      <th className="has-text-centered">Resend</th>
+                      <th className="has-text-centered">Access</th>
+                      <th className="has-text-centered">Notify Status </th>
+                      <th className="has-text-centered">Delete</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {project.clients.map(item => (
+                      <tr key={item.id}>
+                        <td>{item.email}</td>
+                        <td>{item.status}</td>
+                        <td className="has-text-centered">
+                          <Button
+                            secondary
+                            paddingless
+                            onClick={() => {
+                              swal('You want to resend email?', {
+                                buttons: ['Cancel', 'Confirm'],
+                              }).then(async value => {
+                                if (value) {
+                                  await executeMutationResendEmail({
+                                    id: item.id,
+                                  });
+                                  executeQuery({
+                                    requestPolicy: 'network-only',
+                                  });
+                                }
+                              });
+                            }}>
+                            Resend Register Email
+                          </Button>
+                        </td>
+                        <td className="has-text-centered">
+                          <Button
+                            secondary
+                            paddingless
+                            onClick={() => {
+                              swal('Are you sure to change client access?', {
+                                buttons: ['Cancel', 'Confirm'],
+                              }).then(async value => {
+                                if (value) {
+                                  await executeMutationCheck({ id: item.id });
+                                  executeQuery({
+                                    requestPolicy: 'network-only',
+                                  });
+                                }
+                              });
+                            }}>
+                            <i className="far fa-check-square"></i>
+                          </Button>
+                        </td>
+                        <td className="has-text-centered">
+                          {item.notifyStatus}
+                        </td>
+                        <td className="has-text-centered">
+                          <Button
+                            secondary
+                            paddingless
+                            onClick={() => {
+                              swal('Are you confirm to remove this client?', {
+                                buttons: ['Cancel', 'Confirm'],
+                              }).then(async value => {
+                                if (value) {
+                                  await executeRemoveClientMutation({
+                                    id: project.id,
+                                    clientId: item.id,
+                                  });
+                                  executeQuery({
+                                    requestPolicy: 'network-only',
+                                  });
+                                }
+                              });
+                            }}>
+                            <i className="far fa-trash-alt"></i>
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </React.Fragment>
             )}
             <div className="notify-title">
               <Subtitle>Clients Tools</Subtitle>
