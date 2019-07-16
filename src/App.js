@@ -108,7 +108,7 @@ class App extends React.Component {
                       component={DashboardSuperAdmin}
                       access="superAdmin"
                     />
-                    <Route
+                    <PrivateRoute
                       exact
                       path="/super-admin/help"
                       component={HelpSuperAdmin}
