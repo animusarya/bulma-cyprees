@@ -19,6 +19,7 @@ const LoginForm = props => {
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
+        border
         label="Email"
         name="email"
         placeholder="john@doe.com"
@@ -28,6 +29,7 @@ const LoginForm = props => {
         errors={errors.email && touched.email ? errors.email : undefined}
       />
       <InputGroup
+        border
         label="Password"
         name="password"
         type="password"
@@ -41,7 +43,13 @@ const LoginForm = props => {
       />
       <div className="field">
         <div className="control">
-          <Button disabled={isSubmitting}>Login</Button>
+          <Button
+            marginTop
+            type="button"
+            className="button is-medium is-fullwidth"
+            disabled={isSubmitting}>
+            Login
+          </Button>
         </div>
       </div>
     </form>

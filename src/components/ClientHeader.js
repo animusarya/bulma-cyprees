@@ -59,73 +59,77 @@ const ClientHeader = () => {
   };
 
   return (
-  <Container>
-    <MainColumn marginleft="8%" marginRight="8%" paddingless>
-      <div className="columns">
-        <div className="column is-8 is-offset-2">
-          <div>
-            <Link to="/client/dashboard" className="navbar-item">
-              <Logo src={logo} alt="logo" />
-            </Link>
-          </div>
-          <div>
-          <Button>
-            <Link to="/client/settings" className="button is-text is-size-7">
-              Welcome Jonathan
-            </Link>
-          </Button>
-            <Button className="button is-text" onClick={() => handleLogout()}>
+    <Container>
+      <MainColumn marginleft="8%" marginRight="8%" paddingless>
+        <div className="columns">
+          <div className="column is-8 is-offset-2">
+            <div>
+              <Link to="/client/dashboard" className="navbar-item">
+                <Logo src={logo} alt="logo" />
+              </Link>
+            </div>
+            <div>
+              <Button>
+                <Link
+                  to="/client/settings"
+                  className="button is-text is-size-7">
+                  Welcome Jonathan
+                </Link>
+              </Button>
+              <Button className="button is-text" onClick={() => handleLogout()}>
                 <i className="fas fa-power-off icon"></i>
-            </Button>
-            <div className="has-text-right">
-              <Title marginbottom="0px">Project Arden</Title>
+              </Button>
+              <div className="has-text-right">
+                <Title marginbottom="0px">Project Arden</Title>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <NavbarMenu
-        className="navbar"
-        role="navigation"
-        aria-label="main navigation">
-        <div className="navbar-brand">
-          <Link
-            to="/"
-            role="button"
-            className="navbar-burger burger has-text-white"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </Link>
-        </div>
-        <div id="navbarBasicExample" className="navbar-menu">
-          <div className="navbar-start">
-            <Link to="/client/dashboard" className="navbar-item has-text-white">
-              Overview
-            </Link>
-            <Link to="/" className="navbar-item has-text-white">
-              Information Memorandum
-            </Link>
-            <Link to="/" className="navbar-item has-text-white">
-              Property
-            </Link>
-            <Link to="/" className="navbar-item has-text-white">
-              Legal
-            </Link>
-            <Link to="/" className="navbar-item has-text-white">
-              Operational
+        <NavbarMenu
+          className="navbar"
+          role="navigation"
+          aria-label="main navigation">
+          <div className="navbar-brand">
+            <Link
+              to="/"
+              role="button"
+              className="navbar-burger burger has-text-white"
+              aria-label="menu"
+              aria-expanded="false"
+              data-target="navbarBasicExample">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
             </Link>
           </div>
-        </div>
-      </NavbarMenu>
-      <section className="hero is-primary">
-        <HeroImg src={logoBg} alt="logo-bg" />
-      </section>
-    </MainColumn>
-  </Container>
-);
+          <div id="navbarBasicExample" className="navbar-menu">
+            <div className="navbar-start">
+              <Link
+                to="/client/dashboard"
+                className="navbar-item has-text-white">
+                Overview
+              </Link>
+              <Link to="/" className="navbar-item has-text-white">
+                Information Memorandum
+              </Link>
+              <Link to="/" className="navbar-item has-text-white">
+                Property
+              </Link>
+              <Link to="/" className="navbar-item has-text-white">
+                Legal
+              </Link>
+              <Link to="/" className="navbar-item has-text-white">
+                Operational
+              </Link>
+            </div>
+          </div>
+        </NavbarMenu>
+        <section className="hero is-primary">
+          <HeroImg src={logoBg} alt="logo-bg" />
+        </section>
+      </MainColumn>
+    </Container>
+  );
 };
 
 export default ClientHeader;

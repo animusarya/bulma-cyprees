@@ -4,12 +4,10 @@ import { useMutation } from 'urql';
 import gql from 'graphql-tag';
 
 import Seo from '../components/Seo';
-import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
 import RegisterForm from '../components/RegisterForm';
-import Footer from '../components/Footer';
-import loginBg from '../assets/images/login-bg.jpg';
-import logo from '../assets/images/logo.png';
+import logo from '../assets/images/logo1.png';
+import background from '../assets/images/intelliback.jpg';
 
 const registerMutation = gql`
   mutation register($email: String!, $password: String!) {
@@ -25,20 +23,40 @@ const registerMutation = gql`
 `;
 
 const Container = styled.div`
-  .column:last-child {
-    align-self: center;
+  background-image: url(${background});
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  background-position: center center;
+  height: auto;
+  .register-page {
+    width: 52%;
+    margin-right: auto;
+    margin-left: auto;
+    color: #333;
+    background: rgba(255, 255, 255, 0.8);
+  }
+  .hero-body {
+    align-items: flex-start !important;
   }
 `;
 
 const FormContainer = styled.div`
   padding: 0 3rem;
+  margin-top: 2rem;
   @media only screen and (max-width: 768px) {
     padding: 2rem;
+  }
+  .navbar-item {
+    display: grid;
+  }
+  h1 {
+    font-size: 2.3rem;
+    margin-top: -1rem;
   }
 `;
 
 const Logo = styled.img`
-  width: 300px;
+  width: 117px;
   height: auto;
   margin-bottom: 2rem;
 `;
@@ -47,23 +65,46 @@ const Register = () => {
   const [res, executeMutation] = useMutation(registerMutation);
 
   return (
-    <Layout>
-      <Seo title="Register" description="Some description here." />
-      <Container className="columns">
-        <div className="column">
-          <img src={loginBg} alt="Register banner" />
-        </div>
-        <div className="column">
-          <FormContainer>
-            <Logo src={logo} alt="logo banner" />
-            <RegisterForm onSubmit={data => executeMutation(data)} />
-            {res.error && <Message type="error">{res.error.message}</Message>}
-            {res.fetching ? <Loading /> : null}
-          </FormContainer>
-        </div>
-      </Container>
-      <Footer />
-    </Layout>
+    <Container>
+      <div className="register-page">
+        <Seo title="Register" description="Register Yourself Here" />
+        <section className="hero is-fullheight">
+          <div className="hero-body">
+            <div className="container">
+              <FormContainer>
+                <div>
+                  <nav
+                    className="navbar"
+                    role="navigation"
+                    aria-label="main navigation">
+                    <div className="navbar-brand">
+                      <Logo src={logo} alt="logo banner" />
+                    </div>
+                    <div id="navbarBasicExample" className="navbar-menu">
+                      <div className="navbar-end">
+                        <div className="navbar-item has-text-black-bis has-text-right">
+                          <h2 className="has-text-weight-bold is-size-5">
+                            Registration
+                          </h2>
+                          <h1 className="has-text-weight-bold">
+                            Project Arden
+                          </h1>
+                        </div>
+                      </div>
+                    </div>
+                  </nav>
+                </div>
+                <RegisterForm onSubmit={data => executeMutation(data)} />
+                {res.error && (
+                  <Message type="error">{res.error.message}</Message>
+                )}
+                {res.fetching ? <Loading /> : null}
+              </FormContainer>
+            </div>
+          </div>
+        </section>
+      </div>
+    </Container>
   );
 };
 

@@ -26,7 +26,7 @@ const Container = styled.div`
 const CheckBox = ({ text, margin }) => (
   <Container margin={margin}>
     <div className="columns is-horizontal is-mobile">
-      <div className="column is-1-desktop  has-text-left text has-text-weight-semibold	">
+      <div className="column is-1-desktop  has-text-left text has-text-weight-semibold">
         <label className="checkbox">{text}</label>
       </div>
       <div className="column">

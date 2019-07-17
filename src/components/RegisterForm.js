@@ -4,6 +4,8 @@ import { withFormik } from 'formik';
 import * as yup from 'yup';
 
 import { InputGroup, Button } from './elements';
+import Scrollbar from './Scrollbar';
+import Disclaimer from './Disclaimer';
 
 const RegisterForm = props => {
   const {
@@ -19,6 +21,7 @@ const RegisterForm = props => {
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
+        border
         label="Full Name:"
         name="fullName"
         type="text"
@@ -31,6 +34,7 @@ const RegisterForm = props => {
         }
       />
       <InputGroup
+        border
         label="Email:"
         name="email"
         placeholder="john@doe.com"
@@ -40,6 +44,7 @@ const RegisterForm = props => {
         errors={errors.email && touched.email ? errors.email : undefined}
       />
       <InputGroup
+        border
         label="Password:"
         name="password"
         type="password"
@@ -52,6 +57,7 @@ const RegisterForm = props => {
         }
       />
       <InputGroup
+        border
         label="Confirm Password:"
         name="confirmPassword"
         type="password"
@@ -65,11 +71,22 @@ const RegisterForm = props => {
             : undefined
         }
       />
+      <Scrollbar />
+      <label className="checkbox">
+        <input type="checkbox" />{' '}
+        <strong>I Accept the above Non Disclosure Agreement</strong>
+      </label>
       <div className="field">
         <div className="control">
-          <Button disabled={isSubmitting}>Register</Button>
+          <Button
+            marginTop
+            disabled={isSubmitting}
+            className="button is-fullwidth">
+            Register
+          </Button>
         </div>
       </div>
+      <Disclaimer />
     </form>
   );
 };
@@ -105,7 +122,7 @@ export default withFormik({
       .string()
       .required('This filed is required!')
       .label('Confirm password')
-      .test('passwords-match', 'Passwords not matched!', function(values) {
+      .test('passwords-match', 'Passwords not matched!', function (values) {
         return this.parent.password === values;
       }),
   }),
