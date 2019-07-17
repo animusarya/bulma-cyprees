@@ -16,7 +16,7 @@ const Container = styled.div`
     padding: 0px;
   }
   .icon {
-    margin-left: 1rem !important;
+    margin-left: 0.5rem !important;
     font-size: 8px !important;
   }
 `;
@@ -37,8 +37,28 @@ const HeroImg = styled.img`
   height: 12rem;
   width: inherit;
 `;
+const Button = styled.button`
+  background-color: #fff;
+  border: transparent;
+  margin-right: 0px !important;
+  :hover {
+    background-color: #fff !important;
+  }
+  a {
+    :hover {
+      background-color: #fff !important;
+    }
+  }
+`;
 
-const ClientHeader = () => (
+const ClientHeader = () => {
+  const handleLogout = () => {
+    window.localStorage.clear();
+    window.location.reload(true);
+    window.location.replace('/');
+  };
+
+  return (
   <Container>
     <MainColumn marginleft="8%" marginRight="8%" paddingless>
       <div className="columns">
@@ -49,10 +69,14 @@ const ClientHeader = () => (
             </Link>
           </div>
           <div>
+          <Button>
             <Link to="/client/settings" className="button is-text is-size-7">
               Welcome Jonathan
-              <i className="fas fa-power-off icon"></i>
             </Link>
+          </Button>
+            <Button className="button is-text" onClick={() => handleLogout()}>
+                <i className="fas fa-power-off icon"></i>
+            </Button>
             <div className="has-text-right">
               <Title marginbottom="0px">Project Arden</Title>
             </div>
@@ -102,5 +126,6 @@ const ClientHeader = () => (
     </MainColumn>
   </Container>
 );
+};
 
 export default ClientHeader;

@@ -7,7 +7,6 @@ import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import ClientHeader from '../../components/ClientHeader';
 import CopyRight from '../../components/CopyRight';
-import MainColumn from '../../components/MainColumn';
 import { Heading, Message, Loading } from '../../components/elements';
 import ClientSettingsForm from '../../components/ClientSettingsForm';
 
@@ -60,21 +59,17 @@ const ClientSettings = () => {
       <Container className="section">
         <div className="container">
           <div className="columns">
-            <div className="column">
-              <MainColumn paddingtop="1rem">
-                <Heading>Settings</Heading>
-                <div>
-                  <ClientSettingsForm
-                    enableReinitialize
-                    initialValues={me}
-                    onSubmit={data => executeMutation({ input: data })}
-                  />
-                </div>
-                {res.error && (
-                  <Message type="error">{res.error.message}</Message>
-                )}
-                {res.fetching ? <Loading /> : null}
-              </MainColumn>
+            <div className="column is-three-fifths is-offset-one-fifth">
+              <Heading>Settings</Heading>
+              <div>
+                <ClientSettingsForm
+                  enableReinitialize
+                  initialValues={me}
+                  onSubmit={data => executeMutation({ input: data })}
+                />
+              </div>
+              {res.error && <Message type="error">{res.error.message}</Message>}
+              {res.fetching ? <Loading /> : null}
             </div>
           </div>
           <CopyRight />
