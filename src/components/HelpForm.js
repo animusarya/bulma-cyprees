@@ -38,6 +38,7 @@ const HelpForm = props => {
         isHorizontal
         name="embedCode"
         label="Embed Code"
+        placeholder="Paste YouTube Video Link Here"
         value={values.embedCode}
         onChange={handleChange}
         onBlur={handleBlur}

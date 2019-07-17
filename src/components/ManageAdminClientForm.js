@@ -30,6 +30,7 @@ const ManageAdminClientForm = props => {
             className="input"
             name="email"
             label="Client Email"
+            placeholder="john@doe.com"
             value={values.email}
             onChange={handleChange}
             onBlur={handleBlur}
