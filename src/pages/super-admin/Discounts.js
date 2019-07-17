@@ -52,12 +52,12 @@ const removeDiscountMutation = gql`
 `;
 
 const Container = styled.div`
-  .pound-icon {
-    font-size: 0.85rem !important;
-  }
-  td.actions {
-    color: ${props => props.theme.primaryColor};
-  }
+  // .pound-icon {
+  //   font-size: 0.85rem !important;
+  // }
+  // td.actions {
+  //   color: ${props => props.theme.primaryColor};
+  // }
 `;
 
 const Discounts = () => {
@@ -71,7 +71,7 @@ const Discounts = () => {
 
   return (
     <Layout>
-      <Seo title="Discount Code" description="Page description" />
+      <Seo title="Discount Code" description="Create Discount Codes" />
       <Header />
       <Container className="columns">
         <div className="column is-one-fifth">

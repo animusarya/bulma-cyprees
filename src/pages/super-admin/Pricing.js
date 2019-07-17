@@ -86,7 +86,7 @@ const Pricing = () => {
 
   return (
     <Layout>
-      <Seo title="Projects Pricing" description="Page description" />
+      <Seo title="Projects Pricing" description="Setup Subscription Plans" />
       <Header />
       <Container className="columns">
         <div className="column is-one-fifth">
@@ -123,14 +123,14 @@ const Pricing = () => {
               <Message type="error">{resEdit.error.message}</Message>
             )}
             {res.fetching ||
-            result.fetching ||
-            resRemove.fetching ||
-            resEdit.fetching ? (
-              <Loading />
-            ) : null}
+              result.fetching ||
+              resRemove.fetching ||
+              resEdit.fetching ? (
+                <Loading />
+              ) : null}
             {result.data && result.data.packages && (
               <React.Fragment>
-                <Title>Plans</Title>
+                <Title marginTop="4rem">Plans</Title>
                 <table className="table is-fullwidth is-hoverable">
                   <thead>
                     <tr>

@@ -84,7 +84,7 @@ const ProjectsClient = ({ match }) => {
 
   return (
     <Layout>
-      <Seo title="Client Projects" description="Page description" />
+      <Seo title="Client Projects" description="Manage User's Project" />
       <Header />
       <Container className="columns">
         <div className="column is-one-fifth">
@@ -122,8 +122,8 @@ const ProjectsClient = ({ match }) => {
                       <td>
                         {dayjs(project.subscriptionStartsAt).isValid()
                           ? dayjs(project.subscriptionStartsAt).format(
-                              'DD-MM-YYYY',
-                            )
+                            'DD-MM-YYYY',
+                          )
                           : null}
                       </td>
                       <td className="is-uppercase actions">

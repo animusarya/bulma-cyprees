@@ -5,13 +5,13 @@ const Container = styled.h2`
   margin-bottom: ${props =>
     props.marginbottom ? props.marginbottom : '1.3rem'};
   color: ${props => props.theme.secondaryColor};
-  margin-top: ${props => (props.margintop ? props.margintop : 'auto')};
+  margin-top: ${props => (props.marginTop ? props.marginTop : 'auto')};
 `;
 
-const Title = ({ children, margintop, marginbottom }) => (
+const Title = ({ children, marginTop, marginbottom }) => (
   <Container
     className="is-size-5 has-text-weight-semibold"
-    margintop={margintop}
+    marginTop={marginTop}
     marginbottom={marginbottom}>
     {children}
   </Container>

@@ -79,7 +79,7 @@ const ProjectInfo = ({ match }) => {
 
   return (
     <Layout>
-      <Seo title="Project info" description="Page description" />
+      <Seo title="Project info" description="Update User Project Info" />
       <Header />
       <Container className="columns">
         <div className="column is-one-fifth">

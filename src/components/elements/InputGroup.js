@@ -6,7 +6,7 @@ const Group = styled.div`
     width: ${props => (props.fullWidth ? '100%' : '')} !important;
   }
   label {
-    width: ${props => (props.isWidth ? '10rem' : '')} !important;
+    width: ${props => (props.isWidth ? '8rem' : '')} !important;
   }
 `;
 
@@ -34,7 +34,9 @@ const InputGroup = ({
     className={`field ${isHorizontal ? 'is-horizontal' : ''}`}
     fullWidth={fullWidth}
     isWidth={isWidth}>
-    {label && <label className="label">{label}</label>}
+    <div className="field-label is-normal">
+      {label && <label className="label">{label}</label>}
+    </div>
     <div className="control">
       <Input className="input" {...otherProps} />
       {errors && <p className="help is-danger">{errors}</p>}

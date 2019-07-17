@@ -56,7 +56,7 @@ const Container = styled.div`
   }
 `;
 
-const SuperAdminHelp = () => {
+const HelpSuperAdmin = () => {
   const [res, executeMutation] = useMutation(createSupportMutation);
   const [result, executeQuery] = useQuery({
     query: supportQuery,
@@ -65,7 +65,10 @@ const SuperAdminHelp = () => {
 
   return (
     <Layout>
-      <Seo title="Manage help page" description="" />
+      <Seo
+        title="Manage Help Super Admin"
+        description="Provide Videos for Help"
+      />
       <Header />
       <Container className="columns">
         <div className="column is-one-fifth">
@@ -88,7 +91,7 @@ const SuperAdminHelp = () => {
             ) : null}
             {result.data && result.data.support && (
               <React.Fragment>
-                <Title>Plans</Title>
+                {/* <Title marginTop="4rem">Videos</Title> */}
                 <table className="table is-fullwidth is-hoverable">
                   <thead>
                     <tr>
@@ -133,4 +136,4 @@ const SuperAdminHelp = () => {
   );
 };
 
-export default SuperAdminHelp;
+export default HelpSuperAdmin;

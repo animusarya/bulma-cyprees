@@ -113,6 +113,7 @@ class App extends React.Component {
                       exact
                       path="/super-admin/help"
                       component={HelpSuperAdmin}
+                      access="superAdmin"
                     />
                     <PrivateRoute
                       exact

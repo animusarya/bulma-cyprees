@@ -19,8 +19,8 @@ const DiscountForm = props => {
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
-        fullWidth
         isWidth
+        fullWidth
         border
         isHorizontal
         label="Discount Title"
