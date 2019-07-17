@@ -123,11 +123,11 @@ const Pricing = () => {
               <Message type="error">{resEdit.error.message}</Message>
             )}
             {res.fetching ||
-              result.fetching ||
-              resRemove.fetching ||
-              resEdit.fetching ? (
-                <Loading />
-              ) : null}
+            result.fetching ||
+            resRemove.fetching ||
+            resEdit.fetching ? (
+              <Loading />
+            ) : null}
             {result.data && result.data.packages && (
               <React.Fragment>
                 <Title marginTop="4rem">Plans</Title>

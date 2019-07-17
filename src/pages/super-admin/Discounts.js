@@ -52,12 +52,16 @@ const removeDiscountMutation = gql`
 `;
 
 const Container = styled.div`
-  // .pound-icon {
-  //   font-size: 0.85rem !important;
-  // }
-  // td.actions {
-  //   color: ${props => props.theme.primaryColor};
-  // }
+  .pound-icon {
+    font-size: 0.85rem !important;
+  }
+  td.actions {
+    color: ${props => props.theme.primaryColor};
+  }
+  input {
+    border-radius: 0px;
+    border: 1px solid ${props => props.theme.primaryColor};
+  }
 `;
 
 const Discounts = () => {

@@ -14,6 +14,13 @@ const Container = styled.div`
     color: #e8e9ea;
   }
 `;
+
+const LinkLogo = styled(Link)`
+  :hover {
+    background: transparent !important;
+  }
+`;
+
 const LinkWrapper = styled(Link)`
   color: #e8e9ea;
   :hover {
@@ -53,9 +60,9 @@ const Header = () => {
             role="navigation"
             aria-label="main navigation">
             <div className="navbar-brand">
-              <Link className="navbar-item" to="/super-admin/dashboard">
+              <LinkLogo className="navbar-item" to="/super-admin/dashboard">
                 <Logo src={logoAlt} alt="logo" />
-              </Link>
+              </LinkLogo>
               <a
                 role="button"
                 className="navbar-burger burger"
