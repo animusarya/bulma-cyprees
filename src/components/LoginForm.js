@@ -45,7 +45,6 @@ const LoginForm = props => {
         <div className="control">
           <Button
             marginTop
-            type="button"
             className="button is-medium is-fullwidth"
             disabled={isSubmitting}>
             Login
