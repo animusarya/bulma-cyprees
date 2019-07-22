@@ -2,11 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
+import styled from 'styled-components';
 
-import { InputGroup, Button } from './elements';
+import { InputGroup } from './elements';
 import Scrollbar from './Scrollbar';
 import Disclaimer from './Disclaimer';
 
+const Button = styled.button`
+  margin-top: 1rem;
+`;
 const RegisterForm = props => {
   const {
     values,
@@ -78,11 +82,10 @@ const RegisterForm = props => {
       </label>
       <div className="field">
         <div className="control">
-          <a className="button is-info is-normal is-fullwidth">Register</a>
           <Button
-            marginTop
-            disabled={isSubmitting}
-            className="button is-fullwidth">
+            type="submit"
+            className="button is-info is-normal is-fullwidth"
+            disabled={isSubmitting}>
             Register
           </Button>
         </div>
