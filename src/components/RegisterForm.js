@@ -9,7 +9,7 @@ import Scrollbar from './Scrollbar';
 import Disclaimer from './Disclaimer';
 
 const Button = styled.button`
-  margin-top: 1rem;
+  margin-top: 2rem;
 `;
 const RegisterForm = props => {
   const {

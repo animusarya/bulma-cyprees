@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { InputGroup } from './elements';
 
 const Button = styled.button`
-  margin-top: 1rem;
+  margin-top: 2rem;
 `;
 const LoginForm = props => {
   const {
