@@ -43,6 +43,7 @@ const LoginForm = props => {
       />
       <div className="field">
         <div className="control">
+          <a className="button is-info is-normal is-fullwidth">Login</a>
           <Button
             marginTop
             className="button is-medium is-fullwidth"

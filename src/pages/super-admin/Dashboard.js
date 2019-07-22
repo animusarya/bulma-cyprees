@@ -29,7 +29,6 @@ const getAdmins = gql`
 `;
 
 const Container = styled.div`
-  margin-bottom: 0 !important;
   .table {
     @media only screen and (max-width: 768px) {
       width: 100% !important;
@@ -44,10 +43,6 @@ const Container = styled.div`
 
   td {
     color: ${props => props.theme.primaryColor};
-  }
-
-  .is-one-fifth {
-    padding-bottom: 0;
   }
 `;
 

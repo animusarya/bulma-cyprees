@@ -78,6 +78,7 @@ const RegisterForm = props => {
       </label>
       <div className="field">
         <div className="control">
+          <a className="button is-info is-normal is-fullwidth">Register</a>
           <Button
             marginTop
             disabled={isSubmitting}
@@ -122,7 +123,7 @@ export default withFormik({
       .string()
       .required('This filed is required!')
       .label('Confirm password')
-      .test('passwords-match', 'Passwords not matched!', function (values) {
+      .test('passwords-match', 'Passwords not matched!', function(values) {
         return this.parent.password === values;
       }),
   }),
