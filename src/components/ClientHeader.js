@@ -32,6 +32,7 @@ const NavbarMenu = styled.nav`
 const Logo = styled.img`
   width: 140px;
   height: auto;
+  margin-top: 10px;
 `;
 const HeroImg = styled.img`
   height: 12rem;
@@ -64,7 +65,7 @@ const ClientHeader = () => {
         <div className="columns">
           <div className="column is-8 is-offset-2">
             <div>
-              <Link to="/client/dashboard" className="navbar-item">
+              <Link to="/client/dashboard">
                 <Logo src={logo} alt="logo" />
               </Link>
             </div>
