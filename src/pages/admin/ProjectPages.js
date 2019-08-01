@@ -113,7 +113,7 @@ const ProjectPages = ({ match }) => {
                     <th className="has-text-centered">Type</th>
                     <th className="has-text-centered">Status</th>
                     <th className="has-text-centered">Created At</th>
-                    <th>edit</th>
+                    <th>Edit</th>
                     <th>Delete</th>
                   </tr>
                 </thead>
