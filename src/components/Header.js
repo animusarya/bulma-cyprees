@@ -13,6 +13,9 @@ const Container = styled.div`
   .name {
     color: #e8e9ea;
   }
+  .navbar-item {
+    background: transparent !important;
+  }
 `;
 
 const LinkLogo = styled(Link)`
