@@ -61,7 +61,7 @@ const AdminUsers = ({ result, executeQuery }) => {
                         buttons: ['Cancel', 'Confirm'],
                       }).then(async value => {
                         if (value) {
-                          console.log('item', item);
+                          // console.log('item', item);
                           await executeMutationRemove({
                             id: project.id,
                             clientId: item.id,
