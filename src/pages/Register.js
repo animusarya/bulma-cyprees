@@ -69,7 +69,7 @@ const Register = () => {
   );
   const updateUser = useStoreActions(actions => actions.user.update);
 
-  if (res.data && res.data.login) {
+  if (res.data && res.data.register) {
     const { jwt, user } = res.data.register;
     window.localStorage.setItem('token', jwt);
     togggleLoggedIn(true);

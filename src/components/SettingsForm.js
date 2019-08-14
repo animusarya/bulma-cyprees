@@ -19,6 +19,7 @@ const SettingsForm = props => {
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
+        readOnly
         fullWidth
         isWidth
         border

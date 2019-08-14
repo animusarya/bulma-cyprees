@@ -13,7 +13,7 @@ const createPageMutation = gql`
   }
 `;
 
-const AddPageModal = ({ project, isActive, handleChange }) => {
+const AddPageModal = ({ project, isActive, handleChange, refetch }) => {
   const [res, executeMutation] = useMutation(createPageMutation);
 
   return (
@@ -34,6 +34,8 @@ const AddPageModal = ({ project, isActive, handleChange }) => {
               await executeMutation({
                 input: { project: project.id, ...data },
               });
+              // refresh data on dashboard
+              refetch();
               // close the modal box
               handleChange(false);
             }}

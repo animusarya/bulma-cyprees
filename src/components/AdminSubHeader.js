@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -57,7 +58,7 @@ const Hero = styled.section`
   }
 `;
 
-const AdminSubHeader = ({ project }) => {
+const AdminSubHeader = ({ project, refetch }) => {
   const [addPageModal, setAddPageModal] = useState(false);
 
   return (
@@ -108,9 +109,18 @@ const AdminSubHeader = ({ project }) => {
         isActive={addPageModal}
         project={project}
         handleChange={value => setAddPageModal(value)}
+        refetch={refetch}
       />
     </Container>
   );
+};
+
+AdminSubHeader.defaultProps = {
+  refetch: () => {},
+};
+
+AdminSubHeader.propTypes = {
+  refetch: PropTypes.func,
 };
 
 export default AdminSubHeader;

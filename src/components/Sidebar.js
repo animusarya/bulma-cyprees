@@ -62,9 +62,6 @@ const Sidebar = () => {
               <Link to={`/admin/project/${activeProject}`}>
                 <Icon className="fas fa-th-large"></Icon>Dashboard
               </Link>
-              <Link to={`/admin/project/${activeProject}/pages`}>
-                <Icon className="far fa-file"></Icon>Manage Pages
-              </Link>
               <Link to={`/admin/project/${activeProject}/emails`}>
                 <Icon className="far fa-envelope"></Icon>Manage Emails
               </Link>

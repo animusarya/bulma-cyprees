@@ -32,7 +32,6 @@ import DashboardAdmin from './pages/admin/Dashboard';
 import CreateProject from './pages/admin/CreateProject';
 import ManageEmail from './pages/admin/ManageEmail';
 import ProjectDashboard from './pages/admin/ProjectDashboard';
-import ProjectPages from './pages/admin/ProjectPages';
 import ManageClients from './pages/admin/ManageClients';
 import ManagePage from './pages/admin/ManagePage';
 import Help from './pages/admin/Help';
@@ -160,12 +159,6 @@ class App extends React.Component {
                       exact
                       path="/admin/project/:id"
                       component={ProjectDashboard}
-                      access="admin"
-                    />
-                    <PrivateRoute
-                      exact
-                      path="/admin/project/:id/pages"
-                      component={ProjectPages}
                       access="admin"
                     />
                     <PrivateRoute

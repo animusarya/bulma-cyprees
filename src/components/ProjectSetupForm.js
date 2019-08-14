@@ -127,7 +127,7 @@ export default withFormik({
   validationSchema: yup.object().shape({
     name: yup.string().required('Name is required!'),
     slug: yup.string().required('Default URL is required!'),
-    customDomain: yup.string().required('Custom URL is required!'),
+    customDomain: yup.string(),
     subscriptionId: yup.string().required('Subscription is required!'),
   }),
 

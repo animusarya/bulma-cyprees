@@ -12,6 +12,9 @@ import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
 import AdminSubHeader from '../../components/AdminSubHeader';
+import ProjectDashboardHero from '../../components/ProjectDashboardHero';
+import ProjectPages from '../../components/ProjectPages';
+import { Message, Loading } from '../../components/elements';
 
 const projectQuery = gql`
   query project($id: ID!) {
@@ -19,6 +22,19 @@ const projectQuery = gql`
       id
       name
       slug
+    }
+  }
+`;
+
+const pagesQuery = gql`
+  query pages($projectId: ID!) {
+    pages(projectId: $projectId) {
+      id
+      name
+      slug
+      type
+      status
+      createdAt
     }
   }
 `;
@@ -56,6 +72,15 @@ const ProjectDashboard = ({ match }) => {
       : {};
   // console.log('resultProject', project);
 
+  // fetch pages
+  const [resultPages, refetchPages] = useQuery({
+    query: pagesQuery,
+    variables: { projectId: project.id },
+  });
+
+  const pages =
+    resultPages.data && resultPages.data.pages ? resultPages.data.pages : [];
+
   return (
     <Layout>
       <Seo title="Project Dashboard" />
@@ -66,47 +91,25 @@ const ProjectDashboard = ({ match }) => {
         </div>
         <div className="column">
           <AdminHeader project={project} />
-          <AdminSubHeader project={project} />
+          <AdminSubHeader
+            project={project}
+            refetch={() => {
+              refetchPages();
+            }}
+          />
           <MainColumn>
             <div className="content">
-              <div className="hero-body">
-                <div className="has-text-centered has-text-weight-medium">
-                  <p className="title is-size-2 has-text-weight-normal">
-                    Welcome to{' '}
-                    <strong className="has-text-weight-bold">Intelli</strong>
-                    <span>Share</span>
-                  </p>
-                  <div className="steps-title">
-                    <strong className="subtitle has-text-weight-bold is-size-4">
-                      Getting Started
-                    </strong>
-                  </div>
-                  <div className="subtitle is-6">
-                    <p>
-                      1. Insert your{' '}
-                      <span className="has-text-weight-bold">
-                        Logo/Branding Colour
-                      </span>
-                    </p>
-                    <p>
-                      2. Click the{' '}
-                      <strong className="has-text-weight-bold">Add Page</strong>
-                    </p>
-                    <p>
-                      3. Set your outgoing email messages under{' '}
-                      <strong className="has-text-weight-bold">
-                        Manage Emails
-                      </strong>
-                    </p>
-                    <p>
-                      4. Add your Clients under{' '}
-                      <strong className="has-text-weight-bold">
-                        Manage Clients
-                      </strong>
-                    </p>
-                  </div>
-                </div>
-              </div>
+              {pages.length === 0 ? (
+                <ProjectDashboardHero />
+              ) : (
+                <React.Fragment>
+                  {resultPages.error && (
+                    <Message type="error">{resultPages.error.message}</Message>
+                  )}
+                  {resultPages.fetching && <Loading />}
+                  <ProjectPages project={project} pages={pages} />
+                </React.Fragment>
+              )}
             </div>
           </MainColumn>
         </div>
