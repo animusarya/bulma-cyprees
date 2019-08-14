@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useQuery } from 'urql';
 import gql from 'graphql-tag';
 import { useStoreActions } from 'easy-peasy';
-import { filter } from 'lodash';
+import { filter, isEmpty } from 'lodash';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -57,6 +57,7 @@ const Dashboard = () => {
   });
   const me = resultMe.data ? resultMe.data.me : {};
   const project = me.clientProject || {};
+  console.log('project', project);
 
   // set active project
   const updateProject = useStoreActions(
@@ -74,22 +75,33 @@ const Dashboard = () => {
   const dataroomPages = filter(pages, { type: 'dataroom' });
   // console.log('pages', contentPages, dataroomPages);
 
+  if (isEmpty(project)) {
+    return (
+      <Layout>
+        <Seo title="Client Dashboard" description="Page description" />
+        <Message type="error">
+          You are not assigned to any project, please contact admin.
+        </Message>
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
       <Seo title="Client Dashboard" description="Page description" />
       <ClientHeader pages={contentPages} />
+      {(resultMe.fetching || resultPages.fetching) && <Loading />}
       {resultMe.error && (
         <Message type="error">{resultMe.error.message}</Message>
       )}
       {resultPages.error && (
         <Message type="error">{resultPages.error.message}</Message>
       )}
-      {(resultMe.fetching || resultPages.fetching) && <Loading />}
       <Container className="section">
         <div className="container">
           <div className="columns">
             <div className="column is-three-fifths is-offset-one-fifth">
-              <Heading>Overview</Heading>
+              {/* <Heading>Overview</Heading> */}
               {dataroomPages.map(page => (
                 <PageRow key={page.id} project={project} page={page} />
               ))}

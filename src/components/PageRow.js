@@ -34,7 +34,7 @@ const PageRow = ({ project, page }) => {
         <Message type="error">{resultFiles.error.message}</Message>
       )}
       {resultFiles.fetching && <Loading />}
-      {files.length > 0 && (
+      {files.length > 0 ? (
         <table className="table is-fullwidth is-hoverable">
           <thead>
             <tr>
@@ -62,6 +62,8 @@ const PageRow = ({ project, page }) => {
             ))}
           </tbody>
         </table>
+      ) : (
+        <Message>No files added yet.</Message>
       )}
     </React.Fragment>
   );
