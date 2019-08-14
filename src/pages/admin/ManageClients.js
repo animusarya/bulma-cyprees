@@ -39,8 +39,6 @@ const projectQuery = gql`
   }
 `;
 
-// TODO: fix these queries when available with API
-
 const addClientMutation = gql`
   mutation addProjectClient($id: ID!, $input: ProjectClientInput!) {
     addProjectClient(id: $id, input: $input) {

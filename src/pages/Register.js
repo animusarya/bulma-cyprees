@@ -62,12 +62,13 @@ const Logo = styled.img`
   margin-bottom: 2rem;
 `;
 
-const Register = () => {
+const Register = ({ match }) => {
   const [res, executeMutation] = useMutation(registerMutation);
   const togggleLoggedIn = useStoreActions(
     actions => actions.isLoggedIn.togggle,
   );
   const updateUser = useStoreActions(actions => actions.user.update);
+  console.log('project ID', match.params.projectId); // TODO:
 
   if (res.data && res.data.register) {
     const { jwt, user } = res.data.register;

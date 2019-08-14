@@ -41,7 +41,9 @@ const Help = () => {
               {support.map(item => (
                 <div className="column" key={item.id}>
                   <Subtitle>{item.name}</Subtitle>
-                  {item.embedCode}
+                  <section
+                    dangerouslySetInnerHTML={{ __html: item.embedCode }}
+                  />
                 </div>
               ))}
             </div>

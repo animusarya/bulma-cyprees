@@ -25,7 +25,7 @@ const HelpForm = props => {
         isHorizontal
         name="name"
         label="Title"
-        placeholder="Monthly/Bi-Annually/Annually"
+        placeholder="Video Title"
         value={values.name}
         onChange={handleChange}
         onBlur={handleBlur}
@@ -71,7 +71,7 @@ export default withFormik({
     embedCode: '',
   }),
   validationSchema: yup.object().shape({
-    name: yup.string().required('Duration is required!'),
+    name: yup.string().required('Video title is required!'),
     embedCode: yup.string().required('Embed Code is required!'),
   }),
 

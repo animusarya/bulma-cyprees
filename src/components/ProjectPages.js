@@ -49,8 +49,8 @@ const ProjectPages = ({ pages, project }) => {
             <th className="has-text-centered">Type</th>
             <th className="has-text-centered">Status</th>
             <th className="has-text-centered">Created At</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -67,7 +67,7 @@ const ProjectPages = ({ pages, project }) => {
               <td>
                 <LinkWrapper
                   to={`/admin/project/${project.id}/pages/${page.id}`}>
-                  EDIT
+                  Manage
                 </LinkWrapper>
               </td>
               <td>
@@ -75,7 +75,7 @@ const ProjectPages = ({ pages, project }) => {
                   secondary
                   paddingless
                   onClick={() => {
-                    swal('Are you confirm to delete this item?', {
+                    swal('Are you confirm to remove this page?', {
                       buttons: ['Cancel', 'Confirm'],
                     }).then(async value => {
                       if (value) {
@@ -85,7 +85,7 @@ const ProjectPages = ({ pages, project }) => {
                       }
                     });
                   }}>
-                  DELETE
+                  Remove
                 </Button>
               </td>
             </tr>

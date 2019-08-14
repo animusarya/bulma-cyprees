@@ -11,7 +11,7 @@ import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
 import PageFiles from '../../components/PageFiles';
 import PageContent from '../../components/PageContent';
-import { Message, Loading } from '../../components/elements';
+import { Message, Loading, Heading } from '../../components/elements';
 
 const projectQuery = gql`
   query project($id: ID!) {
@@ -64,6 +64,7 @@ const ManagePage = ({ match }) => {
         <div className="column">
           <AdminHeader project={project} />
           <MainColumn>
+            <Heading>{page.name}</Heading>
             {resultProject.error && (
               <Message type="error">{resultProject.error.message}</Message>
             )}

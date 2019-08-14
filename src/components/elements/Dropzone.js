@@ -8,8 +8,8 @@ import styled from 'styled-components';
 import Loading from './Loading';
 
 const signedUploadUrlMutation = gql`
-  mutation signedUploadUrl($fileName: String!) {
-    signedUploadUrl(fileName: $fileName) {
+  mutation signedUploadUrl($fileName: String!, $fileType: String!) {
+    signedUploadUrl(fileName: $fileName, fileType: $fileType) {
       signedUrl
     }
   }
@@ -63,24 +63,44 @@ const MyDropzone = ({ onUpload }) => {
 
   const onDrop = useCallback(async acceptedFiles => {
     setLoading(true);
-    const file = acceptedFiles[0];
+    try {
+      const file = acceptedFiles[0];
 
-    // get signed url from aws s3
-    const signedUploadUrl = await executeUploadMutation({
-      fileName: file.name,
-    });
-    const { signedUrl, fileUrl } = signedUploadUrl.data.signedUploadUrl;
+      // get signed url from aws s3
+      const signedUploadUrl = await executeUploadMutation({
+        fileName: file.name,
+        fileType: file.type,
+      });
+      const { signedUrl, fileUrl } = signedUploadUrl.data.signedUploadUrl;
+      console.log('signedUrl', signedUrl);
+      // return;
 
-    // upload to aws s3
-    const formData = new FormData();
-    await fetch(signedUrl, {
-      method: 'POST',
-      body: formData,
-    });
+      // upload to aws s3
+      const xhr = new window.XMLHttpRequest();
+      xhr.open('POST', signedUrl, true);
+      xhr.onload = function(e) {
+        console.log('eonload', e);
+      };
+      // Listen to the upload progress.
+      xhr.upload.onprogress = function(e) {
+        console.log('onprogress', e);
+      };
+      xhr.send(file);
+      return;
+      // const formData = new FormData();
+      // formData.append('file', file, file.name);
+      // await fetch(signedUrl, {
+      //   method: 'POST',
+      //   body: formData,
+      // });
 
-    // send to aws s3
-    onUpload({ ...file, url: fileUrl });
-    setLoading(false);
+      // upload success
+      onUpload({ ...file, url: fileUrl });
+      setLoading(false);
+    } catch (error) {
+      console.log('upload error', error);
+      setLoading(false);
+    }
   }, []);
 
   const {

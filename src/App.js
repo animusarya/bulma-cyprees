@@ -95,6 +95,11 @@ class App extends React.Component {
                     <Route exact path="/contact" component={Contact} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/register" component={Register} />
+                    <Route
+                      exact
+                      path="/register/client/:projectId"
+                      component={Register}
+                    />
                     <Route exact path="/set-password" component={SetPassword} />
                     <Route
                       exact
