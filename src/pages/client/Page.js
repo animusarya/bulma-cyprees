@@ -105,7 +105,7 @@ const Page = ({ match }) => {
               {resultPage.fetching && <Loading />}
               {page.type === 'content' && (
                 <div>
-                  <section>{page.content}</section>
+                  <section dangerouslySetInnerHTML={{ __html: page.content }} />
                 </div>
               )}
               {page.type === 'dataroom' && (
