@@ -69,7 +69,7 @@ const Login = () => {
   );
   const updateUser = useStoreActions(actions => actions.user.update);
 
-  if (res.data) {
+  if (res.data && res.data.login) {
     const { jwt, user } = res.data.login;
     window.localStorage.setItem('token', jwt);
     togggleLoggedIn(true);

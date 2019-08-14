@@ -2,26 +2,55 @@ import React from 'react';
 import styled from 'styled-components';
 import { useQuery } from 'urql';
 import gql from 'graphql-tag';
+import { useStoreActions } from 'easy-peasy';
+import { filter } from 'lodash';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import ClientHeader from '../../components/ClientHeader';
-import {
-  Heading,
-  Title,
-  Button,
-  Message,
-  Loading,
-} from '../../components/elements';
+import { Message, Loading } from '../../components/elements';
 import ClientFooter from '../../components/ClientFooter';
+import PageRow from '../../components/PageRow';
 
-const clientDashboardQuery = gql`
-  query projects($clientId: ID!) {
-    projects(clientId: $clientId) {
+const meQuery = gql`
+  query me {
+    me {
       id
-      document
-      section
-      uploaded
+      email
+      profile {
+        fullName
+      }
+      clientProject {
+        id
+        name
+        slug
+        logo
+        heroImage
+      }
+    }
+  }
+`;
+
+const pagesQuery = gql`
+  query pages($projectId: ID!) {
+    pages(projectId: $projectId) {
+      id
+      name
+      slug
+      content
+      type
+    }
+  }
+`;
+
+const pageQuery = gql`
+  query page($pageId: ID!) {
+    page(id: $pageId) {
+      id
+      name
+      slug
+      content
+      type
     }
   }
 `;
@@ -33,61 +62,57 @@ const Container = styled.div`
 `;
 
 const Page = ({ match }) => {
-  const [result] = useQuery({
-    query: clientDashboardQuery,
-    variables: { clientId: match.params.clientId },
+  const pageId = match.params.id;
+  const [resultMe] = useQuery({
+    query: meQuery,
   });
+  const me = resultMe.data ? resultMe.data.me : {};
+  const project = me.clientProject || {};
+
+  // set active project
+  const updateProject = useStoreActions(
+    actions => actions.active.updateProject,
+  );
+  updateProject(project.id);
+
+  // fetch pages for project
+  const [resultPages] = useQuery({
+    query: pagesQuery,
+    variables: { projectId: project.id || 0 },
+  });
+  const pages = resultPages.data ? resultPages.data.pages : [];
+  const contentPages = filter(pages, { type: 'content' });
+
+  // fetch requested page
+  const [resultPage] = useQuery({
+    query: pageQuery,
+    variables: { pageId },
+  });
+  const page = resultPage.data ? resultPage.data.page : {};
+  // console.log('page', page);
 
   return (
     <Layout>
       <Seo title="Client Page" description="Page description" />
-      <ClientHeader />
+      <ClientHeader pages={contentPages} />
       <Container className="section">
         <div className="container">
           <div className="columns">
             <div className="column is-three-fifths is-offset-one-fifth">
-              <Heading>Property</Heading>
-              <Title marginbottom="0rem">Sub Section 1</Title>
-              {result.error && (
-                <Message type="error">{result.error.message}</Message>
+              {resultPage.error && (
+                <Message type="error">{resultPage.error.message}</Message>
               )}
-              {result.fetching && <Loading />}
-              {result.data && result.data.projects && (
-                <table className="table is-fullwidth is-hoverable">
-                  <thead>
-                    <tr>
-                      <th>Document</th>
-                      <th>Section</th>
-                      <th>Uploaded</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {result.data.projects.map(project => (
-                      <tr>
-                        <td>{project.document}</td>
-                        <td>{project.section}</td>
-                        <td>{project.uploaded}</td>
-                        <td>
-                          <Button
-                            secondary
-                            paddingless
-                            onClick={() => {
-                              alert('download');
-                            }}>
-                            Download
-                          </Button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              {resultPage.fetching && <Loading />}
+              {page.type === 'content' && (
+                <div>
+                  <section>{page.content}</section>
+                </div>
               )}
-              <Title marginbottom="0rem">Sub Section 2</Title>
-              {result.error && (
-                <Message type="error">{result.error.message}</Message>
+              {page.type === 'dataroom' && (
+                <div>
+                  <PageRow project={project} page={page} />
+                </div>
               )}
-              {result.fetching && <Loading />}
             </div>
           </div>
         </div>

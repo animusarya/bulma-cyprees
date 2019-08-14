@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useMutation } from 'urql';
 import gql from 'graphql-tag';
+import { useStoreActions } from 'easy-peasy';
 
 import Seo from '../components/Seo';
 import { Message, Loading } from '../components/elements';
@@ -63,6 +64,20 @@ const Logo = styled.img`
 
 const Register = () => {
   const [res, executeMutation] = useMutation(registerMutation);
+  const togggleLoggedIn = useStoreActions(
+    actions => actions.isLoggedIn.togggle,
+  );
+  const updateUser = useStoreActions(actions => actions.user.update);
+
+  if (res.data && res.data.login) {
+    const { jwt, user } = res.data.register;
+    window.localStorage.setItem('token', jwt);
+    togggleLoggedIn(true);
+    updateUser(user);
+    setTimeout(() => {
+      window.location.replace('/client/dashboard');
+    }, 1000);
+  }
 
   return (
     <Container>
@@ -94,7 +109,14 @@ const Register = () => {
                     </div>
                   </nav>
                 </div>
-                <RegisterForm onSubmit={data => executeMutation(data)} />
+                <RegisterForm
+                  onSubmit={data => {
+                    return executeMutation({
+                      email: data.email,
+                      password: data.password,
+                    });
+                  }}
+                />
                 {res.error && (
                   <Message type="error">{res.error.message}</Message>
                 )}

@@ -15,11 +15,13 @@ const Home = () => {
           <br />
           <Link to="/login">Login</Link>
           <br />
+          <Link to="/register">Register</Link>
+          {/* <br />
           <Link to="/super-admin/dashboard">Super Admin Area</Link>
           <br />
           <Link to="/admin/dashboard">Admin Area</Link>
           <br />
-          <Link to="/client/dashboard">Client Area</Link>
+          <Link to="/client/dashboard">Client Area</Link> */}
         </div>
       </section>
     </Layout>

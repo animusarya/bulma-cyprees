@@ -1,19 +1,17 @@
+/* eslint prefer-destructuring: 0 */
+
 import React from 'react';
 import styled from 'styled-components';
 import { useQuery } from 'urql';
 import gql from 'graphql-tag';
 import { useStoreActions } from 'easy-peasy';
+import { filter } from 'lodash';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import ClientHeader from '../../components/ClientHeader';
-import {
-  Heading,
-  Title,
-  Button,
-  Message,
-  Loading,
-} from '../../components/elements';
+import PageRow from '../../components/PageRow';
+import { Heading, Message, Loading } from '../../components/elements';
 import ClientFooter from '../../components/ClientFooter';
 
 const meQuery = gql`
@@ -37,7 +35,7 @@ const meQuery = gql`
 
 const pagesQuery = gql`
   query pages($projectId: ID!) {
-    pages(id: $projectId) {
+    pages(projectId: $projectId) {
       id
       name
       slug
@@ -66,66 +64,35 @@ const Dashboard = () => {
   );
   updateProject(project.id);
 
-  // fetch page data
+  // fetch pages for project
   const [resultPages] = useQuery({
     query: pagesQuery,
-    variables: { projectId: project.id },
+    variables: { projectId: project.id || 0 },
   });
-  const pages = [];
-  console.log('resultPages', resultPages);
-
-  // fetch files for page
-
-  console.log('result', me, project);
+  const pages = resultPages.data ? resultPages.data.pages : [];
+  const contentPages = filter(pages, { type: 'content' });
+  const dataroomPages = filter(pages, { type: 'dataroom' });
+  // console.log('pages', contentPages, dataroomPages);
 
   return (
     <Layout>
       <Seo title="Client Dashboard" description="Page description" />
-      <ClientHeader />
+      <ClientHeader pages={contentPages} />
+      {resultMe.error && (
+        <Message type="error">{resultMe.error.message}</Message>
+      )}
+      {resultPages.error && (
+        <Message type="error">{resultPages.error.message}</Message>
+      )}
+      {(resultMe.fetching || resultPages.fetching) && <Loading />}
       <Container className="section">
         <div className="container">
           <div className="columns">
             <div className="column is-three-fifths is-offset-one-fifth">
               <Heading>Overview</Heading>
-              <Title marginbottom="0rem">Property</Title>
-              {resultMe.error && (
-                <Message type="error">{resultMe.error.message}</Message>
-              )}
-              {resultPages.error && (
-                <Message type="error">{resultPages.error.message}</Message>
-              )}
-              {(resultMe.fetching || resultPages.fetching) && <Loading />}
-              {pages && (
-                <table className="table is-fullwidth is-hoverable">
-                  <thead>
-                    <tr>
-                      <th>Document</th>
-                      <th>Section</th>
-                      <th>Uploaded</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {pages.map(page => (
-                      <tr>
-                        <td>{page.document}</td>
-                        <td>{page.section}</td>
-                        <td>{page.uploaded}</td>
-                        <td>
-                          <Button
-                            secondary
-                            paddingless
-                            onClick={() => {
-                              alert('download!');
-                            }}>
-                            Download
-                          </Button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
+              {dataroomPages.map(page => (
+                <PageRow key={page.id} project={project} page={page} />
+              ))}
             </div>
           </div>
         </div>

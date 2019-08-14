@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { startCase } from 'lodash';
 
 import MainColumn from './MainColumn';
 import logoBg from '../assets/images/login-bg.jpg';
@@ -51,7 +53,7 @@ const Button = styled.button`
   }
 `;
 
-const ClientHeader = () => {
+const ClientHeader = ({ pages }) => {
   const handleLogout = () => {
     window.localStorage.clear();
     window.location.reload(true);
@@ -109,18 +111,14 @@ const ClientHeader = () => {
                 className="navbar-item has-text-white">
                 Overview
               </Link>
-              <Link to="/" className="navbar-item has-text-white">
-                Information Memorandum
-              </Link>
-              <Link to="/" className="navbar-item has-text-white">
-                Property
-              </Link>
-              <Link to="/" className="navbar-item has-text-white">
-                Legal
-              </Link>
-              <Link to="/" className="navbar-item has-text-white">
-                Operational
-              </Link>
+              {pages.map(page => (
+                <Link
+                  key={page.id}
+                  to={`/client/page/${page.id}`}
+                  className="navbar-item has-text-white">
+                  {startCase(page.name)}
+                </Link>
+              ))}
             </div>
           </div>
         </NavbarMenu>
@@ -130,6 +128,14 @@ const ClientHeader = () => {
       </MainColumn>
     </Container>
   );
+};
+
+ClientHeader.defaultProps = {
+  pages: [],
+};
+
+ClientHeader.propTypes = {
+  pages: PropTypes.array,
 };
 
 export default ClientHeader;
