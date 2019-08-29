@@ -5,4 +5,5 @@ export default {
   // graphQlUriDev: 'https://intellishare-api.now.sh',
   graphQlUriDev: 'http://localhost:4000',
   projectKey: 'intellishare',
+  stripeKey: 'pk_test_mjhAjr7ARWNkUU2Yj6IQrjxb',
 };

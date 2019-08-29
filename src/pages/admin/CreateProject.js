@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
-import { find } from 'lodash';
+import { find, toString } from 'lodash';
 import { useStoreActions } from 'easy-peasy';
 
 import Seo from '../../components/Seo';
@@ -15,13 +15,15 @@ import ProgressBar from '../../components/ProgressBar';
 import MainColumn from '../../components/MainColumn';
 import ProjectSetupForm from '../../components/ProjectSetupForm';
 import { Title, Message, Loading } from '../../components/elements';
+import { createStripeCardToken } from '../../utils/stripe';
 
 const packagesQuery = gql`
   query packages {
     packages {
       id
+      subscriptionPlanId
       name
-      durationInMonths
+      timeInterval
       price
     }
   }
@@ -32,7 +34,7 @@ const createProjectMutation = gql`
     $name: String!
     $slug: String!
     $customDomain: String!
-    $subscriptionId: String!
+    $subscriptionPlanId: String!
     $billingAddress: Address!
   ) {
     createProject(
@@ -63,7 +65,7 @@ const CreateProject = () => {
     actions => actions.active.updateProject,
   );
   updateProject(null);
-  // console.log('CreateProject', subscription);
+  console.log('CreateProject', packages, subscription);
 
   return (
     <Layout>
@@ -84,7 +86,9 @@ const CreateProject = () => {
                   onSubmit={data => {
                     setProject({ ...data });
                     setSubscription(
-                      find(packages, { id: data.subscriptionId }),
+                      find(packages, {
+                        subscriptionPlanId: data.subscriptionPlanId,
+                      }),
                     );
                     setActiveStep(2);
                   }}
@@ -110,15 +114,27 @@ const CreateProject = () => {
                         postcode: data.postcode,
                       },
                     };
-                    // console.log('newData', inputData);
+
+                    const cardDetails = {
+                      number: toString(data.paymentCardNumber),
+                      expMonth: toString(data.paymentCardExpiryMonth),
+                      expYear: toString(data.paymentCardExpiryYear),
+                      cvc: toString(data.paymentCardCvv),
+                    };
+
+                    try {
+                      await createStripeCardToken(cardDetails);
+                    } catch (err) {
+                      console.log(err);
+                    }
 
                     // TODO: send card details to stripe
 
                     // send success data to server
-                    const projectCreated = await executeMutationAdd(inputData);
+                    // const projectCreated = await executeMutationAdd(inputData);
 
-                    setActiveStep(3);
-                    setProject(projectCreated);
+                    // setActiveStep(3);
+                    // setProject(projectCreated);
                   }}
                 />
               </div>

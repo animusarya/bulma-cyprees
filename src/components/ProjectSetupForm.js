@@ -80,20 +80,20 @@ const ProjectSetupForm = props => {
         border
         label="Project Plan"
         placeholder="Monthly | £30 | 6Months (£180) | Annually (£360)"
-        name="subscriptionId"
-        value={values.subscriptionId}
+        name="subscriptionPlanId"
+        value={values.subscriptionPlanId}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
-          errors.subscriptionId && touched.subscriptionId
-            ? errors.subscriptionId
+          errors.subscriptionPlanId && touched.subscriptionPlanId
+            ? errors.subscriptionPlanId
             : undefined
         }
         options={
           packages
             ? packages.map(item => ({
-                value: item.id,
-                title: `${item.name} - ${item.durationInMonths} months (£${item.price})`,
+                value: item.subscriptionPlanId,
+                title: `${item.name} - £${item.price} per ${item.timeInterval}`,
               }))
             : []
         }
@@ -122,13 +122,13 @@ export default withFormik({
     name: '',
     slug: '',
     customDomain: '',
-    subscriptionId: '',
+    subscriptionPlanId: '',
   }),
   validationSchema: yup.object().shape({
     name: yup.string().required('Name is required!'),
     slug: yup.string().required('Default URL is required!'),
     customDomain: yup.string(),
-    subscriptionId: yup.string().required('Subscription is required!'),
+    subscriptionPlanId: yup.string().required('Subscription is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
