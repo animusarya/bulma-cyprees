@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
-import { find, toString } from 'lodash';
+import { find } from 'lodash';
 import { useStoreActions } from 'easy-peasy';
 
 import Seo from '../../components/Seo';
@@ -15,7 +15,6 @@ import ProgressBar from '../../components/ProgressBar';
 import MainColumn from '../../components/MainColumn';
 import ProjectSetupForm from '../../components/ProjectSetupForm';
 import { Title, Message, Loading } from '../../components/elements';
-import { createStripeCardToken } from '../../utils/stripe';
 
 const packagesQuery = gql`
   query packages {
@@ -36,14 +35,16 @@ const createProjectMutation = gql`
     $customDomain: String!
     $subscriptionPlanId: String!
     $billingAddress: Address!
+    $token: String!
   ) {
     createProject(
       input: {
         name: $name
         slug: $slug
         customDomain: $customDomain
-        subscriptionId: $subscriptionId
+        subscriptionPlanId: $subscriptionPlanId
         billingAddress: $billingAddress
+        token: $token
       }
     ) {
       id
@@ -103,8 +104,18 @@ const CreateProject = () => {
                   initialValues={project}
                   subscription={subscription}
                   onSubmit={async data => {
+                    // const cardDetails = {
+                    //   number: toString(data.paymentCardNumber),
+                    //   expMonth: toString(data.paymentCardExpiryMonth),
+                    //   expYear: toString(data.paymentCardExpiryYear),
+                    //   cvc: toString(data.paymentCardCvv),
+                    // };
+
+                    // TODO: gersend card details to stripe
+
                     const inputData = {
                       ...project,
+                      token: '',
                       billingAddress: {
                         country: data.country,
                         addressLine1: data.addressLine1,
@@ -115,26 +126,10 @@ const CreateProject = () => {
                       },
                     };
 
-                    const cardDetails = {
-                      number: toString(data.paymentCardNumber),
-                      expMonth: toString(data.paymentCardExpiryMonth),
-                      expYear: toString(data.paymentCardExpiryYear),
-                      cvc: toString(data.paymentCardCvv),
-                    };
-
-                    try {
-                      await createStripeCardToken(cardDetails);
-                    } catch (err) {
-                      console.log(err);
-                    }
-
-                    // TODO: send card details to stripe
-
                     // send success data to server
-                    // const projectCreated = await executeMutationAdd(inputData);
-
-                    // setActiveStep(3);
-                    // setProject(projectCreated);
+                    const projectCreated = await executeMutationAdd(inputData);
+                    setActiveStep(3);
+                    setProject(projectCreated);
                   }}
                 />
               </div>
