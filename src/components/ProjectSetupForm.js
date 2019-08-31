@@ -93,7 +93,7 @@ const ProjectSetupForm = props => {
           packages
             ? packages.map(item => ({
                 value: item.subscriptionPlanId,
-                title: `${item.name} - £${item.price} per ${item.timeInterval}`,
+                title: `${item.name} - £${item.price} per ${item.durationInMonths} month`,
               }))
             : []
         }

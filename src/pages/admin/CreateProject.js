@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
-import { find } from 'lodash';
+import { find, toString } from 'lodash';
 import { useStoreActions } from 'easy-peasy';
 
+import stripe from '../../utils/stripe';
 import Seo from '../../components/Seo';
 import Layout from '../../components/Layout';
 import Header from '../../components/Header';
@@ -22,7 +23,7 @@ const packagesQuery = gql`
       id
       subscriptionPlanId
       name
-      timeInterval
+      durationInMonths
       price
     }
   }
@@ -104,14 +105,18 @@ const CreateProject = () => {
                   initialValues={project}
                   subscription={subscription}
                   onSubmit={async data => {
-                    // const cardDetails = {
-                    //   number: toString(data.paymentCardNumber),
-                    //   expMonth: toString(data.paymentCardExpiryMonth),
-                    //   expYear: toString(data.paymentCardExpiryYear),
-                    //   cvc: toString(data.paymentCardCvv),
-                    // };
+                    const card = {
+                      number: toString(data.paymentCardNumber),
+                      expMonth: toString(data.paymentCardExpiryMonth),
+                      expYear: toString(data.paymentCardExpiryYear),
+                      cvc: toString(data.paymentCardCvv),
+                    };
 
                     // TODO: gersend card details to stripe
+                    const { token, error } = await stripe.createToken(card);
+
+                    console.log('stripe result', token, error);
+                    return;
 
                     const inputData = {
                       ...project,
