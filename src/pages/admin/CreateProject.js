@@ -36,7 +36,7 @@ const createProjectMutation = gql`
     $customDomain: String!
     $subscriptionPlanId: String!
     $billingAddress: Address!
-    $token: String!
+    $card: Card!
   ) {
     createProject(
       input: {
@@ -45,7 +45,7 @@ const createProjectMutation = gql`
         customDomain: $customDomain
         subscriptionPlanId: $subscriptionPlanId
         billingAddress: $billingAddress
-        token: $token
+        card: $card
       }
     ) {
       id
@@ -112,15 +112,9 @@ const CreateProject = () => {
                       cvc: toString(data.paymentCardCvv),
                     };
 
-                    // TODO: gersend card details to stripe
-                    const { token, error } = await stripe.createToken(card);
-
-                    console.log('stripe result', token, error);
-                    return;
-
                     const inputData = {
                       ...project,
-                      token: '',
+                      card,
                       billingAddress: {
                         country: data.country,
                         addressLine1: data.addressLine1,
@@ -133,6 +127,7 @@ const CreateProject = () => {
 
                     // send success data to server
                     const projectCreated = await executeMutationAdd(inputData);
+                    console.log('projectCreated', projectCreated);
                     setActiveStep(3);
                     setProject(projectCreated);
                   }}
