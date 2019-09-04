@@ -11,6 +11,7 @@ import MainColumn from '../../components/MainColumn';
 import { Heading, Message, Loading } from '../../components/elements';
 import AdminHeader from '../../components/AdminHeader';
 import ProjectSettingForm from '../../components/ProjectSettingForm';
+import Subscription from '../../components/Subscription';
 
 const projectQuery = gql`
   query project($id: ID!) {
@@ -20,6 +21,10 @@ const projectQuery = gql`
       slug
       status
       customDomain
+      subscriptionName
+      subscriptionDurationInMonths
+      subscriptionAmount
+      status
     }
   }
 `;
@@ -47,7 +52,6 @@ const ProjectSetting = ({ match }) => {
       : {};
 
   const [res, executeMutation] = useMutation(updateProjectMutation);
-  // console.log(resultProject, 'resultProject');
   return (
     <Layout>
       <Seo title="Project Settings" description="Update Existing Projects" />
@@ -71,6 +75,9 @@ const ProjectSetting = ({ match }) => {
             </div>
             {res.error && <Message type="error">{res.error.message}</Message>}
             {res.fetching ? <Loading /> : null}
+          </MainColumn>
+          <MainColumn>
+            <Subscription project={project} />
           </MainColumn>
         </div>
       </div>
