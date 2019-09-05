@@ -1,9 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-import logo from '../assets/images/logo.png';
-import { Title, Button } from './elements';
+import logo from "../assets/images/logo.png";
+import { Title, Button } from "./elements";
+import UploadImageModal from "./UploadImageModal";
 
 const Container = styled.div`
   margin-top: 1rem;
@@ -33,6 +34,7 @@ const Logo = styled.img`
 `;
 
 const AdminHeader = ({ project }) => {
+  const [isActive, setIsActive] = useState(false);
   return (
     <Container>
       <div className="columns">
@@ -41,7 +43,12 @@ const AdminHeader = ({ project }) => {
             <Link to="/client/dashboard" className="navbar-item">
               <Logo src={logo} alt="logo" />
             </Link>
-            <Button paddingless secondary className="edit">
+            <Button
+              paddingless
+              secondary
+              className="edit"
+              onClick={() => setIsActive(true)}
+            >
               Edit
             </Button>
           </div>
@@ -52,6 +59,12 @@ const AdminHeader = ({ project }) => {
           </div>
         </div>
       </div>
+      <UploadImageModal
+        heading="Upload Logo"
+        isActive={isActive}
+        onClose={() => setIsActive(false)}
+        onResponse={() => {}}
+      />
     </Container>
   );
 };

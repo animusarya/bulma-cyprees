@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useStoreActions } from 'easy-peasy';
-import { useQuery } from 'urql';
+import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
@@ -38,6 +38,18 @@ const pagesQuery = gql`
     }
   }
 `;
+
+// const updateProjectMutation = gql`
+//   mutation updateProject($id: ID!, $input: ProjectUpdateInput!) {
+//     updateProject(id: $id, input: $input) {
+//       id
+//       name
+//       slug
+//       status
+//       customDomain
+//     }
+//   }
+// `;
 
 const Container = styled.div`
   .content {
@@ -80,6 +92,8 @@ const ProjectDashboard = ({ match }) => {
 
   const pages =
     resultPages.data && resultPages.data.pages ? resultPages.data.pages : [];
+
+  // const [res, executeMutation] = useMutation(updateProjectMutation);
 
   return (
     <Layout>
