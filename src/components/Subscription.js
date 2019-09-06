@@ -1,9 +1,22 @@
-import React from 'react';
-import { useMutation } from 'urql';
+import React, { useState } from 'react';
+import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
+import { withRouter } from 'react-router-dom';
 
-import { Heading, Button, Message, Loading } from './elements';
+import { Heading, Button, Message, Loading, SelectGroup } from './elements';
+
+const packagesQuery = gql`
+  query packages {
+    packages {
+      id
+      subscriptionPlanId
+      name
+      durationInMonths
+      price
+    }
+  }
+`;
 
 const cancelSubscriptionMutation = gql`
   mutation cancelSubscription($id: ID!) {
@@ -13,46 +26,127 @@ const cancelSubscriptionMutation = gql`
   }
 `;
 
-const Subscription = ({ project }) => {
-  const [res, executeMutation] = useMutation(cancelSubscriptionMutation);
+const renewSubscriptionMutation = gql`
+  mutation renewSubscription($id: ID!, $subscriptionPlanId: String!) {
+    renewSubscription(id: $id, subscriptionPlanId: $subscriptionPlanId) {
+      success
+    }
+  }
+`;
+
+const Subscription = ({ project, history }) => {
+  const [subscriptionPlanId, setSubscriptionPlanId] = useState('');
+  const [packagesData] = useQuery({
+    query: packagesQuery,
+  });
+  const [resCancel, executeCancelMutation] = useMutation(
+    cancelSubscriptionMutation,
+  );
+  const [resRenew, executeRenewMutation] = useMutation(
+    renewSubscriptionMutation,
+  );
+  const { packages } = packagesData.data || {};
+  console.log(project);
   return (
     <div>
-      <Heading>Current Subscription</Heading>
-      <table className="table is-fullwidth">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Duration</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{project.subscriptionName}</td>
-            <td>{project.subscriptionDurationInMonths}</td>
-            <td>{project.subscriptionAmount}</td>
-          </tr>
-        </tbody>
-      </table>
-      <Button
-        onClick={() => {
-          swal({
-            title: 'Are you sure to cancel this subscription?',
-            icon: 'warning',
-            buttons: true,
-            dangerMode: true,
-          }).then(willDelete => {
-            if (willDelete) {
-              executeMutation({ id: project.id });
+      {project.status === 'active' ? (
+        <React.Fragment>
+          <Heading>Current Subscription</Heading>
+          <table className="table is-fullwidth">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Duration</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{project.subscriptionName}</td>
+                <td>{project.subscriptionDurationInMonths}</td>
+                <td>{project.subscriptionAmount}</td>
+              </tr>
+            </tbody>
+          </table>
+          <Button
+            onClick={() => {
+              swal({
+                title: 'Are you sure to cancel this subscription?',
+                icon: 'warning',
+                buttons: true,
+                dangerMode: true,
+              }).then(async willDelete => {
+                if (willDelete) {
+                  const { data } = await executeCancelMutation({
+                    id: project.id,
+                  });
+
+                  if (data.cancelSubscription.success) {
+          
+                    history.push('/admin/dashboard');
+                  }
+                }
+              });
+            }}>
+            Cancel Subscription
+          </Button>
+        </React.Fragment>
+      ) : (
+        <React.Fragment>
+          <Heading>Renew Subscription</Heading>
+          <SelectGroup
+            fullWidth
+            isWidth
+            border
+            placeholder="Monthly | £30 | 6Months (£180) | Annually (£360)"
+            name="subscriptionPlanId"
+            value={subscriptionPlanId}
+            onChange={e => setSubscriptionPlanId(e.target.value)}
+            options={
+              packages
+                ? packages.map(item => ({
+                    value: item.subscriptionPlanId,
+                    title: `${item.name} - £${item.price} per ${item.durationInMonths} month`,
+                  }))
+                : []
             }
-          });
-        }}>
-        Cancel Subscription
-      </Button>
-      {res.error && <Message type="error">{res.error.message}</Message>}
-      {res.fetching ? <Loading /> : null}
+          />
+          <Button
+            disabled={subscriptionPlanId === ''}
+            onClick={() => {
+              swal({
+                title: 'Are you sure to renew this subscription?',
+                icon: 'confirm',
+                buttons: true,
+                dangerMode: true,
+              }).then(async willDelete => {
+                if (willDelete) {
+                  const { data } = await executeRenewMutation({
+                    id: project.id,
+                    subscriptionPlanId,
+                  });
+                  if (data.renewSubscription.success) {
+                    refetch();
+                    history.push('/admin/dashboard');
+                  }
+                }
+              });
+            }}>
+            Renew Subscription
+          </Button>
+        </React.Fragment>
+      )}
+
+      {resCancel.error && (
+        <Message type="error">{resCancel.error.message}</Message>
+      )}
+      {resCancel.fetching ? <Loading /> : null}
+      {resRenew.error && (
+        <Message type="error">{resRenew.error.message}</Message>
+      )}
+      {resRenew.fetching ? <Loading /> : null}
     </div>
   );
 };
 
-export default Subscription;
+export default withRouter(Subscription);

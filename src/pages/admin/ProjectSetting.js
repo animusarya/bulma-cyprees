@@ -1,17 +1,17 @@
-import React from 'react';
-import { useQuery, useMutation } from 'urql';
-import gql from 'graphql-tag';
+import React from "react";
+import { useQuery, useMutation } from "urql";
+import gql from "graphql-tag";
 
-import Layout from '../../components/Layout';
-import Seo from '../../components/Seo';
-import Header from '../../components/Header';
-import Sidebar from '../../components/Sidebar';
-import CopyRight from '../../components/CopyRight';
-import MainColumn from '../../components/MainColumn';
-import { Heading, Message, Loading } from '../../components/elements';
-import AdminHeader from '../../components/AdminHeader';
-import ProjectSettingForm from '../../components/ProjectSettingForm';
-import Subscription from '../../components/Subscription';
+import Layout from "../../components/Layout";
+import Seo from "../../components/Seo";
+import Header from "../../components/Header";
+import Sidebar from "../../components/Sidebar";
+import CopyRight from "../../components/CopyRight";
+import MainColumn from "../../components/MainColumn";
+import { Heading, Message, Loading } from "../../components/elements";
+import AdminHeader from "../../components/AdminHeader";
+import ProjectSettingForm from "../../components/ProjectSettingForm";
+import Subscription from "../../components/Subscription";
 
 const projectQuery = gql`
   query project($id: ID!) {
@@ -24,7 +24,6 @@ const projectQuery = gql`
       subscriptionName
       subscriptionDurationInMonths
       subscriptionAmount
-      status
     }
   }
 `;
@@ -44,7 +43,7 @@ const updateProjectMutation = gql`
 const ProjectSetting = ({ match }) => {
   const [resultProject] = useQuery({
     query: projectQuery,
-    variables: { id: match.params.id },
+    variables: { id: match.params.id }
   });
   const project =
     resultProject.data && resultProject.data.project
@@ -52,6 +51,7 @@ const ProjectSetting = ({ match }) => {
       : {};
 
   const [res, executeMutation] = useMutation(updateProjectMutation);
+
   return (
     <Layout>
       <Seo title="Project Settings" description="Update Existing Projects" />

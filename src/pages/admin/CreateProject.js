@@ -66,7 +66,6 @@ const CreateProject = () => {
     actions => actions.active.updateProject,
   );
   updateProject(null);
-  console.log('CreateProject', packages, subscription);
 
   return (
     <Layout>
