@@ -66,8 +66,8 @@ const noftifyMutation = gql`
 `;
 
 const resendEmailMutation = gql`
-  mutation resendEmail($email: String!) {
-    resendEmail(email: $email) {
+  mutation resendEmail($projectId: ID!, $email: String!) {
+    resendEmail(projectId: $projectId, email: $email) {
       success
     }
   }
@@ -240,7 +240,8 @@ const ManageClients = ({ match }) => {
                               }).then(async value => {
                                 if (value) {
                                   await executeMutationResendEmail({
-                                    id: item.id,
+                                    projectId: project.id,
+                                    email: item.email,
                                   });
                                   executeQuery({
                                     requestPolicy: 'network-only',

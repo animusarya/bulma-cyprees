@@ -52,7 +52,7 @@ const ManageEmail = ({ match }) => {
       : {};
 
   const [res, executeMutation] = useMutation(updateProjectMutation);
-  // console.log('resultProject', project);
+  console.log('resultProject', project);
 
   return (
     <Layout>
