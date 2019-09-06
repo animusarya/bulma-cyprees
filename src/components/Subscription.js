@@ -82,7 +82,6 @@ const Subscription = ({ project, history }) => {
                   });
 
                   if (data.cancelSubscription.success) {
-          
                     history.push('/admin/dashboard');
                   }
                 }
@@ -126,7 +125,6 @@ const Subscription = ({ project, history }) => {
                     subscriptionPlanId,
                   });
                   if (data.renewSubscription.success) {
-                    refetch();
                     history.push('/admin/dashboard');
                   }
                 }
