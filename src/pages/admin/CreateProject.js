@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import { useQuery, useMutation } from 'urql';
-import gql from 'graphql-tag';
-import { find, toString } from 'lodash';
-import { useStoreActions } from 'easy-peasy';
+import React, { useState } from "react";
+import { useQuery, useMutation } from "urql";
+import gql from "graphql-tag";
+import { find, toString } from "lodash";
+import { useStoreActions } from "easy-peasy";
 
-import stripe from '../../utils/stripe';
-import Seo from '../../components/Seo';
-import Layout from '../../components/Layout';
-import Header from '../../components/Header';
-import Sidebar from '../../components/Sidebar';
-import CopyRight from '../../components/CopyRight';
-import PaymentForm from '../../components/PaymentForm';
-import PaymentConfirmation from '../../components/PaymentConfirmation';
-import ProgressBar from '../../components/ProgressBar';
-import MainColumn from '../../components/MainColumn';
-import ProjectSetupForm from '../../components/ProjectSetupForm';
-import { Title, Message, Loading } from '../../components/elements';
+import stripe from "../../utils/stripe";
+import Seo from "../../components/Seo";
+import Layout from "../../components/Layout";
+import Header from "../../components/Header";
+import Sidebar from "../../components/Sidebar";
+import CopyRight from "../../components/CopyRight";
+import PaymentForm from "../../components/PaymentForm";
+import PaymentConfirmation from "../../components/PaymentConfirmation";
+import ProgressBar from "../../components/ProgressBar";
+import MainColumn from "../../components/MainColumn";
+import ProjectSetupForm from "../../components/ProjectSetupForm";
+import { Title, Message, Loading } from "../../components/elements";
 
 const packagesQuery = gql`
   query packages {
@@ -59,15 +59,15 @@ const CreateProject = () => {
   const [project, setProject] = useState({});
   const [subscription, setSubscription] = useState({});
   const [packagesData] = useQuery({
-    query: packagesQuery,
+    query: packagesQuery
   });
   const { packages } = packagesData.data || {};
   const [resAdd, executeMutationAdd] = useMutation(createProjectMutation);
   const updateProject = useStoreActions(
-    actions => actions.active.updateProject,
+    actions => actions.active.updateProject
   );
   updateProject(null);
-  console.log('CreateProject', packages, subscription);
+  console.log("CreateProject", packages, subscription);
 
   return (
     <Layout>
@@ -89,8 +89,8 @@ const CreateProject = () => {
                     setProject({ ...data });
                     setSubscription(
                       find(packages, {
-                        subscriptionPlanId: data.subscriptionPlanId,
-                      }),
+                        subscriptionPlanId: data.subscriptionPlanId
+                      })
                     );
                     setActiveStep(2);
                   }}
@@ -109,7 +109,7 @@ const CreateProject = () => {
                       number: toString(data.paymentCardNumber),
                       expMonth: toString(data.paymentCardExpiryMonth),
                       expYear: toString(data.paymentCardExpiryYear),
-                      cvc: toString(data.paymentCardCvv),
+                      cvc: toString(data.paymentCardCvv)
                     };
 
                     const inputData = {
@@ -121,15 +121,17 @@ const CreateProject = () => {
                         addressLine2: data.addressLine2,
                         city: data.city,
                         state: data.state,
-                        postcode: data.postcode,
-                      },
+                        postcode: data.postcode
+                      }
                     };
 
                     // send success data to server
                     const projectCreated = await executeMutationAdd(inputData);
-                    console.log('projectCreated', projectCreated);
-                    setActiveStep(3);
-                    setProject(projectCreated);
+                    console.log("projectCreated", projectCreated);
+                    if (projectCreated.data.createProject) {
+                      setActiveStep(3);
+                      setProject(projectCreated);
+                    }
                   }}
                 />
               </div>
