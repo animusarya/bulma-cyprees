@@ -147,7 +147,7 @@ const ManageClients = ({ match }) => {
     resultProject.data && resultProject.data.project
       ? resultProject.data.project
       : {};
-  // console.log('resultProject clients', project);
+  // console.log("resultProject clients", project);
 
   return (
     <Layout>

@@ -22,6 +22,7 @@ const projectQuery = gql`
       id
       name
       slug
+      logo
     }
   }
 `;
@@ -39,17 +40,17 @@ const pagesQuery = gql`
   }
 `;
 
-// const updateProjectMutation = gql`
-//   mutation updateProject($id: ID!, $input: ProjectUpdateInput!) {
-//     updateProject(id: $id, input: $input) {
-//       id
-//       name
-//       slug
-//       status
-//       customDomain
-//     }
-//   }
-// `;
+const updateProjectMutation = gql`
+  mutation updateProject($id: ID!, $input: ProjectUpdateInput!) {
+    updateProject(id: $id, input: $input) {
+      id
+      name
+      slug
+      status
+      customDomain
+    }
+  }
+`;
 
 const Container = styled.div`
   .content {
@@ -93,7 +94,9 @@ const ProjectDashboard = ({ match }) => {
   const pages =
     resultPages.data && resultPages.data.pages ? resultPages.data.pages : [];
 
-  // const [res, executeMutation] = useMutation(updateProjectMutation);
+  const [resUpdateProject, executeUpdateProjectMutation] = useMutation(
+    updateProjectMutation,
+  );
 
   return (
     <Layout>
@@ -104,13 +107,21 @@ const ProjectDashboard = ({ match }) => {
           <Sidebar />
         </div>
         <div className="column">
-          <AdminHeader project={project} />
+          <AdminHeader
+            project={project}
+            executeUpdateProjectMutation={executeUpdateProjectMutation}
+          />
+
           <AdminSubHeader
             project={project}
+            executeUpdateProjectMutation={executeUpdateProjectMutation}
             refetch={() => {
               refetchPages();
             }}
           />
+          {resUpdateProject.error && (
+            <Message type="error">{resUpdateProject.error.message} </Message>
+          )}
           <MainColumn>
             <div className="content">
               {pages.length === 0 ? (

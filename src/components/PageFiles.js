@@ -77,7 +77,7 @@ const PageFiles = ({ project, page }) => {
               fileType: 'image',
               project: '5d25a3322c16470708e28c2a',
               page: '5d27266725bc811f1e0805da',
-              url: 'tets-test-url',
+              url: data,
             },
           });
           await executeQuery({

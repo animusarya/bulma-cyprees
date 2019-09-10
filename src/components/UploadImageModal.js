@@ -7,7 +7,7 @@ const UploadImageModal = ({ heading, isActive, onClose, onResponse }) => (
     <div className="modal-content">
       <div className="box">
         <Heading>{heading}</Heading>
-        <Dropzone onUpload={onResponse} />
+        <Dropzone onUpload={value => onResponse(value)} />
       </div>
     </div>
     <button

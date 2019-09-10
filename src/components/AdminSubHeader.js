@@ -59,7 +59,7 @@ const Hero = styled.section`
   }
 `;
 
-const AdminSubHeader = ({ project, refetch }) => {
+const AdminSubHeader = ({ project, executeUpdateProjectMutation, refetch }) => {
   const [addPageModal, setAddPageModal] = useState(false);
   const [uploadImageModal, setUploadImageModal] = useState(false);
 
@@ -114,7 +114,13 @@ const AdminSubHeader = ({ project, refetch }) => {
         heading="Upload Banner"
         isActive={uploadImageModal}
         onClose={() => setUploadImageModal(false)}
-        onResponse={() => {}}
+        onResponse={async image => {
+          await executeUpdateProjectMutation({
+            id: project.id,
+            input: { logo: image },
+          });
+          setUploadImageModal(false);
+        }}
       />
       <AddPageModal
         isActive={addPageModal}
