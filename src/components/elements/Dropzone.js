@@ -64,54 +64,52 @@ const MyDropzone = ({ onUpload }) => {
 
   const onDrop = useCallback(async acceptedFiles => {
     setLoading(true);
-    onUpload('https://source.unsplash.com/random');
-    // try {
-    //   const file = acceptedFiles[0];
 
-    //   // get signed url from aws s3
-    //   const signedUploadUrl = await executeUploadMutation({
-    //     fileName: file.name,
-    //     fileType: file.type,
-    //   });
-    //   const { signedUrl, fileUrl } = await signedUploadUrl.data.signedUploadUrl;
-    //   console.log('signedUrl', signedUrl);
-    //   const options = {
-    //     headers: {
-    //       'Content-Type': file.type,
-    //     },
-    //   };
+    try {
+      const file = acceptedFiles[0];
 
-    //   const result = await uploadFile(signedUrl, file, options);
-    //   console.log('result', result);
+      // get signed url from aws s3
+      const signedUploadUrl = await executeUploadMutation({
+        fileName: file.name,
+        fileType: file.type,
+      });
+      const { signedUrl, fileUrl } = await signedUploadUrl.data.signedUploadUrl;
+      console.log('signedUrl', signedUrl);
+      const options = {
+        headers: {
+          'Content-Type': file.type,
+        },
+      };
 
-    // return;
+      const result = await uploadFile(signedUrl, file, options);
+      console.log('result', result);
 
-    // upload to aws s3
-    // const xhr = new window.XMLHttpRequest();
-    // xhr.open('POST', signedUrl, true);
-    // xhr.onload = function(e) {
-    //   console.log('eonload', e);
-    // };
-    // // Listen to the upload progress.
-    // xhr.upload.onprogress = function(e) {
-    //   console.log('onprogress', e);
-    // };
-    // xhr.send(file);
-    // return;
-    // const formData = new FormData();
-    // formData.append('file', file, file.name);
-    // await fetch(signedUrl, {
-    //   method: 'POST',
-    //   body: formData,
-    // });
+      // upload to aws s3
+      // const xhr = new window.XMLHttpRequest();
+      // xhr.open('POST', signedUrl, true);
+      // xhr.onload = function(e) {
+      //   console.log('eonload', e);
+      // };
+      // // Listen to the upload progress.
+      // xhr.upload.onprogress = function(e) {
+      //   console.log('onprogress', e);
+      // };
+      // xhr.send(file);
 
-    // upload success
-    //   onUpload({ ...file, url: fileUrl });
-    //   setLoading(false);
-    // } catch (error) {
-    //   console.log('upload error', error);
-    //   setLoading(false);
-    // }
+      // const formData = new FormData();
+      // formData.append('file', file, file.name);
+      // await fetch(signedUrl, {
+      //   method: 'POST',
+      //   body: formData,
+      // });
+
+      // upload success
+      onUpload({ ...file, url: fileUrl });
+      setLoading(false);
+    } catch (error) {
+      console.log('upload error', error);
+      setLoading(false);
+    }
   }, []);
 
   const {
