@@ -62,10 +62,10 @@ const AdminHeader = ({ project, executeUpdateProjectMutation }) => {
         heading="Upload Logo"
         isActive={isActive}
         onClose={() => setIsActive(false)}
-        onResponse={async image => {
+        onResponse={async ({ url }) => {
           await executeUpdateProjectMutation({
-            id: project.id,
-            input: { logo: image },
+            id: '5d72202b87053f1a941c5e72',
+            input: { logo: url },
           });
           setIsActive(false);
         }}

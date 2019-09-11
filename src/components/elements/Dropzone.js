@@ -58,9 +58,9 @@ const Container = styled.div`
 
 const MyDropzone = ({ onUpload }) => {
   const [loading, setLoading] = useState(false);
-  const [signedUrlResult, executeUploadMutation] = useMutation(
-    signedUploadUrlMutation,
-  );
+  // const [signedUrlResult, executeUploadMutation] = useMutation(
+  //   signedUploadUrlMutation,
+  // );
 
   const onDrop = useCallback(async acceptedFiles => {
     setLoading(true);
@@ -69,20 +69,21 @@ const MyDropzone = ({ onUpload }) => {
       const file = acceptedFiles[0];
 
       // get signed url from aws s3
-      const signedUploadUrl = await executeUploadMutation({
-        fileName: file.name,
-        fileType: file.type,
-      });
-      const { signedUrl, fileUrl } = await signedUploadUrl.data.signedUploadUrl;
-      console.log('signedUrl', signedUrl);
-      const options = {
-        headers: {
-          'Content-Type': file.type,
-        },
-      };
+      // const signedUploadUrl = await executeUploadMutation({
+      //   fileName: file.name,
+      //   fileType: file.type,
+      // });
+      onUpload({ ...file, url: 'https://source.unsplash.com/random' });
+      // const { signedUrl, fileUrl } = await signedUploadUrl.data.signedUploadUrl;
+      // console.log('signedUrl', signedUrl);
+      // const options = {
+      //   headers: {
+      //     'Content-Type': file.type,
+      //   },
+      // };
 
-      const result = await uploadFile(signedUrl, file, options);
-      console.log('result', result);
+      // const result = await uploadFile(signedUrl, file, options);
+      // console.log('result', result);
 
       // upload to aws s3
       // const xhr = new window.XMLHttpRequest();
@@ -104,7 +105,7 @@ const MyDropzone = ({ onUpload }) => {
       // });
 
       // upload success
-      onUpload({ ...file, url: fileUrl });
+      // onUpload({ ...file, url: fileUrl });
       setLoading(false);
     } catch (error) {
       console.log('upload error', error);

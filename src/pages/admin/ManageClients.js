@@ -130,6 +130,7 @@ const ManageClients = ({ match }) => {
   const [resultProject, executeQuery] = useQuery({
     query: projectQuery,
     variables: { id: match.params.id },
+    requestPolicy: 'network-only',
   });
   // console.log('resultProject', project);
   const [res, executeAddClientMutation] = useMutation(addClientMutation);
@@ -302,7 +303,7 @@ const ManageClients = ({ match }) => {
                 </table>
               </React.Fragment>
             )}
-            <div className="notify-title">
+            {/* <div className="notify-title">
               <Subtitle>Clients Tools</Subtitle>
               <Button
                 onClick={() => {
@@ -316,7 +317,7 @@ const ManageClients = ({ match }) => {
                 }}>
                 Notify All Clients
               </Button>
-            </div>
+            </div> */}
           </MainColumn>
         </div>
       </Container>

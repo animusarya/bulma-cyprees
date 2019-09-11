@@ -23,6 +23,7 @@ const projectQuery = gql`
       name
       slug
       logo
+      heroImage
     }
   }
 `;
@@ -78,6 +79,7 @@ const ProjectDashboard = ({ match }) => {
   const [resultProject] = useQuery({
     query: projectQuery,
     variables: { id: match.params.id },
+    requestPolicy: 'network-only',
   });
   const project =
     resultProject.data && resultProject.data.project
