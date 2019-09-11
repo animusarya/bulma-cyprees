@@ -14,10 +14,14 @@ const removePageMutation = gql`
   }
 `;
 
-const DeletePageBtn = ({ pageId, projectId, history }) => {
+const DeletePageBtn = ({ history, match }) => {
   const [resRemove, executePageRemoveMutation] = useMutation(
     removePageMutation,
   );
+
+  const { id, pageId } = match.params;
+
+  console.log(match);
 
   return (
     <React.Fragment>
@@ -35,7 +39,7 @@ const DeletePageBtn = ({ pageId, projectId, history }) => {
                 id: pageId,
               });
               // redirect back to project page
-              history.push(`/admin/project/${projectId}/pages`);
+              history.push(`/admin/project/${id}`);
             }
           });
         }}>

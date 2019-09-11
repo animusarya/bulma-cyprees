@@ -29,9 +29,9 @@ const removeFileMutation = gql`
   }
 `;
 
-const uploadFileMutation = gql`
-  mutation uploadFile($input: FileInput!) {
-    uploadFile(input: $input) {
+const createFileMutation = gql`
+  mutation createFile($input: FileInput!) {
+    createFile(input: $input) {
       id
       name
     }
@@ -48,15 +48,16 @@ const PageFiles = ({ project, page }) => {
   const [resultFile, executeQuery] = useQuery({
     query: filesQuery,
     variables: { pageId: page.id },
+    requestPolicy: 'network-only',
   });
   const [resFileUpload, executeFileUploadMutation] = useMutation(
-    uploadFileMutation,
+    createFileMutation,
   );
 
   const [resDel, executeMutationDelete] = useMutation(removeFileMutation);
   const files =
     resultFile.data && resultFile.data.files ? resultFile.data.files : {};
-  // console.log('resultFile', files);
+  console.log('resultFile', resultFile);
 
   return (
     <Container>
@@ -65,19 +66,19 @@ const PageFiles = ({ project, page }) => {
           <Title>{page.title}</Title>
         </div>
         <div className="column is-one-fifth">
-          <DeletePageBtn project={project.id} pageId={page.id} />
+          <DeletePageBtn />
         </div>
       </div>
       <Dropzone
-        onUpload={async data => {
-          console.log('onUpload', data);
+        onUpload={async ({ url }) => {
+          console.log('onUpload', url);
           await executeFileUploadMutation({
             input: {
               name: 'abc',
               fileType: 'image',
-              project: '5d25a3322c16470708e28c2a',
-              page: '5d27266725bc811f1e0805da',
-              url: data,
+              project: project.id,
+              page: page.id,
+              url,
             },
           });
           await executeQuery({
@@ -147,6 +148,7 @@ const PageFiles = ({ project, page }) => {
                           await executeMutationDelete({
                             id: file.id,
                           });
+                          executeQuery();
                         }
                       });
                     }}>
