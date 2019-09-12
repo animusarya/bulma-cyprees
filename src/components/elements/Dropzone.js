@@ -67,7 +67,7 @@ const MyDropzone = ({ onUpload }) => {
 
     try {
       const file = acceptedFiles[0];
-
+      console.log('files', file);
       // get signed url from aws s3
       // const signedUploadUrl = await executeUploadMutation({
       //   fileName: file.name,

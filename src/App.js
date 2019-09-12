@@ -231,6 +231,7 @@ class App extends React.Component {
                       component={ClientSettings}
                       access="client"
                     />
+
                     <Route exact path="/test" component={Test} />
                     <Route component={Error404} />
                   </Switch>

@@ -136,7 +136,7 @@ const Pricing = () => {
                     <tr>
                       <th>Duration</th>
                       <th>Price</th>
-                      <th className="has-text-right">Edit</th>
+                      {/* <th className="has-text-right">Edit</th> */}
                       <th className="has-text-right">Delete</th>
                     </tr>
                   </thead>
@@ -145,14 +145,14 @@ const Pricing = () => {
                       <tr key={item.id}>
                         <td>{item.name}</td>
                         <td>£{item.price}</td>
-                        <td className="is-uppercase actions has-text-right">
+                        {/* <td className="is-uppercase actions has-text-right">
                           <Button
                             secondary
                             paddingless
                             onClick={() => setEditClient(item)}>
                             EDIT
                           </Button>
-                        </td>
+                        </td> */}
                         <td className="is-uppercase actions has-text-right">
                           <Button
                             secondary

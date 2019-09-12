@@ -54,7 +54,7 @@ const Button = styled.button`
   }
 `;
 
-const ClientHeader = ({ pages }) => {
+const ClientHeader = ({ pages, project }) => {
   const handleLogout = () => {
     window.localStorage.clear();
     window.location.reload(true);
@@ -68,7 +68,7 @@ const ClientHeader = ({ pages }) => {
           <div className="column is-8 is-offset-2">
             <div>
               <Link to="/client/dashboard">
-                <Logo src={logo} alt="logo" />
+                <Logo src={project.logo || logo} alt="logo" />
               </Link>
             </div>
             <div>
@@ -83,7 +83,9 @@ const ClientHeader = ({ pages }) => {
                 <i className="fas fa-power-off icon"></i>
               </Button>
               <div className="has-text-right">
-                <Title marginbottom="0px">Project Arden</Title>
+                <Title marginbottom="0px">
+                  {project.name || 'Project Arden'}
+                </Title>
               </div>
             </div>
           </div>

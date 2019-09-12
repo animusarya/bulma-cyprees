@@ -66,7 +66,6 @@ const CreateProject = () => {
     actions => actions.active.updateProject,
   );
   updateProject(null);
-
   return (
     <Layout>
       <Seo title="Create Project" description="Create New Project" />
