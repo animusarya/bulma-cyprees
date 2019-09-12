@@ -45,6 +45,7 @@ const ManageEmail = ({ match }) => {
   const [resultProject] = useQuery({
     query: projectQuery,
     variables: { id: match.params.id },
+    requestPolicy: 'network-only',
   });
   const project =
     resultProject.data && resultProject.data.project
@@ -52,7 +53,7 @@ const ManageEmail = ({ match }) => {
       : {};
 
   const [res, executeMutation] = useMutation(updateProjectMutation);
-  // console.log('resultProject', project);
+  console.log('resultProject', project);
 
   return (
     <Layout>

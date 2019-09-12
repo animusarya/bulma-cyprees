@@ -66,8 +66,8 @@ const noftifyMutation = gql`
 `;
 
 const resendEmailMutation = gql`
-  mutation resendEmail($email: String!) {
-    resendEmail(email: $email) {
+  mutation resendEmail($projectId: ID!, $email: String!) {
+    resendEmail(projectId: $projectId, email: $email) {
       success
     }
   }
@@ -130,6 +130,7 @@ const ManageClients = ({ match }) => {
   const [resultProject, executeQuery] = useQuery({
     query: projectQuery,
     variables: { id: match.params.id },
+    requestPolicy: 'network-only',
   });
   // console.log('resultProject', project);
   const [res, executeAddClientMutation] = useMutation(addClientMutation);
@@ -147,7 +148,7 @@ const ManageClients = ({ match }) => {
     resultProject.data && resultProject.data.project
       ? resultProject.data.project
       : {};
-  // console.log('resultProject clients', project);
+  // console.log("resultProject clients", project);
 
   return (
     <Layout>
@@ -240,7 +241,8 @@ const ManageClients = ({ match }) => {
                               }).then(async value => {
                                 if (value) {
                                   await executeMutationResendEmail({
-                                    id: item.id,
+                                    projectId: project.id,
+                                    email: item.email,
                                   });
                                   executeQuery({
                                     requestPolicy: 'network-only',
@@ -301,7 +303,7 @@ const ManageClients = ({ match }) => {
                 </table>
               </React.Fragment>
             )}
-            <div className="notify-title">
+            {/* <div className="notify-title">
               <Subtitle>Clients Tools</Subtitle>
               <Button
                 onClick={() => {
@@ -315,7 +317,7 @@ const ManageClients = ({ match }) => {
                 }}>
                 Notify All Clients
               </Button>
-            </div>
+            </div> */}
           </MainColumn>
         </div>
       </Container>

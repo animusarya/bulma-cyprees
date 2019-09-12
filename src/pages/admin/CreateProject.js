@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
-import { find } from 'lodash';
+import { find, toString } from 'lodash';
 import { useStoreActions } from 'easy-peasy';
 
 import Seo from '../../components/Seo';
@@ -20,6 +20,7 @@ const packagesQuery = gql`
   query packages {
     packages {
       id
+      subscriptionPlanId
       name
       durationInMonths
       price
@@ -32,16 +33,18 @@ const createProjectMutation = gql`
     $name: String!
     $slug: String!
     $customDomain: String!
-    $subscriptionId: String!
+    $subscriptionPlanId: String!
     $billingAddress: Address!
+    $card: Card!
   ) {
     createProject(
       input: {
         name: $name
         slug: $slug
         customDomain: $customDomain
-        subscriptionId: $subscriptionId
+        subscriptionPlanId: $subscriptionPlanId
         billingAddress: $billingAddress
+        card: $card
       }
     ) {
       id
@@ -63,8 +66,6 @@ const CreateProject = () => {
     actions => actions.active.updateProject,
   );
   updateProject(null);
-  // console.log('CreateProject', subscription);
-
   return (
     <Layout>
       <Seo title="Create Project" description="Create New Project" />
@@ -84,7 +85,9 @@ const CreateProject = () => {
                   onSubmit={data => {
                     setProject({ ...data });
                     setSubscription(
-                      find(packages, { id: data.subscriptionId }),
+                      find(packages, {
+                        subscriptionPlanId: data.subscriptionPlanId,
+                      }),
                     );
                     setActiveStep(2);
                   }}
@@ -99,8 +102,16 @@ const CreateProject = () => {
                   initialValues={project}
                   subscription={subscription}
                   onSubmit={async data => {
+                    const card = {
+                      number: toString(data.paymentCardNumber),
+                      expMonth: toString(data.paymentCardExpiryMonth),
+                      expYear: toString(data.paymentCardExpiryYear),
+                      cvc: toString(data.paymentCardCvv),
+                    };
+
                     const inputData = {
                       ...project,
+                      card,
                       billingAddress: {
                         country: data.country,
                         addressLine1: data.addressLine1,
@@ -110,15 +121,13 @@ const CreateProject = () => {
                         postcode: data.postcode,
                       },
                     };
-                    // console.log('newData', inputData);
-
-                    // TODO: send card details to stripe
 
                     // send success data to server
                     const projectCreated = await executeMutationAdd(inputData);
-
-                    setActiveStep(3);
-                    setProject(projectCreated);
+                    if (projectCreated.data.createProject) {
+                      setActiveStep(3);
+                      setProject(projectCreated);
+                    }
                   }}
                 />
               </div>

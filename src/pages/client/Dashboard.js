@@ -72,8 +72,8 @@ const Dashboard = () => {
   });
   const pages = resultPages.data ? resultPages.data.pages : [];
   const contentPages = filter(pages, { type: 'content' });
-  const dataroomPages = filter(pages, { type: 'dataroom' });
-  // console.log('pages', contentPages, dataroomPages);
+  const dataRoomPages = filter(pages, { type: 'dataroom' });
+  console.log('pages', dataRoomPages);
 
   if (isEmpty(project)) {
     return (
@@ -89,7 +89,7 @@ const Dashboard = () => {
   return (
     <Layout>
       <Seo title="Client Dashboard" description="Page description" />
-      <ClientHeader pages={contentPages} />
+      <ClientHeader pages={contentPages} project={project} />
       {(resultMe.fetching || resultPages.fetching) && <Loading />}
       {resultMe.error && (
         <Message type="error">{resultMe.error.message}</Message>
@@ -102,7 +102,7 @@ const Dashboard = () => {
           <div className="columns">
             <div className="column is-three-fifths is-offset-one-fifth">
               {/* <Heading>Overview</Heading> */}
-              {dataroomPages.map(page => (
+              {dataRoomPages.map(page => (
                 <PageRow key={page.id} project={project} page={page} />
               ))}
             </div>

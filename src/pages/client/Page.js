@@ -94,7 +94,7 @@ const Page = ({ match }) => {
   return (
     <Layout>
       <Seo title="Client Page" description="Page description" />
-      <ClientHeader pages={contentPages} />
+      <ClientHeader pages={contentPages} project={project} />
       <Container className="section">
         <div className="container">
           <div className="columns">

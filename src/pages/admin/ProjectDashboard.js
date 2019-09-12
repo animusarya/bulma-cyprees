@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useStoreActions } from 'easy-peasy';
-import { useQuery } from 'urql';
+import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
@@ -22,6 +22,8 @@ const projectQuery = gql`
       id
       name
       slug
+      logo
+      heroImage
     }
   }
 `;
@@ -35,6 +37,18 @@ const pagesQuery = gql`
       type
       status
       createdAt
+    }
+  }
+`;
+
+const updateProjectMutation = gql`
+  mutation updateProject($id: ID!, $input: ProjectUpdateInput!) {
+    updateProject(id: $id, input: $input) {
+      id
+      name
+      slug
+      status
+      customDomain
     }
   }
 `;
@@ -65,6 +79,7 @@ const ProjectDashboard = ({ match }) => {
   const [resultProject] = useQuery({
     query: projectQuery,
     variables: { id: match.params.id },
+    requestPolicy: 'network-only',
   });
   const project =
     resultProject.data && resultProject.data.project
@@ -81,6 +96,10 @@ const ProjectDashboard = ({ match }) => {
   const pages =
     resultPages.data && resultPages.data.pages ? resultPages.data.pages : [];
 
+  const [resUpdateProject, executeUpdateProjectMutation] = useMutation(
+    updateProjectMutation,
+  );
+
   return (
     <Layout>
       <Seo title="Project Dashboard" />
@@ -90,13 +109,21 @@ const ProjectDashboard = ({ match }) => {
           <Sidebar />
         </div>
         <div className="column">
-          <AdminHeader project={project} />
+          <AdminHeader
+            project={project}
+            executeUpdateProjectMutation={executeUpdateProjectMutation}
+          />
+
           <AdminSubHeader
             project={project}
+            executeUpdateProjectMutation={executeUpdateProjectMutation}
             refetch={() => {
               refetchPages();
             }}
           />
+          {resUpdateProject.error && (
+            <Message type="error">{resUpdateProject.error.message} </Message>
+          )}
           <MainColumn>
             <div className="content">
               {pages.length === 0 ? (

@@ -2,6 +2,7 @@ import React from 'react';
 import { startCase } from 'lodash';
 import gql from 'graphql-tag';
 import { useQuery } from 'urql';
+import fileDownload from 'js-file-download';
 
 import { Title, Button, Message, Loading } from './elements';
 
@@ -26,7 +27,7 @@ const PageRow = ({ project, page }) => {
     variables: { projectId: project.id || 0 },
   });
   const files = resultFiles.data ? resultFiles.data.files : [];
-
+  console.log(resultFiles);
   return (
     <React.Fragment>
       <Title marginbottom="0rem">{startCase(page.name)}</Title>
@@ -54,7 +55,7 @@ const PageRow = ({ project, page }) => {
                   <Button
                     secondary
                     paddingless
-                    onClick={() => console.log('start download')}>
+                    onClick={() => fileDownload(file.url)}>
                     Download
                   </Button>
                 </td>

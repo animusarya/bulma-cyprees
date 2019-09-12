@@ -4,6 +4,7 @@ import { useMutation } from 'urql';
 import gql from 'graphql-tag';
 import fetch from 'isomorphic-fetch';
 import styled from 'styled-components';
+import { uploadFile } from '../../utils/upload';
 
 import Loading from './Loading';
 
@@ -57,36 +58,45 @@ const Container = styled.div`
 
 const MyDropzone = ({ onUpload }) => {
   const [loading, setLoading] = useState(false);
-  const [signedUrlResult, executeUploadMutation] = useMutation(
-    signedUploadUrlMutation,
-  );
+  // const [signedUrlResult, executeUploadMutation] = useMutation(
+  //   signedUploadUrlMutation,
+  // );
 
   const onDrop = useCallback(async acceptedFiles => {
     setLoading(true);
+
     try {
       const file = acceptedFiles[0];
-
+      console.log('files', file);
       // get signed url from aws s3
-      const signedUploadUrl = await executeUploadMutation({
-        fileName: file.name,
-        fileType: file.type,
-      });
-      const { signedUrl, fileUrl } = signedUploadUrl.data.signedUploadUrl;
-      console.log('signedUrl', signedUrl);
-      // return;
+      // const signedUploadUrl = await executeUploadMutation({
+      //   fileName: file.name,
+      //   fileType: file.type,
+      // });
+      onUpload({ ...file, url: 'https://source.unsplash.com/random' });
+      // const { signedUrl, fileUrl } = await signedUploadUrl.data.signedUploadUrl;
+      // console.log('signedUrl', signedUrl);
+      // const options = {
+      //   headers: {
+      //     'Content-Type': file.type,
+      //   },
+      // };
+
+      // const result = await uploadFile(signedUrl, file, options);
+      // console.log('result', result);
 
       // upload to aws s3
-      const xhr = new window.XMLHttpRequest();
-      xhr.open('POST', signedUrl, true);
-      xhr.onload = function(e) {
-        console.log('eonload', e);
-      };
-      // Listen to the upload progress.
-      xhr.upload.onprogress = function(e) {
-        console.log('onprogress', e);
-      };
-      xhr.send(file);
-      return;
+      // const xhr = new window.XMLHttpRequest();
+      // xhr.open('POST', signedUrl, true);
+      // xhr.onload = function(e) {
+      //   console.log('eonload', e);
+      // };
+      // // Listen to the upload progress.
+      // xhr.upload.onprogress = function(e) {
+      //   console.log('onprogress', e);
+      // };
+      // xhr.send(file);
+
       // const formData = new FormData();
       // formData.append('file', file, file.name);
       // await fetch(signedUrl, {
@@ -95,7 +105,7 @@ const MyDropzone = ({ onUpload }) => {
       // });
 
       // upload success
-      onUpload({ ...file, url: fileUrl });
+      // onUpload({ ...file, url: fileUrl });
       setLoading(false);
     } catch (error) {
       console.log('upload error', error);

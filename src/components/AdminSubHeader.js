@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import logoBg from '../assets/images/login-bg.jpg';
 import { Button } from './elements';
 import AddPageModal from './AddPageModal';
+import UploadImageModal from './UploadImageModal';
 
 const Container = styled.div`
   margin-top: 1rem;
@@ -58,8 +59,9 @@ const Hero = styled.section`
   }
 `;
 
-const AdminSubHeader = ({ project, refetch }) => {
+const AdminSubHeader = ({ project, executeUpdateProjectMutation, refetch }) => {
   const [addPageModal, setAddPageModal] = useState(false);
+  const [uploadImageModal, setUploadImageModal] = useState(false);
 
   return (
     <Container>
@@ -91,9 +93,12 @@ const AdminSubHeader = ({ project, refetch }) => {
         </div>
       </NavbarMenu>
       <Hero className="hero">
-        <HeroImg src={logoBg} alt="logo-bg" />
+        <HeroImg src={project.heroImage || logoBg} alt="logo-bg" />
         <div className="hero-body has-text-centered">
-          <Button paddingless secondary onClick={() => {}}>
+          <Button
+            paddingless
+            secondary
+            onClick={() => setUploadImageModal(true)}>
             <div className="edit-banner">
               <h6 className="title is-6 has-text-weight-semibold">
                 Change banner
@@ -105,6 +110,18 @@ const AdminSubHeader = ({ project, refetch }) => {
           </Button>
         </div>
       </Hero>
+      <UploadImageModal
+        heading="Upload Banner"
+        isActive={uploadImageModal}
+        onClose={() => setUploadImageModal(false)}
+        onResponse={async ({ url }) => {
+          await executeUpdateProjectMutation({
+            id: '5d72202b87053f1a941c5e72',
+            input: { heroImage: url },
+          });
+          setUploadImageModal(false);
+        }}
+      />
       <AddPageModal
         isActive={addPageModal}
         project={project}

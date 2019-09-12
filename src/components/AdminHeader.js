@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import logo from '../assets/images/logo.png';
 import { Title, Button } from './elements';
+import UploadImageModal from './UploadImageModal';
 
 const Container = styled.div`
   margin-top: 1rem;
@@ -32,16 +33,21 @@ const Logo = styled.img`
   height: auto;
 `;
 
-const AdminHeader = ({ project }) => {
+const AdminHeader = ({ project, executeUpdateProjectMutation }) => {
+  const [isActive, setIsActive] = useState(false);
   return (
     <Container>
       <div className="columns">
         <div className="column is-8 is-offset-2">
           <div className="logo-edit">
             <Link to="/client/dashboard" className="navbar-item">
-              <Logo src={logo} alt="logo" />
+              <Logo src={project.logo || logo} alt="logo" />
             </Link>
-            <Button paddingless secondary className="edit">
+            <Button
+              paddingless
+              secondary
+              className="edit"
+              onClick={() => setIsActive(true)}>
               Edit
             </Button>
           </div>
@@ -52,6 +58,18 @@ const AdminHeader = ({ project }) => {
           </div>
         </div>
       </div>
+      <UploadImageModal
+        heading="Upload Logo"
+        isActive={isActive}
+        onClose={() => setIsActive(false)}
+        onResponse={async ({ url }) => {
+          await executeUpdateProjectMutation({
+            id: '5d72202b87053f1a941c5e72',
+            input: { logo: url },
+          });
+          setIsActive(false);
+        }}
+      />
     </Container>
   );
 };
