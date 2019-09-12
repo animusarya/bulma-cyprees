@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery } from 'urql';
+import { useQuery, useMutation } from 'urql';
 import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
@@ -8,8 +8,18 @@ import { Message, Loading } from '../../components/elements';
 const meQuery = gql`
   query me {
     me {
-      id
       email
+      status
+      hasAccess
+      notifyStatus
+    }
+  }
+`;
+
+const updateProjectClientMutation = gql`
+  mutation updateProjectClient($id: ID!, $input: ProjectClientInput!) {
+    updateProjectClient(input: { id: $id, input: $input }) {
+      id
     }
   }
 `;
@@ -21,9 +31,25 @@ const AcceptInvitation = ({ match }) => {
     query: meQuery,
   });
 
+  const [res, executeMutation] = useMutation(updateProjectClientMutation);
+
+  const me = resultMe.data ? resultMe.data.me : {};
   useEffect(() => {
-    console.log(resultMe, projectId);
-  }, []);
+    if (me) {
+      executeMutation({
+        id: projectId,
+        input: {
+          email: me.email,
+          status: 'accepted',
+          hasAccess: me.hasAccess,
+          notifyStatus: me.notifyStatus,
+        },
+      });
+      if (res.data) {
+        setLoading(false);
+      }
+    }
+  });
 
   return (
     <Layout>{loading ? <Loading /> : <Message>hvbchjadcvhj</Message>}</Layout>
