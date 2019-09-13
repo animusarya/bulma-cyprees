@@ -1,18 +1,19 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useQuery, useMutation } from 'urql';
-import gql from 'graphql-tag';
-import dayjs from 'dayjs';
-import { Link } from 'react-router-dom';
-import swal from 'sweetalert';
+import React from "react";
+import styled from "styled-components";
+import { useQuery, useMutation } from "urql";
+import gql from "graphql-tag";
+import dayjs from "dayjs";
+import { Link } from "react-router-dom";
+import swal from "sweetalert";
 
-import Layout from '../../components/Layout';
-import Seo from '../../components/Seo';
-import { Heading, Message, Loading, Button } from '../../components/elements';
-import Header from '../../components/Header';
-import Sidebar from '../../components/Sidebar';
-import MainColumn from '../../components/MainColumn';
-import CopyRight from '../../components/CopyRight';
+import Layout from "../../components/Layout";
+import Seo from "../../components/Seo";
+import { Heading, Message, Loading, Button } from "../../components/elements";
+import Header from "../../components/Header";
+import Sidebar from "../../components/Sidebar";
+import MainColumn from "../../components/MainColumn";
+import CopyRight from "../../components/CopyRight";
+admin, client;
 
 const userQuery = gql`
   query user($id: ID!) {
@@ -32,6 +33,8 @@ const clientProjectsQuery = gql`
       subscriptionDurationInMonths
       subscriptionStartsAt
       subscriptionEndsAt
+      subscriptionPlanId
+      status
     }
   }
 `;
@@ -44,11 +47,10 @@ const removeProjectMutation = gql`
   }
 `;
 
-const renewProjectClientMutation = gql`
-  mutation renewProjectClient($id: ID!) {
-    renewProjectClient(id: $id) {
-      id
-      subscriptionlastRenewedAt
+const renewSubscriptionMutation = gql`
+  mutation renewSubscription($id: ID!, $subscriptionPlanId: String!) {
+    renewSubscription(id: $id, subscriptionPlanId: $subscriptionPlanId) {
+      success
     }
   }
 `;
@@ -77,7 +79,7 @@ const ProjectsClient = ({ match }) => {
   });
   const [resRemove, executeMutationRemove] = useMutation(removeProjectMutation);
   const [resRenew, executeMutationRenew] = useMutation(
-    renewProjectClientMutation,
+    renewSubscriptionMutation,
   );
   const user = resultUser.data ? resultUser.data.user : {};
   // console.log('clientId', resultUser);
@@ -122,8 +124,8 @@ const ProjectsClient = ({ match }) => {
                       <td>
                         {dayjs(project.subscriptionStartsAt).isValid()
                           ? dayjs(project.subscriptionStartsAt).format(
-                            'DD-MM-YYYY',
-                          )
+                              'DD-MM-YYYY',
+                            )
                           : null}
                       </td>
                       <td className="is-uppercase actions">
@@ -135,6 +137,7 @@ const ProjectsClient = ({ match }) => {
                       <td className="is-uppercase actions">
                         <Button
                           secondary
+                          disabled={project.disabled !== 'active'}
                           paddingless
                           onClick={() => {
                             swal(
@@ -144,7 +147,11 @@ const ProjectsClient = ({ match }) => {
                               },
                             ).then(async value => {
                               if (value) {
-                                await executeMutationRenew({ id: project.id });
+                                await executeMutationRenew({
+                                  id: project.id,
+                                  subscriptionPlanId:
+                                    project.subscriptionPlanId,
+                                });
                               }
                             });
                           }}>

@@ -118,7 +118,7 @@ const CreateProject = () => {
                         addressLine2: data.addressLine2,
                         city: data.city,
                         state: data.state,
-                        postcode: data.postcode,
+                        postcode: toString(data.postcode),
                       },
                     };
 
