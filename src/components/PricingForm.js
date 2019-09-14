@@ -7,6 +7,7 @@ import { InputGroup, Button } from './elements';
 
 const PricingForm = props => {
   const {
+    initialValues,
     values,
     touched,
     errors,
@@ -40,6 +41,7 @@ const PricingForm = props => {
         name="durationInMonths"
         label="Duration"
         placeholder="12"
+        disabled={initialValues.durationInMonths}
         value={values.durationInMonths}
         onChange={handleChange}
         onBlur={handleBlur}
@@ -59,6 +61,7 @@ const PricingForm = props => {
         label="Price (£)"
         placeholder="100"
         value={values.price}
+        disabled={initialValues.price}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={errors.price && touched.price ? errors.price : undefined}

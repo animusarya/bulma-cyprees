@@ -88,7 +88,7 @@ export default withFormik({
   validationSchema: yup.object().shape({
     name: yup.string().required('Name is required!'),
     slug: yup.string().required('slug is required!'),
-    customDomain: yup.string().required('Custom Domain is required!'),
+    // customDomain: yup.string().required('Custom Domain is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {

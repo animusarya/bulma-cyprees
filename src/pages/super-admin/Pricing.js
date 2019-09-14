@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { useQuery, useMutation } from 'urql';
-import gql from 'graphql-tag';
-import swal from 'sweetalert';
-import { isEmpty } from 'lodash';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { useQuery, useMutation } from "urql";
+import gql from "graphql-tag";
+import swal from "sweetalert";
+import { isEmpty } from "lodash";
 
-import Layout from '../../components/Layout';
-import Seo from '../../components/Seo';
+import Layout from "../../components/Layout";
+import Seo from "../../components/Seo";
 import {
   Heading,
   Title,
   Message,
   Loading,
-  Button,
-} from '../../components/elements';
-import Header from '../../components/Header';
-import Sidebar from '../../components/Sidebar';
-import MainColumn from '../../components/MainColumn';
-import CopyRight from '../../components/CopyRight';
-import PricingForm from '../../components/PricingForm';
+  Button
+} from "../../components/elements";
+import Header from "../../components/Header";
+import Sidebar from "../../components/Sidebar";
+import MainColumn from "../../components/MainColumn";
+import CopyRight from "../../components/CopyRight";
+import PricingForm from "../../components/PricingForm";
 
 const pricingsQuery = gql`
   {
@@ -47,13 +47,13 @@ const pricingMutation = gql`
   }
 `;
 
-const removePriceMutation = gql`
-  mutation removePackage($id: ID!) {
-    removePackage(id: $id) {
-      success
-    }
-  }
-`;
+// const removePriceMutation = gql`
+//   mutation removePackage($id: ID!) {
+//     removePackage(id: $id) {
+//       success
+//     }
+//   }
+// `;
 
 const updatePackageMutation = gql`
   mutation updatePackage($id: ID!, $input: PackageInput!) {
@@ -78,10 +78,10 @@ const Container = styled.div`
 const Pricing = () => {
   const [res, executeMutation] = useMutation(pricingMutation);
   const [result, executeQuery] = useQuery({
-    query: pricingsQuery,
+    query: pricingsQuery
   });
   const [editClient, setEditClient] = useState({});
-  const [resRemove, executeMutationRemove] = useMutation(removePriceMutation);
+  // const [resRemove, executeMutationRemove] = useMutation(removePriceMutation);
   const [resEdit, executeMutationEdit] = useMutation(updatePackageMutation);
 
   return (
@@ -106,9 +106,9 @@ const Pricing = () => {
                 // edit item
                 const editItem = editClient;
                 setTimeout(() => {
-                  swal('Item updated successfully!');
+                  swal("Item updated successfully!");
                   executeQuery({
-                    requestPolicy: 'network-only',
+                    requestPolicy: "network-only"
                   });
                   setEditClient({});
                 }, 3000);
@@ -116,16 +116,13 @@ const Pricing = () => {
               }}
             />
             {res.error && <Message type="error">{res.error.message}</Message>}
-            {resRemove.error && (
+            {/* {resRemove.error && (
               <Message type="error">{resRemove.error.message}</Message>
-            )}
+            )} */}
             {resEdit.error && (
               <Message type="error">{resEdit.error.message}</Message>
             )}
-            {res.fetching ||
-            result.fetching ||
-            resRemove.fetching ||
-            resEdit.fetching ? (
+            {res.fetching || result.fetching || resEdit.fetching ? (
               <Loading />
             ) : null}
             {result.data && result.data.packages && (
@@ -136,8 +133,8 @@ const Pricing = () => {
                     <tr>
                       <th>Duration</th>
                       <th>Price</th>
-                      {/* <th className="has-text-right">Edit</th> */}
-                      <th className="has-text-right">Delete</th>
+                      <th className="has-text-right">Edit</th>
+                      {/* <th className="has-text-right">Delete</th> */}
                     </tr>
                   </thead>
                   <tbody>
@@ -145,15 +142,16 @@ const Pricing = () => {
                       <tr key={item.id}>
                         <td>{item.name}</td>
                         <td>£{item.price}</td>
-                        {/* <td className="is-uppercase actions has-text-right">
+                        <td className="is-uppercase actions has-text-right">
                           <Button
                             secondary
                             paddingless
-                            onClick={() => setEditClient(item)}>
+                            onClick={() => setEditClient(item)}
+                          >
                             EDIT
                           </Button>
-                        </td> */}
-                        <td className="is-uppercase actions has-text-right">
+                        </td>
+                        {/* <td className="is-uppercase actions has-text-right">
                           <Button
                             secondary
                             paddingless
@@ -171,7 +169,7 @@ const Pricing = () => {
                             }}>
                             DELETE
                           </Button>
-                        </td>
+                        </td> */}
                       </tr>
                     ))}
                   </tbody>

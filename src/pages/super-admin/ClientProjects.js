@@ -1,19 +1,18 @@
-import React from "react";
-import styled from "styled-components";
-import { useQuery, useMutation } from "urql";
-import gql from "graphql-tag";
-import dayjs from "dayjs";
-import { Link } from "react-router-dom";
-import swal from "sweetalert";
+import React from 'react';
+import styled from 'styled-components';
+import { useQuery, useMutation } from 'urql';
+import gql from 'graphql-tag';
+import dayjs from 'dayjs';
+import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
 
-import Layout from "../../components/Layout";
-import Seo from "../../components/Seo";
-import { Heading, Message, Loading, Button } from "../../components/elements";
-import Header from "../../components/Header";
-import Sidebar from "../../components/Sidebar";
-import MainColumn from "../../components/MainColumn";
-import CopyRight from "../../components/CopyRight";
-admin, client;
+import Layout from '../../components/Layout';
+import Seo from '../../components/Seo';
+import { Heading, Message, Loading, Button } from '../../components/elements';
+import Header from '../../components/Header';
+import Sidebar from '../../components/Sidebar';
+import MainColumn from '../../components/MainColumn';
+import CopyRight from '../../components/CopyRight';
 
 const userQuery = gql`
   query user($id: ID!) {
