@@ -44,8 +44,8 @@ const PageForm = props => {
         onBlur={handleBlur}
         errors={errors.type && touched.type ? errors.type : undefined}
         options={[
-          { value: 'dataroom', title: 'Dataroom' },
           { value: 'content', title: 'Content' },
+          { value: 'dataroom', title: 'Dataroom' },
         ]}
       />
       <div className="field">

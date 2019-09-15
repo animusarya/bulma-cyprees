@@ -54,7 +54,7 @@ const Button = styled.button`
   }
 `;
 
-const ClientHeader = ({ pages, project }) => {
+const ClientHeader = ({ me, pages, project }) => {
   const handleLogout = () => {
     window.localStorage.clear();
     window.location.reload(true);
@@ -76,16 +76,14 @@ const ClientHeader = ({ pages, project }) => {
                 <Link
                   to="/client/settings"
                   className="button is-text is-size-7">
-                  Welcome Jonathan
+                  Welcome {me.profile ? me.profile.fullName : ''}
                 </Link>
               </Button>
               <Button className="button is-text" onClick={() => handleLogout()}>
                 <i className="fas fa-power-off icon"></i>
               </Button>
               <div className="has-text-right">
-                <Title marginbottom="0px">
-                  {project.name || 'Project Arden'}
-                </Title>
+                <Title marginbottom="0px">{project.name || ''}</Title>
               </div>
             </div>
           </div>

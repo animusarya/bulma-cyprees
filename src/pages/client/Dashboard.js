@@ -67,7 +67,7 @@ const Dashboard = () => {
   updateProject(project.id);
 
   // fetch pages for project
-  const [resultPages] = useQuery(pagesQuery, {
+  const resultPages = useQuery(pagesQuery, {
     variables: { projectId: project.id || 0 },
     fetchPolicy: 'cache-and-network',
   });
@@ -91,7 +91,7 @@ const Dashboard = () => {
   return (
     <Layout>
       <Seo title="Client Dashboard" description="Page description" />
-      <ClientHeader pages={contentPages} project={project} />
+      <ClientHeader me={me} pages={contentPages} project={project} />
       {(resultMe.loading || resultPages.loading) && <Loading />}
       {resultMe.error && (
         <Message type="error">{resultMe.error.message}</Message>

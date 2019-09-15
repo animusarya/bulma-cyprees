@@ -26,7 +26,6 @@ const Container = styled.div`
 const PageContent = ({ project, page }) => {
   const [input, setInput] = useState({});
   const [executeUpdateMutation, updateResult] = useMutation(updateMutation);
-  // console.log('input', page);
 
   return (
     <Container>

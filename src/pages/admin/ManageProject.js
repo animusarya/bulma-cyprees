@@ -82,7 +82,6 @@ const ManageProject = ({ match }) => {
                   <tr>
                     <th>Name</th>
                     <th className="has-text-centered">Type</th>
-                    <th className="has-text-centered">Status</th>
                     <th className="has-text-centered">Created At</th>
                     <th>edit</th>
                     <th>Delete</th>
@@ -98,7 +97,6 @@ const ManageProject = ({ match }) => {
                         <i className="fas fa-pound-sign pound-icon"></i>
                         {pageData.type}
                       </td>
-                      <td className="has-text-centered">{pageData.status}</td>
                       <td className="has-text-centered">
                         {dayjs(pageData.createdAt).isValid()
                           ? dayjs(pageData.createdAt).format('DD-MM-YYYY')
