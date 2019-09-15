@@ -89,7 +89,7 @@ const AdminUsers = ({ result, executeQuery }) => {
         }}
       />
       {resAdd.error && <Message type="error">{resAdd.error.message}</Message>}
-      {resAdd.fetching || resRemove.fetching || result.fetching ? (
+      {resAdd.loading || resRemove.loading || result.loading ? (
         <Loading />
       ) : null}
     </div>

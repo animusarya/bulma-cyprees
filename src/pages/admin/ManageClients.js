@@ -28,6 +28,8 @@ const projectQuery = gql`
       name
       slug
       updatedAt
+      logo
+      heroImage
       clients {
         id
         email

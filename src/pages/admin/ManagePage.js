@@ -19,6 +19,8 @@ const projectQuery = gql`
       id
       name
       slug
+      logo
+      heroImage
     }
   }
 `;
@@ -52,7 +54,7 @@ const ManagePage = ({ match }) => {
       : {};
   const page =
     resultPage.data && resultPage.data.page ? resultPage.data.page : {};
-  // console.log('resultProject', project, page);
+  console.log('ManagePage', project, page);
 
   return (
     <Layout>

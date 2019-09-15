@@ -66,7 +66,7 @@ const Settings = () => {
               />
             </div>
             {res.error && <Message type="error">{res.error.message}</Message>}
-            {res.fetching ? <Loading /> : null}
+            {res.loading ? <Loading /> : null}
           </MainColumn>
         </div>
       </div>

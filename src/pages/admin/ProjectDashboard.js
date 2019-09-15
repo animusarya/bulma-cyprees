@@ -114,6 +114,9 @@ const ProjectDashboard = ({ match }) => {
           <AdminHeader
             project={project}
             executeUpdateProjectMutation={executeUpdateProjectMutation}
+            refetch={() => {
+              resultProject.refetch();
+            }}
           />
           <AdminSubHeader
             project={project}

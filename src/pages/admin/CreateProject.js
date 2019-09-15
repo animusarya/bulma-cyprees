@@ -70,7 +70,6 @@ const CreateProject = () => {
   useEffect(() => {
     updateProject(null);
   }, []);
-  console.log('subscription', subscription, packages);
 
   return (
     <Layout>

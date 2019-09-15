@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
 
 import { InputGroup, Button, SelectGroup } from './elements';
+import { formatCurrency } from '../utils/helpers';
 
 const Form = styled.form`
   input {
@@ -98,7 +99,9 @@ const ProjectSetupForm = props => {
           packages
             ? packages.map(item => ({
                 value: item.subscriptionPlanId,
-                title: `${item.name} - £${item.price} per ${item.durationInMonths} month`,
+                title: `${item.name} - ${formatCurrency(item.price)} per ${
+                  item.durationInMonths
+                } month`,
               }))
             : []
         }

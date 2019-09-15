@@ -22,6 +22,7 @@ const Container = styled.div`
     font-size: 8px !important;
   }
 `;
+
 const NavbarMenu = styled.nav`
   padding: 0px 16% !important;
   background-color: ${props => props.theme.primaryColor};
@@ -65,76 +66,72 @@ const ClientHeader = ({ me, pages, project }) => {
 
   return (
     <Container>
-      <MainColumn marginleft="8%" marginRight="8%" paddingless>
-        <div className="columns">
-          <div className="column is-8 is-offset-2">
-            <div>
-              <Link to="/client/dashboard">
-                {project ? (
-                  <Logo src={project.logo || logo} alt="logo" />
-                ) : (
-                  <span>Dashboard</span>
-                )}
-              </Link>
-            </div>
-            <div>
-              <Button>
-                <Link
-                  to="/client/settings"
-                  className="button is-text is-size-7">
-                  Welcome {me.profile ? me.profile.fullName : ''}
-                </Link>
-              </Button>
-              <Button className="button is-text" onClick={() => handleLogout()}>
-                <i className="fas fa-power-off icon"></i>
-              </Button>
-              {project && (
-                <div className="has-text-right">
-                  <Title marginbottom="0px">{project.name || ''}</Title>
-                </div>
+      <div className="columns">
+        <div className="column">
+          <div>
+            <Link to="/client/dashboard">
+              {project ? (
+                <Logo src={project.logo || logo} alt="logo" />
+              ) : (
+                <span>Dashboard</span>
               )}
-            </div>
-          </div>
-        </div>
-        <NavbarMenu
-          className="navbar"
-          role="navigation"
-          aria-label="main navigation">
-          <div className="navbar-brand">
-            <Link
-              to="/"
-              role="button"
-              className="navbar-burger burger has-text-white"
-              aria-label="menu"
-              aria-expanded="false"
-              data-target="navbarBasicExample">
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
             </Link>
           </div>
-          <div id="navbarBasicExample" className="navbar-menu">
-            <div className="navbar-start">
-              <Link
-                to="/client/dashboard"
-                className="navbar-item has-text-white">
-                Overview
+          <div>
+            <Button>
+              <Link to="/client/settings" className="button is-text is-size-7">
+                Welcome {me.profile ? me.profile.fullName : ''}
               </Link>
-              {pages.map(page => (
-                <Link
-                  key={page.id}
-                  to={`/client/page/${page.id}`}
-                  className="navbar-item has-text-white">
-                  {startCase(page.name)}
-                </Link>
-              ))}
-            </div>
+            </Button>
+            <Button className="button is-text" onClick={() => handleLogout()}>
+              <i className="fas fa-power-off icon"></i>
+            </Button>
+            {project && (
+              <div className="has-text-right">
+                <Title marginbottom="0px">{project.name || ''}</Title>
+              </div>
+            )}
           </div>
-        </NavbarMenu>
+        </div>
+      </div>
+      <NavbarMenu
+        className="navbar"
+        role="navigation"
+        aria-label="main navigation">
+        <div className="navbar-brand">
+          <Link
+            to="/"
+            role="button"
+            className="navbar-burger burger has-text-white"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </Link>
+        </div>
+        <div id="navbarBasicExample" className="navbar-menu">
+          <div className="navbar-start">
+            <Link to="/client/dashboard" className="navbar-item has-text-white">
+              Overview
+            </Link>
+            {pages.map(page => (
+              <Link
+                key={page.id}
+                to={`/client/page/${page.id}`}
+                className="navbar-item has-text-white">
+                {startCase(page.name)}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </NavbarMenu>
+      {project && (
         <section className="hero is-primary">
           <HeroImg src={project.heroImage || logoBg} alt="logo-bg" />
         </section>
-      </MainColumn>
+      )}
     </Container>
   );
 };

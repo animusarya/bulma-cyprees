@@ -27,20 +27,25 @@ const Container = styled.div`
     margin-left: 1rem !important;
     font-size: 8px !important;
   }
+  .navbar-item {
+    min-width: 100px;
+  }
 `;
 const Logo = styled.img`
-  width: 140px;
-  height: auto;
+  width: auto;
+  height: 100%;
+  max-height: 2.5rem !important;
 `;
 
-const AdminHeader = ({ project, executeUpdateProjectMutation }) => {
+const AdminHeader = ({ project, executeUpdateProjectMutation, refetch }) => {
   const [isActive, setIsActive] = useState(false);
+
   return (
     <Container>
       <div className="columns">
         <div className="column is-8 is-offset-2">
           <div className="logo-edit">
-            <Link to="/client/dashboard" className="navbar-item">
+            <Link to="/admin/dashboard" className="navbar-item">
               <Logo src={project.logo || logo} alt="logo" />
             </Link>
             <Button
@@ -48,7 +53,7 @@ const AdminHeader = ({ project, executeUpdateProjectMutation }) => {
               secondary
               className="edit"
               onClick={() => setIsActive(true)}>
-              Edit
+              change logo
             </Button>
           </div>
           <div>
@@ -70,6 +75,7 @@ const AdminHeader = ({ project, executeUpdateProjectMutation }) => {
             },
           });
           setIsActive(false);
+          refetch();
         }}
       />
     </Container>

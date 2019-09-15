@@ -6,4 +6,5 @@ export default {
   graphQlUriDev: 'http://localhost:4000',
   projectKey: 'intellishare',
   stripePublishableKey: 'pk_test_mjhAjr7ARWNkUU2Yj6IQrjxb',
+  currency: '£',
 };

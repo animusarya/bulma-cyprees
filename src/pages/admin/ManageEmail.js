@@ -19,6 +19,8 @@ const projectQuery = gql`
       id
       name
       slug
+      logo
+      heroImage
       welcomeEmailTemplate {
         subject
         body

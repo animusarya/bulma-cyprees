@@ -83,7 +83,7 @@ const FilesList = ({ files, isAdmin, refetch }) => {
                     secondary
                     paddingless
                     onClick={() => {
-                      swal('Are you confirm to delete this item?', {
+                      swal('Are you confirm to replace this item?', {
                         buttons: ['Cancel', 'Confirm'],
                       }).then(async value => {
                         if (value) {

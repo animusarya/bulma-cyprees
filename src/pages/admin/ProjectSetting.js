@@ -21,6 +21,8 @@ const projectQuery = gql`
       name
       slug
       status
+      logo
+      heroImage
       customDomain
       subscriptionName
       subscriptionDurationInMonths
@@ -90,7 +92,6 @@ const ProjectSetting = ({ match, history }) => {
           </MainColumn>
           <MainColumn>
             <Subscription project={project} />
-
             <Button
               onClick={() => {
                 swal('Are you confirm to delete this item?', {

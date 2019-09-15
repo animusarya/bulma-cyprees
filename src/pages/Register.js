@@ -71,7 +71,6 @@ const Register = ({ match }) => {
   );
   const updateUser = useStoreActions(actions => actions.user.update);
   const { projectId, email } = match.params;
-  console.log('invite data', projectId, email);
 
   if (res.data && res.data.register) {
     const { jwt, user } = res.data.register;
@@ -79,7 +78,9 @@ const Register = ({ match }) => {
     togggleLoggedIn(true);
     updateUser(user);
     setTimeout(() => {
-      window.location.replace('/client/dashboard');
+      window.location.replace(
+        projectId ? '/client/dashboard' : '/admin/dashboard',
+      );
     }, 1000);
   }
 

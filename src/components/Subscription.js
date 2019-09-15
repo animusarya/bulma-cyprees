@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import swal from 'sweetalert';
 import { withRouter } from 'react-router-dom';
 
+import { formatCurrency } from '../utils/helpers';
 import { Heading, Button, Message, Loading, SelectGroup } from './elements';
 
 const packagesQuery = gql`
@@ -66,7 +67,7 @@ const Subscription = ({ project, history }) => {
               <tr>
                 <td>{project.subscriptionName}</td>
                 <td>{project.subscriptionDurationInMonths}</td>
-                <td>{project.subscriptionAmount}</td>
+                <td>{formatCurrency(project.subscriptionAmount)}</td>
               </tr>
             </tbody>
           </table>

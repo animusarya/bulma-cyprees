@@ -101,14 +101,9 @@ const Dashboard = () => {
       )}
       <Container className="section">
         <div className="container">
-          <div className="columns">
-            <div className="column is-three-fifths is-offset-one-fifth">
-              {/* <Heading>Overview</Heading> */}
-              {dataRoomPages.map(page => (
-                <PageRow key={page.id} project={project} page={page} />
-              ))}
-            </div>
-          </div>
+          {dataRoomPages.map(page => (
+            <PageRow key={page.id} project={project} page={page} />
+          ))}
         </div>
       </Container>
       <ClientFooter project={project} />

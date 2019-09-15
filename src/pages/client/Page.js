@@ -97,25 +97,21 @@ const Page = ({ match }) => {
       <ClientHeader me={me} pages={contentPages} project={project} />
       <Container className="section">
         <div className="container">
-          <div className="columns">
-            <div className="column is-three-fifths is-offset-one-fifth">
-              {resultPage.error && (
-                <Message type="error">{resultPage.error.message}</Message>
-              )}
-              {resultPage.loading && <Loading />}
-              {page.type === 'content' && (
-                <div>
-                  <ImageGallery page={page} />
-                  <section dangerouslySetInnerHTML={{ __html: page.content }} />
-                </div>
-              )}
-              {page.type === 'dataroom' && (
-                <div>
-                  <PageRow page={page} />
-                </div>
-              )}
+          {resultPage.error && (
+            <Message type="error">{resultPage.error.message}</Message>
+          )}
+          {resultPage.loading && <Loading />}
+          {page.type === 'content' && (
+            <div>
+              <ImageGallery page={page} />
+              <section dangerouslySetInnerHTML={{ __html: page.content }} />
             </div>
-          </div>
+          )}
+          {page.type === 'dataroom' && (
+            <div>
+              <PageRow page={page} />
+            </div>
+          )}
         </div>
       </Container>
       <ClientFooter project={project} />
