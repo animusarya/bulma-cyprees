@@ -36,7 +36,7 @@ const ProjectInfoForm = props => {
         fullWidth
         border
         isHorizontal
-        label="Default URL"
+        label="Project URL Slug"
         placeholder="intellishare.online/colliers"
         name="slug"
         value={values.slug}
@@ -49,7 +49,7 @@ const ProjectInfoForm = props => {
         fullWidth
         border
         isHorizontal
-        label="Custom URL"
+        label="Custom Domain Name"
         placeholder="www.colliers.co.uk/arden"
         name="customDomain"
         value={values.customDomain}
@@ -108,7 +108,6 @@ export default withFormik({
   validationSchema: yup.object().shape({
     name: yup.string().required('Name is required!'),
     slug: yup.string().required('Default URL is required!'),
-    customDomain: yup.string().required('Custom URL is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {

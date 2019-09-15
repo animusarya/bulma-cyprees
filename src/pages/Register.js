@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useMutation } from 'urql';
+import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { useStoreActions } from 'easy-peasy';
 
@@ -63,7 +63,7 @@ const Logo = styled.img`
 `;
 
 const Register = ({ match }) => {
-  const [res, executeMutation] = useMutation(registerMutation);
+  const [executeMutation, res] = useMutation(registerMutation);
   const togggleLoggedIn = useStoreActions(
     actions => actions.isLoggedIn.togggle,
   );
@@ -113,15 +113,17 @@ const Register = ({ match }) => {
                 <RegisterForm
                   onSubmit={data => {
                     return executeMutation({
-                      email: data.email,
-                      password: data.password,
+                      variables: {
+                        email: data.email,
+                        password: data.password,
+                      },
                     });
                   }}
                 />
                 {res.error && (
                   <Message type="error">{res.error.message}</Message>
                 )}
-                {res.fetching ? <Loading /> : null}
+                {res.loading ? <Loading /> : null}
               </FormContainer>
             </div>
           </div>

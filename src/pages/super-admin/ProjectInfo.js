@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery, useMutation } from 'urql';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import AdminUsers from '../../components/AdminUsers';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -12,6 +11,7 @@ import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
+import AdminUsers from '../../components/AdminUsers';
 
 const userQuery = gql`
   query user($id: ID!) {
@@ -64,15 +64,14 @@ const Container = styled.div`
 `;
 
 const ProjectInfo = ({ match }) => {
-  const [resultUser] = useQuery({
-    query: userQuery,
+  const resultUser = useQuery(userQuery, {
     variables: { id: match.params.clientId },
   });
-  const [resultProject, executeQuery] = useQuery({
-    query: projectQuery,
+  const resultProject = useQuery(projectQuery, {
     variables: { id: match.params.projectId },
+    fetchPolicy: 'cache-and-network',
   });
-  const [res, executeMutation] = useMutation(updateProjectMutation);
+  const [executeMutation, res] = useMutation(updateProjectMutation);
   const user = resultUser.data ? resultUser.data.user : {};
   const project = resultProject.data ? resultProject.data.project : {};
   // console.log('ProjectInfo', project);
@@ -97,19 +96,24 @@ const ProjectInfo = ({ match }) => {
                 initialValues={project}
                 onSubmit={data =>
                   executeMutation({
-                    id: project.id,
-                    input: {
-                      name: data.name,
-                      slug: data.slug,
-                      customDomain: data.customDomain,
+                    variables: {
+                      id: project.id,
+                      input: {
+                        name: data.name,
+                        slug: data.slug,
+                        customDomain: data.customDomain,
+                      },
                     },
                   })
                 }
               />
               {res.error && <Message type="error">{res.error.message}</Message>}
-              {res.fetching ? <Loading /> : null}
+              {res.loading ? <Loading /> : null}
             </div>
-            <AdminUsers result={resultProject} executeQuery={executeQuery} />
+            <AdminUsers
+              result={resultProject}
+              executeQuery={resultProject.refetch}
+            />
           </MainColumn>
         </div>
       </Container>

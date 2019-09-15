@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useMutation } from 'urql';
+import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { useStoreActions } from 'easy-peasy';
 
@@ -63,7 +63,7 @@ const Logo = styled.img`
 `;
 
 const Login = () => {
-  const [res, executeMutation] = useMutation(mutation);
+  const [executeMutation, res] = useMutation(mutation);
   const togggleLoggedIn = useStoreActions(
     actions => actions.isLoggedIn.togggle,
   );
@@ -115,11 +115,13 @@ const Login = () => {
                     </div>
                   </nav>
                 </div>
-                <LoginForm onSubmit={data => executeMutation(data)} />
+                <LoginForm
+                  onSubmit={data => executeMutation({ variables: data })}
+                />
                 {res.error && (
                   <Message type="error">{res.error.message}</Message>
                 )}
-                {res.fetching ? <Loading /> : null}
+                {res.loading ? <Loading /> : null}
               </FormContainer>
             </div>
           </div>

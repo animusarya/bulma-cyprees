@@ -126,7 +126,7 @@ const ProjectSetupForm = props => {
               errors.postcode && touched.postcode ? errors.postcode : undefined
             }
           />
-          <Subtitle>Payment Method</Subtitle>
+          <Subtitle>Payment Info</Subtitle>
           <InputGroup
             fullWidth
             isWidth

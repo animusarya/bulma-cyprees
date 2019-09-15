@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery, useMutation } from 'urql';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 
@@ -65,13 +65,11 @@ const Container = styled.div`
 `;
 
 const Discounts = () => {
-  const [resAdd, executeMutationAdd] = useMutation(createDiscountMutation);
-  const [resRemove, executeMutationRemove] = useMutation(
+  const result = useQuery(discountsQuery, { fetchPolicy: 'cache-and-network' });
+  const [executeMutationAdd, resAdd] = useMutation(createDiscountMutation);
+  const [executeMutationRemove, resRemove] = useMutation(
     removeDiscountMutation,
   );
-  const [result, executeQuery] = useQuery({
-    query: discountsQuery,
-  });
 
   return (
     <Layout>
@@ -87,8 +85,8 @@ const Discounts = () => {
             <Title>Create Discount Code</Title>
             <DiscountForm
               onSubmit={async data => {
-                await executeMutationAdd(data);
-                executeQuery({ requestPolicy: 'network-only' });
+                await executeMutationAdd({ variables: data });
+                result.refetch();
               }}
             />
             {resAdd.error && (
@@ -100,7 +98,7 @@ const Discounts = () => {
             {result.error && (
               <Message type="error">{result.error.message}</Message>
             )}
-            {resAdd.fetching || resRemove.fetching || result.fetching ? (
+            {resAdd.loading || resRemove.loading || result.loading ? (
               <Loading />
             ) : null}
             {result.data && result.data.discounts.length > 0 && (
@@ -129,8 +127,10 @@ const Discounts = () => {
                               buttons: ['Cancel', 'Confirm'],
                             }).then(async value => {
                               if (value) {
-                                await executeMutationRemove({ id: item.id });
-                                executeQuery({ requestPolicy: 'network-only' });
+                                await executeMutationRemove({
+                                  variables: { id: item.id },
+                                });
+                                result.refetch();
                               }
                             });
                           }}>

@@ -1,12 +1,12 @@
 import React from 'react';
-import { useMutation } from 'urql';
+import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 import { Message } from '../components/elements';
 import Layout from '../components/Layout';
 import ContactForm from '../components/ContactForm';
 
-//TODO: attach when data available 
+// TODO: attach when data available
 
 const contactMutation = gql`
   mutation contact($name: String!, $email: String!, $message: String!) {
@@ -19,14 +19,16 @@ const contactMutation = gql`
   }
 `;
 const Contact = () => {
-  const [res, executeMutation] = useMutation(contactMutation);
+  const [executeMutation, res] = useMutation(contactMutation);
 
   return (
     <Layout>
       <section className="section">
         <div className="container">
           <h1 className="title">Contact</h1>
-          <ContactForm onSubmit={data => executeMutation(data)} />
+          <ContactForm
+            onSubmit={data => executeMutation({ variables: data })}
+          />
           {res.error && <Message type="error">{res.error.message}</Message>}
         </div>
       </section>

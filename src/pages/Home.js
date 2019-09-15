@@ -5,7 +5,6 @@ import Layout from '../components/Layout';
 import Seo from '../components/Seo';
 
 const Home = () => {
-  console.log('home ready');
   return (
     <Layout>
       <Seo title="Home" description="Some description here." />

@@ -1,18 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery, useMutation } from 'urql';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
-import {
-  Heading,
-  Title,
-  Message,
-  Loading,
-  Button,
-} from '../../components/elements';
+import { Heading, Message, Loading, Button } from '../../components/elements';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
@@ -57,11 +51,9 @@ const Container = styled.div`
 `;
 
 const HelpSuperAdmin = () => {
-  const [res, executeMutation] = useMutation(createSupportMutation);
-  const [result, executeQuery] = useQuery({
-    query: supportQuery,
-  });
-  const [resRemove, executeMutationRemove] = useMutation(removeSupportMutation);
+  const result = useQuery(supportQuery, { fetchPolicy: 'cache-and-network' });
+  const [executeMutation, res] = useMutation(createSupportMutation);
+  const [executeMutationRemove, resRemove] = useMutation(removeSupportMutation);
 
   return (
     <Layout>
@@ -78,15 +70,16 @@ const HelpSuperAdmin = () => {
           <MainColumn>
             <Heading>Manage Help</Heading>
             <HelpForm
-              onSubmit={data => {
-                executeMutation({ input: data });
+              onSubmit={async data => {
+                await executeMutation({ variables: { input: data } });
+                result.refetch();
               }}
             />
             {res.error && <Message type="error">{res.error.message}</Message>}
             {resRemove.error && (
               <Message type="error">{resRemove.error.message}</Message>
             )}
-            {res.fetching || result.fetching || resRemove.fetching ? (
+            {res.loading || result.loading || resRemove.loading ? (
               <Loading />
             ) : null}
             {result.data && result.data.support && (
@@ -112,10 +105,10 @@ const HelpSuperAdmin = () => {
                                 buttons: ['Cancel', 'Confirm'],
                               }).then(async value => {
                                 if (value) {
-                                  await executeMutationRemove({ id: item.id });
-                                  executeQuery({
-                                    requestPolicy: 'network-only',
+                                  await executeMutationRemove({
+                                    variables: { id: item.id },
                                   });
+                                  result.refetch();
                                 }
                               });
                             }}>

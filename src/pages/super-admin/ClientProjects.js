@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery, useMutation } from 'urql';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
@@ -68,16 +68,16 @@ const LinkWrapper = styled(Link)`
 `;
 
 const ProjectsClient = ({ match }) => {
-  const [resultUser] = useQuery({
-    query: userQuery,
+  const resultUser = useQuery(userQuery, {
     variables: { id: match.params.clientId },
+    fetchPolicy: 'cache-and-network',
   });
-  const [result, executeQuery] = useQuery({
-    query: clientProjectsQuery,
+  const result = useQuery(clientProjectsQuery, {
     variables: { clientId: match.params.clientId },
+    fetchPolicy: 'cache-and-network',
   });
-  const [resRemove, executeMutationRemove] = useMutation(removeProjectMutation);
-  const [resRenew, executeMutationRenew] = useMutation(
+  const [executeMutationRemove, resRemove] = useMutation(removeProjectMutation);
+  const [executeMutationRenew, resRenew] = useMutation(
     renewSubscriptionMutation,
   );
   const user = resultUser.data ? resultUser.data.user : {};
@@ -97,7 +97,7 @@ const ProjectsClient = ({ match }) => {
             {result.error && (
               <Message type="error">{result.error.message}</Message>
             )}
-            {result.fetching && <Loading />}
+            {result.loading && <Loading />}
             {result.data && result.data.projects && (
               <table className="table is-fullwidth is-hoverable">
                 <thead>
@@ -170,9 +170,7 @@ const ProjectsClient = ({ match }) => {
                                   id: project.id,
                                   clientId: project.clientId,
                                 });
-                                executeQuery({
-                                  requestPolicy: 'network-only',
-                                });
+                                result.refetch();
                               }
                             });
                           }}>
@@ -206,7 +204,7 @@ const ProjectsClient = ({ match }) => {
             {resRenew.error && (
               <Message type="error">{resRenew.error.message}</Message>
             )}
-            {resRemove.fetching || resRenew.fetching ? <Loading /> : null}
+            {resRemove.loading || resRenew.loading ? <Loading /> : null}
           </MainColumn>
         </div>
       </Container>

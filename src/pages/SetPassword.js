@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useMutation } from 'urql';
+import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 import Seo from '../components/Seo';
@@ -42,7 +42,7 @@ const Logo = styled.img`
 `;
 
 const SetPassword = () => {
-  const [res, executeMutation] = useMutation(setPasswordMutation);
+  const [executeMutation, res] = useMutation(setPasswordMutation);
 
   return (
     <Layout>
@@ -54,9 +54,11 @@ const SetPassword = () => {
         <div className="column">
           <FormContainer>
             <Logo src={logo} alt="logo banner" />
-            <SetPasswordForm onSubmit={data => executeMutation(data)} />
+            <SetPasswordForm
+              onSubmit={data => executeMutation({ variables: data })}
+            />
             {res.error && <Message type="error">{res.error.message}</Message>}
-            {res.fetching ? <Loading /> : null}
+            {res.loading ? <Loading /> : null}
           </FormContainer>
         </div>
       </Container>

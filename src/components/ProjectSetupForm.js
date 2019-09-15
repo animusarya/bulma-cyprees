@@ -50,7 +50,8 @@ const ProjectSetupForm = props => {
         fullWidth
         isWidth
         border
-        label="Default URL"
+        label="Project URL Slug"
+        placeholder="intellishare.online/colliers"
         name="slug"
         value={values.slug}
         onChange={handleChange}
@@ -79,7 +80,6 @@ const ProjectSetupForm = props => {
         isWidth
         border
         label="Project Plan"
-        placeholder="Monthly | £30 | 6Months (£180) | Annually (£360)"
         name="subscriptionPlanId"
         value={values.subscriptionPlanId}
         onChange={handleChange}

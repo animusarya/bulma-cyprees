@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery } from 'urql';
+import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -54,9 +54,7 @@ const LinkWrapper = styled(Link)`
 `;
 
 const Dashboard = () => {
-  const [res] = useQuery({
-    query: getAdmins,
-  });
+  const res = useQuery(getAdmins, { fetchPolicy: 'cache-and-network' });
   // console.log('res', res);
 
   return (
@@ -71,7 +69,7 @@ const Dashboard = () => {
           <MainColumn>
             <Heading>Clients</Heading>
             {res.error && <Message type="error">{res.error.message}</Message>}
-            {res.fetching && <Loading />}
+            {res.loading && <Loading />}
             {res.data && (
               <table className="table is-fullwidth is-hoverable">
                 <thead>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMutation } from 'urql';
+import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 
@@ -26,8 +26,8 @@ const removeProjectClientMutation = gql`
 `;
 
 const AdminUsers = ({ result, executeQuery }) => {
-  const [resAdd, executeMutationAdd] = useMutation(addProjectClientMutation);
-  const [resRemove, executeMutationRemove] = useMutation(
+  const [executeMutationAdd, resAdd] = useMutation(addProjectClientMutation);
+  const [executeMutationRemove, resRemove] = useMutation(
     removeProjectClientMutation,
   );
   const project = result.data ? result.data.project : {};
@@ -63,10 +63,12 @@ const AdminUsers = ({ result, executeQuery }) => {
                         if (value) {
                           // console.log('item', item);
                           await executeMutationRemove({
-                            id: project.id,
-                            clientId: item.id,
+                            variables: {
+                              id: project.id,
+                              clientId: item.id,
+                            },
                           });
-                          executeQuery({ requestPolicy: 'network-only' });
+                          executeQuery();
                         }
                       });
                     }}>
@@ -80,8 +82,10 @@ const AdminUsers = ({ result, executeQuery }) => {
       </table>
       <AdminUsersForm
         onSubmit={async data => {
-          await executeMutationAdd({ id: project.id, input: data });
-          executeQuery({ requestPolicy: 'network-only' });
+          await executeMutationAdd({
+            variables: { id: project.id, input: data },
+          });
+          executeQuery();
         }}
       />
       {resAdd.error && <Message type="error">{resAdd.error.message}</Message>}

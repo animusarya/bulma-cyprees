@@ -25,7 +25,7 @@ const PricingForm = props => {
         border
         isHorizontal
         name="name"
-        label="Title"
+        label="Package Name"
         placeholder="Monthly/Bi-Annually/Annually"
         value={values.name}
         onChange={handleChange}
@@ -39,8 +39,8 @@ const PricingForm = props => {
         isHorizontal
         type="number"
         name="durationInMonths"
-        label="Duration"
-        placeholder="12"
+        label="Duration (in months)"
+        placeholder="6"
         disabled={initialValues.durationInMonths}
         value={values.durationInMonths}
         onChange={handleChange}
