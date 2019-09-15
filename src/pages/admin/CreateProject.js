@@ -70,6 +70,7 @@ const CreateProject = () => {
   useEffect(() => {
     updateProject(null);
   }, []);
+  console.log('subscription', subscription, packages);
 
   return (
     <Layout>
@@ -88,12 +89,11 @@ const CreateProject = () => {
                 <ProjectSetupForm
                   packages={packages}
                   onSubmit={data => {
-                    setProject({ ...data });
-                    setSubscription(
-                      find(packages, {
-                        subscriptionPlanId: data.subscriptionPlanId,
-                      }),
-                    );
+                    setProject(data);
+                    const selectedSubscription = find(packages, {
+                      subscriptionPlanId: data.subscriptionPlanId,
+                    });
+                    setSubscription(selectedSubscription);
                     setActiveStep(2);
                   }}
                 />
@@ -132,8 +132,8 @@ const CreateProject = () => {
                       variables: inputData,
                     });
                     if (projectCreated.data.createProject) {
-                      setActiveStep(3);
                       setProject(projectCreated.data.createProject);
+                      setActiveStep(3);
                     }
                   }}
                 />

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 import styled from 'styled-components';
+import Cleave from 'cleave.js/react';
 
 import { InputGroup, Button } from './elements';
 import theme from '../utils/theme';
@@ -17,7 +18,7 @@ const Form = styled.form`
     }
   }
   .columns {
-    margin-top: 1.5rem;
+    margin-top: -0.5rem;
   }
   .notify {
     display: inline-flex;
@@ -146,75 +147,89 @@ const ProjectSetupForm = props => {
             fullWidth
             isWidth
             border
-            placeholder="Credit Card Number"
-            name="paymentCardNumber"
-            type="number"
-            maxLength={12}
-            value={values.paymentCardNumber}
-            onChange={handleChange}
-            onBlur={handleBlur}
             errors={
               errors.paymentCardNumber && touched.paymentCardNumber
                 ? errors.paymentCardNumber
                 : undefined
-            }
-          />
+            }>
+            <Cleave
+              placeholder="4242 4242 4242 4242"
+              name="paymentCardNumber"
+              id="paymentCardNumber"
+              value={values.paymentCardNumber}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              options={{ creditCard: true }}
+              className="input is-shadowless"
+            />
+          </InputGroup>
           <div className="columns">
             <div className="column">
               <InputGroup
                 fullWidth
                 isWidth
                 border
-                placeholder="Expiry Month"
-                name="paymentCardExpiryMonth"
-                type="number"
-                maxLength={2}
-                value={values.paymentCardExpiryMonth}
-                onChange={handleChange}
-                onBlur={handleBlur}
                 errors={
                   errors.paymentCardExpiryMonth &&
                   touched.paymentCardExpiryMonth
                     ? errors.paymentCardExpiryMonth
                     : undefined
-                }
-              />
+                }>
+                <Cleave
+                  placeholder="12"
+                  name="paymentCardExpiryMonth"
+                  id="paymentCardExpiryMonth"
+                  value={values.paymentCardExpiryMonth}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  options={{ date: true, datePattern: ['m'] }}
+                  className="input is-shadowless"
+                />
+              </InputGroup>
               <InputGroup
                 type="number"
                 maxLength={3}
                 fullWidth
                 isWidth
                 border
-                placeholder="CVV"
-                name="paymentCardCvv"
-                value={values.paymentCardCvv}
-                onChange={handleChange}
-                onBlur={handleBlur}
                 errors={
                   errors.paymentCardCvv && touched.paymentCardCvv
                     ? errors.paymentCardCvv
                     : undefined
-                }
-              />
+                }>
+                <Cleave
+                  placeholder="123"
+                  name="paymentCardCvv"
+                  id="paymentCardCvv"
+                  value={values.paymentCardCvv}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  options={{ numeral: true }}
+                  className="input is-shadowless"
+                />
+              </InputGroup>
             </div>
             <div className="column">
               <InputGroup
                 fullWidth
                 isWidth
                 border
-                placeholder="Expiry Year"
-                name="paymentCardExpiryYear"
-                type="number"
-                maxLength={4}
-                value={values.paymentCardExpiryYear}
-                onChange={handleChange}
-                onBlur={handleBlur}
                 errors={
                   errors.paymentCardExpiryYear && touched.paymentCardExpiryYear
                     ? errors.paymentCardExpiryYear
                     : undefined
-                }
-              />
+                }>
+                <Cleave
+                  placeholder="2020"
+                  name="paymentCardExpiryYear"
+                  id="paymentCardExpiryYear"
+                  value={values.paymentCardExpiryYear}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  options={{ date: true, datePattern: ['Y'] }}
+                  className="input is-shadowless"
+                />
+              </InputGroup>
             </div>
           </div>
         </div>
@@ -246,7 +261,7 @@ const ProjectSetupForm = props => {
             placeholder="Monthly | £30 | 6Months (£180) | Annually (£360)"
             name="projectPlan"
             type="text"
-            value={values.projectPlan}
+            value={subscription.name}
             onChange={handleChange}
             onBlur={handleBlur}
             errors={

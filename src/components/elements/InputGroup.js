@@ -30,6 +30,7 @@ const InputGroup = ({
   isWidth,
   isHorizontal,
   hasAddons,
+  children,
   ...otherProps
 }) => (
   <Group
@@ -45,7 +46,7 @@ const InputGroup = ({
       </p>
     )}
     <div className="control">
-      <Input className="input" {...otherProps} />
+      {children || <Input className="input" {...otherProps} />}
       {errors && <p className="help is-danger">{errors}</p>}
     </div>
   </Group>

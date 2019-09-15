@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 import styled from 'styled-components';
+import Cleave from 'cleave.js/react';
 
 import { InputGroup, Button, SelectGroup } from './elements';
 
@@ -51,13 +52,18 @@ const ProjectSetupForm = props => {
         isWidth
         border
         label="Project URL Slug"
-        placeholder="colliers"
-        name="slug"
-        value={values.slug}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={errors.slug && touched.slug ? errors.slug : undefined}
-      />
+        errors={errors.slug && touched.slug ? errors.slug : undefined}>
+        <Cleave
+          placeholder="colliers"
+          name="slug"
+          id="slug"
+          value={values.slug}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          options={{ prefix: 'intellishare.com/' }}
+          className="input is-shadowless"
+        />
+      </InputGroup>
       <InputGroup
         fullWidth
         border
@@ -74,7 +80,6 @@ const ProjectSetupForm = props => {
             : undefined
         }
       />
-      {/* later on this field will be replaced with select field */}
       <SelectGroup
         fullWidth
         isWidth
