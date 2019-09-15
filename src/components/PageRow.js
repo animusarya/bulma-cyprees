@@ -8,8 +8,8 @@ import { Title, Message, Loading } from './elements';
 import FilesList from './FilesList';
 
 const filesQuery = gql`
-  query files($projectId: ID!) {
-    files(projectId: $projectId) {
+  query files($pageId: ID!) {
+    files(pageId: $pageId) {
       id
       name
       section
@@ -21,10 +21,10 @@ const filesQuery = gql`
   }
 `;
 
-const PageRow = ({ project, page }) => {
+const PageRow = ({ page }) => {
   // fetch files for page
   const resultFiles = useQuery(filesQuery, {
-    variables: { projectId: project.id || 0 },
+    variables: { pageId: page.id || 0 },
     fetchPolicy: 'cache-and-network',
   });
   const files = resultFiles.data ? resultFiles.data.files : [];

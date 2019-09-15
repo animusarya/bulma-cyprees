@@ -120,6 +120,7 @@ const ProjectDashboard = ({ match }) => {
             executeUpdateProjectMutation={executeUpdateProjectMutation}
             refetch={() => {
               resultPages.refetch();
+              resultProject.refetch();
             }}
           />
           {resUpdateProject.error && (

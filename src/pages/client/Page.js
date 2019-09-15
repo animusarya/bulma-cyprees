@@ -11,6 +11,7 @@ import ClientHeader from '../../components/ClientHeader';
 import { Message, Loading } from '../../components/elements';
 import ClientFooter from '../../components/ClientFooter';
 import PageRow from '../../components/PageRow';
+import ImageGallery from '../../components/ImageGallery';
 
 const meQuery = gql`
   query me {
@@ -104,12 +105,13 @@ const Page = ({ match }) => {
               {resultPage.loading && <Loading />}
               {page.type === 'content' && (
                 <div>
+                  <ImageGallery page={page} />
                   <section dangerouslySetInnerHTML={{ __html: page.content }} />
                 </div>
               )}
               {page.type === 'dataroom' && (
                 <div>
-                  <PageRow project={project} page={page} />
+                  <PageRow page={page} />
                 </div>
               )}
             </div>

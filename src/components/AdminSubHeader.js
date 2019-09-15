@@ -41,7 +41,8 @@ const NavbarMenu = styled.nav`
 `;
 const HeroImg = styled.img`
   height: 10rem;
-  width: inherit;
+  width: auto;
+  object-fit: cover;
 `;
 const Hero = styled.section`
   .hero-body {
@@ -122,6 +123,7 @@ const AdminSubHeader = ({ project, executeUpdateProjectMutation, refetch }) => {
             },
           });
           setUploadImageModal(false);
+          refetch();
         }}
       />
       <AddPageModal

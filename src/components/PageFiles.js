@@ -36,7 +36,7 @@ const Container = styled.div`
   }
 `;
 
-const PageFiles = ({ project, page }) => {
+const PageFiles = ({ project, page, isPublic }) => {
   const resultFiles = useQuery(filesQuery, {
     variables: { pageId: page.id },
     fetchPolicy: 'cache-and-network',
@@ -59,6 +59,7 @@ const PageFiles = ({ project, page }) => {
         </div>
       </div>
       <Dropzone
+        isPublic={isPublic}
         onUpload={async data => {
           await executeFileUploadMutation({
             variables: {

@@ -73,9 +73,11 @@ const ManagePage = ({ match }) => {
               <Message type="error">{resultPage.error.message}</Message>
             )}
             {(resultPage.loading || resultProject.loading) && <Loading />}
-            {page.type === 'dataroom' && (
-              <PageFiles project={project} page={page} />
-            )}
+            <PageFiles
+              project={project}
+              page={page}
+              isPublic={page.type === 'content'}
+            />
             {page.type === 'content' && (
               <PageContent project={project} page={page} />
             )}

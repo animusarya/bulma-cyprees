@@ -9,8 +9,16 @@ import { uploadFile } from '../../utils/upload';
 import Loading from './Loading';
 
 const signedUploadUrlMutation = gql`
-  mutation signedUploadUrl($fileName: String!, $fileType: String!) {
-    signedUploadUrl(fileName: $fileName, fileType: $fileType) {
+  mutation signedUploadUrl(
+    $fileName: String!
+    $fileType: String!
+    $isPublic: Boolean
+  ) {
+    signedUploadUrl(
+      fileName: $fileName
+      fileType: $fileType
+      isPublic: $isPublic
+    ) {
       signedUrl
       fileUrl
     }
@@ -47,7 +55,7 @@ const Container = styled.div`
   margin-bottom: 20px;
 `;
 
-const MyDropzone = ({ onUpload }) => {
+const MyDropzone = ({ onUpload, isPublic }) => {
   const [loading, setLoading] = useState(false);
   const [executeUploadMutation, signedUrlResult] = useMutation(
     signedUploadUrlMutation,
@@ -65,7 +73,10 @@ const MyDropzone = ({ onUpload }) => {
 
       // get signed url from aws s3
       const signedUploadUrl = await executeUploadMutation({
-        variables,
+        variables: {
+          ...variables,
+          isPublic: isPublic || false,
+        },
       });
       if (signedUploadUrl.data.error) {
         console.log('upload error', signedUploadUrl.data.error);

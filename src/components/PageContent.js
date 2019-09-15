@@ -29,14 +29,6 @@ const PageContent = ({ project, page }) => {
 
   return (
     <Container>
-      <div className="columns">
-        <div className="column">
-          <Title>{page.title}</Title>
-        </div>
-        <div className="column is-one-fifth">
-          <DeletePageBtn project={project.id} pageId={page.id} />
-        </div>
-      </div>
       <WysiwygEditor
         value={!isNull(page.content) ? page.content : ''}
         onChange={data => setInput({ content: data })}
