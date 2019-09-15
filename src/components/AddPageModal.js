@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery, useMutation } from 'urql';
+import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 import PageForm from './PageForm';
@@ -14,7 +14,7 @@ const createPageMutation = gql`
 `;
 
 const AddPageModal = ({ project, isActive, handleChange, refetch }) => {
-  const [res, executeMutation] = useMutation(createPageMutation);
+  const [executeMutation, res] = useMutation(createPageMutation);
 
   return (
     <div className={`modal ${isActive ? 'is-active' : ''}`}>
@@ -32,7 +32,7 @@ const AddPageModal = ({ project, isActive, handleChange, refetch }) => {
           <PageForm
             onSubmit={async data => {
               await executeMutation({
-                input: { project: project.id, ...data },
+                variables: { input: { project: project.id, ...data } },
               });
               // refresh data on dashboard
               refetch();

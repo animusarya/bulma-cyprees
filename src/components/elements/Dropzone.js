@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { useMutation } from 'urql';
+import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import fetch from 'isomorphic-fetch';
 import styled from 'styled-components';
@@ -58,7 +58,7 @@ const Container = styled.div`
 
 const MyDropzone = ({ onUpload }) => {
   const [loading, setLoading] = useState(false);
-  // const [signedUrlResult, executeUploadMutation] = useMutation(
+  // const [executeUploadMutation, signedUrlResult] = useMutation(
   //   signedUploadUrlMutation,
   // );
 
@@ -70,8 +70,10 @@ const MyDropzone = ({ onUpload }) => {
       console.log('files', file);
       // get signed url from aws s3
       // const signedUploadUrl = await executeUploadMutation({
-      //   fileName: file.name,
-      //   fileType: file.type,
+      //   variables: {
+      //     fileName: file.name,
+      //     fileType: file.type,
+      //   },
       // });
       onUpload({ ...file, url: 'https://source.unsplash.com/random' });
       // const { signedUrl, fileUrl } = await signedUploadUrl.data.signedUploadUrl;

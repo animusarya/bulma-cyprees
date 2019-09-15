@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useMutation } from 'urql';
+import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { isNull } from 'lodash';
 
@@ -25,7 +25,7 @@ const Container = styled.div`
 
 const PageContent = ({ project, page }) => {
   const [input, setInput] = useState({});
-  const [updateResult, executeUpdateMutation] = useMutation(updateMutation);
+  const [executeUpdateMutation, updateResult] = useMutation(updateMutation);
   // console.log('input', page);
 
   return (
@@ -42,13 +42,16 @@ const PageContent = ({ project, page }) => {
         value={!isNull(page.content) ? page.content : ''}
         onChange={data => setInput({ content: data })}
       />
-      <Button onClick={() => executeUpdateMutation({ id: page.id, input })}>
+      <Button
+        onClick={() =>
+          executeUpdateMutation({ variables: { id: page.id, input } })
+        }>
         Update
       </Button>
       {updateResult.error && (
         <Message type="error">{updateResult.error.message}</Message>
       )}
-      {updateResult.fetching ? <Loading /> : null}
+      {updateResult.loading ? <Loading /> : null}
     </Container>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { startCase } from 'lodash';
 import gql from 'graphql-tag';
-import { useQuery } from 'urql';
+import { useQuery } from '@apollo/react-hooks';
 import fileDownload from 'js-file-download';
 
 import { Title, Button, Message, Loading } from './elements';
@@ -22,19 +22,19 @@ const filesQuery = gql`
 
 const PageRow = ({ project, page }) => {
   // fetch files for page
-  const [resultFiles] = useQuery({
-    query: filesQuery,
+  const resultFiles = useQuery(filesQuery, {
     variables: { projectId: project.id || 0 },
+    fetchPolicy: 'cache-and-network',
   });
   const files = resultFiles.data ? resultFiles.data.files : [];
-  console.log(resultFiles);
+
   return (
     <React.Fragment>
       <Title marginbottom="0rem">{startCase(page.name)}</Title>
       {resultFiles.error && (
         <Message type="error">{resultFiles.error.message}</Message>
       )}
-      {resultFiles.fetching && <Loading />}
+      {resultFiles.loading && <Loading />}
       {files.length > 0 ? (
         <table className="table is-fullwidth is-hoverable">
           <thead>

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useMutation } from 'urql';
+import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 import dayjs from 'dayjs';
@@ -37,7 +37,7 @@ const LinkWrapper = styled(Link)`
 `;
 
 const ProjectPages = ({ pages, project }) => {
-  const [resRemove, executeMutationRemove] = useMutation(removeMutation);
+  const [executeMutationRemove, resRemove] = useMutation(removeMutation);
 
   return (
     <div className="column">
@@ -80,7 +80,7 @@ const ProjectPages = ({ pages, project }) => {
                     }).then(async value => {
                       if (value) {
                         await executeMutationRemove({
-                          id: page.id,
+                          variables: { id: page.id },
                         });
                       }
                     });
@@ -95,7 +95,7 @@ const ProjectPages = ({ pages, project }) => {
       {resRemove.error && (
         <Message type="error">{resRemove.error.message}</Message>
       )}
-      {resRemove.fetching ? <Loading /> : null}
+      {resRemove.loading ? <Loading /> : null}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useQuery, useMutation } from 'urql';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 import { withRouter } from 'react-router-dom';
@@ -36,17 +36,19 @@ const renewSubscriptionMutation = gql`
 
 const Subscription = ({ project, history }) => {
   const [subscriptionPlanId, setSubscriptionPlanId] = useState('');
-  const [packagesData] = useQuery({
-    query: packagesQuery,
+
+  const packagesData = useQuery(packagesQuery, {
+    fetchPolicy: 'cache-and-network',
   });
-  const [resCancel, executeCancelMutation] = useMutation(
+  const [executeCancelMutation, resCancel] = useMutation(
     cancelSubscriptionMutation,
   );
-  const [resRenew, executeRenewMutation] = useMutation(
+  const [executeRenewMutation, resRenew] = useMutation(
     renewSubscriptionMutation,
   );
+
   const { packages } = packagesData.data || {};
-  console.log(project);
+
   return (
     <div>
       {project.status === 'active' ? (
@@ -78,7 +80,7 @@ const Subscription = ({ project, history }) => {
               }).then(async willDelete => {
                 if (willDelete) {
                   const { data } = await executeCancelMutation({
-                    id: project.id,
+                    variables: { id: project.id },
                   });
 
                   if (data.cancelSubscription.success) {
@@ -121,8 +123,7 @@ const Subscription = ({ project, history }) => {
               }).then(async willDelete => {
                 if (willDelete) {
                   const { data } = await executeRenewMutation({
-                    id: project.id,
-                    subscriptionPlanId,
+                    variables: { id: project.id, subscriptionPlanId },
                   });
                   if (data.renewSubscription.success) {
                     history.push('/admin/dashboard');
@@ -138,11 +139,10 @@ const Subscription = ({ project, history }) => {
       {resCancel.error && (
         <Message type="error">{resCancel.error.message}</Message>
       )}
-      {resCancel.fetching ? <Loading /> : null}
       {resRenew.error && (
         <Message type="error">{resRenew.error.message}</Message>
       )}
-      {resRenew.fetching ? <Loading /> : null}
+      {resCancel.loading || resRenew.loading ? <Loading /> : null}
     </div>
   );
 };

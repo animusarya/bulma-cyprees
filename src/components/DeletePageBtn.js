@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMutation } from 'urql';
+import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 import { withRouter } from 'react-router';
@@ -15,20 +15,18 @@ const removePageMutation = gql`
 `;
 
 const DeletePageBtn = ({ history, match }) => {
-  const [resRemove, executePageRemoveMutation] = useMutation(
+  const [executePageRemoveMutation, resRemove] = useMutation(
     removePageMutation,
   );
 
   const { id, pageId } = match.params;
-
-  console.log(match);
 
   return (
     <React.Fragment>
       {resRemove.error && (
         <Message type="error">{resRemove.error.message}</Message>
       )}
-      {resRemove.fetching ? <Loading /> : null}
+      {resRemove.loading ? <Loading /> : null}
       <Button
         onClick={() => {
           swal('Are you confirm to delete this item?', {
@@ -36,7 +34,9 @@ const DeletePageBtn = ({ history, match }) => {
           }).then(async value => {
             if (value) {
               await executePageRemoveMutation({
-                id: pageId,
+                variables: {
+                  id: pageId,
+                },
               });
               // redirect back to project page
               history.push(`/admin/project/${id}`);

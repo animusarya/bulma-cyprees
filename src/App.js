@@ -2,12 +2,10 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { StoreProvider, useStoreState } from 'easy-peasy';
-import { Provider as UrqlProvider } from 'urql';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 import theme, { GlobalStyle } from './utils/theme';
-import urqlGraphql from './utils/urqlGraphql';
 import apolloClient from './utils/apolloClient';
 import { store, persistor } from './store';
 import { Loading } from './components/elements';
@@ -85,165 +83,154 @@ class App extends React.Component {
     }
 
     return (
-      <UrqlProvider value={urqlGraphql}>
-        <ApolloProvider client={apolloClient}>
-          <PersistGate loading={<Loading />} persistor={persistor}>
-            <StoreProvider store={store}>
-              <ThemeProvider theme={theme}>
-                <React.Fragment>
-                  <BrowserRouter>
-                    <Switch>
-                      <Route exact path="/" component={Home} />
-                      <Route exact path="/about" component={About} />
-                      <Route exact path="/contact" component={Contact} />
-                      <Route exact path="/login" component={Login} />
-                      <Route exact path="/register" component={Register} />
-                      <Route
-                        exact
-                        path="/register/client/:projectId"
-                        component={Register}
-                      />
-                      <Route
-                        exact
-                        path="/set-password"
-                        component={SetPassword}
-                      />
-                      <Route
-                        exact
-                        path="/forgot-password"
-                        component={ForgotPassword}
-                      />
-                      <Route exact path="/not-allowed" component={NotAllowed} />
-                      <PrivateRoute
-                        exact
-                        path="/super-admin/dashboard"
-                        component={DashboardSuperAdmin}
-                        access="superAdmin"
-                      />
-                      <PrivateRoute
-                        exact
-                        path="/super-admin/help"
-                        component={HelpSuperAdmin}
-                        access="superAdmin"
-                      />
-                      <PrivateRoute
-                        exact
-                        path="/super-admin/client/:clientId/projects"
-                        component={ClientProjects}
-                        access="superAdmin"
-                      />
-                      <PrivateRoute
-                        exact
-                        path="/super-admin/client/:clientId/project/:projectId/info"
-                        component={ProjectInfo}
-                        access="superAdmin"
-                      />
-                      <PrivateRoute
-                        exact
-                        path="/super-admin/pricing"
-                        component={Pricing}
-                        access="superAdmin"
-                      />
-                      <PrivateRoute
-                        exact
-                        path="/super-admin/discounts"
-                        component={Discounts}
-                        access="superAdmin"
-                      />
-                      <PrivateRoute
-                        exact
-                        path="/admin/dashboard"
-                        component={DashboardAdmin}
-                        access="admin"
-                      />
-                      {/* <PrivateRoute
+      <ApolloProvider client={apolloClient}>
+        <PersistGate loading={<Loading />} persistor={persistor}>
+          <StoreProvider store={store}>
+            <ThemeProvider theme={theme}>
+              <React.Fragment>
+                <BrowserRouter>
+                  <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/about" component={About} />
+                    <Route exact path="/contact" component={Contact} />
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/register" component={Register} />
+                    <Route
                       exact
-                      path="/admin/create/account"
-                      component={AccountCreated}
-                    /> */}
-                      <PrivateRoute
-                        exact
-                        path="/admin/project/create"
-                        component={CreateProject}
-                        access="admin"
-                      />
-                      <PrivateRoute
-                        exact
-                        path="/admin/project/:id"
-                        component={ProjectDashboard}
-                        access="admin"
-                      />
-                      <PrivateRoute
-                        exact
-                        path="/admin/project/:id/pages/:pageId"
-                        component={ManagePage}
-                        access="admin"
-                      />
-                      <PrivateRoute
-                        exact
-                        path="/admin/project/:id/emails"
-                        component={ManageEmail}
-                        access="admin"
-                      />
-                      <PrivateRoute
-                        exact
-                        path="/admin/project/:id/clients"
-                        component={ManageClients}
-                        access="admin"
-                      />
-                      <PrivateRoute
-                        exact
-                        path="/admin/help"
-                        component={Help}
-                        access="admin"
-                      />
-                      <PrivateRoute
-                        exact
-                        path="/admin/project/:id/settings"
-                        component={ProjectSetting}
-                        access="admin"
-                      />
-                      <PrivateRoute
-                        exact
-                        path="/admin/settings"
-                        component={Settings}
-                        access="admin"
-                      />
-                      <PrivateRoute
-                        exact
-                        path="/client/dashboard"
-                        component={DashboardClient}
-                        access="client"
-                      />
-                      <PrivateRoute
-                        exact
-                        path="/client/page/:id"
-                        component={Page}
-                        access="client"
-                      />
-                      <PrivateRoute
-                        exact
-                        path="/client/settings"
-                        component={ClientSettings}
-                        access="client"
-                      />
-                      <PrivateRoute
-                        exact
-                        path="/client/invite/:projectId"
-                        component={AcceptInvitation}
-                        access="client"
-                      />
-                      <Route exact path="/test" component={Test} />
-                      <Route component={Error404} />
-                    </Switch>
-                  </BrowserRouter>
-                  <GlobalStyle />
-                </React.Fragment>
-              </ThemeProvider>
-            </StoreProvider>
-          </PersistGate>
-        </ApolloProvider>
-      </UrqlProvider>
+                      path="/register/client/:projectId"
+                      component={Register}
+                    />
+                    <Route exact path="/set-password" component={SetPassword} />
+                    <Route
+                      exact
+                      path="/forgot-password"
+                      component={ForgotPassword}
+                    />
+                    <Route exact path="/not-allowed" component={NotAllowed} />
+                    <PrivateRoute
+                      exact
+                      path="/super-admin/dashboard"
+                      component={DashboardSuperAdmin}
+                      access="superAdmin"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/super-admin/help"
+                      component={HelpSuperAdmin}
+                      access="superAdmin"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/super-admin/client/:clientId/projects"
+                      component={ClientProjects}
+                      access="superAdmin"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/super-admin/client/:clientId/project/:projectId/info"
+                      component={ProjectInfo}
+                      access="superAdmin"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/super-admin/pricing"
+                      component={Pricing}
+                      access="superAdmin"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/super-admin/discounts"
+                      component={Discounts}
+                      access="superAdmin"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/admin/dashboard"
+                      component={DashboardAdmin}
+                      access="admin"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/admin/project/create"
+                      component={CreateProject}
+                      access="admin"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/admin/project/:id"
+                      component={ProjectDashboard}
+                      access="admin"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/admin/project/:id/pages/:pageId"
+                      component={ManagePage}
+                      access="admin"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/admin/project/:id/emails"
+                      component={ManageEmail}
+                      access="admin"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/admin/project/:id/clients"
+                      component={ManageClients}
+                      access="admin"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/admin/help"
+                      component={Help}
+                      access="admin"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/admin/project/:id/settings"
+                      component={ProjectSetting}
+                      access="admin"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/admin/settings"
+                      component={Settings}
+                      access="admin"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/client/dashboard"
+                      component={DashboardClient}
+                      access="client"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/client/page/:id"
+                      component={Page}
+                      access="client"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/client/settings"
+                      component={ClientSettings}
+                      access="client"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/client/invite/:projectId"
+                      component={AcceptInvitation}
+                      access="client"
+                    />
+                    <Route exact path="/test" component={Test} />
+                    <Route component={Error404} />
+                  </Switch>
+                </BrowserRouter>
+                <GlobalStyle />
+              </React.Fragment>
+            </ThemeProvider>
+          </StoreProvider>
+        </PersistGate>
+      </ApolloProvider>
     );
   }
 }

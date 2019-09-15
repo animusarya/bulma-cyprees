@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery, useMutation } from 'urql';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 
@@ -45,16 +45,15 @@ const Container = styled.div`
 `;
 
 const PageFiles = ({ project, page }) => {
-  const [resultFile, executeQuery] = useQuery({
-    query: filesQuery,
+  const resultFile = useQuery(filesQuery, {
     variables: { pageId: page.id },
-    requestPolicy: 'network-only',
+    fetchPolicy: 'cache-and-network',
   });
-  const [resFileUpload, executeFileUploadMutation] = useMutation(
+  const [executeFileUploadMutation, resFileUpload] = useMutation(
     createFileMutation,
   );
+  const [executeMutationDelete, resDel] = useMutation(removeFileMutation);
 
-  const [resDel, executeMutationDelete] = useMutation(removeFileMutation);
   const files =
     resultFile.data && resultFile.data.files ? resultFile.data.files : {};
   console.log('resultFile', resultFile);
@@ -73,24 +72,24 @@ const PageFiles = ({ project, page }) => {
         onUpload={async ({ url }) => {
           console.log('onUpload', url);
           await executeFileUploadMutation({
-            input: {
-              name: 'abc',
-              fileType: 'image',
-              project: project.id,
-              page: page.id,
-              url,
+            variables: {
+              input: {
+                name: 'abc',
+                fileType: 'image',
+                project: project.id,
+                page: page.id,
+                url,
+              },
             },
           });
-          await executeQuery({
-            requestPolicy: 'network-only',
-          });
+          resultFile.refetch();
         }}
       />
       {resFileUpload.error && (
         <Message type="error">{resFileUpload.error.message}</Message>
       )}
       {resDel.error && <Message type="error">{resDel.error.message}</Message>}
-      {resultFile.fetching || resFileUpload.fetching || resDel.fetching ? (
+      {resultFile.loading || resFileUpload.loading || resDel.loading ? (
         <Loading />
       ) : null}
       {files.length > 0 && (
@@ -146,9 +145,9 @@ const PageFiles = ({ project, page }) => {
                       }).then(async value => {
                         if (value) {
                           await executeMutationDelete({
-                            id: file.id,
+                            variables: { id: file.id },
                           });
-                          executeQuery();
+                          resultFile.refetch();
                         }
                       });
                     }}>
