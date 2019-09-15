@@ -111,7 +111,7 @@ const Dashboard = () => {
           </div>
         </div>
       </Container>
-      <ClientFooter />
+      <ClientFooter project={project} />
     </Layout>
   );
 };

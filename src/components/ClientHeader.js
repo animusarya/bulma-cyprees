@@ -37,9 +37,11 @@ const Logo = styled.img`
   margin-top: 10px;
 `;
 const HeroImg = styled.img`
-  height: 12rem;
-  width: inherit;
+  height: 10rem;
+  width: auto;
+  object-fit: cover;
 `;
+
 const Button = styled.button`
   background-color: #fff;
   border: transparent;
@@ -130,7 +132,7 @@ const ClientHeader = ({ me, pages, project }) => {
           </div>
         </NavbarMenu>
         <section className="hero is-primary">
-          <HeroImg src={logoBg} alt="logo-bg" />
+          <HeroImg src={project.heroImage || logoBg} alt="logo-bg" />
         </section>
       </MainColumn>
     </Container>

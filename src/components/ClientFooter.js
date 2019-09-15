@@ -15,16 +15,16 @@ const Container = styled.div`
   }
 `;
 
-const ClientFooter = () => (
+const ClientFooter = ({ project }) => (
   <Container>
     <MainColumn marginleft="8%" marginRight="8%" paddingless>
       <footer className="footer">
         <div className="content has-text-centered">
-          <Title>Your Agent Details</Title>
-          <p className="has-text-weight-semibold is-size-7">
+          <Title>{project.name}</Title>
+          {/* <p className="has-text-weight-semibold is-size-7">
             Paul Barrassford | 01689 123 4567 | 07939 550 774 |{' '}
             <Link to="/">paul.barrassford@colliers.com</Link>
-          </p>
+          </p> */}
         </div>
       </footer>
       <div className="disclaimer has-text-weight-light is-size-7">
