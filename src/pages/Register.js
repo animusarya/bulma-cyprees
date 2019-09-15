@@ -11,8 +11,10 @@ import logo from '../assets/images/logo1.png';
 import background from '../assets/images/intelliback.jpg';
 
 const registerMutation = gql`
-  mutation register($email: String!, $password: String!) {
-    register(input: { email: $email, password: $password }) {
+  mutation register($email: String!, $password: String!, $projectId: String) {
+    register(
+      input: { email: $email, password: $password, projectId: $projectId }
+    ) {
       jwt
       user {
         id
@@ -68,7 +70,8 @@ const Register = ({ match }) => {
     actions => actions.isLoggedIn.togggle,
   );
   const updateUser = useStoreActions(actions => actions.user.update);
-  console.log('project ID', match.params.projectId); // TODO:
+  const { projectId, email } = match.params;
+  console.log('invite data', projectId, email);
 
   if (res.data && res.data.register) {
     const { jwt, user } = res.data.register;
@@ -111,11 +114,13 @@ const Register = ({ match }) => {
                   </nav>
                 </div>
                 <RegisterForm
+                  initialValues={{ email: email || '' }}
                   onSubmit={data => {
                     return executeMutation({
                       variables: {
                         email: data.email,
                         password: data.password,
+                        projectId: projectId || undefined,
                       },
                     });
                   }}

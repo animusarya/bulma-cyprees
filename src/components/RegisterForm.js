@@ -106,9 +106,9 @@ RegisterForm.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({
+  mapPropsToValues: ({ initialValues }) => ({
     fullName: '',
-    email: '',
+    email: initialValues.email,
     password: '',
     confirmPassword: '',
   }),

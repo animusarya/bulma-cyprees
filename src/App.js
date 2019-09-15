@@ -97,7 +97,7 @@ class App extends React.Component {
                     <Route exact path="/register" component={Register} />
                     <Route
                       exact
-                      path="/register/client/:projectId"
+                      path="/register/:projectId/:email"
                       component={Register}
                     />
                     <Route exact path="/set-password" component={SetPassword} />
@@ -215,11 +215,10 @@ class App extends React.Component {
                       component={ClientSettings}
                       access="client"
                     />
-                    <PrivateRoute
+                    <Route
                       exact
-                      path="/client/invite/:projectId"
+                      path="/client/invite/:projectId/:clientEmail"
                       component={AcceptInvitation}
-                      access="client"
                     />
                     <Route exact path="/test" component={Test} />
                     <Route component={Error404} />

@@ -9,9 +9,6 @@ const meQuery = gql`
   query me {
     me {
       email
-      status
-      hasAccess
-      notifyStatus
     }
   }
 `;
@@ -24,37 +21,49 @@ const updateProjectClientMutation = gql`
   }
 `;
 
-const AcceptInvitation = ({ match }) => {
+const AcceptInvitation = ({ match, history }) => {
   const [loading, setLoading] = useState(true);
-  const { projectId } = match.params;
+  const { projectId, clientEmail } = match.params;
   const resultMe = useQuery(meQuery, {
     fetchPolicy: 'cache-and-network',
   });
 
-  const [executeMutation, res] = useMutation(updateProjectClientMutation);
+  const [executeMutation] = useMutation(updateProjectClientMutation);
 
   const me = resultMe.data ? resultMe.data.me : {};
-  useEffect(() => {
-    if (me) {
-      executeMutation({
+
+  useEffect(async () => {
+    console.log('run useEffect');
+    if (me && clientEmail === me.email) {
+      // is already logged in
+      await executeMutation({
         variable: {
           id: projectId,
           input: {
-            email: me.email,
+            email: clientEmail,
             status: 'accepted',
-            hasAccess: me.hasAccess,
-            notifyStatus: me.notifyStatus,
           },
         },
       });
-      if (res.data) {
-        setLoading(false);
-      }
+      setLoading(false);
+
+      // redirect to project
+      history.push(`/admin/project/${projectId}`);
     }
-  });
+    if (me && clientEmail !== me.email) {
+      setLoading(false);
+      window.localStorage.clear();
+      window.location.reload(true);
+      window.location.replace(`/register/${projectId}/${clientEmail}`);
+    }
+    if (!me) {
+      setLoading(false);
+      history.push(`/register/${projectId}/${clientEmail}`);
+    }
+  }, [me]);
 
   return (
-    <Layout>{loading ? <Loading /> : <Message>Loading...</Message>}</Layout>
+    <Layout>{loading ? <Loading /> : <Message>Redirecting...</Message>}</Layout>
   );
 };
 
