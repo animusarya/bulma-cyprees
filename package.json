@@ -31,6 +31,7 @@
     "lodash": "^4.17.13",
     "merge-graphql-schemas": "^1.5.8",
     "prop-types": "^15.7.2",
+    "randomstring": "^1.1.5",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-draft-wysiwyg": "^1.13.2",

@@ -2,29 +2,20 @@ import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import fetch from 'isomorphic-fetch';
 import styled from 'styled-components';
-import { uploadFile } from '../../utils/upload';
+import randomstring from 'randomstring';
 
+import { uploadFile } from '../../utils/upload';
 import Loading from './Loading';
 
 const signedUploadUrlMutation = gql`
   mutation signedUploadUrl($fileName: String!, $fileType: String!) {
     signedUploadUrl(fileName: $fileName, fileType: $fileType) {
       signedUrl
+      fileUrl
     }
   }
 `;
-
-// const uploadFileMutation = gql`
-//   mutation uploadFile($input: FileInput!) {
-//     uploadFile(input: $input) {
-//       id
-//       name
-//       url
-//     }
-//   }
-// `;
 
 const getColor = props => {
   if (props.isDragAccept) {
@@ -58,56 +49,43 @@ const Container = styled.div`
 
 const MyDropzone = ({ onUpload }) => {
   const [loading, setLoading] = useState(false);
-  // const [executeUploadMutation, signedUrlResult] = useMutation(
-  //   signedUploadUrlMutation,
-  // );
+  const [executeUploadMutation, signedUrlResult] = useMutation(
+    signedUploadUrlMutation,
+  );
 
   const onDrop = useCallback(async acceptedFiles => {
     setLoading(true);
 
     try {
       const file = acceptedFiles[0];
-      console.log('files', file);
+      const variables = {
+        fileName: `${randomstring.generate(3)}-${file.name}`,
+        fileType: file.type,
+      };
+
       // get signed url from aws s3
-      // const signedUploadUrl = await executeUploadMutation({
-      //   variables: {
-      //     fileName: file.name,
-      //     fileType: file.type,
-      //   },
-      // });
-      onUpload({ ...file, url: 'https://source.unsplash.com/random' });
-      // const { signedUrl, fileUrl } = await signedUploadUrl.data.signedUploadUrl;
-      // console.log('signedUrl', signedUrl);
-      // const options = {
-      //   headers: {
-      //     'Content-Type': file.type,
-      //   },
-      // };
+      const signedUploadUrl = await executeUploadMutation({
+        variables,
+      });
+      if (signedUploadUrl.data.error) {
+        console.log('upload error', signedUploadUrl.data.error);
+        return;
+      }
 
-      // const result = await uploadFile(signedUrl, file, options);
-      // console.log('result', result);
+      const { signedUrl, fileUrl } = await signedUploadUrl.data.signedUploadUrl;
 
-      // upload to aws s3
-      // const xhr = new window.XMLHttpRequest();
-      // xhr.open('POST', signedUrl, true);
-      // xhr.onload = function(e) {
-      //   console.log('eonload', e);
-      // };
-      // // Listen to the upload progress.
-      // xhr.upload.onprogress = function(e) {
-      //   console.log('onprogress', e);
-      // };
-      // xhr.send(file);
+      // return;
+      const options = {
+        headers: {
+          'Content-Type': file.type,
+        },
+      };
 
-      // const formData = new FormData();
-      // formData.append('file', file, file.name);
-      // await fetch(signedUrl, {
-      //   method: 'POST',
-      //   body: formData,
-      // });
+      const result = await uploadFile(signedUrl, file, options);
+      console.log('upload success', result);
 
       // upload success
-      // onUpload({ ...file, url: fileUrl });
+      onUpload({ ...variables, url: fileUrl });
       setLoading(false);
     } catch (error) {
       console.log('upload error', error);

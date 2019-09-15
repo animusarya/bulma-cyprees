@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation, useLazyQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
+import dayjs from 'dayjs';
 
 import { Title, Button, Message, Loading, Dropzone } from './elements';
 import DeletePageBtn from './DeletePageBtn';
@@ -17,6 +18,13 @@ const filesQuery = gql`
       url
       order
       createdAt
+    }
+  }
+`;
+const fileQuery = gql`
+  query file($fileKey: String!) {
+    file(fileKey: $fileKey) {
+      url
     }
   }
 `;
@@ -45,18 +53,30 @@ const Container = styled.div`
 `;
 
 const PageFiles = ({ project, page }) => {
-  const resultFile = useQuery(filesQuery, {
+  const resultFiles = useQuery(filesQuery, {
     variables: { pageId: page.id },
     fetchPolicy: 'cache-and-network',
   });
+  const [getFile, { loading: fileLoading, data: fileData }] = useLazyQuery(
+    fileQuery,
+    {
+      fetchPolicy: 'network-only',
+    },
+  );
   const [executeFileUploadMutation, resFileUpload] = useMutation(
     createFileMutation,
   );
   const [executeMutationDelete, resDel] = useMutation(removeFileMutation);
 
   const files =
-    resultFile.data && resultFile.data.files ? resultFile.data.files : {};
-  console.log('resultFile', resultFile);
+    resultFiles.data && resultFiles.data.files ? resultFiles.data.files : {};
+
+  useEffect(() => {
+    if (fileData && !fileLoading) {
+      const win = window.open(fileData.file.url, '_blank');
+      win.focus();
+    }
+  }, [fileData]);
 
   return (
     <Container>
@@ -69,27 +89,26 @@ const PageFiles = ({ project, page }) => {
         </div>
       </div>
       <Dropzone
-        onUpload={async ({ url }) => {
-          console.log('onUpload', url);
+        onUpload={async data => {
           await executeFileUploadMutation({
             variables: {
               input: {
-                name: 'abc',
-                fileType: 'image',
+                name: data.fileName,
+                fileType: data.fileType,
                 project: project.id,
                 page: page.id,
-                url,
+                url: data.url,
               },
             },
           });
-          resultFile.refetch();
+          resultFiles.refetch();
         }}
       />
       {resFileUpload.error && (
         <Message type="error">{resFileUpload.error.message}</Message>
       )}
       {resDel.error && <Message type="error">{resDel.error.message}</Message>}
-      {resultFile.loading || resFileUpload.loading || resDel.loading ? (
+      {resultFiles.loading || resFileUpload.loading || resDel.loading ? (
         <Loading />
       ) : null}
       {files.length > 0 && (
@@ -113,12 +132,21 @@ const PageFiles = ({ project, page }) => {
                     <i className="far fa-hand-pointer"></i>
                   </Button>
                 </td>
-                <td>{file.name}</td>
+                <td>
+                  <a
+                    onClick={() =>
+                      getFile({ variables: { fileKey: file.name } })
+                    }>
+                    {file.name}
+                  </a>
+                </td>
                 <td className="has-text-centered is-uppercase">
                   {file.fileType}
                 </td>
-                <td className="has-text-centered">{file.section}</td>
-                <td className="has-text-centered">{file.createdAt}</td>
+                <td className="has-text-centered">{file.section || '-'}</td>
+                <td className="has-text-centered">
+                  {dayjs(file.createdAt).format('DD-MM-YYYY')}
+                </td>
                 <td className="has-text-centered">
                   <Button
                     secondary
@@ -147,7 +175,7 @@ const PageFiles = ({ project, page }) => {
                           await executeMutationDelete({
                             variables: { id: file.id },
                           });
-                          resultFile.refetch();
+                          resultFiles.refetch();
                         }
                       });
                     }}>

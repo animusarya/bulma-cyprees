@@ -9,11 +9,9 @@ export const uploadFile = (signedRequest, file, options) =>
         const returnData = {
           requestResponse: result,
         };
-        console.log('Response from s3', returnData);
         resolve(returnData);
       })
       .catch(err => {
-        console.log(err);
         reject(err);
       });
   });
