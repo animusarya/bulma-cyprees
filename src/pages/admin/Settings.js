@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery, useMutation } from 'urql';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
@@ -40,10 +40,8 @@ const settingMutation = gql`
 `;
 
 const Settings = () => {
-  const [meData] = useQuery({
-    query: meQuery,
-  });
-  const [res, executeMutation] = useMutation(settingMutation);
+  const meData = useQuery(meQuery, { fetchPolicy: 'cache-and-network' });
+  const [executeMutation, res] = useMutation(settingMutation);
   const me = meData.data ? meData.data.me : {};
   // console.log('res', me);
 
@@ -62,7 +60,9 @@ const Settings = () => {
               <SettingsForm
                 enableReinitialize
                 initialValues={me}
-                onSubmit={data => executeMutation({ input: data })}
+                onSubmit={data =>
+                  executeMutation({ variables: { input: data } })
+                }
               />
             </div>
             {res.error && <Message type="error">{res.error.message}</Message>}

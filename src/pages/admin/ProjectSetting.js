@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery, useMutation } from 'urql';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 
@@ -50,18 +50,17 @@ const updateProjectMutation = gql`
 `;
 
 const ProjectSetting = ({ match, history }) => {
-  const [resultProject] = useQuery({
-    query: projectQuery,
+  const resultProject = useQuery(projectQuery, {
     variables: { id: match.params.id },
-    requestPolicy: 'network-only',
+    fetchPolicy: 'cache-and-network',
   });
-  const [resRemove, executeMutationRemove] = useMutation(removeProjectMutation);
+  const [executeMutationRemove, resRemove] = useMutation(removeProjectMutation);
+  const [executeMutation, res] = useMutation(updateProjectMutation);
+
   const project =
     resultProject.data && resultProject.data.project
       ? resultProject.data.project
       : {};
-
-  const [res, executeMutation] = useMutation(updateProjectMutation);
 
   return (
     <Layout>
@@ -80,12 +79,14 @@ const ProjectSetting = ({ match, history }) => {
                 enableReinitialize
                 initialValues={project}
                 onSubmit={data => {
-                  executeMutation({ id: project.id, input: data });
+                  executeMutation({
+                    variables: { id: project.id, input: data },
+                  });
                 }}
               />
             </div>
             {res.error && <Message type="error">{res.error.message}</Message>}
-            {res.fetching ? <Loading /> : null}
+            {res.loading ? <Loading /> : null}
           </MainColumn>
           <MainColumn>
             <Subscription project={project} />
@@ -97,10 +98,12 @@ const ProjectSetting = ({ match, history }) => {
                 }).then(async value => {
                   if (value) {
                     const response = await executeMutationRemove({
-                      id: project.id,
-                      clientId: project.clientId,
+                      variables: {
+                        id: project.id,
+                        clientId: project.clientId,
+                      },
                     });
-                    if (response.data.removeProject || !resRemove.fetching) {
+                    if (response.data.removeProject || !resRemove.loading) {
                       history.push('/admin/project/create');
                     }
                   }
@@ -111,7 +114,7 @@ const ProjectSetting = ({ match, history }) => {
             {resRemove.error && (
               <Message type="error">{resRemove.error.message}</Message>
             )}
-            {resRemove.fetching ? <Loading /> : null}
+            {resRemove.loading ? <Loading /> : null}
           </MainColumn>
         </div>
       </div>

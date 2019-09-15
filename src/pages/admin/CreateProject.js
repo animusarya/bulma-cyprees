@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useQuery, useMutation } from 'urql';
+import React, { useState, useEffect } from 'react';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { find, toString } from 'lodash';
 import { useStoreActions } from 'easy-peasy';
@@ -57,15 +57,20 @@ const CreateProject = () => {
   const [activeStep, setActiveStep] = useState(1);
   const [project, setProject] = useState({});
   const [subscription, setSubscription] = useState({});
-  const [packagesData] = useQuery({
-    query: packagesQuery,
+
+  const packagesData = useQuery(packagesQuery, {
+    fetchPolicy: 'cache-and-network',
   });
   const { packages } = packagesData.data || {};
-  const [resAdd, executeMutationAdd] = useMutation(createProjectMutation);
+  const [executeMutationAdd, resAdd] = useMutation(createProjectMutation);
   const updateProject = useStoreActions(
     actions => actions.active.updateProject,
   );
-  updateProject(null);
+
+  useEffect(() => {
+    updateProject(null);
+  }, []);
+
   return (
     <Layout>
       <Seo title="Create Project" description="Create New Project" />
@@ -123,7 +128,9 @@ const CreateProject = () => {
                     };
 
                     // send success data to server
-                    const projectCreated = await executeMutationAdd(inputData);
+                    const projectCreated = await executeMutationAdd({
+                      variables: inputData,
+                    });
                     if (projectCreated.data.createProject) {
                       setActiveStep(3);
                       setProject(projectCreated);
@@ -136,7 +143,7 @@ const CreateProject = () => {
             {resAdd.error && (
               <Message type="error">{resAdd.error.message}</Message>
             )}
-            {resAdd.fetching ? <Loading /> : null}
+            {resAdd.loading ? <Loading /> : null}
           </MainColumn>
         </div>
       </div>

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useStoreActions } from 'easy-peasy';
-import { useQuery, useMutation } from 'urql';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
@@ -73,13 +73,11 @@ const ProjectDashboard = ({ match }) => {
   const updateProject = useStoreActions(
     actions => actions.active.updateProject,
   );
-  updateProject(match.params.id);
 
   // fetch project data from api
-  const [resultProject] = useQuery({
-    query: projectQuery,
+  const resultProject = useQuery(projectQuery, {
     variables: { id: match.params.id },
-    requestPolicy: 'network-only',
+    fetchPolicy: 'cache-and-network',
   });
   const project =
     resultProject.data && resultProject.data.project
@@ -88,15 +86,19 @@ const ProjectDashboard = ({ match }) => {
   // console.log('resultProject', project);
 
   // fetch pages
-  const [resultPages, refetchPages] = useQuery({
-    query: pagesQuery,
+  const resultPages = useQuery(pagesQuery, {
     variables: { projectId: project.id },
+    fetchPolicy: 'cache-and-network',
   });
+
+  useEffect(() => {
+    updateProject(match.params.id);
+  }, [match.params.id]);
 
   const pages =
     resultPages.data && resultPages.data.pages ? resultPages.data.pages : [];
 
-  const [resUpdateProject, executeUpdateProjectMutation] = useMutation(
+  const [executeUpdateProjectMutation, resUpdateProject] = useMutation(
     updateProjectMutation,
   );
 
@@ -113,12 +115,11 @@ const ProjectDashboard = ({ match }) => {
             project={project}
             executeUpdateProjectMutation={executeUpdateProjectMutation}
           />
-
           <AdminSubHeader
             project={project}
             executeUpdateProjectMutation={executeUpdateProjectMutation}
             refetch={() => {
-              refetchPages();
+              resultPages.refetch();
             }}
           />
           {resUpdateProject.error && (
@@ -133,7 +134,7 @@ const ProjectDashboard = ({ match }) => {
                   {resultPages.error && (
                     <Message type="error">{resultPages.error.message}</Message>
                   )}
-                  {resultPages.fetching && <Loading />}
+                  {resultPages.loading && <Loading />}
                   <ProjectPages project={project} pages={pages} />
                 </React.Fragment>
               )}

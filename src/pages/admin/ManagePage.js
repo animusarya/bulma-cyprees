@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from 'urql';
+import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
@@ -37,14 +37,15 @@ const pageQuery = gql`
 
 const ManagePage = ({ match }) => {
   // fetch project data from api
-  const [resultProject] = useQuery({
-    query: projectQuery,
+  const resultProject = useQuery(projectQuery, {
     variables: { id: match.params.id },
+    fetchPolicy: 'cache-and-network',
   });
-  const [resultPage] = useQuery({
-    query: pageQuery,
+  const resultPage = useQuery(pageQuery, {
     variables: { id: match.params.pageId },
+    fetchPolicy: 'cache-and-network',
   });
+
   const project =
     resultProject.data && resultProject.data.project
       ? resultProject.data.project
@@ -71,7 +72,7 @@ const ManagePage = ({ match }) => {
             {resultPage.error && (
               <Message type="error">{resultPage.error.message}</Message>
             )}
-            {(resultPage.fetching || resultProject.fetching) && <Loading />}
+            {(resultPage.loading || resultProject.loading) && <Loading />}
             {page.type === 'dataroom' && (
               <PageFiles project={project} page={page} />
             )}

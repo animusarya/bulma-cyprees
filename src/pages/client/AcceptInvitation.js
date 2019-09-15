@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from 'urql';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
@@ -27,22 +27,24 @@ const updateProjectClientMutation = gql`
 const AcceptInvitation = ({ match }) => {
   const [loading, setLoading] = useState(true);
   const { projectId } = match.params;
-  const [resultMe] = useQuery({
-    query: meQuery,
+  const resultMe = useQuery(meQuery, {
+    fetchPolicy: 'cache-and-network',
   });
 
-  const [res, executeMutation] = useMutation(updateProjectClientMutation);
+  const [executeMutation, res] = useMutation(updateProjectClientMutation);
 
   const me = resultMe.data ? resultMe.data.me : {};
   useEffect(() => {
     if (me) {
       executeMutation({
-        id: projectId,
-        input: {
-          email: me.email,
-          status: 'accepted',
-          hasAccess: me.hasAccess,
-          notifyStatus: me.notifyStatus,
+        variable: {
+          id: projectId,
+          input: {
+            email: me.email,
+            status: 'accepted',
+            hasAccess: me.hasAccess,
+            notifyStatus: me.notifyStatus,
+          },
         },
       });
       if (res.data) {
@@ -52,7 +54,7 @@ const AcceptInvitation = ({ match }) => {
   });
 
   return (
-    <Layout>{loading ? <Loading /> : <Message>hvbchjadcvhj</Message>}</Layout>
+    <Layout>{loading ? <Loading /> : <Message>Loading...</Message>}</Layout>
   );
 };
 

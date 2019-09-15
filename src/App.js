@@ -37,7 +37,6 @@ import ProjectDashboard from './pages/admin/ProjectDashboard';
 import ManageClients from './pages/admin/ManageClients';
 import ManagePage from './pages/admin/ManagePage';
 import Help from './pages/admin/Help';
-import ProjectUpdate from './pages/admin/ProjectUpdate'; // TODO: WHY THIS PAGE IS HERE?
 import ProjectSetting from './pages/admin/ProjectSetting';
 import Settings from './pages/admin/Settings';
 
@@ -192,17 +191,6 @@ class App extends React.Component {
                         component={ManageClients}
                         access="admin"
                       />
-                      <PrivateRoute
-                        exact
-                        path="/admin/project/:id/update"
-                        component={ProjectUpdate}
-                        access="admin"
-                      />
-                      {/* <Route
-                      exact
-                      path="/admin/project/{id}"
-                      component={WelcomeScreen}
-                    /> */}
                       <PrivateRoute
                         exact
                         path="/admin/help"

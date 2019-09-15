@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery, useMutation } from 'urql';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 import dayjs from 'dayjs';
@@ -54,12 +54,12 @@ const Container = styled.div`
 `;
 
 const ManageProject = ({ match }) => {
-  const [result] = useQuery({
-    query: projectPageQuery,
+  const result = useQuery(projectPageQuery, {
     variables: { id: match.params.id },
+    fetchPolicy: 'cache-and-network',
   });
-  const [resRemove, executeMutationRemove] = useMutation(removeMutation);
-  const [resUpdate, executeMutationUpdate] = useMutation(updatePageMutation);
+  const [executeMutationRemove, resRemove] = useMutation(removeMutation);
+  const [executeMutationUpdate, resUpdate] = useMutation(updatePageMutation);
 
   return (
     <Layout>
@@ -75,7 +75,7 @@ const ManageProject = ({ match }) => {
             {result.error && (
               <Message type="error">{result.error.message}</Message>
             )}
-            {result.fetching && <Loading />}
+            {result.loading && <Loading />}
             {result.data && result.data.page && (
               <table className="table is-fullwidth is-hoverable">
                 <thead>
@@ -109,7 +109,7 @@ const ManageProject = ({ match }) => {
                           secondary
                           paddingless
                           onClick={() => {
-                            executeMutationUpdate();
+                            executeMutationUpdate({ variables: {} });
                           }}>
                           EDIT
                         </Button>
@@ -124,7 +124,9 @@ const ManageProject = ({ match }) => {
                             }).then(async value => {
                               if (value) {
                                 await executeMutationRemove({
-                                  id: pageData.id,
+                                  variables: {
+                                    id: pageData.id,
+                                  },
                                 });
                               }
                             });
@@ -143,7 +145,7 @@ const ManageProject = ({ match }) => {
             {resUpdate.error && (
               <Message type="error">{resUpdate.error.message}</Message>
             )}
-            {resRemove.fetching || resUpdate.fetching ? <Loading /> : null}
+            {resRemove.loading || resUpdate.loading ? <Loading /> : null}
           </MainColumn>
         </div>
       </Container>

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery } from 'urql';
+import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { useStoreActions } from 'easy-peasy';
 import { filter } from 'lodash';
@@ -62,10 +62,9 @@ const Container = styled.div`
 `;
 
 const Page = ({ match }) => {
+  const resultMe = useQuery(meQuery, { fetchPolicy: 'cache-and-network' });
+
   const pageId = match.params.id;
-  const [resultMe] = useQuery({
-    query: meQuery,
-  });
   const me = resultMe.data ? resultMe.data.me : {};
   const project = me.clientProject || {};
 
@@ -76,9 +75,9 @@ const Page = ({ match }) => {
   updateProject(project.id);
 
   // fetch pages for project
-  const [resultPages] = useQuery({
-    query: pagesQuery,
+  const resultPages = useQuery(pagesQuery, {
     variables: { projectId: project.id || 0 },
+    fetchPolicy: 'cache-and-network',
   });
   const pages = resultPages.data ? resultPages.data.pages : [];
   const contentPages = filter(pages, { type: 'content' });
@@ -102,7 +101,7 @@ const Page = ({ match }) => {
               {resultPage.error && (
                 <Message type="error">{resultPage.error.message}</Message>
               )}
-              {resultPage.fetching && <Loading />}
+              {resultPage.loading && <Loading />}
               {page.type === 'content' && (
                 <div>
                   <section dangerouslySetInnerHTML={{ __html: page.content }} />

@@ -116,8 +116,10 @@ const AdminSubHeader = ({ project, executeUpdateProjectMutation, refetch }) => {
         onClose={() => setUploadImageModal(false)}
         onResponse={async ({ url }) => {
           await executeUpdateProjectMutation({
-            id: '5d72202b87053f1a941c5e72',
-            input: { heroImage: url },
+            variables: {
+              id: project.id,
+              input: { heroImage: url },
+            },
           });
           setUploadImageModal(false);
         }}

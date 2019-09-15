@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery, useMutation } from 'urql';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 import dayjs from 'dayjs';
@@ -12,6 +12,7 @@ import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
+import ManageAdminClientForm from '../../components/ManageAdminClientForm';
 import {
   Heading,
   Subtitle,
@@ -19,7 +20,6 @@ import {
   Message,
   Loading,
 } from '../../components/elements';
-import ManageAdminClientForm from '../../components/ManageAdminClientForm';
 
 const projectQuery = gql`
   query project($id: ID!) {
@@ -50,15 +50,6 @@ const addClientMutation = gql`
 const importCsvMutation = gql`
   mutation importCsv($email: String!) {
     importCsv(email: $email) {
-      id
-      email
-    }
-  }
-`;
-
-const noftifyMutation = gql`
-  mutation notify($email: String!) {
-    notify(email: $email) {
       id
       email
     }
@@ -127,20 +118,17 @@ const Container = styled.div`
 
 const ManageClients = ({ match }) => {
   // fetch project data from api
-  const [resultProject, executeQuery] = useQuery({
-    query: projectQuery,
+  const resultProject = useQuery(projectQuery, {
     variables: { id: match.params.id },
-    requestPolicy: 'network-only',
+    fetchPolicy: 'cache-and-network',
   });
-  // console.log('resultProject', project);
-  const [res, executeAddClientMutation] = useMutation(addClientMutation);
-  const [resCsv, executeMutationCsv] = useMutation(importCsvMutation);
-  const [resNotify, executeMutationNotify] = useMutation(noftifyMutation);
-  const [resResendEmail, executeMutationResendEmail] = useMutation(
+  const [executeAddClientMutation, res] = useMutation(addClientMutation);
+  const [executeMutationCsv, resCsv] = useMutation(importCsvMutation);
+  const [executeMutationResendEmail, resResendEmail] = useMutation(
     resendEmailMutation,
   );
-  const [resCheck, executeMutationCheck] = useMutation(checkMutation);
-  const [resTrash, executeRemoveClientMutation] = useMutation(
+  const [executeMutationCheck, resCheck] = useMutation(checkMutation);
+  const [executeRemoveClientMutation, resTrash] = useMutation(
     removeClientMutation,
   );
 
@@ -165,16 +153,16 @@ const ManageClients = ({ match }) => {
             <Subtitle className="subtitle">Add Client</Subtitle>
             <div className="field is-grouped">
               <ManageAdminClientForm
-                onSubmit={data =>
-                  executeAddClientMutation({ id: project.id, input: data })
-                }
+                onSubmit={async data => {
+                  await executeAddClientMutation({
+                    variables: { id: project.id, input: data },
+                  });
+                  resultProject.refetch();
+                }}
               />
               {res.error && <Message type="error">{res.error.message}</Message>}
               {resCsv.error && (
                 <Message type="error">{resCsv.error.message}</Message>
-              )}
-              {resNotify.error && (
-                <Message type="error">{resNotify.error.message}</Message>
               )}
               {resResendEmail.error && (
                 <Message type="error">{resResendEmail.error.message}</Message>
@@ -185,12 +173,11 @@ const ManageClients = ({ match }) => {
               {resTrash.error && (
                 <Message type="error">{resTrash.error.message}</Message>
               )}
-              {res.fetching ||
-              resCsv.fetching ||
-              resNotify.fetching ||
-              resResendEmail.fetching ||
-              resCheck.fetching ||
-              resTrash.fetching ? (
+              {res.loading ||
+              resCsv.loading ||
+              resResendEmail.loading ||
+              resCheck.loading ||
+              resTrash.loading ? (
                 <Loading />
               ) : null}
               <p className="import-button">
@@ -200,7 +187,7 @@ const ManageClients = ({ match }) => {
                   onClick={async () => {
                     // TODO: show file picker then send data
                     alert('Show file picker');
-                    await executeMutationCsv();
+                    await executeMutationCsv({ variables: {} });
                   }}>
                   Import CSV
                 </Button>
@@ -241,12 +228,12 @@ const ManageClients = ({ match }) => {
                               }).then(async value => {
                                 if (value) {
                                   await executeMutationResendEmail({
-                                    projectId: project.id,
-                                    email: item.email,
+                                    variables: {
+                                      projectId: project.id,
+                                      email: item.email,
+                                    },
                                   });
-                                  executeQuery({
-                                    requestPolicy: 'network-only',
-                                  });
+                                  resultProject.refetch();
                                 }
                               });
                             }}>
@@ -262,10 +249,10 @@ const ManageClients = ({ match }) => {
                                 buttons: ['Cancel', 'Confirm'],
                               }).then(async value => {
                                 if (value) {
-                                  await executeMutationCheck({ id: item.id });
-                                  executeQuery({
-                                    requestPolicy: 'network-only',
+                                  await executeMutationCheck({
+                                    variables: { id: item.id },
                                   });
+                                  resultProject.refetch();
                                 }
                               });
                             }}>
@@ -285,12 +272,12 @@ const ManageClients = ({ match }) => {
                               }).then(async value => {
                                 if (value) {
                                   await executeRemoveClientMutation({
-                                    id: project.id,
-                                    clientId: item.id,
+                                    variables: {
+                                      id: project.id,
+                                      clientId: item.id,
+                                    },
                                   });
-                                  executeQuery({
-                                    requestPolicy: 'network-only',
-                                  });
+                                  resultProject.refetch();
                                 }
                               });
                             }}>
@@ -303,21 +290,6 @@ const ManageClients = ({ match }) => {
                 </table>
               </React.Fragment>
             )}
-            {/* <div className="notify-title">
-              <Subtitle>Clients Tools</Subtitle>
-              <Button
-                onClick={() => {
-                  swal('Are you sure to notify all clients?', {
-                    buttons: ['Cancel', 'Confirm'],
-                  }).then(async value => {
-                    if (value) {
-                      await executeMutationNotify();
-                    }
-                  });
-                }}>
-                Notify All Clients
-              </Button>
-            </div> */}
           </MainColumn>
         </div>
       </Container>

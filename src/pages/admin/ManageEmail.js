@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery, useMutation } from 'urql';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
@@ -42,18 +42,16 @@ const updateProjectMutation = gql`
 
 const ManageEmail = ({ match }) => {
   // fetch project data from api
-  const [resultProject] = useQuery({
-    query: projectQuery,
+  const resultProject = useQuery(projectQuery, {
     variables: { id: match.params.id },
-    requestPolicy: 'network-only',
+    fetchPolicy: 'cache-and-network',
   });
+  const [executeMutation, res] = useMutation(updateProjectMutation);
+
   const project =
     resultProject.data && resultProject.data.project
       ? resultProject.data.project
       : {};
-
-  const [res, executeMutation] = useMutation(updateProjectMutation);
-  console.log('resultProject', project);
 
   return (
     <Layout>
@@ -74,9 +72,11 @@ const ManageEmail = ({ match }) => {
                 initialValues={project}
                 onSubmit={async data => {
                   await executeMutation({
-                    id: project.id,
-                    input: {
-                      welcomeEmailTemplate: data,
+                    variables: {
+                      id: project.id,
+                      input: {
+                        welcomeEmailTemplate: data,
+                      },
                     },
                   });
                 }}
@@ -89,9 +89,11 @@ const ManageEmail = ({ match }) => {
                 initialValues={project}
                 onSubmit={async data => {
                   await executeMutation({
-                    id: project.id,
-                    input: {
-                      clientEmailTemplate: data,
+                    variables: {
+                      id: project.id,
+                      input: {
+                        clientEmailTemplate: data,
+                      },
                     },
                   });
                 }}

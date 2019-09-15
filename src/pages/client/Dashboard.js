@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery } from 'urql';
+import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { useStoreActions } from 'easy-peasy';
 import { filter, isEmpty } from 'lodash';
@@ -11,7 +11,7 @@ import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import ClientHeader from '../../components/ClientHeader';
 import PageRow from '../../components/PageRow';
-import { Heading, Message, Loading } from '../../components/elements';
+import { Message, Loading } from '../../components/elements';
 import ClientFooter from '../../components/ClientFooter';
 
 const meQuery = gql`
@@ -52,12 +52,13 @@ const Container = styled.div`
 `;
 
 const Dashboard = () => {
-  const [resultMe] = useQuery({
-    query: meQuery,
+  const resultMe = useQuery(meQuery, {
+    fetchPolicy: 'cache-and-network',
   });
+
   const me = resultMe.data ? resultMe.data.me : {};
   const project = me.clientProject || {};
-  console.log('project', project);
+  // console.log('project', project);
 
   // set active project
   const updateProject = useStoreActions(
@@ -66,14 +67,15 @@ const Dashboard = () => {
   updateProject(project.id);
 
   // fetch pages for project
-  const [resultPages] = useQuery({
-    query: pagesQuery,
+  const [resultPages] = useQuery(pagesQuery, {
     variables: { projectId: project.id || 0 },
+    fetchPolicy: 'cache-and-network',
   });
+
   const pages = resultPages.data ? resultPages.data.pages : [];
   const contentPages = filter(pages, { type: 'content' });
   const dataRoomPages = filter(pages, { type: 'dataroom' });
-  console.log('pages', dataRoomPages);
+  // console.log('pages', dataRoomPages);
 
   if (isEmpty(project)) {
     return (
@@ -90,7 +92,7 @@ const Dashboard = () => {
     <Layout>
       <Seo title="Client Dashboard" description="Page description" />
       <ClientHeader pages={contentPages} project={project} />
-      {(resultMe.fetching || resultPages.fetching) && <Loading />}
+      {(resultMe.loading || resultPages.loading) && <Loading />}
       {resultMe.error && (
         <Message type="error">{resultMe.error.message}</Message>
       )}

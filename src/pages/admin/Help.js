@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from 'urql';
+import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
@@ -21,9 +21,7 @@ const helpQuery = gql`
 `;
 
 const Help = () => {
-  const [supportData] = useQuery({
-    query: helpQuery,
-  });
+  const supportData = useQuery(helpQuery, { fetchPolicy: 'cache-and-network' });
   const support = supportData.data ? supportData.data.support : [];
 
   return (

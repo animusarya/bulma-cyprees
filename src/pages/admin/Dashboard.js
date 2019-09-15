@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useQuery } from 'urql';
+import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { useStoreActions } from 'easy-peasy';
 import dayjs from 'dayjs';
@@ -42,8 +42,8 @@ const LinkWrapper = styled(Link)`
 `;
 
 const Dashboard = () => {
-  const [resultProjects] = useQuery({
-    query: projectsQuery,
+  const resultProjects = useQuery(projectsQuery, {
+    fetchPolicy: 'cache-and-network',
   });
   const projects = (resultProjects.data && resultProjects.data.projects) || [];
   const updateProject = useStoreActions(
