@@ -133,7 +133,7 @@ const CreateProject = () => {
                     });
                     if (projectCreated.data.createProject) {
                       setActiveStep(3);
-                      setProject(projectCreated);
+                      setProject(projectCreated.data.createProject);
                     }
                   }}
                 />

@@ -51,7 +51,7 @@ const ProjectSetupForm = props => {
         isWidth
         border
         label="Project URL Slug"
-        placeholder="intellishare.online/colliers"
+        placeholder="colliers"
         name="slug"
         value={values.slug}
         onChange={handleChange}

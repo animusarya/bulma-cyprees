@@ -29,13 +29,21 @@ const InputGroup = ({
   fullWidth,
   isWidth,
   isHorizontal,
+  hasAddons,
   ...otherProps
 }) => (
   <Group
-    className={`field ${isHorizontal ? 'is-horizontal' : ''}`}
+    className={`field ${isHorizontal ? 'is-horizontal' : ''} ${
+      hasAddons ? 'has-addons' : ''
+    }`}
     fullWidth={fullWidth}
     isWidth={isWidth}>
     {label && <label className="label">{label}</label>}
+    {hasAddons && (
+      <p className="control">
+        <div className="button is-static">@gmail.com</div>
+      </p>
+    )}
     <div className="control">
       <Input className="input" {...otherProps} />
       {errors && <p className="help is-danger">{errors}</p>}

@@ -36,7 +36,7 @@ const LinkWrapper = styled(Link)`
   }
 `;
 
-const ProjectPages = ({ pages, project }) => {
+const ProjectPages = ({ pages, project, refetch }) => {
   const [executeMutationRemove, resRemove] = useMutation(removeMutation);
 
   return (
@@ -82,6 +82,7 @@ const ProjectPages = ({ pages, project }) => {
                         await executeMutationRemove({
                           variables: { id: page.id },
                         });
+                        refetch();
                       }
                     });
                   }}>

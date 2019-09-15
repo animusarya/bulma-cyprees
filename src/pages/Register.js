@@ -94,7 +94,7 @@ const Register = ({ match }) => {
                     role="navigation"
                     aria-label="main navigation">
                     <div className="navbar-brand">
-                      <Logo src={logo} alt="logo banner" />
+                      {/* <Logo src={logo} alt="logo banner" /> */}
                     </div>
                     <div id="navbarBasicExample" className="navbar-menu">
                       <div className="navbar-end">
@@ -102,9 +102,9 @@ const Register = ({ match }) => {
                           <h2 className="has-text-weight-bold is-size-5">
                             Registration
                           </h2>
-                          <h1 className="has-text-weight-bold">
+                          {/* <h1 className="has-text-weight-bold">
                             Project Arden
-                          </h1>
+                          </h1> */}
                         </div>
                       </div>
                     </div>

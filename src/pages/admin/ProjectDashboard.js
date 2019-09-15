@@ -135,7 +135,11 @@ const ProjectDashboard = ({ match }) => {
                     <Message type="error">{resultPages.error.message}</Message>
                   )}
                   {resultPages.loading && <Loading />}
-                  <ProjectPages project={project} pages={pages} />
+                  <ProjectPages
+                    project={project}
+                    pages={pages}
+                    refetch={resultPages.refetch}
+                  />
                 </React.Fragment>
               )}
             </div>

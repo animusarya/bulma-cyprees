@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 import styled from 'styled-components';
+
 import { InputGroup, Button } from './elements';
 
 const Buttonstyled = styled(Button)`
@@ -41,7 +42,9 @@ const ManageAdminClientForm = props => {
         </div>
       </div>
       <div className="field">
-        <div className="control">
+        <div
+          className="control"
+          style={{ paddingTop: '1rem', marginLeft: '1rem' }}>
           <Buttonstyled
             type="submit"
             className="button"

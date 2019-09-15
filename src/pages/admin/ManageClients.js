@@ -187,7 +187,7 @@ const ManageClients = ({ match }) => {
                   onClick={async () => {
                     // TODO: show file picker then send data
                     alert('Show file picker');
-                    await executeMutationCsv({ variables: {} });
+                    // await executeMutationCsv({ variables: {} });
                   }}>
                   Import CSV
                 </Button>
