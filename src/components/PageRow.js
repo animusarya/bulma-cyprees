@@ -2,9 +2,10 @@ import React from 'react';
 import { startCase } from 'lodash';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import fileDownload from 'js-file-download';
+import { Link } from 'react-router-dom';
 
-import { Title, Button, Message, Loading } from './elements';
+import { Title, Message, Loading } from './elements';
+import FilesList from './FilesList';
 
 const filesQuery = gql`
   query files($projectId: ID!) {
@@ -30,39 +31,15 @@ const PageRow = ({ project, page }) => {
 
   return (
     <React.Fragment>
-      <Title marginbottom="0rem">{startCase(page.name)}</Title>
+      <Title marginbottom="0rem">
+        <Link to={`/client/page/${page.id}`}>{startCase(page.name)}</Link>
+      </Title>
       {resultFiles.error && (
         <Message type="error">{resultFiles.error.message}</Message>
       )}
       {resultFiles.loading && <Loading />}
       {files.length > 0 ? (
-        <table className="table is-fullwidth is-hoverable">
-          <thead>
-            <tr>
-              <th>Document</th>
-              <th>Section</th>
-              <th>Uploaded</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {files.map(file => (
-              <tr key={file.id}>
-                <td>{file.name}</td>
-                <td>{file.section}</td>
-                <td>{file.createdAt}</td>
-                <td>
-                  <Button
-                    secondary
-                    paddingless
-                    onClick={() => fileDownload(file.url)}>
-                    Download
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <FilesList files={files} isAdmin={false} />
       ) : (
         <Message>No files added yet.</Message>
       )}

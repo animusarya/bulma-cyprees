@@ -83,9 +83,9 @@ const Page = ({ match }) => {
   const contentPages = filter(pages, { type: 'content' });
 
   // fetch requested page
-  const [resultPage] = useQuery({
-    query: pageQuery,
+  const resultPage = useQuery(pageQuery, {
     variables: { pageId },
+    fetchPolicy: 'cache-and-network',
   });
   const page = resultPage.data ? resultPage.data.page : {};
   // console.log('page', page);
@@ -93,7 +93,7 @@ const Page = ({ match }) => {
   return (
     <Layout>
       <Seo title="Client Page" description="Page description" />
-      <ClientHeader pages={contentPages} project={project} />
+      <ClientHeader me={me} pages={contentPages} project={project} />
       <Container className="section">
         <div className="container">
           <div className="columns">

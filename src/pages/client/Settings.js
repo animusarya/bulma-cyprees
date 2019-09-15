@@ -53,7 +53,7 @@ const ClientSettings = () => {
   return (
     <Layout>
       <Seo title="User Settings" description="Page description" />
-      <ClientHeader />
+      <ClientHeader me={me} />
       <Container className="section">
         <div className="container">
           <div className="columns">

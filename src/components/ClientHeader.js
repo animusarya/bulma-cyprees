@@ -68,7 +68,11 @@ const ClientHeader = ({ me, pages, project }) => {
           <div className="column is-8 is-offset-2">
             <div>
               <Link to="/client/dashboard">
-                <Logo src={project.logo || logo} alt="logo" />
+                {project ? (
+                  <Logo src={project.logo || logo} alt="logo" />
+                ) : (
+                  <span>Dashboard</span>
+                )}
               </Link>
             </div>
             <div>
@@ -82,9 +86,11 @@ const ClientHeader = ({ me, pages, project }) => {
               <Button className="button is-text" onClick={() => handleLogout()}>
                 <i className="fas fa-power-off icon"></i>
               </Button>
-              <div className="has-text-right">
-                <Title marginbottom="0px">{project.name || ''}</Title>
-              </div>
+              {project && (
+                <div className="has-text-right">
+                  <Title marginbottom="0px">{project.name || ''}</Title>
+                </div>
+              )}
             </div>
           </div>
         </div>
