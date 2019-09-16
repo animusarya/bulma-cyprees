@@ -1,12 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { startCase } from 'lodash';
 
+import useProjectPages from '../hooks/useProjectPages';
+import { Title } from './elements';
 import logoBg from '../assets/images/login-bg.jpg';
 import logo from '../assets/images/logo.png';
-import { Title } from './elements';
 
 const Container = styled.div`
   .column {
@@ -56,7 +56,9 @@ const Button = styled.button`
   }
 `;
 
-const ClientHeader = ({ me, pages, project }) => {
+const ClientHeader = ({ me, project }) => {
+  const [{ contentPages: pages }] = useProjectPages(project.id || 0);
+
   const handleLogout = () => {
     window.localStorage.clear();
     window.location.reload(true);
@@ -133,14 +135,6 @@ const ClientHeader = ({ me, pages, project }) => {
       )}
     </Container>
   );
-};
-
-ClientHeader.defaultProps = {
-  pages: [],
-};
-
-ClientHeader.propTypes = {
-  pages: PropTypes.array,
 };
 
 export default ClientHeader;

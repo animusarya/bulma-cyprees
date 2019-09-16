@@ -37,7 +37,6 @@ const ImageGallery = ({ page }) => {
     fetchPolicy: 'cache-and-network',
   });
   const files = resultFiles.data ? resultFiles.data.files : [];
-  console.log('files', files);
 
   if (files.length === 0) return null;
 
@@ -53,7 +52,7 @@ const ImageGallery = ({ page }) => {
     <Container>
       <Slider {...settings}>
         {files.map(file => (
-          <div>
+          <div key={file.id}>
             <img src={file.url} alt={file.name} />
           </div>
         ))}

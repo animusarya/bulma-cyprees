@@ -6,8 +6,9 @@ const pagesQuery = gql`
   query pages($projectId: ID!) {
     pages(projectId: $projectId) {
       id
-      name
       slug
+      name
+      content
       type
       status
       createdAt

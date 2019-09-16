@@ -2,48 +2,16 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-import { useStoreActions } from 'easy-peasy';
-import { filter, isEmpty } from 'lodash';
+import { isEmpty } from 'lodash';
 
+import useMeDetails from '../../hooks/useMeDetails';
+import useProjectPages from '../../hooks/useProjectPages';
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import ClientHeader from '../../components/ClientHeader';
 import PageRow from '../../components/PageRow';
 import { Message, Loading } from '../../components/elements';
 import ClientFooter from '../../components/ClientFooter';
-
-const meQuery = gql`
-  query me {
-    me {
-      id
-      email
-      profile {
-        fullName
-      }
-      clientProject {
-        id
-        name
-        slug
-        logo
-        heroImage
-      }
-    }
-  }
-`;
-
-const pagesQuery = gql`
-  query pages($projectId: ID!) {
-    pages(projectId: $projectId) {
-      id
-      name
-      slug
-      content
-      type
-    }
-  }
-`;
 
 const Container = styled.div`
   thead {
@@ -52,30 +20,9 @@ const Container = styled.div`
 `;
 
 const Dashboard = () => {
-  const resultMe = useQuery(meQuery, {
-    fetchPolicy: 'cache-and-network',
-  });
-
-  const me = resultMe.data ? resultMe.data.me : {};
+  const [me, resultMe] = useMeDetails();
   const project = me.clientProject || {};
-  // console.log('project', project);
-
-  // set active project
-  const updateProject = useStoreActions(
-    actions => actions.active.updateProject,
-  );
-  updateProject(project.id);
-
-  // fetch pages for project
-  const resultPages = useQuery(pagesQuery, {
-    variables: { projectId: project.id || 0 },
-    fetchPolicy: 'cache-and-network',
-  });
-
-  const pages = resultPages.data ? resultPages.data.pages : [];
-  const contentPages = filter(pages, { type: 'content' });
-  const dataRoomPages = filter(pages, { type: 'dataroom' });
-  // console.log('pages', dataRoomPages);
+  const [{ dataRoomPages }, resultPages] = useProjectPages(project.id || 0);
 
   if (isEmpty(project)) {
     return (
@@ -91,7 +38,7 @@ const Dashboard = () => {
   return (
     <Layout>
       <Seo title="Client Dashboard" description="Page description" />
-      <ClientHeader me={me} pages={contentPages} project={project} />
+      <ClientHeader me={me} project={project} />
       {(resultMe.loading || resultPages.loading) && <Loading />}
       {resultMe.error && (
         <Message type="error">{resultMe.error.message}</Message>

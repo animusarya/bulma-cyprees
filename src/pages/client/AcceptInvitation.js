@@ -33,7 +33,6 @@ const AcceptInvitation = ({ match, history }) => {
   const me = resultMe.data ? resultMe.data.me : {};
 
   useEffect(async () => {
-    console.log('run useEffect');
     if (me && clientEmail === me.email) {
       // is already logged in
       await executeMutation({

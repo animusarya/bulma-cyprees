@@ -70,7 +70,6 @@ const AdminSubHeader = () => {
   const [project, resultProject] = useProjectDetails(projectId);
   const [executeUpdateProjectMutation, resUpdateProject] = useProjectUpdate();
   const [{ contentPages }, resultPages] = useProjectPages(projectId);
-  console.log('contentPages', contentPages);
 
   return (
     <Container>

@@ -1,28 +1,15 @@
 import React from 'react';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 
+import useMeDetails from '../../hooks/useMeDetails';
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import ClientHeader from '../../components/ClientHeader';
 import CopyRight from '../../components/CopyRight';
 import { Heading, Message, Loading } from '../../components/elements';
 import ClientSettingsForm from '../../components/ClientSettingsForm';
-
-const meQuery = gql`
-  query me {
-    me {
-      id
-      email
-      profile {
-        fullName
-        company
-        telephone
-      }
-    }
-  }
-`;
 
 const settingMutation = gql`
   mutation updateMe($input: UpdateUserInput!) {
@@ -45,10 +32,8 @@ const Container = styled.div`
 `;
 
 const ClientSettings = () => {
-  const meData = useQuery(meQuery, { fetchPolicy: 'cache-and-network' });
+  const [me] = useMeDetails();
   const [executeMutation, res] = useMutation(settingMutation);
-  const me = meData.data ? meData.data.me : {};
-  // console.log('res', me);
 
   return (
     <Layout>
