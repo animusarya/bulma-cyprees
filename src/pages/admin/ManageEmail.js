@@ -1,7 +1,7 @@
 import React from 'react';
-import { useQuery, useMutation } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 
+import useProjectDetails from '../../hooks/useProjectDetails';
+import useProjectUpdate from '../../hooks/useProjectUpdate';
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import { Heading, Title, Message } from '../../components/elements';
@@ -13,47 +13,10 @@ import ClientWelcomeEmailForm from '../../components/ClientWelcomeEmailForm';
 import ClientNotificationEmailForm from '../../components/ClientNotificationEmailForm';
 import AdminHeader from '../../components/AdminHeader';
 
-const projectQuery = gql`
-  query project($id: ID!) {
-    project(id: $id) {
-      id
-      name
-      slug
-      logo
-      heroImage
-      welcomeEmailTemplate {
-        subject
-        body
-      }
-      clientEmailTemplate {
-        subject
-        body
-      }
-    }
-  }
-`;
-
-const updateProjectMutation = gql`
-  mutation updateProject($id: ID!, $input: ProjectUpdateInput!) {
-    updateProject(id: $id, input: $input) {
-      id
-      name
-    }
-  }
-`;
-
 const ManageEmail = ({ match }) => {
-  // fetch project data from api
-  const resultProject = useQuery(projectQuery, {
-    variables: { id: match.params.id },
-    fetchPolicy: 'cache-and-network',
-  });
-  const [executeMutation, res] = useMutation(updateProjectMutation);
-
-  const project =
-    resultProject.data && resultProject.data.project
-      ? resultProject.data.project
-      : {};
+  const projectId = match.params.id;
+  const [project] = useProjectDetails(projectId);
+  const [executeMutation, res] = useProjectUpdate();
 
   return (
     <Layout>
@@ -64,7 +27,7 @@ const ManageEmail = ({ match }) => {
           <Sidebar />
         </div>
         <div className="column">
-          <AdminHeader project={project} />
+          <AdminHeader />
           <MainColumn paddingtop="1rem">
             <Heading>Manage Outgoing Email Content</Heading>
             <Title>Client Welcome Email (For Unregistered clients)</Title>

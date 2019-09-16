@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useStoreState } from 'easy-peasy';
 
-import logoBg from '../assets/images/login-bg.jpg';
-import { Button } from './elements';
+import useProjectDetails from '../hooks/useProjectDetails';
+import useProjectUpdate from '../hooks/useProjectUpdate';
+import { Button, Message } from './elements';
 import AddPageModal from './AddPageModal';
 import UploadImageModal from './UploadImageModal';
+import logoBg from '../assets/images/login-bg.jpg';
 
 const Container = styled.div`
   margin-top: 1rem;
@@ -60,9 +63,12 @@ const Hero = styled.section`
   }
 `;
 
-const AdminSubHeader = ({ project, executeUpdateProjectMutation, refetch }) => {
+const AdminSubHeader = ({ refetch }) => {
   const [addPageModal, setAddPageModal] = useState(false);
   const [uploadImageModal, setUploadImageModal] = useState(false);
+  const projectId = useStoreState(state => state.active.project);
+  const [project, resultProject] = useProjectDetails(projectId);
+  const [executeUpdateProjectMutation, resUpdateProject] = useProjectUpdate();
 
   return (
     <Container>
@@ -123,7 +129,7 @@ const AdminSubHeader = ({ project, executeUpdateProjectMutation, refetch }) => {
             },
           });
           setUploadImageModal(false);
-          refetch();
+          resultProject.refetch();
         }}
       />
       <AddPageModal
@@ -132,6 +138,9 @@ const AdminSubHeader = ({ project, executeUpdateProjectMutation, refetch }) => {
         handleChange={value => setAddPageModal(value)}
         refetch={refetch}
       />
+      {resUpdateProject.error && (
+        <Message type="error">{resUpdateProject.error.message}</Message>
+      )}
     </Container>
   );
 };

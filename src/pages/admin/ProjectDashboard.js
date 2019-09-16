@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useStoreActions } from 'easy-peasy';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
+import useProjectDetails from '../../hooks/useProjectDetails';
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import Header from '../../components/Header';
@@ -16,18 +16,6 @@ import ProjectDashboardHero from '../../components/ProjectDashboardHero';
 import ProjectPages from '../../components/ProjectPages';
 import { Message, Loading } from '../../components/elements';
 
-const projectQuery = gql`
-  query project($id: ID!) {
-    project(id: $id) {
-      id
-      name
-      slug
-      logo
-      heroImage
-    }
-  }
-`;
-
 const pagesQuery = gql`
   query pages($projectId: ID!) {
     pages(projectId: $projectId) {
@@ -37,18 +25,6 @@ const pagesQuery = gql`
       type
       status
       createdAt
-    }
-  }
-`;
-
-const updateProjectMutation = gql`
-  mutation updateProject($id: ID!, $input: ProjectUpdateInput!) {
-    updateProject(id: $id, input: $input) {
-      id
-      name
-      slug
-      status
-      customDomain
     }
   }
 `;
@@ -69,38 +45,17 @@ const Container = styled.div`
 `;
 
 const ProjectDashboard = ({ match }) => {
-  // set sidebar active project
-  const updateProject = useStoreActions(
-    actions => actions.active.updateProject,
-  );
-
-  // fetch project data from api
-  const resultProject = useQuery(projectQuery, {
-    variables: { id: match.params.id },
-    fetchPolicy: 'cache-and-network',
-  });
-  const project =
-    resultProject.data && resultProject.data.project
-      ? resultProject.data.project
-      : {};
-  // console.log('resultProject', project);
+  const projectId = match.params.id;
+  const [project] = useProjectDetails(projectId);
 
   // fetch pages
   const resultPages = useQuery(pagesQuery, {
-    variables: { projectId: project.id },
+    variables: { projectId },
     fetchPolicy: 'cache-and-network',
   });
 
-  useEffect(() => {
-    updateProject(match.params.id);
-  }, [match.params.id]);
-
   const pages =
     resultPages.data && resultPages.data.pages ? resultPages.data.pages : [];
-
-  const [executeUpdateProjectMutation, resUpdateProject] = useMutation(
-    updateProjectMutation,
-  );
 
   return (
     <Layout>
@@ -111,40 +66,26 @@ const ProjectDashboard = ({ match }) => {
           <Sidebar />
         </div>
         <div className="column">
-          <AdminHeader
-            project={project}
-            executeUpdateProjectMutation={executeUpdateProjectMutation}
-            refetch={() => {
-              resultProject.refetch();
-            }}
-          />
+          <AdminHeader />
           <AdminSubHeader
-            project={project}
-            executeUpdateProjectMutation={executeUpdateProjectMutation}
             refetch={() => {
               resultPages.refetch();
-              resultProject.refetch();
             }}
           />
-          {resUpdateProject.error && (
-            <Message type="error">{resUpdateProject.error.message} </Message>
-          )}
           <MainColumn>
+            {resultPages.error && (
+              <Message type="error">{resultPages.error.message}</Message>
+            )}
+            {resultPages.loading && <Loading />}
             <div className="content">
               {pages.length === 0 ? (
                 <ProjectDashboardHero />
               ) : (
-                <React.Fragment>
-                  {resultPages.error && (
-                    <Message type="error">{resultPages.error.message}</Message>
-                  )}
-                  {resultPages.loading && <Loading />}
-                  <ProjectPages
-                    project={project}
-                    pages={pages}
-                    refetch={resultPages.refetch}
-                  />
-                </React.Fragment>
+                <ProjectPages
+                  project={project}
+                  pages={pages}
+                  refetch={resultPages.refetch}
+                />
               )}
             </div>
           </MainColumn>

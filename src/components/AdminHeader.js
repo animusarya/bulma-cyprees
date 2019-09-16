@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useStoreState } from 'easy-peasy';
 
-import logo from '../assets/images/logo.png';
-import { Title, Button } from './elements';
+import useProjectDetails from '../hooks/useProjectDetails';
+import useProjectUpdate from '../hooks/useProjectUpdate';
+import { Title, Button, Message } from './elements';
 import UploadImageModal from './UploadImageModal';
+import logo from '../assets/images/logo.png';
 
 const Container = styled.div`
   margin-top: 1rem;
@@ -33,12 +36,14 @@ const Container = styled.div`
 `;
 const Logo = styled.img`
   width: auto;
-  height: 100%;
-  max-height: 2.5rem !important;
+  height: 2.5rem;
 `;
 
-const AdminHeader = ({ project, executeUpdateProjectMutation, refetch }) => {
+const AdminHeader = () => {
   const [isActive, setIsActive] = useState(false);
+  const projectId = useStoreState(state => state.active.project);
+  const [project, resultProject] = useProjectDetails(projectId);
+  const [executeUpdateProjectMutation, resUpdateProject] = useProjectUpdate();
 
   return (
     <Container>
@@ -75,9 +80,12 @@ const AdminHeader = ({ project, executeUpdateProjectMutation, refetch }) => {
             },
           });
           setIsActive(false);
-          refetch();
+          resultProject.refetch();
         }}
       />
+      {resUpdateProject.error && (
+        <Message type="error">{resUpdateProject.error.message}</Message>
+      )}
     </Container>
   );
 };

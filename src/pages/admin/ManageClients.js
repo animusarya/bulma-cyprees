@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 import dayjs from 'dayjs';
 
+import useProjectDetails from '../../hooks/useProjectDetails';
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import Header from '../../components/Header';
@@ -20,26 +21,6 @@ import {
   Message,
   Loading,
 } from '../../components/elements';
-
-const projectQuery = gql`
-  query project($id: ID!) {
-    project(id: $id) {
-      id
-      name
-      slug
-      updatedAt
-      logo
-      heroImage
-      clients {
-        id
-        email
-        status
-        hasAccess
-        notifyStatus
-      }
-    }
-  }
-`;
 
 const addClientMutation = gql`
   mutation addProjectClient($id: ID!, $input: ProjectClientInput!) {
@@ -119,11 +100,8 @@ const Container = styled.div`
 `;
 
 const ManageClients = ({ match }) => {
-  // fetch project data from api
-  const resultProject = useQuery(projectQuery, {
-    variables: { id: match.params.id },
-    fetchPolicy: 'cache-and-network',
-  });
+  const projectId = match.params.id;
+  const [project, resultProject] = useProjectDetails(projectId);
   const [executeAddClientMutation, res] = useMutation(addClientMutation);
   const [executeMutationCsv, resCsv] = useMutation(importCsvMutation);
   const [executeMutationResendEmail, resResendEmail] = useMutation(
@@ -134,12 +112,6 @@ const ManageClients = ({ match }) => {
     removeClientMutation,
   );
 
-  const project =
-    resultProject.data && resultProject.data.project
-      ? resultProject.data.project
-      : {};
-  // console.log("resultProject clients", project);
-
   return (
     <Layout>
       <Seo title="Manage Clients" description="Invite Your Clients" />
@@ -149,7 +121,7 @@ const ManageClients = ({ match }) => {
           <Sidebar />
         </div>
         <div className="column">
-          <AdminHeader project={project} />
+          <AdminHeader />
           <MainColumn>
             <Heading>Project Clients</Heading>
             <Subtitle className="subtitle">Add Client</Subtitle>
@@ -182,6 +154,7 @@ const ManageClients = ({ match }) => {
               resTrash.loading ? (
                 <Loading />
               ) : null}
+
               <p className="import-button">
                 <Button
                   secondary
@@ -211,7 +184,7 @@ const ManageClients = ({ match }) => {
                       <th>Status</th>
                       <th className="has-text-centered">Resend</th>
                       <th className="has-text-centered">Access</th>
-                      <th className="has-text-centered">Notify Status </th>
+                      <th className="has-text-centered">Notify Status</th>
                       <th className="has-text-centered">Delete</th>
                     </tr>
                   </thead>

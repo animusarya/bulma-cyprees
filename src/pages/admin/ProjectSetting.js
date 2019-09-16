@@ -1,8 +1,10 @@
 import React from 'react';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 
+import useProjectDetails from '../../hooks/useProjectDetails';
+import useProjectUpdate from '../../hooks/useProjectUpdate';
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import Header from '../../components/Header';
@@ -14,23 +16,6 @@ import AdminHeader from '../../components/AdminHeader';
 import ProjectSettingForm from '../../components/ProjectSettingForm';
 import Subscription from '../../components/Subscription';
 
-const projectQuery = gql`
-  query project($id: ID!) {
-    project(id: $id) {
-      id
-      name
-      slug
-      status
-      logo
-      heroImage
-      customDomain
-      subscriptionName
-      subscriptionDurationInMonths
-      subscriptionAmount
-    }
-  }
-`;
-
 const removeProjectMutation = gql`
   mutation removeProject($id: ID!) {
     removeProject(id: $id) {
@@ -39,30 +24,11 @@ const removeProjectMutation = gql`
   }
 `;
 
-const updateProjectMutation = gql`
-  mutation updateProject($id: ID!, $input: ProjectUpdateInput!) {
-    updateProject(id: $id, input: $input) {
-      id
-      name
-      slug
-      status
-      customDomain
-    }
-  }
-`;
-
 const ProjectSetting = ({ match, history }) => {
-  const resultProject = useQuery(projectQuery, {
-    variables: { id: match.params.id },
-    fetchPolicy: 'cache-and-network',
-  });
+  const projectId = match.params.id;
+  const [project] = useProjectDetails(projectId);
+  const [executeMutation, res] = useProjectUpdate();
   const [executeMutationRemove, resRemove] = useMutation(removeProjectMutation);
-  const [executeMutation, res] = useMutation(updateProjectMutation);
-
-  const project =
-    resultProject.data && resultProject.data.project
-      ? resultProject.data.project
-      : {};
 
   return (
     <Layout>
@@ -73,7 +39,7 @@ const ProjectSetting = ({ match, history }) => {
           <Sidebar />
         </div>
         <div className="column">
-          <AdminHeader project={project} />
+          <AdminHeader />
           <MainColumn paddingtop="1rem">
             <Heading>Project Setting</Heading>
             <div>

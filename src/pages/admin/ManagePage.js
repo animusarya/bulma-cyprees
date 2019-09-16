@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
+import useProjectDetails from '../../hooks/useProjectDetails';
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import Header from '../../components/Header';
@@ -12,18 +13,6 @@ import AdminHeader from '../../components/AdminHeader';
 import PageFiles from '../../components/PageFiles';
 import PageContent from '../../components/PageContent';
 import { Message, Loading, Heading } from '../../components/elements';
-
-const projectQuery = gql`
-  query project($id: ID!) {
-    project(id: $id) {
-      id
-      name
-      slug
-      logo
-      heroImage
-    }
-  }
-`;
 
 const pageQuery = gql`
   query page($id: ID!) {
@@ -38,23 +27,16 @@ const pageQuery = gql`
 `;
 
 const ManagePage = ({ match }) => {
-  // fetch project data from api
-  const resultProject = useQuery(projectQuery, {
-    variables: { id: match.params.id },
-    fetchPolicy: 'cache-and-network',
-  });
+  const projectId = match.params.id;
+  const [project, resultProject] = useProjectDetails(projectId);
+
   const resultPage = useQuery(pageQuery, {
     variables: { id: match.params.pageId },
     fetchPolicy: 'cache-and-network',
   });
 
-  const project =
-    resultProject.data && resultProject.data.project
-      ? resultProject.data.project
-      : {};
   const page =
     resultPage.data && resultPage.data.page ? resultPage.data.page : {};
-  console.log('ManagePage', project, page);
 
   return (
     <Layout>
@@ -65,7 +47,7 @@ const ManagePage = ({ match }) => {
           <Sidebar />
         </div>
         <div className="column">
-          <AdminHeader project={project} />
+          <AdminHeader />
           <MainColumn>
             <Heading>{page.name}</Heading>
             {resultProject.error && (

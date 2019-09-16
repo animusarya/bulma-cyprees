@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
@@ -6,6 +6,7 @@ import gql from 'graphql-tag';
 import { useStoreActions } from 'easy-peasy';
 import dayjs from 'dayjs';
 
+import { formatCurrency } from '../../utils/helpers';
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import Header from '../../components/Header';
@@ -45,12 +46,15 @@ const Dashboard = () => {
   const resultProjects = useQuery(projectsQuery, {
     fetchPolicy: 'cache-and-network',
   });
-  const projects = (resultProjects.data && resultProjects.data.projects) || [];
   const updateProject = useStoreActions(
     actions => actions.active.updateProject,
   );
-  updateProject(null);
-  // console.log('resultProjects', projects);
+
+  useEffect(() => {
+    updateProject(null);
+  }, []);
+
+  const projects = (resultProjects.data && resultProjects.data.projects) || [];
 
   return (
     <Layout>
@@ -83,13 +87,13 @@ const Dashboard = () => {
                   <div className="column">
                     <Title>Projects</Title>
                   </div>
-                  <div className="column is-one-fifth">
+                  {/* <div className="column is-one-fifth">
                     <input
                       className="input"
                       type="text"
                       placeholder="Search Project"
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <table className="table is-fullwidth is-hoverable">
                   <thead>
@@ -108,7 +112,7 @@ const Dashboard = () => {
                             {project.name}
                           </Link>
                         </td>
-                        <td>£{project.subscriptionAmount}</td>
+                        <td>{formatCurrency(project.subscriptionAmount)}</td>
                         <td>{project.subscriptionDurationInMonths} months</td>
                         <td>
                           {dayjs(project.subscriptionStartsAt).isValid()
