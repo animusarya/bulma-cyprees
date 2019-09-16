@@ -57,9 +57,7 @@ const Container = styled.div`
 
 const MyDropzone = ({ onUpload, isPublic }) => {
   const [loading, setLoading] = useState(false);
-  const [executeUploadMutation, signedUrlResult] = useMutation(
-    signedUploadUrlMutation,
-  );
+  const [executeUploadMutation] = useMutation(signedUploadUrlMutation);
 
   const onDrop = useCallback(async acceptedFiles => {
     setLoading(true);

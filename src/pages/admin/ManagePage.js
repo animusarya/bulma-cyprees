@@ -27,11 +27,11 @@ const pageQuery = gql`
 `;
 
 const ManagePage = ({ match }) => {
-  const projectId = match.params.id;
+  const { pageId, id: projectId } = match.params;
   const [project, resultProject] = useProjectDetails(projectId);
 
   const resultPage = useQuery(pageQuery, {
-    variables: { id: match.params.pageId },
+    variables: { id: pageId },
     fetchPolicy: 'cache-and-network',
   });
 
@@ -62,9 +62,7 @@ const ManagePage = ({ match }) => {
               page={page}
               isPublic={page.type === 'content'}
             />
-            {page.type === 'content' && (
-              <PageContent project={project} page={page} />
-            )}
+            {page.type === 'content' && <PageContent page={page} />}
           </MainColumn>
         </div>
       </div>

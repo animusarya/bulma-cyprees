@@ -4,8 +4,7 @@ import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { isNull } from 'lodash';
 
-import { Title, Message, Loading, WysiwygEditor, Button } from './elements';
-import DeletePageBtn from './DeletePageBtn';
+import { Message, Loading, WysiwygEditor, Button } from './elements';
 
 const updateMutation = gql`
   mutation updatePage($id: ID!, $input: PageUpdateInput!) {
@@ -23,7 +22,7 @@ const Container = styled.div`
   }
 `;
 
-const PageContent = ({ project, page }) => {
+const PageContent = ({ page }) => {
   const [input, setInput] = useState({});
   const [executeUpdateMutation, updateResult] = useMutation(updateMutation);
 

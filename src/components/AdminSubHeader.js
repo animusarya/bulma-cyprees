@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
 
 import useProjectDetails from '../hooks/useProjectDetails';
 import useProjectUpdate from '../hooks/useProjectUpdate';
+import useProjectPages from '../hooks/useProjectPages';
 import { Button, Message } from './elements';
 import AddPageModal from './AddPageModal';
 import UploadImageModal from './UploadImageModal';
@@ -63,12 +63,14 @@ const Hero = styled.section`
   }
 `;
 
-const AdminSubHeader = ({ refetch }) => {
+const AdminSubHeader = () => {
   const [addPageModal, setAddPageModal] = useState(false);
   const [uploadImageModal, setUploadImageModal] = useState(false);
   const projectId = useStoreState(state => state.active.project);
   const [project, resultProject] = useProjectDetails(projectId);
   const [executeUpdateProjectMutation, resUpdateProject] = useProjectUpdate();
+  const [{ contentPages }, resultPages] = useProjectPages(projectId);
+  console.log('contentPages', contentPages);
 
   return (
     <Container>
@@ -96,6 +98,15 @@ const AdminSubHeader = ({ refetch }) => {
               onClick={() => setAddPageModal(true)}>
               + Add Page
             </a>
+            {contentPages &&
+              contentPages.map(page => (
+                <Link
+                  key={page.id}
+                  className="navbar-item has-text-white"
+                  to={`/admin/project/${project.id}/pages/${page.id}`}>
+                  {page.name}
+                </Link>
+              ))}
           </div>
         </div>
       </NavbarMenu>
@@ -136,21 +147,13 @@ const AdminSubHeader = ({ refetch }) => {
         isActive={addPageModal}
         project={project}
         handleChange={value => setAddPageModal(value)}
-        refetch={refetch}
+        refetch={resultPages.refetch}
       />
       {resUpdateProject.error && (
         <Message type="error">{resUpdateProject.error.message}</Message>
       )}
     </Container>
   );
-};
-
-AdminSubHeader.defaultProps = {
-  refetch: () => {},
-};
-
-AdminSubHeader.propTypes = {
-  refetch: PropTypes.func,
 };
 
 export default AdminSubHeader;

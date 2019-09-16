@@ -14,7 +14,7 @@ const createPageMutation = gql`
 `;
 
 const AddPageModal = ({ project, isActive, handleChange, refetch }) => {
-  const [executeMutation, res] = useMutation(createPageMutation);
+  const [executeMutation] = useMutation(createPageMutation);
 
   return (
     <div className={`modal ${isActive ? 'is-active' : ''}`}>

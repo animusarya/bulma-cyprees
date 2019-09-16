@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 
 import useProjectDetails from '../../hooks/useProjectDetails';
+import useProjectPages from '../../hooks/useProjectPages';
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import Header from '../../components/Header';
@@ -15,19 +14,6 @@ import AdminSubHeader from '../../components/AdminSubHeader';
 import ProjectDashboardHero from '../../components/ProjectDashboardHero';
 import ProjectPages from '../../components/ProjectPages';
 import { Message, Loading } from '../../components/elements';
-
-const pagesQuery = gql`
-  query pages($projectId: ID!) {
-    pages(projectId: $projectId) {
-      id
-      name
-      slug
-      type
-      status
-      createdAt
-    }
-  }
-`;
 
 const Container = styled.div`
   .content {
@@ -47,15 +33,7 @@ const Container = styled.div`
 const ProjectDashboard = ({ match }) => {
   const projectId = match.params.id;
   const [project] = useProjectDetails(projectId);
-
-  // fetch pages
-  const resultPages = useQuery(pagesQuery, {
-    variables: { projectId },
-    fetchPolicy: 'cache-and-network',
-  });
-
-  const pages =
-    resultPages.data && resultPages.data.pages ? resultPages.data.pages : [];
+  const [{ dataRoomPages }, resultPages] = useProjectPages(projectId);
 
   return (
     <Layout>
@@ -67,23 +45,19 @@ const ProjectDashboard = ({ match }) => {
         </div>
         <div className="column">
           <AdminHeader />
-          <AdminSubHeader
-            refetch={() => {
-              resultPages.refetch();
-            }}
-          />
+          <AdminSubHeader />
           <MainColumn>
             {resultPages.error && (
               <Message type="error">{resultPages.error.message}</Message>
             )}
             {resultPages.loading && <Loading />}
             <div className="content">
-              {pages.length === 0 ? (
+              {dataRoomPages.length === 0 ? (
                 <ProjectDashboardHero />
               ) : (
                 <ProjectPages
                   project={project}
-                  pages={pages}
+                  pages={dataRoomPages}
                   refetch={resultPages.refetch}
                 />
               )}

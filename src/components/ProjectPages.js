@@ -16,19 +16,6 @@ const removeMutation = gql`
   }
 `;
 
-const updatePageMutation = gql`
-  mutation updatePage($id: ID!, $input: PageInput!) {
-    updatePage(id: $id, input: $input) {
-      id
-      name
-      slug
-      type
-      status
-      createdAt
-    }
-  }
-`;
-
 const LinkWrapper = styled(Link)`
   color: ${props => props.theme.primaryColor};
   :hover {

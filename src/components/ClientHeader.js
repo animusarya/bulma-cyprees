@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { startCase } from 'lodash';
 
-import MainColumn from './MainColumn';
 import logoBg from '../assets/images/login-bg.jpg';
 import logo from '../assets/images/logo.png';
 import { Title } from './elements';
