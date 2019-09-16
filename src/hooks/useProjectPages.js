@@ -19,7 +19,7 @@ const pagesQuery = gql`
 const useProjectPages = projectId => {
   // fetch pages
   const resultPages = useQuery(pagesQuery, {
-    variables: { projectId },
+    variables: { projectId: projectId || 0 },
     fetchPolicy: 'cache-and-network',
   });
 

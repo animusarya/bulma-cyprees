@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
@@ -45,6 +45,21 @@ const AdminHeader = () => {
   const [project, resultProject] = useProjectDetails(projectId);
   const [executeUpdateProjectMutation, resUpdateProject] = useProjectUpdate();
 
+  const handleLogoUpload = useCallback(
+    uploadResponse => {
+      executeUpdateProjectMutation({
+        variables: {
+          id: projectId,
+          input: { logo: uploadResponse.url },
+        },
+      }).then(() => {
+        setIsActive(false);
+        resultProject.refetch();
+      });
+    },
+    [projectId],
+  );
+
   return (
     <Container>
       <div className="columns">
@@ -72,16 +87,7 @@ const AdminHeader = () => {
         heading="Upload Logo"
         isActive={isActive}
         onClose={() => setIsActive(false)}
-        onResponse={async ({ url }) => {
-          await executeUpdateProjectMutation({
-            variables: {
-              id: project.id,
-              input: { logo: url },
-            },
-          });
-          setIsActive(false);
-          resultProject.refetch();
-        }}
+        onResponse={handleLogoUpload}
       />
       {resUpdateProject.error && (
         <Message type="error">{resUpdateProject.error.message}</Message>

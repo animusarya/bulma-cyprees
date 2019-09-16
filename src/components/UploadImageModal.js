@@ -1,13 +1,14 @@
 import React from 'react';
+
 import { Heading, Dropzone } from './elements';
 
 const UploadImageModal = ({ heading, isActive, onClose, onResponse }) => (
-  <div className={`modal ${isActive && 'is-active'}`}>
+  <div className={`modal ${isActive ? 'is-active' : ''}`}>
     <div className="modal-background"></div>
     <div className="modal-content">
       <div className="box">
         <Heading>{heading}</Heading>
-        <Dropzone isPublic onUpload={value => onResponse(value)} />
+        <Dropzone isPublic onUpload={onResponse} />
       </div>
     </div>
     <button

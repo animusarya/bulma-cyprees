@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
@@ -71,6 +71,21 @@ const AdminSubHeader = () => {
   const [executeUpdateProjectMutation, resUpdateProject] = useProjectUpdate();
   const [{ contentPages }, resultPages] = useProjectPages(projectId);
 
+  const handleBannerUpload = useCallback(
+    uploadResponse => {
+      executeUpdateProjectMutation({
+        variables: {
+          id: projectId,
+          input: { heroImage: uploadResponse.url },
+        },
+      }).then(() => {
+        setUploadImageModal(false);
+        resultProject.refetch();
+      });
+    },
+    [projectId],
+  );
+
   return (
     <Container>
       <NavbarMenu
@@ -131,16 +146,7 @@ const AdminSubHeader = () => {
         heading="Upload Banner"
         isActive={uploadImageModal}
         onClose={() => setUploadImageModal(false)}
-        onResponse={async ({ url }) => {
-          await executeUpdateProjectMutation({
-            variables: {
-              id: project.id,
-              input: { heroImage: url },
-            },
-          });
-          setUploadImageModal(false);
-          resultProject.refetch();
-        }}
+        onResponse={handleBannerUpload}
       />
       <AddPageModal
         isActive={addPageModal}

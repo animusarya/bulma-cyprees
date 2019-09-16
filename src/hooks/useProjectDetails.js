@@ -42,7 +42,7 @@ const useProjectDetails = projectId => {
 
   // fetch project data from api
   const resultProject = useQuery(projectQuery, {
-    variables: { id: projectId },
+    variables: { id: projectId || 0 },
     fetchPolicy: 'cache-and-network',
   });
 

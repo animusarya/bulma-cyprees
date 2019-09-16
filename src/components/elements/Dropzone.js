@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
@@ -59,7 +59,7 @@ const MyDropzone = ({ onUpload, isPublic }) => {
   const [loading, setLoading] = useState(false);
   const [executeUploadMutation] = useMutation(signedUploadUrlMutation);
 
-  const onDrop = useCallback(async acceptedFiles => {
+  const onDrop = async acceptedFiles => {
     setLoading(true);
 
     try {
@@ -100,7 +100,7 @@ const MyDropzone = ({ onUpload, isPublic }) => {
       console.log('upload error', error);
       setLoading(false);
     }
-  }, []);
+  };
 
   const {
     getRootProps,

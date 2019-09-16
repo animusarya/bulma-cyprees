@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
@@ -48,6 +48,22 @@ const PageFiles = ({ project, page, isPublic }) => {
   const files =
     resultFiles.data && resultFiles.data.files ? resultFiles.data.files : {};
 
+  const handleFileUpload = useCallback(data => {
+    executeFileUploadMutation({
+      variables: {
+        input: {
+          name: data.fileName,
+          fileType: data.fileType,
+          project: project.id,
+          page: page.id,
+          url: data.url,
+        },
+      },
+    }).then(() => {
+      resultFiles.refetch();
+    });
+  }, []);
+
   return (
     <Container>
       <div className="columns">
@@ -58,24 +74,7 @@ const PageFiles = ({ project, page, isPublic }) => {
           <DeletePageBtn />
         </div>
       </div>
-      <Dropzone
-        isPublic={isPublic}
-        onUpload={async data => {
-          console.log('on upload', project.id, page.id);
-          await executeFileUploadMutation({
-            variables: {
-              input: {
-                name: data.fileName,
-                fileType: data.fileType,
-                project: project.id,
-                page: page.id,
-                url: data.url,
-              },
-            },
-          });
-          resultFiles.refetch();
-        }}
-      />
+      <Dropzone isPublic={isPublic} onUpload={handleFileUpload} />
       {resFileUpload.error && (
         <Message type="error">{resFileUpload.error.message}</Message>
       )}
