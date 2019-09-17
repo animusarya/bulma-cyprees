@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import styled from 'styled-components';
 
 import { InputGroup } from './elements';
-import Scrollbar from './Scrollbar';
+import NDAScroller from './NDAScroller';
 import Disclaimer from './Disclaimer';
 
 const Button = styled.button`
@@ -20,6 +20,7 @@ const RegisterForm = props => {
     handleChange,
     handleBlur,
     handleSubmit,
+    project,
   } = props;
 
   return (
@@ -75,7 +76,7 @@ const RegisterForm = props => {
             : undefined
         }
       />
-      <Scrollbar />
+      {project.nda && <NDAScroller data={project.nda} />}
       <label className="checkbox">
         <input type="checkbox" />{' '}
         <strong>I Accept the above Non Disclosure Agreement</strong>
@@ -90,7 +91,7 @@ const RegisterForm = props => {
           </Button>
         </div>
       </div>
-      <Disclaimer />
+      <Disclaimer data={project.disclaimer ? project.disclaimer : undefined} />
     </form>
   );
 };

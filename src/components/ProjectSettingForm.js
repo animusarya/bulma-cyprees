@@ -4,7 +4,7 @@ import { withFormik } from 'formik';
 import * as yup from 'yup';
 import Cleave from 'cleave.js/react';
 
-import { InputGroup, Button } from './elements';
+import { InputGroup, Button, TextAreaGroup } from './elements';
 
 const ProjectSetting = props => {
   const {
@@ -68,6 +68,36 @@ const ProjectSetting = props => {
             : undefined
         }
       />
+      <TextAreaGroup
+        fullWidth
+        isWidth
+        border
+        isHorizontal
+        label="Disclaimer"
+        name="disclaimer"
+        className="textarea"
+        value={values.disclaimer}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.disclaimer && touched.disclaimer
+            ? errors.disclaimer
+            : undefined
+        }
+      />
+      <TextAreaGroup
+        fullWidth
+        isWidth
+        border
+        isHorizontal
+        label="Non-Disclosure Agreement"
+        name="nda"
+        className="textarea"
+        value={values.nda}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={errors.nda && touched.nda ? errors.nda : undefined}
+      />
       <div className="button-field is-pulled-right">
         <Button disabled={isSubmitting}>Update</Button>
       </div>
@@ -90,11 +120,12 @@ export default withFormik({
     name: initialValues.name || '',
     slug: initialValues.slug || '',
     customDomain: initialValues.customDomain || '',
+    disclaimer: initialValues.disclaimer || '',
+    nda: initialValues.nda || '',
   }),
   validationSchema: yup.object().shape({
     name: yup.string().required('Name is required!'),
     slug: yup.string().required('slug is required!'),
-    // customDomain: yup.string().required('Custom Domain is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {

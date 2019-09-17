@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { useStoreActions } from 'easy-peasy';
 
@@ -9,6 +9,21 @@ import { Message, Loading } from '../components/elements';
 import RegisterForm from '../components/RegisterForm';
 import logo from '../assets/images/logo1.png';
 import background from '../assets/images/intelliback.jpg';
+
+const projectQuery = gql`
+  query projectGuest($id: ID!) {
+    projectGuest(id: $id) {
+      id
+      name
+      slug
+      logo
+      heroImage
+      customDomain
+      disclaimer
+      nda
+    }
+  }
+`;
 
 const registerMutation = gql`
   mutation register($email: String!, $password: String!, $projectId: String) {
@@ -72,6 +87,17 @@ const Register = ({ match }) => {
   const updateUser = useStoreActions(actions => actions.user.update);
   const { projectId, email } = match.params;
 
+  // fetch project data from api
+  const resultProject = useQuery(projectQuery, {
+    variables: { id: projectId || 0 },
+    fetchPolicy: 'cache-and-network',
+  });
+  const project =
+    resultProject.data && resultProject.data.projectGuest
+      ? resultProject.data.projectGuest
+      : {};
+  console.log('project', project);
+
   if (res.data && res.data.register) {
     const { jwt, user } = res.data.register;
     window.localStorage.setItem('token', jwt);
@@ -87,7 +113,7 @@ const Register = ({ match }) => {
   return (
     <Container>
       <div className="register-page">
-        <Seo title="Register" description="Register Yourself Here" />
+        <Seo title="Registeration" description="Register Yourself Here" />
         <section className="hero is-fullheight">
           <div className="hero-body">
             <div className="container">
@@ -98,17 +124,23 @@ const Register = ({ match }) => {
                     role="navigation"
                     aria-label="main navigation">
                     <div className="navbar-brand">
-                      {/* <Logo src={logo} alt="logo banner" /> */}
+                      {projectId && project.logo ? (
+                        <Logo src={project.logo} alt={project.name} />
+                      ) : (
+                        <Logo src={logo} alt="logo banner" />
+                      )}
                     </div>
                     <div id="navbarBasicExample" className="navbar-menu">
                       <div className="navbar-end">
                         <div className="navbar-item has-text-black-bis has-text-right">
                           <h2 className="has-text-weight-bold is-size-5">
-                            Registration
+                            Registeration
                           </h2>
-                          {/* <h1 className="has-text-weight-bold">
-                            Project Arden
-                          </h1> */}
+                          {projectId && (
+                            <h1 className="has-text-weight-bold">
+                              {project.name}
+                            </h1>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -125,6 +157,7 @@ const Register = ({ match }) => {
                       },
                     });
                   }}
+                  project={project}
                 />
                 {res.error && (
                   <Message type="error">{res.error.message}</Message>

@@ -17,6 +17,7 @@ const meQuery = gql`
         slug
         logo
         heroImage
+        disclaimer
       }
     }
   }

@@ -15,6 +15,8 @@ const projectQuery = gql`
       subscriptionName
       subscriptionDurationInMonths
       subscriptionAmount
+      disclaimer
+      nda
       welcomeEmailTemplate {
         subject
         body
