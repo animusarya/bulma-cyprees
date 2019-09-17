@@ -96,7 +96,6 @@ const Register = ({ match }) => {
     resultProject.data && resultProject.data.projectGuest
       ? resultProject.data.projectGuest
       : {};
-  console.log('project', project);
 
   if (res.data && res.data.register) {
     const { jwt, user } = res.data.register;

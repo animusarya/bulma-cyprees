@@ -1,42 +1,43 @@
-import React, { useEffect } from 'react';
-import swal from 'sweetalert';
-import dayjs from 'dayjs';
-import { useMutation, useLazyQuery } from '@apollo/react-hooks';
+import React, { useCallback, useState, useEffect } from 'react';
+import update from 'immutability-helper';
+import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
-import { Button, Loading, Message } from './elements';
+import FileListItem from './FileListItem';
 
-const fileQuery = gql`
-  query file($fileKey: String!) {
-    file(fileKey: $fileKey) {
-      url
+const updateFileMutation = gql`
+  mutation updateFile($id: ID!, $input: FileInput!) {
+    updateFile(id: $id, input: $input) {
+      id
     }
   }
 `;
 
-const removeFileMutation = gql`
-  mutation removeFile($id: ID!) {
-    removeFile(id: $id) {
-      success
-    }
-  }
-`;
+const FilesList = ({ files: items, isAdmin, refetch }) => {
+  const [files, setFiles] = useState(items);
+  const [executeUpdate] = useMutation(updateFileMutation);
 
-const FilesList = ({ files, isAdmin, refetch }) => {
-  const [getFile, { loading: fileLoading, data: fileData }] = useLazyQuery(
-    fileQuery,
-    {
-      fetchPolicy: 'network-only',
-    },
-  );
-  const [executeMutationDelete, resDel] = useMutation(removeFileMutation);
-
+  // if files updated
   useEffect(() => {
-    if (fileData && !fileLoading) {
-      const win = window.open(fileData.file.url, '_blank');
-      win.focus();
-    }
-  }, [fileData]);
+    setFiles(items);
+  }, [items]);
+
+  const handleMoveItem = useCallback(
+    (dragIndex, hoverIndex) => {
+      const dragCard = files[dragIndex];
+      const reorderdFiles = update(files, {
+        $splice: [[dragIndex, 1], [hoverIndex, 0, dragCard]],
+      });
+      setFiles(reorderdFiles);
+      // update db
+      reorderdFiles.forEach((reFile, index) => {
+        executeUpdate({
+          variables: { id: reFile.id, input: { order: index + 1 } },
+        });
+      });
+    },
+    [files],
+  );
 
   return (
     <>
@@ -53,75 +54,20 @@ const FilesList = ({ files, isAdmin, refetch }) => {
           </tr>
         </thead>
         <tbody>
-          {files.map(file => (
-            <tr key={file.id}>
-              {isAdmin && (
-                <td className="has-text-centered">
-                  <Button secondary paddingless>
-                    <i className="far fa-hand-pointer"></i>
-                  </Button>
-                </td>
-              )}
-              <td>
-                <a
-                  onClick={() =>
-                    getFile({ variables: { fileKey: file.name } })
-                  }>
-                  {file.name}
-                </a>
-              </td>
-              <td className="has-text-centered is-uppercase">
-                {file.fileType}
-              </td>
-              <td className="has-text-centered">{file.section || '-'}</td>
-              <td className="has-text-centered">
-                {dayjs(file.createdAt).format('DD-MM-YYYY')}
-              </td>
-              {isAdmin && (
-                <td className="has-text-centered">
-                  <Button
-                    secondary
-                    paddingless
-                    onClick={() => {
-                      swal('Are you confirm to replace this item?', {
-                        buttons: ['Cancel', 'Confirm'],
-                      }).then(async value => {
-                        if (value) {
-                          // await executeMutationSync();
-                        }
-                      });
-                    }}>
-                    <i className="fas fa-sync-alt"></i>
-                  </Button>
-                </td>
-              )}
-              {isAdmin && (
-                <td className="has-text-centered">
-                  <Button
-                    secondary
-                    paddingless
-                    onClick={() => {
-                      swal('Are you confirm to delete this item?', {
-                        buttons: ['Cancel', 'Confirm'],
-                      }).then(async value => {
-                        if (value) {
-                          await executeMutationDelete({
-                            variables: { id: file.id },
-                          });
-                          refetch();
-                        }
-                      });
-                    }}>
-                    <i className="far fa-trash-alt"></i>
-                  </Button>
-                </td>
-              )}
-            </tr>
+          {files.map((file, index) => (
+            <FileListItem
+              key={file.id}
+              index={index}
+              id={file.id}
+              file={file}
+              isAdmin={isAdmin}
+              refetch={refetch}
+              moveItem={handleMoveItem}
+              executeUpdate={executeUpdate}
+            />
           ))}
         </tbody>
       </table>
-      {resDel.loading ? <Loading /> : null}
-      {resDel.error && <Message type="error">{resDel.error.message}</Message>}
     </>
   );
 };

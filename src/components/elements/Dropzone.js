@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
@@ -55,9 +55,15 @@ const Container = styled.div`
   margin-bottom: 20px;
 `;
 
-const MyDropzone = ({ onUpload, isPublic }) => {
+const MyDropzone = ({ onUpload, isPublic, children, handleLoading }) => {
   const [loading, setLoading] = useState(false);
   const [executeUploadMutation] = useMutation(signedUploadUrlMutation);
+
+  useEffect(() => {
+    if (handleLoading) {
+      handleLoading(loading);
+    }
+  }, [loading]);
 
   const onDrop = async acceptedFiles => {
     setLoading(true);
@@ -109,6 +115,15 @@ const MyDropzone = ({ onUpload, isPublic }) => {
     isDragAccept,
     isDragReject,
   } = useDropzone({ onDrop });
+
+  if (children) {
+    return (
+      <span {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
+        <input {...getInputProps()} />
+        {children}
+      </span>
+    );
+  }
 
   return (
     <Container {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
