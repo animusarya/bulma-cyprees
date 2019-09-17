@@ -1,6 +1,6 @@
 # Intellishare
 
-> An boilerplate for frontend apps using ReactJs with batteries included.
+> Frontend app for intellishare using ReactJs with batteries included.
 
 ## Requirements
 ```bash
