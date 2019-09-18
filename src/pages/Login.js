@@ -2,9 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { useStoreActions } from 'easy-peasy';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import Seo from '../components/Seo';
+import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
 import LoginForm from '../components/LoginForm';
 import logo from '../assets/images/logo1.png';
@@ -68,6 +69,7 @@ const Login = () => {
     actions => actions.isLoggedIn.togggle,
   );
   const updateUser = useStoreActions(actions => actions.user.update);
+  const activeProject = useStoreState(state => state.origin.project);
 
   if (res.data && res.data.login) {
     const { jwt, user } = res.data.login;
@@ -86,48 +88,59 @@ const Login = () => {
   }
 
   return (
-    <Container>
-      <div className="login-page">
-        <Seo title="Login" description="Some description here." />
-        <section className="hero is-fullheight">
-          <div className="hero-body">
-            <div className="container">
-              <FormContainer>
-                <div>
-                  <nav
-                    className="navbar"
-                    role="navigation"
-                    aria-label="main navigation">
-                    <div className="navbar-brand">
-                      {/* <Logo src={logo} alt="logo banner" /> */}
-                    </div>
-                    <div id="navbarBasicExample" className="navbar-menu">
-                      <div className="navbar-end">
-                        <div className="navbar-item has-text-black-bis has-text-right">
-                          <h2 className="has-text-weight-bold is-size-5">
-                            Login
-                          </h2>
-                          {/* <h1 className="has-text-weight-bold">
-                            Project Arden
-                          </h1> */}
+    <Layout>
+      <Container>
+        <div className="login-page">
+          <Seo title="Login" description="Some description here." />
+          <section className="hero is-fullheight">
+            <div className="hero-body">
+              <div className="container">
+                <FormContainer>
+                  <div>
+                    <nav
+                      className="navbar"
+                      role="navigation"
+                      aria-label="main navigation">
+                      <div className="navbar-brand">
+                        {activeProject.logo ? (
+                          <Logo
+                            src={activeProject.logo}
+                            alt={activeProject.name}
+                          />
+                        ) : (
+                          <Logo src={logo} alt="logo banner" />
+                        )}
+                      </div>
+                      <div id="navbarBasicExample" className="navbar-menu">
+                        <div className="navbar-end">
+                          <div className="navbar-item has-text-black-bis has-text-right">
+                            <h2 className="has-text-weight-bold is-size-5">
+                              Login
+                            </h2>
+                            {activeProject.name && (
+                              <h1 className="has-text-weight-bold">
+                                {activeProject.name}
+                              </h1>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </nav>
-                </div>
-                <LoginForm
-                  onSubmit={data => executeMutation({ variables: data })}
-                />
-                {res.error && (
-                  <Message type="error">{res.error.message}</Message>
-                )}
-                {res.loading ? <Loading /> : null}
-              </FormContainer>
+                    </nav>
+                  </div>
+                  <LoginForm
+                    onSubmit={data => executeMutation({ variables: data })}
+                  />
+                  {res.error && (
+                    <Message type="error">{res.error.message}</Message>
+                  )}
+                  {res.loading ? <Loading /> : null}
+                </FormContainer>
+              </div>
             </div>
-          </div>
-        </section>
-      </div>
-    </Container>
+          </section>
+        </div>
+      </Container>
+    </Layout>
   );
 };
 

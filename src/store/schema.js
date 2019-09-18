@@ -3,6 +3,16 @@
 import { action, selector } from 'easy-peasy';
 
 const schema = {
+  origin: {
+    value: 'https://www.intellishare.com',
+    project: {},
+    update: action((state, payload) => {
+      state.value = payload;
+    }),
+    updateProject: action((state, payload) => {
+      state.project = payload;
+    }),
+  },
   isLoggedIn: {
     value: false,
     togggle: action((state, payload) => {

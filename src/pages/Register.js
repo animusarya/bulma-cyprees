@@ -1,29 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { useStoreActions } from 'easy-peasy';
+import { useStoreActions, useStoreState } from 'easy-peasy';
+import { isEmpty } from 'lodash';
 
+import useProjectGuestDetails from '../hooks/useProjectGuestDetails';
 import Seo from '../components/Seo';
+import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
 import RegisterForm from '../components/RegisterForm';
 import logo from '../assets/images/logo1.png';
 import background from '../assets/images/intelliback.jpg';
-
-const projectQuery = gql`
-  query projectGuest($id: ID!) {
-    projectGuest(id: $id) {
-      id
-      name
-      slug
-      logo
-      heroImage
-      customDomain
-      disclaimer
-      nda
-    }
-  }
-`;
 
 const registerMutation = gql`
   mutation register($email: String!, $password: String!, $projectId: String) {
@@ -85,17 +73,20 @@ const Register = ({ match }) => {
     actions => actions.isLoggedIn.togggle,
   );
   const updateUser = useStoreActions(actions => actions.user.update);
+  const updateProject = useStoreActions(
+    actions => actions.origin.updateProject,
+  );
+  const activeProject = useStoreState(state => state.origin.project);
   const { projectId, email } = match.params;
 
   // fetch project data from api
-  const resultProject = useQuery(projectQuery, {
-    variables: { id: projectId || 0 },
-    fetchPolicy: 'cache-and-network',
-  });
-  const project =
-    resultProject.data && resultProject.data.projectGuest
-      ? resultProject.data.projectGuest
-      : {};
+  const [project] = useProjectGuestDetails({ projectId });
+
+  useEffect(() => {
+    if (!isEmpty(project)) {
+      updateProject(project);
+    }
+  }, [project]);
 
   if (res.data && res.data.register) {
     const { jwt, user } = res.data.register;
@@ -110,64 +101,69 @@ const Register = ({ match }) => {
   }
 
   return (
-    <Container>
-      <div className="register-page">
-        <Seo title="Registeration" description="Register Yourself Here" />
-        <section className="hero is-fullheight">
-          <div className="hero-body">
-            <div className="container">
-              <FormContainer>
-                <div>
-                  <nav
-                    className="navbar"
-                    role="navigation"
-                    aria-label="main navigation">
-                    <div className="navbar-brand">
-                      {projectId && project.logo ? (
-                        <Logo src={project.logo} alt={project.name} />
-                      ) : (
-                        <Logo src={logo} alt="logo banner" />
-                      )}
-                    </div>
-                    <div id="navbarBasicExample" className="navbar-menu">
-                      <div className="navbar-end">
-                        <div className="navbar-item has-text-black-bis has-text-right">
-                          <h2 className="has-text-weight-bold is-size-5">
-                            Registeration
-                          </h2>
-                          {projectId && (
-                            <h1 className="has-text-weight-bold">
-                              {project.name}
-                            </h1>
-                          )}
+    <Layout>
+      <Container>
+        <div className="register-page">
+          <Seo title="Registeration" description="Register Yourself Here" />
+          <section className="hero is-fullheight">
+            <div className="hero-body">
+              <div className="container">
+                <FormContainer>
+                  <div>
+                    <nav
+                      className="navbar"
+                      role="navigation"
+                      aria-label="main navigation">
+                      <div className="navbar-brand">
+                        {activeProject.logo ? (
+                          <Logo
+                            src={activeProject.logo}
+                            alt={activeProject.name}
+                          />
+                        ) : (
+                          <Logo src={logo} alt="logo banner" />
+                        )}
+                      </div>
+                      <div id="navbarBasicExample" className="navbar-menu">
+                        <div className="navbar-end">
+                          <div className="navbar-item has-text-black-bis has-text-right">
+                            <h2 className="has-text-weight-bold is-size-5">
+                              Registeration
+                            </h2>
+                            {activeProject.name && (
+                              <h1 className="has-text-weight-bold">
+                                {activeProject.name}
+                              </h1>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </nav>
-                </div>
-                <RegisterForm
-                  initialValues={{ email: email || '' }}
-                  onSubmit={data => {
-                    return executeMutation({
-                      variables: {
-                        email: data.email,
-                        password: data.password,
-                        projectId: projectId || undefined,
-                      },
-                    });
-                  }}
-                  project={project}
-                />
-                {res.error && (
-                  <Message type="error">{res.error.message}</Message>
-                )}
-                {res.loading ? <Loading /> : null}
-              </FormContainer>
+                    </nav>
+                  </div>
+                  <RegisterForm
+                    initialValues={{ email: email || '' }}
+                    onSubmit={data => {
+                      return executeMutation({
+                        variables: {
+                          email: data.email,
+                          password: data.password,
+                          projectId: projectId || undefined,
+                        },
+                      });
+                    }}
+                    project={activeProject}
+                  />
+                  {res.error && (
+                    <Message type="error">{res.error.message}</Message>
+                  )}
+                  {res.loading ? <Loading /> : null}
+                </FormContainer>
+              </div>
             </div>
-          </div>
-        </section>
-      </div>
-    </Container>
+          </section>
+        </div>
+      </Container>
+    </Layout>
   );
 };
 
