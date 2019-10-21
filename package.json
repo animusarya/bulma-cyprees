@@ -7,7 +7,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --fix --ext .jsx,.js src/*.js src/**/*.js",
-    "lint-two": "NODE_ENV=production lint-staged"
+    "lint-two": "NODE_ENV=production lint-staged",
+    "deploy": "now"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.0",
