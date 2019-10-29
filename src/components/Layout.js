@@ -6,7 +6,7 @@ import { isEmpty } from 'lodash';
 import config from '../utils/config';
 import useProjectGuestDetails from '../hooks/useProjectGuestDetails';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, noContainer }) => {
   const updateOrigin = useStoreActions(actions => actions.origin.update);
   const origin = useStoreState(state => state.origin.value);
   const [project] = useProjectGuestDetails({ domain: origin });
@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
   }, [project]);
 
   return (
-    <div className="container">
+    <div className={noContainer ? '' : 'container'}>
       <Helmet title={config.siteName} />
       {children}
     </div>

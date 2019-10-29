@@ -8,7 +8,6 @@ import Seo from '../components/Seo';
 import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
 import LoginForm from '../components/LoginForm';
-import logo from '../assets/images/logo1.png';
 import background from '../assets/images/intelliback.jpg';
 
 const mutation = gql`
@@ -88,7 +87,7 @@ const Login = () => {
   }
 
   return (
-    <Layout>
+    <Layout noContainer>
       <Container>
         <div className="login-page">
           <Seo title="Login" description="Some description here." />
@@ -102,13 +101,11 @@ const Login = () => {
                       role="navigation"
                       aria-label="main navigation">
                       <div className="navbar-brand">
-                        {activeProject.logo ? (
+                        {activeProject.logo && (
                           <Logo
                             src={activeProject.logo}
                             alt={activeProject.name}
                           />
-                        ) : (
-                          <Logo src={logo} alt="logo banner" />
                         )}
                       </div>
                       <div id="navbarBasicExample" className="navbar-menu">

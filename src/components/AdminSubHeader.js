@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
+import { startCase } from 'lodash';
 
 import useProjectDetails from '../hooks/useProjectDetails';
 import useProjectUpdate from '../hooks/useProjectUpdate';
@@ -69,7 +70,7 @@ const AdminSubHeader = () => {
   const projectId = useStoreState(state => state.active.project);
   const [project, resultProject] = useProjectDetails(projectId);
   const [executeUpdateProjectMutation, resUpdateProject] = useProjectUpdate();
-  const [{ contentPages }, resultPages] = useProjectPages(projectId);
+  const [{ pages }, resultPages] = useProjectPages(projectId);
 
   const handleBannerUpload = useCallback(
     uploadResponse => {
@@ -112,13 +113,13 @@ const AdminSubHeader = () => {
               onClick={() => setAddPageModal(true)}>
               + Add Page
             </a>
-            {contentPages &&
-              contentPages.map(page => (
+            {pages &&
+              pages.map(page => (
                 <Link
                   key={page.id}
                   className="navbar-item has-text-white"
                   to={`/admin/project/${project.id}/pages/${page.id}`}>
-                  {page.name}
+                  {startCase(page.name)}
                 </Link>
               ))}
           </div>

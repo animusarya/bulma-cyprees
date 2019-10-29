@@ -4,6 +4,7 @@ import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 import dayjs from 'dayjs';
+import { startCase } from 'lodash';
 
 import useProjectDetails from '../../hooks/useProjectDetails';
 import Layout from '../../components/Layout';
@@ -125,7 +126,7 @@ const ManageClients = ({ match }) => {
           <MainColumn>
             <Heading>Project Clients</Heading>
             <Subtitle className="subtitle">Add Client</Subtitle>
-            <div className="field is-grouped">
+            <div>
               <ManageAdminClientForm
                 onSubmit={async data => {
                   await executeAddClientMutation({
@@ -134,6 +135,7 @@ const ManageClients = ({ match }) => {
                   resultProject.refetch();
                 }}
               />
+              <br />
               {res.error && <Message type="error">{res.error.message}</Message>}
               {resCsv.error && (
                 <Message type="error">{resCsv.error.message}</Message>
@@ -155,7 +157,7 @@ const ManageClients = ({ match }) => {
                 <Loading />
               ) : null}
 
-              <p className="import-button">
+              {/* <p className="import-button">
                 <Button
                   secondary
                   paddingless
@@ -166,7 +168,7 @@ const ManageClients = ({ match }) => {
                   }}>
                   Import CSV
                 </Button>
-              </p>
+              </p> */}
             </div>
             {project.clients && project.clients.length > 0 && (
               <React.Fragment>
@@ -192,7 +194,7 @@ const ManageClients = ({ match }) => {
                     {project.clients.map(item => (
                       <tr key={item.id}>
                         <td>{item.email}</td>
-                        <td>{item.status}</td>
+                        <td>{startCase(item.status)}</td>
                         <td className="has-text-centered">
                           <Button
                             secondary

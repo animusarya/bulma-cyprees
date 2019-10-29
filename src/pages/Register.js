@@ -10,7 +10,6 @@ import Seo from '../components/Seo';
 import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
 import RegisterForm from '../components/RegisterForm';
-import logo from '../assets/images/logo1.png';
 import background from '../assets/images/intelliback.jpg';
 
 const registerMutation = gql`
@@ -101,7 +100,7 @@ const Register = ({ match }) => {
   }
 
   return (
-    <Layout>
+    <Layout noContainer>
       <Container>
         <div className="register-page">
           <Seo title="Registeration" description="Register Yourself Here" />
@@ -115,13 +114,11 @@ const Register = ({ match }) => {
                       role="navigation"
                       aria-label="main navigation">
                       <div className="navbar-brand">
-                        {activeProject.logo ? (
+                        {activeProject.logo && (
                           <Logo
                             src={activeProject.logo}
                             alt={activeProject.name}
                           />
-                        ) : (
-                          <Logo src={logo} alt="logo banner" />
                         )}
                       </div>
                       <div id="navbarBasicExample" className="navbar-menu">

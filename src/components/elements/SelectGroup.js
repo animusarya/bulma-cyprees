@@ -20,6 +20,10 @@ const Input = styled.div`
     props.border ? '1px solid theme.borderColor' : 'none'};
   border-radius: ${props => (props.hasRadius ? '5px' : '0')};
   border-bottom: ${props => `1px solid ${props.theme.borderColor}`};
+  width: 100%;
+  select {
+    width: 100%;
+  }
 `;
 
 const SelectGroup = ({

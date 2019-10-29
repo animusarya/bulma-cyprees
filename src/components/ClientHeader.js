@@ -57,7 +57,7 @@ const Button = styled.button`
 `;
 
 const ClientHeader = ({ me, project }) => {
-  const [{ contentPages: pages }] = useProjectPages(project.id || 0);
+  const [{ pages }] = useProjectPages(project.id || 0);
 
   const handleLogout = () => {
     window.localStorage.clear();
@@ -89,7 +89,9 @@ const ClientHeader = ({ me, project }) => {
             </Button>
             {project && (
               <div className="has-text-right">
-                <Title marginbottom="0px">{project.name || ''}</Title>
+                <Title marginbottom="0px">
+                  {startCase(project.name) || ''}
+                </Title>
               </div>
             )}
           </div>

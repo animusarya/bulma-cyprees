@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
 
-import { InputGroup, Button } from './elements';
+import { InputGroup, Button, SelectGroup } from './elements';
 import theme from '../utils/theme';
 import Subtitle from './elements/Subtitle';
 
@@ -26,6 +26,14 @@ const Form = styled.form`
   }
 `;
 
+const countries = [
+  {
+    key: 1,
+    title: 'United Kingdom',
+    value: 'united-kingdom',
+  },
+];
+
 const ProjectSetupForm = props => {
   const {
     values,
@@ -43,20 +51,6 @@ const ProjectSetupForm = props => {
       <div className="columns">
         <div className="column">
           <Subtitle>Billing Address</Subtitle>
-          <InputGroup
-            fullWidth
-            isWidth
-            border
-            placeholder="Country"
-            name="country"
-            type="text"
-            value={values.country}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            errors={
-              errors.country && touched.country ? errors.country : undefined
-            }
-          />
           <InputGroup
             fullWidth
             isWidth
@@ -126,6 +120,21 @@ const ProjectSetupForm = props => {
             errors={
               errors.postcode && touched.postcode ? errors.postcode : undefined
             }
+          />
+          <SelectGroup
+            fullWidth
+            isWidth
+            border
+            placeholder="Country"
+            name="country"
+            type="text"
+            value={values.country}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            errors={
+              errors.country && touched.country ? errors.country : undefined
+            }
+            options={countries}
           />
           <Subtitle>Payment Info</Subtitle>
           <InputGroup

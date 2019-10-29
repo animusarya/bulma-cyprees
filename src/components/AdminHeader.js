@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
+import { startCase } from 'lodash';
 
 import useProjectDetails from '../hooks/useProjectDetails';
 import useProjectUpdate from '../hooks/useProjectUpdate';
@@ -78,7 +79,7 @@ const AdminHeader = () => {
           </div>
           <div>
             <div className="has-text-right">
-              <Title marginbottom="0px">{project.name}</Title>
+              <Title marginbottom="0px">{startCase(project.name)}</Title>
             </div>
           </div>
         </div>

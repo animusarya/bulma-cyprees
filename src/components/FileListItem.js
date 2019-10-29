@@ -149,7 +149,7 @@ const FileListItem = ({
           {file.name}
         </a>
       </td>
-      <td className="has-text-centered is-uppercase">{file.fileType}</td>
+      <td className="has-text-centered">{file.fileType}</td>
       <td className="has-text-centered">{file.section || '-'}</td>
       <td className="has-text-centered">
         {dayjs(file.createdAt).format('DD-MM-YYYY')}

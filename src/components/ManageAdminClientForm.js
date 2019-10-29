@@ -2,20 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
-import styled from 'styled-components';
-
-import { InputGroup, Button } from './elements';
-
-const Buttonstyled = styled(Button)`
-  margin-top: 24px;
-  margin-left: 10px;
-`;
 
 const ManageAdminClientForm = props => {
   const {
     values,
-    touched,
-    errors,
     isSubmitting,
     handleChange,
     handleBlur,
@@ -24,11 +14,11 @@ const ManageAdminClientForm = props => {
 
   return (
     <form onSubmit={handleSubmit} className="is-flex">
-      <div className="field">
+      <div className="field has-addons">
         <div className="control">
-          <InputGroup
-            border
+          <input
             className="input"
+            type="text"
             name="email"
             label="Client Email"
             placeholder="john@doe.com"
@@ -36,21 +26,14 @@ const ManageAdminClientForm = props => {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          {errors.email && touched.email && (
-            <p className="help is-danger">{errors.email}</p>
-          )}
         </div>
-      </div>
-      <div className="field">
-        <div
-          className="control"
-          style={{ paddingTop: '1rem', marginLeft: '1rem' }}>
-          <Buttonstyled
+        <div className="control">
+          <button
             type="submit"
-            className="button"
+            className="button is-info"
             disabled={isSubmitting}>
             <i className="fas fa-plus"></i>
-          </Buttonstyled>
+          </button>
         </div>
       </div>
     </form>

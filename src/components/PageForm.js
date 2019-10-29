@@ -24,7 +24,7 @@ const PageForm = props => {
         border
         fullWidth
         name="name"
-        label="Page Name"
+        label="Title"
         placeholder=""
         value={values.name}
         onChange={handleChange}
@@ -36,7 +36,7 @@ const PageForm = props => {
         fullWidth
         isWidth
         border
-        label="Page Type"
+        label="Type"
         placeholder=""
         name="type"
         value={values.type}

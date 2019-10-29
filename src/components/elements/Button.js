@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const Container = styled.button`
   &&& {
+    ${props => props.style};
     margin-top: ${props => (props.marginTop ? '2rem' : '')};
     border-color: ${props =>
       props.paddingless ? 'transparent' : props.theme.primaryColor};

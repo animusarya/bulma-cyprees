@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 import swal from 'sweetalert';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
+import { startCase } from 'lodash';
 
 import { Heading, Button, Message, Loading } from './elements';
 
@@ -43,12 +44,14 @@ const ProjectPages = ({ pages, project, refetch }) => {
         <tbody>
           {pages.map(page => (
             <tr key={page.id}>
-              <td className="has-text-weight-semibold">{page.name}</td>
-              <td className="has-text-centered">{page.type}</td>
-              <td className="has-text-centered">{page.status}</td>
+              <td className="has-text-weight-semibold">
+                {startCase(page.name)}
+              </td>
+              <td className="has-text-centered">{startCase(page.type)}</td>
+              <td className="has-text-centered">{startCase(page.status)}</td>
               <td className="has-text-centered">
                 {dayjs(page.createdAt).isValid()
-                  ? dayjs(page.createdAt).format('DD-MM-YYYY')
+                  ? dayjs(page.createdAt).format('DD MMM YYYY')
                   : null}
               </td>
               <td>
