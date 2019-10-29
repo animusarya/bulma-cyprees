@@ -32,8 +32,8 @@ const NavbarMenu = styled.nav`
   }
 `;
 const Logo = styled.img`
-  width: 140px;
-  height: auto;
+  width: auto;
+  height: 70px;
   margin-top: 10px;
 `;
 const HeroImg = styled.img`

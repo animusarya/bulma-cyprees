@@ -39,7 +39,7 @@ const Dashboard = () => {
     <Layout>
       <Seo title="Client Dashboard" description="Page description" />
       <ClientHeader me={me} project={project} />
-      {(resultMe.loading || resultPages.loading) && <Loading />}
+      {(resultMe.loading || resultPages.loading) && !project && <Loading />}
       {resultMe.error && (
         <Message type="error">{resultMe.error.message}</Message>
       )}

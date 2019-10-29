@@ -152,7 +152,7 @@ const FileListItem = ({
       <td className="has-text-centered">{file.fileType}</td>
       <td className="has-text-centered">{file.section || '-'}</td>
       <td className="has-text-centered">
-        {dayjs(file.createdAt).format('DD-MM-YYYY')}
+        {dayjs(file.createdAt).format('DD MMM YYYY')}
       </td>
       {isAdmin && (
         <td className="has-text-centered">
