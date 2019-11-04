@@ -28,7 +28,6 @@ const pageQuery = gql`
 
 const ManagePage = ({ match }) => {
   const { pageId, id: projectId } = match.params;
-  console.log('ManagePage', projectId, pageId);
   const [project, resultProject] = useProjectDetails(projectId);
 
   const resultPage = useQuery(pageQuery, {
