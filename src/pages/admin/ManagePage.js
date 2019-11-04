@@ -28,6 +28,7 @@ const pageQuery = gql`
 
 const ManagePage = ({ match }) => {
   const { pageId, id: projectId } = match.params;
+  console.log('ManagePage', projectId, pageId);
   const [project, resultProject] = useProjectDetails(projectId);
 
   const resultPage = useQuery(pageQuery, {
@@ -58,11 +59,13 @@ const ManagePage = ({ match }) => {
             )}
             {(resultPage.loading || resultProject.loading) && <Loading />}
             <PageFiles
-              project={project}
+              project={{ ...project, id: projectId }}
               page={{ ...page, id: pageId }}
               isPublic={page.type === 'content'}
             />
-            {page.type === 'content' && <PageContent page={page} />}
+            {page.type === 'content' && (
+              <PageContent page={{ ...page, id: pageId }} />
+            )}
           </MainColumn>
         </div>
       </div>
