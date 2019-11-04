@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/react-hooks';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -32,10 +32,17 @@ const Container = styled.div`
 
 const ImageGallery = ({ page }) => {
   // fetch files for page
-  const resultFiles = useQuery(filesQuery, {
-    variables: { pageId: page.id || 0 },
+  const [getFiles, resultFiles] = useLazyQuery(filesQuery, {
+    variables: { pageId: page.id },
     fetchPolicy: 'cache-and-network',
   });
+
+  useEffect(() => {
+    if (page.id) {
+      getFiles();
+    }
+  }, [page.id]);
+
   const files = resultFiles.data ? resultFiles.data.files : [];
 
   if (files.length === 0) return null;

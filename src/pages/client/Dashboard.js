@@ -22,7 +22,7 @@ const Container = styled.div`
 const Dashboard = () => {
   const [me, resultMe] = useMeDetails();
   const project = me.clientProject || {};
-  const [{ dataRoomPages }, resultPages] = useProjectPages(project.id || 0);
+  const [{ dataRoomPages }, resultPages] = useProjectPages(project.id);
 
   if (isEmpty(project)) {
     return (

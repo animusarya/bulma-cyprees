@@ -57,7 +57,7 @@ const Button = styled.button`
 `;
 
 const ClientHeader = ({ me, project }) => {
-  const [{ pages }] = useProjectPages(project.id || 0);
+  const [{ pages }] = useProjectPages(project.id);
 
   const handleLogout = () => {
     window.localStorage.clear();

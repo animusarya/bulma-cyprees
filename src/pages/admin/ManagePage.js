@@ -59,7 +59,7 @@ const ManagePage = ({ match }) => {
             {(resultPage.loading || resultProject.loading) && <Loading />}
             <PageFiles
               project={project}
-              page={page}
+              page={{ ...page, id: pageId }}
               isPublic={page.type === 'content'}
             />
             {page.type === 'content' && <PageContent page={page} />}

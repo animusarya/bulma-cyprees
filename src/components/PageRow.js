@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { startCase } from 'lodash';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/react-hooks';
 import { Link } from 'react-router-dom';
 
 import { Title, Message, Loading } from './elements';
@@ -23,10 +23,17 @@ const filesQuery = gql`
 
 const PageRow = ({ page }) => {
   // fetch files for page
-  const resultFiles = useQuery(filesQuery, {
-    variables: { pageId: page.id || 0 },
+  const [getFiles, resultFiles] = useLazyQuery(filesQuery, {
+    variables: { pageId: page.id },
     fetchPolicy: 'cache-and-network',
   });
+
+  useEffect(() => {
+    if (page.id) {
+      getFiles();
+    }
+  }, [page.id]);
+
   const files = resultFiles.data ? resultFiles.data.files : [];
 
   return (

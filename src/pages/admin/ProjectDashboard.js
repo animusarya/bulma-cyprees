@@ -31,6 +31,7 @@ const Container = styled.div`
 `;
 
 const ProjectDashboard = ({ match }) => {
+  console.log('ProjectDashboard', match.params);
   const projectId = match.params.id;
   const [project] = useProjectDetails(projectId);
   const [{ dataRoomPages }, resultPages] = useProjectPages(projectId);

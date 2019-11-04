@@ -4,8 +4,10 @@ import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import { CachePersistor } from 'apollo-cache-persist';
 import fetch from 'isomorphic-fetch';
+import { onError } from 'apollo-link-error';
 
 import config from './config';
+import sentry from './sentry';
 
 const httpLink = createHttpLink({
   uri: config.debug ? config.graphQlUriDev : config.graphQlUri,
@@ -37,11 +39,27 @@ const authLink = setContext(async (_, { headers }) => {
   };
 });
 
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (config.debug) {
+    console.log('onError', graphQLErrors, networkError);
+    return;
+  }
+
+  if (graphQLErrors)
+    graphQLErrors.map(({ message, locations, path }) =>
+      sentry.captureException(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+      ),
+    );
+
+  if (networkError) sentry.captureException(`[Network error]: ${networkError}`);
+});
+
 // Purge persistor when the store was reset.
 // persistor.purge(); // clear local storage
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: errorLink.concat(authLink.concat(httpLink)),
   cache,
 });
 

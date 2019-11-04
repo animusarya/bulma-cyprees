@@ -1,4 +1,5 @@
-import { useQuery } from '@apollo/react-hooks';
+import { useEffect } from 'react';
+import { useLazyQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { filter } from 'lodash';
 
@@ -18,10 +19,16 @@ const pagesQuery = gql`
 
 const useProjectPages = projectId => {
   // fetch pages
-  const resultPages = useQuery(pagesQuery, {
-    variables: { projectId: projectId || 0 },
+  const [getPages, resultPages] = useLazyQuery(pagesQuery, {
+    variables: { projectId },
     fetchPolicy: 'cache-and-network',
   });
+
+  useEffect(() => {
+    if (projectId) {
+      getPages();
+    }
+  }, [projectId]);
 
   const pages =
     resultPages.data && resultPages.data.pages ? resultPages.data.pages : [];

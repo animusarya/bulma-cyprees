@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useStoreActions } from 'easy-peasy';
-import { useQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 const projectQuery = gql`
@@ -43,8 +43,8 @@ const useProjectDetails = projectId => {
   );
 
   // fetch project data from api
-  const resultProject = useQuery(projectQuery, {
-    variables: { id: projectId || 0 },
+  const [getProject, resultProject] = useLazyQuery(projectQuery, {
+    variables: { id: projectId },
     fetchPolicy: 'cache-and-network',
   });
 
@@ -52,6 +52,12 @@ const useProjectDetails = projectId => {
     resultProject.data && resultProject.data.project
       ? resultProject.data.project
       : {};
+
+  useEffect(() => {
+    if (projectId) {
+      getProject();
+    }
+  }, [projectId]);
 
   useEffect(() => {
     updateProject(projectId);

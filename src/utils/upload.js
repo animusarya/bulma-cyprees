@@ -1,6 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 
+import sentry from './sentry';
+
 export const uploadFile = (signedRequest, file, options) =>
   new Promise((resolve, reject) => {
     axios
@@ -13,5 +15,6 @@ export const uploadFile = (signedRequest, file, options) =>
       })
       .catch(err => {
         reject(err);
+        sentry.captureException(`AWS upload error: ${err.message}`);
       });
   });
