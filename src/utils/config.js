@@ -5,6 +5,7 @@ export default {
   graphQlUriDev: 'https://api.intellishare.online/api',
   // graphQlUriDev: 'http://localhost:4000/api',
   projectKey: 'intellishare',
-  stripePublishableKey: 'pk_test_mjhAjr7ARWNkUU2Yj6IQrjxb',
+  // stripePublishableKey: 'pk_test_mjhAjr7ARWNkUU2Yj6IQrjxb',
+  stripePublishableKey: 'pk_live_kktxV73Rli3NiH4UBOmtQTzy',
   currency: '£',
 };
