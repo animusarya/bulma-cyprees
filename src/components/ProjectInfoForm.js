@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
+import Cleave from 'cleave.js/react';
 
 import { InputGroup, Button } from './elements';
 
@@ -32,18 +33,23 @@ const ProjectInfoForm = props => {
         errors={errors.name && touched.name ? errors.name : undefined}
       />
       <InputGroup
-        isWidth
         fullWidth
+        isWidth
         border
         isHorizontal
         label="Project URL Slug"
-        placeholder="intellishare.online/colliers"
-        name="slug"
-        value={values.slug}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={errors.slug && touched.slug ? errors.slug : undefined}
-      />
+        errors={errors.slug && touched.slug ? errors.slug : undefined}>
+        <Cleave
+          placeholder="colliers"
+          name="slug"
+          id="slug"
+          value={values.slug}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          options={{ prefix: 'intellishare.online/' }}
+          className="input is-shadowless"
+        />
+      </InputGroup>
       <InputGroup
         isWidth
         fullWidth

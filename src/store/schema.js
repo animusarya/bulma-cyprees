@@ -4,7 +4,7 @@ import { action, selector } from 'easy-peasy';
 
 const schema = {
   origin: {
-    value: 'https://www.intellishare.com',
+    value: 'https://app.intellishare.online',
     project: {},
     update: action((state, payload) => {
       state.value = payload;

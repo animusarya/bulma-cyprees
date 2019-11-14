@@ -35,7 +35,7 @@ const AdminUsers = ({ result, executeQuery }) => {
 
   return (
     <div>
-      <Title marginTop="4rem">Admin Users</Title>
+      <Title marginTop="4rem">Users</Title>
       {resRemove.error && (
         <Message type="error">{resRemove.error.message}</Message>
       )}

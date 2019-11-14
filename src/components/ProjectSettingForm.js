@@ -47,7 +47,7 @@ const ProjectSetting = props => {
           value={values.slug}
           onChange={handleChange}
           onBlur={handleBlur}
-          options={{ prefix: 'intellishare.com/' }}
+          options={{ prefix: 'intellishare.online/' }}
           className="input is-shadowless"
         />
       </InputGroup>
