@@ -4,7 +4,7 @@ export const elements = { mobileBreakpoint: 800, ipadBreakpoint: 1024 };
 
 const theme = {
   primaryColor: '#b2d13d',
-  secondaryColor: '#1c2f3e',
+  secondaryColor: '#25313f',
   fontDark: '#231f20',
   borderColor: '#d4d6d5',
 };
@@ -24,5 +24,10 @@ export const GlobalStyle = createGlobalStyle`
       background-color: #ecedf0;
     }
   }
-  
+  .button.is-info {
+    background-color: ${theme.secondaryColor};
+    :hover {
+      background-color: #11161d;
+    }
+  }
 `;

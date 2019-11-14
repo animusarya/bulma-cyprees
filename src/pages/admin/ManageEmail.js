@@ -21,7 +21,7 @@ const ManageEmail = ({ match }) => {
 
   return (
     <Layout noContainer>
-      <Seo title="Manage Email" description="Manage Email Content" />
+      <Seo title="Manage Emails" description="Manage Email Content" />
       <Header />
       <div className="columns">
         <div className="column is-one-fifth">
@@ -30,7 +30,7 @@ const ManageEmail = ({ match }) => {
         <div className="column">
           <AdminHeader />
           <MainColumn paddingtop="1rem">
-            <Heading>Manage Outgoing Email Content</Heading>
+            <Heading>Manage Emails</Heading>
             <Title>Client Welcome Email (For Unregistered clients)</Title>
             <div>
               <ClientWelcomeEmailForm

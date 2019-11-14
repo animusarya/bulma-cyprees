@@ -41,7 +41,7 @@ const ProjectSetting = ({ match, history }) => {
         <div className="column">
           <AdminHeader />
           <MainColumn paddingtop="1rem">
-            <Heading>Project Setting</Heading>
+            <Heading>Project Settings</Heading>
             <div>
               <ProjectSettingForm
                 enableReinitialize

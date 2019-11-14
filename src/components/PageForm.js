@@ -77,10 +77,11 @@ export default withFormik({
     type: yup.string().required('Type is required!'),
   }),
 
-  handleSubmit: (values, { setSubmitting, props }) => {
+  handleSubmit: (values, { setSubmitting, resetForm, props }) => {
     // console.log('handle submit', values, props);
     props.onSubmit(values).finally(() => {
       setSubmitting(false);
+      resetForm();
     });
   },
   displayName: 'PageForm', // helps with React DevTools

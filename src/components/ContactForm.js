@@ -102,10 +102,12 @@ export default withFormik({
       .required('Email is required!'),
     message: yup.string().required('Message is required!'),
   }),
-  handleSubmit: (values, { setSubmitting, props }) => {
+  handleSubmit: (values, { setSubmitting, resetForm, props }) => {
     // console.log('handle submit', values, props);
     props.addContact(values);
     setSubmitting(false);
+
+    resetForm();
   },
   displayName: 'ContactUs', // helps with React DevTools
 })(ContactForm);

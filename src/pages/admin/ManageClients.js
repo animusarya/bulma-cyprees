@@ -77,21 +77,6 @@ const Container = styled.div`
   .import-button {
     margin: 26px;
   }
-  button {
-    color: ${props => props.theme.primaryColor};
-    border-color: ${props => props.theme.primaryColor};
-    :hover {
-      color: ${props => props.theme.primaryColor};
-      border-color: ${props => props.theme.primaryColor};
-    }
-  }
-  input {
-    border-color: ${props => props.theme.primaryColor};
-    border-radius: 0px;
-    :hover {
-      border-color: ${props => props.theme.primaryColor};
-    }
-  }
   .kzCdMG {
     margin-bottom: 3%;
   }
@@ -124,7 +109,7 @@ const ManageClients = ({ match }) => {
         <div className="column">
           <AdminHeader />
           <MainColumn>
-            <Heading>Project Clients</Heading>
+            <Heading>Manage Clients</Heading>
             <Subtitle className="subtitle">Add Client</Subtitle>
             <div>
               <ManageAdminClientForm

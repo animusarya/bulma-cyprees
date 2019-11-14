@@ -42,8 +42,6 @@ const ManageAdminClientForm = props => {
 
 ManageAdminClientForm.propTypes = {
   values: PropTypes.object.isRequired,
-  touched: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleBlur: PropTypes.func.isRequired,
@@ -60,10 +58,11 @@ export default withFormik({
       .email('Invalid email address')
       .required('Email is required!'),
   }),
-  handleSubmit: (values, { setSubmitting, props }) => {
+  handleSubmit: (values, { setSubmitting, resetForm, props }) => {
     // console.log('handle submit', values, props);
     props.onSubmit(values).finally(() => {
       setSubmitting(false);
+      resetForm();
     });
   },
   displayName: 'ManageAdminClientForm', // helps with React DevTools
