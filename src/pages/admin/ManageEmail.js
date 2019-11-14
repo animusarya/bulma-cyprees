@@ -1,4 +1,5 @@
 import React from 'react';
+import swal from 'sweetalert';
 
 import useProjectDetails from '../../hooks/useProjectDetails';
 import useProjectUpdate from '../../hooks/useProjectUpdate';
@@ -44,6 +45,7 @@ const ManageEmail = ({ match }) => {
                       },
                     },
                   });
+                  swal('Email data updated');
                 }}
               />
             </div>
@@ -61,6 +63,7 @@ const ManageEmail = ({ match }) => {
                       },
                     },
                   });
+                  swal('Email data updated');
                 }}
               />
               {res.error && <Message type="error">{res.error.message}</Message>}
