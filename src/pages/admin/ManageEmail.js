@@ -13,6 +13,7 @@ import CopyRight from '../../components/CopyRight';
 import ClientWelcomeEmailForm from '../../components/ClientWelcomeEmailForm';
 import ClientNotificationEmailForm from '../../components/ClientNotificationEmailForm';
 import AdminHeader from '../../components/AdminHeader';
+import AdminSubHeader from '../../components/AdminSubHeader';
 
 const ManageEmail = ({ match }) => {
   const projectId = match.params.id;
@@ -29,6 +30,7 @@ const ManageEmail = ({ match }) => {
         </div>
         <div className="column">
           <AdminHeader />
+          <AdminSubHeader />
           <MainColumn paddingtop="1rem">
             <Heading>Manage Emails</Heading>
             <Title>Client Welcome Email (For Unregistered clients)</Title>

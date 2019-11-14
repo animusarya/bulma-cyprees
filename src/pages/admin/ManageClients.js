@@ -14,6 +14,7 @@ import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
+import AdminSubHeader from '../../components/AdminSubHeader';
 import ManageAdminClientForm from '../../components/ManageAdminClientForm';
 import {
   Heading,
@@ -108,6 +109,7 @@ const ManageClients = ({ match }) => {
         </div>
         <div className="column">
           <AdminHeader />
+          <AdminSubHeader />
           <MainColumn>
             <Heading>Manage Clients</Heading>
             <Subtitle className="subtitle">Add Client</Subtitle>

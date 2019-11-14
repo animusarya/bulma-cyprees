@@ -1,19 +1,28 @@
 import React from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import { withRouter } from 'react-router';
+import swal from 'sweetalert';
 
 import PageForm from './PageForm';
 
 const createPageMutation = gql`
   mutation createPage($input: PageInput!) {
     createPage(input: $input) {
+      id
       name
       slug
     }
   }
 `;
 
-const AddPageModal = ({ project, isActive, handleChange, refetch }) => {
+const AddPageModal = ({
+  project,
+  isActive,
+  handleChange,
+  refetch,
+  history,
+}) => {
   const [executeMutation] = useMutation(createPageMutation);
 
   return (
@@ -31,13 +40,19 @@ const AddPageModal = ({ project, isActive, handleChange, refetch }) => {
         <section className="modal-card-body">
           <PageForm
             onSubmit={async data => {
-              await executeMutation({
+              const pageData = await executeMutation({
                 variables: { input: { project: project.id, ...data } },
               });
               // refresh data on dashboard
               refetch();
               // close the modal box
               handleChange(false);
+              // redirect to new created page
+              swal('Page added successfully').then(() => {
+                history.push(
+                  `/admin/project/${project.id}/pages/${pageData.data.createPage.id}`,
+                );
+              });
             }}
           />
         </section>
@@ -46,4 +61,4 @@ const AddPageModal = ({ project, isActive, handleChange, refetch }) => {
   );
 };
 
-export default AddPageModal;
+export default withRouter(AddPageModal);

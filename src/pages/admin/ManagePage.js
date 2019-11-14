@@ -10,6 +10,7 @@ import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
+import AdminSubHeader from '../../components/AdminSubHeader';
 import PageFiles from '../../components/PageFiles';
 import PageContent from '../../components/PageContent';
 import { Message, Loading, Heading } from '../../components/elements';
@@ -48,6 +49,7 @@ const ManagePage = ({ match }) => {
         </div>
         <div className="column">
           <AdminHeader />
+          <AdminSubHeader />
           <MainColumn>
             <Heading>{page.name}</Heading>
             {resultProject.error && (

@@ -13,6 +13,7 @@ import CopyRight from '../../components/CopyRight';
 import MainColumn from '../../components/MainColumn';
 import { Heading, Message, Loading, Button } from '../../components/elements';
 import AdminHeader from '../../components/AdminHeader';
+import AdminSubHeader from '../../components/AdminSubHeader';
 import ProjectSettingForm from '../../components/ProjectSettingForm';
 import Subscription from '../../components/Subscription';
 
@@ -40,6 +41,7 @@ const ProjectSetting = ({ match, history }) => {
         </div>
         <div className="column">
           <AdminHeader />
+          <AdminSubHeader />
           <MainColumn paddingtop="1rem">
             <Heading>Project Settings</Heading>
             <div>
