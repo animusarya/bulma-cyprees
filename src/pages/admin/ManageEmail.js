@@ -19,7 +19,7 @@ const ManageEmail = ({ match }) => {
   const [executeMutation, res] = useProjectUpdate();
 
   return (
-    <Layout>
+    <Layout noContainer>
       <Seo title="Manage Email" description="Manage Email Content" />
       <Header />
       <div className="columns">

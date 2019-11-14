@@ -2,9 +2,17 @@ import React, { useEffect } from 'react';
 import Helmet from 'react-helmet';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { isEmpty } from 'lodash';
+import styled from 'styled-components';
 
 import config from '../utils/config';
 import useProjectGuestDetails from '../hooks/useProjectGuestDetails';
+
+const Container = styled.div`
+  && {
+    margin-left: 0;
+    margin-right: 0;
+  }
+`;
 
 const Layout = ({ children, noContainer }) => {
   const updateOrigin = useStoreActions(actions => actions.origin.update);
@@ -25,10 +33,10 @@ const Layout = ({ children, noContainer }) => {
   }, [project]);
 
   return (
-    <div className={noContainer ? '' : 'container'}>
+    <Container className={noContainer ? 'container is-fluid' : 'container'}>
       <Helmet title={config.siteName} />
       {children}
-    </div>
+    </Container>
   );
 };
 

@@ -31,7 +31,7 @@ const ProjectSetting = ({ match, history }) => {
   const [executeMutationRemove, resRemove] = useMutation(removeProjectMutation);
 
   return (
-    <Layout>
+    <Layout noContainer>
       <Seo title="Project Settings" description="Update Existing Projects" />
       <Header />
       <div className="columns">

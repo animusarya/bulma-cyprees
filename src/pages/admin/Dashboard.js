@@ -57,7 +57,7 @@ const Dashboard = () => {
   const projects = (resultProjects.data && resultProjects.data.projects) || [];
 
   return (
-    <Layout>
+    <Layout noContainer>
       <Seo title="Dashboard Admin" description="List of Projects Here" />
       <Header />
       <Container className="columns">

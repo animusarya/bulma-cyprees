@@ -46,7 +46,7 @@ const Settings = () => {
   // console.log('res', me);
 
   return (
-    <Layout>
+    <Layout noContainer>
       <Seo title="Settings" description="Update User info" />
       <Header />
       <div className="columns">

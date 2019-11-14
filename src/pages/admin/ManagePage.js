@@ -39,7 +39,7 @@ const ManagePage = ({ match }) => {
     resultPage.data && resultPage.data.page ? resultPage.data.page : {};
 
   return (
-    <Layout>
+    <Layout noContainer>
       <Seo title="Manage Page" description="Manage Page Type Content Here" />
       <Header />
       <div className="columns">

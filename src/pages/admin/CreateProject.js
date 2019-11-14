@@ -72,7 +72,7 @@ const CreateProject = () => {
   }, []);
 
   return (
-    <Layout>
+    <Layout noContainer>
       <Seo title="Create Project" description="Create New Project" />
       <Header />
       <div className="columns">

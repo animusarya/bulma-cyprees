@@ -25,7 +25,7 @@ const Help = () => {
   const support = supportData.data ? supportData.data.support : [];
 
   return (
-    <Layout>
+    <Layout noContainer>
       <Seo title="Help" description="Manage Help Content" />
       <Header />
       <div className="columns">

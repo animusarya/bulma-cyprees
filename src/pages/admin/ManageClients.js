@@ -114,7 +114,7 @@ const ManageClients = ({ match }) => {
   );
 
   return (
-    <Layout>
+    <Layout noContainer>
       <Seo title="Manage Clients" description="Invite Your Clients" />
       <Header />
       <Container className="columns">
@@ -274,4 +274,5 @@ const ManageClients = ({ match }) => {
     </Layout>
   );
 };
+
 export default ManageClients;

@@ -36,7 +36,7 @@ const ProjectDashboard = ({ match }) => {
   const [{ dataRoomPages }, resultPages] = useProjectPages(projectId);
 
   return (
-    <Layout>
+    <Layout noContainer>
       <Seo title="Project Dashboard" />
       <Header />
       <Container className="columns">
