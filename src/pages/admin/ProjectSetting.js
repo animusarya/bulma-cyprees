@@ -46,10 +46,11 @@ const ProjectSetting = ({ match, history }) => {
               <ProjectSettingForm
                 enableReinitialize
                 initialValues={project}
-                onSubmit={data => {
-                  executeMutation({
+                onSubmit={async data => {
+                  await executeMutation({
                     variables: { id: project.id, input: data },
                   });
+                  swal('Project info updated');
                 }}
               />
             </div>
