@@ -21,6 +21,7 @@ const RegisterForm = props => {
     handleBlur,
     handleSubmit,
     project,
+    isAdminRegister,
   } = props;
 
   return (
@@ -47,6 +48,7 @@ const RegisterForm = props => {
         onChange={handleChange}
         onBlur={handleBlur}
         errors={errors.email && touched.email ? errors.email : undefined}
+        readOnly={!isAdminRegister}
       />
       <InputGroup
         border
@@ -77,10 +79,12 @@ const RegisterForm = props => {
         }
       />
       {project.nda && <NDAScroller data={project.nda} />}
-      <label className="checkbox">
-        <input type="checkbox" />{' '}
-        <strong>I Accept the above Non Disclosure Agreement</strong>
-      </label>
+      {isAdminRegister && (
+        <label className="checkbox">
+          <input type="checkbox" />{' '}
+          <strong>I Accept the above Non Disclosure Agreement</strong>
+        </label>
+      )}
       <div className="field">
         <div className="control">
           <Button

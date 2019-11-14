@@ -11,6 +11,7 @@ import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
 import RegisterForm from '../components/RegisterForm';
 import background from '../assets/images/intelliback.jpg';
+import logo from '../assets/images/logo.png';
 
 const registerMutation = gql`
   mutation register($email: String!, $password: String!, $projectId: String) {
@@ -61,7 +62,7 @@ const FormContainer = styled.div`
 `;
 
 const Logo = styled.img`
-  width: 117px;
+  max-width: 140px;
   height: auto;
   margin-bottom: 2rem;
 `;
@@ -77,6 +78,7 @@ const Register = ({ match }) => {
   );
   const activeProject = useStoreState(state => state.origin.project);
   const { projectId, email } = match.params;
+  const isAdminRegister = !projectId;
 
   // fetch project data from api
   const [project] = useProjectGuestDetails({ projectId });
@@ -94,7 +96,7 @@ const Register = ({ match }) => {
     updateUser(user);
     setTimeout(() => {
       window.location.replace(
-        projectId ? '/client/dashboard' : '/admin/dashboard',
+        isAdminRegister ? '/admin/dashboard' : '/client/dashboard',
       );
     }, 1000);
   }
@@ -103,7 +105,7 @@ const Register = ({ match }) => {
     <Layout noContainer>
       <Container>
         <div className="register-page">
-          <Seo title="Registeration" description="Register Yourself Here" />
+          <Seo title="Registration" description="Register Yourself Here" />
           <section className="hero is-fullheight">
             <div className="hero-body">
               <div className="container">
@@ -114,18 +116,20 @@ const Register = ({ match }) => {
                       role="navigation"
                       aria-label="main navigation">
                       <div className="navbar-brand">
-                        {activeProject.logo && (
+                        {activeProject.logo ? (
                           <Logo
                             src={activeProject.logo}
                             alt={activeProject.name}
                           />
+                        ) : (
+                          <Logo src={logo} alt="Intellishare" />
                         )}
                       </div>
                       <div id="navbarBasicExample" className="navbar-menu">
                         <div className="navbar-end">
                           <div className="navbar-item has-text-black-bis has-text-right">
                             <h2 className="has-text-weight-bold is-size-5">
-                              Registeration
+                              Registration
                             </h2>
                             {activeProject.name && (
                               <h1 className="has-text-weight-bold">
@@ -149,6 +153,7 @@ const Register = ({ match }) => {
                       });
                     }}
                     project={activeProject}
+                    isAdminRegister={isAdminRegister}
                   />
                   {res.error && (
                     <Message type="error">{res.error.message}</Message>
