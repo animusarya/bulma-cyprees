@@ -37,7 +37,8 @@ const Container = styled.div`
 `;
 const Logo = styled.img`
   width: auto;
-  height: 2.5rem;
+  height: 70px;
+  max-height: initial !important;
 `;
 
 const AdminHeader = () => {

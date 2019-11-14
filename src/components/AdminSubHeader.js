@@ -108,11 +108,6 @@ const AdminSubHeader = () => {
         </div>
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
-            <a
-              className="navbar-item has-text-white"
-              onClick={() => setAddPageModal(true)}>
-              + Add Page
-            </a>
             {pages &&
               pages.map(page => (
                 <Link
@@ -122,6 +117,11 @@ const AdminSubHeader = () => {
                   {startCase(page.name)}
                 </Link>
               ))}
+            <a
+              className="navbar-item has-text-white"
+              onClick={() => setAddPageModal(true)}>
+              + Add Page
+            </a>
           </div>
         </div>
       </NavbarMenu>

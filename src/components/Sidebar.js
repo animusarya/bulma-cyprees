@@ -15,6 +15,13 @@ const Container = styled.aside`
       padding: 0.8em 1em;
     }
   }
+  .sub-items {
+    a {
+      :hover {
+        background-color: #e1e1e4;
+      }
+    }
+  }
 `;
 
 const Icon = styled.i`
@@ -58,7 +65,7 @@ const Sidebar = () => {
             </Link>
           </li>
           {!isNull(activeProject) ? (
-            <React.Fragment>
+            <div className="sub-items">
               <Link to={`/admin/project/${activeProject}`}>
                 <Icon className="fas fa-th-large"></Icon>Dashboard
               </Link>
@@ -74,7 +81,7 @@ const Sidebar = () => {
               <Link to="/admin/help">
                 <Icon className="far fa-question-circle"></Icon>Help
               </Link>
-            </React.Fragment>
+            </div>
           ) : null}
         </ul>
       )}

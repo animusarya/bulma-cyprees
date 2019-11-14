@@ -14,7 +14,7 @@ export default theme;
 export const GlobalStyle = createGlobalStyle`
   body {
     height: 100vh;
-    color: ${theme.fontDark};
+    color: ${theme.fontDark} !important;
   }
   #root {
     height: 100vh;
