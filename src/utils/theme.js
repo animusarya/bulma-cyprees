@@ -15,6 +15,7 @@ export const GlobalStyle = createGlobalStyle`
   body {
     height: 100vh;
     color: ${theme.fontDark} !important;
+    font-family: 'Poppins', sans-serif !important;
   }
   #root {
     height: 100vh;
