@@ -8,7 +8,7 @@ const Progress = styled.div`
   .active {
     font-weight: bold;
     .progress {
-      background-color: #000 !important;
+      background-color: #bccf02 !important;
       width: 100%;
     }
   }

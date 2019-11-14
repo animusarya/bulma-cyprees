@@ -20,7 +20,9 @@ const PaymentConfirmation = ({ project }) => (
         <p className="subtitle is-size-6 has-text-weight-semibold">
           Your new Project has been setup.
         </p>
-        <Link to={`/admin/project/${project.id}`}>Go to your project</Link>
+        <Link className="button is-primary" to={`/admin/project/${project.id}`}>
+          Go to your project
+        </Link>
       </div>
     </div>
   </Container>

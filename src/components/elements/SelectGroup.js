@@ -34,6 +34,7 @@ const SelectGroup = ({
   isHorizontal,
   options,
   border,
+  placeholder,
   ...otherProps
 }) => (
   <Group
@@ -44,7 +45,7 @@ const SelectGroup = ({
     <div className="control">
       <Input className="select">
         <select {...otherProps}>
-          <option>Select...</option>
+          <option>{placeholder}...</option>
           {options.map(option => (
             <option key={option.value} value={option.value}>
               {option.title}

@@ -99,7 +99,7 @@ const ProjectSetupForm = props => {
             fullWidth
             isWidth
             border
-            placeholder="State"
+            placeholder="County"
             name="state"
             type="text"
             value={values.state}
@@ -347,8 +347,8 @@ export default withFormik({
     country: yup.string().required('Country is required!'),
     addressLine1: yup.string().required('Address is required!'),
     city: yup.string().required('City is required!'),
-    state: yup.string().required('State is required!'),
-    postcode: yup.number().required('Post Code is required!'),
+    state: yup.string().required('County is required!'),
+    postcode: yup.string().required('Post Code is required!'),
     paymentCardName: yup.string().required('Card Name is required!'),
     paymentCardNumber: yup.number().required('Card Number is required!'),
     paymentCardExpiryMonth: yup
