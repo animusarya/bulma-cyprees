@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
-import { Title, Message, Loading, Dropzone } from './elements';
-import DeletePageBtn from './DeletePageBtn';
+import { Message, Loading, Dropzone } from './elements';
 import FilesList from './FilesList';
 
 const filesQuery = gql`
@@ -66,14 +65,9 @@ const PageFiles = ({ project, page, isPublic }) => {
 
   return (
     <Container>
-      <div className="columns">
-        <div className="column">
-          <Title>{page.title}</Title>
-        </div>
-        <div className="column is-one-fifth">
-          <DeletePageBtn />
-        </div>
-      </div>
+      {page.type === 'content' && (
+        <h5 className="title is-5">Add images here for image slider</h5>
+      )}
       <Dropzone isPublic={isPublic} onUpload={handleFileUpload} />
       {resFileUpload.error && (
         <Message type="error">{resFileUpload.error.message}</Message>

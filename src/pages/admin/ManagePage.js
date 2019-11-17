@@ -14,6 +14,7 @@ import AdminSubHeader from '../../components/AdminSubHeader';
 import PageFiles from '../../components/PageFiles';
 import PageContent from '../../components/PageContent';
 import { Message, Loading, Heading } from '../../components/elements';
+import DeletePageBtn from '../../components/DeletePageBtn';
 
 const pageQuery = gql`
   query page($id: ID!) {
@@ -51,7 +52,15 @@ const ManagePage = ({ match }) => {
           <AdminHeader />
           <AdminSubHeader />
           <MainColumn>
-            <Heading>{page.name}</Heading>
+            <div className="columns">
+              <div className="column">
+                <Heading>{page.name}</Heading>
+              </div>
+              <div className="column">
+                <DeletePageBtn />
+              </div>
+            </div>
+
             {resultProject.error && (
               <Message type="error">{resultProject.error.message}</Message>
             )}

@@ -72,7 +72,6 @@ const AdminSubHeader = () => {
   const [project, resultProject] = useProjectDetails(projectId);
   const [executeUpdateProjectMutation, resUpdateProject] = useProjectUpdate();
   const [{ pages }, resultPages] = useProjectPages(projectId);
-  console.log('project', project);
 
   const handleBannerUpload = useCallback(
     uploadResponse => {

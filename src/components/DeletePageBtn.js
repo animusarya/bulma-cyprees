@@ -22,7 +22,7 @@ const DeletePageBtn = ({ history, match }) => {
   const { id, pageId } = match.params;
 
   return (
-    <React.Fragment>
+    <div className="is-pulled-right	">
       {resRemove.error && (
         <Message type="error">{resRemove.error.message}</Message>
       )}
@@ -45,7 +45,7 @@ const DeletePageBtn = ({ history, match }) => {
         }}>
         Delete Page
       </Button>
-    </React.Fragment>
+    </div>
   );
 };
 
