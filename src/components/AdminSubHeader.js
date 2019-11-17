@@ -10,6 +10,7 @@ import useProjectPages from '../hooks/useProjectPages';
 import { Button, Message } from './elements';
 import AddPageModal from './AddPageModal';
 import UploadImageModal from './UploadImageModal';
+import theme from '../utils/theme';
 import logoBg from '../assets/images/login-bg.jpg';
 
 const Container = styled.div`
@@ -36,10 +37,10 @@ const Container = styled.div`
 `;
 const NavbarMenu = styled.nav`
   padding: 0px 16% !important;
-  background-color: ${props => props.theme.primaryColor};
+  background-color: ${props => props.brandColor};
   .navbar-item {
     :hover {
-      background-color: ${props => props.theme.primaryColor};
+      background-color: ${props => props.brandColor};
     }
   }
 `;
@@ -54,7 +55,7 @@ const Hero = styled.section`
     align-self: center;
   }
   .title {
-    color: ${props => props.theme.primaryColor};
+    color: ${props => props.brandColor};
   }
   .edit-banner {
     background: white;
@@ -71,6 +72,7 @@ const AdminSubHeader = () => {
   const [project, resultProject] = useProjectDetails(projectId);
   const [executeUpdateProjectMutation, resUpdateProject] = useProjectUpdate();
   const [{ pages }, resultPages] = useProjectPages(projectId);
+  console.log('project', project);
 
   const handleBannerUpload = useCallback(
     uploadResponse => {
@@ -86,13 +88,17 @@ const AdminSubHeader = () => {
     },
     [projectId],
   );
+  const brandColor = project.brandColor
+    ? project.brandColor
+    : theme.primaryColor;
 
   return (
     <Container>
       <NavbarMenu
         className="navbar"
         role="navigation"
-        aria-label="main navigation">
+        aria-label="main navigation"
+        brandColor={brandColor}>
         <div className="navbar-brand">
           <Link
             to="/"
@@ -125,7 +131,7 @@ const AdminSubHeader = () => {
           </div>
         </div>
       </NavbarMenu>
-      <Hero className="hero">
+      <Hero className="hero" brandColor={brandColor}>
         <HeroImg src={project.heroImage || logoBg} alt="logo-bg" />
         <div className="hero-body has-text-centered">
           <Button

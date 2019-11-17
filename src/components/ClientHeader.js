@@ -5,6 +5,7 @@ import { startCase } from 'lodash';
 
 import useProjectPages from '../hooks/useProjectPages';
 import { Title } from './elements';
+import theme from '../utils/theme';
 import logoBg from '../assets/images/login-bg.jpg';
 import logo from '../assets/images/logo.png';
 
@@ -24,10 +25,10 @@ const Container = styled.div`
 
 const NavbarMenu = styled.nav`
   padding: 0px 16% !important;
-  background-color: ${props => props.theme.primaryColor};
+  background-color: ${props => props.brandColor};
   .navbar-item {
     :hover {
-      background-color: ${props => props.theme.primaryColor};
+      background-color: ${props => props.brandColor};
     }
   }
 `;
@@ -58,6 +59,9 @@ const Button = styled.button`
 
 const ClientHeader = ({ me, project }) => {
   const [{ pages }] = useProjectPages(project.id);
+  const brandColor = project.brandColor
+    ? project.brandColor
+    : theme.primaryColor;
 
   const handleLogout = () => {
     window.localStorage.clear();
@@ -100,7 +104,8 @@ const ClientHeader = ({ me, project }) => {
       <NavbarMenu
         className="navbar"
         role="navigation"
-        aria-label="main navigation">
+        aria-label="main navigation"
+        brandColor={brandColor}>
         <div className="navbar-brand">
           <Link
             to="/"

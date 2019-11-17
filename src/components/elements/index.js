@@ -11,6 +11,7 @@ import SelectGroup from './SelectGroup';
 import Dropzone from './Dropzone';
 import WysiwygEditor from './WysiwygEditor';
 import CreditCardInput from './CreditCardInput';
+import ColorPicker from './ColorPicker';
 
 export {
   InputGroup,
@@ -26,4 +27,5 @@ export {
   Dropzone,
   WysiwygEditor,
   CreditCardInput,
+  ColorPicker,
 };

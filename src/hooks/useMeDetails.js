@@ -18,6 +18,7 @@ const meQuery = gql`
         logo
         heroImage
         disclaimer
+        brandColor
       }
     }
   }

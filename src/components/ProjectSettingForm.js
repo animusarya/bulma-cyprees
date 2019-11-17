@@ -4,7 +4,7 @@ import { withFormik } from 'formik';
 import * as yup from 'yup';
 import Cleave from 'cleave.js/react';
 
-import { InputGroup, Button, TextAreaGroup } from './elements';
+import { InputGroup, Button, TextAreaGroup, ColorPicker } from './elements';
 
 const ProjectSetting = props => {
   const {
@@ -15,6 +15,7 @@ const ProjectSetting = props => {
     handleChange,
     handleBlur,
     handleSubmit,
+    setFieldValue,
   } = props;
 
   return (
@@ -98,6 +99,26 @@ const ProjectSetting = props => {
         onBlur={handleBlur}
         errors={errors.nda && touched.nda ? errors.nda : undefined}
       />
+      <InputGroup
+        fullWidth
+        isWidth
+        border
+        isHorizontal
+        label="Brand Color"
+        errors={
+          errors.brandColor && touched.brandColor
+            ? errors.brandColor
+            : undefined
+        }>
+        <ColorPicker
+          name="brandColor"
+          id="brandColor"
+          label="Brand Color"
+          color={values.brandColor}
+          onChange={val => setFieldValue('brandColor', val)}
+        />
+      </InputGroup>
+
       <div className="button-field is-pulled-right">
         <Button disabled={isSubmitting}>Update</Button>
       </div>
@@ -122,6 +143,7 @@ export default withFormik({
     customDomain: initialValues.customDomain || '',
     disclaimer: initialValues.disclaimer || '',
     nda: initialValues.nda || '',
+    brandColor: initialValues.brandColor || '',
   }),
   validationSchema: yup.object().shape({
     name: yup.string().required('Name is required!'),

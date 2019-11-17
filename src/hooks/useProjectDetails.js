@@ -17,6 +17,7 @@ const projectQuery = gql`
       subscriptionAmount
       disclaimer
       nda
+      brandColor
       welcomeEmailTemplate {
         subject
         body
