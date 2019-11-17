@@ -6,6 +6,7 @@ import { isNull } from 'lodash';
 
 const Container = styled.aside`
   background-color: #f4f4f6;
+  height: 100%;
   min-height: 100vh;
   margin-bottom: 0px !important;
   li {

@@ -49,10 +49,10 @@ const resendEmailMutation = gql`
   }
 `;
 
-const checkMutation = gql`
-  mutation check($email: String!) {
-    check(email: $email) {
-      success
+const updateProjectClientMutation = gql`
+  mutation updateProjectClient($id: ID!, $input: ProjectClientInput!) {
+    updateProjectClient(id: $id, input: $input) {
+      name
     }
   }
 `;
@@ -94,10 +94,13 @@ const ManageClients = ({ match }) => {
   const [executeMutationResendEmail, resResendEmail] = useMutation(
     resendEmailMutation,
   );
-  const [executeMutationCheck, resCheck] = useMutation(checkMutation);
+  const [executeUpdateProjectClient, resUpdateProjectClient] = useMutation(
+    updateProjectClientMutation,
+  );
   const [executeRemoveClientMutation, resTrash] = useMutation(
     removeClientMutation,
   );
+  console.log('project', project);
 
   return (
     <Layout noContainer>
@@ -130,8 +133,10 @@ const ManageClients = ({ match }) => {
               {resResendEmail.error && (
                 <Message type="error">{resResendEmail.error.message}</Message>
               )}
-              {resCheck.error && (
-                <Message type="error">{resCheck.error.message}</Message>
+              {resUpdateProjectClient.error && (
+                <Message type="error">
+                  {resUpdateProjectClient.error.message}
+                </Message>
               )}
               {resTrash.error && (
                 <Message type="error">{resTrash.error.message}</Message>
@@ -139,7 +144,7 @@ const ManageClients = ({ match }) => {
               {res.loading ||
               resCsv.loading ||
               resResendEmail.loading ||
-              resCheck.loading ||
+              resUpdateProjectClient.loading ||
               resTrash.loading ? (
                 <Loading />
               ) : null}
@@ -178,78 +183,92 @@ const ManageClients = ({ match }) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {project.clients.map(item => (
-                      <tr key={item.id}>
-                        <td>{item.email}</td>
-                        <td>{startCase(item.status)}</td>
-                        <td className="has-text-centered">
-                          <Button
-                            secondary
-                            paddingless
-                            onClick={() => {
-                              swal('You want to resend email?', {
-                                buttons: ['Cancel', 'Confirm'],
-                              }).then(async value => {
-                                if (value) {
-                                  await executeMutationResendEmail({
-                                    variables: {
-                                      projectId: project.id,
-                                      email: item.email,
-                                    },
-                                  });
-                                  resultProject.refetch();
-                                }
-                              });
-                            }}>
-                            Resend Register Email
-                          </Button>
-                        </td>
-                        <td className="has-text-centered">
-                          <Button
-                            secondary
-                            paddingless
-                            onClick={() => {
-                              swal('Are you sure to change client access?', {
-                                buttons: ['Cancel', 'Confirm'],
-                              }).then(async value => {
-                                if (value) {
-                                  await executeMutationCheck({
-                                    variables: { id: item.id },
-                                  });
-                                  resultProject.refetch();
-                                }
-                              });
-                            }}>
-                            <i className="far fa-check-square"></i>
-                          </Button>
-                        </td>
-                        <td className="has-text-centered">
-                          {item.notifyStatus}
-                        </td>
-                        <td className="has-text-centered">
-                          <Button
-                            secondary
-                            paddingless
-                            onClick={() => {
-                              swal('Are you confirm to remove this client?', {
-                                buttons: ['Cancel', 'Confirm'],
-                              }).then(async value => {
-                                if (value) {
-                                  await executeRemoveClientMutation({
-                                    variables: {
-                                      id: project.id,
-                                      clientId: item.id,
-                                    },
-                                  });
-                                  resultProject.refetch();
-                                }
-                              });
-                            }}>
-                            <i className="far fa-trash-alt"></i>
-                          </Button>
-                        </td>
-                      </tr>
-                    ))}
+                    {project.clients.map(item => {
+                      const clientAccessClass = item.hasAccess
+                        ? 'far fa-check-square'
+                        : 'far fa-square';
+
+                      return (
+                        <tr key={item.id}>
+                          <td>{item.email}</td>
+                          <td>{startCase(item.status)}</td>
+                          <td className="has-text-centered">
+                            <Button
+                              secondary
+                              paddingless
+                              onClick={() => {
+                                swal('You want to resend email?', {
+                                  buttons: ['Cancel', 'Confirm'],
+                                }).then(async value => {
+                                  if (value) {
+                                    await executeMutationResendEmail({
+                                      variables: {
+                                        projectId: project.id,
+                                        email: item.email,
+                                      },
+                                    });
+                                    resultProject.refetch();
+                                  }
+                                });
+                              }}>
+                              Resend Register Email
+                            </Button>
+                          </td>
+                          <td className="has-text-centered">
+                            <Button
+                              secondary
+                              paddingless
+                              onClick={() => {
+                                swal('Are you sure to change client access?', {
+                                  buttons: ['Cancel', 'Confirm'],
+                                }).then(async value => {
+                                  if (value) {
+                                    await executeUpdateProjectClient({
+                                      variables: {
+                                        id: project.id,
+                                        input: {
+                                          email: item.email,
+                                          hasAccess: !item.hasAccess,
+                                        },
+                                      },
+                                    });
+                                    resultProject.refetch();
+                                  }
+                                });
+                              }}>
+                              <div key={clientAccessClass}>
+                                <i className={clientAccessClass}></i>
+                              </div>
+                            </Button>
+                          </td>
+                          <td className="has-text-centered">
+                            {item.notifyStatus}
+                          </td>
+                          <td className="has-text-centered">
+                            <Button
+                              secondary
+                              paddingless
+                              onClick={() => {
+                                swal('Are you confirm to remove this client?', {
+                                  buttons: ['Cancel', 'Confirm'],
+                                }).then(async value => {
+                                  if (value) {
+                                    await executeRemoveClientMutation({
+                                      variables: {
+                                        id: project.id,
+                                        clientId: item.id,
+                                      },
+                                    });
+                                    resultProject.refetch();
+                                  }
+                                });
+                              }}>
+                              <i className="far fa-trash-alt"></i>
+                            </Button>
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </React.Fragment>
