@@ -39,6 +39,7 @@ import ManageClients from './pages/admin/ManageClients';
 import ManagePage from './pages/admin/ManagePage';
 import Help from './pages/admin/Help';
 import ProjectSetting from './pages/admin/ProjectSetting';
+import ProjectSubscription from './pages/admin/ProjectSubscription';
 import Settings from './pages/admin/Settings';
 
 import DashboardClient from './pages/client/Dashboard';
@@ -183,6 +184,12 @@ const App = () => {
                       exact
                       path="/admin/project/:id/settings"
                       component={ProjectSetting}
+                      access="admin"
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/admin/project/:id/subscription"
+                      component={ProjectSubscription}
                       access="admin"
                     />
                     <PrivateRoute

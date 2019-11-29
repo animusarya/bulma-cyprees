@@ -95,7 +95,7 @@ const Subscription = ({ project, history }) => {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <Heading>Renew Subscription</Heading>
+          <Heading>Renew subscription for {project.name}</Heading>
           <SelectGroup
             fullWidth
             isWidth
