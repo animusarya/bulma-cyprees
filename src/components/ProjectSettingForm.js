@@ -69,36 +69,6 @@ const ProjectSetting = props => {
             : undefined
         }
       />
-      <TextAreaGroup
-        fullWidth
-        isWidth
-        border
-        isHorizontal
-        label="Disclaimer"
-        name="disclaimer"
-        className="textarea"
-        value={values.disclaimer}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={
-          errors.disclaimer && touched.disclaimer
-            ? errors.disclaimer
-            : undefined
-        }
-      />
-      <TextAreaGroup
-        fullWidth
-        isWidth
-        border
-        isHorizontal
-        label="Non-Disclosure Agreement"
-        name="nda"
-        className="textarea"
-        value={values.nda}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={errors.nda && touched.nda ? errors.nda : undefined}
-      />
       <InputGroup
         fullWidth
         isWidth
@@ -118,8 +88,102 @@ const ProjectSetting = props => {
           onChange={val => setFieldValue('brandColor', val)}
         />
       </InputGroup>
+      <TextAreaGroup
+        fullWidth
+        isWidth
+        border
+        isHorizontal
+        label="Non-Disclosure Agreement"
+        name="nda"
+        className="textarea"
+        value={values.nda}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={errors.nda && touched.nda ? errors.nda : undefined}
+      />
 
-      <div className="button-field is-pulled-right">
+      <div>
+        <label className="label">Footer content information</label>
+        <small>
+          This information will show in the client view above in the footer
+          disclaimer
+        </small>
+        <div className="columns" style={{ marginTop: '1rem' }}>
+          <div className="column">
+            <InputGroup
+              fullWidth
+              isWidth
+              border
+              label="Contact Name"
+              name="contactName"
+              value={values.contactName}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              errors={
+                errors.contactName && touched.contactName
+                  ? errors.contactName
+                  : undefined
+              }
+            />
+          </div>
+          <div className="column">
+            <InputGroup
+              fullWidth
+              isWidth
+              border
+              label="Contact Telephone"
+              name="contactTelephone"
+              value={values.contactTelephone}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              errors={
+                errors.contactTelephone && touched.contactTelephone
+                  ? errors.contactTelephone
+                  : undefined
+              }
+            />
+          </div>
+          <div className="column">
+            <InputGroup
+              fullWidth
+              isWidth
+              border
+              label="Contact Email"
+              name="contactEmail"
+              value={values.contactEmail}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              errors={
+                errors.contactEmail && touched.contactEmail
+                  ? errors.contactEmail
+                  : undefined
+              }
+            />
+          </div>
+        </div>
+
+        <TextAreaGroup
+          fullWidth
+          isWidth
+          border
+          isHorizontal
+          label="Footer Disclaimer"
+          name="disclaimer"
+          className="textarea"
+          value={values.disclaimer}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errors={
+            errors.disclaimer && touched.disclaimer
+              ? errors.disclaimer
+              : undefined
+          }
+        />
+      </div>
+
+      <div
+        className="button-field is-pulled-right"
+        style={{ marginTop: '2rem' }}>
         <Button disabled={isSubmitting}>Update</Button>
       </div>
     </form>
@@ -144,6 +208,9 @@ export default withFormik({
     disclaimer: initialValues.disclaimer || '',
     nda: initialValues.nda || '',
     brandColor: initialValues.brandColor || '',
+    contactName: initialValues.contactName || '',
+    contactTelephone: initialValues.contactTelephone || '',
+    contactEmail: initialValues.contactEmail || '',
   }),
   validationSchema: yup.object().shape({
     name: yup.string().required('Name is required!'),

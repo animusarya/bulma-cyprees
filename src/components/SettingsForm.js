@@ -56,10 +56,14 @@ const SettingsForm = props => {
         label="Company:"
         name="company"
         type="text"
-        value={values.company}
+        value={values.companyName}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={errors.company && touched.company ? errors.company : undefined}
+        errors={
+          errors.companyName && touched.companyName
+            ? errors.companyName
+            : undefined
+        }
       />
       <InputGroup
         fullWidth
@@ -99,7 +103,7 @@ export default withFormik({
   mapPropsToValues: ({ initialValues }) => ({
     email: initialValues.email || '',
     fullName: initialValues.profile ? initialValues.profile.fullName : '',
-    company: initialValues.profile ? initialValues.profile.company : '',
+    companyName: initialValues.profile ? initialValues.profile.companyName : '',
     telephone: initialValues.profile ? initialValues.profile.telephone : '',
   }),
   validationSchema: yup.object().shape({
@@ -108,7 +112,7 @@ export default withFormik({
       .email('Invalid email address')
       .required('Email is required!'),
     fullName: yup.string().required('Full Name is required!'),
-    company: yup.string().required('Company is required!'),
+    companyName: yup.string().required('Company is required!'),
     telephone: yup.string().required('Telephone is required!'),
   }),
 

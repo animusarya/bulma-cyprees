@@ -18,6 +18,9 @@ const projectQuery = gql`
       disclaimer
       nda
       brandColor
+      contactName
+      contactTelephone
+      contactEmail
       welcomeEmailTemplate {
         subject
         body
