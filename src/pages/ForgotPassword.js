@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import swal from 'sweetalert';
 
 import Seo from '../components/Seo';
 import Layout from '../components/Layout';
@@ -51,7 +52,10 @@ const ForgotPassword = () => {
           <FormContainer>
             <Logo src={logo} alt="logo banner" />
             <ForgotPasswordForm
-              onSubmit={data => executeMutation({ variables: data })}
+              onSubmit={async data => {
+                await executeMutation({ variables: { input: data } });
+                swal('Email sent with instruction to reset password');
+              }}
             />
             {res.error && <Message type="error">{res.error.message}</Message>}
           </FormContainer>
