@@ -14,10 +14,8 @@ import background from '../assets/images/intelliback.jpg';
 import logo from '../assets/images/logo.png';
 
 const registerMutation = gql`
-  mutation register($email: String!, $password: String!, $projectId: String) {
-    register(
-      input: { email: $email, password: $password, projectId: $projectId }
-    ) {
+  mutation register($input: RegisterInput) {
+    register(input: $input) {
       jwt
       user {
         id
@@ -146,9 +144,14 @@ const Register = ({ match }) => {
                     onSubmit={data => {
                       return executeMutation({
                         variables: {
-                          email: data.email,
-                          password: data.password,
-                          projectId: projectId || undefined,
+                          input: {
+                            email: data.email,
+                            password: data.password,
+                            projectId: projectId || undefined,
+                            fullName: data.fullName,
+                            companyName: data.companyName,
+                            telephone: data.telephone,
+                          },
                         },
                       });
                     }}

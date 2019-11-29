@@ -53,7 +53,7 @@ const ProjectDashboard = ({ match }) => {
             {resultPages.loading && <Loading />}
             <div className="content">
               {dataRoomPages.length === 0 ? (
-                <ProjectDashboardHero />
+                <ProjectDashboardHero project={project} />
               ) : (
                 <ProjectPages
                   project={project}

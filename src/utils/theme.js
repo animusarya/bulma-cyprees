@@ -5,7 +5,7 @@ export const elements = { mobileBreakpoint: 800, ipadBreakpoint: 1024 };
 const theme = {
   primaryColor: '#b2d13d',
   secondaryColor: '#25313f',
-  fontDark: '#231f20',
+  fontDark: '#25313f',
   borderColor: '#d4d6d5',
 };
 
@@ -30,5 +30,8 @@ export const GlobalStyle = createGlobalStyle`
     :hover {
       background-color: #11161d;
     }
+  }
+  a {
+    color: #bccf02;
   }
 `;

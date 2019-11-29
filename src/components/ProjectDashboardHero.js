@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const ProjectDashboardHero = () => (
+const ProjectDashboardHero = ({ project }) => (
   <div className="hero-body">
     <div className="has-text-centered has-text-weight-medium">
-      <p className="title is-size-2 has-text-weight-normal">
+      <p className="title is-size-3 has-text-weight-normal">
         Welcome to <strong className="has-text-weight-bold">Intelli</strong>
         <span>Share</span>
       </p>
@@ -14,20 +15,28 @@ const ProjectDashboardHero = () => (
       </div>
       <div className="subtitle is-6">
         <p>
-          1. Insert your{' '}
-          <span className="has-text-weight-bold">Logo/Branding Colour</span>
+          1. Insert your <span className="has-text-weight-bold">logo</span>
         </p>
         <p>
-          2. Click the{' '}
-          <strong className="has-text-weight-bold">Add Page</strong>
+          2. Insert your branding colour under{' '}
+          <Link to={`/admin/project/${project.id}/settings`}>
+            <strong className="has-text-weight-bold">Project Settings</strong>
+          </Link>
         </p>
         <p>
-          3. Set your outgoing email messages under{' '}
-          <strong className="has-text-weight-bold">Manage Emails</strong>
+          3. Click <strong className="has-text-weight-bold">+Add Page</strong>
         </p>
         <p>
-          4. Add your Clients under{' '}
-          <strong className="has-text-weight-bold">Manage Clients</strong>
+          4. Create email message for your users under{' '}
+          <Link to={`/admin/project/${project.id}/clients`}>
+            <strong className="has-text-weight-bold">Manage Clients</strong>
+          </Link>
+        </p>
+        <p>
+          5. Invite your Clients under{' '}
+          <Link to={`/admin/project/${project.id}/clients`}>
+            <strong className="has-text-weight-bold">Manage Clients</strong>
+          </Link>
         </p>
       </div>
     </div>

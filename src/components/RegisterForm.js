@@ -39,6 +39,38 @@ const RegisterForm = props => {
           errors.fullName && touched.fullName ? errors.fullName : undefined
         }
       />
+      {isAdminRegister && (
+        <InputGroup
+          border
+          label="Company Name:"
+          name="companyName"
+          type="text"
+          placeholder="My Company"
+          value={values.companyName}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errors={
+            errors.companyName && touched.companyName
+              ? errors.companyName
+              : undefined
+          }
+        />
+      )}
+      {isAdminRegister && (
+        <InputGroup
+          border
+          label="Telephone:"
+          name="telephone"
+          type="text"
+          placeholder="+123123123"
+          value={values.telephone}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errors={
+            errors.telephone && touched.telephone ? errors.telephone : undefined
+          }
+        />
+      )}
       <InputGroup
         border
         label="Email:"
@@ -116,6 +148,8 @@ export default withFormik({
     email: initialValues.email,
     password: '',
     confirmPassword: '',
+    companyName: '',
+    telephone: '',
   }),
   validationSchema: yup.object().shape({
     fullName: yup.string().required('name is required!'),

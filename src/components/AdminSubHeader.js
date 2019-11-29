@@ -15,6 +15,7 @@ import logoBg from '../assets/images/login-bg.jpg';
 
 const Container = styled.div`
   margin-top: 1rem;
+  padding: 0 2rem;
   .column {
     display: flex;
     justify-content: space-between;

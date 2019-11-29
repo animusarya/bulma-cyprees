@@ -8,6 +8,7 @@ const Container = styled.aside`
   background-color: #f4f4f6;
   height: 100%;
   min-height: 100vh;
+  max-width: 320px;
   margin-bottom: 0px !important;
   li {
     background-color: #e2e4e6;

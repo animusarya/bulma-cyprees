@@ -12,6 +12,7 @@ import logo from '../assets/images/logo.png';
 
 const Container = styled.div`
   margin-top: 1rem;
+  padding: 0 2rem;
   .column {
     display: flex;
     justify-content: space-between;
@@ -37,7 +38,7 @@ const Container = styled.div`
 `;
 const Logo = styled.img`
   width: auto;
-  height: 70px;
+  height: 80px;
   max-height: initial !important;
 `;
 
@@ -65,7 +66,7 @@ const AdminHeader = () => {
   return (
     <Container>
       <div className="columns">
-        <div className="column is-8 is-offset-2">
+        <div className="column">
           <div className="logo-edit">
             <Link to="/admin/dashboard" className="navbar-item">
               <Logo src={project.logo || logo} alt="logo" />
@@ -75,7 +76,7 @@ const AdminHeader = () => {
               secondary
               className="edit"
               onClick={() => setIsActive(true)}>
-              change logo
+              Change Logo
             </Button>
           </div>
           <div>

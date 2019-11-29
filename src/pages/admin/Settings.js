@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import swal from 'sweetalert';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -60,9 +61,10 @@ const Settings = () => {
               <SettingsForm
                 enableReinitialize
                 initialValues={me}
-                onSubmit={data =>
-                  executeMutation({ variables: { input: data } })
-                }
+                onSubmit={async data => {
+                  await executeMutation({ variables: { input: data } });
+                  swal('Settings updated');
+                }}
               />
             </div>
             {res.error && <Message type="error">{res.error.message}</Message>}
