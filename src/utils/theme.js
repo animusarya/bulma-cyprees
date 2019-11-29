@@ -32,6 +32,13 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   a {
-    color: #bccf02;
+    color: ${theme.primaryColor};
+  }
+  .swal-button-container {
+    display: flex;
+    justify-content: center;
+  }
+  .swal-button {
+    background-color: ${theme.primaryColor};
   }
 `;

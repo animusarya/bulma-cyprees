@@ -53,7 +53,7 @@ const ClientNotificationEmailForm = props => {
       />
       <div className="button-field">
         <div className="">
-          <Button disabled={isSubmitting}>Update Template</Button>
+          <Button disabled={isSubmitting}>Update Message</Button>
         </div>
       </div>
     </Form>

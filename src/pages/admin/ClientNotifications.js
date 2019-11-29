@@ -5,19 +5,19 @@ import useProjectDetails from '../../hooks/useProjectDetails';
 import useProjectUpdate from '../../hooks/useProjectUpdate';
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
-import { Heading, Title } from '../../components/elements';
+import { Heading, Title, Message, Button } from '../../components/elements';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
-import ClientWelcomeEmailForm from '../../components/ClientWelcomeEmailForm';
+import ClientNotificationEmailForm from '../../components/ClientNotificationEmailForm';
 import AdminHeader from '../../components/AdminHeader';
 import AdminSubHeader from '../../components/AdminSubHeader';
 
-const ManageEmail = ({ match }) => {
+const ClientNotifications = ({ match }) => {
   const projectId = match.params.id;
   const [project] = useProjectDetails(projectId);
-  const [executeMutation] = useProjectUpdate();
+  const [executeMutation, res] = useProjectUpdate();
 
   return (
     <Layout noContainer>
@@ -31,10 +31,14 @@ const ManageEmail = ({ match }) => {
           <AdminHeader />
           <AdminSubHeader />
           <MainColumn paddingtop="1rem">
-            <Heading>Manage Emails</Heading>
-            <Title>Client Welcome Email (For Unregistered clients)</Title>
+            <Heading>Notifications</Heading>
             <div>
-              <ClientWelcomeEmailForm
+              <Title>Notify your clients for any recent activity</Title>
+              <Button>Notify All Clients</Button>
+            </div>
+            <div>
+              <Title>Notification Email Message</Title>
+              <ClientNotificationEmailForm
                 enableReinitialize
                 initialValues={project}
                 onSubmit={async data => {
@@ -42,13 +46,14 @@ const ManageEmail = ({ match }) => {
                     variables: {
                       id: project.id,
                       input: {
-                        welcomeEmailTemplate: data,
+                        clientEmailTemplate: data,
                       },
                     },
                   });
                   swal('Email data updated');
                 }}
               />
+              {res.error && <Message type="error">{res.error.message}</Message>}
             </div>
           </MainColumn>
         </div>
@@ -58,4 +63,4 @@ const ManageEmail = ({ match }) => {
   );
 };
 
-export default ManageEmail;
+export default ClientNotifications;

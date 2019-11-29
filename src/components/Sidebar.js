@@ -77,6 +77,9 @@ const Sidebar = () => {
               <Link to={`/admin/project/${activeProject}/clients`}>
                 <Icon className="fas fa-user-friends"></Icon>Manage Clients
               </Link>
+              <Link to={`/admin/project/${activeProject}/notifications`}>
+                <Icon className="fas fa-bell"></Icon> Notifications
+              </Link>
               <Link to={`/admin/project/${activeProject}/settings`}>
                 <Icon className="fas fa-cogs"></Icon>Project Settings
               </Link>
