@@ -18,7 +18,7 @@ const settingMutation = gql`
       email
       profile {
         fullName
-        company
+        companyName
         telephone
       }
     }

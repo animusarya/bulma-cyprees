@@ -8,7 +8,7 @@ const meQuery = gql`
       email
       profile {
         fullName
-        company
+        companyName
         telephone
       }
       clientProject {

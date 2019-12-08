@@ -92,7 +92,7 @@ const Dashboard = () => {
                           </LinkWrapper>
                         </td>
                         <td>{user.profile && user.profile.fullName}</td>
-                        <td>{user.profile && user.profile.company}</td>
+                        <td>{user.profile && user.profile.companyName}</td>
                         <td>{user.profile && user.profile.telephone}</td>
                         <td>{dayjs(user.createdAt).format('DD-MM-YYYY')}</td>
                       </tr>

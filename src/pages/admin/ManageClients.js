@@ -100,7 +100,7 @@ const ManageClients = ({ match }) => {
   const [executeRemoveClientMutation, resTrash] = useMutation(
     removeClientMutation,
   );
-  console.log('project', project);
+  // console.log('project', project);
 
   return (
     <Layout noContainer>

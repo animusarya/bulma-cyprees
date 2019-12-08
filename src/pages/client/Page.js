@@ -25,6 +25,7 @@ const pageQuery = gql`
 `;
 
 const Container = styled.div`
+  min-height: 50vh;
   thead {
     background: transparent;
   }
@@ -44,27 +45,26 @@ const Page = ({ match }) => {
   // console.log('page', page);
 
   return (
-    <Layout>
+    <Layout noContainer>
       <Seo title="Client Page" description="Page description" />
       <ClientHeader me={me} project={project} />
       <Container className="section">
-        <div className="container">
-          {resultPage.error && (
-            <Message type="error">{resultPage.error.message}</Message>
-          )}
-          {resultPage.loading && <Loading />}
-          {page.type === 'content' && (
-            <div>
-              <ImageGallery page={page} />
-              <section dangerouslySetInnerHTML={{ __html: page.content }} />
-            </div>
-          )}
-          {page.type === 'dataroom' && (
-            <div>
-              <PageRow page={page} />
-            </div>
-          )}
-        </div>
+        {resultPage.error && (
+          <Message type="error">{resultPage.error.message}</Message>
+        )}
+        {resultPage.loading && <Loading />}
+        <h2 className="title is-2">{page.name}</h2>
+        {page.type === 'content' && (
+          <div>
+            <ImageGallery page={page} />
+            <section dangerouslySetInnerHTML={{ __html: page.content }} />
+          </div>
+        )}
+        {page.type === 'dataroom' && (
+          <div>
+            <PageRow page={page} />
+          </div>
+        )}
       </Container>
       <ClientFooter project={project} />
     </Layout>

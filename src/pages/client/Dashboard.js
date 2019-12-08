@@ -14,6 +14,7 @@ import { Message, Loading } from '../../components/elements';
 import ClientFooter from '../../components/ClientFooter';
 
 const Container = styled.div`
+  min-height: 50vh;
   thead {
     background: transparent;
   }
@@ -36,7 +37,7 @@ const Dashboard = () => {
   }
 
   return (
-    <Layout>
+    <Layout noContainer>
       <Seo title="Client Dashboard" description="Page description" />
       <ClientHeader me={me} project={project} />
       {(resultMe.loading || resultPages.loading) && !project && <Loading />}
@@ -47,11 +48,9 @@ const Dashboard = () => {
         <Message type="error">{resultPages.error.message}</Message>
       )}
       <Container className="section">
-        <div className="container">
-          {dataRoomPages.map(page => (
-            <PageRow key={page.id} project={project} page={page} />
-          ))}
-        </div>
+        {dataRoomPages.map(page => (
+          <PageRow key={page.id} project={project} page={page} />
+        ))}
       </Container>
       <ClientFooter project={project} />
     </Layout>

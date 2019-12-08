@@ -59,33 +59,6 @@ const ProjectSetting = ({ match, history }) => {
             {res.error && <Message type="error">{res.error.message}</Message>}
             {res.loading ? <Loading /> : null}
           </MainColumn>
-          <MainColumn>
-            <Subscription project={project} />
-            <Button
-              onClick={() => {
-                swal('Are you confirm to delete this item?', {
-                  buttons: ['Cancel', 'Confirm'],
-                }).then(async value => {
-                  if (value) {
-                    const response = await executeMutationRemove({
-                      variables: {
-                        id: project.id,
-                        clientId: project.clientId,
-                      },
-                    });
-                    if (response.data.removeProject || !resRemove.loading) {
-                      history.push('/admin/project/create');
-                    }
-                  }
-                });
-              }}>
-              Remove Project
-            </Button>
-            {resRemove.error && (
-              <Message type="error">{resRemove.error.message}</Message>
-            )}
-            {resRemove.loading ? <Loading /> : null}
-          </MainColumn>
         </div>
       </div>
       <CopyRight />

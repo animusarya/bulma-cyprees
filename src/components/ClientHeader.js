@@ -23,8 +23,12 @@ const Container = styled.div`
   }
 `;
 
+const Top = styled.div`
+  padding: 1rem 4rem;
+`;
+
 const NavbarMenu = styled.nav`
-  padding: 0px 16% !important;
+  padding: 0 2rem !important;
   background-color: ${props => props.brandColor};
   .navbar-item {
     :hover {
@@ -34,7 +38,7 @@ const NavbarMenu = styled.nav`
 `;
 const Logo = styled.img`
   width: auto;
-  height: 70px;
+  max-height: 40px;
   margin-top: 10px;
 `;
 const HeroImg = styled.img`
@@ -72,7 +76,7 @@ const ClientHeader = ({ me, project }) => {
   return (
     <Container>
       <div className="columns">
-        <div className="column">
+        <Top className="column">
           <div>
             <Link to="/client/dashboard">
               {project ? (
@@ -99,7 +103,7 @@ const ClientHeader = ({ me, project }) => {
               </div>
             )}
           </div>
-        </div>
+        </Top>
       </div>
       <NavbarMenu
         className="navbar"
