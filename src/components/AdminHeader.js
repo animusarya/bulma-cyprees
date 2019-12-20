@@ -38,7 +38,7 @@ const Container = styled.div`
 `;
 const Logo = styled.img`
   width: auto;
-  height: 80px;
+  height: 50px;
   max-height: initial !important;
 `;
 
@@ -48,20 +48,17 @@ const AdminHeader = () => {
   const [project, resultProject] = useProjectDetails(projectId);
   const [executeUpdateProjectMutation, resUpdateProject] = useProjectUpdate();
 
-  const handleLogoUpload = useCallback(
-    uploadResponse => {
-      executeUpdateProjectMutation({
-        variables: {
-          id: projectId,
-          input: { logo: uploadResponse.url },
-        },
-      }).then(() => {
-        setIsActive(false);
-        resultProject.refetch();
-      });
-    },
-    [projectId],
-  );
+  const handleLogoUpload = uploadResponse => {
+    executeUpdateProjectMutation({
+      variables: {
+        id: projectId,
+        input: { logo: uploadResponse.url },
+      },
+    }).then(() => {
+      setIsActive(false);
+      resultProject.refetch();
+    });
+  };
 
   return (
     <Container>

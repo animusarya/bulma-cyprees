@@ -33,7 +33,9 @@ const ClientNotifications = ({ match }) => {
           <MainColumn paddingtop="1rem">
             <Heading>Notifications</Heading>
             <div>
-              <Title>Notify your clients for any recent activity</Title>
+              <Title>
+                Notify your clients by email for any recent activity
+              </Title>
               <Button>Notify All Clients</Button>
             </div>
             <div>

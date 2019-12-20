@@ -25,6 +25,12 @@ export const GlobalStyle = createGlobalStyle`
       background-color: #ecedf0;
     }
   }
+  .button.is-primary {
+    background-color: ${theme.primaryColor};
+    :hover {
+      background-color: #8fa735;
+    }
+  }
   .button.is-info {
     background-color: ${theme.secondaryColor};
     :hover {

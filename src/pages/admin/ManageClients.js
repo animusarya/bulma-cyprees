@@ -178,7 +178,6 @@ const ManageClients = ({ match }) => {
                       <th>Status</th>
                       <th className="has-text-centered">Resend</th>
                       <th className="has-text-centered">Access</th>
-                      <th className="has-text-centered">Notify Status</th>
                       <th className="has-text-centered">Delete</th>
                     </tr>
                   </thead>
@@ -240,9 +239,6 @@ const ManageClients = ({ match }) => {
                                 <i className={clientAccessClass}></i>
                               </div>
                             </Button>
-                          </td>
-                          <td className="has-text-centered">
-                            {item.notifyStatus}
                           </td>
                           <td className="has-text-centered">
                             <Button

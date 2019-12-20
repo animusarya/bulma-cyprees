@@ -21,7 +21,7 @@ const PaymentConfirmation = ({ project }) => (
           Your new Project has been setup.
         </p>
         <Link
-          className="button is-primary is-medium"
+          className="button is-primary is-large"
           to={`/admin/project/${project.id}`}>
           Go to your project
         </Link>

@@ -73,6 +73,7 @@ const AdminSubHeader = () => {
   const [project, resultProject] = useProjectDetails(projectId);
   const [executeUpdateProjectMutation, resUpdateProject] = useProjectUpdate();
   const [{ pages }, resultPages] = useProjectPages(projectId);
+  console.log('pages', pages);
 
   const handleBannerUpload = useCallback(
     uploadResponse => {
@@ -123,6 +124,8 @@ const AdminSubHeader = () => {
                   {startCase(page.name)}
                 </Link>
               ))}
+          </div>
+          <div className="navbar-end">
             <a
               className="navbar-item has-text-white"
               onClick={() => setAddPageModal(true)}>
