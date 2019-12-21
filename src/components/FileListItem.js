@@ -1,10 +1,17 @@
-import React, { useRef, useEffect, useCallback, useState } from 'react';
+import React, {
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
 import styled from 'styled-components';
 import swal from 'sweetalert';
 import dayjs from 'dayjs';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { useDrag, useDrop } from 'react-dnd';
+import ContentEditable from 'react-contenteditable';
 
 import { Button, Dropzone } from './elements';
 import loadingImg from '../assets/images/loading.png';
@@ -53,6 +60,7 @@ const FileListItem = ({
 }) => {
   const ref = useRef(null);
   const [loading, setLoading] = useState(false);
+  const [fileName, setFileName] = useState(file.name);
   const [getFile, { loading: fileLoading, data: fileData }] = useLazyQuery(
     fileQuery,
     {
@@ -135,6 +143,17 @@ const FileListItem = ({
     });
   }, []);
 
+  useEffect(() => {
+    executeUpdate({
+      variables: {
+        id,
+        input: {
+          name: fileName,
+        },
+      },
+    });
+  }, [fileName]);
+
   return (
     <tr ref={ref} style={{ opacity }}>
       {isAdmin && (
@@ -145,14 +164,21 @@ const FileListItem = ({
         </td>
       )}
       <td>
-        <a onClick={() => getFile({ variables: { fileKey: file.name } })}>
-          {file.name}
-        </a>
+        <ContentEditable
+          html={fileName}
+          onChange={e => setFileName(e.target.value)}
+          tagName="span"
+        />
       </td>
       <td className="has-text-centered">{file.fileType}</td>
       <td className="has-text-centered">{file.section || '-'}</td>
       <td className="has-text-centered">
         {dayjs(file.createdAt).format('DD MMM YYYY')}
+      </td>
+      <td className="has-text-centered">
+        <a onClick={() => getFile({ variables: { fileKey: file.name } })}>
+          Download
+        </a>
       </td>
       {isAdmin && (
         <td className="has-text-centered">

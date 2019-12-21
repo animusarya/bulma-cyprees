@@ -49,6 +49,7 @@ const FilesList = ({ files: items, isAdmin, refetch }) => {
             <th className="has-text-centered">File Type</th>
             <th className="has-text-centered">Section</th>
             <th className="has-text-centered">Uploaded</th>
+            <th className="has-text-centered">View</th>
             {isAdmin && <th className="has-text-centered">Replace</th>}
             {isAdmin && <th className="has-text-centered">Delete</th>}
           </tr>
