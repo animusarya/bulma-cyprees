@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
@@ -47,7 +47,7 @@ const PageFiles = ({ project, page, isPublic }) => {
   const files =
     resultFiles.data && resultFiles.data.files ? resultFiles.data.files : {};
 
-  const handleFileUpload = useCallback(data => {
+  const handleFileUpload = data => {
     executeFileUploadMutation({
       variables: {
         input: {
@@ -61,7 +61,7 @@ const PageFiles = ({ project, page, isPublic }) => {
     }).then(() => {
       resultFiles.refetch();
     });
-  }, []);
+  };
 
   return (
     <Container>

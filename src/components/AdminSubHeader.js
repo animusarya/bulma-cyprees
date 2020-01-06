@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
@@ -74,20 +74,18 @@ const AdminSubHeader = () => {
   const [{ pages }, resultPages] = useProjectPages(projectId);
   // console.log('pages', pages);
 
-  const handleBannerUpload = useCallback(
-    uploadResponse => {
-      executeUpdateProjectMutation({
-        variables: {
-          id: projectId,
-          input: { heroImage: uploadResponse.url },
-        },
-      }).then(() => {
-        setUploadImageModal(false);
-        resultProject.refetch();
-      });
-    },
-    [projectId],
-  );
+  const handleBannerUpload = uploadResponse => {
+    executeUpdateProjectMutation({
+      variables: {
+        id: projectId,
+        input: { heroImage: uploadResponse.url },
+      },
+    }).then(() => {
+      setUploadImageModal(false);
+      resultProject.refetch();
+    });
+  };
+
   const brandColor = project.brandColor
     ? project.brandColor
     : theme.primaryColor;

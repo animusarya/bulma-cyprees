@@ -45,7 +45,7 @@ const ProjectSubscription = ({ match, history }) => {
           <MainColumn>
             <Heading>Subscriptions</Heading>
             <Subscription project={project} />
-            <Heading>Delete subscription</Heading>
+            <Heading>Cancel subscription</Heading>
             <Button
               onClick={() => {
                 swal('Are you confirm to delete this item?', {
@@ -63,7 +63,8 @@ const ProjectSubscription = ({ match, history }) => {
                     }
                   }
                 });
-              }}>
+              }}
+            >
               Remove Project
             </Button>
             {resRemove.error && (

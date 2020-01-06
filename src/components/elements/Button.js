@@ -23,11 +23,14 @@ const Container = styled.button`
   }
 `;
 
-const Button = ({ className, children, secondary, ...otherProps }) => (
+const Button = ({ className, children, secondary, loading, ...otherProps }) => (
   <Container
     type="submit"
-    className={`button ${secondary ? '' : 'is-primary is-outlined is-medium'}`}
-    {...otherProps}>
+    className={`button ${secondary ? '' : 'is-primary is-outlined is-medium'} ${
+      loading ? 'is-loading' : ''
+    }`}
+    {...otherProps}
+  >
     {children}
   </Container>
 );

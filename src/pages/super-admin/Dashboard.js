@@ -21,7 +21,7 @@ const getAdmins = gql`
       createdAt
       profile {
         fullName
-        company
+        companyName
         telephone
       }
     }
