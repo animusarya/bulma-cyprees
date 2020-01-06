@@ -81,10 +81,10 @@ const ProjectInfo = ({ match }) => {
       <Seo title="Project info" description="Update User Project Info" />
       <Header />
       <Container className="columns">
-        <div className="column is-one-fifth">
+        <div className="column">
           <Sidebar />
         </div>
-        <div className="column">
+        <div className="column is-four-fifths">
           <MainColumn>
             <Heading>
               Users &gt; {user.email} &gt; {project.name}

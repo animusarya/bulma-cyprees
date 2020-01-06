@@ -19,6 +19,9 @@ const meQuery = gql`
         heroImage
         disclaimer
         brandColor
+        contactName
+        contactTelephone
+        contactEmail
       }
     }
   }

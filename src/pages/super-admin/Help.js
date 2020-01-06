@@ -63,10 +63,10 @@ const HelpSuperAdmin = () => {
       />
       <Header />
       <Container className="columns">
-        <div className="column is-one-fifth">
+        <div className="column">
           <Sidebar />
         </div>
-        <div className="column">
+        <div className="column is-four-fifths">
           <MainColumn>
             <Heading>Manage Help</Heading>
             <HelpForm
@@ -111,7 +111,8 @@ const HelpSuperAdmin = () => {
                                   result.refetch();
                                 }
                               });
-                            }}>
+                            }}
+                          >
                             DELETE
                           </Button>
                         </td>

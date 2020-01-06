@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { isNull } from 'lodash';
+import swal from 'sweetalert';
 
 import { Message, Loading, WysiwygEditor, Button } from './elements';
 
@@ -22,20 +23,28 @@ const Container = styled.div`
   }
 `;
 
+const EditorContainer = styled.div`
+  margin-bottom: 1rem;
+`;
+
 const PageContent = ({ page }) => {
   const [input, setInput] = useState({});
   const [executeUpdateMutation, updateResult] = useMutation(updateMutation);
 
   return (
     <Container>
-      <WysiwygEditor
-        value={!isNull(page.content) ? page.content : ''}
-        onChange={data => setInput({ content: data })}
-      />
+      <EditorContainer>
+        <WysiwygEditor
+          value={!isNull(page.content) ? page.content : ''}
+          onChange={data => setInput({ content: data })}
+        />
+      </EditorContainer>
       <Button
-        onClick={() =>
-          executeUpdateMutation({ variables: { id: page.id, input } })
-        }>
+        onClick={async () => {
+          await executeUpdateMutation({ variables: { id: page.id, input } });
+          swal('Page updated successfully');
+        }}
+      >
         Update
       </Button>
       {updateResult.error && (

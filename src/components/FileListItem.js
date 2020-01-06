@@ -164,11 +164,15 @@ const FileListItem = ({
         </td>
       )}
       <td>
-        <ContentEditable
-          html={fileName}
-          onChange={e => setFileName(e.target.value)}
-          tagName="span"
-        />
+        {isAdmin ? (
+          <ContentEditable
+            html={fileName}
+            onChange={e => setFileName(e.target.value)}
+            tagName="span"
+          />
+        ) : (
+          <span>{fileName}</span>
+        )}
       </td>
       <td className="has-text-centered">{file.fileType}</td>
       <td className="has-text-centered">{file.section || '-'}</td>
@@ -184,7 +188,8 @@ const FileListItem = ({
         <td className="has-text-centered">
           <Dropzone
             onUpload={handleFileReplace}
-            handleLoading={isLoading => setLoading(isLoading)}>
+            handleLoading={isLoading => setLoading(isLoading)}
+          >
             <SyncIcon src={loadingImg} isLoading={loading} />
           </Dropzone>
         </td>
@@ -205,7 +210,8 @@ const FileListItem = ({
                   refetch();
                 }
               });
-            }}>
+            }}
+          >
             <i className="far fa-trash-alt"></i>
           </Button>
         </td>

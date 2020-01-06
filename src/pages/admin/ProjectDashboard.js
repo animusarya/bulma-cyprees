@@ -40,10 +40,10 @@ const ProjectDashboard = ({ match }) => {
       <Seo title="Project Dashboard" />
       <Header />
       <Container className="columns">
-        <div className="column is-one-fifth">
+        <div className="column">
           <Sidebar />
         </div>
-        <div className="column">
+        <div className="column is-four-fifths">
           <AdminHeader />
           <AdminSubHeader />
           <MainColumn>

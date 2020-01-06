@@ -78,10 +78,10 @@ const Pricing = () => {
       <Seo title="Projects Pricing" description="Setup Subscription Plans" />
       <Header />
       <Container className="columns">
-        <div className="column is-one-fifth">
+        <div className="column">
           <Sidebar />
         </div>
-        <div className="column">
+        <div className="column is-four-fifths">
           <MainColumn>
             <Heading>Set Pricing</Heading>
             <PricingForm
@@ -138,7 +138,8 @@ const Pricing = () => {
                           <Button
                             secondary
                             paddingless
-                            onClick={() => setEditClient(item)}>
+                            onClick={() => setEditClient(item)}
+                          >
                             EDIT
                           </Button>
                         </td>

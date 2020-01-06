@@ -61,10 +61,10 @@ const Dashboard = () => {
       <Seo title="Dashboard Admin" description="List of Projects Here" />
       <Header />
       <Container className="columns">
-        <div className="column is-one-fifth">
+        <div className="column">
           <Sidebar />
         </div>
-        <div className="column content">
+        <div className="column is-four-fifths">
           <MainColumn>
             {projects.length === 0 ? (
               <div className="hero-body">

@@ -12,6 +12,32 @@ const Container = styled.div`
     padding: 0 15px;
     min-height: 250px;
   }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 1.2rem;
+  }
+  h1 {
+    font-size: 3rem;
+  }
+  h2 {
+    font-size: 2.6rem;
+  }
+  h3 {
+    font-size: 2.2rem;
+  }
+  h4 {
+    font-size: 1.7rem;
+  }
+  h5 {
+    font-size: 1.4rem;
+  }
+  h6 {
+    font-size: 1.1rem;
+  }
 `;
 
 const WysiwygEditor = ({ onChange, value }) => {
@@ -29,6 +55,25 @@ const WysiwygEditor = ({ onChange, value }) => {
   return (
     <Container>
       <Editor
+        toolbar={{
+          options: [
+            'inline',
+            'blockType',
+            'fontSize',
+            'fontFamily',
+            'list',
+            'textAlign',
+            'colorPicker',
+            'link',
+            'emoji',
+            'image',
+          ],
+          inline: { inDropdown: true },
+          list: { inDropdown: true },
+          textAlign: { inDropdown: true },
+          link: { inDropdown: true },
+          history: { inDropdown: true },
+        }}
         editorState={editor}
         onEditorStateChange={editorState => {
           setEditor(editorState);

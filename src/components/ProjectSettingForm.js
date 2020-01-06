@@ -20,6 +20,12 @@ const ProjectSetting = props => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <div style={{ height: '56px' }}>
+        <div className="button-field is-pulled-right">
+          <Button disabled={isSubmitting}>Update</Button>
+        </div>
+      </div>
+      <br />
       <InputGroup
         fullWidth
         isWidth
@@ -40,7 +46,8 @@ const ProjectSetting = props => {
         border
         isHorizontal
         label="Project URL Slug"
-        errors={errors.slug && touched.slug ? errors.slug : undefined}>
+        errors={errors.slug && touched.slug ? errors.slug : undefined}
+      >
         <Cleave
           placeholder="colliers"
           name="slug"
@@ -79,7 +86,8 @@ const ProjectSetting = props => {
           errors.brandColor && touched.brandColor
             ? errors.brandColor
             : undefined
-        }>
+        }
+      >
         <ColorPicker
           name="brandColor"
           id="brandColor"
@@ -183,7 +191,8 @@ const ProjectSetting = props => {
 
       <div
         className="button-field is-pulled-right"
-        style={{ marginTop: '2rem' }}>
+        style={{ marginTop: '2rem' }}
+      >
         <Button disabled={isSubmitting}>Update</Button>
       </div>
     </form>

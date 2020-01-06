@@ -16,11 +16,15 @@ const ClientFooter = ({ project }) => (
   <Container>
     <footer className="footer">
       <div className="content has-text-centered">
-        <Title>{project.name}</Title>
-        {/* <p className="has-text-weight-semibold is-size-7">
-            Paul Barrassford | 01689 123 4567 | 07939 550 774 |{' '}
-            <Link to="/">paul.barrassford@colliers.com</Link>
-          </p> */}
+        <Title>Contact Details</Title>
+        <p className="has-text-weight-semibold is-size-7">
+          {project.contactName} |{' '}
+          <a href={`tel:${project.contactTelephone}`}>
+            {project.contactTelephone}
+          </a>{' '}
+          |{' '}
+          <a href={`mailto:${project.contactEmail}`}>{project.contactEmail}</a>
+        </p>
       </div>
     </footer>
     <div className="disclaimer has-text-weight-light is-size-6">

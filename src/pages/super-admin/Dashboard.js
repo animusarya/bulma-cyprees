@@ -62,10 +62,10 @@ const Dashboard = () => {
       <Seo title="Dashboard Super Admin" description="Clients Details Here" />
       <Header />
       <Container className="columns">
-        <div className="column is-one-fifth">
+        <div className="column">
           <Sidebar />
         </div>
-        <div className="column">
+        <div className="column is-four-fifths">
           <MainColumn>
             <Heading>Clients</Heading>
             {res.error && <Message type="error">{res.error.message}</Message>}
@@ -87,7 +87,8 @@ const Dashboard = () => {
                       <tr key={user.id}>
                         <td>
                           <LinkWrapper
-                            to={`/super-admin/client/${user.id}/projects`}>
+                            to={`/super-admin/client/${user.id}/projects`}
+                          >
                             {user.email}
                           </LinkWrapper>
                         </td>

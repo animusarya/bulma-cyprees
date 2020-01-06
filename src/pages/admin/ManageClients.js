@@ -107,10 +107,10 @@ const ManageClients = ({ match }) => {
       <Seo title="Manage Clients" description="Invite Your Clients" />
       <Header />
       <Container className="columns">
-        <div className="column is-one-fifth">
+        <div className="column">
           <Sidebar />
         </div>
-        <div className="column">
+        <div className="column is-four-fifths">
           <AdminHeader />
           <AdminSubHeader />
           <MainColumn>
@@ -192,26 +192,31 @@ const ManageClients = ({ match }) => {
                           <td>{item.email}</td>
                           <td>{startCase(item.status)}</td>
                           <td className="has-text-centered">
-                            <Button
-                              secondary
-                              paddingless
-                              onClick={() => {
-                                swal('You want to resend email?', {
-                                  buttons: ['Cancel', 'Confirm'],
-                                }).then(async value => {
-                                  if (value) {
-                                    await executeMutationResendEmail({
-                                      variables: {
-                                        projectId: project.id,
-                                        email: item.email,
-                                      },
-                                    });
-                                    resultProject.refetch();
-                                  }
-                                });
-                              }}>
-                              Resend Register Email
-                            </Button>
+                            {item.status === 'accepted' ? (
+                              '-'
+                            ) : (
+                              <Button
+                                secondary
+                                paddingless
+                                onClick={() => {
+                                  swal('You want to resend email?', {
+                                    buttons: ['Cancel', 'Confirm'],
+                                  }).then(async value => {
+                                    if (value) {
+                                      await executeMutationResendEmail({
+                                        variables: {
+                                          projectId: project.id,
+                                          email: item.email,
+                                        },
+                                      });
+                                      resultProject.refetch();
+                                    }
+                                  });
+                                }}
+                              >
+                                Resend register email
+                              </Button>
+                            )}
                           </td>
                           <td className="has-text-centered">
                             <Button
@@ -234,7 +239,8 @@ const ManageClients = ({ match }) => {
                                     resultProject.refetch();
                                   }
                                 });
-                              }}>
+                              }}
+                            >
                               <div key={clientAccessClass}>
                                 <i className={clientAccessClass}></i>
                               </div>
@@ -258,7 +264,8 @@ const ManageClients = ({ match }) => {
                                     resultProject.refetch();
                                   }
                                 });
-                              }}>
+                              }}
+                            >
                               <i className="far fa-trash-alt"></i>
                             </Button>
                           </td>

@@ -111,7 +111,7 @@ const RegisterForm = props => {
         }
       />
       {project.nda && <NDAScroller data={project.nda} />}
-      {isAdminRegister && (
+      {!isAdminRegister && (
         <label className="checkbox">
           <input type="checkbox" />{' '}
           <strong>I Accept the above Non Disclosure Agreement</strong>
@@ -122,7 +122,8 @@ const RegisterForm = props => {
           <Button
             type="submit"
             className="button is-info is-normal is-fullwidth"
-            disabled={isSubmitting}>
+            disabled={isSubmitting}
+          >
             Register
           </Button>
         </div>

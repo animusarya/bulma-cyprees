@@ -76,10 +76,10 @@ const Discounts = () => {
       <Seo title="Discount Code" description="Create Discount Codes" />
       <Header />
       <Container className="columns">
-        <div className="column is-one-fifth">
+        <div className="column">
           <Sidebar />
         </div>
-        <div className="column">
+        <div className="column is-four-fifths">
           <MainColumn>
             <Heading>Discount Codes</Heading>
             <Title>Create Discount Code</Title>
@@ -133,7 +133,8 @@ const Discounts = () => {
                                 result.refetch();
                               }
                             });
-                          }}>
+                          }}
+                        >
                           DELETE
                         </Button>
                       </td>

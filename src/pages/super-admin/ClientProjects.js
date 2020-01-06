@@ -88,10 +88,10 @@ const ProjectsClient = ({ match }) => {
       <Seo title="Client Projects" description="Manage User's Project" />
       <Header />
       <Container className="columns">
-        <div className="column is-one-fifth">
+        <div className="column">
           <Sidebar />
         </div>
-        <div className="column">
+        <div className="column is-four-fifths">
           <MainColumn>
             <Heading>Users &gt; {user.email}</Heading>
             {result.error && (
@@ -129,7 +129,8 @@ const ProjectsClient = ({ match }) => {
                       </td>
                       <td className="is-uppercase actions">
                         <LinkWrapper
-                          to={`/super-admin/client/${match.params.clientId}/project/${project.id}/info`}>
+                          to={`/super-admin/client/${match.params.clientId}/project/${project.id}/info`}
+                        >
                           manage{' '}
                         </LinkWrapper>
                       </td>
@@ -153,7 +154,8 @@ const ProjectsClient = ({ match }) => {
                                 });
                               }
                             });
-                          }}>
+                          }}
+                        >
                           RENEW
                         </Button>
                       </td>
@@ -173,7 +175,8 @@ const ProjectsClient = ({ match }) => {
                                 result.refetch();
                               }
                             });
-                          }}>
+                          }}
+                        >
                           DELETE
                         </Button>
                       </td>
@@ -189,7 +192,8 @@ const ProjectsClient = ({ match }) => {
                             //     await executeMutationRemove({ id: project.id });
                             //   }
                             // });
-                          }}>
+                          }}
+                        >
                           EXPORT
                         </Button>
                       </td>

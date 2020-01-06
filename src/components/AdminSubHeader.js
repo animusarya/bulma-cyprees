@@ -37,7 +37,6 @@ const Container = styled.div`
   }
 `;
 const NavbarMenu = styled.nav`
-  padding: 0px 16% !important;
   background-color: ${props => props.brandColor};
   .navbar-item {
     :hover {
@@ -99,7 +98,8 @@ const AdminSubHeader = () => {
         className="navbar"
         role="navigation"
         aria-label="main navigation"
-        brandColor={brandColor}>
+        brandColor={brandColor}
+      >
         <div className="navbar-brand">
           <Link
             to="/"
@@ -107,7 +107,8 @@ const AdminSubHeader = () => {
             className="navbar-burger burger has-text-white"
             aria-label="menu"
             aria-expanded="false"
-            data-target="navbarBasicExample">
+            data-target="navbarBasicExample"
+          >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -120,7 +121,8 @@ const AdminSubHeader = () => {
                 <Link
                   key={page.id}
                   className="navbar-item has-text-white"
-                  to={`/admin/project/${project.id}/pages/${page.id}`}>
+                  to={`/admin/project/${project.id}/pages/${page.id}`}
+                >
                   {startCase(page.name)}
                 </Link>
               ))}
@@ -128,7 +130,8 @@ const AdminSubHeader = () => {
           <div className="navbar-end">
             <a
               className="navbar-item has-text-white"
-              onClick={() => setAddPageModal(true)}>
+              onClick={() => setAddPageModal(true)}
+            >
               + Add Page
             </a>
           </div>
@@ -140,7 +143,8 @@ const AdminSubHeader = () => {
           <Button
             paddingless
             secondary
-            onClick={() => setUploadImageModal(true)}>
+            onClick={() => setUploadImageModal(true)}
+          >
             <div className="edit-banner">
               <h6 className="title is-6 has-text-weight-semibold">
                 Change banner

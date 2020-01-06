@@ -87,10 +87,8 @@ const ClientHeader = ({ me, project }) => {
             </Link>
           </div>
           <div>
-            <Button>
-              <Link to="/client/settings" className="button is-text is-size-7">
-                Welcome {me.profile ? me.profile.fullName : ''}
-              </Link>
+            <Button className="button is-text is-size-6">
+              Welcome {me.profile ? me.profile.fullName : ''}
             </Button>
             <Button className="button is-text" onClick={() => handleLogout()}>
               <i className="fas fa-power-off icon"></i>
@@ -109,7 +107,8 @@ const ClientHeader = ({ me, project }) => {
         className="navbar"
         role="navigation"
         aria-label="main navigation"
-        brandColor={brandColor}>
+        brandColor={brandColor}
+      >
         <div className="navbar-brand">
           <Link
             to="/"
@@ -117,7 +116,8 @@ const ClientHeader = ({ me, project }) => {
             className="navbar-burger burger has-text-white"
             aria-label="menu"
             aria-expanded="false"
-            data-target="navbarBasicExample">
+            data-target="navbarBasicExample"
+          >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -132,7 +132,8 @@ const ClientHeader = ({ me, project }) => {
               <Link
                 key={page.id}
                 to={`/client/page/${page.id}`}
-                className="navbar-item has-text-white">
+                className="navbar-item has-text-white"
+              >
                 {startCase(page.name)}
               </Link>
             ))}
