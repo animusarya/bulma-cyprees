@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
@@ -23,6 +23,10 @@ const RegisterForm = props => {
     project,
     isAdminRegister,
   } = props;
+  const [ndaAccepted, setNdaAccepted] = useState(
+    !(!isAdminRegister && project.nda),
+  );
+  console.log('ndaAccepted', ndaAccepted);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -111,9 +115,13 @@ const RegisterForm = props => {
         }
       />
       {project.nda && <NDAScroller data={project.nda} />}
-      {!isAdminRegister && (
+      {!isAdminRegister && project.nda && (
         <label className="checkbox">
-          <input type="checkbox" />{' '}
+          <input
+            type="checkbox"
+            defaultChecked={ndaAccepted}
+            onChange={() => setNdaAccepted(!ndaAccepted)}
+          />{' '}
           <strong>I Accept the above Non Disclosure Agreement</strong>
         </label>
       )}
@@ -122,7 +130,7 @@ const RegisterForm = props => {
           <Button
             type="submit"
             className="button is-info is-normal is-fullwidth"
-            disabled={isSubmitting}
+            disabled={isSubmitting || !ndaAccepted}
           >
             Register
           </Button>

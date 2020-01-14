@@ -9,6 +9,7 @@ import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
 import LoginForm from '../components/LoginForm';
 import background from '../assets/images/intelliback.jpg';
+import logo from '../assets/images/logo.png';
 
 const mutation = gql`
   mutation login($email: String!, $password: String!) {
@@ -99,13 +100,16 @@ const Login = () => {
                     <nav
                       className="navbar"
                       role="navigation"
-                      aria-label="main navigation">
+                      aria-label="main navigation"
+                    >
                       <div className="navbar-brand">
-                        {activeProject.logo && (
+                        {activeProject.logo ? (
                           <Logo
                             src={activeProject.logo}
                             alt={activeProject.name}
                           />
+                        ) : (
+                          <Logo src={logo} alt="Intellishare" />
                         )}
                       </div>
                       <div id="navbarBasicExample" className="navbar-menu">

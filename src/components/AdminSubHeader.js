@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
-import { startCase } from 'lodash';
 
 import useProjectDetails from '../hooks/useProjectDetails';
 import useProjectUpdate from '../hooks/useProjectUpdate';
 import useProjectPages from '../hooks/useProjectPages';
+import AdminSubHeaderNav from './AdminSubHeaderNav';
 import { Button, Message } from './elements';
 import AddPageModal from './AddPageModal';
 import UploadImageModal from './UploadImageModal';
@@ -114,16 +114,7 @@ const AdminSubHeader = () => {
         </div>
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
-            {pages &&
-              pages.map(page => (
-                <Link
-                  key={page.id}
-                  className="navbar-item has-text-white"
-                  to={`/admin/project/${project.id}/pages/${page.id}`}
-                >
-                  {startCase(page.name)}
-                </Link>
-              ))}
+            {pages && <AdminSubHeaderNav project={project} pages={pages} />}
           </div>
           <div className="navbar-end">
             <a
