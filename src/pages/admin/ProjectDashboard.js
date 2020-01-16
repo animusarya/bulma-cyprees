@@ -33,7 +33,7 @@ const Container = styled.div`
 const ProjectDashboard = ({ match }) => {
   const projectId = match.params.id;
   const [project] = useProjectDetails(projectId);
-  const [{ dataRoomPages }, resultPages] = useProjectPages(projectId);
+  const [{ pages }, resultPages] = useProjectPages(projectId);
 
   return (
     <Layout noContainer>
@@ -52,12 +52,12 @@ const ProjectDashboard = ({ match }) => {
             )}
             {resultPages.loading && <Loading />}
             <div className="content">
-              {dataRoomPages.length === 0 ? (
+              {pages.length === 0 ? (
                 <ProjectDashboardHero project={project} />
               ) : (
                 <ProjectPages
                   project={project}
-                  pages={dataRoomPages}
+                  pages={pages}
                   refetch={resultPages.refetch}
                 />
               )}

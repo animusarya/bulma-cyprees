@@ -38,7 +38,7 @@ const NavbarMenu = styled.nav`
 `;
 const Logo = styled.img`
   width: auto;
-  max-height: 40px;
+  height: 70px;
   margin-top: 10px;
 `;
 const HeroImg = styled.img`
