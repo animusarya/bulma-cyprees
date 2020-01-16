@@ -109,7 +109,7 @@ const Sidebar = () => {
                 className={isCurrentRoute('/admin/project/:id')}
                 to={`/admin/project/${activeProject}`}
               >
-                <Icon className="fas fa-th-large"></Icon>Dashboard
+                <Icon className="fas fa-th-large"></Icon>Manage Pages
               </Link>
               <Link
                 className={isCurrentRoute('/admin/project/:id/emails')}

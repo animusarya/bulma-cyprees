@@ -45,7 +45,11 @@ const ProjectPages = ({ pages, project, refetch }) => {
           {pages.map(page => (
             <tr key={page.id}>
               <td className="has-text-weight-semibold">
-                {startCase(page.name)}
+                <LinkWrapper
+                  to={`/admin/project/${project.id}/pages/${page.id}`}
+                >
+                  {startCase(page.name)}
+                </LinkWrapper>
               </td>
               <td className="has-text-centered">{startCase(page.type)}</td>
               <td className="has-text-centered">{startCase(page.status)}</td>
@@ -56,7 +60,8 @@ const ProjectPages = ({ pages, project, refetch }) => {
               </td>
               <td>
                 <LinkWrapper
-                  to={`/admin/project/${project.id}/pages/${page.id}`}>
+                  to={`/admin/project/${project.id}/pages/${page.id}`}
+                >
                   Manage
                 </LinkWrapper>
               </td>
@@ -75,7 +80,8 @@ const ProjectPages = ({ pages, project, refetch }) => {
                         refetch();
                       }
                     });
-                  }}>
+                  }}
+                >
                   Remove
                 </Button>
               </td>
