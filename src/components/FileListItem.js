@@ -54,7 +54,7 @@ const FileListItem = ({
 }) => {
   const ref = useRef(null);
   const [loading, setLoading] = useState(false);
-  const [fileName, setFileName] = useState(file.name);
+  const [fileName, setFileName] = useState(file.displayName);
   const [getFile, { loading: fileLoading, data: fileData }] = useLazyQuery(
     fileQuery,
     {
@@ -128,6 +128,7 @@ const FileListItem = ({
         id,
         input: {
           name: data.fileName,
+          displayName: data.fileName,
           fileType: data.fileType,
           url: data.url,
         },
@@ -142,7 +143,7 @@ const FileListItem = ({
       variables: {
         id,
         input: {
-          name: fileName,
+          displayName: fileName,
         },
       },
     });

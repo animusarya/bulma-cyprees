@@ -11,6 +11,7 @@ const filesQuery = gql`
     files(pageId: $pageId) {
       id
       name
+      displayName
       fileType
       section
       url

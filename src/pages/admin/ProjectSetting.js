@@ -1,6 +1,4 @@
 import React from 'react';
-import { useMutation } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 import swal from 'sweetalert';
 
 import useProjectDetails from '../../hooks/useProjectDetails';
@@ -11,25 +9,15 @@ import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import CopyRight from '../../components/CopyRight';
 import MainColumn from '../../components/MainColumn';
-import { Heading, Message, Loading, Button } from '../../components/elements';
+import { Heading, Message, Loading } from '../../components/elements';
 import AdminHeader from '../../components/AdminHeader';
 import AdminSubHeader from '../../components/AdminSubHeader';
 import ProjectSettingForm from '../../components/ProjectSettingForm';
-import Subscription from '../../components/Subscription';
 
-const removeProjectMutation = gql`
-  mutation removeProject($id: ID!) {
-    removeProject(id: $id) {
-      success
-    }
-  }
-`;
-
-const ProjectSetting = ({ match, history }) => {
+const ProjectSetting = ({ match }) => {
   const projectId = match.params.id;
   const [project] = useProjectDetails(projectId);
   const [executeMutation, res] = useProjectUpdate();
-  const [executeMutationRemove, resRemove] = useMutation(removeProjectMutation);
 
   return (
     <Layout noContainer>
@@ -52,7 +40,9 @@ const ProjectSetting = ({ match, history }) => {
                   await executeMutation({
                     variables: { id: project.id, input: data },
                   });
-                  swal('Project info updated');
+                  swal('Project info updated').then(() =>
+                    window.location.reload(),
+                  );
                 }}
               />
             </div>

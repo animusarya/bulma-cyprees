@@ -81,7 +81,7 @@ const ProjectSetting = props => {
         isWidth
         border
         isHorizontal
-        label="Brand Color"
+        label="Brand Colour"
         errors={
           errors.brandColor && touched.brandColor
             ? errors.brandColor
@@ -91,7 +91,7 @@ const ProjectSetting = props => {
         <ColorPicker
           name="brandColor"
           id="brandColor"
-          label="Brand Color"
+          label="Brand Colour"
           color={values.brandColor}
           onChange={val => setFieldValue('brandColor', val)}
         />

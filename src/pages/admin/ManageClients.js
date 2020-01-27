@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
@@ -86,7 +86,7 @@ const Container = styled.div`
   }
 `;
 
-const ManageClients = ({ match }) => {
+const ManageClients = ({ match, history }) => {
   const projectId = match.params.id;
   const [project, resultProject] = useProjectDetails(projectId);
   const [executeAddClientMutation, res] = useMutation(addClientMutation);
@@ -100,7 +100,15 @@ const ManageClients = ({ match }) => {
   const [executeRemoveClientMutation, resTrash] = useMutation(
     removeClientMutation,
   );
-  // console.log('project', project);
+  console.log('project', project);
+
+  useEffect(() => {
+    if (project && project.welcomeEmailTemplate === null) {
+      swal('Please add invite email content first').then(() =>
+        history.push(`/admin/project/${projectId}/emails`),
+      );
+    }
+  }, [project]);
 
   return (
     <Layout noContainer>
@@ -174,6 +182,7 @@ const ManageClients = ({ match }) => {
                 <table className="table is-fullwidth is-hoverable">
                   <thead>
                     <tr>
+                      <th>Name</th>
                       <th>Email</th>
                       <th>Status</th>
                       <th className="has-text-centered">Resend</th>
@@ -189,6 +198,7 @@ const ManageClients = ({ match }) => {
 
                       return (
                         <tr key={item.id}>
+                          <td>-</td>
                           <td>{item.email}</td>
                           <td>{startCase(item.status)}</td>
                           <td className="has-text-centered">

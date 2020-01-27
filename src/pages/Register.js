@@ -60,9 +60,9 @@ const FormContainer = styled.div`
 `;
 
 const Logo = styled.img`
-  max-width: 140px;
-  max-height: 100px;
-  height: auto;
+  /* max-width: 140px; */
+  max-height: 70px;
+  width: auto;
   margin-bottom: 2rem;
 `;
 
