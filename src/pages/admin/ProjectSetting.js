@@ -1,5 +1,6 @@
 import React from 'react';
 import swal from 'sweetalert';
+import styled from 'styled-components';
 
 import useProjectDetails from '../../hooks/useProjectDetails';
 import useProjectUpdate from '../../hooks/useProjectUpdate';
@@ -13,6 +14,10 @@ import { Heading, Message, Loading } from '../../components/elements';
 import AdminHeader from '../../components/AdminHeader';
 import AdminSubHeader from '../../components/AdminSubHeader';
 import ProjectSettingForm from '../../components/ProjectSettingForm';
+
+const FormContainer = styled.div`
+  margin-top: -70px;
+`;
 
 const ProjectSetting = ({ match }) => {
   const projectId = match.params.id;
@@ -32,7 +37,7 @@ const ProjectSetting = ({ match }) => {
           <AdminSubHeader />
           <MainColumn paddingtop="1rem">
             <Heading>Project Settings</Heading>
-            <div>
+            <FormContainer>
               <ProjectSettingForm
                 enableReinitialize
                 initialValues={project}
@@ -45,7 +50,7 @@ const ProjectSetting = ({ match }) => {
                   );
                 }}
               />
-            </div>
+            </FormContainer>
             {res.error && <Message type="error">{res.error.message}</Message>}
             {res.loading ? <Loading /> : null}
           </MainColumn>

@@ -26,7 +26,11 @@ const NDAScroller = ({ data }) => (
       <span className="has-text-weight-semibold">Please read our</span>{' '}
       <strong>&apos;Non Disclosure Agreement&apos;</strong>
     </Title>
-    <ScrollArea>{data}</ScrollArea>
+    <ScrollArea>
+      <span
+        dangerouslySetInnerHTML={{ __html: data.replace('\n', '<br />') }}
+      />
+    </ScrollArea>
   </Container>
 );
 

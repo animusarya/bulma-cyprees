@@ -54,7 +54,7 @@ const SettingsForm = props => {
         border
         isHorizontal
         label="Company:"
-        name="company"
+        name="companyName"
         type="text"
         value={values.companyName}
         onChange={handleChange}

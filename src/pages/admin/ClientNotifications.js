@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import swal from 'sweetalert';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
@@ -29,7 +29,14 @@ const ClientNotifications = ({ match }) => {
   const projectId = match.params.id;
   const [project] = useProjectDetails(projectId);
   const [executeMutation, res] = useProjectUpdate();
-  const [sendNotification] = useMutation(sendNotificationMutation);
+  const [sendNotification, { error }] = useMutation(sendNotificationMutation);
+
+  useEffect(() => {
+    if (error) {
+      swal(error.message);
+      setLoading(false);
+    }
+  }, [error]);
 
   const handleSendNotification = () => {
     setLoading(true);
@@ -39,7 +46,7 @@ const ClientNotifications = ({ match }) => {
     }).then(async value => {
       if (value) {
         await sendNotification({ variables: { projectId } });
-        swal('Notifications sent!');
+        swal('Notifications sent successfully!');
         setLoading(false);
       } else {
         setLoading(false);
