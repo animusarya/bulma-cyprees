@@ -136,11 +136,9 @@ const AdminSubHeader = () => {
           >
             <div className="edit-banner">
               <h6 className="title is-6 has-text-weight-semibold">
-                Change banner
+                banner area
               </h6>
-              <h6 className="subtitle is-size-7 is-italic">
-                image size 1600 x 400px
-              </h6>
+              <h6 className="subtitle is-size-7 is-italic">1600 x 400</h6>
             </div>
           </Button>
         </div>
