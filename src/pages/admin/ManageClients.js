@@ -104,9 +104,9 @@ const ManageClients = ({ match, history }) => {
 
   useEffect(() => {
     if (project && project.welcomeEmailTemplate === null) {
-      swal('Please add invite email content first').then(() =>
-        history.push(`/admin/project/${projectId}/emails`),
-      );
+      swal(
+        'Before adding your first client you must complete the registration email message they will receive under',
+      ).then(() => history.push(`/admin/project/${projectId}/emails`));
     }
   }, [project]);
 
