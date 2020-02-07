@@ -71,15 +71,17 @@ const ClientNotifications = ({ match }) => {
               <Title>
                 Notify your clients by email for any recent activity
               </Title>
-              <Button loading={loading} onClick={handleSendNotification}>
+              {/* <Button loading={loading} onClick={handleSendNotification}>
                 Notify All Clients
-              </Button>
+              </Button> */}
             </div>
             <div>
               <Title>Notification Email Message</Title>
               <ClientNotificationEmailForm
                 enableReinitialize
                 initialValues={project}
+                handleSendNotification={handleSendNotification}
+                loading={loading}
                 onSubmit={async data => {
                   await executeMutation({
                     variables: {

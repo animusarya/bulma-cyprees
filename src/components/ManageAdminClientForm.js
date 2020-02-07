@@ -31,7 +31,8 @@ const ManageAdminClientForm = props => {
           <button
             type="submit"
             className="button is-info"
-            disabled={isSubmitting}>
+            disabled={isSubmitting}
+          >
             <i className="fas fa-plus"></i>
           </button>
         </div>
