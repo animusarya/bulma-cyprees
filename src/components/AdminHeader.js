@@ -72,8 +72,9 @@ const AdminHeader = () => {
               paddingless
               secondary
               className="edit"
-              onClick={() => setIsActive(true)}>
-              Change Logo
+              onClick={() => setIsActive(true)}
+            >
+              Upload logo
             </Button>
           </div>
           <div>
