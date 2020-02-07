@@ -24,7 +24,7 @@ const Footer = () => (
         </div>
         <div className="column">
           <p className="has-text-right is-size-7 has-text-white">
-            2019 IntelliShare. All Rights Reserved.
+            2020 IntelliShare. All Rights Reserved.
           </p>
         </div>
       </div>
