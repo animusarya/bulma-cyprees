@@ -84,6 +84,9 @@ const Container = styled.div`
   .notify-title {
     margin-top: 5%;
   }
+  input {
+    width: 18rem;
+  }
 `;
 
 const ManageClients = ({ match, history }) => {
