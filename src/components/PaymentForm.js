@@ -160,7 +160,8 @@ const ProjectSetupForm = props => {
               errors.paymentCardNumber && touched.paymentCardNumber
                 ? errors.paymentCardNumber
                 : undefined
-            }>
+            }
+          >
             <Cleave
               placeholder="4242 4242 4242 4242"
               name="paymentCardNumber"
@@ -183,7 +184,8 @@ const ProjectSetupForm = props => {
                   touched.paymentCardExpiryMonth
                     ? errors.paymentCardExpiryMonth
                     : undefined
-                }>
+                }
+              >
                 <Cleave
                   placeholder="12"
                   name="paymentCardExpiryMonth"
@@ -205,7 +207,8 @@ const ProjectSetupForm = props => {
                   errors.paymentCardCvv && touched.paymentCardCvv
                     ? errors.paymentCardCvv
                     : undefined
-                }>
+                }
+              >
                 <Cleave
                   placeholder="123"
                   name="paymentCardCvv"
@@ -227,7 +230,8 @@ const ProjectSetupForm = props => {
                   errors.paymentCardExpiryYear && touched.paymentCardExpiryYear
                     ? errors.paymentCardExpiryYear
                     : undefined
-                }>
+                }
+              >
                 <Cleave
                   placeholder="2020"
                   name="paymentCardExpiryYear"
@@ -305,11 +309,11 @@ const ProjectSetupForm = props => {
             </div>
           </div>
           <div className="notify">
-            <p>
+            {/* <p>
               <strong>Source checkout</strong> For your convenience intellishare
               will store your encrypted payment for your future orders. Manage
               your payment information in My Account
-            </p>
+            </p> */}
           </div>
         </div>
       </div>
