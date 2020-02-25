@@ -27,6 +27,8 @@ const EditorContainer = styled.div`
   margin-bottom: 1rem;
 `;
 
+const ButtonContainer = styled.div``;
+
 const PageContent = ({ page }) => {
   const [input, setInput] = useState({});
   const [executeUpdateMutation, updateResult] = useMutation(updateMutation);
@@ -39,14 +41,16 @@ const PageContent = ({ page }) => {
           onChange={data => setInput({ content: data })}
         />
       </EditorContainer>
-      <Button
-        onClick={async () => {
-          await executeUpdateMutation({ variables: { id: page.id, input } });
-          swal('Page updated successfully');
-        }}
-      >
-        Update
-      </Button>
+      <ButtonContainer className="has-text-right">
+        <Button
+          onClick={async () => {
+            await executeUpdateMutation({ variables: { id: page.id, input } });
+            swal('Page updated successfully');
+          }}
+        >
+          Update
+        </Button>
+      </ButtonContainer>
       {updateResult.error && (
         <Message type="error">{updateResult.error.message}</Message>
       )}
