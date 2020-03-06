@@ -53,18 +53,14 @@ const ProjectSubscription = ({ match, history }) => {
                 }).then(async value => {
                   if (value) {
                     const response = await executeMutationRemove({
-                      variables: {
-                        id: project.id,
-                        clientId: project.clientId,
-                      },
+                      variables: { id: project.id },
                     });
                     if (response.data.removeProject || !resRemove.loading) {
                       history.push('/admin/project/create');
                     }
                   }
                 });
-              }}
-            >
+              }}>
               Remove Project
             </Button>
             {resRemove.error && (
