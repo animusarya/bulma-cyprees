@@ -21,8 +21,6 @@ const ClientNotificationEmailForm = props => {
     handleChange,
     handleBlur,
     handleSubmit,
-    loading,
-    handleSendNotification,
   } = props;
 
   return (

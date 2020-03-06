@@ -35,6 +35,12 @@ const projectQuery = gql`
         status
         hasAccess
         notifyStatus
+        user {
+          id
+          profile {
+            fullName
+          }
+        }
       }
     }
   }

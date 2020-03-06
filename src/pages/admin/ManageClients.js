@@ -103,7 +103,7 @@ const ManageClients = ({ match, history }) => {
   const [executeRemoveClientMutation, resTrash] = useMutation(
     removeClientMutation,
   );
-  console.log('project', project);
+  // console.log('project', project);
 
   useEffect(() => {
     if (project && project.welcomeEmailTemplate === null) {
@@ -195,13 +195,18 @@ const ManageClients = ({ match, history }) => {
                   </thead>
                   <tbody>
                     {project.clients.map(item => {
+                      console.log('item', item);
                       const clientAccessClass = item.hasAccess
                         ? 'far fa-check-square'
                         : 'far fa-square';
 
                       return (
                         <tr key={item.id}>
-                          <td>-</td>
+                          <td>
+                            {item.user === null
+                              ? '-'
+                              : item.user.profile.fullName}
+                          </td>
                           <td>{item.email}</td>
                           <td>{startCase(item.status)}</td>
                           <td className="has-text-centered">
@@ -225,8 +230,7 @@ const ManageClients = ({ match, history }) => {
                                       resultProject.refetch();
                                     }
                                   });
-                                }}
-                              >
+                                }}>
                                 Resend register email
                               </Button>
                             )}
@@ -252,8 +256,7 @@ const ManageClients = ({ match, history }) => {
                                     resultProject.refetch();
                                   }
                                 });
-                              }}
-                            >
+                              }}>
                               <div key={clientAccessClass}>
                                 <i className={clientAccessClass}></i>
                               </div>
@@ -277,8 +280,7 @@ const ManageClients = ({ match, history }) => {
                                     resultProject.refetch();
                                   }
                                 });
-                              }}
-                            >
+                              }}>
                               <i className="far fa-trash-alt"></i>
                             </Button>
                           </td>

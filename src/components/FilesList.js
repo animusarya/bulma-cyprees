@@ -40,36 +40,34 @@ const FilesList = ({ files: items, isAdmin, refetch }) => {
   );
 
   return (
-    <>
-      <table className="table is-fullwidth is-hoverable">
-        <thead>
-          <tr>
-            {isAdmin && <th className="has-text-centered">Sort</th>}
-            <th>Name</th>
-            <th className="has-text-centered">File Type</th>
-            <th className="has-text-centered">Section</th>
-            <th className="has-text-centered">Uploaded</th>
-            <th className="has-text-centered">View</th>
-            {isAdmin && <th className="has-text-centered">Replace</th>}
-            {isAdmin && <th className="has-text-centered">Delete</th>}
-          </tr>
-        </thead>
-        <tbody>
-          {files.map((file, index) => (
-            <FileListItem
-              key={file.id}
-              index={index}
-              id={file.id}
-              file={file}
-              isAdmin={isAdmin}
-              refetch={refetch}
-              moveItem={handleMoveItem}
-              executeUpdate={executeUpdate}
-            />
-          ))}
-        </tbody>
-      </table>
-    </>
+    <table className="table is-fullwidth is-hoverable">
+      <thead>
+        <tr>
+          {isAdmin && <th className="has-text-centered">Sort</th>}
+          <th>Name</th>
+          <th className="has-text-centered">File Type</th>
+          <th className="has-text-centered">Section</th>
+          <th className="has-text-centered">Uploaded</th>
+          <th className="has-text-centered">View</th>
+          {isAdmin && <th className="has-text-centered">Replace</th>}
+          {isAdmin && <th className="has-text-centered">Delete</th>}
+        </tr>
+      </thead>
+      <tbody>
+        {files.map((file, index) => (
+          <FileListItem
+            key={file.id}
+            index={index}
+            id={file.id}
+            file={file}
+            isAdmin={isAdmin}
+            refetch={refetch}
+            moveItem={handleMoveItem}
+            executeUpdate={executeUpdate}
+          />
+        ))}
+      </tbody>
+    </table>
   );
 };
 

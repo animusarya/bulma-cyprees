@@ -41,7 +41,8 @@ const Logo = styled.img`
   margin-bottom: 2rem;
 `;
 
-const SetPassword = () => {
+const SetPassword = ({ match }) => {
+  const { token } = match.params;
   const [executeMutation, res] = useMutation(setPasswordMutation);
 
   return (
@@ -55,7 +56,11 @@ const SetPassword = () => {
           <FormContainer>
             <Logo src={logo} alt="logo banner" />
             <SetPasswordForm
-              onSubmit={data => executeMutation({ variables: data })}
+              onSubmit={data =>
+                executeMutation({
+                  variables: { password: data.password, token },
+                })
+              }
             />
             {res.error && <Message type="error">{res.error.message}</Message>}
             {res.loading ? <Loading /> : null}

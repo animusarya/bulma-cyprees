@@ -89,7 +89,11 @@ const App = () => {
                       path="/register/:projectId/:email"
                       component={Register}
                     />
-                    <Route exact path="/set-password" component={SetPassword} />
+                    <Route
+                      exact
+                      path="/set-password/:token"
+                      component={SetPassword}
+                    />
                     <Route
                       exact
                       path="/forgot-password"

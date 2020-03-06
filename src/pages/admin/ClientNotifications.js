@@ -39,8 +39,12 @@ const ClientNotifications = ({ match }) => {
   }, [error]);
 
   const handleSendNotification = () => {
+    if (!project.clientEmailTemplate) {
+      return swal('Please fill in email details below to continue');
+    }
+
     setLoading(true);
-    swal({
+    return swal({
       title: 'Do you confirm to send emails to all of your clients?',
       buttons: ['Cancel', 'Send!'],
     }).then(async value => {
