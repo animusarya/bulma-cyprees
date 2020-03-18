@@ -10,7 +10,14 @@ import Disclaimer from './Disclaimer';
 
 const Button = styled.button`
   margin-top: 2rem;
+  background-color: ${props => props.theme.primaryColor};
+  height: 100%;
 `;
+
+const MarginContainer = styled.p`
+  margin-top: 2.5rem;
+`;
+
 const RegisterForm = props => {
   const {
     values,
@@ -35,7 +42,6 @@ const RegisterForm = props => {
         label="Full Name:"
         name="fullName"
         type="text"
-        placeholder="John Doe"
         value={values.fullName}
         onChange={handleChange}
         onBlur={handleBlur}
@@ -49,7 +55,6 @@ const RegisterForm = props => {
           label="Company Name:"
           name="companyName"
           type="text"
-          placeholder="My Company"
           value={values.companyName}
           onChange={handleChange}
           onBlur={handleBlur}
@@ -66,7 +71,6 @@ const RegisterForm = props => {
           label="Telephone:"
           name="telephone"
           type="text"
-          placeholder="+123123123"
           value={values.telephone}
           onChange={handleChange}
           onBlur={handleBlur}
@@ -79,7 +83,6 @@ const RegisterForm = props => {
         border
         label="Email:"
         name="email"
-        placeholder="john@doe.com"
         value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}
@@ -91,7 +94,6 @@ const RegisterForm = props => {
         label="Password:"
         name="password"
         type="password"
-        placeholder="*********"
         value={values.password}
         onChange={handleChange}
         onBlur={handleBlur}
@@ -104,7 +106,6 @@ const RegisterForm = props => {
         label="Confirm Password:"
         name="confirmPassword"
         type="password"
-        placeholder="*********"
         value={values.confirmPassword}
         onChange={handleChange}
         onBlur={handleBlur}
@@ -125,18 +126,37 @@ const RegisterForm = props => {
           <strong>I Accept the above Non Disclosure Agreement</strong>
         </label>
       )}
+      {isAdminRegister && (
+        <MarginContainer className="has-text-weight-semibold">
+          By creating an account you agree to the website{' '}
+          <a href="#">terms and conditions</a> and our{' '}
+          <a href="#">privacy notice.</a>
+        </MarginContainer>
+      )}
       <div className="field">
         <div className="control">
           <Button
             type="submit"
-            className="button is-info is-normal is-fullwidth"
+            className="button"
             disabled={isSubmitting || !ndaAccepted}
           >
-            Register
+            <span className="has-text-weight-bold has-text-light is-size-4">
+              Create Account
+            </span>
           </Button>
         </div>
       </div>
-      <Disclaimer data={project.disclaimer ? project.disclaimer : undefined} />
+      <Disclaimer
+        data={
+          project.disclaimer ? (
+            project.disclaimer
+          ) : (
+            <MarginContainer>
+              © 2020. IntelliShare. All Rights Reserved.
+            </MarginContainer>
+          )
+        }
+      />
     </form>
   );
 };

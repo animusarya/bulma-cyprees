@@ -7,6 +7,11 @@ const theme = {
   secondaryColor: '#25313f',
   fontDark: '#25313f',
   borderColor: '#d4d6d5',
+  fontSizeSuperLarge: '26px',
+  fontSizeExtraLarge: '22px',
+  fontSizeLarge: '20px',
+  fontSizeMedium: '18px',
+  fontSize: '16px',
 };
 
 export default theme;

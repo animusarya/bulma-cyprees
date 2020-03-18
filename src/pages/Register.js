@@ -10,7 +10,6 @@ import Seo from '../components/Seo';
 import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
 import RegisterForm from '../components/RegisterForm';
-import background from '../assets/images/intelliback.jpg';
 import logo from '../assets/images/logo.png';
 
 const registerMutation = gql`
@@ -27,11 +26,6 @@ const registerMutation = gql`
 `;
 
 const Container = styled.div`
-  background-image: url(${background});
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  background-position: center center;
-  height: auto;
   .register-page {
     width: 52%;
     margin-right: auto;
@@ -60,10 +54,20 @@ const FormContainer = styled.div`
 `;
 
 const Logo = styled.img`
-  /* max-width: 140px; */
   max-height: 70px;
   width: auto;
   margin-bottom: 2rem;
+`;
+
+const ContentContainer = styled.div`
+  p {
+    margin: 2rem 0;
+  }
+  a {
+    :hover {
+      color: ${props => props.theme.primaryColor};
+    }
+  }
 `;
 
 const Register = ({ match }) => {
@@ -128,9 +132,6 @@ const Register = ({ match }) => {
                       <div id="navbarBasicExample" className="navbar-menu">
                         <div className="navbar-end">
                           <div className="navbar-item has-text-black-bis has-text-right">
-                            <h5 className="has-text-weight-bold is-size-5">
-                              Registration
-                            </h5>
                             {activeProject.name && (
                               <h3 className="has-text-weight-bold is-size-3">
                                 {activeProject.name}
@@ -140,6 +141,18 @@ const Register = ({ match }) => {
                         </div>
                       </div>
                     </nav>
+                    <ContentContainer>
+                      <h2 className="has-text-weight-semibold">
+                        Create an Account
+                      </h2>
+                      <p className="is-size-6">
+                        Share your files and content and engage your clients. Do
+                        it all with Intellishare. Already have an account?{' '}
+                        <a className="has-text-weight-bold" href="/login">
+                          Log in
+                        </a>
+                      </p>
+                    </ContentContainer>
                   </div>
                   <RegisterForm
                     initialValues={{ email: email || '' }}
