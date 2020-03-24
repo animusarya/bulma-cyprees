@@ -104,7 +104,7 @@ const ForgotPassword = ({ match }) => {
     <Layout noContainer>
       <Container>
         <div className="forgot-password-page">
-          <Seo title="Forgot Password" description="Register Yourself Here" />
+          <Seo title="Forgot Password" />
           <section className="hero is-fullheight">
             <div className="hero-body">
               <div className="container">
@@ -148,6 +148,7 @@ const ForgotPassword = ({ match }) => {
                     </ContentContainer>
                   </div>
                   <ForgotPasswordForm
+                    initialValues={{ email: email || '' }}
                     onSubmit={async data => {
                       await executeMutation({ variables: { input: data } });
                       swal('An email has been sent, please check your Inbox');
