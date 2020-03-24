@@ -47,7 +47,7 @@ const Dashboard = () => {
       {resultPages.error && (
         <Message type="error">{resultPages.error.message}</Message>
       )}
-      <Container className="section">
+      <Container>
         {dataRoomPages.map(page => (
           <PageRow key={page.id} project={project} page={page} />
         ))}

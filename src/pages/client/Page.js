@@ -29,6 +29,11 @@ const Container = styled.div`
   thead {
     background: transparent;
   }
+  h2 {
+    font-size: ${props => props.theme.fontSizeSuperLarge};
+    color: ${props => props.theme.fontDark};
+    margin-bottom: 2rem;
+  }
 `;
 
 const Page = ({ match }) => {
@@ -49,22 +54,24 @@ const Page = ({ match }) => {
       <Seo title="Client Page" description="Page description" />
       <ClientHeader me={me} project={project} />
       <Container className="section">
-        {resultPage.error && (
-          <Message type="error">{resultPage.error.message}</Message>
-        )}
-        {resultPage.loading && <Loading />}
-        <h2 className="title is-2">{page.name}</h2>
-        {page.type === 'content' && (
-          <div>
-            <ImageGallery page={page} />
-            <section dangerouslySetInnerHTML={{ __html: page.content }} />
-          </div>
-        )}
-        {page.type === 'dataroom' && (
-          <div>
-            <PageRow page={page} />
-          </div>
-        )}
+        <div className="container">
+          {resultPage.error && (
+            <Message type="error">{resultPage.error.message}</Message>
+          )}
+          {resultPage.loading && <Loading />}
+          <h2 className="has-text-weight-semibold">{page.name}</h2>
+          {page.type === 'content' && (
+            <div>
+              <ImageGallery page={page} />
+              <section dangerouslySetInnerHTML={{ __html: page.content }} />
+            </div>
+          )}
+          {page.type === 'dataroom' && (
+            <div>
+              <PageRow page={page} />
+            </div>
+          )}
+        </div>
       </Container>
       <ClientFooter project={project} />
     </Layout>

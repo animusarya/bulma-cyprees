@@ -2,8 +2,15 @@ import React, { useCallback, useState, useEffect } from 'react';
 import update from 'immutability-helper';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import styled from 'styled-components';
 
 import FileListItem from './FileListItem';
+
+const Container = styled.table`
+  th {
+    color: ${props => props.theme.fontDark} !important;
+  }
+`;
 
 const updateFileMutation = gql`
   mutation updateFile($id: ID!, $input: FileInput!) {
@@ -40,7 +47,7 @@ const FilesList = ({ files: items, isAdmin, refetch }) => {
   );
 
   return (
-    <table className="table is-fullwidth is-hoverable">
+    <Container className="table is-fullwidth is-hoverable">
       <thead>
         <tr>
           {isAdmin && <th className="has-text-centered">Sort</th>}
@@ -67,7 +74,7 @@ const FilesList = ({ files: items, isAdmin, refetch }) => {
           />
         ))}
       </tbody>
-    </table>
+    </Container>
   );
 };
 
