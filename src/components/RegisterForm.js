@@ -12,6 +12,7 @@ const Button = styled.button`
   margin-top: 2rem;
   background-color: ${props => props.theme.primaryColor};
   height: 100%;
+  border-radius: 6px;
 `;
 
 const MarginContainer = styled.p`

@@ -53,9 +53,6 @@ const ContentContainer = styled.div`
 const FormContainer = styled.div`
   padding: 0 3rem;
   margin-top: 2rem;
-  @media only screen and (max-width: 768px) {
-    padding: 2rem;
-  }
   .navbar-item {
     display: grid;
   }
@@ -134,7 +131,9 @@ const Login = () => {
                     </nav>
 
                     <ContentContainer>
-                      <h2 className="has-text-weight-semibold">Log In</h2>
+                      <h2 className="has-text-weight-semibold is-size-5-mobile">
+                        Log In
+                      </h2>
                     </ContentContainer>
                   </div>
                   <LoginForm

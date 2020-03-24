@@ -12,7 +12,6 @@ const Button = styled.button`
   background-color: ${props => props.theme.primaryColor};
   height: 100%;
   border-radius: 6px;
-  padding: 0.5rem 5rem 0.5rem 5rem;
 `;
 
 const ResetPassword = styled.div`

@@ -42,9 +42,6 @@ const Container = styled.div`
 const FormContainer = styled.div`
   padding: 0 3rem;
   margin-top: 2rem;
-  @media only screen and (max-width: 768px) {
-    padding: 2rem;
-  }
   .navbar-item {
     display: grid;
   }
