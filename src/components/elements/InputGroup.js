@@ -38,7 +38,8 @@ const InputGroup = ({
       hasAddons ? 'has-addons' : ''
     }`}
     fullWidth={fullWidth}
-    isWidth={isWidth}>
+    isWidth={isWidth}
+  >
     {label && <label className="label">{label}</label>}
     {hasAddons && (
       <p className="control">

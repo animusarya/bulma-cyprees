@@ -60,6 +60,9 @@ const Logo = styled.img`
 `;
 
 const ContentContainer = styled.div`
+  h2 {
+    font-size: ${props => props.theme.fontSizeSuperLarge};
+  }
   p {
     margin: 2rem 0;
   }

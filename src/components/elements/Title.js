@@ -8,11 +8,12 @@ const Container = styled.h2`
   margin-top: ${props => (props.marginTop ? props.marginTop : 'auto')};
 `;
 
-const Title = ({ children, marginTop, marginbottom }) => (
+const Title = ({ children, marginTop, marginbottom, fontSize }) => (
   <Container
-    className="is-size-5 has-text-weight-semibold"
+    className={`is-size-${fontSize || 5} has-text-weight-semibold`}
     marginTop={marginTop}
-    marginbottom={marginbottom}>
+    marginbottom={marginbottom}
+  >
     {children}
   </Container>
 );

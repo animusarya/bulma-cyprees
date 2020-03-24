@@ -4,14 +4,16 @@ export const elements = { mobileBreakpoint: 800, ipadBreakpoint: 1024 };
 
 const theme = {
   primaryColor: '#b2d13d',
+  PrimaryLinkColor: '#BCCF02',
   secondaryColor: '#25313f',
   fontDark: '#25313f',
   borderColor: '#d4d6d5',
-  fontSizeSuperLarge: '26px',
+  fontSizeSuperLarge: '28px',
   fontSizeExtraLarge: '22px',
   fontSizeLarge: '20px',
   fontSizeMedium: '18px',
   fontSize: '16px',
+  fontSizeSmall: '14px',
 };
 
 export default theme;
