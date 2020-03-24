@@ -2,8 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
+import styled from 'styled-components';
 
-import { InputGroup, Button } from './elements';
+import { InputGroup } from './elements';
+
+const Button = styled.button`
+  margin-top: 2rem;
+  background-color: ${props => props.theme.primaryColor};
+  height: 100%;
+  border-radius: 6px;
+`;
 
 const ForgotPasswordForm = props => {
   const {
@@ -19,6 +27,7 @@ const ForgotPasswordForm = props => {
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
+        border
         label="Email:"
         name="email"
         placeholder="john@doe.com"
@@ -29,7 +38,11 @@ const ForgotPasswordForm = props => {
       />
       <div className="field">
         <div className="control">
-          <Button disabled={isSubmitting}>Reset Password</Button>
+          <Button type="submit" className="button" disabled={isSubmitting}>
+            <span className="has-text-weight-bold has-text-light is-size-4">
+              Reset Password
+            </span>
+          </Button>
         </div>
       </div>
     </form>
