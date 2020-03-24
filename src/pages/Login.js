@@ -25,7 +25,7 @@ const mutation = gql`
 `;
 
 const Container = styled.div`
-  background-image: url(${background});
+  /* background-image: url(${background}); */
   background-repeat: no-repeat, repeat;
   background-size: cover;
   background-position: center center;
@@ -34,11 +34,19 @@ const Container = styled.div`
     width: 52%;
     margin-right: auto;
     margin-left: auto;
-    color: #333;
-    background: rgba(255, 255, 255, 0.8);
+    @media only screen and (max-width: 768px) {
+      width: 100%;
+    }
   }
   .hero-body {
     align-items: flex-start !important;
+  }
+`;
+
+const ContentContainer = styled.div`
+  h2 {
+    font-size: ${props => props.theme.fontSizeSuperLarge};
+    margin-bottom: 2rem;
   }
 `;
 
@@ -58,8 +66,8 @@ const FormContainer = styled.div`
 `;
 
 const Logo = styled.img`
-  width: 117px;
-  height: auto;
+  max-height: 70px;
+  width: auto;
   margin-bottom: 2rem;
 `;
 
@@ -113,11 +121,8 @@ const Login = () => {
                         )}
                       </div>
                       <div id="navbarBasicExample" className="navbar-menu">
-                        <div className="navbar-end">
+                        <div className="endnavbar-">
                           <div className="navbar-item has-text-black-bis has-text-right">
-                            <h2 className="has-text-weight-bold is-size-5">
-                              Login
-                            </h2>
                             {activeProject.name && (
                               <h1 className="has-text-weight-bold">
                                 {activeProject.name}
@@ -127,6 +132,10 @@ const Login = () => {
                         </div>
                       </div>
                     </nav>
+
+                    <ContentContainer>
+                      <h2 className="has-text-weight-semibold">Log In</h2>
+                    </ContentContainer>
                   </div>
                   <LoginForm
                     onSubmit={data => executeMutation({ variables: data })}

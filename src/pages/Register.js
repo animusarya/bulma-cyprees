@@ -30,8 +30,9 @@ const Container = styled.div`
     width: 52%;
     margin-right: auto;
     margin-left: auto;
-    color: #333;
-    background: rgba(255, 255, 255, 0.8);
+    @media only screen and (max-width: 768px) {
+      width: 100%;
+    }
   }
   .hero-body {
     align-items: flex-start !important;
@@ -145,7 +146,7 @@ const Register = ({ match }) => {
                       </div>
                     </nav>
                     <ContentContainer>
-                      <h2 className="has-text-weight-semibold">
+                      <h2 className="has-text-weight-semibold is-size-5-mobile">
                         Create an Account
                       </h2>
                       <p className="is-size-6">

@@ -3,12 +3,27 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { InputGroup } from './elements';
 
 const Button = styled.button`
   margin-top: 2rem;
+  background-color: ${props => props.theme.primaryColor};
+  height: 100%;
+  border-radius: 6px;
+  padding: 0.5rem 5rem 0.5rem 5rem;
 `;
+
+const ResetPassword = styled.div`
+  a {
+    :hover {
+      color: #b2d13d;
+      font-size: ${props => props.theme.fontSizeSmall};
+    }
+  }
+`;
+
 const LoginForm = props => {
   const {
     values,
@@ -47,14 +62,16 @@ const LoginForm = props => {
       />
       <div className="field">
         <div className="control">
-          <Button
-            type="submit"
-            className="button is-info is-normal is-fullwidth"
-            disabled={isSubmitting}>
-            Login
+          <Button type="submit" className="button" disabled={isSubmitting}>
+            <span className="has-text-weight-bold has-text-light is-size-4">
+              Log In
+            </span>
           </Button>
         </div>
       </div>
+      <ResetPassword>
+        <Link to="/forgot-password">Forgot Password?</Link>
+      </ResetPassword>
     </form>
   );
 };
