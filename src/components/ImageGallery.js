@@ -30,6 +30,12 @@ const Container = styled.div`
   }
 `;
 
+const Wrapper = styled.div`
+  :focus {
+    outline: -webkit-focus-ring-color auto 0px;
+  }
+`;
+
 const ImageGallery = ({ page }) => {
   // fetch files for page
   const [getFiles, resultFiles] = useLazyQuery(filesQuery, {
@@ -59,9 +65,9 @@ const ImageGallery = ({ page }) => {
     <Container>
       <Slider {...settings}>
         {files.map(file => (
-          <div key={file.id}>
+          <Wrapper key={file.id}>
             <img src={file.url} alt={file.name} />
-          </div>
+          </Wrapper>
         ))}
       </Slider>
     </Container>
