@@ -48,9 +48,10 @@ const Logo = styled.img`
   margin-top: 10px;
 `;
 const HeroImg = styled.img`
-  height: 10rem;
+  height: 250px;
   width: auto;
-  object-fit: cover;
+  position: center center;
+  background-size: cover;
 `;
 
 const Button = styled.button`
