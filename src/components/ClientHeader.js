@@ -36,6 +36,11 @@ const NavbarMenu = styled.nav`
       background-color: ${props => props.brandColor};
     }
   }
+  .navbar-item {
+    :hover {
+      background-color: rgb(255, 255, 255, 0.2);
+    }
+  }
 `;
 const Logo = styled.img`
   width: auto;
