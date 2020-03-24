@@ -33,6 +33,15 @@ const Container = styled.div`
     font-size: ${props => props.theme.fontSizeSuperLarge};
     color: ${props => props.theme.fontDark};
     margin-bottom: 2rem;
+    @media only screen and (max-width: 768px) {
+      font-size: ${props => props.theme.fontSizeExtraLarge};
+    }
+  }
+`;
+
+const Table = styled.div`
+  @media only screen and (max-width: 768px) {
+    overflow: scroll;
   }
 `;
 
@@ -67,9 +76,9 @@ const Page = ({ match }) => {
             </div>
           )}
           {page.type === 'dataroom' && (
-            <div>
+            <Table>
               <PageRow page={page} />
-            </div>
+            </Table>
           )}
         </div>
       </Container>

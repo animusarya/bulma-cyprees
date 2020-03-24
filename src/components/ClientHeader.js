@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { startCase } from 'lodash';
@@ -14,6 +14,9 @@ const Container = styled.section`
   .column {
     display: flex;
     justify-content: space-between;
+    @media only screen and (max-width: 768px) {
+      justify-content: center;
+    }
   }
   .is-text {
     padding: 0px;
@@ -48,6 +51,9 @@ const HeroImg = styled.img`
   width: auto;
   position: center center;
   background-size: cover;
+  @media only screen and (max-width: 768px) {
+    height: 150px;
+  }
 `;
 
 const Button = styled.button`
@@ -74,8 +80,16 @@ const LogoutButton = styled(Button)`
   margin-top: -2px;
 `;
 
+const TitleContainer = styled.div`
+  margin-bottom: 2rem;
+`;
+
 const ClientHeader = ({ me, project }) => {
   const [{ pages }] = useProjectPages(project.id);
+  const [isActive, setIsActive] = useState(false);
+  const toggleMenu = () => {
+    setIsActive(!isActive);
+  };
   const brandColor = project.brandColor
     ? project.brandColor
     : theme.primaryColor;
@@ -100,7 +114,7 @@ const ClientHeader = ({ me, project }) => {
                 )}
               </Link>
             </div>
-            <div>
+            <div className="is-hidden-mobile">
               <ClientName className="button is-text">
                 Welcome {me.profile ? me.profile.fullName : ''}
               </ClientName>
@@ -119,6 +133,13 @@ const ClientHeader = ({ me, project }) => {
               )}
             </div>
           </Top>
+          {project && (
+            <TitleContainer className="has-text-centered is-hidden-desktop">
+              <Title marginbottom="0px" fontSize={4}>
+                {startCase(project.name) || ''}
+              </Title>
+            </TitleContainer>
+          )}
         </div>
       </div>
       <NavbarMenu
@@ -129,18 +150,20 @@ const ClientHeader = ({ me, project }) => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <Link
-              to="#"
+            <a
               role="button"
-              className="navbar-burger burger has-text-white"
+              className={`navbar-burger burger has-text-white ${
+                isActive ? 'is-active' : ''
+              }`}
               aria-label="menu"
               aria-expanded="false"
               data-target="navbarBasicExample"
+              onClick={toggleMenu}
             >
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
-            </Link>
+            </a>
           </div>
           <div id="navbarBasicExample" className="navbar-menu">
             <div className="navbar-start">

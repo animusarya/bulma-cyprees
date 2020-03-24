@@ -9,6 +9,9 @@ import FileListItem from './FileListItem';
 const Container = styled.table`
   th {
     color: ${props => props.theme.fontDark} !important;
+    @media only screen and (max-width: 768px) {
+      font-size: ${props => props.theme.fontSizeSmall};
+    }
   }
 `;
 

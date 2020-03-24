@@ -9,7 +9,7 @@ const theme = {
   fontDark: '#25313f',
   borderColor: '#d4d6d5',
   fontSizeSuperLarge: '30px',
-  fontSizeExtraLarge: '22px',
+  fontSizeExtraLarge: '26px',
   fontSizeLarge: '20px',
   fontSizeMedium: '18px',
   fontSize: '16px',
