@@ -68,16 +68,11 @@ const ContentContainer = styled.div`
 `;
 const ForgotPassword = ({ match }) => {
   const [executeMutation, res] = useMutation(forgotPasswordMutation);
-  const togggleLoggedIn = useStoreActions(
-    actions => actions.isLoggedIn.togggle,
-  );
-  const updateUser = useStoreActions(actions => actions.user.update);
   const updateProject = useStoreActions(
     actions => actions.origin.updateProject,
   );
   const activeProject = useStoreState(state => state.origin.project);
   const { projectId, email } = match.params;
-  const isAdminRegister = !projectId;
 
   // fetch project data from api
   const [project] = useProjectGuestDetails({ projectId });
@@ -87,18 +82,6 @@ const ForgotPassword = ({ match }) => {
       updateProject(project);
     }
   }, [project]);
-
-  if (res.data && res.data.register) {
-    const { jwt, user } = res.data.register;
-    window.localStorage.setItem('token', jwt);
-    togggleLoggedIn(true);
-    updateUser(user);
-    setTimeout(() => {
-      window.location.replace(
-        isAdminRegister ? '/admin/dashboard' : '/client/dashboard',
-      );
-    }, 1000);
-  }
 
   return (
     <Layout noContainer>
@@ -148,7 +131,6 @@ const ForgotPassword = ({ match }) => {
                     </ContentContainer>
                   </div>
                   <ForgotPasswordForm
-                    initialValues={{ email: email || '' }}
                     onSubmit={async data => {
                       await executeMutation({ variables: { input: data } });
                       swal('An email has been sent, please check your Inbox');
