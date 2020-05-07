@@ -15,7 +15,8 @@ const ProjectDashboardHero = ({ project }) => (
       </div>
       <div className="subtitle is-6">
         <p>
-          1. Insert your <span className="has-text-weight-bold">logo</span>
+          1. Insert your <strong className="has-text-weight-bold">logo</strong>{' '}
+          and <strong className="has-text-weight-bold">banner</strong>
         </p>
         <p>
           2. Insert your branding colour under{' '}

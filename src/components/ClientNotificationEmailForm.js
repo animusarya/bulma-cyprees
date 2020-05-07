@@ -53,14 +53,7 @@ const ClientNotificationEmailForm = props => {
       />
       <div className="button-field">
         <div className="">
-          <Button disabled={isSubmitting}>Update Message</Button>
-          {/* <Button
-            loading={loading}
-            onClick={handleSendNotification}
-            disabled={isSubmitting}
-          >
-            Notify All Clients
-          </Button> */}
+          <Button disabled={isSubmitting}>Notify All Clients</Button>
         </div>
       </div>
     </Form>

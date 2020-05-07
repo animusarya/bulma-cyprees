@@ -39,9 +39,9 @@ const ClientNotifications = ({ match }) => {
   }, [error]);
 
   const handleSendNotification = () => {
-    if (!project.clientEmailTemplate) {
-      return swal('Please fill in email details below to continue');
-    }
+    // if (!project.clientEmailTemplate) {
+    //   return swal('Please fill in email details below to continue');
+    // }
 
     setLoading(true);
     return swal({
@@ -71,14 +71,14 @@ const ClientNotifications = ({ match }) => {
           <AdminSubHeader />
           <MainColumn paddingtop="1rem">
             <Heading>Notifications</Heading>
-            <div>
+            {/* <div>
               <Title>
                 Notify your clients by email for any recent activity
               </Title>
               <Button loading={loading} onClick={handleSendNotification}>
                 Notify All Clients
               </Button>
-            </div>
+            </div> */}
             <div>
               <Title>Notification Email Message</Title>
               <ClientNotificationEmailForm
@@ -93,7 +93,7 @@ const ClientNotifications = ({ match }) => {
                       },
                     },
                   });
-                  swal('Email data updated');
+                  handleSendNotification();
                 }}
               />
               {res.error && <Message type="error">{res.error.message}</Message>}

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
@@ -8,7 +8,9 @@ import useProjectDetails from '../hooks/useProjectDetails';
 import useProjectUpdate from '../hooks/useProjectUpdate';
 import { Title, Button, Message } from './elements';
 import UploadImageModal from './UploadImageModal';
+
 import logo from '../assets/images/logo.png';
+import uploadLogoImg from '../assets/images/upload-logo.png';
 
 const Container = styled.div`
   margin-top: 1rem;
@@ -34,6 +36,11 @@ const Container = styled.div`
   }
   .navbar-item {
     min-width: 100px;
+  }
+
+  .edit-logo {
+    height: auto;
+    width: 160px;
   }
 `;
 const Logo = styled.img`
@@ -72,9 +79,12 @@ const AdminHeader = () => {
               paddingless
               secondary
               className="edit"
-              onClick={() => setIsActive(true)}
-            >
-              Upload logo
+              onClick={() => setIsActive(true)}>
+              <img
+                className="edit-logo"
+                src={uploadLogoImg}
+                alt="upload logo"
+              />
             </Button>
           </div>
           <div>

@@ -11,7 +11,9 @@ import { Button, Message } from './elements';
 import AddPageModal from './AddPageModal';
 import UploadImageModal from './UploadImageModal';
 import theme from '../utils/theme';
+
 import logoBg from '../assets/images/login-bg.jpg';
+import uploadBannerImg from '../assets/images/upload-banner.png';
 
 const Container = styled.div`
   margin-top: 1rem;
@@ -58,10 +60,8 @@ const Hero = styled.section`
     color: ${props => props.brandColor};
   }
   .edit-banner {
-    background: white;
-    height: 4.5rem;
-    width: 11rem;
-    padding-top: 10%;
+    height: auto;
+    width: 210px;
   }
 `;
 
@@ -96,8 +96,7 @@ const AdminSubHeader = () => {
         className="navbar"
         role="navigation"
         aria-label="main navigation"
-        brandColor={brandColor}
-      >
+        brandColor={brandColor}>
         <div className="navbar-brand">
           <Link
             to="/"
@@ -105,8 +104,7 @@ const AdminSubHeader = () => {
             className="navbar-burger burger has-text-white"
             aria-label="menu"
             aria-expanded="false"
-            data-target="navbarBasicExample"
-          >
+            data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -119,8 +117,7 @@ const AdminSubHeader = () => {
           <div className="navbar-end">
             <a
               className="navbar-item has-text-white"
-              onClick={() => setAddPageModal(true)}
-            >
+              onClick={() => setAddPageModal(true)}>
               + Add Page
             </a>
           </div>
@@ -132,14 +129,12 @@ const AdminSubHeader = () => {
           <Button
             paddingless
             secondary
-            onClick={() => setUploadImageModal(true)}
-          >
-            <div className="edit-banner">
-              <h6 className="title is-6 has-text-weight-semibold">
-                banner area
-              </h6>
-              <h6 className="subtitle is-size-7 is-italic">1600 x 400</h6>
-            </div>
+            onClick={() => setUploadImageModal(true)}>
+            <img
+              className="edit-banner"
+              src={uploadBannerImg}
+              alt="upload banner"
+            />
           </Button>
         </div>
       </Hero>

@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
-import { startCase } from 'lodash';
 import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/react-hooks';
-import { Link } from 'react-router-dom';
 
 import { Title, Message, Loading } from './elements';
 import FilesList from './FilesList';
@@ -12,6 +10,7 @@ const filesQuery = gql`
     files(pageId: $pageId) {
       id
       name
+      displayName
       section
       fileType
       createdAt
@@ -35,6 +34,7 @@ const PageRow = ({ page }) => {
   }, [page.id]);
 
   const files = resultFiles.data ? resultFiles.data.files : [];
+  console.log('files', files);
 
   return (
     <React.Fragment>
