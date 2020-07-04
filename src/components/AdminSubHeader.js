@@ -12,7 +12,7 @@ import AddPageModal from './AddPageModal';
 import UploadImageModal from './UploadImageModal';
 import theme from '../utils/theme';
 
-import logoBg from '../assets/images/login-bg.jpg';
+import logoBg from '../assets/images/blank.png';
 import uploadBannerImg from '../assets/images/upload-banner.png';
 
 const Container = styled.div`
@@ -39,10 +39,10 @@ const Container = styled.div`
   }
 `;
 const NavbarMenu = styled.nav`
-  background-color: ${props => props.brandColor};
+  background-color: ${(props) => props.brandColor};
   .navbar-item {
     :hover {
-      background-color: ${props => props.brandColor};
+      background-color: ${(props) => props.brandColor};
     }
   }
 `;
@@ -50,6 +50,7 @@ const HeroImg = styled.img`
   height: 10rem;
   width: auto;
   object-fit: cover;
+  background-color: #eeeeee;
 `;
 const Hero = styled.section`
   .hero-body {
@@ -57,7 +58,7 @@ const Hero = styled.section`
     align-self: center;
   }
   .title {
-    color: ${props => props.brandColor};
+    color: ${(props) => props.brandColor};
   }
   .edit-banner {
     height: auto;
@@ -68,13 +69,13 @@ const Hero = styled.section`
 const AdminSubHeader = () => {
   const [addPageModal, setAddPageModal] = useState(false);
   const [uploadImageModal, setUploadImageModal] = useState(false);
-  const projectId = useStoreState(state => state.active.project);
+  const projectId = useStoreState((state) => state.active.project);
   const [project, resultProject] = useProjectDetails(projectId);
   const [executeUpdateProjectMutation, resUpdateProject] = useProjectUpdate();
   const [{ pages }, resultPages] = useProjectPages(projectId);
   // console.log('pages', pages);
 
-  const handleBannerUpload = uploadResponse => {
+  const handleBannerUpload = (uploadResponse) => {
     executeUpdateProjectMutation({
       variables: {
         id: projectId,
@@ -96,7 +97,8 @@ const AdminSubHeader = () => {
         className="navbar"
         role="navigation"
         aria-label="main navigation"
-        brandColor={brandColor}>
+        brandColor={brandColor}
+      >
         <div className="navbar-brand">
           <Link
             to="/"
@@ -104,7 +106,8 @@ const AdminSubHeader = () => {
             className="navbar-burger burger has-text-white"
             aria-label="menu"
             aria-expanded="false"
-            data-target="navbarBasicExample">
+            data-target="navbarBasicExample"
+          >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -117,7 +120,8 @@ const AdminSubHeader = () => {
           <div className="navbar-end">
             <a
               className="navbar-item has-text-white"
-              onClick={() => setAddPageModal(true)}>
+              onClick={() => setAddPageModal(true)}
+            >
               + Add Page
             </a>
           </div>
@@ -129,7 +133,8 @@ const AdminSubHeader = () => {
           <Button
             paddingless
             secondary
-            onClick={() => setUploadImageModal(true)}>
+            onClick={() => setUploadImageModal(true)}
+          >
             <img
               className="edit-banner"
               src={uploadBannerImg}
@@ -147,7 +152,7 @@ const AdminSubHeader = () => {
       <AddPageModal
         isActive={addPageModal}
         project={project}
-        handleChange={value => setAddPageModal(value)}
+        handleChange={(value) => setAddPageModal(value)}
         refetch={resultPages.refetch}
       />
       {resUpdateProject.error && (

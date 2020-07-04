@@ -20,7 +20,7 @@ const Container = styled.div`
     align-self: center;
   }
   span {
-    color: ${props => props.theme.primaryColor};
+    color: ${(props) => props.theme.primaryColor};
   }
   p {
     line-height: 1;
