@@ -34,7 +34,7 @@ const countries = [
   },
 ];
 
-const ProjectSetupForm = props => {
+const ProjectSetupForm = (props) => {
   const {
     values,
     touched,
@@ -351,7 +351,6 @@ export default withFormik({
     country: yup.string().required('Country is required!'),
     addressLine1: yup.string().required('Address is required!'),
     city: yup.string().required('City is required!'),
-    state: yup.string().required('County is required!'),
     postcode: yup.string().required('Post Code is required!'),
     paymentCardName: yup.string().required('Card Name is required!'),
     paymentCardNumber: yup.number().required('Card Number is required!'),
