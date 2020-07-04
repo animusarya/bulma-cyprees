@@ -6,7 +6,7 @@ import Cleave from 'cleave.js/react';
 
 import { InputGroup, Button, TextAreaGroup, ColorPicker } from './elements';
 
-const ProjectSetting = props => {
+const ProjectSetting = (props) => {
   const {
     values,
     touched,
@@ -93,7 +93,7 @@ const ProjectSetting = props => {
           id="brandColor"
           label="Brand Colour"
           color={values.brandColor}
-          onChange={val => setFieldValue('brandColor', val)}
+          onChange={(val) => setFieldValue('brandColor', val)}
         />
       </InputGroup>
       <TextAreaGroup
@@ -111,7 +111,7 @@ const ProjectSetting = props => {
       />
 
       <div>
-        <label className="label">Footer content information</label>
+        <label className="label">Footer contact information</label>
         <small>
           This information will show in the client view above in the footer
           disclaimer
