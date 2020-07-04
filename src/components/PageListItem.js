@@ -20,10 +20,14 @@ const removeMutation = gql`
 `;
 
 const LinkWrapper = styled(Link)`
-  color: ${props => props.theme.primaryColor};
+  color: ${(props) => props.theme.primaryColor};
   :hover {
-    color: ${props => props.theme.primaryColor};
+    color: ${(props) => props.theme.primaryColor};
   }
+`;
+
+const ButtonContainer = styled.div`
+  margin-top: -2px;
 `;
 
 const PageListItem = ({
@@ -84,7 +88,7 @@ const PageListItem = ({
   });
   const [{ isDragging }, drag] = useDrag({
     item: { type: 'card', id, index },
-    collect: monitor => ({
+    collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   });
@@ -113,7 +117,7 @@ const PageListItem = ({
       <td className="has-text-weight-semibold">
         <ContentEditable
           html={pageName}
-          onChange={e => setPageName(e.target.value)}
+          onChange={(e) => setPageName(e.target.value)}
           tagName="span"
         />
         {/* <LinkWrapper to={`/admin/project/${project.id}/pages/${page.id}`}>
@@ -133,23 +137,27 @@ const PageListItem = ({
         </LinkWrapper>
       </td>
       <td>
-        <Button
-          secondary
-          paddingless
-          onClick={() => {
-            swal('Are you confirm to remove this page?', {
-              buttons: ['Cancel', 'Confirm'],
-            }).then(async value => {
-              if (value) {
-                await executeMutationRemove({
-                  variables: { id: page.id },
-                });
-                refetch();
-              }
-            });
-          }}>
-          Remove
-        </Button>
+        <ButtonContainer>
+          <Button
+            secondary
+            paddingless
+            fontWeight="400"
+            onClick={() => {
+              swal('Are you confirm to remove this page?', {
+                buttons: ['Cancel', 'Confirm'],
+              }).then(async (value) => {
+                if (value) {
+                  await executeMutationRemove({
+                    variables: { id: page.id },
+                  });
+                  refetch();
+                }
+              });
+            }}
+          >
+            Remove
+          </Button>
+        </ButtonContainer>
       </td>
     </tr>
   );
