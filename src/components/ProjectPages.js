@@ -32,7 +32,7 @@ const ProjectPages = ({ pages: pagesItems, project, refetch }) => {
         });
       });
     },
-    [pages],
+    [pages]
   );
 
   return (
@@ -45,7 +45,7 @@ const ProjectPages = ({ pages: pagesItems, project, refetch }) => {
             <th>Name</th>
             <th className="has-text-centered">Type</th>
             <th className="has-text-centered">Status</th>
-            <th className="has-text-centered">Created At</th>
+            <th className="has-text-centered">Created</th>
             <th></th>
             <th></th>
           </tr>
