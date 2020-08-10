@@ -10,10 +10,10 @@ import { formatCurrency } from '../utils/helpers';
 
 const Form = styled.form`
   input {
-    border-color: ${propsInput => propsInput.theme.primaryColor};
+    border-color: ${(propsInput) => propsInput.theme.primaryColor};
     box-shadow: none;
     :hover {
-      border-color: ${propsInput => propsInput.theme.primaryColor};
+      border-color: ${(propsInput) => propsInput.theme.primaryColor};
     }
   }
   .columns {
@@ -21,7 +21,7 @@ const Form = styled.form`
   }
 `;
 
-const ProjectSetupForm = props => {
+const ProjectSetupForm = (props) => {
   const {
     values,
     touched,
@@ -53,7 +53,8 @@ const ProjectSetupForm = props => {
         isWidth
         border
         label="Project URL Slug"
-        errors={errors.slug && touched.slug ? errors.slug : undefined}>
+        errors={errors.slug && touched.slug ? errors.slug : undefined}
+      >
         <Cleave
           placeholder="colliers"
           name="slug"
@@ -97,7 +98,7 @@ const ProjectSetupForm = props => {
         }
         options={
           packages
-            ? packages.map(item => ({
+            ? packages.map((item) => ({
                 value: item.subscriptionPlanId,
                 title: `${item.name} - ${formatCurrency(item.price)} per ${
                   item.durationInMonths
@@ -134,7 +135,9 @@ export default withFormik({
   }),
   validationSchema: yup.object().shape({
     name: yup.string().required('Name is required!'),
-    slug: yup.string().required('Default URL is required!'),
+    slug: yup
+      .string()
+      .required('Default URL is required! e.g: intellishare.online/colliners'),
     customDomain: yup.string(),
     subscriptionPlanId: yup.string().required('Subscription is required!'),
   }),
