@@ -18,6 +18,7 @@ import { Message, Loading } from '../../components/elements';
 const Container = styled.div`
   .content {
     align-self: center;
+    overflow: scroll !important;
   }
   span {
     color: ${(props) => props.theme.primaryColor};

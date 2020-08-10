@@ -15,6 +15,8 @@ import ClientFooter from '../../components/ClientFooter';
 
 const Container = styled.div`
   min-height: 50vh;
+  overflow: scroll;
+
   thead {
     background: transparent;
   }
@@ -48,7 +50,7 @@ const Dashboard = () => {
         <Message type="error">{resultPages.error.message}</Message>
       )}
       <Container>
-        {dataRoomPages.map(page => (
+        {dataRoomPages.map((page) => (
           <PageRow key={page.id} project={project} page={page} />
         ))}
       </Container>

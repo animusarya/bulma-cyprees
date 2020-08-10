@@ -34,7 +34,7 @@ const PageRow = ({ page }) => {
   }, [page.id]);
 
   const files = resultFiles.data ? resultFiles.data.files : [];
-  console.log('files', files);
+  // console.log('files', files);
 
   return (
     <React.Fragment>
