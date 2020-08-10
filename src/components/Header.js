@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 import logoAlt from '../assets/images/logo-alt.png';
 
 const Container = styled.div`
-  background-color: ${props => props.theme.secondaryColor};
+  background-color: ${(props) => props.theme.secondaryColor};
   .navbar {
-    background-color: ${props => props.theme.secondaryColor};
+    background-color: ${(props) => props.theme.secondaryColor};
   }
   .name {
     color: #e8e9ea;
@@ -47,7 +47,7 @@ const Button = styled.button`
 `;
 
 const Header = () => {
-  const userData = useStoreState(state => state.user.data);
+  const userData = useStoreState((state) => state.user.data);
   const handleLogout = () => {
     window.localStorage.clear();
     window.location.reload(true);
@@ -61,7 +61,8 @@ const Header = () => {
           <nav
             className="navbar"
             role="navigation"
-            aria-label="main navigation">
+            aria-label="main navigation"
+          >
             <div className="navbar-brand">
               <LinkLogo className="navbar-item" to="/super-admin/dashboard">
                 <Logo src={logoAlt} alt="logo" />
@@ -71,7 +72,8 @@ const Header = () => {
                 className="navbar-burger burger"
                 aria-label="menu"
                 aria-expanded="false"
-                data-target="navbarBasicExample">
+                data-target="navbarBasicExample"
+              >
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -96,7 +98,8 @@ const Header = () => {
           <nav
             className="navbar"
             role="navigation"
-            aria-label="main navigation">
+            aria-label="main navigation"
+          >
             <div className="navbar-brand">
               <Link className="navbar-item" to="/admin/dashboard">
                 <Logo src={logoAlt} alt="logo" />
@@ -106,7 +109,8 @@ const Header = () => {
                 className="navbar-burger burger"
                 aria-label="menu"
                 aria-expanded="false"
-                data-target="navbarBasicExample">
+                data-target="navbarBasicExample"
+              >
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
