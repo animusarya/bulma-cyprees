@@ -6,16 +6,14 @@ const Container = styled.div`
     padding: 1.5rem 1.5rem 1.5rem;
   }
   .disclaimer {
-    background-color: ${props => props.theme.secondaryColor};
+    background-color: ${(props) => props.theme.secondaryColor};
   }
 `;
 
 const FooterTitle = styled.h2`
-  font-size: ${props => props.theme.fontSizeMedium} !important;
-  color: ${props => props.theme.fontDark} !important;
-  @media only screen and (max-width: 768px) {
-    font-size: ${props => props.theme.fontSizeLarge} !important;
-  }
+  font-size: ${(props) => props.theme.fontSizeMedium} !important;
+  color: ${(props) => props.theme.fontDark} !important;
+  font-size: ${(props) => props.theme.fontSizeLarge} !important;
 `;
 
 const ContactInfo = styled.p`

@@ -21,6 +21,8 @@ const Form = styled.form`
   }
 `;
 
+const infoIcon = <i className="fas fa-info-circle"></i>;
+
 const ProjectSetupForm = (props) => {
   const {
     values,
@@ -71,6 +73,8 @@ const ProjectSetupForm = (props) => {
         border
         type="text"
         label="Custom Domain Name"
+        infoIcon={infoIcon}
+        iconLabel="Please contact us to help you with this"
         placeholder="www.projectname.co.uk"
         name="customDomain"
         value={values.customDomain}

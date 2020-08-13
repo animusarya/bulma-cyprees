@@ -14,6 +14,9 @@ import uploadLogoImg from '../assets/images/upload-logo.png';
 const Container = styled.div`
   margin-top: 1rem;
   padding: 0 2rem;
+  @media only screen and (max-width: 768px) {
+    margin-top: none;
+  }
   .column {
     display: flex;
     justify-content: space-between;
