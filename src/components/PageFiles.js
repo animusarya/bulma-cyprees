@@ -36,6 +36,12 @@ const Container = styled.div`
   }
 `;
 
+const TableContainer = styled.div`
+  @media only screen and (max-width: 768px) {
+    overflow: scroll;
+  }
+`;
+
 const PageFiles = ({ project, page, isPublic }) => {
   const resultFiles = useQuery(filesQuery, {
     variables: { pageId: page.id },
@@ -48,7 +54,7 @@ const PageFiles = ({ project, page, isPublic }) => {
   const files =
     resultFiles.data && resultFiles.data.files ? resultFiles.data.files : {};
 
-  const handleFileUpload = data => {
+  const handleFileUpload = (data) => {
     executeFileUploadMutation({
       variables: {
         input: {
@@ -74,9 +80,11 @@ const PageFiles = ({ project, page, isPublic }) => {
         <Message type="error">{resFileUpload.error.message}</Message>
       )}
       {resultFiles.loading || resFileUpload.loading ? <Loading /> : null}
-      {files.length > 0 && (
-        <FilesList files={files} isAdmin refetch={resultFiles.refetch} />
-      )}
+      <TableContainer>
+        {files.length > 0 && (
+          <FilesList files={files} isAdmin refetch={resultFiles.refetch} />
+        )}
+      </TableContainer>
     </Container>
   );
 };

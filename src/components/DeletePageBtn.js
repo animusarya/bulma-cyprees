@@ -22,7 +22,7 @@ const DeletePageBtn = ({ history, match }) => {
   const { id, pageId } = match.params;
 
   return (
-    <div className="is-pulled-right	">
+    <div className="has-text-right-desktop">
       {resRemove.error && (
         <Message type="error">{resRemove.error.message}</Message>
       )}
@@ -31,7 +31,7 @@ const DeletePageBtn = ({ history, match }) => {
         onClick={() => {
           swal('Are you confirm to delete this item?', {
             buttons: ['Cancel', 'Confirm'],
-          }).then(async value => {
+          }).then(async (value) => {
             if (value) {
               await executePageRemoveMutation({
                 variables: {
@@ -42,7 +42,8 @@ const DeletePageBtn = ({ history, match }) => {
               history.push(`/admin/project/${id}`);
             }
           });
-        }}>
+        }}
+      >
         Delete Page
       </Button>
     </div>
