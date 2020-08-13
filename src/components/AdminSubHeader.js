@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
 
 import useProjectDetails from '../hooks/useProjectDetails';
@@ -45,6 +44,16 @@ const NavbarMenu = styled.nav`
       background-color: ${(props) => props.brandColor};
     }
   }
+  button {
+    background: #231f20;
+
+    :focus {
+      outline: -webkit-focus-ring-color auto 0px;
+    }
+  }
+  .navbar-menu {
+    background: #231f20;
+  }
 `;
 const HeroImg = styled.img`
   height: 10rem;
@@ -67,6 +76,7 @@ const Hero = styled.section`
 `;
 
 const AdminSubHeader = () => {
+  const [active, setActive] = useState(false);
   const [addPageModal, setAddPageModal] = useState(false);
   const [uploadImageModal, setUploadImageModal] = useState(false);
   const projectId = useStoreState((state) => state.active.project);
@@ -100,20 +110,23 @@ const AdminSubHeader = () => {
         brandColor={brandColor}
       >
         <div className="navbar-brand">
-          <Link
-            to="/"
-            role="button"
-            className="navbar-burger burger has-text-white"
+          <button
+            type="button"
+            className={active ? 'is-active navbar-burger' : 'navbar-burger'}
             aria-label="menu"
             aria-expanded="false"
             data-target="navbarBasicExample"
+            onClick={() => setActive(!active)}
           >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
-          </Link>
-        </div>
-        <div id="navbarBasicExample" className="navbar-menu">
+          </button>
+        </div>{' '}
+        <div
+          id="navbarBasicExample"
+          className={active ? 'navbar-menu is-active' : 'navbar-menu'}
+        >
           <div className="navbar-start">
             {pages && <AdminSubHeaderNav project={project} pages={pages} />}
           </div>

@@ -91,7 +91,7 @@ const AdminHeader = () => {
             </Button>
           </div>
           <div>
-            <div className="has-text-right">
+            <div className="has-text-right is-size-1-mobile">
               <Title marginbottom="0px">{startCase(project.name)}</Title>
             </div>
           </div>

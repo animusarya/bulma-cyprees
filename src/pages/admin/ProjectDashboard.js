@@ -19,6 +19,9 @@ const Container = styled.div`
   .content {
     align-self: center;
     overflow: scroll !important;
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
   span {
     color: ${(props) => props.theme.primaryColor};
