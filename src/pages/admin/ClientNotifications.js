@@ -47,7 +47,7 @@ const ClientNotifications = ({ match }) => {
     return swal({
       title: 'Do you confirm to send emails to all of your clients?',
       buttons: ['Cancel', 'Send!'],
-    }).then(async value => {
+    }).then(async (value) => {
       if (value) {
         await sendNotification({ variables: { projectId } });
         swal('Notifications sent successfully!');
@@ -84,7 +84,8 @@ const ClientNotifications = ({ match }) => {
               <ClientNotificationEmailForm
                 enableReinitialize
                 initialValues={project}
-                onSubmit={async data => {
+                project={project}
+                onSubmit={async (data) => {
                   await executeMutation({
                     variables: {
                       id: project.id,

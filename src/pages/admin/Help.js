@@ -21,7 +21,9 @@ const helpQuery = gql`
 `;
 
 const Help = () => {
-  const supportData = useQuery(helpQuery, { fetchPolicy: 'cache-and-network' });
+  const supportData = useQuery(helpQuery, {
+    fetchPolicy: 'network-only',
+  });
   const support = supportData.data ? supportData.data.support : [];
 
   return (
@@ -36,7 +38,7 @@ const Help = () => {
           <MainColumn>
             <Heading>Help</Heading>
             <div className="columns">
-              {support.map(item => (
+              {support.map((item) => (
                 <div className="column" key={item.id}>
                   <Subtitle>{item.name}</Subtitle>
                   <section

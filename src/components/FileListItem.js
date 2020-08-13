@@ -29,7 +29,7 @@ const removeFileMutation = gql`
 const SyncIcon = styled.img`
   width: 20px;
   height: auto;
-  animation-name: ${props => (props.isLoading ? 'spin' : 'none')};
+  animation-name: ${(props) => (props.isLoading ? 'spin' : 'none')};
   animation-duration: 4000ms;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
@@ -114,7 +114,7 @@ const FileListItem = ({
   });
   const [{ isDragging }, drag] = useDrag({
     item: { type: 'card', id, index },
-    collect: monitor => ({
+    collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   });
@@ -122,7 +122,7 @@ const FileListItem = ({
   drag(drop(ref));
   // drag n drop
 
-  const handleFileReplace = useCallback(data => {
+  const handleFileReplace = useCallback((data) => {
     executeUpdate({
       variables: {
         id,
@@ -162,7 +162,7 @@ const FileListItem = ({
         {isAdmin ? (
           <ContentEditable
             html={fileName}
-            onChange={e => setFileName(e.target.value)}
+            onChange={(e) => setFileName(e.target.value)}
             tagName="span"
           />
         ) : (
@@ -183,7 +183,7 @@ const FileListItem = ({
         <td className="has-text-centered">
           <Dropzone
             onUpload={handleFileReplace}
-            handleLoading={isLoading => setLoading(isLoading)}
+            handleLoading={(isLoading) => setLoading(isLoading)}
           >
             <SyncIcon src={loadingImg} isLoading={loading} />
           </Dropzone>
@@ -197,7 +197,7 @@ const FileListItem = ({
             onClick={() => {
               swal('Are you confirm to delete this item?', {
                 buttons: ['Cancel', 'Confirm'],
-              }).then(async value => {
+              }).then(async (value) => {
                 if (value) {
                   await executeMutationDelete({
                     variables: { id: file.id },

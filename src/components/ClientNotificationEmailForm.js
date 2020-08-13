@@ -12,7 +12,7 @@ const Form = styled.form`
     justify-content: flex-end;
   }
 `;
-const ClientNotificationEmailForm = props => {
+const ClientNotificationEmailForm = (props) => {
   const {
     values,
     touched,
@@ -21,8 +21,8 @@ const ClientNotificationEmailForm = props => {
     handleChange,
     handleBlur,
     handleSubmit,
+    project,
   } = props;
-
   return (
     <Form onSubmit={handleSubmit}>
       <InputGroup
@@ -31,7 +31,7 @@ const ClientNotificationEmailForm = props => {
         border
         isHorizontal
         label="Subject of email"
-        placeholder="Project Arden Notification"
+        placeholder={`Project ${project.name} Notification`}
         name="subject"
         value={values.subject}
         onChange={handleChange}
@@ -71,10 +71,10 @@ ClientNotificationEmailForm.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: ({ initialValues }) => ({
+  mapPropsToValues: ({ initialValues, project }) => ({
     subject: initialValues.clientEmailTemplate
       ? initialValues.clientEmailTemplate.subject
-      : '',
+      : `Project ${project.name} Notification`,
     body: initialValues.clientEmailTemplate
       ? initialValues.clientEmailTemplate.body
       : '',

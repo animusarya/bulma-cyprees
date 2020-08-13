@@ -34,7 +34,7 @@ const ManagePage = ({ match }) => {
 
   const resultPage = useQuery(pageQuery, {
     variables: { id: pageId },
-    fetchPolicy: 'cache-and-network',
+    fetchPolicy: 'network-only',
   });
 
   const page =

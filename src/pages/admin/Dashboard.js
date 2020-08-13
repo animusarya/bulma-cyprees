@@ -36,18 +36,18 @@ const Container = styled.div`
 `;
 
 const LinkWrapper = styled(Link)`
-  color: ${props => props.theme.primaryColor};
+  color: ${(props) => props.theme.primaryColor};
   :hover {
-    color: ${props => props.theme.primaryColor};
+    color: ${(props) => props.theme.primaryColor};
   }
 `;
 
 const Dashboard = () => {
   const resultProjects = useQuery(projectsQuery, {
-    fetchPolicy: 'cache-and-network',
+    fetchPolicy: 'network-only',
   });
   const updateProject = useStoreActions(
-    actions => actions.active.updateProject,
+    (actions) => actions.active.updateProject,
   );
 
   useEffect(() => {
@@ -55,7 +55,6 @@ const Dashboard = () => {
   }, []);
 
   const projects = (resultProjects.data && resultProjects.data.projects) || [];
-
   return (
     <Layout noContainer>
       <Seo title="Dashboard Admin" description="List of Projects Here" />
@@ -105,7 +104,7 @@ const Dashboard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {projects.map(project => (
+                    {projects.map((project) => (
                       <tr key={project.id}>
                         <td>
                           <Link to={`/admin/project/${project.id}`}>
