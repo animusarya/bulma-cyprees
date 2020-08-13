@@ -8,6 +8,7 @@ const theme = {
   secondaryColor: '#25313f',
   fontDark: '#25313f',
   borderColor: '#d4d6d5',
+  menuBackgroundColor: '#231f20',
   fontSizeSuperLarge: '30px',
   fontSizeExtraLarge: '26px',
   fontSizeLarge: '20px',

@@ -45,14 +45,14 @@ const NavbarMenu = styled.nav`
     }
   }
   button {
-    background: #231f20;
+    background: ${(props) => props.theme.menuBackgroundColor};
 
     :focus {
       outline: -webkit-focus-ring-color auto 0px;
     }
   }
   .navbar-menu {
-    background: #231f20;
+    background: ${(props) => props.theme.menuBackgroundColor};
   }
 `;
 const HeroImg = styled.img`

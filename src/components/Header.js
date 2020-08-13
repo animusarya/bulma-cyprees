@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useStoreState } from 'easy-peasy';
 import { Link } from 'react-router-dom';
@@ -9,9 +9,6 @@ const Container = styled.div`
   background-color: ${(props) => props.theme.secondaryColor};
   .navbar {
     background-color: ${(props) => props.theme.secondaryColor};
-  }
-  .name {
-    color: #e8e9ea;
   }
   .navbar-item {
     background: transparent !important;
@@ -46,7 +43,12 @@ const Button = styled.button`
   }
 `;
 
+const AdminBurgerMenu = styled.div`
+  background: ${(props) => props.theme.menuBackgroundColor};
+`;
+
 const Header = () => {
+  const [active, setActive] = useState(false);
   const userData = useStoreState((state) => state.user.data);
   const handleLogout = () => {
     window.localStorage.clear();
@@ -105,21 +107,24 @@ const Header = () => {
                 <Logo src={logoAlt} alt="logo" />
               </Link>
               <a
-                role="button"
-                className="navbar-burger burger"
+                className={active ? 'is-active navbar-burger' : 'navbar-burger'}
                 aria-label="menu"
                 aria-expanded="false"
                 data-target="navbarBasicExample"
+                onClick={() => setActive(!active)}
               >
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
               </a>
             </div>
-            <div className="navbar-menu">
+            <AdminBurgerMenu
+              id="navbarBasicExample"
+              className={active ? 'navbar-menu is-active' : 'navbar-menu'}
+            >
               <div className="navbar-end">
-                <div className="navbar-item">
-                  <div className="name">{userData.email}</div>
+                <a className="navbar-item has-text-white">{userData.email}</a>
+                <a className="navbar-item has-text-white">
                   <div className="buttons">
                     <Button className="button">
                       <LinkWrapper to="/admin/settings">
@@ -130,9 +135,9 @@ const Header = () => {
                       <i className="fas fa-power-off"></i>
                     </Button>
                   </div>
-                </div>
+                </a>
               </div>
-            </div>
+            </AdminBurgerMenu>
           </nav>
         </Container>
       )}

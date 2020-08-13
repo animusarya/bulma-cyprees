@@ -9,7 +9,6 @@ import useProjectUpdate from '../hooks/useProjectUpdate';
 import { Title, Button, Message } from './elements';
 import UploadImageModal from './UploadImageModal';
 
-import logo from '../assets/images/logo.png';
 import uploadLogoImg from '../assets/images/upload-logo.png';
 
 const Container = styled.div`
