@@ -21,7 +21,7 @@ const useProjectPages = projectId => {
   // fetch pages
   const [getPages, resultPages] = useLazyQuery(pagesQuery, {
     variables: { projectId },
-    fetchPolicy: 'cache-and-network',
+    fetchPolicy: 'network-only',
   });
 
   useEffect(() => {

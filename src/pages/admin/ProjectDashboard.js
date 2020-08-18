@@ -24,7 +24,7 @@ const Container = styled.div`
     }
   }
   span {
-    color: ${(props) => props.theme.primaryColor};
+    color: ${props => props.theme.primaryColor};
   }
   p {
     line-height: 1;
