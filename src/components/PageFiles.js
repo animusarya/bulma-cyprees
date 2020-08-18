@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 
 import { Message, Loading, Dropzone } from './elements';

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import { useStoreActions } from 'easy-peasy';
 import dayjs from 'dayjs';
@@ -36,9 +36,9 @@ const Container = styled.div`
 `;
 
 const LinkWrapper = styled(Link)`
-  color: ${(props) => props.theme.primaryColor};
+  color: ${props => props.theme.primaryColor};
   :hover {
-    color: ${(props) => props.theme.primaryColor};
+    color: ${props => props.theme.primaryColor};
   }
 `;
 
@@ -47,12 +47,12 @@ const Dashboard = () => {
     fetchPolicy: 'network-only',
   });
   const updateProject = useStoreActions(
-    (actions) => actions.active.updateProject,
+    actions => actions.active.updateProject,
   );
 
   useEffect(() => {
     updateProject(null);
-  }, []);
+  }, [updateProject]);
 
   const projects = (resultProjects.data && resultProjects.data.projects) || [];
   return (
@@ -104,7 +104,7 @@ const Dashboard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {projects.map((project) => (
+                    {projects.map(project => (
                       <tr key={project.id}>
                         <td>
                           <Link to={`/admin/project/${project.id}`}>

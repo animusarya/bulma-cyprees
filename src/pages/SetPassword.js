@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 
 import Seo from '../components/Seo';

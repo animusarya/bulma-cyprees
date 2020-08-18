@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -87,8 +87,7 @@ const Dashboard = () => {
                       <tr key={user.id}>
                         <td>
                           <LinkWrapper
-                            to={`/super-admin/client/${user.id}/projects`}
-                          >
+                            to={`/super-admin/client/${user.id}/projects`}>
                             {user.email}
                           </LinkWrapper>
                         </td>

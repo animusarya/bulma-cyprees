@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import { filter } from 'lodash';
 
@@ -28,7 +28,7 @@ const useProjectPages = projectId => {
     if (projectId) {
       getPages();
     }
-  }, [projectId]);
+  }, [projectId, getPages]);
 
   const pages =
     resultPages.data && resultPages.data.pages ? resultPages.data.pages : [];

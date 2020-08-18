@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import gql from 'graphql-tag';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/client';
 
 import { Title, Message, Loading } from './elements';
 import FilesList from './FilesList';
@@ -31,7 +31,7 @@ const PageRow = ({ page }) => {
     if (page.id) {
       getFiles();
     }
-  }, [page.id]);
+  }, [page.id, getFiles]);
 
   const files = resultFiles.data ? resultFiles.data.files : [];
   // console.log('files', files);

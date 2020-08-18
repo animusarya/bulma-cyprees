@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 import { withRouter } from 'react-router';
@@ -31,7 +31,7 @@ const DeletePageBtn = ({ history, match }) => {
         onClick={() => {
           swal('Are you confirm to delete this item?', {
             buttons: ['Cancel', 'Confirm'],
-          }).then(async (value) => {
+          }).then(async value => {
             if (value) {
               await executePageRemoveMutation({
                 variables: {
@@ -42,8 +42,7 @@ const DeletePageBtn = ({ history, match }) => {
               history.push(`/admin/project/${id}`);
             }
           });
-        }}
-      >
+        }}>
         Delete Page
       </Button>
     </div>

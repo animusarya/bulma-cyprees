@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
@@ -41,16 +41,19 @@ const Container = styled.div`
 `;
 
 const WysiwygEditor = ({ onChange, value }) => {
+  const [editor, setEditor] = useState(undefined);
   const contentBlock = htmlToDraft(value);
 
-  let [editor, setEditor] = useState();
-  if (contentBlock) {
-    const contentState = ContentState.createFromBlockArray(
-      contentBlock.contentBlocks,
-    );
-    const editorState = EditorState.createWithContent(contentState);
-    [editor, setEditor] = useState(editorState);
-  }
+  useEffect(() => {
+    if (contentBlock) {
+      const contentState = ContentState.createFromBlockArray(
+        contentBlock.contentBlocks,
+      );
+      const editorState = EditorState.createWithContent(contentState);
+      setEditor(editorState);
+      // [editor, setEditor] = useState(editorState);
+    }
+  }, []);
 
   return (
     <Container>

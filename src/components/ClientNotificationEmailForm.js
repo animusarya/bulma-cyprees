@@ -12,7 +12,7 @@ const Form = styled.form`
     justify-content: flex-end;
   }
 `;
-const ClientNotificationEmailForm = (props) => {
+const ClientNotificationEmailForm = props => {
   const {
     values,
     touched,
@@ -22,6 +22,7 @@ const ClientNotificationEmailForm = (props) => {
     handleBlur,
     handleSubmit,
     project,
+    loading,
   } = props;
   return (
     <Form onSubmit={handleSubmit}>
@@ -53,7 +54,7 @@ const ClientNotificationEmailForm = (props) => {
       />
       <div className="button-field">
         <div className="">
-          <Button disabled={isSubmitting}>Notify All Clients</Button>
+          <Button disabled={isSubmitting || loading}>Notify All Clients</Button>
         </div>
       </div>
     </Form>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import gql from 'graphql-tag';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/client';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -47,7 +47,7 @@ const ImageGallery = ({ page }) => {
     if (page.id) {
       getFiles();
     }
-  }, [page.id]);
+  }, [page.id, getFiles]);
 
   const files = resultFiles.data ? resultFiles.data.files : [];
 

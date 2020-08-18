@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import update from 'immutability-helper';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 
@@ -46,7 +46,7 @@ const FilesList = ({ files: items, isAdmin, refetch }) => {
         });
       });
     },
-    [files],
+    [files, executeUpdate],
   );
 
   return (

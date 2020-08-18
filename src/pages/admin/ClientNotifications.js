@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import swal from 'sweetalert';
 import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 
 import useProjectDetails from '../../hooks/useProjectDetails';
 import useProjectUpdate from '../../hooks/useProjectUpdate';
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
-import { Heading, Title, Message, Button } from '../../components/elements';
+import { Heading, Title, Message } from '../../components/elements';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
@@ -47,7 +47,7 @@ const ClientNotifications = ({ match }) => {
     return swal({
       title: 'Do you confirm to send emails to all of your clients?',
       buttons: ['Cancel', 'Send!'],
-    }).then(async (value) => {
+    }).then(async value => {
       if (value) {
         await sendNotification({ variables: { projectId } });
         swal('Notifications sent successfully!');
@@ -85,7 +85,8 @@ const ClientNotifications = ({ match }) => {
                 enableReinitialize
                 initialValues={project}
                 project={project}
-                onSubmit={async (data) => {
+                loading={loading}
+                onSubmit={async data => {
                   await executeMutation({
                     variables: {
                       id: project.id,

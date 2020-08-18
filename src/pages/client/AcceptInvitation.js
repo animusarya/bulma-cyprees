@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
@@ -32,34 +32,38 @@ const AcceptInvitation = ({ match, history }) => {
 
   const me = resultMe.data ? resultMe.data.me : {};
 
-  useEffect(async () => {
-    if (me && clientEmail === me.email) {
-      // is already logged in
-      await executeMutation({
-        variable: {
-          id: projectId,
-          input: {
-            email: clientEmail,
-            status: 'accepted',
+  useEffect(() => {
+    const handleSuccess = async () => {
+      if (me && clientEmail === me.email) {
+        // is already logged in
+        await executeMutation({
+          variable: {
+            id: projectId,
+            input: {
+              email: clientEmail,
+              status: 'accepted',
+            },
           },
-        },
-      });
-      setLoading(false);
+        });
+        setLoading(false);
 
-      // redirect to project
-      history.push(`/admin/project/${projectId}`);
-    }
-    if (me && clientEmail !== me.email) {
-      setLoading(false);
-      window.localStorage.clear();
-      window.location.reload(true);
-      window.location.replace(`/register/${projectId}/${clientEmail}`);
-    }
-    if (!me) {
-      setLoading(false);
-      history.push(`/register/${projectId}/${clientEmail}`);
-    }
-  }, [me]);
+        // redirect to project
+        history.push(`/admin/project/${projectId}`);
+      }
+      if (me && clientEmail !== me.email) {
+        setLoading(false);
+        window.localStorage.clear();
+        window.location.reload(true);
+        window.location.replace(`/register/${projectId}/${clientEmail}`);
+      }
+      if (!me) {
+        setLoading(false);
+        history.push(`/register/${projectId}/${clientEmail}`);
+      }
+    };
+
+    handleSuccess();
+  }, [me, clientEmail, executeMutation, history, projectId]);
 
   return (
     <Layout>{loading ? <Loading /> : <Message>Redirecting...</Message>}</Layout>

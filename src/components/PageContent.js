@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import { isNull } from 'lodash';
 import swal from 'sweetalert';
@@ -46,8 +46,7 @@ const PageContent = ({ page }) => {
           onClick={async () => {
             await executeUpdateMutation({ variables: { id: page.id, input } });
             swal('Page updated successfully');
-          }}
-        >
+          }}>
           Update
         </Button>
       </ButtonContainer>

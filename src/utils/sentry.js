@@ -1,5 +1,4 @@
 import * as Sentry from '@sentry/browser';
-import { BrowserClient } from '@sentry/browser';
 
 import config from './config';
 

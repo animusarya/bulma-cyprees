@@ -24,13 +24,13 @@ const Layout = ({ children, noContainer }) => {
 
   useEffect(() => {
     updateOrigin(window.location.origin);
-  }, []);
+  }, [updateOrigin]);
 
   useEffect(() => {
     if (!isEmpty(project)) {
       updateProject(project);
     }
-  }, [project]);
+  }, [project, updateProject]);
 
   return (
     <Container className={noContainer ? 'container is-fluid' : 'container'}>

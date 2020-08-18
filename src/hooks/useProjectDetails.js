@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useStoreActions } from 'easy-peasy';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 
 const projectQuery = gql`
@@ -67,11 +67,11 @@ const useProjectDetails = projectId => {
     if (projectId) {
       getProject();
     }
-  }, [projectId]);
+  }, [projectId, getProject]);
 
   useEffect(() => {
     updateProject(projectId);
-  }, [projectId]);
+  }, [projectId, updateProject]);
 
   return [project, resultProject];
 };

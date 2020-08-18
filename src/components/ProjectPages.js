@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import update from 'immutability-helper';
 
@@ -32,7 +32,7 @@ const ProjectPages = ({ pages: pagesItems, project, refetch }) => {
         });
       });
     },
-    [pages]
+    [pages, executeUpdate],
   );
 
   return (

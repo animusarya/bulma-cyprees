@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
@@ -38,7 +38,7 @@ const Help = () => {
           <MainColumn>
             <Heading>Help</Heading>
             <div className="columns">
-              {support.map((item) => (
+              {support.map(item => (
                 <div className="column" key={item.id}>
                   <Subtitle>{item.name}</Subtitle>
                   <section

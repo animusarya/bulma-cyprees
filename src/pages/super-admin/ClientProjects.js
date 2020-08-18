@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
@@ -129,8 +129,7 @@ const ProjectsClient = ({ match }) => {
                       </td>
                       <td className="is-uppercase actions">
                         <LinkWrapper
-                          to={`/super-admin/client/${match.params.clientId}/project/${project.id}/info`}
-                        >
+                          to={`/super-admin/client/${match.params.clientId}/project/${project.id}/info`}>
                           manage{' '}
                         </LinkWrapper>
                       </td>
@@ -154,8 +153,7 @@ const ProjectsClient = ({ match }) => {
                                 });
                               }
                             });
-                          }}
-                        >
+                          }}>
                           RENEW
                         </Button>
                       </td>
@@ -175,8 +173,7 @@ const ProjectsClient = ({ match }) => {
                                 result.refetch();
                               }
                             });
-                          }}
-                        >
+                          }}>
                           DELETE
                         </Button>
                       </td>
@@ -192,8 +189,7 @@ const ProjectsClient = ({ match }) => {
                             //     await executeMutationRemove({ id: project.id });
                             //   }
                             // });
-                          }}
-                        >
+                          }}>
                           EXPORT
                         </Button>
                       </td>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 import { isEmpty } from 'lodash';
@@ -138,8 +138,7 @@ const Pricing = () => {
                           <Button
                             secondary
                             paddingless
-                            onClick={() => setEditClient(item)}
-                          >
+                            onClick={() => setEditClient(item)}>
                             EDIT
                           </Button>
                         </td>

@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 import logoAlt from '../assets/images/logo-alt.png';
 
 const Container = styled.div`
-  background-color: ${(props) => props.theme.secondaryColor};
+  background-color: ${props => props.theme.secondaryColor};
   .navbar {
-    background-color: ${(props) => props.theme.secondaryColor};
+    background-color: ${props => props.theme.secondaryColor};
   }
   .navbar-item {
     background: transparent !important;
@@ -44,12 +44,12 @@ const Button = styled.button`
 `;
 
 const AdminBurgerMenu = styled.div`
-  background: ${(props) => props.theme.menuBackgroundColor};
+  background: ${props => props.theme.menuBackgroundColor};
 `;
 
 const Header = () => {
   const [active, setActive] = useState(false);
-  const userData = useStoreState((state) => state.user.data);
+  const userData = useStoreState(state => state.user.data);
   const handleLogout = () => {
     window.localStorage.clear();
     window.location.reload(true);
@@ -63,8 +63,7 @@ const Header = () => {
           <nav
             className="navbar"
             role="navigation"
-            aria-label="main navigation"
-          >
+            aria-label="main navigation">
             <div className="navbar-brand">
               <LinkLogo className="navbar-item" to="/super-admin/dashboard">
                 <Logo src={logoAlt} alt="logo" />
@@ -74,8 +73,7 @@ const Header = () => {
                 className="navbar-burger burger"
                 aria-label="menu"
                 aria-expanded="false"
-                data-target="navbarBasicExample"
-              >
+                data-target="navbarBasicExample">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -100,8 +98,7 @@ const Header = () => {
           <nav
             className="navbar"
             role="navigation"
-            aria-label="main navigation"
-          >
+            aria-label="main navigation">
             <div className="navbar-brand">
               <Link className="navbar-item" to="/admin/dashboard">
                 <Logo src={logoAlt} alt="logo" />
@@ -111,8 +108,7 @@ const Header = () => {
                 aria-label="menu"
                 aria-expanded="false"
                 data-target="navbarBasicExample"
-                onClick={() => setActive(!active)}
-              >
+                onClick={() => setActive(!active)}>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -120,11 +116,12 @@ const Header = () => {
             </div>
             <AdminBurgerMenu
               id="navbarBasicExample"
-              className={active ? 'navbar-menu is-active' : 'navbar-menu'}
-            >
+              className={active ? 'navbar-menu is-active' : 'navbar-menu'}>
               <div className="navbar-end">
-                <a className="navbar-item has-text-white">{userData.email}</a>
-                <a className="navbar-item has-text-white">
+                <span className="navbar-item has-text-white">
+                  {userData.email}
+                </span>
+                <span className="navbar-item has-text-white">
                   <div className="buttons">
                     <Button className="button">
                       <LinkWrapper to="/admin/settings">
@@ -135,7 +132,7 @@ const Header = () => {
                       <i className="fas fa-power-off"></i>
                     </Button>
                   </div>
-                </a>
+                </span>
               </div>
             </AdminBurgerMenu>
           </nav>

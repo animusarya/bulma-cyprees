@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
@@ -96,8 +96,7 @@ const ForgotPassword = ({ match }) => {
                     <nav
                       className="navbar"
                       role="navigation"
-                      aria-label="main navigation"
-                    >
+                      aria-label="main navigation">
                       <div className="navbar-brand">
                         {activeProject.logo ? (
                           <Logo

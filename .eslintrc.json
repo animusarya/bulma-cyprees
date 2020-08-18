@@ -1,13 +1,7 @@
 {
   "parser": "babel-eslint",
-  "extends": [
-    "airbnb",
-    "prettier",
-    "prettier/react"
-  ],
-  "plugins": [
-    "prettier"
-  ],
+  "extends": ["airbnb", "prettier", "prettier/react"],
+  "plugins": ["prettier"],
   "rules": {
     "func-names": 0,
     "prettier/prettier": [
@@ -16,16 +10,14 @@
         "singleQuote": true,
         "trailingComma": "all",
         "bracketSpacing": true,
-        "jsxBracketSameLine": true
+        "jsxBracketSameLine": true,
+        "quoteProps": "as-needed"
       }
     ],
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
+        "extensions": [".js", ".jsx"]
       }
     ],
     "react/prop-types": 0,
@@ -33,10 +25,7 @@
     "react/prefer-stateless-function": 0,
     "react/forbid-prop-types": 0,
     "react/no-this-in-sfc": 0,
-    "import/imports-first": [
-      "error",
-      "absolute-first"
-    ],
+    "import/imports-first": ["error", "absolute-first"],
     "import/newline-after-import": "error",
     "jsx-a11y/label-has-associated-control": 0,
     "jsx-a11y/anchor-is-valid": 0,
