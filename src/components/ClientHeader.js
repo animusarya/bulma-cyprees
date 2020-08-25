@@ -33,12 +33,15 @@ const Top = styled.div`
 
 const NavbarMenu = styled.nav`
   padding: 0 2rem !important;
-  background-color: ${props => props.brandColor};
-  font-size: ${props => props.theme.fontSizeMedium};
+  background-color: ${(props) => props.brandColor};
+  font-size: ${(props) => props.theme.fontSizeMedium};
   .navbar-item {
     :hover {
       background-color: rgb(255, 255, 255, 0.2);
     }
+  }
+  .navbar-menu {
+    background-color: #000000;
   }
 `;
 const Logo = styled.img`
@@ -72,8 +75,8 @@ const Button = styled.button`
 `;
 
 const ClientName = styled(Button)`
-  font-size: ${props => props.theme.fontSizeSmall};
-  color: ${props => props.theme.fontDark} !important;
+  font-size: ${(props) => props.theme.fontSizeSmall};
+  color: ${(props) => props.theme.fontDark} !important;
 `;
 
 const LogoutButton = styled(Button)`
@@ -151,7 +154,6 @@ const ClientHeader = ({ me, project }) => {
         <div className="container">
           <div className="navbar-brand">
             <a
-              role="button"
               className={`navbar-burger burger has-text-white ${
                 isActive ? 'is-active' : ''
               }`}
@@ -165,7 +167,10 @@ const ClientHeader = ({ me, project }) => {
               <span aria-hidden="true"></span>
             </a>
           </div>
-          <div id="navbarBasicExample" className="navbar-menu">
+          <div
+            id="navbarBasicExample"
+            className={isActive ? 'navbar-menu is-active' : 'navbar-menu'}
+          >
             <div className="navbar-start">
               <Link
                 to="/client/dashboard"
@@ -173,7 +178,7 @@ const ClientHeader = ({ me, project }) => {
               >
                 Overview
               </Link>
-              {pages.map(page => (
+              {pages.map((page) => (
                 <Link
                   key={page.id}
                   to={`/client/page/${page.id}`}

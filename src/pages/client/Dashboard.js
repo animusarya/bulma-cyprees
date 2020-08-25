@@ -16,7 +16,7 @@ import ClientFooter from '../../components/ClientFooter';
 const Container = styled.div`
   min-height: 50vh;
   overflow: scroll;
-
+  padding-top: 50px;
   thead {
     background: transparent;
   }
