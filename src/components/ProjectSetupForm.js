@@ -141,7 +141,9 @@ export default withFormik({
     name: yup.string().required('Name is required!'),
     slug: yup
       .string()
-      .required('Default URL is required! e.g: intellishare.online/colliners'),
+      .required(
+        'Default URL is required! e.g: intellishare.online/yourproject',
+      ),
     customDomain: yup.string(),
     subscriptionPlanId: yup.string().required('Subscription is required!'),
   }),

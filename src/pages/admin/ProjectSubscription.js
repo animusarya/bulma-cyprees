@@ -45,12 +45,15 @@ const ProjectSubscription = ({ match, history }) => {
           <MainColumn>
             <Heading>Subscriptions</Heading>
             <Subscription project={project} />
-            <Heading>Cancel subscription</Heading>
+            <Heading>Cancel subscription?</Heading>
             <Button
               onClick={() => {
-                swal('Are you confirm to delete this item?', {
-                  buttons: ['Cancel', 'Confirm'],
-                }).then(async value => {
+                swal(
+                  'Are you confirm to cancel subscription of this project?',
+                  {
+                    buttons: ['Cancel', 'Confirm'],
+                  },
+                ).then(async (value) => {
                   if (value) {
                     const response = await executeMutationRemove({
                       variables: { id: project.id },
@@ -60,8 +63,9 @@ const ProjectSubscription = ({ match, history }) => {
                     }
                   }
                 });
-              }}>
-              Remove Project
+              }}
+            >
+              Cancel
             </Button>
             {resRemove.error && (
               <Message type="error">{resRemove.error.message}</Message>

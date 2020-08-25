@@ -12,7 +12,7 @@ const Form = styled.form`
     justify-content: flex-end;
   }
 `;
-const ClientNotificationEmailForm = props => {
+const ClientNotificationEmailForm = (props) => {
   const {
     values,
     touched,
@@ -24,6 +24,8 @@ const ClientNotificationEmailForm = props => {
     project,
     loading,
   } = props;
+
+  // console.log(project, 'project');
   return (
     <Form onSubmit={handleSubmit}>
       <InputGroup
@@ -44,6 +46,7 @@ const ClientNotificationEmailForm = props => {
         isWidth
         border
         isHorizontal
+        placeholder={`An update has been made, please log into the ${project.name} dataroom`}
         label="Email message"
         name="body"
         className="textarea"
