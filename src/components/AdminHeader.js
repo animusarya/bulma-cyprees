@@ -47,7 +47,7 @@ const Container = styled.div`
 `;
 const Logo = styled.img`
   width: auto;
-  height: 50px;
+  height: 80px;
   max-height: initial !important;
 `;
 

@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { useQuery, useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
+import swal from 'sweetalert';
 
-import { Message, Loading, Dropzone } from './elements';
+import { Message, Loading, Dropzone, Button } from './elements';
 import FilesList from './FilesList';
 
 const filesQuery = gql`
@@ -40,6 +41,11 @@ const TableContainer = styled.div`
   @media only screen and (max-width: 768px) {
     overflow: scroll;
   }
+`;
+
+const ButtonContainer = styled.div`
+  justify-content: flex-end;
+  padding-top: 20px;
 `;
 
 const PageFiles = ({ project, page, isPublic }) => {
@@ -85,6 +91,16 @@ const PageFiles = ({ project, page, isPublic }) => {
           <FilesList files={files} isAdmin refetch={resultFiles.refetch} />
         )}
       </TableContainer>
+      <ButtonContainer className="is-flex">
+        <Button
+          onClick={() => {
+            window.location.reload(true);
+            swal('Files updated successfully');
+          }}
+        >
+          Update
+        </Button>
+      </ButtonContainer>
     </Container>
   );
 };
