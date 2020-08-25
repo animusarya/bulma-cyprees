@@ -13,7 +13,7 @@ import AdminHeader from '../../components/AdminHeader';
 import AdminSubHeader from '../../components/AdminSubHeader';
 import PageFiles from '../../components/PageFiles';
 import PageContent from '../../components/PageContent';
-import { Message, Loading, Heading } from '../../components/elements';
+import { Message, Loading, Heading, Button } from '../../components/elements';
 import DeletePageBtn from '../../components/DeletePageBtn';
 
 const pageQuery = gql`

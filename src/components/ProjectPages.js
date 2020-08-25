@@ -2,9 +2,16 @@ import React, { useCallback, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import update from 'immutability-helper';
+import styled from 'styled-components';
+import swal from 'sweetalert';
 
-import { Heading } from './elements';
+import { Heading, Button } from './elements';
 import PageListItem from './PageListItem';
+
+const ButtonContainer = styled.div`
+  justify-content: flex-end;
+  padding-top: 20px;
+`;
 
 const updatePageMutation = gql`
   mutation updatePage($id: ID!, $input: PageUpdateInput!) {
@@ -22,7 +29,10 @@ const ProjectPages = ({ pages: pagesItems, project, refetch }) => {
     (dragIndex, hoverIndex) => {
       const dragCard = pages[dragIndex];
       const reorderdPages = update(pages, {
-        $splice: [[dragIndex, 1], [hoverIndex, 0, dragCard]],
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, dragCard],
+        ],
       });
       setPages(reorderdPages);
       // update db
@@ -65,6 +75,17 @@ const ProjectPages = ({ pages: pagesItems, project, refetch }) => {
           ))}
         </tbody>
       </table>
+
+      <ButtonContainer className="is-flex">
+        <Button
+          onClick={() => {
+            window.location.reload(true);
+            swal('Pages updated successfully');
+          }}
+        >
+          Update
+        </Button>
+      </ButtonContainer>
     </div>
   );
 };
