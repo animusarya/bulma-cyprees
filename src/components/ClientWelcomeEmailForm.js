@@ -12,7 +12,7 @@ const Form = styled.form`
     justify-content: flex-end;
   }
 `;
-const ClientWelcomeEmailForm = props => {
+const ClientWelcomeEmailForm = (props) => {
   const {
     values,
     touched,

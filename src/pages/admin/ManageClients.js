@@ -129,7 +129,7 @@ const ManageClients = ({ match, history }) => {
             <Subtitle className="subtitle">Add Client</Subtitle>
             <div>
               <ManageAdminClientForm
-                onSubmit={async data => {
+                onSubmit={async (data) => {
                   await executeAddClientMutation({
                     variables: { id: project.id, input: data },
                   });
@@ -188,13 +188,13 @@ const ManageClients = ({ match, history }) => {
                       <th>Name</th>
                       <th>Email</th>
                       <th>Status</th>
-                      <th className="has-text-centered">Resend</th>
+                      <th className="has-text-centered">Send</th>
                       <th className="has-text-centered">Access</th>
                       <th className="has-text-centered">Delete</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {project.clients.map(item => {
+                    {project.clients.map((item) => {
                       console.log('item', item);
                       const clientAccessClass = item.hasAccess
                         ? 'far fa-check-square'
@@ -219,7 +219,7 @@ const ManageClients = ({ match, history }) => {
                                 onClick={() => {
                                   swal('You want to resend email?', {
                                     buttons: ['Cancel', 'Confirm'],
-                                  }).then(async value => {
+                                  }).then(async (value) => {
                                     if (value) {
                                       await executeMutationResendEmail({
                                         variables: {
@@ -230,8 +230,9 @@ const ManageClients = ({ match, history }) => {
                                       resultProject.refetch();
                                     }
                                   });
-                                }}>
-                                Resend register email
+                                }}
+                              >
+                                Send register email
                               </Button>
                             )}
                           </td>
@@ -242,7 +243,7 @@ const ManageClients = ({ match, history }) => {
                               onClick={() => {
                                 swal('Are you sure to change client access?', {
                                   buttons: ['Cancel', 'Confirm'],
-                                }).then(async value => {
+                                }).then(async (value) => {
                                   if (value) {
                                     await executeUpdateProjectClient({
                                       variables: {
@@ -256,7 +257,8 @@ const ManageClients = ({ match, history }) => {
                                     resultProject.refetch();
                                   }
                                 });
-                              }}>
+                              }}
+                            >
                               <div key={clientAccessClass}>
                                 <i className={clientAccessClass}></i>
                               </div>
@@ -269,7 +271,7 @@ const ManageClients = ({ match, history }) => {
                               onClick={() => {
                                 swal('Are you confirm to remove this client?', {
                                   buttons: ['Cancel', 'Confirm'],
-                                }).then(async value => {
+                                }).then(async (value) => {
                                   if (value) {
                                     await executeRemoveClientMutation({
                                       variables: {
@@ -280,7 +282,8 @@ const ManageClients = ({ match, history }) => {
                                     resultProject.refetch();
                                   }
                                 });
-                              }}>
+                              }}
+                            >
                               <i className="far fa-trash-alt"></i>
                             </Button>
                           </td>

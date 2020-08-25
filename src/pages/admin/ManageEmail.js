@@ -32,12 +32,12 @@ const ManageEmail = ({ match }) => {
           <AdminSubHeader />
           <MainColumn paddingtop="1rem">
             <Heading>Manage Emails</Heading>
-            <Title>Client Welcome Email (For Unregistered clients)</Title>
+            <Title>Client Welcome Email (For Unregistered Clients)</Title>
             <div>
               <ClientWelcomeEmailForm
                 enableReinitialize
                 initialValues={project}
-                onSubmit={async data => {
+                onSubmit={async (data) => {
                   await executeMutation({
                     variables: {
                       id: project.id,
