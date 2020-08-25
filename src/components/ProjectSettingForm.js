@@ -111,7 +111,7 @@ const ProjectSetting = (props) => {
       />
 
       <div>
-        <label className="label">Footer contact information</label>
+        {/* <label className="label">Footer contact information</label> */}
         <small>
           This information will show in the client view above in the footer
           disclaimer

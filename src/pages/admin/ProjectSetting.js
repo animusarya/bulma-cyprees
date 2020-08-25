@@ -26,7 +26,10 @@ const ProjectSetting = ({ match }) => {
 
   return (
     <Layout noContainer>
-      <Seo title="Project Settings" description="Update Existing Projects" />
+      <Seo
+        title="Footer Contact Information"
+        description="Update Existing Projects"
+      />
       <Header />
       <div className="columns">
         <div className="column is-one-fifth">
@@ -36,12 +39,12 @@ const ProjectSetting = ({ match }) => {
           <AdminHeader />
           <AdminSubHeader />
           <MainColumn paddingtop="1rem">
-            <Heading>Project Settings</Heading>
+            <Heading>Footer Contact Information</Heading>
             <FormContainer>
               <ProjectSettingForm
                 enableReinitialize
                 initialValues={project}
-                onSubmit={async data => {
+                onSubmit={async (data) => {
                   await executeMutation({
                     variables: { id: project.id, input: data },
                   });
