@@ -59,14 +59,14 @@ const Logo = styled.img`
 
 const ContentContainer = styled.div`
   h2 {
-    font-size: ${props => props.theme.fontSizeSuperLarge};
+    font-size: ${(props) => props.theme.fontSizeSuperLarge};
   }
   p {
     margin: 2rem 0;
   }
   a {
     :hover {
-      color: ${props => props.theme.primaryColor};
+      color: ${(props) => props.theme.primaryColor};
     }
   }
 `;
@@ -74,13 +74,13 @@ const ContentContainer = styled.div`
 const Register = ({ match }) => {
   const [executeMutation, res] = useMutation(registerMutation);
   const togggleLoggedIn = useStoreActions(
-    actions => actions.isLoggedIn.togggle,
+    (actions) => actions.isLoggedIn.togggle,
   );
-  const updateUser = useStoreActions(actions => actions.user.update);
+  const updateUser = useStoreActions((actions) => actions.user.update);
   const updateProject = useStoreActions(
-    actions => actions.origin.updateProject,
+    (actions) => actions.origin.updateProject,
   );
-  const activeProject = useStoreState(state => state.origin.project);
+  const activeProject = useStoreState((state) => state.origin.project);
   const { projectId, email } = match.params;
   const isAdminRegister = !projectId;
 
@@ -118,7 +118,8 @@ const Register = ({ match }) => {
                     <nav
                       className="navbar"
                       role="navigation"
-                      aria-label="main navigation">
+                      aria-label="main navigation"
+                    >
                       <div className="navbar-brand">
                         {activeProject.logo ? (
                           <Logo
@@ -156,7 +157,7 @@ const Register = ({ match }) => {
                   </div>
                   <RegisterForm
                     initialValues={{ email: email || '' }}
-                    onSubmit={data => {
+                    onSubmit={(data) => {
                       return executeMutation({
                         variables: {
                           input: {
