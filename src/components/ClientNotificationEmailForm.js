@@ -81,7 +81,7 @@ export default withFormik({
       : `Project ${project.name} Notification`,
     body: initialValues.clientEmailTemplate
       ? initialValues.clientEmailTemplate.body
-      : '',
+      : `An update has been made, please log into the ${project.name} dataroom`,
   }),
   validationSchema: yup.object().shape({
     subject: yup.string().required('Subject is required!'),
