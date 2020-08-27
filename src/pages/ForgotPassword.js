@@ -54,24 +54,25 @@ const Logo = styled.img`
 `;
 
 const ContentContainer = styled.div`
+  padding-bottom: 2rem;
   h2 {
-    font-size: ${props => props.theme.fontSizeSuperLarge};
+    font-size: ${(props) => props.theme.fontSizeSuperLarge};
   }
   p {
     margin: 2rem 0;
   }
   a {
     :hover {
-      color: ${props => props.theme.primaryColor};
+      color: ${(props) => props.theme.primaryColor};
     }
   }
 `;
 const ForgotPassword = ({ match }) => {
   const [executeMutation, res] = useMutation(forgotPasswordMutation);
   const updateProject = useStoreActions(
-    actions => actions.origin.updateProject,
+    (actions) => actions.origin.updateProject,
   );
-  const activeProject = useStoreState(state => state.origin.project);
+  const activeProject = useStoreState((state) => state.origin.project);
   const { projectId, email } = match.params;
 
   // fetch project data from api
@@ -96,7 +97,8 @@ const ForgotPassword = ({ match }) => {
                     <nav
                       className="navbar"
                       role="navigation"
-                      aria-label="main navigation">
+                      aria-label="main navigation"
+                    >
                       <div className="navbar-brand">
                         {activeProject.logo ? (
                           <Logo
@@ -123,14 +125,14 @@ const ForgotPassword = ({ match }) => {
                       <h2 className="has-text-weight-semibold is-size-5-mobile">
                         Reset Password
                       </h2>
-                      <p className="is-size-6">
+                      {/* <p className="is-size-6">
                         Enter the email address associated with your account and
                         we&apos;ll send you a link to reset your password.
-                      </p>
+                      </p> */}
                     </ContentContainer>
                   </div>
                   <ForgotPasswordForm
-                    onSubmit={async data => {
+                    onSubmit={async (data) => {
                       await executeMutation({ variables: { input: data } });
                       swal('An email has been sent, please check your Inbox');
                     }}

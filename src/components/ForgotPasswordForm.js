@@ -8,12 +8,12 @@ import { InputGroup } from './elements';
 
 const Button = styled.button`
   margin-top: 2rem;
-  background-color: ${props => props.theme.primaryColor};
+  background-color: ${(props) => props.theme.primaryColor};
   height: 100%;
   border-radius: 6px;
 `;
 
-const ForgotPasswordForm = props => {
+const ForgotPasswordForm = (props) => {
   const {
     values,
     touched,
@@ -28,7 +28,7 @@ const ForgotPasswordForm = props => {
     <form onSubmit={handleSubmit}>
       <InputGroup
         border
-        label="Email:"
+        label="Email"
         name="email"
         placeholder="john@doe.com"
         value={values.email}
