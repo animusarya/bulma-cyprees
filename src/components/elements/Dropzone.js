@@ -59,6 +59,7 @@ const Container = styled.div`
 
 const MyDropzone = ({ onUpload, isPublic, children, handleLoading }) => {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(undefined);
   const [executeUploadMutation] = useMutation(signedUploadUrlMutation);
 
   useEffect(() => {
@@ -69,6 +70,7 @@ const MyDropzone = ({ onUpload, isPublic, children, handleLoading }) => {
 
   const onDrop = acceptedFiles => {
     setLoading(true);
+    setError(undefined);
 
     if (acceptedFiles.length > 0) {
       acceptedFiles.map(async file => {
@@ -114,13 +116,24 @@ const MyDropzone = ({ onUpload, isPublic, children, handleLoading }) => {
     }
   };
 
+  const onDropRejected = data => {
+    if (data.length > 0) {
+      setError('Please upload files smaller than 5mb');
+      setLoading(false);
+    }
+  };
+
   const {
     getRootProps,
     getInputProps,
     isDragActive,
     isDragAccept,
     isDragReject,
-  } = useDropzone({ onDrop });
+  } = useDropzone({
+    onDrop,
+    onDropRejected,
+    maxSize: 5000000,
+  });
 
   if (children) {
     return (
@@ -137,6 +150,7 @@ const MyDropzone = ({ onUpload, isPublic, children, handleLoading }) => {
       <p>+ Drag n drop some files here</p>
       <small>or click to select files</small>
       {loading && <Loading />}
+      {error && <small className="has-text-danger">{error}</small>}
     </Container>
   );
 };

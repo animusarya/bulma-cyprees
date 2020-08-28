@@ -14,10 +14,7 @@ import logo from '../assets/images/logo.png';
 const setPasswordMutation = gql`
   mutation setNewPassword($token: String!, $password: String!) {
     setNewPassword(input: { token: $token, password: $password }) {
-      jwt
-      user {
-        id
-      }
+      success
     }
   }
 `;
