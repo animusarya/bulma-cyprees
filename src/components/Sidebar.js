@@ -136,7 +136,7 @@ const Sidebar = () => {
                 className={isCurrentRoute('/admin/project/:id/settings')}
                 to={`/admin/project/${activeProject}/settings`}
               >
-                <Icon className="fas fa-cogs"></Icon>Footer Contact Info
+                <Icon className="fas fa-cogs"></Icon>Project Settings
               </Link>
               <Link
                 className={isCurrentRoute('/admin/project/:id/subscription')}
