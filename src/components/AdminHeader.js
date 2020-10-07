@@ -49,6 +49,7 @@ const Logo = styled.img`
   width: auto;
   height: 80px;
   max-height: initial !important;
+  padding-top: 1.5rem;
 `;
 
 const AdminHeader = () => {
@@ -74,22 +75,26 @@ const AdminHeader = () => {
       <div className="columns">
         <div className="column">
           <div className="logo-edit">
-            {project.logo && (
+            {/* {project.logo && (
               <Link to="/admin/dashboard" className="navbar-item">
                 <Logo src={project.logo} alt="logo" />
               </Link>
-            )}
+            )} */}
             <Button
               paddingless
               secondary
               className="edit"
               onClick={() => setIsActive(true)}
             >
-              <img
-                className="edit-logo"
-                src={uploadLogoImg}
-                alt="upload logo"
-              />
+              {!project.logo ? (
+                <img
+                  className="edit-logo"
+                  src={uploadLogoImg}
+                  alt="upload logo"
+                />
+              ) : (
+                <Logo src={project.logo} alt="logo" />
+              )}
             </Button>
           </div>
           <div>
