@@ -20,7 +20,7 @@ const Container = styled.aside`
     }
   }
   .sub-items {
-    margin-left: 15px;
+    margin-left: 5px;
     a {
       :hover {
         background-color: #e1e1e4;
@@ -110,13 +110,15 @@ const Sidebar = () => {
                 className={isCurrentRoute('/admin/project/:id')}
                 to={`/admin/project/${activeProject}`}
               >
-                <Icon className="fas fa-th-large"></Icon>Manage Pages
+                <Icon className="fas fa-th-large"></Icon>
+                Manage Pages
               </Link>
               <Link
                 className={isCurrentRoute('/admin/project/:id/emails')}
                 to={`/admin/project/${activeProject}/emails`}
               >
-                <Icon className="far fa-envelope"></Icon>Manage Emails
+                <Icon className="far fa-envelope"></Icon>
+                Manage Emails
               </Link>
               <Link
                 className={isCurrentRoute('/admin/project/:id/clients')}
