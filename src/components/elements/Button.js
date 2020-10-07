@@ -15,6 +15,7 @@ const Container = styled.button`
     height: ${(props) => (props.paddingless ? '2em' : '')};
     background-color: transparent;
     font-weight: ${(props) => props.fontWeight};
+    font-family: 'Poppins', sans-serif !important;
     :hover {
       border-color: ${(props) =>
         props.paddingless ? '#transparent' : props.theme.primaryColor};
