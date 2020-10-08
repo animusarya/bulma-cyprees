@@ -16,11 +16,9 @@ const Container = styled.aside`
     }
     a {
       padding: 0.8em 1em;
-      font-weight: 500;
     }
   }
   .sub-items {
-    margin-left: 5px;
     a {
       :hover {
         background-color: #e1e1e4;
@@ -37,6 +35,23 @@ const Icon = styled.i`
   margin-right: 5%;
 `;
 
+const LinkWrapper = ({ to, title, icon }) => {
+  const route = useRouteMatch(to);
+  return (
+    <li>
+      <Link
+        className={
+          route ? 'has-text-weight-bold is-active' : 'has-text-weight-medium'
+        }
+        to={to}
+      >
+        {icon && <Icon className={icon}></Icon>}
+        {title}
+      </Link>
+    </li>
+  );
+};
+
 const Sidebar = () => {
   const userData = useStoreState((state) => state.user.data);
   const activeProject = useStoreState((state) => state.active.project);
@@ -47,120 +62,75 @@ const Sidebar = () => {
     // return !isNull(route) ? (route.isExact ? 'is-active' : '') : '';
     return '';
   };
-
+  const route = useRouteMatch('/admin/help');
+  console.log(route);
   return (
     <Container className="menu is-hidden-mobile">
       {userData.type === 'superAdmin' && (
         <ul className="menu-list">
-          <li>
-            <Link
-              className={isCurrentRoute('/super-admin/dashboard')}
-              to="/super-admin/dashboard"
-            >
-              Users
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={isCurrentRoute('/super-admin/pricing')}
-              to="/super-admin/pricing"
-            >
-              Set Pricing
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={isCurrentRoute('/super-admin/discounts')}
-              to="/super-admin/discounts"
-            >
-              Discount Codes
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={isCurrentRoute('/super-admin/help')}
-              to="/super-admin/help"
-            >
-              Manage Help
-            </Link>
-          </li>
+          <LinkWrapper title="Users" to="/super-admin/dashboard" />
+          <LinkWrapper title="Set Pricing" to="/super-admin/pricing" />
+          <LinkWrapper title="Discount Codes" to="/super-admin/discounts" />
+          <LinkWrapper title="Manage Help" to="/super-admin/help" />
         </ul>
       )}
       {userData.type === 'admin' && (
         <ul className="menu-list">
-          <li>
-            <Link
-              className={isCurrentRoute('/admin/project/create')}
-              to="/admin/project/create"
-            >
-              <Icon className="fas fa-plus-circle"></Icon>Create Project
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={isCurrentRoute('/admin/dashboard')}
-              to="/admin/dashboard"
-            >
-              <Icon className="fas fa-folder-open"></Icon>Manage Projects
-            </Link>
-          </li>
+          <LinkWrapper
+            icon="fas fa-plus-circle"
+            title="Create Project"
+            to="/admin/project/create"
+          />
+          <LinkWrapper
+            icon="fas fa-folder-open"
+            title="Manage Projects"
+            to="/admin/dashboard"
+          />
+
           {!isNull(activeProject) ? (
             <div className="sub-items">
-              <Link
-                className={isCurrentRoute('/admin/project/:id')}
+              <LinkWrapper
+                icon="fas fa-th-large"
+                title="Manage Pages"
                 to={`/admin/project/${activeProject}`}
-              >
-                <Icon className="fas fa-th-large"></Icon>
-                Manage Pages
-              </Link>
-              <Link
-                className={isCurrentRoute('/admin/project/:id/emails')}
+              />
+              <LinkWrapper
+                icon="far fa-envelope"
+                title="Manage Emails"
                 to={`/admin/project/${activeProject}/emails`}
-              >
-                <Icon className="far fa-envelope"></Icon>
-                Manage Emails
-              </Link>
-              <Link
-                className={isCurrentRoute('/admin/project/:id/clients')}
+              />
+              <LinkWrapper
+                icon="fas fa-user-friends"
+                title="Manage Clients"
                 to={`/admin/project/${activeProject}/clients`}
-              >
-                <Icon className="fas fa-user-friends"></Icon>Manage Clients
-              </Link>
-              <Link
-                className={isCurrentRoute('/admin/project/:id/notifications')}
+              />
+              <LinkWrapper
+                icon="fas fa-bell"
+                title="Notifications"
                 to={`/admin/project/${activeProject}/notifications`}
-              >
-                <Icon className="fas fa-bell"></Icon> Notifications
-              </Link>
-              <Link
-                className={isCurrentRoute('/admin/project/:id/settings')}
+              />
+              <LinkWrapper
+                icon="fas fa-cogs"
+                title="Project Settings"
                 to={`/admin/project/${activeProject}/settings`}
-              >
-                <Icon className="fas fa-cogs"></Icon>Project Settings
-              </Link>
-              <Link
-                className={isCurrentRoute('/admin/project/:id/subscription')}
+              />
+              <LinkWrapper
+                icon="fas fa-sync"
+                title="Subscriptions"
                 to={`/admin/project/${activeProject}/subscription`}
-              >
-                <Icon className="fas fa-sync"></Icon>Subscriptions
-              </Link>
-              <Link className={isCurrentRoute('/admin/help')} to="/admin/help">
-                <Icon className="far fa-question-circle"></Icon>Help
-              </Link>
+              />
+              <LinkWrapper
+                icon="far fa-question-circle"
+                title="Help"
+                to="/admin/help"
+              />
             </div>
           ) : null}
         </ul>
       )}
       {userData.type === 'client' && (
         <ul className="menu-list">
-          <li>
-            <Link
-              className={isCurrentRoute('/client/dashboard')}
-              to="/client/dashboard"
-            >
-              Files
-            </Link>
-          </li>
+          <LinkWrapper title="Files" to="/client/dashboard" />
         </ul>
       )}
     </Container>
