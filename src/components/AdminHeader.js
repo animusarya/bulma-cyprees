@@ -44,6 +44,10 @@ const Container = styled.div`
     height: auto;
     width: 160px;
   }
+  button {
+    height: auto !important;
+    border: none;
+  }
 `;
 const Logo = styled.img`
   width: auto;

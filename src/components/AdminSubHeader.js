@@ -73,6 +73,10 @@ const Hero = styled.section`
     height: auto;
     width: 210px;
   }
+  button {
+    height: auto !important;
+    border: none;
+  }
 `;
 
 const AdminSubHeader = () => {
@@ -148,11 +152,7 @@ const AdminSubHeader = () => {
       <Hero className="hero" brandColor={brandColor}>
         <HeroImg src={project.heroImage || logoBg} alt="logo-bg" />
         <div className="hero-body has-text-centered">
-          <Button
-            paddingless
-            secondary
-            onClick={() => setUploadImageModal(true)}
-          >
+          <Button secondary onClick={() => setUploadImageModal(true)}>
             <img
               className="edit-banner"
               src={uploadBannerImg}
