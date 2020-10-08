@@ -48,6 +48,9 @@ export const GlobalStyle = createGlobalStyle`
   a {
     color: ${theme.primaryColor};
   }
+  a.has-text-white:focus, a.has-text-white:hover {
+    color: #ffffff!important;
+}
   .swal-button-container {
     display: flex;
     justify-content: center;
