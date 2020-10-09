@@ -217,7 +217,7 @@ const ManageClients = ({ match, history }) => {
                                 secondary
                                 paddingless
                                 onClick={() => {
-                                  swal('You want to resend email?', {
+                                  swal('You want to send email?', {
                                     buttons: ['Cancel', 'Confirm'],
                                   }).then(async (value) => {
                                     if (value) {

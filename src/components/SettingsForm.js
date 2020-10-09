@@ -5,7 +5,7 @@ import * as yup from 'yup';
 
 import { InputGroup, Button } from './elements';
 
-const SettingsForm = props => {
+const SettingsForm = (props) => {
   const {
     values,
     touched,
@@ -112,7 +112,7 @@ export default withFormik({
       .email('Invalid email address')
       .required('Email is required!'),
     fullName: yup.string().required('Full Name is required!'),
-    companyName: yup.string().required('Company is required!'),
+    companyName: yup.string().required('Company name is required!'),
     telephone: yup.string().required('Telephone is required!'),
   }),
 
