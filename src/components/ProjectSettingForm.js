@@ -93,6 +93,7 @@ const ProjectSetting = (props) => {
           id="brandColor"
           label="Brand Colour"
           color={values.brandColor}
+          selectBrandColor={values.brandColor}
           onChange={(val) => setFieldValue('brandColor', val)}
         />
       </InputGroup>
@@ -174,7 +175,6 @@ const ProjectSetting = (props) => {
           fullWidth
           isWidth
           border
-          isHorizontal
           label="Footer Disclaimer"
           name="disclaimer"
           className="textarea"

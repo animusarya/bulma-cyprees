@@ -1,5 +1,5 @@
 import React from 'react';
-import { SketchPicker } from 'react-color';
+import { SketchPicker, ChromePicker } from 'react-color';
 import styled from 'styled-components';
 
 const Container = styled.div``;
@@ -20,7 +20,7 @@ class ColorPicker extends React.Component {
     this.setState({ displayColorPicker: false });
   };
 
-  handleChange = color => {
+  handleChange = (color) => {
     const { onChange } = this.props;
 
     this.setState({ color: color.rgb });
@@ -29,13 +29,15 @@ class ColorPicker extends React.Component {
 
   render() {
     const { displayColorPicker, color, ...otherProps } = this.state;
-
+    const { selectBrandColor } = this.props;
     const styles = {
       color: {
         width: '36px',
         height: '14px',
         borderRadius: '2px',
-        background: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+        background:
+          selectBrandColor ||
+          `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
       },
       swatch: {
         padding: '5px',
@@ -66,7 +68,7 @@ class ColorPicker extends React.Component {
         {displayColorPicker ? (
           <div style={styles.popover}>
             <div style={styles.cover} onClick={this.handleClose} />
-            <SketchPicker
+            <ChromePicker
               color={color}
               onChange={this.handleChange}
               {...otherProps}
