@@ -5,7 +5,7 @@ import * as yup from 'yup';
 
 import { InputGroup, SelectGroup, Button } from './elements';
 
-const PageForm = props => {
+const PageForm = (props) => {
   const {
     values,
     touched,
@@ -73,7 +73,7 @@ export default withFormik({
     type: '',
   }),
   validationSchema: yup.object().shape({
-    name: yup.string().required('Duration is required!'),
+    name: yup.string().required('Title is required!'),
     type: yup.string().required('Type is required!'),
   }),
 
