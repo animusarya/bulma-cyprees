@@ -56,11 +56,11 @@ const Container = styled.div`
     font-size: 0.85rem !important;
   }
   td.actions {
-    color: ${props => props.theme.primaryColor};
+    color: ${(props) => props.theme.primaryColor};
   }
   input {
     border-radius: 0px;
-    border: 1px solid ${props => props.theme.primaryColor};
+    border: 1px solid ${(props) => props.theme.primaryColor};
   }
 `;
 
@@ -72,7 +72,7 @@ const Discounts = () => {
   );
 
   return (
-    <Layout>
+    <Layout noContainer>
       <Seo title="Discount Code" description="Create Discount Codes" />
       <Header />
       <Container className="columns">
@@ -84,7 +84,7 @@ const Discounts = () => {
             <Heading>Discount Codes</Heading>
             <Title>Create Discount Code</Title>
             <DiscountForm
-              onSubmit={async data => {
+              onSubmit={async (data) => {
                 await executeMutationAdd({ variables: data });
                 result.refetch();
               }}
@@ -111,7 +111,7 @@ const Discounts = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {result.data.discounts.map(item => (
+                  {result.data.discounts.map((item) => (
                     <tr key={item.id}>
                       <td>
                         {item.name}
@@ -125,7 +125,7 @@ const Discounts = () => {
                           onClick={() => {
                             swal('Are you confirm to delete this item?', {
                               buttons: ['Cancel', 'Confirm'],
-                            }).then(async value => {
+                            }).then(async (value) => {
                               if (value) {
                                 await executeMutationRemove({
                                   variables: { id: item.id },
@@ -133,7 +133,8 @@ const Discounts = () => {
                                 result.refetch();
                               }
                             });
-                          }}>
+                          }}
+                        >
                           DELETE
                         </Button>
                       </td>

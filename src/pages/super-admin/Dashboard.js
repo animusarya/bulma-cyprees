@@ -42,14 +42,14 @@ const Container = styled.div`
   }
 
   td {
-    color: ${props => props.theme.primaryColor};
+    color: ${(props) => props.theme.primaryColor};
   }
 `;
 
 const LinkWrapper = styled(Link)`
-  color: ${props => props.theme.primaryColor};
+  color: ${(props) => props.theme.primaryColor};
   :hover {
-    color: ${props => props.theme.primaryColor};
+    color: ${(props) => props.theme.primaryColor};
   }
 `;
 
@@ -58,7 +58,7 @@ const Dashboard = () => {
   // console.log('res', res);
 
   return (
-    <Layout>
+    <Layout noContainer>
       <Seo title="Dashboard Super Admin" description="Clients Details Here" />
       <Header />
       <Container className="columns">
@@ -83,11 +83,12 @@ const Dashboard = () => {
                 </thead>
                 <tbody>
                   {res.data.users &&
-                    res.data.users.map(user => (
+                    res.data.users.map((user) => (
                       <tr key={user.id}>
                         <td>
                           <LinkWrapper
-                            to={`/super-admin/client/${user.id}/projects`}>
+                            to={`/super-admin/client/${user.id}/projects`}
+                          >
                             {user.email}
                           </LinkWrapper>
                         </td>

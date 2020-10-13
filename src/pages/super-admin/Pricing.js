@@ -63,7 +63,7 @@ const Container = styled.div`
   }
   input {
     border-radius: 0px;
-    border: 1px solid ${props => props.theme.primaryColor};
+    border: 1px solid ${(props) => props.theme.primaryColor};
   }
 `;
 
@@ -74,7 +74,7 @@ const Pricing = () => {
   const [editClient, setEditClient] = useState({});
 
   return (
-    <Layout>
+    <Layout noContainer>
       <Seo title="Projects Pricing" description="Setup Subscription Plans" />
       <Header />
       <Container className="columns">
@@ -87,7 +87,7 @@ const Pricing = () => {
             <PricingForm
               enableReinitialize
               initialValues={editClient}
-              onSubmit={data => {
+              onSubmit={(data) => {
                 if (isEmpty(editClient)) {
                   // add item
                   setTimeout(() => {
@@ -130,7 +130,7 @@ const Pricing = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {result.data.packages.map(item => (
+                    {result.data.packages.map((item) => (
                       <tr key={item.id}>
                         <td>{item.name}</td>
                         <td>£{item.price}</td>
@@ -138,7 +138,8 @@ const Pricing = () => {
                           <Button
                             secondary
                             paddingless
-                            onClick={() => setEditClient(item)}>
+                            onClick={() => setEditClient(item)}
+                          >
                             EDIT
                           </Button>
                         </td>

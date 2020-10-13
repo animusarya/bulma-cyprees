@@ -59,7 +59,7 @@ const Container = styled.div`
     margin-top: 4rem;
   }
   label {
-    color: ${props => props.theme.secondaryColor};
+    color: ${(props) => props.theme.secondaryColor};
   }
 `;
 
@@ -77,7 +77,7 @@ const ProjectInfo = ({ match }) => {
   // console.log('ProjectInfo', project);
 
   return (
-    <Layout>
+    <Layout noContainer>
       <Seo title="Project info" description="Update User Project Info" />
       <Header />
       <Container className="columns">
@@ -94,7 +94,7 @@ const ProjectInfo = ({ match }) => {
               <ProjectInfoForm
                 enableReinitialize
                 initialValues={project}
-                onSubmit={data =>
+                onSubmit={(data) =>
                   executeMutation({
                     variables: {
                       id: project.id,
