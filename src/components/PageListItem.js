@@ -151,6 +151,7 @@ const PageListItem = ({
                     variables: { id: page.id },
                   });
                   refetch();
+                  window.location.reload();
                 }
               });
             }}
