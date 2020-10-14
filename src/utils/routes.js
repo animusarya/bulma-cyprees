@@ -25,6 +25,7 @@ import DashboardAdmin from '../pages/admin/Dashboard';
 import CreateProject from '../pages/admin/CreateProject';
 import ManageEmail from '../pages/admin/ManageEmail';
 import ClientNotifications from '../pages/admin/ClientNotifications';
+import Analytics from '../pages/admin/Analytics';
 import ProjectDashboard from '../pages/admin/ProjectDashboard';
 import ManageClients from '../pages/admin/ManageClients';
 import ManagePage from '../pages/admin/ManagePage';
@@ -141,6 +142,12 @@ const Routes = () => (
           exact
           path="/admin/project/:id/notifications"
           component={ClientNotifications}
+          access="admin"
+        />
+         <PrivateRoute
+          exact
+          path="/admin/project/:id/analytics"
+          component={Analytics}
           access="admin"
         />
         <PrivateRoute

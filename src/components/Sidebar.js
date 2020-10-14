@@ -110,6 +110,11 @@ const Sidebar = () => {
                 to={`/admin/project/${activeProject}/notifications`}
               />
               <LinkWrapper
+                icon="fas fa-chart-pie"
+                title="Analytics"
+                to={`/admin/project/${activeProject}/analytics`}
+              />
+              <LinkWrapper
                 icon="fas fa-cogs"
                 title="Project Settings"
                 to={`/admin/project/${activeProject}/settings`}
