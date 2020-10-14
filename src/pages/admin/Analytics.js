@@ -1,5 +1,4 @@
 import React from 'react';
-import { Chart } from 'react-google-charts';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -11,6 +10,7 @@ import AdminHeader from '../../components/AdminHeader';
 import AdminSubHeader from '../../components/AdminSubHeader';
 import {Heading, Title } from '../../components/elements';
 import AnalyticChartItem from '../../components/AnalyticChartItem';
+import ClientActivity from '../../components/ClientActivity';
 
 const Analytics = () => {
 
@@ -49,6 +49,7 @@ const Analytics = () => {
                   ]}/>
               </div>
             </div>
+            <ClientActivity />
           </MainColumn>
         </div>
       </div>
