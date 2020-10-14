@@ -119,6 +119,9 @@ const PageListItem = ({
           html={pageName}
           onChange={(e) => setPageName(e.target.value)}
           tagName="span"
+          onKeyDown={(event) => {
+            event.key === 'Enter' && event.preventDefault();
+          }}
         />
         {/* <LinkWrapper to={`/admin/project/${project.id}/pages/${page.id}`}>
           {startCase(page.name)}
@@ -151,6 +154,7 @@ const PageListItem = ({
                     variables: { id: page.id },
                   });
                   refetch();
+                  window.location.reload();
                 }
               });
             }}
