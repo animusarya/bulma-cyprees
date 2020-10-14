@@ -195,7 +195,6 @@ const ManageClients = ({ match, history }) => {
                   </thead>
                   <tbody>
                     {project.clients.map((item) => {
-                      console.log('item', item);
                       const clientAccessClass = item.hasAccess
                         ? 'far fa-check-square'
                         : 'far fa-square';

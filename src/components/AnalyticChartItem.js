@@ -39,20 +39,20 @@ const pieOptions = {
   color: '#7a7a7a',
 };
 
-const AnalyticChartItem = ({data, title}) => {
+const AnalyticChartItem = ({ data, title }) => {
   return (
     <>
-    <Title>{title}</Title>
-                <Chart
-                  width="100%"
-                  height="300px"
-                  chartType="PieChart"
-                  options={pieOptions}
-                  loader={<div>Loading Chart</div>}
-                  data={data}
-                  rootProps={{ 'data-testid': '1' }}
-                />
-                </>
+      <Title>{title}</Title>
+      <Chart
+        width="100%"
+        height="300px"
+        chartType="PieChart"
+        options={pieOptions}
+        loader={<div>Loading Chart</div>}
+        data={data}
+        rootProps={{ 'data-testid': '1' }}
+      />
+    </>
   );
 };
 
