@@ -65,7 +65,7 @@ const ProjectSubscription = ({ match, history }) => {
                 });
               }}
             >
-              Cancel
+              Delete Project
             </Button>
             {resRemove.error && (
               <Message type="error">{resRemove.error.message}</Message>

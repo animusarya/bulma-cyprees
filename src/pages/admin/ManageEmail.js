@@ -19,6 +19,8 @@ const ManageEmail = ({ match }) => {
   const [project] = useProjectDetails(projectId);
   const [executeMutation] = useProjectUpdate();
 
+  console.log(project, 'project');
+
   return (
     <Layout noContainer>
       <Seo title="Manage Emails" description="Manage Email Content" />
@@ -37,6 +39,7 @@ const ManageEmail = ({ match }) => {
               <ClientWelcomeEmailForm
                 enableReinitialize
                 initialValues={project}
+                project={project}
                 onSubmit={async (data) => {
                   await executeMutation({
                     variables: {

@@ -21,6 +21,7 @@ const ClientWelcomeEmailForm = (props) => {
     handleChange,
     handleBlur,
     handleSubmit,
+    project,
   } = props;
 
   return (
@@ -31,7 +32,7 @@ const ClientWelcomeEmailForm = (props) => {
         border
         isHorizontal
         label="Subject of email"
-        placeholder="Welcome to Project Arden"
+        placeholder={`Welcome to ${project.name}`}
         name="subject"
         value={values.subject}
         onChange={handleChange}
