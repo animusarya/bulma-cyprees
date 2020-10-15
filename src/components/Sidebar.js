@@ -31,9 +31,11 @@ const Container = styled.aside`
   }
 `;
 
-const Icon = styled.i`
-  margin-right: 5%;
+const IconContainer = styled.div`
+  width: 30px;
 `;
+
+const Icon = styled.i``;
 
 const LinkWrapper = ({ to, title, icon }) => {
   const route = useRouteMatch(to);
@@ -41,11 +43,13 @@ const LinkWrapper = ({ to, title, icon }) => {
     <li>
       <Link
         className={
-          route ? 'has-text-weight-bold is-active' : 'has-text-weight-medium'
+          route
+            ? 'has-text-weight-bold is-active is-flex'
+            : 'has-text-weight-medium is-flex'
         }
         to={to}
       >
-        {icon && <Icon className={icon}></Icon>}
+        <IconContainer>{icon && <Icon className={icon}></Icon>}</IconContainer>
         {title}
       </Link>
     </li>
