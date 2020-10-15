@@ -165,6 +165,9 @@ const FileListItem = ({
             html={fileName}
             onChange={(e) => setFileName(e.target.value)}
             tagName="span"
+            onKeyDown={(event) => {
+              event.key === 'Enter' && event.preventDefault();
+            }}
           />
         ) : (
           <span>{fileName}</span>
