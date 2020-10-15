@@ -108,7 +108,7 @@ const Dashboard = () => {
                     {projects.map((project) => (
                       <tr key={project.id}>
                         <td>
-                          <Link to={`/admin/project/${project.id}`}>
+                          <Link to={`/admin/project/${project.id}/pages`}>
                             {project.name}
                           </Link>
                         </td>
