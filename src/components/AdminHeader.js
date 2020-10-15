@@ -61,6 +61,7 @@ const AdminHeader = () => {
   const projectId = useStoreState((state) => state.active.project);
   const [project, resultProject] = useProjectDetails(projectId);
   const [executeUpdateProjectMutation, resUpdateProject] = useProjectUpdate();
+  console.log(projectId, 'projectId');
 
   const handleLogoUpload = (uploadResponse) => {
     executeUpdateProjectMutation({
