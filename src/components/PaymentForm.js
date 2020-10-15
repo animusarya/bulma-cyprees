@@ -26,6 +26,10 @@ const Form = styled.form`
   }
 `;
 
+const CvvContainer = styled.div`
+  margin-top: -8px;
+`;
+
 const countries = [
   {
     key: 1,
@@ -197,29 +201,6 @@ const ProjectSetupForm = (props) => {
                   className="input is-shadowless"
                 />
               </InputGroup>
-              <InputGroup
-                type="number"
-                maxLength={3}
-                fullWidth
-                isWidth
-                border
-                errors={
-                  errors.paymentCardCvv && touched.paymentCardCvv
-                    ? errors.paymentCardCvv
-                    : undefined
-                }
-              >
-                <Cleave
-                  placeholder="123"
-                  name="paymentCardCvv"
-                  id="paymentCardCvv"
-                  value={values.paymentCardCvv}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  options={{ numeral: true }}
-                  className="input is-shadowless"
-                />
-              </InputGroup>
             </div>
             <div className="column">
               <InputGroup
@@ -233,7 +214,7 @@ const ProjectSetupForm = (props) => {
                 }
               >
                 <Cleave
-                  placeholder="2020"
+                  placeholder="2022"
                   name="paymentCardExpiryYear"
                   id="paymentCardExpiryYear"
                   value={values.paymentCardExpiryYear}
@@ -245,6 +226,31 @@ const ProjectSetupForm = (props) => {
               </InputGroup>
             </div>
           </div>
+          <CvvContainer>
+            <InputGroup
+              type="number"
+              maxLength={3}
+              fullWidth
+              isWidth
+              border
+              errors={
+                errors.paymentCardCvv && touched.paymentCardCvv
+                  ? errors.paymentCardCvv
+                  : undefined
+              }
+            >
+              <Cleave
+                placeholder="123"
+                name="paymentCardCvv"
+                id="paymentCardCvv"
+                value={values.paymentCardCvv}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                options={{ numeral: true }}
+                className="input is-shadowless"
+              />
+            </InputGroup>
+          </CvvContainer>
         </div>
         <div className="column">
           <Subtitle>Project Summary</Subtitle>
