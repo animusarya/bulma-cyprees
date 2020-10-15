@@ -39,11 +39,12 @@ const Container = styled.div`
 `;
 const NavbarMenu = styled.nav`
   background-color: ${(props) => props.brandColor};
-  .navbar-item {
+  /* .navbar-item {
     :hover {
-      background-color: ${(props) => props.brandColor};
+      background-color: #fff;
+      opacity: 0.8;
     }
-  }
+  } */
   button {
     background: ${(props) => props.theme.menuBackgroundColor};
 
@@ -52,7 +53,7 @@ const NavbarMenu = styled.nav`
     }
   }
   .navbar-menu {
-    background: ${(props) => props.theme.menuBackgroundColor};
+    background: ${(props) => props.brandColor};
   }
 `;
 const HeroImg = styled.img`

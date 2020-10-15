@@ -4,7 +4,14 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const NavItem = styled(Link)`
-  background: ${(props) => props.brandColor} !important;
+  background-color: ${(props) =>
+    props.brandColor ? '#fff' : props.brandColor};
+  opacity: ${(props) => (props.brandColor ? 0.7 : 1)};
+  :hover {
+    background: #fff;
+    opacity: 0.7;
+    color: #000 !important;
+  }
 `;
 
 const AdminSubHeaderNav = ({ pages, project, brandColor }) => {
@@ -20,8 +27,8 @@ const AdminSubHeaderNav = ({ pages, project, brandColor }) => {
           brandColor={active == page.slug && brandColor}
           className={
             active == page.slug
-              ? 'navbar-item has-text-white has-text-weight-bold'
-              : 'navbar-item has-text-white'
+              ? 'navbar-item has-text-black has-text-weight-bold active-nav'
+              : 'navbar-item has-text-black'
           }
           activeLink={page.slug}
           to={`/admin/project/${project.id}/pages/${page.id}`}
