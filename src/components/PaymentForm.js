@@ -24,6 +24,12 @@ const Form = styled.form`
     display: inline-flex;
     font-size: 10px;
   }
+  .button {
+    border-radius: 0 !important;
+  }
+  .field.is-grouped {
+  align-items: flex-end;
+  }
 `;
 
 const countries = [
@@ -283,16 +289,26 @@ const ProjectSetupForm = (props) => {
                 : undefined
             }
           />
-          <InputGroup
-            fullWidth
-            border
-            label="Do you have a discount code?"
-            name="discount"
-            type="text"
-            value={values.discount}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
+          <div class="field is-grouped">
+            <p class="control is-expanded">
+            <InputGroup
+              fullWidth
+              border
+              placeholder="Enter Discount code"
+              label="Do you have a discount code?"
+              name="discount"
+              type="text"
+              value={values.discount}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              />
+            </p>
+            <p class="control">
+              <a class="button is-info">
+                Apply
+              </a>
+            </p>
+          </div>
           <div className="columns">
             <div className="column">
               <Subtitle>Amount due today</Subtitle>
