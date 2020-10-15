@@ -31,7 +31,11 @@ const ClientActivity = () => {
       <div class="select">
         <select>
           <option>Select Client</option>
-          <option>With options</option>
+          <option>David Smith</option>
+          <option>James Brown</option>
+          <option>Helen Mirren</option>
+          <option>Paddy Murphy</option>
+          <option>Vicky Roberts</option>
         </select>
       </div>
       <table className="table is-fullwidth is-hoverable">

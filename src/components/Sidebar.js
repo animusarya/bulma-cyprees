@@ -96,7 +96,7 @@ const Sidebar = () => {
               <LinkWrapper
                 icon="fas fa-th-large"
                 title="Manage Pages"
-                to={`/admin/project/${activeProject}`}
+                to={`/admin/project/${activeProject}/pages`}
               />
               <LinkWrapper
                 icon="far fa-envelope"
