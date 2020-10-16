@@ -36,9 +36,9 @@ const Container = styled.div`
 `;
 
 const LinkWrapper = styled(Link)`
-  color: ${(props) => props.theme.primaryColor};
+  color: #fff;
   :hover {
-    color: ${(props) => props.theme.primaryColor};
+    color: #fff;
   }
 `;
 
