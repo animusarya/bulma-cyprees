@@ -7,6 +7,7 @@ const NavItem = styled(Link)`
   background-color: ${(props) =>
     props.brandColor ? '#fff' : props.brandColor};
   opacity: ${(props) => (props.brandColor ? 0.7 : 1)};
+  color: #fff;
   :hover {
     background: #fff;
     opacity: 0.7;
@@ -28,7 +29,7 @@ const AdminSubHeaderNav = ({ pages, project, brandColor }) => {
           className={
             active == page.slug
               ? 'navbar-item has-text-black has-text-weight-bold active-nav'
-              : 'navbar-item has-text-black'
+              : 'navbar-item'
           }
           activeLink={page.slug}
           to={`/admin/project/${project.id}/pages/${page.id}`}

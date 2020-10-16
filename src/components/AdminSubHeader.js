@@ -39,12 +39,13 @@ const Container = styled.div`
 `;
 const NavbarMenu = styled.nav`
   background-color: ${(props) => props.brandColor};
-  /* .navbar-item {
+  .navbar-item {
     :hover {
-      background-color: #fff;
-      opacity: 0.8;
-    }
-  } */
+    background: #fff;
+    opacity: 0.7;
+    color: #000 !important;
+  }
+  }
   button {
     background: ${(props) => props.theme.menuBackgroundColor};
 
