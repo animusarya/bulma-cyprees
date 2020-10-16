@@ -48,7 +48,7 @@ const FormContainer = styled.div`
 `;
 
 const Logo = styled.img`
-  max-height: 70px;
+  max-height: 60px;
   width: auto;
   margin-bottom: 2rem;
 `;
