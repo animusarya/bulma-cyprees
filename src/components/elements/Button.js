@@ -7,7 +7,8 @@ const Container = styled.button`
     margin-top: ${(props) => (props.marginTop ? '2rem' : '')};
     border-color: ${(props) =>
       props.paddingless ? 'transparent' : props.theme.primaryColor};
-    color: #fff;
+    color: ${(props) =>
+      props.paddingless ? props.theme.primaryColor : "#fff"};
     padding-left: ${(props) => (props.paddingless ? '0px' : '1.45em')};
     padding-right: ${(props) => (props.paddingless ? '0px' : '1.45em')};
     margin-bottom: ${(props) => (props.paddingless ? '0px' : '2rem')};
