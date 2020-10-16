@@ -11,7 +11,7 @@ const Container = styled.button`
       props.paddingless ? props.theme.primaryColor : "#fff"};
     padding-left: ${(props) => (props.paddingless ? '0px' : '1.45em')};
     padding-right: ${(props) => (props.paddingless ? '0px' : '1.45em')};
-    margin-bottom: ${(props) => (props.paddingless ? '0px' : '2rem')};
+    margin-bottom: ${(props) => (props.paddingless || props.marginBottomNone ? '0px' : '2rem')};
     padding-top: ${(props) => (props.paddingless ? 'calc(0px)' : '')};
     height: ${(props) => (props.paddingless ? '2em' : '')};
     background-color: ${(props) =>
