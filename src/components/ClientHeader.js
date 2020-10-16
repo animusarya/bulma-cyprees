@@ -7,7 +7,7 @@ import useProjectPages from '../hooks/useProjectPages';
 import { Title } from './elements';
 import theme from '../utils/theme';
 import logoBg from '../assets/images/login-bg.jpg';
-import logo from '../assets/images/logo.png';
+import logo from '../assets/images/logo2.png';
 
 const Container = styled.section`
   padding: 0rem 1.5rem;

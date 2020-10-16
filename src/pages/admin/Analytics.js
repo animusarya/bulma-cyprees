@@ -8,7 +8,7 @@ import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
 import AdminSubHeader from '../../components/AdminSubHeader';
-import { Heading, Title } from '../../components/elements';
+import { Heading } from '../../components/elements';
 import AnalyticChartItem from '../../components/AnalyticChartItem';
 import ClientActivity from '../../components/ClientActivity';
 
