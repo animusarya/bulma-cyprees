@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useStoreState } from 'easy-peasy';
 import { Link } from 'react-router-dom';
 
-import logoAlt from '../assets/images/logo-alt.png';
+import logoAlt from '../assets/images/logo.png';
 
 const Container = styled.div`
   background-color: ${(props) => props.theme.secondaryColor};

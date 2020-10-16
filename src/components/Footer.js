@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import logoAlt from '../assets/images/logo-alt.png';
+import logoAlt from '../assets/images/logo.png';
 
 const Container = styled.div`
-  background-color: ${props => props.theme.secondaryColor};
+  background-color: ${(props) => props.theme.secondaryColor};
   margin-top: -2rem;
   .section {
     padding: 1rem 1.5rem 0.7rem 1.5rem;

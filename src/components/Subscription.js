@@ -78,7 +78,7 @@ const Subscription = ({ project, history }) => {
                 icon: 'warning',
                 buttons: true,
                 dangerMode: true,
-              }).then(async willDelete => {
+              }).then(async (willDelete) => {
                 if (willDelete) {
                   const { data } = await executeCancelMutation({
                     variables: { id: project.id },
@@ -89,7 +89,8 @@ const Subscription = ({ project, history }) => {
                   }
                 }
               });
-            }}>
+            }}
+          >
             Cancel Subscription
           </Button>
         </React.Fragment>
@@ -103,10 +104,10 @@ const Subscription = ({ project, history }) => {
             placeholder="Monthly | £30 | 6Months (£180) | Annually (£360)"
             name="subscriptionPlanId"
             value={subscriptionPlanId}
-            onChange={e => setSubscriptionPlanId(e.target.value)}
+            onChange={(e) => setSubscriptionPlanId(e.target.value)}
             options={
               packages
-                ? packages.map(item => ({
+                ? packages.map((item) => ({
                     value: item.subscriptionPlanId,
                     title: `${item.name} - £${item.price} per ${item.durationInMonths} month`,
                   }))
@@ -114,6 +115,7 @@ const Subscription = ({ project, history }) => {
             }
           />
           <Button
+            secondary
             disabled={subscriptionPlanId === ''}
             onClick={() => {
               swal({
@@ -121,7 +123,7 @@ const Subscription = ({ project, history }) => {
                 icon: 'confirm',
                 buttons: true,
                 dangerMode: true,
-              }).then(async willDelete => {
+              }).then(async (willDelete) => {
                 if (willDelete) {
                   const { data } = await executeRenewMutation({
                     variables: { id: project.id, subscriptionPlanId },
@@ -131,7 +133,8 @@ const Subscription = ({ project, history }) => {
                   }
                 }
               });
-            }}>
+            }}
+          >
             Renew Subscription
           </Button>
         </React.Fragment>
