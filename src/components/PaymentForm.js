@@ -28,7 +28,7 @@ const Form = styled.form`
     border-radius: 0 !important;
   }
   .field.is-grouped {
-  align-items: flex-end;
+    align-items: flex-end;
   }
 `;
 
@@ -295,24 +295,22 @@ const ProjectSetupForm = (props) => {
                 : undefined
             }
           />
-          <div class="field is-grouped">
-            <p class="control is-expanded">
-            <InputGroup
-              fullWidth
-              border
-              placeholder="Enter Discount code"
-              label="Do you have a discount code?"
-              name="discount"
-              type="text"
-              value={values.discount}
-              onChange={handleChange}
-              onBlur={handleBlur}
+          <div className="field is-grouped">
+            <p className="control is-expanded">
+              <InputGroup
+                fullWidth
+                border
+                placeholder="Enter Discount code"
+                label="Do you have a discount code?"
+                name="discount"
+                type="text"
+                value={values.discount}
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
             </p>
-            <p class="control">
-              <a class="button is-info">
-                Apply
-              </a>
+            <p className="control">
+              <a className="button is-primary">Apply</a>
             </p>
           </div>
           <div className="columns">

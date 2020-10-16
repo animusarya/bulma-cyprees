@@ -3,8 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 export const elements = { mobileBreakpoint: 800, ipadBreakpoint: 1024 };
 
 const theme = {
-  primaryColor: '#b2d13d',
-  PrimaryLinkColor: '#BCCF02',
+  primaryColor: '#79B5DB',
   secondaryColor: '#25313f',
   fontDark: '#25313f',
   borderColor: '#d4d6d5',
@@ -36,7 +35,8 @@ export const GlobalStyle = createGlobalStyle`
   .button.is-primary {
     background-color: ${theme.primaryColor};
     :hover {
-      background-color: #8fa735;
+      background-color: ${theme.secondaryColor};
+      transition: 0.6s;
     }
   }
   .button.is-info {

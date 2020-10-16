@@ -7,20 +7,22 @@ const Container = styled.button`
     margin-top: ${(props) => (props.marginTop ? '2rem' : '')};
     border-color: ${(props) =>
       props.paddingless ? 'transparent' : props.theme.primaryColor};
-    color: ${(props) => props.theme.primaryColor};
+    color: #fff;
     padding-left: ${(props) => (props.paddingless ? '0px' : '1.45em')};
     padding-right: ${(props) => (props.paddingless ? '0px' : '1.45em')};
     margin-bottom: ${(props) => (props.paddingless ? '0px' : '2rem')};
     padding-top: ${(props) => (props.paddingless ? 'calc(0px)' : '')};
     height: ${(props) => (props.paddingless ? '2em' : '')};
-    background-color: transparent;
+    background-color: ${(props) =>
+      props.paddingless ? 'transparent' : props.theme.primaryColor};
     font-weight: ${(props) => props.fontWeight};
     font-family: 'Poppins', sans-serif !important;
     :hover {
       border-color: ${(props) =>
-        props.paddingless ? '#transparent' : props.theme.primaryColor};
-      color: ${(props) => props.theme.primaryColor};
-      background: transparent;
+        props.paddingless ? '#transparent' : props.theme.secondaryColor};
+      background: ${(props) =>
+        props.paddingless ? '#transparent' : props.theme.secondaryColor};
+      transition: 0.6s;
     }
   }
 `;

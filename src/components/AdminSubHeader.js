@@ -153,7 +153,11 @@ const AdminSubHeader = () => {
       <Hero className="hero" brandColor={brandColor}>
         <HeroImg src={project.heroImage || logoBg} alt="logo-bg" />
         <div className="hero-body has-text-centered">
-          <Button secondary onClick={() => setUploadImageModal(true)}>
+          <Button
+            secondary
+            onClick={() => setUploadImageModal(true)}
+            paddingless
+          >
             <img
               className="edit-banner"
               src={uploadBannerImg}

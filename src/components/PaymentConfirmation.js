@@ -10,6 +10,12 @@ const Container = styled.div`
   }
 `;
 
+const LinkStyled = styled(Link)`
+  :hover {
+    background-color: ${(props) => props.theme.primaryColor};
+  }
+`;
+
 const PaymentConfirmation = ({ project }) => (
   <Container>
     <div className="hero-body">
@@ -20,11 +26,12 @@ const PaymentConfirmation = ({ project }) => (
         <p className="subtitle is-size-6 has-text-weight-semibold">
           Your new Project has been setup.
         </p>
-        <Link
+        <LinkStyled
           className="button is-primary is-large"
-          to={`/admin/project/${project.id}`}>
+          to={`/admin/project/${project.id}/pages`}
+        >
           Go to your project
-        </Link>
+        </LinkStyled>
       </div>
     </div>
   </Container>
