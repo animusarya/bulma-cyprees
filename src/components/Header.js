@@ -44,7 +44,7 @@ const Button = styled.button`
 `;
 
 const AdminBurgerMenu = styled.div`
-  background: ${(props) => props.theme.menuBackgroundColor};
+  /* background: ${(props) => props.theme.menuBackgroundColor}; */
 `;
 
 const Header = () => {

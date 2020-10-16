@@ -17,7 +17,7 @@ const Button = styled.button`
 const ResetPassword = styled.div`
   a {
     :hover {
-      color: #b2d13d;
+      color: ${props => props.theme.primaryColor};
       font-size: ${props => props.theme.fontSizeSmall};
     }
   }
