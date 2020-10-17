@@ -5,20 +5,12 @@ import * as yup from 'yup';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { InputGroup } from './elements';
-
-const Button = styled.button`
-  margin-top: 2rem;
-  background-color: ${props => props.theme.primaryColor};
-  height: 100%;
-  border-radius: 6px;
-`;
+import { InputGroup, Button } from './elements';
 
 const ResetPassword = styled.div`
   a {
     :hover {
       color: ${props => props.theme.primaryColor};
-      font-size: ${props => props.theme.fontSizeSmall};
     }
   }
 `;
@@ -61,7 +53,7 @@ const LoginForm = props => {
       />
       <div className="field">
         <div className="control">
-          <Button type="submit" className="button" disabled={isSubmitting}>
+          <Button marginTop marginBottomNone type="submit" disabled={isSubmitting}>
             <span className="has-text-weight-bold has-text-light is-size-4">
               Log In
             </span>

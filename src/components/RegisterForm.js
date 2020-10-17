@@ -4,16 +4,9 @@ import { withFormik } from 'formik';
 import * as yup from 'yup';
 import styled from 'styled-components';
 
-import { InputGroup } from './elements';
+import { InputGroup, Button } from './elements';
 import NDAScroller from './NDAScroller';
 import Disclaimer from './Disclaimer';
-
-const Button = styled.button`
-  margin-top: 2rem;
-  background-color: ${props => props.theme.primaryColor};
-  height: 100%;
-  border-radius: 6px;
-`;
 
 const MarginContainer = styled.p`
   margin-top: 2.5rem;
@@ -137,8 +130,9 @@ const RegisterForm = props => {
       <div className="field">
         <div className="control">
           <Button
+            marginTop
+            marginBottomNone
             type="submit"
-            className="button"
             disabled={isSubmitting || !ndaAccepted}
           >
             <span className="has-text-weight-bold has-text-light is-size-4">

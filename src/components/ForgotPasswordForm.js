@@ -4,14 +4,7 @@ import { withFormik } from 'formik';
 import * as yup from 'yup';
 import styled from 'styled-components';
 
-import { InputGroup } from './elements';
-
-const Button = styled.button`
-  margin-top: 2rem;
-  background-color: ${(props) => props.theme.primaryColor};
-  height: 100%;
-  border-radius: 6px;
-`;
+import { InputGroup, Button } from './elements';
 
 const ForgotPasswordForm = (props) => {
   const {
@@ -38,7 +31,7 @@ const ForgotPasswordForm = (props) => {
       />
       <div className="field">
         <div className="control">
-          <Button type="submit" className="button" disabled={isSubmitting}>
+          <Button type="submit" marginTop marginBottomNone disabled={isSubmitting}>
             <span className="has-text-weight-bold has-text-light is-size-4">
               Reset Password
             </span>
