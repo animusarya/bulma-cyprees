@@ -37,11 +37,11 @@ const NavbarMenu = styled.nav`
   font-size: ${(props) => props.theme.fontSizeMedium};
   .navbar-item {
     :hover {
-      background-color: rgb(255, 255, 255, 0.2);
+      background-color: ${(props) => props.brandColor};
     }
   }
   .navbar-menu {
-    background-color: #000000;
+    background-color: ${(props) => props.brandColor};
   }
 `;
 const Logo = styled.img`

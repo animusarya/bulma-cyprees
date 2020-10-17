@@ -31,7 +31,7 @@ const DeletePageBtn = ({ history, match }) => {
         onClick={() => {
           swal('Are you confirm to delete this item?', {
             buttons: ['Cancel', 'Confirm'],
-          }).then(async value => {
+          }).then(async (value) => {
             if (value) {
               await executePageRemoveMutation({
                 variables: {
@@ -39,10 +39,11 @@ const DeletePageBtn = ({ history, match }) => {
                 },
               });
               // redirect back to project page
-              history.push(`/admin/project/${id}`);
+              history.push(`/admin/project/${id}/pages`);
             }
           });
-        }}>
+        }}
+      >
         Delete Page
       </Button>
     </div>

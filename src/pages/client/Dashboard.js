@@ -17,9 +17,9 @@ const Container = styled.div`
   min-height: 50vh;
   overflow: scroll;
   padding-top: 50px;
-  thead {
+  /* thead {
     background: transparent;
-  }
+  } */
 `;
 
 const Dashboard = () => {
