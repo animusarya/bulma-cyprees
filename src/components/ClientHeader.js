@@ -10,6 +10,9 @@ import logoBg from '../assets/images/login-bg.jpg';
 import logo from '../assets/images/logo2.png';
 
 const Container = styled.section`
+.container {
+  max-width: 1100px;
+}
   .column {
     display: flex;
     justify-content: space-between;
@@ -72,7 +75,8 @@ const Logo = styled.img`
 const HeroImg = styled.img`
   height: 250px;
   width: auto;
-  position: center center;
+  background-position-x: center;
+  background-position-y: center;
   background-size: cover;
   @media only screen and (max-width: 768px) {
     height: 150px;
@@ -180,7 +184,7 @@ const ClientHeader = ({ me, project }) => {
         brandColor={brandColor}
       >
         <div className="container">
-          <div className="navbar-brand">
+          <div className="">
             <a
               className={`navbar-burger burger has-text-white ${
                 isActive ? 'is-active' : ''

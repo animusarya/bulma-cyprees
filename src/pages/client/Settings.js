@@ -26,6 +26,13 @@ const settingMutation = gql`
 `;
 
 const Container = styled.div`
+  padding: 3rem 0rem;
+  @media only screen and (max-width: 768px) {
+    padding: 3rem 1.5rem;
+  }
+  .container {
+    max-width: 1100px;
+  }
   thead {
     background: transparent;
   }
@@ -39,7 +46,7 @@ const ClientSettings = () => {
     <Layout>
       <Seo title="User Settings" description="Page description" />
       <ClientHeader me={me} />
-      <Container className="section">
+      <Container className="">
         <div className="container">
           <div className="columns">
             <div className="column is-three-fifths is-offset-one-fifth">

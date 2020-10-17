@@ -25,6 +25,13 @@ const pageQuery = gql`
 `;
 
 const Container = styled.div`
+  padding: 3rem 0rem;
+ @media only screen and (max-width: 768px) {
+    padding: 3rem 1.5rem;
+  }
+  .container {
+    max-width: 1100px;
+  }
   min-height: 50vh;
   thead {
     background: transparent;
@@ -62,7 +69,7 @@ const Page = ({ match }) => {
     <Layout noContainer>
       <Seo title="Client Page" description="Page description" />
       <ClientHeader me={me} project={project} />
-      <Container className="section">
+      <Container className="">
         <div className="container">
           {resultPage.error && (
             <Message type="error">{resultPage.error.message}</Message>
