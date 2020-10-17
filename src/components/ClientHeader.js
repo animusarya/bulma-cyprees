@@ -10,6 +10,9 @@ import logoBg from '../assets/images/login-bg.jpg';
 import logo from '../assets/images/logo2.png';
 
 const Container = styled.section`
+  @media only screen and (max-width: 768px) {
+    padding: 3rem 1.5rem;
+  }
 .container {
   max-width: 1100px;
 }
@@ -26,6 +29,11 @@ const Container = styled.section`
   .icon {
     margin-left: 0.5rem !important;
     font-size: 8px !important;
+  }
+  h2 {
+    @media only screen and (max-width: 768px) {
+    font-size: 22px !important;
+    }
   }
 `;
 
@@ -69,7 +77,7 @@ const LinkStyle = styled(Link)`
 
 const Logo = styled.img`
   width: auto;
-  height: 70px;
+  max-height: 70px;
   margin-top: 10px;
 `;
 const HeroImg = styled.img`
