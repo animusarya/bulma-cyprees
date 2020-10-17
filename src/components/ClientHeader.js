@@ -33,11 +33,17 @@ const Top = styled.div`
 
 const NavbarMenu = styled.nav`
   padding: 0 2rem !important;
-  background-color: ${(props) => props.brandColor};
   font-size: ${(props) => props.theme.fontSizeMedium};
+
+  background-color: ${(props) =>
+    props.brandColor ? props.brandColor : '#fff'};
+  opacity: ${(props) => (props.brandColor ? 0.7 : 1)};
+  color: #fff;
   .navbar-item {
     :hover {
-      background-color: ${(props) => props.brandColor};
+      background: #fff;
+      opacity: 0.7;
+      color: #000 !important;
     }
   }
   .navbar-menu {
@@ -81,6 +87,9 @@ const ClientName = styled(Button)`
 
 const LogoutButton = styled(Button)`
   margin-top: -2px;
+  svg:not(:root).svg-inline--fa {
+    color: ${(props) => props.brandColor} !important;
+  }
 `;
 
 const TitleContainer = styled.div`
@@ -93,6 +102,10 @@ const ClientHeader = ({ me, project }) => {
   const toggleMenu = () => {
     setIsActive(!isActive);
   };
+
+  const activeSlug = pages[0] ? pages[0].slug : '';
+
+  const [active, setActive] = useState(activeSlug);
   const brandColor = project.brandColor
     ? project.brandColor
     : theme.primaryColor;
@@ -124,6 +137,7 @@ const ClientHeader = ({ me, project }) => {
               <LogoutButton
                 className="button is-text"
                 onClick={() => handleLogout()}
+                brandColor={brandColor}
               >
                 <i className="fas fa-power-off icon"></i>
               </LogoutButton>
@@ -182,7 +196,14 @@ const ClientHeader = ({ me, project }) => {
                 <Link
                   key={page.id}
                   to={`/client/page/${page.id}`}
-                  className="navbar-item has-text-white"
+                  className={
+                    active == page.slug
+                      ? 'navbar-item has-text-white has-text-weight-bold'
+                      : 'navbar-item has-text-white'
+                  }
+                  activeLink={page.slug}
+                  brandColor={active == page.slug && brandColor}
+                  onClick={() => setActive(page.slug)}
                 >
                   {startCase(page.name)}
                 </Link>

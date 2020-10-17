@@ -28,7 +28,7 @@ const AdminSubHeaderNav = ({ pages, project, brandColor }) => {
           brandColor={active == page.slug && brandColor}
           className={
             active == page.slug
-              ? 'navbar-item has-text-black has-text-weight-bold active-nav'
+              ? 'navbar-item has-text-black has-text-weight-bold'
               : 'navbar-item'
           }
           activeLink={page.slug}
