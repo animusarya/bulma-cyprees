@@ -10,7 +10,6 @@ import logoBg from '../assets/images/login-bg.jpg';
 import logo from '../assets/images/logo2.png';
 
 const Container = styled.section`
-  padding: 0rem 1.5rem;
   .column {
     display: flex;
     justify-content: space-between;
@@ -33,23 +32,38 @@ const Top = styled.div`
 
 const NavbarMenu = styled.nav`
   padding: 0 2rem !important;
-  font-size: ${(props) => props.theme.fontSizeMedium};
-
   background-color: ${(props) =>
     props.brandColor ? props.brandColor : '#fff'};
-  opacity: ${(props) => (props.brandColor ? 0.7 : 1)};
   color: #fff;
-  .navbar-item {
+  /* .navbar-item {
+    color: ${(props) =>
+    props.data ? "#000" : '#fff'};
     :hover {
       background: #fff;
       opacity: 0.7;
       color: #000 !important;
     }
-  }
+  } */
   .navbar-menu {
     background-color: ${(props) => props.brandColor};
   }
 `;
+
+const LinkStyle = styled(Link)`
+  color: ${(props) =>
+    props.data ? "#000" : '#fff'};
+    background-color: ${(props) =>
+    props.data ? "#fff" : 'transparent'};
+    opacity: ${(props) =>
+    props.data ? 0.7 : 1};
+    :hover {
+      background: ${(props) =>
+        props.data ? '#fff' : 'transparent'};
+      opacity: 0.7;
+      color: #000 !important;
+    }
+`;
+
 const Logo = styled.img`
   width: auto;
   height: 70px;
@@ -103,9 +117,9 @@ const ClientHeader = ({ me, project }) => {
     setIsActive(!isActive);
   };
 
-  const activeSlug = pages[0] ? pages[0].slug : '';
+  // const activeSlug = pages[0] ? pages[0].slug : '';
 
-  const [active, setActive] = useState(activeSlug);
+  const [active, setActive] = useState("/client/dashboard");
   const brandColor = project.brandColor
     ? project.brandColor
     : theme.primaryColor;
@@ -117,7 +131,7 @@ const ClientHeader = ({ me, project }) => {
   };
 
   return (
-    <Container className="section">
+    <Container className="">
       <div className="container">
         <div className="columns">
           <Top className="column">
@@ -186,27 +200,34 @@ const ClientHeader = ({ me, project }) => {
             className={isActive ? 'navbar-menu is-active' : 'navbar-menu'}
           >
             <div className="navbar-start">
-              <Link
+              <LinkStyle
                 to="/client/dashboard"
-                className="navbar-item has-text-white"
+                className={
+                    active == "/client/dashboard"
+                      ? 'navbar-item has-text-weight-bold'
+                      : 'navbar-item '
+                  }
+                  data={active == "/client/dashboard" && true}
+                  brandColor={brandColor}
               >
                 Overview
-              </Link>
+              </LinkStyle>
               {pages.map((page) => (
-                <Link
+                <LinkStyle
                   key={page.id}
                   to={`/client/page/${page.id}`}
                   className={
                     active == page.slug
-                      ? 'navbar-item has-text-white has-text-weight-bold'
-                      : 'navbar-item has-text-white'
+                      ? 'navbar-item has-text-weight-bold'
+                      : 'navbar-item '
                   }
                   activeLink={page.slug}
-                  brandColor={active == page.slug && brandColor}
+                  brandColor={brandColor}
                   onClick={() => setActive(page.slug)}
+                  data={active == page.slug  && true}
                 >
                   {startCase(page.name)}
-                </Link>
+                </LinkStyle>
               ))}
             </div>
           </div>
