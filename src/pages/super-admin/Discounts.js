@@ -113,10 +113,7 @@ const Discounts = () => {
                 <tbody>
                   {result.data.discounts.map((item) => (
                     <tr key={item.id}>
-                      <td>
-                        {item.name}
-                        {item.code}
-                      </td>
+                      <td>{item.code}</td>
                       <td>{item.percentage}%</td>
                       <td className="has-text-right">
                         <Button

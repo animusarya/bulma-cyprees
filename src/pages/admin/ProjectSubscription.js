@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
@@ -13,7 +14,7 @@ import MainColumn from '../../components/MainColumn';
 import { Message, Loading, Button, Heading } from '../../components/elements';
 import AdminHeader from '../../components/AdminHeader';
 import AdminSubHeader from '../../components/AdminSubHeader';
-import Subscription from '../../components/Subscription';
+// import Subscription from '../../components/Subscription';
 
 const removeProjectMutation = gql`
   mutation removeProject($id: ID!) {
@@ -21,6 +22,10 @@ const removeProjectMutation = gql`
       success
     }
   }
+`;
+
+const Wrapper = styled.p`
+  margin-bottom: 50px;
 `;
 
 const ProjectSubscription = ({ match, history }) => {
@@ -44,8 +49,16 @@ const ProjectSubscription = ({ match, history }) => {
           <AdminSubHeader />
           <MainColumn>
             <Heading>Subscriptions</Heading>
-            <Subscription project={project} />
-            <Heading>Cancel subscription?</Heading>
+            {/* <Subscription project={project} /> */}
+            {/* <Heading>Cancel subscription?</Heading> */}
+            <p className="is-size-5">
+              To cancel your subscription please click the &apos;
+              <span className="has-text-weight-semibold">Delete Project</span>
+              &rsquo; button below
+            </p>
+            <Wrapper className="is-size-5">
+              This will permanently delete your project.
+            </Wrapper>
             <Button
               onClick={() => {
                 swal(
