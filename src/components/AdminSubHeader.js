@@ -36,14 +36,18 @@ const Container = styled.div`
     margin-left: 1rem !important;
     font-size: 8px !important;
   }
+  .upload-banner-text {
+    height: 70px;
+    display: flex;
+    align-items: center;
+  }
 `;
 const NavbarMenu = styled.nav`
   background-color: ${(props) => props.brandColor};
   .navbar-item {
     :hover {
-    background: #fff;
-    opacity: 0.7;
-    color: #000 !important;
+    background: #ffffff10;
+    color: #fff !important;
   }
   }
   button {
@@ -153,17 +157,21 @@ const AdminSubHeader = () => {
       </NavbarMenu>
       <Hero className="hero" brandColor={brandColor}>
         <HeroImg src={project.heroImage || logoBg} alt="logo-bg" />
-        <div className="hero-body has-text-centered">
+
+          <div className="hero-body has-text-centered">
           <Button
             secondary
             onClick={() => setUploadImageModal(true)}
             paddingless
           >
-            <img
-              className="edit-banner"
-              src={uploadBannerImg}
-              alt="upload banner"
-            />
+            {
+              !project.heroImage ?
+                <img
+                  className="edit-banner"
+                  src={uploadBannerImg}
+                  alt="upload banner"
+                /> : <h2 className="has-text-weight-bold upload-banner-text">Upload Banner – Minimum Width 1600px</h2>
+            }
           </Button>
         </div>
       </Hero>

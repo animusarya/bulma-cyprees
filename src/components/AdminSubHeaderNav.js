@@ -5,13 +5,10 @@ import styled from 'styled-components';
 
 const NavItem = styled(Link)`
   background-color: ${(props) =>
-    props.brandColor ? '#fff' : props.brandColor};
-  opacity: ${(props) => (props.brandColor ? 0.7 : 1)};
+    props.brandColor ? '#ffffff10' : props.brandColor};
   color: #fff;
   :hover {
-    background: #fff;
-    opacity: 0.7;
-    color: #000 !important;
+    background: #ffffff10;
   }
 `;
 
@@ -28,7 +25,7 @@ const AdminSubHeaderNav = ({ pages, project, brandColor }) => {
           brandColor={active == page.slug && brandColor}
           className={
             active == page.slug
-              ? 'navbar-item has-text-black has-text-weight-bold'
+              ? 'navbar-item  has-text-weight-bold'
               : 'navbar-item'
           }
           activeLink={page.slug}
