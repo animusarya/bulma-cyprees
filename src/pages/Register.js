@@ -147,11 +147,11 @@ const Register = ({ match }) => {
                         Create an Account
                       </h2>
                       <p className="is-size-6">
-                        Share your files and content and engage your clients. Do
-                        it all with Intellishare. Already have an account?{' '}
-                        <a className="has-text-weight-bold" href="/login">
+                        {/* Share your files and content and engage your clients. Do
+                        it all with Intellishare. Already have an account?{' '} */}
+                        {/* <a className="has-text-weight-bold" href="/login">
                           Log in
-                        </a>
+                        </a> */}
                       </p>
                     </ContentContainer>
                   </div>
