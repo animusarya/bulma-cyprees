@@ -6,7 +6,7 @@ const Group = styled.div`
     width: ${(props) => (props.fullWidth ? '100%' : '')} !important;
   }
   label {
-    width: ${(props) => (props.isWidth ? '11.2rem' : '')} !important;
+    width: ${(props) => (props.isWidth ? '10rem' : '')} !important;
   }
 `;
 
@@ -35,7 +35,11 @@ const TextAreaGroup = ({
     fullWidth={fullWidth}
     isWidth={isWidth}
   >
-    {label && <label className="label">{label}</label>}
+    {label &&
+      <div className="is-flex">
+        <label className="label">{label}</label>
+      </div>
+    }
     <div className="control">
       <TextArea className="textarea" {...otherProps} />
       {errors && <p className="help is-danger">{errors}</p>}

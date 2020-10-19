@@ -61,17 +61,12 @@ const NavbarMenu = styled.nav`
 `;
 
 const LinkStyle = styled(Link)`
-  color: ${(props) =>
-    props.data ? "#000" : '#fff'};
-    background-color: ${(props) =>
-    props.data ? "#fff" : 'transparent'};
-    opacity: ${(props) =>
-    props.data ? 0.7 : 1};
+  color: #fff;
+  background-color: ${(props) =>
+    props.data ? "#ffffff10" : 'transparent'};
     :hover {
-      background: ${(props) =>
-        props.data ? '#fff' : 'transparent'};
-      opacity: 0.7;
-      color: #000 !important;
+      background: #ffffff10 !important;
+      color: #fff !important;
     }
 `;
 

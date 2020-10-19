@@ -57,5 +57,15 @@ export const GlobalStyle = createGlobalStyle`
   }
   .swal-button {
     background-color: ${theme.primaryColor};
+    font-size: 16px;
+  }
+  .swal-button--cancel {
+    background-color: ${theme.primaryColor};
+    color: #ffffff;
+  }
+  .swal-footer {
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
   }
 `;
