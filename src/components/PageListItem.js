@@ -101,7 +101,7 @@ const PageListItem = ({
       variables: {
         id,
         input: {
-          name: pageName.replace('&nbsp;<br>', ''),
+          name: pageName.replace(/&nbsp;/g, ''),
         },
       },
     });
