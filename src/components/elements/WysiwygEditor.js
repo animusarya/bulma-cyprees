@@ -21,22 +21,22 @@ const Container = styled.div`
     margin-bottom: 1.2rem;
   }
   h1 {
-    font-size: 3rem;
+    font-size: 36px;
   }
   h2 {
-    font-size: 2.6rem;
+    font-size: 30px;
   }
   h3 {
-    font-size: 2.2rem;
+    font-size: 24px;
   }
   h4 {
-    font-size: 1.7rem;
+    font-size: 20px;
   }
   h5 {
-    font-size: 1.4rem;
+    font-size: 18px;
   }
   h6 {
-    font-size: 1.1rem;
+    font-size: 16px;
   }
 `;
 
@@ -78,7 +78,7 @@ const WysiwygEditor = ({ onChange, value }) => {
           history: { inDropdown: true },
         }}
         editorState={editor}
-        onEditorStateChange={editorState => {
+        onEditorStateChange={(editorState) => {
           setEditor(editorState);
           const htmlContent = draftToHtml(
             convertToRaw(editorState.getCurrentContent()),
