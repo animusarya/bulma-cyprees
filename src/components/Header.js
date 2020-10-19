@@ -13,6 +13,14 @@ const Container = styled.div`
   .navbar-item {
     background: transparent !important;
   }
+  .navbar-end {
+    background-color: ${(props) => props.theme.secondaryColor};
+  }
+  @media screen and (max-width: 1023px) {
+    .navbar-menu {
+      padding: 0;
+    }
+  }
 `;
 
 const LinkLogo = styled(Link)`
