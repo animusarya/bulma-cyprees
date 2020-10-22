@@ -44,6 +44,10 @@ const SyncIcon = styled.img`
   }
 `;
 
+const ButtonContainer = styled.div`
+  margin: 5px 0;
+`;
+
 const FileListItem = ({
   index,
   file,
@@ -178,11 +182,23 @@ const FileListItem = ({
       <td className="has-text-centered">
         {dayjs(file.createdAt).format('DD MMM YYYY')}
       </td>
-      <td className="has-text-centered">
-        <a onClick={() => getFile({ variables: { fileKey: file.name } })}>
-          Download
-        </a>
-      </td>
+      {isAdmin ? (
+        <td className="has-text-centered">
+          <a onClick={() => getFile({ variables: { fileKey: file.name } })}>
+            Download
+          </a>
+        </td>
+      ) : (
+        <ButtonContainer>
+          <Button
+            marginBottomNone
+            secondary
+            onClick={() => getFile({ variables: { fileKey: file.name } })}
+          >
+            Download
+          </Button>
+        </ButtonContainer>
+      )}
       {isAdmin && (
         <td className="has-text-centered">
           <Dropzone

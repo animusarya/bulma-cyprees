@@ -208,7 +208,7 @@ const ClientHeader = ({ me, project }) => {
               <LinkStyle
                 to="/client/dashboard"
                 className="navbar-item has-text-weight-bold"
-                data={active == '/client/dashboard' && true}
+                data={active == '/client/dashboard'}
                 brandColor={brandColor}
               >
                 Overview
