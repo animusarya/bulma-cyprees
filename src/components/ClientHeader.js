@@ -13,9 +13,9 @@ const Container = styled.section`
   @media only screen and (max-width: 768px) {
     padding: 3rem 1.5rem;
   }
-.container {
-  max-width: 1100px;
-}
+  .container {
+    max-width: 1100px;
+  }
   .column {
     display: flex;
     justify-content: space-between;
@@ -32,7 +32,7 @@ const Container = styled.section`
   }
   h2 {
     @media only screen and (max-width: 768px) {
-    font-size: 22px !important;
+      font-size: 22px !important;
     }
   }
 `;
@@ -47,8 +47,7 @@ const NavbarMenu = styled.nav`
     props.brandColor ? props.brandColor : '#fff'};
   color: #fff;
   /* .navbar-item {
-    color: ${(props) =>
-    props.data ? "#000" : '#fff'};
+    color: ${(props) => (props.data ? '#000' : '#fff')};
     :hover {
       background: #fff;
       opacity: 0.7;
@@ -62,12 +61,11 @@ const NavbarMenu = styled.nav`
 
 const LinkStyle = styled(Link)`
   color: #fff;
-  background-color: ${(props) =>
-    props.data ? "#ffffff10" : 'transparent'};
-    :hover {
-      background: #ffffff10 !important;
-      color: #fff !important;
-    }
+  background-color: ${(props) => (props.data ? '#ffffff10' : 'transparent')};
+  :hover {
+    background: #ffffff10 !important;
+    color: #fff !important;
+  }
 `;
 
 const Logo = styled.img`
@@ -126,7 +124,7 @@ const ClientHeader = ({ me, project }) => {
 
   // const activeSlug = pages[0] ? pages[0].slug : '';
 
-  const [active, setActive] = useState("/client/dashboard");
+  const [active, setActive] = useState('/client/dashboard');
   const brandColor = project.brandColor
     ? project.brandColor
     : theme.primaryColor;
@@ -209,13 +207,9 @@ const ClientHeader = ({ me, project }) => {
             <div className="navbar-start">
               <LinkStyle
                 to="/client/dashboard"
-                className={
-                    active == "/client/dashboard"
-                      ? 'navbar-item has-text-weight-bold'
-                      : 'navbar-item '
-                  }
-                  data={active == "/client/dashboard" && true}
-                  brandColor={brandColor}
+                className="navbar-item has-text-weight-bold"
+                data={active == '/client/dashboard' && true}
+                brandColor={brandColor}
               >
                 Overview
               </LinkStyle>
@@ -223,15 +217,11 @@ const ClientHeader = ({ me, project }) => {
                 <LinkStyle
                   key={page.id}
                   to={`/client/page/${page.id}`}
-                  className={
-                    active == page.slug
-                      ? 'navbar-item has-text-weight-bold'
-                      : 'navbar-item '
-                  }
+                  className="navbar-item has-text-weight-bold"
                   activeLink={page.slug}
                   brandColor={brandColor}
                   onClick={() => setActive(page.slug)}
-                  data={active == page.slug  && true}
+                  data={active == page.slug && true}
                 >
                   {startCase(page.name)}
                 </LinkStyle>
