@@ -18,7 +18,7 @@ const Container = styled.div`
   h4,
   h5,
   h6 {
-    margin-bottom: 1.2rem;
+    margin-bottom: 15px !important;
   }
   h1 {
     font-size: 36px;
