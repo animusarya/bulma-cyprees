@@ -1,3 +1,4 @@
+/* eslint no-nested-ternary: 0 */
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import styled from 'styled-components';
 import swal from 'sweetalert';
@@ -29,7 +30,7 @@ const removeFileMutation = gql`
 
 const Container = styled.tr`
   td {
-    color: ${(props) => (props.brandColor ? props.brandColor : '#25313F')};
+    color: ${(props) => props.brandColor}!important;
   }
 `;
 
