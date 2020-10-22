@@ -20,13 +20,13 @@ const filesQuery = gql`
   }
 `;
 
-const PageRow = ({ page }) => {
+const PageRow = ({ page, project }) => {
   // fetch files for page
   const [getFiles, resultFiles] = useLazyQuery(filesQuery, {
     variables: { pageId: page.id },
     fetchPolicy: 'cache-and-network',
   });
-
+  // console.log(project, 'project');
   useEffect(() => {
     if (page.id) {
       getFiles();
@@ -46,7 +46,7 @@ const PageRow = ({ page }) => {
       )}
       {resultFiles.loading && <Loading />}
       {files.length > 0 ? (
-        <FilesList files={files} isAdmin={false} />
+        <FilesList files={files} isAdmin={false} project={project} />
       ) : (
         <Message>No files added yet.</Message>
       )}

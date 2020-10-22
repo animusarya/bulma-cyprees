@@ -8,6 +8,7 @@ import { useDrag, useDrop } from 'react-dnd';
 import ContentEditable from 'react-contenteditable';
 
 import { Button, Dropzone } from './elements';
+import theme from '../utils/theme';
 import loadingImg from '../assets/images/exchange.png';
 
 const fileQuery = gql`
@@ -23,6 +24,12 @@ const removeFileMutation = gql`
     removeFile(id: $id) {
       success
     }
+  }
+`;
+
+const Container = styled.tr`
+  td {
+    color: ${(props) => (props.brandColor ? props.brandColor : '#25313F')};
   }
 `;
 
@@ -56,6 +63,7 @@ const FileListItem = ({
   refetch,
   moveItem,
   executeUpdate,
+  project,
 }) => {
   const ref = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -67,6 +75,12 @@ const FileListItem = ({
     },
   );
   const [executeMutationDelete] = useMutation(removeFileMutation);
+
+  const brandColor = isAdmin
+    ? ''
+    : project.brandColor
+    ? project.brandColor
+    : theme.primaryColor;
 
   useEffect(() => {
     if (fileData && !fileLoading) {
@@ -155,7 +169,7 @@ const FileListItem = ({
   }, [fileName]);
 
   return (
-    <tr ref={ref} style={{ opacity }}>
+    <Container ref={ref} style={{ opacity }}>
       {isAdmin && (
         <td className="has-text-centered">
           <Button secondary paddingless>
@@ -177,7 +191,13 @@ const FileListItem = ({
           <span>{fileName}</span>
         )}
       </td>
-      <td className="has-text-centered">{file.fileType}</td>
+      {isAdmin ? (
+        <td className="has-text-centered">{file.fileType}</td>
+      ) : (
+        <td className="has-text-centered" brandColor={brandColor}>
+          {file.fileType}
+        </td>
+      )}
       <td className="has-text-centered">{file.section || '-'}</td>
       <td className="has-text-centered">
         {dayjs(file.createdAt).format('DD MMM YYYY')}
@@ -231,7 +251,7 @@ const FileListItem = ({
           </Button>
         </td>
       )}
-    </tr>
+    </Container>
   );
 };
 

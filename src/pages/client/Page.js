@@ -26,7 +26,7 @@ const pageQuery = gql`
 
 const Container = styled.div`
   padding: 3rem 0rem;
- @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 768px) {
     padding: 3rem 1.5rem;
   }
   .container {
@@ -37,11 +37,11 @@ const Container = styled.div`
     background: transparent;
   }
   h2 {
-    font-size: ${props => props.theme.fontSizeSuperLarge};
-    color: ${props => props.theme.fontDark};
+    font-size: ${(props) => props.theme.fontSizeSuperLarge};
+    color: ${(props) => props.theme.fontDark};
     margin-bottom: 2rem;
     @media only screen and (max-width: 768px) {
-      font-size: ${props => props.theme.fontSizeExtraLarge};
+      font-size: ${(props) => props.theme.fontSizeExtraLarge};
     }
   }
 `;
@@ -63,7 +63,6 @@ const Page = ({ match }) => {
     fetchPolicy: 'cache-and-network',
   });
   const page = resultPage.data ? resultPage.data.page : {};
-  // console.log('page', page);
 
   return (
     <Layout noContainer>
@@ -84,7 +83,7 @@ const Page = ({ match }) => {
           )}
           {page.type === 'dataroom' && (
             <Table>
-              <PageRow page={page} />
+              <PageRow page={page} project={project} />
             </Table>
           )}
         </div>

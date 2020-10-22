@@ -24,7 +24,6 @@ const Container = styled.div`
   margin-bottom: 4rem;
   .slick-slide img {
     margin: 0 auto;
-    max-height: 400px;
     width: auto;
     max-width: 100%;
   }
@@ -64,7 +63,7 @@ const ImageGallery = ({ page }) => {
   return (
     <Container>
       <Slider {...settings}>
-        {files.map(file => (
+        {files.map((file) => (
           <Wrapper key={file.id}>
             <img src={file.url} alt={file.name} />
           </Wrapper>

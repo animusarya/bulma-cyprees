@@ -8,9 +8,9 @@ import FileListItem from './FileListItem';
 
 const Container = styled.table`
   th {
-    color: ${props => props.theme.fontDark} !important;
+    color: ${(props) => props.theme.fontDark} !important;
     @media only screen and (max-width: 768px) {
-      font-size: ${props => props.theme.fontSizeSmall};
+      font-size: ${(props) => props.theme.fontSizeSmall};
     }
   }
 `;
@@ -23,10 +23,9 @@ const updateFileMutation = gql`
   }
 `;
 
-const FilesList = ({ files: items, isAdmin, refetch }) => {
+const FilesList = ({ files: items, isAdmin, refetch, project }) => {
   const [files, setFiles] = useState(items);
   const [executeUpdate] = useMutation(updateFileMutation);
-
   // if files updated
   useEffect(() => {
     setFiles(items);
@@ -36,7 +35,10 @@ const FilesList = ({ files: items, isAdmin, refetch }) => {
     (dragIndex, hoverIndex) => {
       const dragCard = files[dragIndex];
       const reorderdFiles = update(files, {
-        $splice: [[dragIndex, 1], [hoverIndex, 0, dragCard]],
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, dragCard],
+        ],
       });
       setFiles(reorderdFiles);
       // update db
@@ -72,6 +74,7 @@ const FilesList = ({ files: items, isAdmin, refetch }) => {
             file={file}
             isAdmin={isAdmin}
             refetch={refetch}
+            project={project}
             moveItem={handleMoveItem}
             executeUpdate={executeUpdate}
           />
