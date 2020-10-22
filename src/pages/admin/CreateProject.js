@@ -54,7 +54,11 @@ const createProjectMutation = gql`
 `;
 
 const CreateProject = () => {
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState({
+    stepOne: true,
+    stepTwo: false,
+    stepThree: false,
+  });
   const [project, setProject] = useState({});
   const [subscription, setSubscription] = useState({});
 
@@ -82,23 +86,25 @@ const CreateProject = () => {
         <div className="column">
           <MainColumn>
             <ProgressBar activeStep={activeStep} />
-            {activeStep === 1 && (
-              <div className="column is-half">
-                <Title>01 Project Setup</Title>
-                <ProjectSetupForm
-                  packages={packages}
-                  onSubmit={(data) => {
-                    setProject(data);
-                    const selectedSubscription = find(packages, {
-                      subscriptionPlanId: data.subscriptionPlanId,
-                    });
-                    setSubscription(selectedSubscription);
-                    setActiveStep(2);
-                  }}
-                />
-              </div>
-            )}
-            {activeStep === 2 && (
+            {activeStep.stepOne &&
+              !activeStep.stepTwo &&
+              !activeStep.stepThree && (
+                <div className="column is-half">
+                  <Title>01 Project Setup</Title>
+                  <ProjectSetupForm
+                    packages={packages}
+                    onSubmit={(data) => {
+                      setProject(data);
+                      const selectedSubscription = find(packages, {
+                        subscriptionPlanId: data.subscriptionPlanId,
+                      });
+                      setSubscription(selectedSubscription);
+                      setActiveStep({ ...activeStep, stepTwo: true });
+                    }}
+                  />
+                </div>
+              )}
+            {activeStep.stepOne && activeStep.stepTwo && !activeStep.stepThree && (
               <div className="column">
                 <Title>02 Payment</Title>
                 <PaymentForm
@@ -132,13 +138,15 @@ const CreateProject = () => {
                     });
                     if (projectCreated.data.createProject) {
                       setProject(projectCreated.data.createProject);
-                      setActiveStep(3);
+                      setActiveStep({ ...activeStep, stepThree: true });
                     }
                   }}
                 />
               </div>
             )}
-            {activeStep === 3 && <PaymentConfirmation project={project} />}
+            {activeStep.stepOne &&
+              activeStep.stepTwo &&
+              activeStep.stepThree && <PaymentConfirmation project={project} />}
             {resAdd.error && (
               <Message type="error">{resAdd.error.message}</Message>
             )}

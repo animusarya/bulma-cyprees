@@ -18,7 +18,7 @@ const Progress = styled.div`
     .progress {
       width: 100%;
       height: 10px;
-      background-color: #797979;
+      background-color: #eeeeee;
       margin: -9px auto 0 auto;
     }
   }
@@ -39,29 +39,32 @@ const Progress = styled.div`
   }
 `;
 
-const ProgressBar = ({ activeStep }) => (
-  <Progress>
-    <div className={`step one ${activeStep === 1 ? 'active' : ''}`}>
-      <div className="progress" />
-      <span className="has-text-weight-bold">01. Project Setup</span>
-    </div>
-    <div className={`step two ${activeStep === 2 ? 'active' : ''}`}>
-      <div className="progress" />
-      <span className="has-text-weight-bold">02. Payment</span>
-    </div>
-    <div className={`step three ${activeStep === 3 ? 'active' : ''}`}>
-      <div className="progress" />
-      <span className="has-text-weight-bold">03. Confirmation</span>
-    </div>
-  </Progress>
-);
+const ProgressBar = ({ activeStep }) => {
+  console.log(activeStep, 'activeStep');
+  return (
+    <Progress>
+      <div className={`step one ${activeStep.stepOne ? 'active' : ''}`}>
+        <div className="progress" />
+        <span className="has-text-weight-bold">01. Project Setup</span>
+      </div>
 
-ProgressBar.defaultProps = {
-  activeStep: 1,
+      <div className={`step two ${activeStep.stepTwo ? 'active' : ''}`}>
+        <div className="progress" />
+        <span className="has-text-weight-bold">02. Payment</span>
+      </div>
+      <div className={`step three ${activeStep.stepThree ? 'active' : ''}`}>
+        <div className="progress" />
+        <span className="has-text-weight-bold">03. Confirmation</span>
+      </div>
+    </Progress>
+  );
 };
+// ProgressBar.defaultProps = {
+//   activeStep: 1,
+// };
 
-ProgressBar.propTypes = {
-  activeStep: PropTypes.number,
-};
+// ProgressBar.propTypes = {
+//   activeStep: PropTypes.number,
+// };
 
 export default ProgressBar;
