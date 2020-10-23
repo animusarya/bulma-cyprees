@@ -17,6 +17,9 @@ import ProjectSettingForm from '../../components/ProjectSettingForm';
 
 const FormContainer = styled.div`
   margin-top: -70px;
+  small {
+    margin-left: 10rem;
+  }
 `;
 
 const ProjectSetting = ({ match }) => {

@@ -76,7 +76,7 @@ const FileListItem = ({
     },
   );
   const [executeMutationDelete] = useMutation(removeFileMutation);
-
+  console.log(fileName, 'fileName');
   const brandColor = isAdmin
     ? ''
     : project.brandColor
@@ -165,7 +165,7 @@ const FileListItem = ({
       variables: {
         id,
         input: {
-          displayName: fileName,
+          displayName: fileName.replace('(-)', ''),
         },
       },
     });

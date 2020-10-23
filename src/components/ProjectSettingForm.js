@@ -6,7 +6,7 @@ import Cleave from 'cleave.js/react';
 
 import { InputGroup, Button, TextAreaGroup, ColorPicker } from './elements';
 
-const ProjectSetting = (props) => {
+const ProjectSettingForm = (props) => {
   const {
     values,
     touched,
@@ -199,7 +199,7 @@ const ProjectSetting = (props) => {
   );
 };
 
-ProjectSetting.propTypes = {
+ProjectSettingForm.propTypes = {
   values: PropTypes.object.isRequired,
   touched: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -231,5 +231,5 @@ export default withFormik({
     props.onSubmit(values);
     setSubmitting(false);
   },
-  displayName: 'ProjectSetting', // helps with React DevTools
-})(ProjectSetting);
+  displayName: 'ProjectSettingForm', // helps with React DevTools
+})(ProjectSettingForm);
