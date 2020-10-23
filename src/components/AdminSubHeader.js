@@ -40,15 +40,16 @@ const Container = styled.div`
     height: 70px;
     display: flex;
     align-items: center;
+    color: #ffffff;
   }
 `;
 const NavbarMenu = styled.nav`
   background-color: ${(props) => props.brandColor};
   .navbar-item {
     :hover {
-    background: #ffffff10;
-    color: #fff !important;
-  }
+      background: #ffffff10;
+      color: #fff !important;
+    }
   }
   button {
     background: ${(props) => props.theme.menuBackgroundColor};
@@ -158,20 +159,23 @@ const AdminSubHeader = () => {
       <Hero className="hero" brandColor={brandColor}>
         <HeroImg src={project.heroImage || logoBg} alt="logo-bg" />
 
-          <div className="hero-body has-text-centered">
+        <div className="hero-body has-text-centered">
           <Button
             secondary
             onClick={() => setUploadImageModal(true)}
             paddingless
           >
-            {
-              !project.heroImage ?
-                <img
-                  className="edit-banner"
-                  src={uploadBannerImg}
-                  alt="upload banner"
-                /> : <h2 className="has-text-weight-bold upload-banner-text">Upload Banner – Minimum Width 1600px</h2>
-            }
+            {!project.heroImage ? (
+              <img
+                className="edit-banner"
+                src={uploadBannerImg}
+                alt="upload banner"
+              />
+            ) : (
+              <span className="has-text-weight-bold upload-banner-text">
+                Upload Banner – Minimum Width 1600px
+              </span>
+            )}
           </Button>
         </div>
       </Hero>

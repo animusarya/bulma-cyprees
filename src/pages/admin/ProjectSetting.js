@@ -39,7 +39,7 @@ const ProjectSetting = ({ match }) => {
           <AdminHeader />
           <AdminSubHeader />
           <MainColumn paddingtop="1rem">
-            <Heading>Footer Contact Information</Heading>
+            <Heading>Project Settings</Heading>
             <FormContainer>
               <ProjectSettingForm
                 enableReinitialize
