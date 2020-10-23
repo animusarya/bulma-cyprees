@@ -33,6 +33,7 @@ const Container = styled.aside`
 
 const IconContainer = styled.div`
   width: 30px;
+  margin-left: 10px;
 `;
 
 const Icon = styled.i``;

@@ -156,6 +156,8 @@ const FileListItem = ({
     }).then(() => {
       refetch();
     });
+
+    window.location.reload(true);
   }, []);
 
   useEffect(() => {
