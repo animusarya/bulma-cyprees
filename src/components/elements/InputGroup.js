@@ -71,7 +71,7 @@ const InputGroup = ({
     </div>
     {hasAddons && (
       <p className="control">
-        <div className="button is-static">@gmail.com</div>
+        <span className="button is-static">@gmail.com</span>
       </p>
     )}
     <div className="control">

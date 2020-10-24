@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
+import { useQuery, useMutation } from '@apollo/client';
+import gql from 'graphql-tag';
 
 import { InputGroup, Button, SelectGroup } from './elements';
 import theme from '../utils/theme';
@@ -43,7 +45,17 @@ const countries = [
     value: 'united-kingdom',
   },
 ];
-
+const discountQuery = gql`
+  query discounts {
+    discounts {
+      id
+      name
+      percentage
+      code
+      status
+    }
+  }
+`;
 const ProjectSetupForm = (props) => {
   const {
     values,
@@ -55,6 +67,34 @@ const ProjectSetupForm = (props) => {
     handleSubmit,
     subscription,
   } = props;
+
+  const [couponCode, setCouponCode] = useState(false);
+  const [subscriptionPrice, setSubscriptionPrice] = useState(
+    subscription.price,
+  );
+  const { data } = useQuery(discountQuery, {
+    fetchPolicy: 'cache-and-network',
+  });
+  const couponCodes = data && data.discounts ? data.discounts : [];
+
+  const applyCoupon = () => {
+    if (!couponCode) {
+      return null;
+    }
+    let discountPercentage = 0;
+    couponCodes.map((item) => {
+      if (item.code == couponCode) {
+        discountPercentage = item.percentage;
+      }
+    });
+
+    if (discountPercentage !== 0) {
+      const price = (subscription.price * discountPercentage) / 100;
+      setSubscriptionPrice(subscription.price - price);
+    } else {
+      setCouponCode('invalid');
+    }
+  };
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -304,22 +344,30 @@ const ProjectSetupForm = (props) => {
                 label="Do you have a discount code?"
                 name="discount"
                 type="text"
-                value={values.discount}
-                onChange={handleChange}
+                onChange={(e) => setCouponCode(e.target.value)}
                 onBlur={handleBlur}
               />
             </p>
             <p className="control">
-              <a className="button is-primary">Apply</a>
+              <button
+                type="button"
+                className="button is-primary"
+                onClick={applyCoupon}
+              >
+                Apply
+              </button>
             </p>
           </div>
+          {couponCode == 'invalid' && (
+            <p className="has-text-danger">Coupon code is invalid</p>
+          )}
           <div className="columns">
             <div className="column">
               <Subtitle>Amount due today</Subtitle>
             </div>
             <div className="column">
               <p className="is-size-3 is-pulled-right has-text-weight-bold">
-                £{subscription.price}
+                £{subscriptionPrice}
               </p>
             </div>
           </div>
@@ -328,13 +376,7 @@ const ProjectSetupForm = (props) => {
               <Button disabled={isSubmitting}>Make Payment</Button>
             </div>
           </div>
-          <div className="notify">
-            {/* <p>
-              <strong>Source checkout</strong> For your convenience intellishare
-              will store your encrypted payment for your future orders. Manage
-              your payment information in My Account
-            </p> */}
-          </div>
+          <div className="notify"></div>
         </div>
       </div>
     </Form>
