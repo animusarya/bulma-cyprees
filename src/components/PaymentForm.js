@@ -4,7 +4,7 @@ import { withFormik } from 'formik';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 
 import { InputGroup, Button, SelectGroup } from './elements';

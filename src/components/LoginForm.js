@@ -10,12 +10,12 @@ import { InputGroup, Button } from './elements';
 const ResetPassword = styled.div`
   a {
     :hover {
-      color: ${props => props.theme.primaryColor};
+      color: ${(props) => props.theme.primaryColor};
     }
   }
 `;
 
-const LoginForm = props => {
+const LoginForm = (props) => {
   const {
     values,
     touched,
@@ -53,7 +53,12 @@ const LoginForm = props => {
       />
       <div className="field">
         <div className="control">
-          <Button marginTop marginBottomNone type="submit" disabled={isSubmitting}>
+          <Button
+            marginTop
+            marginBottomNone
+            type="submit"
+            disabled={isSubmitting}
+          >
             <span className="has-text-weight-bold has-text-light is-size-4">
               Log In
             </span>

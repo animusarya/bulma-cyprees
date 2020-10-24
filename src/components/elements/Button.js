@@ -5,8 +5,7 @@ const Container = styled.button`
   &&& {
     ${(props) => props.style};
     margin-top: ${(props) => (props.marginTop ? '2rem' : '')};
-    border-color: ${(props) =>
-      props.paddingless ? 'transparent' : props.theme.primaryColor};
+    border-color: transparent !important;
     color: ${(props) =>
       props.paddingless ? props.theme.primaryColor : '#fff'};
     padding-left: ${(props) => (props.paddingless ? '0px' : '1.45em')};
@@ -20,11 +19,10 @@ const Container = styled.button`
     font-weight: ${(props) => props.fontWeight};
     font-family: 'Poppins', sans-serif !important;
     :hover {
-      border-color: ${(props) =>
-        props.paddingless ? '#transparent' : props.theme.secondaryColor};
       background: ${(props) =>
-        props.paddingless ? '#transparent' : props.theme.secondaryColor};
+        props.paddingless ? 'transparent' : props.theme.secondaryColor};
       transition: 0.6s;
+      color: red;
     }
   }
 `;
