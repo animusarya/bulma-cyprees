@@ -12,7 +12,7 @@ import UploadImageModal from './UploadImageModal';
 import theme from '../utils/theme';
 
 import logoBg from '../assets/images/blank.png';
-import uploadBannerImg from '../assets/images/upload-banner.png';
+import uploadBannerImg from '../assets/images/upload-banner.svg';
 
 const Container = styled.div`
   margin-top: 1rem;

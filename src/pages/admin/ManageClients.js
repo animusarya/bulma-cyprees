@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
 import dayjs from 'dayjs';
-import { startCase } from 'lodash';
+import { startCase, isEmpty } from 'lodash';
 
 import useProjectDetails from '../../hooks/useProjectDetails';
 import Layout from '../../components/Layout';
@@ -106,7 +106,13 @@ const ManageClients = ({ match, history }) => {
   // console.log('project', project);
 
   useEffect(() => {
-    if (project && project.welcomeEmailTemplate === null) {
+    if (
+      (project &&
+        !isEmpty(project) &&
+        project.welcomeEmailTemplate &&
+        project.welcomeEmailTemplate.subject.length === 0) ||
+      (project && !isEmpty(project) && !project.welcomeEmailTemplate)
+    ) {
       swal(
         'Before adding your first client you must complete the registration email message they will receive under',
       ).then(() => history.push(`/admin/project/${projectId}/emails`));

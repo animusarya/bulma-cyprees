@@ -9,7 +9,7 @@ import { Message, Loading } from '../components/elements';
 import SetPasswordForm from '../components/SetPasswordForm';
 import Footer from '../components/Footer';
 import loginBg from '../assets/images/login-bg.jpg';
-import logo from '../assets/images/logo.png';
+import logo from '../assets/images/logo.svg';
 
 const setPasswordMutation = gql`
   mutation setNewPassword($token: String!, $password: String!) {
@@ -53,7 +53,7 @@ const SetPassword = ({ match }) => {
           <FormContainer>
             <Logo src={logo} alt="logo banner" />
             <SetPasswordForm
-              onSubmit={data =>
+              onSubmit={(data) =>
                 executeMutation({
                   variables: { password: data.password, token },
                 })

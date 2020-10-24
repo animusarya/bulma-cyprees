@@ -7,6 +7,7 @@ import { useMutation, useLazyQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import { useDrag, useDrop } from 'react-dnd';
 import ContentEditable from 'react-contenteditable';
+import { useStoreState } from 'easy-peasy';
 
 import { Button, Dropzone } from './elements';
 import theme from '../utils/theme';
@@ -69,6 +70,7 @@ const FileListItem = ({
   const ref = useRef(null);
   const [loading, setLoading] = useState(false);
   const [fileName, setFileName] = useState(file.displayName);
+  const me = useStoreState((state) => state.user.data);
   const [getFile, { loading: fileLoading, data: fileData }] = useLazyQuery(
     fileQuery,
     {
@@ -76,7 +78,7 @@ const FileListItem = ({
     },
   );
   const [executeMutationDelete] = useMutation(removeFileMutation);
-  console.log(fileName, 'fileName');
+  // console.log(fileName, 'fileName');
   const brandColor = isAdmin
     ? ''
     : project.brandColor
@@ -161,14 +163,16 @@ const FileListItem = ({
   }, []);
 
   useEffect(() => {
-    executeUpdate({
-      variables: {
-        id,
-        input: {
-          displayName: fileName.replace('(-)', ''),
+    if (me.type !== 'client') {
+      executeUpdate({
+        variables: {
+          id,
+          input: {
+            displayName: fileName.replace('(-)', ''),
+          },
         },
-      },
-    });
+      });
+    }
   }, [fileName]);
 
   return (

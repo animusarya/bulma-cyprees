@@ -9,7 +9,7 @@ import useProjectUpdate from '../hooks/useProjectUpdate';
 import { Title, Button, Message } from './elements';
 import UploadImageModal from './UploadImageModal';
 
-import uploadLogoImg from '../assets/images/upload-logo.png';
+import uploadLogoImg from '../assets/images/upload-logo.svg';
 
 const Container = styled.div`
   margin-top: 1rem;
