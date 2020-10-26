@@ -41,13 +41,13 @@ const ProjectSetting = ({ match }) => {
         <div className="column">
           <AdminHeader />
           <AdminSubHeader />
-          <MainColumn paddingtop="1rem">
+          <MainColumn>
             <Heading>Project Settings</Heading>
             <FormContainer>
               <ProjectSettingForm
                 enableReinitialize
                 initialValues={project}
-                onSubmit={async (data) => {
+                onSubmit={async data => {
                   await executeMutation({
                     variables: { id: project.id, input: data },
                   });

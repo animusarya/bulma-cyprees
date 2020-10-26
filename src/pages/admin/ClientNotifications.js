@@ -69,7 +69,7 @@ const ClientNotifications = ({ match }) => {
         <div className="column">
           <AdminHeader />
           <AdminSubHeader />
-          <MainColumn paddingtop="1rem">
+          <MainColumn>
             <Heading>Notifications</Heading>
             {/* <div>
               <Title>

@@ -8,6 +8,10 @@ import swal from 'sweetalert';
 import { Heading, Button } from './elements';
 import PageListItem from './PageListItem';
 
+const Container = styled.div`
+  margin-top: 4px;
+`;
+
 const ButtonContainer = styled.div`
   justify-content: flex-end;
   padding-top: 20px;
@@ -46,7 +50,7 @@ const ProjectPages = ({ pages: pagesItems, project, refetch }) => {
   );
 
   return (
-    <div className="column">
+    <Container>
       <Heading>Manage Pages</Heading>
       <table className="table is-fullwidth is-hoverable">
         <thead>
@@ -81,12 +85,11 @@ const ProjectPages = ({ pages: pagesItems, project, refetch }) => {
           onClick={() => {
             window.location.reload(true);
             swal('Pages updated successfully');
-          }}
-        >
+          }}>
           Update
         </Button>
       </ButtonContainer>
-    </div>
+    </Container>
   );
 };
 

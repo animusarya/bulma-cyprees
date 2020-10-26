@@ -32,7 +32,7 @@ const ManageEmail = ({ match }) => {
         <div className="column">
           <AdminHeader />
           <AdminSubHeader />
-          <MainColumn paddingtop="1rem">
+          <MainColumn>
             <Heading>Manage Emails</Heading>
             <Title>Client Welcome Email (For Unregistered Clients)</Title>
             <div>
@@ -40,7 +40,7 @@ const ManageEmail = ({ match }) => {
                 enableReinitialize
                 initialValues={project}
                 project={project}
-                onSubmit={async (data) => {
+                onSubmit={async data => {
                   await executeMutation({
                     variables: {
                       id: project.id,
