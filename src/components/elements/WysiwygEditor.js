@@ -9,7 +9,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 const Container = styled.div`
   .rdw-editor-main {
     border: 1px solid #f1f1f1;
-    padding: 0 15px;
+    /* padding: 0 15px; */
     min-height: 250px;
   }
   h1,
@@ -78,7 +78,7 @@ const WysiwygEditor = ({ onChange, value }) => {
           history: { inDropdown: true },
         }}
         editorState={editor}
-        onEditorStateChange={(editorState) => {
+        onEditorStateChange={editorState => {
           setEditor(editorState);
           const htmlContent = draftToHtml(
             convertToRaw(editorState.getCurrentContent()),
