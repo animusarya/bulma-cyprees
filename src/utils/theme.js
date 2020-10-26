@@ -34,6 +34,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   .button.is-primary {
     background-color: ${theme.primaryColor};
+    color: #ffffff;
     :hover {
       background-color: ${theme.secondaryColor};
       transition: 0.6s;
@@ -67,5 +68,9 @@ export const GlobalStyle = createGlobalStyle`
     display: flex;
     justify-content: center;
     flex-direction: row-reverse;
+  }
+  .button.is-primary.is-outlined[disabled] {
+    background-color: #eee;
+    color: #666;
   }
 `;
