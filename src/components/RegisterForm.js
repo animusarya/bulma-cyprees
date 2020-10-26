@@ -27,8 +27,7 @@ const RegisterForm = props => {
   const [ndaAccepted, setNdaAccepted] = useState(
     !(!isAdminRegister && project.nda),
   );
-  console.log('ndaAccepted', ndaAccepted);
-
+  // console.log('ndaAccepted', ndaAccepted);
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
@@ -133,8 +132,7 @@ const RegisterForm = props => {
             marginTop
             marginBottomNone
             type="submit"
-            disabled={isSubmitting || !ndaAccepted}
-          >
+            disabled={isSubmitting || !ndaAccepted}>
             <span className="has-text-weight-bold has-text-light is-size-4">
               Create Account
             </span>
@@ -147,7 +145,7 @@ const RegisterForm = props => {
             project.disclaimer
           ) : (
             <MarginContainer>
-              © 2020. IntelliShare. All Rights Reserved.
+              © 2020. Intellishare. All Rights Reserved.
             </MarginContainer>
           )
         }
@@ -168,12 +166,14 @@ RegisterForm.propTypes = {
 
 export default withFormik({
   mapPropsToValues: ({ initialValues }) => ({
-    fullName: '',
-    email: initialValues.email,
-    password: '',
-    confirmPassword: '',
-    companyName: '',
-    telephone: '',
+    fullName: initialValues.fullName ? initialValues.fullName : '',
+    email: initialValues.email ? initialValues.email : '',
+    password: initialValues.password ? initialValues.password : '',
+    confirmPassword: initialValues.confirmPassword
+      ? initialValues.confirmPassword
+      : '',
+    companyName: initialValues.companyName ? initialValues.companyName : '',
+    telephone: initialValues.telephone ? initialValues.telephone : '',
   }),
   validationSchema: yup.object().shape({
     fullName: yup.string().required('name is required!'),
