@@ -30,7 +30,7 @@ const ProjectDashboardHero = ({ project }) => (
         <p>
           4. Create email message for your users under{' '}
           <Link to={`/admin/project/${project.id}/clients`}>
-            <strong className="has-text-weight-bold">Manage Clients</strong>
+            <strong className="has-text-weight-bold">Manage Emails</strong>
           </Link>
         </p>
         <p>
