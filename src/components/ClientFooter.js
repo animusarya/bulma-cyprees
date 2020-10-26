@@ -4,13 +4,13 @@ import styled from 'styled-components';
 const Container = styled.div`
   footer {
     padding: 1.5rem 1.5rem 1.5rem;
-    background-color: #F8F8F9;
+    background-color: #f8f8f9;
   }
   .disclaimer {
-    background-color: ${(props) => props.theme.secondaryColor};
+    background-color: ${props => props.theme.secondaryColor};
     @media only screen and (max-width: 768px) {
-    padding: 1.5rem;
-  }
+      padding: 1.5rem;
+    }
   }
   .container {
     max-width: 1100px;
@@ -25,9 +25,9 @@ const Container = styled.div`
 `;
 
 const FooterTitle = styled.h2`
-  font-size: ${(props) => props.theme.fontSizeMedium} !important;
-  color: ${(props) => props.theme.fontDark} !important;
-  font-size: ${(props) => props.theme.fontSizeLarge} !important;
+  font-size: ${props => props.theme.fontSizeMedium} !important;
+  color: ${props => props.theme.fontDark} !important;
+  font-size: ${props => props.theme.fontSizeLarge} !important;
 `;
 
 const ContactInfo = styled.p`
@@ -37,10 +37,16 @@ const ContactInfo = styled.p`
   }
 `;
 
+const FooterLink = styled.a`
+  color: ${props => props.brandColor}!important;
+`;
+
 const ClientFooter = ({ project }) => {
   const getYear = () => {
     return new Date().getFullYear();
   };
+
+  const { brandColor } = project;
   return (
     <Container>
       <footer className="footer">
@@ -50,40 +56,46 @@ const ClientFooter = ({ project }) => {
           </FooterTitle>
           <ContactInfo className=" is-size-6 is-hidden-mobile">
             {project.contactName} |{' '}
-            <a href={`tel:${project.contactTelephone}`}>
+            <FooterLink
+              href={`tel:${project.contactTelephone}`}
+              brandColor={brandColor}>
               {project.contactTelephone}
-            </a>{' '}
+            </FooterLink>{' '}
             |{' '}
-            <a href={`mailto:${project.contactEmail}`}>
+            <FooterLink
+              href={`mailto:${project.contactEmail}`}
+              brandColor={brandColor}>
               {project.contactEmail}
-            </a>
+            </FooterLink>
           </ContactInfo>
           <ContactInfo className="is-size-6 is-hidden-desktop">
             <div className="">{project.contactName}</div>
             <div>
-              <a href={`tel:${project.contactTelephone}`}>
+              <FooterLink href={`tel:${project.contactTelephone}`}>
                 {project.contactTelephone}
-              </a>
+              </FooterLink>
             </div>
             <div>
-              <a href={`mailto:${project.contactEmail}`}>
+              <FooterLink href={`mailto:${project.contactEmail}`}>
                 {project.contactEmail}
-              </a>
+              </FooterLink>
             </div>
           </ContactInfo>
         </ContactInfo>
       </footer>
       <div className="disclaimer has-text-weight-light is-size-6">
         <div className="container">
-        <div className="columns">
-          <div className="column has-text-white">
-            {project.disclaimer && <p className="para">Disclaimer: {project.disclaimer}</p>}
-            <p className="para">
-              <i className="far fa-copyright"></i> {getYear()} {project.name}{' '}
-              All Rights Reserved
-            </p>
+          <div className="columns">
+            <div className="column has-text-white">
+              {project.disclaimer && (
+                <p className="para">Disclaimer: {project.disclaimer}</p>
+              )}
+              <p className="para">
+                <i className="far fa-copyright"></i> {getYear()} {project.name}{' '}
+                All Rights Reserved
+              </p>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </Container>

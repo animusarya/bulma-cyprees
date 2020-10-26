@@ -29,17 +29,15 @@ const removeFileMutation = gql`
   }
 `;
 
-const Container = styled.tr`
-  td {
-    color: ${(props) => props.brandColor}!important;
-  }
+const TitleClientFiles = styled.span`
+  color: ${props => props.brandColor}!important;
 `;
 
 const SyncIcon = styled.img`
   width: 17px;
   height: auto;
   margin-top: 2px;
-  animation-name: ${(props) => (props.isLoading ? 'spin' : 'none')};
+  animation-name: ${props => (props.isLoading ? 'spin' : 'none')};
   animation-duration: 4000ms;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
@@ -53,7 +51,7 @@ const SyncIcon = styled.img`
   }
 `;
 
-const ButtonContainer = styled.div`
+const ButtonContainer = styled.td`
   margin: 5px 0;
 `;
 
@@ -70,7 +68,7 @@ const FileListItem = ({
   const ref = useRef(null);
   const [loading, setLoading] = useState(false);
   const [fileName, setFileName] = useState(file.displayName);
-  const me = useStoreState((state) => state.user.data);
+  const me = useStoreState(state => state.user.data);
   const [getFile, { loading: fileLoading, data: fileData }] = useLazyQuery(
     fileQuery,
     {
@@ -136,7 +134,7 @@ const FileListItem = ({
   });
   const [{ isDragging }, drag] = useDrag({
     item: { type: 'card', id, index },
-    collect: (monitor) => ({
+    collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),
   });
@@ -144,7 +142,7 @@ const FileListItem = ({
   drag(drop(ref));
   // drag n drop
 
-  const handleFileReplace = useCallback((data) => {
+  const handleFileReplace = useCallback(data => {
     executeUpdate({
       variables: {
         id,
@@ -176,7 +174,7 @@ const FileListItem = ({
   }, [fileName]);
 
   return (
-    <Container ref={ref} style={{ opacity }}>
+    <tr ref={ref} style={{ opacity }}>
       {isAdmin && (
         <td className="has-text-centered">
           <Button secondary paddingless>
@@ -188,22 +186,22 @@ const FileListItem = ({
         {isAdmin ? (
           <ContentEditable
             html={fileName}
-            onChange={(e) => setFileName(e.target.value)}
+            onChange={e => setFileName(e.target.value)}
             tagName="span"
-            onKeyDown={(event) => {
+            onKeyDown={event => {
               event.key === 'Enter' && event.preventDefault();
             }}
           />
         ) : (
-          <span>{fileName}</span>
+          <TitleClientFiles brandColor={brandColor}>
+            {fileName}
+          </TitleClientFiles>
         )}
       </td>
       {isAdmin ? (
         <td className="has-text-centered">{file.fileType}</td>
       ) : (
-        <td className="has-text-centered" brandColor={brandColor}>
-          {file.fileType}
-        </td>
+        <td className="has-text-centered">{file.fileType}</td>
       )}
       <td className="has-text-centered">{file.section || '-'}</td>
       <td className="has-text-centered">
@@ -216,12 +214,13 @@ const FileListItem = ({
           </a>
         </td>
       ) : (
-        <ButtonContainer>
+        <ButtonContainer className="has-text-centered">
           <Button
             marginBottomNone
             secondary
-            onClick={() => getFile({ variables: { fileKey: file.name } })}
-          >
+            primary
+            brandColor={brandColor}
+            onClick={() => getFile({ variables: { fileKey: file.name } })}>
             Download
           </Button>
         </ButtonContainer>
@@ -230,8 +229,7 @@ const FileListItem = ({
         <td className="has-text-centered">
           <Dropzone
             onUpload={handleFileReplace}
-            handleLoading={(isLoading) => setLoading(isLoading)}
-          >
+            handleLoading={isLoading => setLoading(isLoading)}>
             <SyncIcon src={loadingImg} isLoading={loading} />
           </Dropzone>
         </td>
@@ -244,7 +242,7 @@ const FileListItem = ({
             onClick={() => {
               swal('Are you confirm to delete this item?', {
                 buttons: ['Cancel', 'Confirm'],
-              }).then(async (value) => {
+              }).then(async value => {
                 if (value) {
                   await executeMutationDelete({
                     variables: { id: file.id },
@@ -252,13 +250,12 @@ const FileListItem = ({
                   refetch();
                 }
               });
-            }}
-          >
+            }}>
             <i className="far fa-trash-alt"></i>
           </Button>
         </td>
       )}
-    </Container>
+    </tr>
   );
 };
 

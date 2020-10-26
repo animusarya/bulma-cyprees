@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import theme from '../../utils/theme';
+
 const Container = styled.button`
   &&& {
     ${props => props.style};
@@ -14,7 +16,7 @@ const Container = styled.button`
     padding-top: ${props => (props.paddingless ? 'calc(0px)' : '')};
     height: ${props => (props.paddingless ? '2em' : '')};
     background-color: ${props =>
-      props.paddingless ? 'transparent' : props.theme.primaryColor};
+      props.bgColor ? props.bgColor : props.theme.mainBrandColor};
     font-weight: ${props => props.fontWeight};
     font-family: 'Poppins', sans-serif !important;
     :hover {
@@ -26,15 +28,31 @@ const Container = styled.button`
   }
 `;
 
-const Button = ({ className, children, secondary, loading, ...otherProps }) => (
-  <Container
-    type="submit"
-    className={`button ${secondary ? '' : 'is-primary is-outlined is-medium'} ${
-      loading ? 'is-loading' : ''
-    }`}
-    {...otherProps}>
-    {children}
-  </Container>
-);
+const Button = ({
+  className,
+  children,
+  secondary,
+  primary,
+  loading,
+  brandColor,
+  ...otherProps
+}) => {
+  let bgColor = theme.primaryColor;
+  if (primary) {
+    bgColor = brandColor;
+  }
+
+  return (
+    <Container
+      type="submit"
+      className={`button ${
+        secondary ? '' : 'is-primary is-outlined is-medium'
+      } ${loading ? 'is-loading' : ''}`}
+      bgColor={bgColor}
+      {...otherProps}>
+      {children}
+    </Container>
+  );
+};
 
 export default Button;
