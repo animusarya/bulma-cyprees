@@ -27,10 +27,18 @@ const Container = styled.div`
 const FooterTitle = styled.h2`
   font-size: ${props => props.theme.fontSizeMedium} !important;
   color: ${props => props.theme.fontDark} !important;
+  @media only screen and (max-width: 768px) {
+    font-size: 22px !important;
+  }
 `;
 
 const ContactInfo = styled.p`
   padding: 20px 0;
+  .contact {
+    @media only screen and (max-width: 768px) {
+      font-size: 18px;
+    }
+  }
   @media only screen and (max-width: 768px) {
     padding: 0;
   }
@@ -72,7 +80,7 @@ const ClientFooter = ({ project }) => {
             </FooterLink>
           </ContactInfo>
           <ContactInfo className="is-size-6 is-hidden-desktop">
-            <div className="">{project.contactName}</div>
+            <div className="contact">{project.contactName}</div>
             <div>
               <FooterLink href={`tel:${project.contactTelephone}`}>
                 {project.contactTelephone}
