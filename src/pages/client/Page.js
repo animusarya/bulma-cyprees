@@ -37,11 +37,11 @@ const Container = styled.div`
     background: transparent;
   }
   h2 {
-    font-size: ${(props) => props.theme.fontSizeSuperLarge};
-    color: ${(props) => props.theme.fontDark};
+    font-size: ${props => props.theme.fontSizeSuperLarge};
+    color: ${props => props.theme.fontDark};
     margin-bottom: 2rem;
     @media only screen and (max-width: 768px) {
-      font-size: ${(props) => props.theme.fontSizeExtraLarge};
+      font-size: ${props => props.theme.fontSizeExtraLarge};
     }
   }
 `;
