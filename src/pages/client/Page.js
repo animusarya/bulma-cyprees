@@ -75,8 +75,8 @@ const Page = ({ match }) => {
           {resultPage.error && (
             <Message type="error">{resultPage.error.message}</Message>
           )}
-          {resultPage.loading && <Loading />}
           <h2 className="has-text-weight-semibold">{page.name}</h2>
+          {resultPage.loading && <Loading />}
           {page.type === 'content' && (
             <div>
               <ImageGallery page={page} />
