@@ -43,11 +43,10 @@ const Top = styled.div`
 
 const NavbarMenu = styled.nav`
   padding: 0 2rem !important;
-  background-color: ${(props) =>
-    props.brandColor ? props.brandColor : '#fff'};
+  background-color: ${props => (props.brandColor ? props.brandColor : '#000')};
   color: #fff;
   /* .navbar-item {
-    color: ${(props) => (props.data ? '#000' : '#fff')};
+    color: ${props => (props.data ? '#000' : '#fff')};
     :hover {
       background: #fff;
       opacity: 0.7;
@@ -55,15 +54,16 @@ const NavbarMenu = styled.nav`
     }
   } */
   .navbar-menu {
-    background-color: ${(props) => props.brandColor};
+    background-color: ${props => props.brandColor};
   }
 `;
 
 const LinkStyle = styled(Link)`
   color: #fff;
-  background-color: ${(props) => (props.data ? '#ffffff10' : 'transparent')};
+  background-color: ${props =>
+    props.data ? 'rgba(255, 255, 255, 0.2)' : 'transparent'};
   :hover {
-    background: #ffffff10 !important;
+    background: rgba(255, 255, 255, 0.2) !important;
     color: #fff !important;
   }
 `;
@@ -100,14 +100,14 @@ const Button = styled.button`
 `;
 
 const ClientName = styled(Button)`
-  font-size: ${(props) => props.theme.fontSizeSmall};
-  color: ${(props) => props.theme.fontDark} !important;
+  font-size: ${props => props.theme.fontSizeSmall};
+  color: ${props => props.theme.fontDark} !important;
 `;
 
 const LogoutButton = styled(Button)`
   margin-top: -2px;
   svg:not(:root).svg-inline--fa {
-    color: ${(props) => props.brandColor} !important;
+    color: ${props => props.brandColor} !important;
   }
 `;
 
@@ -156,8 +156,7 @@ const ClientHeader = ({ me, project }) => {
               <LogoutButton
                 className="button is-text"
                 onClick={() => handleLogout()}
-                brandColor={brandColor}
-              >
+                brandColor={brandColor}>
                 <i className="fas fa-power-off icon"></i>
               </LogoutButton>
               {project && (
@@ -182,8 +181,7 @@ const ClientHeader = ({ me, project }) => {
         className="navbar"
         role="navigation"
         aria-label="main navigation"
-        brandColor={brandColor}
-      >
+        brandColor={brandColor}>
         <div className="container">
           <div className="">
             <a
@@ -193,8 +191,7 @@ const ClientHeader = ({ me, project }) => {
               aria-label="menu"
               aria-expanded="false"
               data-target="navbarBasicExample"
-              onClick={toggleMenu}
-            >
+              onClick={toggleMenu}>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
@@ -202,18 +199,16 @@ const ClientHeader = ({ me, project }) => {
           </div>
           <div
             id="navbarBasicExample"
-            className={isActive ? 'navbar-menu is-active' : 'navbar-menu'}
-          >
+            className={isActive ? 'navbar-menu is-active' : 'navbar-menu'}>
             <div className="navbar-start">
               <LinkStyle
                 to="/client/dashboard"
                 className="navbar-item has-text-weight-bold"
                 data={active == '/client/dashboard'}
-                brandColor={brandColor}
-              >
+                brandColor={brandColor}>
                 Overview
               </LinkStyle>
-              {pages.map((page) => (
+              {pages.map(page => (
                 <LinkStyle
                   key={page.id}
                   to={`/client/page/${page.id}`}
@@ -221,8 +216,7 @@ const ClientHeader = ({ me, project }) => {
                   activeLink={page.slug}
                   brandColor={brandColor}
                   onClick={() => setActive(page.slug)}
-                  data={active == page.slug && true}
-                >
+                  data={active == page.slug && true}>
                   {startCase(page.name)}
                 </LinkStyle>
               ))}
