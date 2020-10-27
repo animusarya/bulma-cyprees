@@ -63,7 +63,7 @@ const Container = styled.div`
   }
   input {
     border-radius: 0px;
-    border: 1px solid ${(props) => props.theme.primaryColor};
+    border: 1px solid ${props => props.theme.primaryColor};
   }
 `;
 
@@ -87,7 +87,7 @@ const Pricing = () => {
             <PricingForm
               enableReinitialize
               initialValues={editClient}
-              onSubmit={(data) => {
+              onSubmit={data => {
                 if (isEmpty(editClient)) {
                   // add item
                   setTimeout(() => {
@@ -130,17 +130,16 @@ const Pricing = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {result.data.packages.map((item) => (
+                    {result.data.packages.map(item => (
                       <tr key={item.id}>
                         <td>{item.name}</td>
                         <td>£{item.price}</td>
                         <td className="is-uppercase actions has-text-right">
                           <Button
-                            secondary
+                            primary
                             paddingless
-                            onClick={() => setEditClient(item)}
-                          >
-                            EDIT
+                            onClick={() => setEditClient(item)}>
+                            <span className="is-size-6">EDIT</span>
                           </Button>
                         </td>
                       </tr>
