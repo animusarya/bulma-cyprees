@@ -61,9 +61,9 @@ const Container = styled.div`
 `;
 
 const LinkWrapper = styled(Link)`
-  color: ${(props) => props.theme.primaryColor};
+  color: ${props => props.theme.primaryColor};
   :hover {
-    color: ${(props) => props.theme.primaryColor};
+    color: ${props => props.theme.primaryColor};
   }
 `;
 
@@ -113,7 +113,7 @@ const ProjectsClient = ({ match }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {result.data.projects.map((project) => (
+                  {result.data.projects.map(project => (
                     <tr key={project.id}>
                       <td>
                         <strong>{project.name}</strong>
@@ -129,14 +129,13 @@ const ProjectsClient = ({ match }) => {
                       </td>
                       <td className="is-uppercase actions">
                         <LinkWrapper
-                          to={`/super-admin/client/${match.params.clientId}/project/${project.id}/info`}
-                        >
+                          to={`/super-admin/client/${match.params.clientId}/project/${project.id}/info`}>
                           manage{' '}
                         </LinkWrapper>
                       </td>
                       <td className="is-uppercase actions">
                         <Button
-                          secondary
+                          primary
                           disabled={project.disabled !== 'active'}
                           paddingless
                           onClick={() => {
@@ -145,7 +144,7 @@ const ProjectsClient = ({ match }) => {
                               {
                                 buttons: ['Cancel', 'Confirm'],
                               },
-                            ).then(async (value) => {
+                            ).then(async value => {
                               if (value) {
                                 await executeMutationRenew({
                                   id: project.id,
@@ -154,19 +153,18 @@ const ProjectsClient = ({ match }) => {
                                 });
                               }
                             });
-                          }}
-                        >
+                          }}>
                           RENEW
                         </Button>
                       </td>
                       <td className="is-uppercase actions">
                         <Button
-                          secondary
+                          primary
                           paddingless
                           onClick={() => {
                             swal('Are you confirm to delete this item?', {
                               buttons: ['Cancel', 'Confirm'],
-                            }).then(async (value) => {
+                            }).then(async value => {
                               if (value) {
                                 await executeMutationRemove({
                                   id: project.id,
@@ -175,14 +173,13 @@ const ProjectsClient = ({ match }) => {
                                 result.refetch();
                               }
                             });
-                          }}
-                        >
+                          }}>
                           DELETE
                         </Button>
                       </td>
                       <td className="is-uppercase actions">
                         <Button
-                          secondary
+                          primary
                           paddingless
                           onClick={() => {
                             // swal('Are you confirm to delete this item?', {
@@ -192,8 +189,7 @@ const ProjectsClient = ({ match }) => {
                             //     await executeMutationRemove({ id: project.id });
                             //   }
                             // });
-                          }}
-                        >
+                          }}>
                           EXPORT
                         </Button>
                       </td>

@@ -236,9 +236,7 @@ const ManageClients = ({ match, history }) => {
                                     }
                                   });
                                 }}>
-                                <span className="is-size-6">
-                                  Send register email
-                                </span>
+                                Send register email
                               </Button>
                             )}
                           </td>

@@ -54,7 +54,7 @@ const AdminUsers = ({ result, executeQuery }) => {
                 <td>{item.email}</td>
                 <td className="has-text-right">
                   <Button
-                    secondary
+                    primary
                     paddingless
                     onClick={() => {
                       swal('Are you sure you want to delete this user?', {

@@ -131,7 +131,7 @@ const Discounts = () => {
                               }
                             });
                           }}>
-                          <span className="is-size-6">DELETE</span>
+                          DELETE
                         </Button>
                       </td>
                     </tr>

@@ -19,6 +19,7 @@ const Container = styled.button`
       props.bgColor ? props.bgColor : props.theme.mainBrandColor};
     font-weight: ${props => props.fontWeight};
     font-family: 'Poppins', sans-serif !important;
+    font-size: ${props => (props.fontSize ? props.fontSize : '16px')}
     :hover {
       background: ${props =>
         props.paddingless ? 'transparent' : props.theme.secondaryColor};

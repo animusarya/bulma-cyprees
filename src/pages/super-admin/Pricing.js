@@ -139,7 +139,7 @@ const Pricing = () => {
                             primary
                             paddingless
                             onClick={() => setEditClient(item)}>
-                            <span className="is-size-6">EDIT</span>
+                            EDIT
                           </Button>
                         </td>
                       </tr>
