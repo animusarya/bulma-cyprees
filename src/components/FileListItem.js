@@ -51,6 +51,13 @@ const SyncIcon = styled.img`
   }
 `;
 
+const NewTag = styled.p`
+  background: #780000;
+  width: 50px;
+  align-self: center;
+  margin-left: 8px;
+`;
+
 const ButtonContainer = styled.td`
   margin: 5px 0;
 `;
@@ -173,6 +180,21 @@ const FileListItem = ({
     }
   }, [fileName]);
 
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 2);
+  const differece = today - yesterday;
+  const diffDays = Math.ceil(differece / (1000 * 60 * 60 * 24));
+  const newTagFile = () => {
+    if (diffDays === 2) {
+      return (
+        <NewTag className="has-text-ceneterd has-text-white has-text-centered is-size-7">
+          New
+        </NewTag>
+      );
+    }
+  };
+
   return (
     <tr ref={ref} style={{ opacity }}>
       {isAdmin && (
@@ -193,9 +215,12 @@ const FileListItem = ({
             }}
           />
         ) : (
-          <TitleClientFiles brandColor={brandColor}>
-            {fileName}
-          </TitleClientFiles>
+          <div className="is-flex">
+            <TitleClientFiles brandColor={brandColor}>
+              {fileName}
+            </TitleClientFiles>
+            {newTagFile()}
+          </div>
         )}
       </td>
       {isAdmin ? (
