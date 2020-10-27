@@ -58,11 +58,11 @@ const Logo = styled.img`
 
 const AdminHeader = () => {
   const [isActive, setIsActive] = useState(false);
-  const projectId = useStoreState((state) => state.active.project);
+  const projectId = useStoreState(state => state.active.project);
   const [project, resultProject] = useProjectDetails(projectId);
   const [executeUpdateProjectMutation, resUpdateProject] = useProjectUpdate();
 
-  const handleLogoUpload = (uploadResponse) => {
+  const handleLogoUpload = uploadResponse => {
     executeUpdateProjectMutation({
       variables: {
         id: projectId,
@@ -86,10 +86,9 @@ const AdminHeader = () => {
             )} */}
             <Button
               paddingless
-              secondary
+              primary
               className="edit"
-              onClick={() => setIsActive(true)}
-            >
+              onClick={() => setIsActive(true)}>
               {!project.logo ? (
                 <img
                   className="edit-logo"

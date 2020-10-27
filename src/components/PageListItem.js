@@ -20,9 +20,9 @@ const removeMutation = gql`
 `;
 
 const LinkWrapper = styled(Link)`
-  color: ${(props) => props.theme.primaryColor};
+  color: ${props => props.theme.primaryColor};
   :hover {
-    color: ${(props) => props.theme.primaryColor};
+    color: ${props => props.theme.primaryColor};
   }
 `;
 
@@ -88,7 +88,7 @@ const PageListItem = ({
   });
   const [{ isDragging }, drag] = useDrag({
     item: { type: 'card', id, index },
-    collect: (monitor) => ({
+    collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),
   });
@@ -110,16 +110,16 @@ const PageListItem = ({
   return (
     <tr ref={ref} style={{ opacity }}>
       <td className="has-text-centered">
-        <Button secondary paddingless>
+        <Button primary paddingless>
           <i className="far fa-hand-pointer"></i>
         </Button>
       </td>
       <td className="has-text-weight-semibold">
         <ContentEditable
           html={pageName}
-          onChange={(e) => setPageName(e.target.value)}
+          onChange={e => setPageName(e.target.value)}
           tagName="span"
-          onKeyDown={(event) => {
+          onKeyDown={event => {
             event.key === 'Enter' && event.preventDefault();
           }}
         />
@@ -142,13 +142,13 @@ const PageListItem = ({
       <td>
         <ButtonContainer>
           <Button
-            secondary
+            primary
             paddingless
             fontWeight="400"
             onClick={() => {
               swal('Are you confirm to remove this page?', {
                 buttons: ['Cancel', 'Confirm'],
-              }).then(async (value) => {
+              }).then(async value => {
                 if (value) {
                   await executeMutationRemove({
                     variables: { id: page.id },
@@ -157,8 +157,7 @@ const PageListItem = ({
                   window.location.reload();
                 }
               });
-            }}
-          >
+            }}>
             Remove
           </Button>
         </ButtonContainer>

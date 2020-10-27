@@ -27,7 +27,6 @@ const Container = styled.div`
 const FooterTitle = styled.h2`
   font-size: ${props => props.theme.fontSizeMedium} !important;
   color: ${props => props.theme.fontDark} !important;
-  font-size: ${props => props.theme.fontSizeLarge} !important;
 `;
 
 const ContactInfo = styled.p`
@@ -39,6 +38,10 @@ const ContactInfo = styled.p`
 
 const FooterLink = styled.a`
   color: ${props => props.brandColor}!important;
+`;
+
+const Disclaimer = styled.p`
+  padding: 20px 0;
 `;
 
 const ClientFooter = ({ project }) => {
@@ -88,7 +91,9 @@ const ClientFooter = ({ project }) => {
           <div className="columns">
             <div className="column has-text-white">
               {project.disclaimer && (
-                <p className="para">Disclaimer: {project.disclaimer}</p>
+                <Disclaimer className="para">
+                  Disclaimer: {project.disclaimer}
+                </Disclaimer>
               )}
               <p className="para">
                 <i className="far fa-copyright"></i> {getYear()} {project.name}{' '}

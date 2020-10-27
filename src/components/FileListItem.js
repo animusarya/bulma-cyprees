@@ -199,7 +199,7 @@ const FileListItem = ({
     <tr ref={ref} style={{ opacity }}>
       {isAdmin && (
         <td className="has-text-centered">
-          <Button secondary paddingless>
+          <Button primary paddingless>
             <i className="far fa-hand-pointer"></i>
           </Button>
         </td>
@@ -262,7 +262,7 @@ const FileListItem = ({
       {isAdmin && (
         <td className="has-text-centered">
           <Button
-            secondary
+            primary
             paddingless
             onClick={() => {
               swal('Are you confirm to delete this item?', {

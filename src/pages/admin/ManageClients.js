@@ -135,7 +135,7 @@ const ManageClients = ({ match, history }) => {
             <Subtitle className="subtitle">Add Client</Subtitle>
             <div>
               <ManageAdminClientForm
-                onSubmit={async (data) => {
+                onSubmit={async data => {
                   await executeAddClientMutation({
                     variables: { id: project.id, input: data },
                   });
@@ -200,7 +200,7 @@ const ManageClients = ({ match, history }) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {project.clients.map((item) => {
+                    {project.clients.map(item => {
                       const clientAccessClass = item.hasAccess
                         ? 'far fa-check-square'
                         : 'far fa-square';
@@ -219,12 +219,12 @@ const ManageClients = ({ match, history }) => {
                               '-'
                             ) : (
                               <Button
-                                secondary
+                                primary
                                 paddingless
                                 onClick={() => {
                                   swal('You want to send email?', {
                                     buttons: ['Cancel', 'Confirm'],
-                                  }).then(async (value) => {
+                                  }).then(async value => {
                                     if (value) {
                                       await executeMutationResendEmail({
                                         variables: {
@@ -235,20 +235,21 @@ const ManageClients = ({ match, history }) => {
                                       resultProject.refetch();
                                     }
                                   });
-                                }}
-                              >
-                                Send register email
+                                }}>
+                                <span className="is-size-6">
+                                  Send register email
+                                </span>
                               </Button>
                             )}
                           </td>
                           <td className="has-text-centered">
                             <Button
-                              secondary
+                              primary
                               paddingless
                               onClick={() => {
                                 swal('Are you sure to change client access?', {
                                   buttons: ['Cancel', 'Confirm'],
-                                }).then(async (value) => {
+                                }).then(async value => {
                                   if (value) {
                                     await executeUpdateProjectClient({
                                       variables: {
@@ -262,8 +263,7 @@ const ManageClients = ({ match, history }) => {
                                     resultProject.refetch();
                                   }
                                 });
-                              }}
-                            >
+                              }}>
                               <div key={clientAccessClass}>
                                 <i className={clientAccessClass}></i>
                               </div>
@@ -271,12 +271,12 @@ const ManageClients = ({ match, history }) => {
                           </td>
                           <td className="has-text-centered">
                             <Button
-                              secondary
+                              primary
                               paddingless
                               onClick={() => {
                                 swal('Are you confirm to remove this client?', {
                                   buttons: ['Cancel', 'Confirm'],
-                                }).then(async (value) => {
+                                }).then(async value => {
                                   if (value) {
                                     await executeRemoveClientMutation({
                                       variables: {
@@ -287,8 +287,7 @@ const ManageClients = ({ match, history }) => {
                                     resultProject.refetch();
                                   }
                                 });
-                              }}
-                            >
+                              }}>
                               <i className="far fa-trash-alt"></i>
                             </Button>
                           </td>

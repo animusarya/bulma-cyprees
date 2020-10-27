@@ -23,7 +23,8 @@ const Container = styled.button`
       background: ${props =>
         props.paddingless ? 'transparent' : props.theme.secondaryColor};
       transition: 0.6s;
-      color: #fff;
+      color: ${props =>
+        props.paddingless ? props.theme.primaryColor : '#fff'};
     }
   }
 `;
