@@ -239,7 +239,7 @@ const FileListItem = ({
           </a>
         </td>
       ) : (
-        <ButtonContainer className="has-text-centered">
+        <ButtonContainer className="has-text-centered is-hidden-mobile">
           <Button
             marginBottomNone
             secondary

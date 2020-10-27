@@ -38,9 +38,9 @@ const PageRow = ({ page, project }) => {
 
   return (
     <React.Fragment>
-      <Title marginbottom="0rem">
-        {/* <Link to={`/client/page/${page.id}`}>{startCase(page.name)}</Link> */}
-      </Title>
+      {/* <Title marginbottom="0rem">
+        <Link to={`/client/page/${page.id}`}>{startCase(page.name)}</Link>
+      </Title> */}
       {resultFiles.error && (
         <Message type="error">{resultFiles.error.message}</Message>
       )}

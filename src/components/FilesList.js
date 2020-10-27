@@ -8,9 +8,9 @@ import FileListItem from './FileListItem';
 
 const Container = styled.table`
   th {
-    color: ${(props) => props.theme.fontDark} !important;
+    color: ${props => props.theme.fontDark} !important;
     @media only screen and (max-width: 768px) {
-      font-size: ${(props) => props.theme.fontSizeSmall};
+      font-size: ${props => props.theme.fontSizeSmall};
     }
   }
 `;
@@ -60,7 +60,7 @@ const FilesList = ({ files: items, isAdmin, refetch, project }) => {
           <th className="has-text-centered">File Type</th>
           <th className="has-text-centered">Section</th>
           <th className="has-text-centered">Uploaded</th>
-          <th className="has-text-centered">View</th>
+          <th className="has-text-centered is-hidden-mobile">View</th>
           {isAdmin && <th className="has-text-centered">Replace</th>}
           {isAdmin && <th className="has-text-centered">Delete</th>}
         </tr>
