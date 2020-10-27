@@ -15,11 +15,10 @@ import ClientFooter from '../../components/ClientFooter';
 
 const Container = styled.div`
   min-height: 50vh;
-  overflow: scroll;
   padding-top: 50px;
-  /* thead {
-    background: transparent;
-  } */
+  @media only screen and (max-width: 768px) {
+    overflow: scroll;
+  }
 `;
 
 const Dashboard = () => {
@@ -49,8 +48,8 @@ const Dashboard = () => {
       {resultPages.error && (
         <Message type="error">{resultPages.error.message}</Message>
       )}
-      <Container>
-        {dataRoomPages.map((page) => (
+      <Container className="container">
+        {dataRoomPages.map(page => (
           <PageRow key={page.id} project={project} page={page} />
         ))}
       </Container>
