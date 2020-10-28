@@ -4,18 +4,18 @@ import styled from 'styled-components';
 import { Heading } from './elements';
 
 const Container = styled.div`
-.select {
-  margin-bottom: 2rem;
-}
+  .select {
+    margin-bottom: 2rem;
+  }
   select {
-    border-color: ${(props) => props.theme.primaryColor};
-    color: ${(props) => props.theme.primaryColor};
+    border-color: ${props => props.theme.primaryColor};
+    color: ${props => props.theme.primaryColor};
     :hover {
-      border-color: ${(props) => props.theme.primaryColor};
+      border-color: ${props => props.theme.primaryColor};
     }
   }
   .select:not(.is-multiple)::after {
-    border: 1px solid ${(props) => props.theme.primaryColor} !important;
+    border: 1px solid ${props => props.theme.primaryColor} !important;
     border-top: 0px !important;
     border-right: 0px !important;
   }
@@ -24,11 +24,10 @@ const Container = styled.div`
   }
 `;
 const ClientActivity = () => {
-
   return (
-    <Container >
+    <Container>
       <Heading>Client activity</Heading>
-      <div class="select">
+      <div className="select">
         <select>
           <option>Select Client</option>
           <option>David Smith</option>

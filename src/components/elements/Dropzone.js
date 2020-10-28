@@ -57,6 +57,12 @@ const Container = styled.div`
   cursor: pointer;
 `;
 
+const Span = styled(
+  ({ isDragActive, isDragAccept, isDragReject, ...props }) => (
+    <span {...props} />
+  ),
+)``;
+
 const MyDropzone = ({ onUpload, isPublic, children, handleLoading }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(undefined);
@@ -137,10 +143,10 @@ const MyDropzone = ({ onUpload, isPublic, children, handleLoading }) => {
 
   if (children) {
     return (
-      <span {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
+      <Span {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
         <input {...getInputProps()} />
         {children}
-      </span>
+      </Span>
     );
   }
 
