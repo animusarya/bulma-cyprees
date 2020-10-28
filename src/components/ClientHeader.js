@@ -58,7 +58,7 @@ const NavbarMenu = styled.nav`
   }
 `;
 
-const LinkStyle = styled(Link)`
+const LinkStyle = styled(({ brandColor, ...props }) => <Link {...props} />)`
   color: #fff;
   background-color: ${props =>
     props.data ? 'rgba(255, 255, 255, 0.2)' : 'transparent'};
@@ -213,10 +213,10 @@ const ClientHeader = ({ me, project }) => {
                   key={page.id}
                   to={`/client/page/${page.id}`}
                   className="navbar-item has-text-weight-bold"
-                  activeLink={page.slug}
+                  activelink={page.slug}
                   brandColor={brandColor}
                   onClick={() => setActive(page.slug)}
-                  data={active == page.slug && true}>
+                  data={active == page.slug}>
                   {startCase(page.name)}
                 </LinkStyle>
               ))}

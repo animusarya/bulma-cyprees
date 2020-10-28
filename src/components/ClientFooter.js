@@ -5,6 +5,8 @@ const Container = styled.div`
   footer {
     padding: 1.5rem 1.5rem 1.5rem;
     background-color: #f8f8f9;
+    justify-content: center;
+    display: flex;
   }
   .disclaimer {
     background-color: ${props => props.theme.secondaryColor};
@@ -32,7 +34,7 @@ const FooterTitle = styled.h2`
   }
 `;
 
-const ContactInfo = styled.p`
+const ContactInfo = styled.span`
   padding: 20px 0;
   .contact {
     @media only screen and (max-width: 768px) {
@@ -65,7 +67,7 @@ const ClientFooter = ({ project }) => {
           <FooterTitle className="has-text-weight-semibold">
             Contact Details
           </FooterTitle>
-          <ContactInfo className=" is-size-6 is-hidden-mobile">
+          <ContactInfo className=" is-size-6 has-text-centered is-hidden-mobile">
             {project.contactName} |{' '}
             <FooterLink
               href={`tel:${project.contactTelephone}`}
