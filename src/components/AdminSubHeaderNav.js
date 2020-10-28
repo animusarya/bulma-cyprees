@@ -3,8 +3,8 @@ import { startCase } from 'lodash';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const NavItem = styled(Link)`
-  background-color: ${(props) =>
+const NavItem = styled(({ brandColor, ...props }) => <Link {...props} />)`
+  background-color: ${props =>
     props.brandColor ? '#ffffff10' : props.brandColor};
   color: #fff;
   :hover {
@@ -12,15 +12,16 @@ const NavItem = styled(Link)`
   }
 `;
 
-const AdminSubHeaderNav = ({ pages, project, brandColor }) => {
+const AdminSubHeaderNav = ({ pages, project, brandColor, ...props }) => {
   const activeSlug = pages[0] ? pages[0].slug : '';
 
   const [active, setActive] = useState(activeSlug);
 
   return (
     <>
-      {pages.map((page) => (
+      {pages.map(page => (
         <NavItem
+          {...props}
           key={page.id}
           brandColor={active == page.slug && brandColor}
           className={
@@ -28,10 +29,9 @@ const AdminSubHeaderNav = ({ pages, project, brandColor }) => {
               ? 'navbar-item  has-text-weight-bold'
               : 'navbar-item'
           }
-          activeLink={page.slug}
+          activelink={page.slug}
           to={`/admin/project/${project.id}/pages/${page.id}`}
-          onClick={() => setActive(page.slug)}
-        >
+          onClick={() => setActive(page.slug)}>
           {startCase(page.name)}
         </NavItem>
       ))}
