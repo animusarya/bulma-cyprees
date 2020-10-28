@@ -9,7 +9,6 @@ import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
 import LoginForm from '../components/LoginForm';
 import background from '../assets/images/intelliback.jpg';
-import logo from '../assets/images/logo2.png';
 
 const mutation = gql`
   mutation login($email: String!, $password: String!) {
@@ -40,6 +39,7 @@ const Container = styled.div`
   }
   .hero-body {
     align-items: flex-start !important;
+    padding: 0 !important;
   }
 `;
 
@@ -52,7 +52,6 @@ const ContentContainer = styled.div`
 
 const FormContainer = styled.div`
   padding: 0 3rem;
-  margin-top: 2rem;
   .navbar-item {
     display: grid;
   }
@@ -60,12 +59,6 @@ const FormContainer = styled.div`
     font-size: 2.3rem;
     margin-top: -1rem;
   }
-`;
-
-const Logo = styled.img`
-  max-height: 60px;
-  width: auto;
-  margin-bottom: 2rem;
 `;
 
 const Login = () => {
@@ -93,7 +86,7 @@ const Login = () => {
   }
 
   return (
-    <Layout noContainer>
+    <Layout noContainer hasAuthNav activeProject={activeProject}>
       <Container>
         <div className="login-page">
           <Seo title="Login" description="Some description here." />
@@ -106,16 +99,6 @@ const Login = () => {
                       className="navbar"
                       role="navigation"
                       aria-label="main navigation">
-                      <div className="navbar-brand">
-                        {activeProject.logo ? (
-                          <Logo
-                            src={activeProject.logo}
-                            alt={activeProject.name}
-                          />
-                        ) : (
-                          <Logo src={logo} alt="Intellishare" />
-                        )}
-                      </div>
                       <div id="navbarBasicExample" className="navbar-menu">
                         <div className="endnavbar-">
                           <div className="navbar-item has-text-black-bis has-text-right">

@@ -10,7 +10,6 @@ import Seo from '../components/Seo';
 import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
 import RegisterForm from '../components/RegisterForm';
-import logo from '../assets/images/logo2.png';
 
 const registerMutation = gql`
   mutation register($input: RegisterInput) {
@@ -36,6 +35,7 @@ const Container = styled.div`
   }
   .hero-body {
     align-items: flex-start !important;
+    padding: 0 !important;
   }
 `;
 
@@ -49,12 +49,6 @@ const FormContainer = styled.div`
     font-size: 2.3rem;
     margin-top: -1rem;
   }
-`;
-
-const Logo = styled.img`
-  max-height: 60px;
-  width: auto;
-  margin-bottom: 2rem;
 `;
 
 const ContentContainer = styled.div`
@@ -106,7 +100,7 @@ const Register = ({ match }) => {
   }
 
   return (
-    <Layout noContainer>
+    <Layout noContainer hasAuthNav activeProject={activeProject}>
       <Container>
         <div className="register-page">
           <Seo title="Registration" description="Register Yourself Here" />
@@ -119,16 +113,6 @@ const Register = ({ match }) => {
                       className="navbar"
                       role="navigation"
                       aria-label="main navigation">
-                      <div className="navbar-brand">
-                        {activeProject.logo ? (
-                          <Logo
-                            src={activeProject.logo}
-                            alt={activeProject.name}
-                          />
-                        ) : (
-                          <Logo src={logo} alt="Intellishare" />
-                        )}
-                      </div>
                       <div id="navbarBasicExample" className="navbar-menu">
                         <div className="navbar-end">
                           <div className="navbar-item has-text-black-bis has-text-right">
