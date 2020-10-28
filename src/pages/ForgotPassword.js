@@ -32,6 +32,7 @@ const Container = styled.div`
   }
   .hero-body {
     align-items: flex-start !important;
+    padding: 0 !important;
   }
 `;
 
@@ -47,32 +48,26 @@ const FormContainer = styled.div`
   }
 `;
 
-const Logo = styled.img`
-  max-height: 60px;
-  width: auto;
-  margin-bottom: 2rem;
-`;
-
 const ContentContainer = styled.div`
   padding-bottom: 2rem;
   h2 {
-    font-size: ${(props) => props.theme.fontSizeSuperLarge};
+    font-size: ${props => props.theme.fontSizeSuperLarge};
   }
   p {
     margin: 2rem 0;
   }
   a {
     :hover {
-      color: ${(props) => props.theme.primaryColor};
+      color: ${props => props.theme.primaryColor};
     }
   }
 `;
 const ForgotPassword = ({ match }) => {
   const [executeMutation, res] = useMutation(forgotPasswordMutation);
   const updateProject = useStoreActions(
-    (actions) => actions.origin.updateProject,
+    actions => actions.origin.updateProject,
   );
-  const activeProject = useStoreState((state) => state.origin.project);
+  const activeProject = useStoreState(state => state.origin.project);
   const { projectId, email } = match.params;
 
   // fetch project data from api
@@ -85,7 +80,7 @@ const ForgotPassword = ({ match }) => {
   }, [project]);
 
   return (
-    <Layout noContainer>
+    <Layout noContainer hasAuthNav activeProject={activeProject}>
       <Container>
         <div className="forgot-password-page">
           <Seo title="Forgot Password" />
@@ -97,18 +92,7 @@ const ForgotPassword = ({ match }) => {
                     <nav
                       className="navbar"
                       role="navigation"
-                      aria-label="main navigation"
-                    >
-                      <div className="navbar-brand">
-                        {activeProject.logo ? (
-                          <Logo
-                            src={activeProject.logo}
-                            alt={activeProject.name}
-                          />
-                        ) : (
-                          <Logo src={logo} alt="logo banner" />
-                        )}
-                      </div>
+                      aria-label="main navigation">
                       <div id="navbarBasicExample" className="navbar-menu">
                         <div className="navbar-end">
                           <div className="navbar-item has-text-black-bis has-text-right">
@@ -132,7 +116,7 @@ const ForgotPassword = ({ match }) => {
                     </ContentContainer>
                   </div>
                   <ForgotPasswordForm
-                    onSubmit={async (data) => {
+                    onSubmit={async data => {
                       await executeMutation({ variables: { input: data } });
                       swal('An email has been sent, please check your Inbox');
                     }}
