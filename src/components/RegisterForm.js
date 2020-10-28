@@ -8,7 +8,7 @@ import { InputGroup, Button } from './elements';
 import NDAScroller from './NDAScroller';
 import Disclaimer from './Disclaimer';
 
-const MarginContainer = styled.p`
+const MarginContainer = styled.div`
   margin-top: 2.5rem;
 `;
 

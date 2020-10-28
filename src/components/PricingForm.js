@@ -92,7 +92,7 @@ export default withFormik({
     price: initialValues.price || '',
   }),
   validationSchema: yup.object().shape({
-    name: yup.string().required('Duration is required!'),
+    name: yup.string().required('Package Name is required!'),
     price: yup.string().required('Price is required!'),
   }),
 

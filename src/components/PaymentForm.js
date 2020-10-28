@@ -56,7 +56,7 @@ const discountQuery = gql`
     }
   }
 `;
-const ProjectSetupForm = (props) => {
+const ProjectSetupForm = props => {
   const {
     values,
     touched,
@@ -82,7 +82,7 @@ const ProjectSetupForm = (props) => {
       return null;
     }
     let discountPercentage = 0;
-    couponCodes.map((item) => {
+    couponCodes.map(item => {
       if (item.code == couponCode) {
         discountPercentage = item.percentage;
       }
@@ -210,8 +210,7 @@ const ProjectSetupForm = (props) => {
               errors.paymentCardNumber && touched.paymentCardNumber
                 ? errors.paymentCardNumber
                 : undefined
-            }
-          >
+            }>
             <Cleave
               placeholder="4242 4242 4242 4242"
               name="paymentCardNumber"
@@ -234,8 +233,7 @@ const ProjectSetupForm = (props) => {
                   touched.paymentCardExpiryMonth
                     ? errors.paymentCardExpiryMonth
                     : undefined
-                }
-              >
+                }>
                 <Cleave
                   placeholder="12"
                   name="paymentCardExpiryMonth"
@@ -257,8 +255,7 @@ const ProjectSetupForm = (props) => {
                   errors.paymentCardExpiryYear && touched.paymentCardExpiryYear
                     ? errors.paymentCardExpiryYear
                     : undefined
-                }
-              >
+                }>
                 <Cleave
                   placeholder="2022"
                   name="paymentCardExpiryYear"
@@ -283,8 +280,7 @@ const ProjectSetupForm = (props) => {
                 errors.paymentCardCvv && touched.paymentCardCvv
                   ? errors.paymentCardCvv
                   : undefined
-              }
-            >
+              }>
               <Cleave
                 placeholder="123"
                 name="paymentCardCvv"
@@ -336,7 +332,7 @@ const ProjectSetupForm = (props) => {
             }
           />
           <div className="field is-grouped">
-            <p className="control is-expanded">
+            <div className="control is-expanded">
               <InputGroup
                 fullWidth
                 border
@@ -344,16 +340,15 @@ const ProjectSetupForm = (props) => {
                 label="Do you have a discount code?"
                 name="discount"
                 type="text"
-                onChange={(e) => setCouponCode(e.target.value)}
+                onChange={e => setCouponCode(e.target.value)}
                 onBlur={handleBlur}
               />
-            </p>
+            </div>
             <p className="control">
               <button
                 type="button"
                 className="button is-primary"
-                onClick={applyCoupon}
-              >
+                onClick={applyCoupon}>
                 Apply
               </button>
             </p>
