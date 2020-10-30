@@ -61,7 +61,7 @@ const FilesList = ({ files: items, isAdmin, refetch, project }) => {
           <th className="has-text-centered">Section</th>
           <th className="has-text-centered">Uploaded</th>
           <th className="has-text-centered is-hidden-mobile">View</th>
-          {isAdmin && <th className="has-text-centered">Replace</th>}
+          {/* {isAdmin && <th className="has-text-centered">Replace</th>} */}
           {isAdmin && <th className="has-text-centered">Delete</th>}
         </tr>
       </thead>

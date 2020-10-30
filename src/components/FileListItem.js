@@ -250,7 +250,7 @@ const FileListItem = ({
           </Button>
         </ButtonContainer>
       )}
-      {isAdmin && (
+      {/* {isAdmin && (
         <td className="has-text-centered">
           <Dropzone
             onUpload={handleFileReplace}
@@ -258,7 +258,7 @@ const FileListItem = ({
             <SyncIcon src={loadingImg} isLoading={loading} />
           </Dropzone>
         </td>
-      )}
+      )} */}
       {isAdmin && (
         <td className="has-text-centered">
           <Button
