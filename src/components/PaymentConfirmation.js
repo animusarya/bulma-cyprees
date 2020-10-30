@@ -11,7 +11,7 @@ const Container = styled.div`
     margin-top: 1.5rem !important;
   }
   .image img {
-    width: 38% !important;
+    width: 25% !important;
   }
   figure {
     justify-content: center;

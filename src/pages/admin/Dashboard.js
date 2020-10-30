@@ -16,6 +16,8 @@ import Button from '../../components/elements/Button';
 import MainColumn from '../../components/MainColumn';
 import { Heading, Title } from '../../components/elements';
 
+import paymentImg from '../../assets/images/success.png';
+
 const projectsQuery = gql`
   query projectsQuery {
     projects {
@@ -33,6 +35,12 @@ const Container = styled.div`
   .subtitle {
     margin-bottom: 2rem !important;
   }
+  .image img {
+    width: 25% !important;
+  }
+  figure {
+    justify-content: center;
+  }
 `;
 
 const LinkWrapper = styled(Link)`
@@ -47,7 +55,7 @@ const Dashboard = () => {
     fetchPolicy: 'network-only',
   });
   const updateProject = useStoreActions(
-    (actions) => actions.active.updateProject,
+    actions => actions.active.updateProject,
   );
 
   useEffect(() => {
@@ -70,6 +78,9 @@ const Dashboard = () => {
             {projects.length === 0 ? (
               <div className="hero-body">
                 <div className="has-text-centered">
+                  <figure className="image is-flex">
+                    <img src={paymentImg} alt="Payment Successful" />
+                  </figure>
                   <p className="title is-size-2">Account Created</p>
                   <p className="subtitle is-size-6 has-text-weight-semibold">
                     Thank you for registering, you are now signed in.
@@ -106,7 +117,7 @@ const Dashboard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {projects.map((project) => (
+                    {projects.map(project => (
                       <tr key={project.id}>
                         <td>
                           <Link to={`/admin/project/${project.id}/pages`}>
