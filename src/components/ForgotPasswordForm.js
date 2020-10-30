@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { InputGroup, Button } from './elements';
 
-const ForgotPasswordForm = (props) => {
+const ForgotPasswordForm = props => {
   const {
     values,
     touched,
@@ -31,7 +31,11 @@ const ForgotPasswordForm = (props) => {
       />
       <div className="field">
         <div className="control">
-          <Button type="submit" marginTop marginBottomNone disabled={isSubmitting}>
+          <Button
+            type="submit"
+            marginTop
+            marginBottomNone
+            disabled={isSubmitting}>
             <span className="has-text-weight-bold has-text-light is-size-4">
               Reset Password
             </span>

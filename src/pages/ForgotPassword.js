@@ -89,6 +89,8 @@ const ForgotPassword = ({ match }) => {
     }
   }, [project]);
 
+  // console.log(activeProject, 'activeProject');
+
   return (
     <Layout noContainer hasAuthNav activeProject={activeProject}>
       <Container>

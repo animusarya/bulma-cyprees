@@ -132,8 +132,8 @@ const RegisterForm = props => {
             marginTop
             marginBottomNone
             type="submit"
-            disabled={isSubmitting || !ndaAccepted}>
-            <span className="has-text-weight-bold has-text-light is-size-4">
+            disabled={isSubmitting}>
+            <span className="has-text-weight-bold is-size-4">
               Create Account
             </span>
           </Button>

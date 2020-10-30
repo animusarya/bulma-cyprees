@@ -125,13 +125,13 @@ const Register = ({ match }) => {
                       aria-label="main navigation">
                       <div id="navbarBasicExample" className="navbar-menu">
                         <div className="navbar-end">
-                          <div className="navbar-item has-text-black-bis has-text-right">
+                          {/* <div className="navbar-item has-text-black-bis has-text-right">
                             {activeProject.name && (
                               <h3 className="has-text-weight-bold is-size-3">
                                 {activeProject.name}
                               </h3>
                             )}
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </nav>

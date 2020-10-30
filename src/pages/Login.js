@@ -103,13 +103,13 @@ const Login = () => {
                       aria-label="main navigation">
                       <div id="navbarBasicExample" className="navbar-menu">
                         <div className="endnavbar-">
-                          <div className="navbar-item has-text-black-bis has-text-right">
+                          {/* <div className="navbar-item has-text-black-bis has-text-right">
                             {activeProject.name && (
                               <h1 className="has-text-weight-bold">
                                 {activeProject.name}
                               </h1>
                             )}
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </nav>
