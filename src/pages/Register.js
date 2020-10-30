@@ -10,6 +10,7 @@ import Seo from '../components/Seo';
 import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
 import RegisterForm from '../components/RegisterForm';
+import logo from '../assets/images/logo2.png';
 
 const registerMutation = gql`
   mutation register($input: RegisterInput) {
@@ -49,6 +50,9 @@ const FormContainer = styled.div`
     font-size: 2.3rem;
     margin-top: -1rem;
   }
+  .navbar {
+    min-height: 1.25rem;
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -63,6 +67,12 @@ const ContentContainer = styled.div`
       color: ${props => props.theme.primaryColor};
     }
   }
+`;
+
+const Logo = styled.img`
+  max-height: 60px;
+  width: auto;
+  padding-bottom: 1rem;
 `;
 
 const Register = ({ match }) => {
@@ -125,6 +135,11 @@ const Register = ({ match }) => {
                         </div>
                       </div>
                     </nav>
+                    {activeProject.logo ? (
+                      <Logo src={activeProject.logo} alt={activeProject.name} />
+                    ) : (
+                      <Logo src={logo} alt="Intellishare" />
+                    )}
                     <ContentContainer>
                       <h2 className="has-text-weight-semibold is-size-5-mobile">
                         Create an Account

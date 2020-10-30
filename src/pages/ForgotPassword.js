@@ -34,6 +34,9 @@ const Container = styled.div`
     align-items: flex-start !important;
     padding: 0 !important;
   }
+  .navbar {
+    min-height: 1.25rem;
+  }
 `;
 
 const FormContainer = styled.div`
@@ -62,6 +65,13 @@ const ContentContainer = styled.div`
     }
   }
 `;
+
+const Logo = styled.img`
+  max-height: 60px;
+  width: auto;
+  padding-bottom: 1rem;
+`;
+
 const ForgotPassword = ({ match }) => {
   const [executeMutation, res] = useMutation(forgotPasswordMutation);
   const updateProject = useStoreActions(
@@ -105,6 +115,11 @@ const ForgotPassword = ({ match }) => {
                         </div>
                       </div>
                     </nav>
+                    {activeProject.logo ? (
+                      <Logo src={activeProject.logo} alt={activeProject.name} />
+                    ) : (
+                      <Logo src={logo} alt="Intellishare" />
+                    )}
                     <ContentContainer>
                       <h2 className="has-text-weight-semibold is-size-5-mobile">
                         Reset Password

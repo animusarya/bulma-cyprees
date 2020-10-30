@@ -51,7 +51,7 @@ const ProjectSetting = ({ match }) => {
                   await executeMutation({
                     variables: { id: project.id, input: data },
                   });
-                  swal('Project info updated').then(() =>
+                  swal('Project Settings updated').then(() =>
                     window.location.reload(),
                   );
                 }}

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import logo from '../assets/images/logo2.png';
+// import logo from '../assets/images/logo2.png';
 
 const Container = styled.section`
   background-color: #0a253e;
@@ -17,10 +17,10 @@ const Container = styled.section`
   }
 `;
 
-const Logo = styled.img`
-  max-height: 60px;
-  width: auto;
-`;
+// const Logo = styled.img`
+//   max-height: 60px;
+//   width: auto;
+// `;
 
 const AuthHeader = ({ activeProject }) => (
   <Container className="section">
@@ -28,11 +28,11 @@ const AuthHeader = ({ activeProject }) => (
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <a className="navbar-item" href="/">
-            {activeProject.logo ? (
+            {/* {activeProject.logo ? (
               <Logo src={activeProject.logo} alt={activeProject.name} />
             ) : (
               <Logo src={logo} alt="Intellishare" />
-            )}
+            )} */}
           </a>
 
           <a

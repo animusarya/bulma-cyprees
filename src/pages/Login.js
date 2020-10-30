@@ -9,6 +9,7 @@ import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
 import LoginForm from '../components/LoginForm';
 import background from '../assets/images/intelliback.jpg';
+import logo from '../assets/images/logo2.png';
 
 const mutation = gql`
   mutation login($email: String!, $password: String!) {
@@ -24,11 +25,6 @@ const mutation = gql`
 `;
 
 const Container = styled.div`
-  /* background-image: url(${background}); */
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  background-position: center center;
-  height: auto;
   .login-page {
     width: 52%;
     margin-right: auto;
@@ -59,6 +55,12 @@ const FormContainer = styled.div`
     font-size: 2.3rem;
     margin-top: -1rem;
   }
+`;
+
+const Logo = styled.img`
+  max-height: 60px;
+  width: auto;
+  padding-bottom: 1rem;
 `;
 
 const Login = () => {
@@ -112,6 +114,11 @@ const Login = () => {
                       </div>
                     </nav>
 
+                    {activeProject.logo ? (
+                      <Logo src={activeProject.logo} alt={activeProject.name} />
+                    ) : (
+                      <Logo src={logo} alt="Intellishare" />
+                    )}
                     <ContentContainer>
                       <h2 className="has-text-weight-semibold is-size-5-mobile">
                         Log In

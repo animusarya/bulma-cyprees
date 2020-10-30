@@ -37,7 +37,7 @@ const Layout = ({ children, noContainer, hasAuthNav, activeProject }) => {
   return (
     <Container className={noContainer ? 'container is-fluid' : 'container'}>
       <Helmet title={config.siteName} />
-      {hasAuthNav && <AuthHeader activeProject={activeProject} />}
+      {/* {hasAuthNav && <AuthHeader activeProject={activeProject} />} */}
       {children}
       {hasAuthNav && <AuthFooter activeProject={activeProject} />}
     </Container>
