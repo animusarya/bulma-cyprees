@@ -73,15 +73,12 @@ const Logo = styled.img`
   max-height: 70px;
   margin-top: 10px;
 `;
+
 const HeroImg = styled.img`
   height: 250px;
   width: auto;
-  background-position-x: center;
-  background-position-y: center;
-  background-size: cover;
-  @media only screen and (max-width: 768px) {
-    height: 150px;
-  }
+  object-fit: cover;
+  background-color: #eeeeee;
 `;
 
 const Button = styled.button`
@@ -114,6 +111,23 @@ const LogoutButton = styled(Button)`
 const TitleContainer = styled.div`
   margin-bottom: 2rem;
 `;
+const Hero = styled.section`
+  .hero-body {
+    position: absolute;
+    align-self: center;
+  }
+  .title {
+    color: ${props => props.brandColor};
+  }
+  .edit-banner {
+    height: auto;
+    width: 210px;
+  }
+  button {
+    height: auto !important;
+    border: none;
+  }
+`;
 
 const ClientHeader = ({ me, project }) => {
   const [{ pages }] = useProjectPages(project.id);
@@ -135,6 +149,10 @@ const ClientHeader = ({ me, project }) => {
     window.location.replace('/');
   };
 
+  if (!project.logo) {
+    return null;
+  }
+
   return (
     <Container className="">
       <div className="container">
@@ -143,7 +161,7 @@ const ClientHeader = ({ me, project }) => {
             <div>
               <Link to="/client/dashboard">
                 {project ? (
-                  <Logo src={project.logo || logo} alt="logo" />
+                  <Logo src={project.logo} alt="logo" />
                 ) : (
                   <span>Dashboard</span>
                 )}
@@ -225,9 +243,9 @@ const ClientHeader = ({ me, project }) => {
         </div>
       </NavbarMenu>
       {project && (
-        <section className="hero is-primary">
+        <Hero className="hero">
           <HeroImg src={project.heroImage || logoBg} alt="logo-bg" />
-        </section>
+        </Hero>
       )}
     </Container>
   );

@@ -27,6 +27,7 @@ const projectsQuery = gql`
       subscriptionDurationInMonths
       subscriptionStartsAt
       subscriptionEndsAt
+      subscriptionName
     }
   }
 `;
@@ -125,7 +126,7 @@ const Dashboard = () => {
                           </Link>
                         </td>
                         <td>{formatCurrency(project.subscriptionAmount)}</td>
-                        <td>{project.subscriptionDurationInMonths} months</td>
+                        <td>{project.subscriptionName}</td>
                         <td>
                           {dayjs(project.subscriptionStartsAt).isValid()
                             ? dayjs(project.subscriptionStartsAt).format(

@@ -33,11 +33,11 @@ const AuthFooter = ({ activeProject }) => (
           </div>
         </div>
         <div className="column has-text-right">
-          {activeProject.logo ? (
+          {/* {activeProject.logo ? (
             <Logo src={activeProject.logo} alt={activeProject.name} />
           ) : (
-            <Logo src={logo} alt="Intellishare" />
-          )}
+            ''
+          )} */}
         </div>
       </div>
     </div>
