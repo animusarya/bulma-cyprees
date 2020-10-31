@@ -7,11 +7,11 @@ import useProjectPages from '../hooks/useProjectPages';
 import { Title } from './elements';
 import theme from '../utils/theme';
 import logoBg from '../assets/images/login-bg.jpg';
-import logo from '../assets/images/logo2.png';
+// import logo from '../assets/images/logo2.png';
 
 const Container = styled.section`
   @media only screen and (max-width: 768px) {
-    padding: 3rem 1.5rem;
+    padding: 3rem 0rem;
   }
   .container {
     max-width: 1100px;
@@ -34,6 +34,13 @@ const Container = styled.section`
     @media only screen and (max-width: 768px) {
       font-size: 22px !important;
     }
+  }
+`;
+
+const BurgerMenu = styled.div`
+  justify-content: center;
+  .navbar-burger {
+    margin-left: 0 !important;
   }
 `;
 
@@ -201,7 +208,7 @@ const ClientHeader = ({ me, project }) => {
         aria-label="main navigation"
         brandColor={brandColor}>
         <div className="container">
-          <div className="">
+          <BurgerMenu className="is-flex">
             <a
               className={`navbar-burger burger has-text-white ${
                 isActive ? 'is-active' : ''
@@ -214,7 +221,7 @@ const ClientHeader = ({ me, project }) => {
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
             </a>
-          </div>
+          </BurgerMenu>
           <div
             id="navbarBasicExample"
             className={isActive ? 'navbar-menu is-active' : 'navbar-menu'}>

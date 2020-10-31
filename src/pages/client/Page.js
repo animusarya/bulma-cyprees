@@ -48,6 +48,35 @@ const Container = styled.div`
   }
 `;
 
+const Content = styled.div`
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 15px !important;
+  }
+  h1 {
+    font-size: 36px;
+  }
+  h2 {
+    font-size: 30px;
+  }
+  h3 {
+    font-size: 24px;
+  }
+  h4 {
+    font-size: 20px;
+  }
+  h5 {
+    font-size: 18px;
+  }
+  h6 {
+    font-size: 16px;
+  }
+`;
+
 const Table = styled.div`
   @media only screen and (max-width: 768px) {
     overflow: scroll;
@@ -78,10 +107,10 @@ const Page = ({ match }) => {
           <h2 className="has-text-weight-semibold">{page.name}</h2>
           {resultPage.loading && <Loading />}
           {page.type === 'content' && (
-            <div>
+            <Content>
               <ImageGallery page={page} />
               <section dangerouslySetInnerHTML={{ __html: page.content }} />
-            </div>
+            </Content>
           )}
           {page.type === 'dataroom' && (
             <Table>

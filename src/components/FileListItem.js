@@ -31,6 +31,10 @@ const removeFileMutation = gql`
 
 const TitleClientFiles = styled.span`
   color: ${props => props.brandColor}!important;
+  @media only screen and (max-width: 768px) {
+    word-break: break-all;
+    width: 35%;
+  }
 `;
 
 const SyncIcon = styled.img`
@@ -185,7 +189,7 @@ const FileListItem = ({
   yesterday.setDate(yesterday.getDate() - 2);
   const differece = today - yesterday;
   const diffDays = Math.ceil(differece / (1000 * 60 * 60 * 24));
-  const newTagFile = () => {
+  const newFileTag = () => {
     if (diffDays === 2) {
       return (
         <NewTag className="has-text-ceneterd has-text-white has-text-centered is-size-7">
@@ -219,7 +223,7 @@ const FileListItem = ({
             <TitleClientFiles brandColor={brandColor}>
               {fileName}
             </TitleClientFiles>
-            {newTagFile()}
+            {newFileTag()}
           </div>
         )}
       </td>
@@ -228,7 +232,9 @@ const FileListItem = ({
       ) : (
         <td className="has-text-centered">{file.fileType}</td>
       )}
-      <td className="has-text-centered">{file.section || '-'}</td>
+      <td className="has-text-centered is-hidden-mobile">
+        {file.section || '-'}
+      </td>
       <td className="has-text-centered">
         {dayjs(file.createdAt).format('DD MMM YYYY')}
       </td>

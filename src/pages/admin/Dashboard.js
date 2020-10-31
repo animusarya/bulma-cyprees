@@ -64,7 +64,7 @@ const Dashboard = () => {
   }, [updateProject]);
 
   const projects = (resultProjects.data && resultProjects.data.projects) || [];
-  console.log(projects, 'projects');
+  // console.log(projects, 'projects');
 
   return (
     <Layout noContainer>
