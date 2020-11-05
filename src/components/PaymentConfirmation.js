@@ -15,6 +15,7 @@ const Container = styled.div`
   }
   figure {
     justify-content: center;
+    padding-bottom: 20px;
   }
 `;
 
