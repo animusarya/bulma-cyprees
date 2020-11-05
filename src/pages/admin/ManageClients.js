@@ -114,7 +114,7 @@ const ManageClients = ({ match, history }) => {
       (project && !isEmpty(project) && !project.welcomeEmailTemplate)
     ) {
       swal(
-        'Before adding your first client you must complete the registration email message they will receive under',
+        'Before adding your first client please create your client ‘registration’ email under Manage Emails.',
       ).then(() => history.push(`/admin/project/${projectId}/emails`));
     }
   }, [project]);
