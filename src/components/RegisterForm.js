@@ -128,15 +128,27 @@ const RegisterForm = props => {
       )}
       <div className="field">
         <div className="control">
-          <Button
-            marginTop
-            marginBottomNone
-            type="submit"
-            disabled={isSubmitting}>
-            <span className="has-text-weight-bold is-size-4">
-              Create Account
-            </span>
-          </Button>
+          {isAdminRegister ? (
+            <Button
+              marginTop
+              marginBottomNone
+              type="submit"
+              disabled={isSubmitting}>
+              <span className="has-text-weight-bold is-size-4">
+                Create Account
+              </span>
+            </Button>
+          ) : (
+            <Button
+              marginTop
+              marginBottomNone
+              type="submit"
+              disabled={!ndaAccepted || isSubmitting}>
+              <span className="has-text-weight-bold is-size-4">
+                Create Account
+              </span>
+            </Button>
+          )}
         </div>
       </div>
       <Disclaimer
