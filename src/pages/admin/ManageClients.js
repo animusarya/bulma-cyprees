@@ -222,9 +222,12 @@ const ManageClients = ({ match, history }) => {
                                 primary
                                 paddingless
                                 onClick={() => {
-                                  swal('You want to send email?', {
-                                    buttons: ['Cancel', 'Confirm'],
-                                  }).then(async value => {
+                                  swal(
+                                    'Would you like to send a registration email to this client?',
+                                    {
+                                      buttons: ['Cancel', 'Confirm'],
+                                    },
+                                  ).then(async value => {
                                     if (value) {
                                       await executeMutationResendEmail({
                                         variables: {
