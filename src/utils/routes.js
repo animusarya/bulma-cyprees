@@ -13,6 +13,7 @@ import Register from '../pages/Register';
 import ForgotPassword from '../pages/ForgotPassword';
 import SetPassword from '../pages/SetPassword';
 import Test from '../pages/Test';
+import ProjectQuickView from '../pages/ProjectQuickView';
 
 import DashboardSuperAdmin from '../pages/super-admin/Dashboard';
 import Discounts from '../pages/super-admin/Discounts';
@@ -144,7 +145,7 @@ const Routes = () => (
           component={ClientNotifications}
           access="admin"
         />
-         <PrivateRoute
+        <PrivateRoute
           exact
           path="/admin/project/:id/analytics"
           component={Analytics}
@@ -204,6 +205,7 @@ const Routes = () => (
           component={AcceptInvitation}
         />
         <Route exact path="/test" component={Test} />
+        <Route exact path="/:slug" component={ProjectQuickView} />
         <Route component={Error404} />
       </Switch>
     </BrowserRouter>
