@@ -48,8 +48,7 @@ const LinkWrapper = ({ to, title, icon }) => {
             ? 'has-text-weight-bold is-active is-flex'
             : 'has-text-weight-medium is-flex'
         }
-        to={to}
-      >
+        to={to}>
         <IconContainer>{icon && <Icon className={icon}></Icon>}</IconContainer>
         {title}
       </Link>
@@ -58,17 +57,17 @@ const LinkWrapper = ({ to, title, icon }) => {
 };
 
 const Sidebar = () => {
-  const userData = useStoreState((state) => state.user.data);
-  const activeProject = useStoreState((state) => state.active.project);
+  const userData = useStoreState(state => state.user.data);
+  const activeProject = useStoreState(state => state.active.project);
   // const [isToggledOn, setToggle] = useState(false);
   // const toggle = () => setToggle(!isToggledOn);
-  const isCurrentRoute = (routeName) => {
-    // const route = useRouteMatch(routeName);
-    // return !isNull(route) ? (route.isExact ? 'is-active' : '') : '';
-    return '';
-  };
-  const route = useRouteMatch('/admin/help');
-  console.log(route);
+  // const isCurrentRoute = routeName => {
+  //   // const route = useRouteMatch(routeName);
+  //   // return !isNull(route) ? (route.isExact ? 'is-active' : '') : '';
+  //   return '';
+  // };
+  // const route = useRouteMatch('/admin/help');
+
   return (
     <Container className="menu is-hidden-mobile">
       {userData.type === 'superAdmin' && (

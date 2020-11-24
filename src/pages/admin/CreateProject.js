@@ -36,6 +36,7 @@ const createProjectMutation = gql`
     $subscriptionPlanId: String!
     $billingAddress: Address!
     $card: Card!
+    $couponCode: String
   ) {
     createProject(
       input: {

@@ -8,7 +8,7 @@ const Progress = styled.div`
   .active {
     font-weight: bold;
     .progress {
-      background-color: ${(props) => props.theme.primaryColor} !important;
+      background-color: ${props => props.theme.primaryColor} !important;
       width: 100%;
     }
   }
@@ -40,7 +40,6 @@ const Progress = styled.div`
 `;
 
 const ProgressBar = ({ activeStep }) => {
-  console.log(activeStep, 'activeStep');
   return (
     <Progress>
       <div className={`step one ${activeStep.stepOne ? 'active' : ''}`}>
@@ -59,12 +58,5 @@ const ProgressBar = ({ activeStep }) => {
     </Progress>
   );
 };
-// ProgressBar.defaultProps = {
-//   activeStep: 1,
-// };
-
-// ProgressBar.propTypes = {
-//   activeStep: PropTypes.number,
-// };
 
 export default ProgressBar;
