@@ -10,9 +10,6 @@ import logoBg from '../assets/images/login-bg.jpg';
 // import logo from '../assets/images/logo2.png';
 
 const Container = styled.section`
-  @media only screen and (max-width: 768px) {
-    padding: 3rem 0rem;
-  }
   .container {
     max-width: 1100px;
   }
@@ -46,12 +43,19 @@ const BurgerMenu = styled.div`
 
 const Top = styled.div`
   padding: 1rem 1rem;
+  .project-logo {
+    padding: 5px 0;
+  }
 `;
 
 const NavbarMenu = styled.nav`
   padding: 0 2rem !important;
   background-color: ${props => (props.brandColor ? props.brandColor : '#000')};
   color: #fff;
+
+  @media only screen and (max-width: 768px) {
+  padding: 0 !important;
+  }
   /* .navbar-item {
     color: ${props => (props.data ? '#000' : '#fff')};
     :hover {
@@ -165,7 +169,7 @@ const ClientHeader = ({ me, project }) => {
       <div className="container">
         <div className="columns">
           <Top className="column">
-            <div>
+            <div className="project-logo">
               <Link to="/client/dashboard">
                 {project.logo ? (
                   <Logo src={project.logo} alt="logo" />
@@ -194,7 +198,7 @@ const ClientHeader = ({ me, project }) => {
             </div>
           </Top>
           {project && (
-            <TitleContainer className="has-text-centered is-hidden-desktop">
+            <TitleContainer className="has-text-centered is-hidden-desktop is-hidden-tablet">
               <Title marginbottom="0px" fontSize={4}>
                 {startCase(project.name) || ''}
               </Title>

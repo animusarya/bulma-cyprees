@@ -19,14 +19,18 @@ const Container = styled.div`
   @media only screen and (max-width: 768px) {
     overflow: scroll;
   }
+  td {
+    padding-top: 20px;
+  }
+  td:last-child {
+    padding-top: 10px;
+  }
 `;
 
 const Dashboard = () => {
   const [me, resultMe] = useMeDetails();
   const project = me.clientProject || {};
   const [{ dataRoomPages }, resultPages] = useProjectPages(project.id);
-
-  console.log(project, 'project');
 
   if (isEmpty(project)) {
     return (

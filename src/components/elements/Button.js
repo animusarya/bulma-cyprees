@@ -9,10 +9,10 @@ const Container = styled.button`
     margin-top: ${props => (props.marginTop ? '2rem' : '')};
     border-color: transparent !important;
     color: ${props => (props.paddingless ? props.theme.primaryColor : '#fff')};
-    padding-left: ${props => (props.paddingless ? '0px' : '1.45em')};
-    padding-right: ${props => (props.paddingless ? '0px' : '1.45em')};
-    padding-top: ${props => (props.paddingless ? '0px' : '1.45em')};
-    padding-bottom: ${props => (props.paddingless ? '0px' : '1.45em')};
+    padding-left: ${props => (props.paddingless ? '0px' : '1.4em')};
+    padding-right: ${props => (props.paddingless ? '0px' : '1.4em')};
+    padding-top: ${props => (props.paddingless ? '0px' : '1.4em')};
+    padding-bottom: ${props => (props.paddingless ? '0px' : '1.4em')};
     margin-bottom: ${props =>
       props.paddingless || props.marginBottomNone ? '0px' : '2rem'};
     padding-top: ${props => (props.paddingless ? 'calc(0px)' : '')};
