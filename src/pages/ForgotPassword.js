@@ -64,6 +64,9 @@ const ContentContainer = styled.div`
       color: ${props => props.theme.primaryColor};
     }
   }
+  .project {
+    padding-right: 5px;
+  }
 `;
 
 const Logo = styled.img`
@@ -107,13 +110,13 @@ const ForgotPassword = ({ match }) => {
                       aria-label="main navigation">
                       <div id="navbarBasicExample" className="navbar-menu">
                         <div className="navbar-end">
-                          <div className="navbar-item has-text-black-bis has-text-right">
+                          {/* <div className="navbar-item has-text-black-bis has-text-right">
                             {activeProject.name && (
                               <h3 className="has-text-weight-bold is-size-3">
                                 {activeProject.name}
                               </h3>
                             )}
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </nav>
@@ -122,7 +125,12 @@ const ForgotPassword = ({ match }) => {
                     ) : (
                       <Logo src={logo} alt="Intellishare" />
                     )}
-                    <ContentContainer>
+                    <ContentContainer className="is-flex">
+                      {activeProject.name && (
+                        <h2 className="has-text-weight-semibold is-size-5-mobile project">
+                          {activeProject.name}
+                        </h2>
+                      )}{' '}
                       <h2 className="has-text-weight-semibold is-size-5-mobile">
                         Reset Password
                       </h2>
