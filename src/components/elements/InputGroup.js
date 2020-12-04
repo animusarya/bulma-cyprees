@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Group = styled.div`
+  width: ${props => (props.groupWidth ? '100%' : '')};
   .control {
     width: ${props => (props.fullWidth ? '100%' : '')} !important;
   }
@@ -51,12 +52,14 @@ const InputGroup = ({
   children,
   infoIcon,
   iconLabel,
+  groupWidth,
   ...otherProps
 }) => (
   <Group
     className={`field ${isHorizontal ? 'is-horizontal' : ''} ${
       hasAddons ? 'has-addons' : ''
     }`}
+    groupWidth={groupWidth}
     fullWidth={fullWidth}
     isWidth={isWidth}>
     <div className="is-flex">

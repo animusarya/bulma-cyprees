@@ -17,8 +17,8 @@ import ProjectSettingForm from '../../components/ProjectSettingForm';
 
 const FormContainer = styled.div`
   margin-top: -70px;
-  small {
-    margin-left: 10rem;
+  .disclaimer-note {
+    margin-bottom: 12px;
   }
 `;
 

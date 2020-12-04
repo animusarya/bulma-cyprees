@@ -6,7 +6,7 @@ import Cleave from 'cleave.js/react';
 
 import { InputGroup, Button, TextAreaGroup, ColorPicker } from './elements';
 
-const ProjectSettingForm = (props) => {
+const ProjectSettingForm = props => {
   const {
     values,
     touched,
@@ -31,23 +31,26 @@ const ProjectSettingForm = (props) => {
         isWidth
         border
         isHorizontal
+        groupWidth
         label="Project Name"
-        placeholder=""
-        name="name"
-        type="text"
-        value={values.name}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={errors.name && touched.name ? errors.name : undefined}
-      />
+        errors={errors.name && touched.name ? errors.name : undefined}>
+        <Cleave
+          placeholder="colliers"
+          name="name"
+          id="name"
+          value={values.name}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className="input is-shadowless"
+        />
+      </InputGroup>
       <InputGroup
         fullWidth
         isWidth
         border
         isHorizontal
         label="Project URL Slug"
-        errors={errors.slug && touched.slug ? errors.slug : undefined}
-      >
+        errors={errors.slug && touched.slug ? errors.slug : undefined}>
         <Cleave
           placeholder="colliers"
           name="slug"
@@ -86,15 +89,14 @@ const ProjectSettingForm = (props) => {
           errors.brandColor && touched.brandColor
             ? errors.brandColor
             : undefined
-        }
-      >
+        }>
         <ColorPicker
           name="brandColor"
           id="brandColor"
           label="Brand Colour"
           color={values.brandColor}
           selectBrandColor={values.brandColor}
-          onChange={(val) => setFieldValue('brandColor', val)}
+          onChange={val => setFieldValue('brandColor', val)}
         />
       </InputGroup>
       <TextAreaGroup
@@ -113,10 +115,6 @@ const ProjectSettingForm = (props) => {
 
       <div>
         {/* <label className="label">Footer contact information</label> */}
-        <small>
-          This information will show in the client view above in the footer
-          disclaimer
-        </small>
         <div className="columns" style={{ marginTop: '1rem' }}>
           <div className="column">
             <InputGroup
@@ -170,7 +168,12 @@ const ProjectSettingForm = (props) => {
             />
           </div>
         </div>
-
+        <div className="disclaimer-note">
+          <small>
+            This information will show in the client view above in the footer
+            disclaimer
+          </small>
+        </div>
         <TextAreaGroup
           fullWidth
           isWidth
@@ -191,8 +194,7 @@ const ProjectSettingForm = (props) => {
 
       <div
         className="button-field is-pulled-right"
-        style={{ marginTop: '2rem' }}
-      >
+        style={{ marginTop: '2rem' }}>
         <Button disabled={isSubmitting}>Update</Button>
       </div>
     </form>
