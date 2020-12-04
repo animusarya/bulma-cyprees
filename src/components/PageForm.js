@@ -5,7 +5,7 @@ import * as yup from 'yup';
 
 import { InputGroup, SelectGroup, Button } from './elements';
 
-const PageForm = (props) => {
+const PageForm = props => {
   const {
     values,
     touched,
@@ -20,7 +20,6 @@ const PageForm = (props) => {
     <form onSubmit={handleSubmit}>
       <InputGroup
         isHorizontal
-        isWidth
         border
         fullWidth
         name="name"
