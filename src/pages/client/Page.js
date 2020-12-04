@@ -67,6 +67,9 @@ const Content = styled.div`
   h6 {
     font-size: 16px;
   }
+  p:empty {
+    padding-bottom: 22px;
+  }
 `;
 
 const Table = styled.div`
