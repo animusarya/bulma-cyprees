@@ -156,9 +156,9 @@ const ClientHeader = ({ me, project }) => {
     window.location.replace('/');
   };
 
-  if (!project.logo) {
-    return null;
-  }
+  // if (!project.logo) {
+  //   return null;
+  // }
 
   return (
     <Container className="">
@@ -167,10 +167,10 @@ const ClientHeader = ({ me, project }) => {
           <Top className="column">
             <div>
               <Link to="/client/dashboard">
-                {project ? (
+                {project.logo ? (
                   <Logo src={project.logo} alt="logo" />
                 ) : (
-                  <span>Dashboard</span>
+                  <span></span>
                 )}
               </Link>
             </div>
@@ -226,13 +226,14 @@ const ClientHeader = ({ me, project }) => {
             id="navbarBasicExample"
             className={isActive ? 'navbar-menu is-active' : 'navbar-menu'}>
             <div className="navbar-start">
-              <LinkStyle
+              {/* <LinkStyle
                 to="/client/dashboard"
                 className="navbar-item has-text-weight-bold"
                 data={active == '/client/dashboard'}
                 brandColor={brandColor}>
                 Overview
-              </LinkStyle>
+              </LinkStyle> */}
+
               {pages.map(page => (
                 <LinkStyle
                   key={page.id}

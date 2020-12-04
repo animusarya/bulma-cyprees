@@ -26,6 +26,8 @@ const Dashboard = () => {
   const project = me.clientProject || {};
   const [{ dataRoomPages }, resultPages] = useProjectPages(project.id);
 
+  console.log(project, 'project');
+
   if (isEmpty(project)) {
     return (
       <Layout>
