@@ -40,6 +40,8 @@ const ManagePage = ({ match }) => {
   const page =
     resultPage.data && resultPage.data.page ? resultPage.data.page : {};
 
+  const brandColor = project.brandColor ? project.brandColor : '#000000';
+
   return (
     <Layout noContainer>
       <Seo title="Manage Page" description="Manage Page Type Content Here" />
@@ -74,7 +76,10 @@ const ManagePage = ({ match }) => {
               isPublic={page.type === 'content'}
             />
             {page.type === 'content' && (
-              <PageContent page={{ ...page, id: pageId }} />
+              <PageContent
+                page={{ ...page, id: pageId }}
+                brandColor={brandColor}
+              />
             )}
           </MainColumn>
         </div>

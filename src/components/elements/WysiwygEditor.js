@@ -37,9 +37,12 @@ const Container = styled.div`
   h6 {
     font-size: 16px;
   }
+  a {
+    color: ${props => props.brandColor};
+  }
 `;
 
-const WysiwygEditor = ({ onChange, value }) => {
+const WysiwygEditor = ({ onChange, value, brandColor }) => {
   const [editor, setEditor] = useState(undefined);
   const contentBlock = htmlToDraft(value);
 
@@ -54,7 +57,7 @@ const WysiwygEditor = ({ onChange, value }) => {
   }, []);
 
   return (
-    <Container>
+    <Container brandColor={brandColor}>
       <Editor
         toolbar={{
           options: [

@@ -22,7 +22,7 @@ const AuthFooter = ({ activeProject }) => (
   <Container className="section">
     <div className="container">
       <div className="columns">
-        <div className="column">
+        <div className="column is-full has-text-centered">
           <p className="has-text-white">
             © 2020 IntelliShare. All Rights Reserved.
           </p>

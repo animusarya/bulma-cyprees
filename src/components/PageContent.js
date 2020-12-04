@@ -29,7 +29,7 @@ const EditorContainer = styled.div`
 
 const ButtonContainer = styled.div``;
 
-const PageContent = ({ page }) => {
+const PageContent = ({ page, brandColor }) => {
   const [input, setInput] = useState({});
   const [executeUpdateMutation, updateResult] = useMutation(updateMutation);
 
@@ -39,6 +39,7 @@ const PageContent = ({ page }) => {
         <WysiwygEditor
           value={!isNull(page.content) ? page.content : ''}
           onChange={data => setInput({ content: data })}
+          brandColor={brandColor}
         />
       </EditorContainer>
       <ButtonContainer className="has-text-right">
