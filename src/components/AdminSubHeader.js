@@ -52,7 +52,8 @@ const NavbarMenu = styled.nav`
     }
   }
   button {
-    background: ${props => props.theme.menuBackgroundColor};
+    background: ${props =>
+      props.brandColor ? props.brandColor : props.theme.menuBackgroundColor};
 
     :focus {
       outline: -webkit-focus-ring-color auto 0px;
@@ -61,7 +62,11 @@ const NavbarMenu = styled.nav`
   .navbar-menu {
     background: ${props => props.brandColor};
   }
+  .navbar-burger span {
+    color: #ffffff;
+  }
 `;
+
 const HeroImg = styled.img`
   height: 10rem;
   width: auto;
@@ -121,6 +126,7 @@ const AdminSubHeader = () => {
         <div className="navbar-brand">
           <button
             type="button"
+            brandColor={brandColor}
             className={active ? 'is-active navbar-burger' : 'navbar-burger'}
             aria-label="menu"
             aria-expanded="false"
