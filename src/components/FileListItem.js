@@ -21,6 +21,14 @@ const fileQuery = gql`
   }
 `;
 
+const logDownloadMutation = gql`
+  mutation logDownload($fileId: ID!, $projectId: ID!) {
+    logDownload(fileId: $fileId, projectId: $projectId) {
+      success
+    }
+  }
+`;
+
 const removeFileMutation = gql`
   mutation removeFile($id: ID!) {
     removeFile(id: $id) {
@@ -87,7 +95,8 @@ const FileListItem = ({
     },
   );
   const [executeMutationDelete] = useMutation(removeFileMutation);
-  // console.log(fileName, 'fileName');
+  const [executeLogDownloadMutation] = useMutation(logDownloadMutation);
+  // console.log(project, 'project');
   const brandColor = isAdmin
     ? ''
     : project.brandColor
@@ -215,6 +224,7 @@ const FileListItem = ({
             onChange={e => setFileName(e.target.value)}
             tagName="span"
             onKeyDown={event => {
+              // eslint-disable-next-line no-unused-expressions
               event.key === 'Enter' && event.preventDefault();
             }}
           />
@@ -251,7 +261,14 @@ const FileListItem = ({
             secondary
             primary
             brandColor={brandColor}
-            onClick={() => getFile({ variables: { fileKey: file.name } })}>
+            onClick={async () => {
+              const result = await executeLogDownloadMutation({
+                variables: { fileId: file.id, projectId: project.id },
+              });
+              if (result) {
+                getFile({ variables: { fileKey: file.name } });
+              }
+            }}>
             Download
           </Button>
         </ButtonContainer>
