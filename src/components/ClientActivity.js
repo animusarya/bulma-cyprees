@@ -24,19 +24,17 @@ const Container = styled.div`
     margin-bottom: 1.5rem !important;
   }
 `;
-const ClientActivity = ({ clientActivityData }) => {
-  console.log(clientActivityData, 'clientActivityData');
+const ClientActivity = ({ clientActivityData, clientUsageLogsData }) => {
   return (
     <Container>
       <Heading>Client activity</Heading>
       <div className="select">
         <select>
-          <option>Select Client</option>
-          <option>David Smith</option>
-          <option>James Brown</option>
-          <option>Helen Mirren</option>
-          <option>Paddy Murphy</option>
-          <option>Vicky Roberts</option>
+          <option>All Client</option>
+          {clientUsageLogsData &&
+            clientUsageLogsData.map(client => (
+              <option key={client._id}>{client.userName}</option>
+            ))}
         </select>
       </div>
       <table className="table is-fullwidth is-hoverable">
@@ -56,7 +54,7 @@ const ClientActivity = ({ clientActivityData }) => {
                 <td>{data.clientId.profile.fullName}</td>
                 <td>{data.fileId.name}</td>
                 <td>
-                  Download{' '}
+                  Downloaded{' '}
                   {moment(data.createdAt)
                     .local()
                     .fromNow()}

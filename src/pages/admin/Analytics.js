@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useQuery, useMutation } from '@apollo/client';
+import React from 'react';
+import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
@@ -141,7 +141,10 @@ const Analytics = ({ match }) => {
                 />
               </div>
             </div>
-            <ClientActivity clientActivityData={clientActivityData} />
+            <ClientActivity
+              clientActivityData={clientActivityData}
+              clientUsageLogsData={clientUsageLogsData}
+            />
           </MainColumn>
         </div>
       </div>
