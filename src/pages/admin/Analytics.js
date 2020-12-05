@@ -76,8 +76,6 @@ const Analytics = ({ match }) => {
     fetchPolicy: 'cache-and-network',
   });
 
-  console.log(filesDownloadLogsActivity, 'filesDownloadLogsActivity');
-
   const clientActivityData =
     resultClientActivity &&
     resultClientActivity.data &&
@@ -143,7 +141,7 @@ const Analytics = ({ match }) => {
                 />
               </div>
             </div>
-            <ClientActivity />
+            <ClientActivity clientActivityData={clientActivityData} />
           </MainColumn>
         </div>
       </div>

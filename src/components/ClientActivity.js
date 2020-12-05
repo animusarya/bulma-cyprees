@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 
 import { Heading } from './elements';
 
@@ -23,7 +24,8 @@ const Container = styled.div`
     margin-bottom: 1.5rem !important;
   }
 `;
-const ClientActivity = () => {
+const ClientActivity = ({ clientActivityData }) => {
+  console.log(clientActivityData, 'clientActivityData');
   return (
     <Container>
       <Heading>Client activity</Heading>
@@ -40,25 +42,30 @@ const ClientActivity = () => {
       <table className="table is-fullwidth is-hoverable">
         <thead>
           <tr>
-            <th>Client Time</th>
+            <th>Client Name</th>
             <th>File</th>
             <th>Activity</th>
             <th>Client Time</th>
           </tr>
         </thead>
+
         <tbody>
-          <tr>
-            <td>David Smith</td>
-            <td>Terms and conditions.pdf</td>
-            <td>Download 5 hours ago</td>
-            <td>Tue 04 June 2020 - 22:10:23</td>
-          </tr>
-          <tr>
-            <td>David Smith</td>
-            <td>Brochure photos.pdf</td>
-            <td>Download 5 hours ago</td>
-            <td>Tue 04 June 2020 - 22:10:23</td>
-          </tr>
+          {clientActivityData &&
+            clientActivityData.map(data => (
+              <tr key={data._id}>
+                <td>{data.clientId.profile.fullName}</td>
+                <td>{data.fileId.name}</td>
+                <td>
+                  Download{' '}
+                  {moment(data.createdAt)
+                    .local()
+                    .fromNow()}
+                </td>
+                <td>
+                  {moment(data.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </Container>
