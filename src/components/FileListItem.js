@@ -242,9 +242,9 @@ const FileListItem = ({
       ) : (
         <td className="has-text-centered">{file.fileType}</td>
       )}
-      <td className="has-text-centered is-hidden-mobile">
+      {/* <td className="has-text-centered is-hidden-mobile">
         {file.section || '-'}
-      </td>
+      </td> */}
       <td className="has-text-centered">
         {dayjs(file.createdAt).format('DD MMM YYYY')}
       </td>
