@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
+import { filter } from 'lodash';
 
 import { Heading } from './elements';
 
@@ -25,15 +26,35 @@ const Container = styled.div`
   }
 `;
 const ClientActivity = ({ clientActivityData, clientUsageLogsData }) => {
+  const [clientId, setClientId] = useState('all');
+  const [activityData, setActivityData] = useState([]);
+
+  useEffect(() => {
+    if (clientId == 'all') {
+      return setActivityData(clientActivityData);
+    }
+  });
+
+  useEffect(() => {
+    if (clientId != 'all') {
+      const activity = filter(clientActivityData, {
+        clientId: { id: clientId },
+      });
+      setActivityData(activity);
+    }
+  }, [clientId]);
+
   return (
     <Container>
       <Heading>Client activity</Heading>
       <div className="select">
-        <select>
-          <option>All Client</option>
+        <select onChange={e => setClientId(e.target.value)}>
+          <option value="all">All Client</option>
           {clientUsageLogsData &&
             clientUsageLogsData.map(client => (
-              <option key={client._id}>{client.userName}</option>
+              <option value={client._id} key={client._id}>
+                {client.userName}
+              </option>
             ))}
         </select>
       </div>
@@ -48,22 +69,21 @@ const ClientActivity = ({ clientActivityData, clientUsageLogsData }) => {
         </thead>
 
         <tbody>
-          {clientActivityData &&
-            clientActivityData.map(data => (
-              <tr key={data._id}>
-                <td>{data.clientId.profile.fullName}</td>
-                <td>{data.fileId.name}</td>
-                <td>
-                  Downloaded{' '}
-                  {moment(data.createdAt)
-                    .local()
-                    .fromNow()}
-                </td>
-                <td>
-                  {moment(data.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
-                </td>
-              </tr>
-            ))}
+          {activityData.map(data => (
+            <tr key={data._id}>
+              <td>{data.clientId.profile.fullName}</td>
+              <td>{data.fileId.name}</td>
+              <td>
+                Downloaded{' '}
+                {moment(data.createdAt)
+                  .local()
+                  .fromNow()}
+              </td>
+              <td>
+                {moment(data.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </Container>
