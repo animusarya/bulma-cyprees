@@ -72,6 +72,7 @@ const ProjectsClient = ({ match }) => {
     variables: { id: match.params.clientId },
     fetchPolicy: 'cache-and-network',
   });
+
   const result = useQuery(clientProjectsQuery, {
     variables: { clientId: match.params.clientId },
     fetchPolicy: 'cache-and-network',

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useQuery, useMutation } from '@apollo/client';
+import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -12,7 +14,108 @@ import { Heading } from '../../components/elements';
 import AnalyticChartItem from '../../components/AnalyticChartItem';
 import ClientActivity from '../../components/ClientActivity';
 
-const Analytics = () => {
+const clientActivityQuery = gql`
+  query clientActivity($projectId: ID!) {
+    clientActivity(projectId: $projectId) {
+      _id
+      clientId {
+        id
+        email
+        profile {
+          fullName
+        }
+      }
+      fileId {
+        name
+      }
+      createdAt
+    }
+  }
+`;
+
+const clientUsageLogsQuery = gql`
+  query clientUsageLogs($projectId: ID!) {
+    clientUsageLogs(projectId: $projectId) {
+      _id
+      userName
+      count
+    }
+  }
+`;
+
+const filesDownloadLogsQuery = gql`
+  query filesDownloadLogs($projectId: ID!) {
+    filesDownloadLogs(projectId: $projectId) {
+      _id
+      fileName
+      count
+    }
+  }
+`;
+
+const Analytics = ({ match }) => {
+  const { id: projectId } = match.params;
+  const resultClientActivity = useQuery(clientActivityQuery, {
+    variables: {
+      projectId,
+    },
+    fetchPolicy: 'cache-and-network',
+  });
+
+  const clientUsageLogsActivity = useQuery(clientUsageLogsQuery, {
+    variables: {
+      projectId,
+    },
+    fetchPolicy: 'cache-and-network',
+  });
+
+  const filesDownloadLogsActivity = useQuery(filesDownloadLogsQuery, {
+    variables: {
+      projectId,
+    },
+    fetchPolicy: 'cache-and-network',
+  });
+
+  console.log(filesDownloadLogsActivity, 'filesDownloadLogsActivity');
+
+  const clientActivityData =
+    resultClientActivity &&
+    resultClientActivity.data &&
+    resultClientActivity.data.clientActivity
+      ? resultClientActivity.data.clientActivity
+      : [];
+
+  const clientUsageLogsData =
+    clientUsageLogsActivity &&
+    clientUsageLogsActivity.data &&
+    clientUsageLogsActivity.data.clientUsageLogs
+      ? clientUsageLogsActivity.data.clientUsageLogs
+      : [];
+
+  const filesDownloadLogsData =
+    filesDownloadLogsActivity &&
+    filesDownloadLogsActivity.data &&
+    filesDownloadLogsActivity.data.filesDownloadLogs
+      ? filesDownloadLogsActivity.data.filesDownloadLogs
+      : [];
+
+  const projectUsersAnalytics = [['Name', 'downloaded files']];
+  const projectFilesAnalytics = [['File Name', 'Most Downloaded Count']];
+
+  // To push array of logs to variable projectUsersAnalytics
+  clientUsageLogsData.map(item => {
+    // eslint-disable-next-line radix
+    const data = [item.userName, parseInt(item.count)];
+    projectUsersAnalytics.push(data);
+  });
+
+  // To push array of logs to variable projectFilesAnalytics
+  filesDownloadLogsData.map(item => {
+    // eslint-disable-next-line radix
+    const data = [item.fileName, parseInt(item.count)];
+    projectFilesAnalytics.push(data);
+  });
+
   return (
     <Layout noContainer>
       <Seo title="Manage Page" description="Manage Page Type Content Here" />
@@ -30,27 +133,13 @@ const Analytics = () => {
               <div className="column">
                 <AnalyticChartItem
                   title="Client usage"
-                  data={[
-                    ['Task', 'Hours per Day'],
-                    ['David Smith', 11],
-                    ['James Brown', 4],
-                    ['Helen Mirren', 6.1],
-                    ['Paddy Murphy', 3],
-                    ['Vicky Roberts', 7],
-                  ]}
+                  data={projectUsersAnalytics}
                 />
               </div>
               <div className="column">
                 <AnalyticChartItem
                   title="Most downloaded files"
-                  data={[
-                    ['Task', 'Hours per Day'],
-                    ['Terms and conditions.pdf', 11],
-                    ['Brochure photos.pdf', 2],
-                    ['Accounts.docx', 2],
-                    ['Legals.pdf', 2],
-                    ['Hotel.jpg', 7],
-                  ]}
+                  data={projectFilesAnalytics}
                 />
               </div>
             </div>
