@@ -33,17 +33,14 @@ const ProjectSettingForm = props => {
         isHorizontal
         groupWidth
         label="Project Name"
-        errors={errors.name && touched.name ? errors.name : undefined}>
-        <Cleave
-          placeholder="colliers"
-          name="name"
-          id="name"
-          value={values.name}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          className="input is-shadowless"
-        />
-      </InputGroup>
+        errors={errors.name && touched.name ? errors.name : undefined}
+        placeholder="colliers"
+        name="name"
+        id="name"
+        value={values.name}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        className="input is-shadowless"></InputGroup>
       <InputGroup
         fullWidth
         isWidth
