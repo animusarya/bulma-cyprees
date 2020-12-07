@@ -43,8 +43,8 @@ const PageForm = props => {
         onBlur={handleBlur}
         errors={errors.type && touched.type ? errors.type : undefined}
         options={[
-          { value: 'content', title: 'Content' },
-          { value: 'dataroom', title: 'Dataroom' },
+          { value: 'content', title: 'Content (Text Page)' },
+          { value: 'dataroom', title: 'Dataroom (File Sharing Page)' },
         ]}
       />
       <div className="field">
