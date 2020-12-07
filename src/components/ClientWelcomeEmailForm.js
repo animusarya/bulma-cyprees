@@ -32,7 +32,7 @@ const ClientWelcomeEmailForm = props => {
         border
         isHorizontal
         label="Subject of email"
-        placeholder={`Welcome to ${project.name}`}
+        placeholder={`Register for the ${project.name}`}
         name="subject"
         value={values.subject}
         onChange={handleChange}
