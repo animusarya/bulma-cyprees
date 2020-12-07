@@ -19,6 +19,7 @@ const FormContainer = styled.div`
   margin-top: -70px;
   .disclaimer-note {
     margin-bottom: 12px;
+    margin-top: -22px;
   }
 `;
 
