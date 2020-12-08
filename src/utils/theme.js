@@ -69,6 +69,12 @@ export const GlobalStyle = createGlobalStyle`
     justify-content: center;
     flex-direction: row-reverse;
   }
+  .swal-modal {
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
   .button.is-primary.is-outlined[disabled] {
     background-color: #eee;
     color: #666;
