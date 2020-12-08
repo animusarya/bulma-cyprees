@@ -21,6 +21,14 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media only screen and (max-width: 768px) {
+      display: grid;
+    }
+  }
+  h2 {
+    @media only screen and (max-width: 768px) {
+      font-size: 2.5rem !important;
+    }
   }
   .column .logo-edit {
     display: flex;
@@ -39,7 +47,6 @@ const Container = styled.div`
   .navbar-item {
     min-width: 100px;
   }
-
   .edit-logo {
     height: auto;
     width: 160px;
@@ -101,7 +108,7 @@ const AdminHeader = () => {
             </Button>
           </div>
           <div>
-            <div className="has-text-right is-size-1-mobile">
+            <div className="has-text-right-desktop is-size-1-mobile">
               <Title marginbottom="0px">{startCase(project.name)}</Title>
             </div>
           </div>
