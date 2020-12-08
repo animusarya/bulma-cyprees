@@ -13,6 +13,12 @@ const Container = styled.table`
       font-size: ${props => props.theme.fontSizeSmall};
     }
   }
+  td {
+    padding-top: 18px !important;
+    :last-child {
+      padding-top: 8px !important;
+    }
+  }
 `;
 
 const updateFileMutation = gql`

@@ -42,8 +42,10 @@ const Container = styled.div`
     margin-bottom: 2rem;
     @media only screen and (max-width: 768px) {
       font-size: ${props => props.theme.fontSizeExtraLarge};
-      margin-top: -5rem;
-      /* margin-bottom: 0rem; */
+      margin-top: -2rem;
+    }
+    @media screen and (min-device-width: 769px) and (max-device-width: 1023px) {
+      padding-left: 10px;
     }
   }
 `;

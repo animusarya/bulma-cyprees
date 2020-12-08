@@ -53,8 +53,8 @@ const ClientWelcomeEmailForm = props => {
         onBlur={handleBlur}
         errors={errors.body && touched.body ? errors.body : undefined}
       />
-      <small>
-        A link will be added to your Registration email for you client to click
+      <small className="is-italic">
+        A link will be added to your Registration email for your client to click
         on.
       </small>
       <div className="button-field">

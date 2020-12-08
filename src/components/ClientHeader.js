@@ -5,7 +5,6 @@ import { startCase } from 'lodash';
 
 import useProjectPages from '../hooks/useProjectPages';
 import { Title } from './elements';
-import theme from '../utils/theme';
 import logoBg from '../assets/images/login-bg.jpg';
 // import logo from '../assets/images/logo2.png';
 
@@ -50,7 +49,8 @@ const Top = styled.div`
 
 const NavbarMenu = styled.nav`
   padding: 0 2rem !important;
-  background-color: ${props => (props.brandColor ? props.brandColor : '#000')};
+  background-color: ${props =>
+    props.brandColor ? props.brandColor : 'transparent'};
   color: #fff;
 
   @media only screen and (max-width: 768px) {
@@ -65,7 +65,8 @@ const NavbarMenu = styled.nav`
     }
   } */
   .navbar-menu {
-    background-color: ${props => props.brandColor};
+    background-color: ${props =>
+      props.brandColor ? props.brandColor : 'transparent'};
   }
 `;
 
@@ -150,9 +151,7 @@ const ClientHeader = ({ me, project }) => {
   // const activeSlug = pages[0] ? pages[0].slug : '';
 
   const [active, setActive] = useState('/client/dashboard');
-  const brandColor = project.brandColor
-    ? project.brandColor
-    : theme.primaryColor;
+  const brandColor = project.brandColor ? project.brandColor : '#ffffff';
 
   const handleLogout = () => {
     window.localStorage.clear();
@@ -245,7 +244,7 @@ const ClientHeader = ({ me, project }) => {
                   className="navbar-item has-text-weight-bold"
                   activelink={page.slug}
                   brandColor={brandColor}
-                  onClick={() => setActive(page.slug)}
+                  onClick={(() => setActive(page.slug), toggleMenu)}
                   data={active == page.slug}>
                   {startCase(page.name)}
                 </LinkStyle>
