@@ -4,6 +4,7 @@ import { useStoreState } from 'easy-peasy';
 import { Link } from 'react-router-dom';
 
 import logoAlt from '../assets/images/logo.svg';
+import Sidebar from './Sidebar';
 
 const Container = styled.div`
   background-color: ${props => props.theme.secondaryColor};
@@ -68,10 +69,16 @@ const Button = styled.button`
 
 const AdminBurgerMenu = styled.div`
   /* background: ${props => props.theme.menuBackgroundColor}; */
+  .admin-nav-mobile {
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: -0.25rem;
+    padding-bottom: 0.5rem;
+  }
 `;
 
 const Header = () => {
-  const [active, setActive] = useState(false);
+  const [showSideBar, setShowSideBar] = useState(false);
   const userData = useStoreState(state => state.user.data);
   const handleLogout = () => {
     window.localStorage.clear();
@@ -118,7 +125,28 @@ const Header = () => {
       )}
       {userData.type === 'admin' && (
         <Container>
-          <AdminNav
+          <AdminBurgerMenu
+            id="navbarBasicExample"
+            className="navbar-menu is-active is-hidden-desktop">
+            <div className="navbar-end is-flex admin-nav-mobile">
+              <span className="navbar-item has-text-white is-size-7">
+                {userData.email}
+              </span>
+              <span className="navbar-item has-text-white">
+                <div className="buttons">
+                  <Button className="">
+                    <LinkWrapper to="/admin/settings">
+                      <i className="fas fa-cog"></i>
+                    </LinkWrapper>
+                  </Button>
+                  <Button className="" onClick={() => handleLogout()}>
+                    <i className="fas fa-power-off"></i>
+                  </Button>
+                </div>
+              </span>
+            </div>
+          </AdminBurgerMenu>
+          <nav
             className="navbar"
             role="navigation"
             aria-label="main navigation">
@@ -127,21 +155,22 @@ const Header = () => {
                 <Logo src={logoAlt} alt="logo" />
               </Link>
               <a
-                className={active ? 'is-active navbar-burger' : 'navbar-burger'}
+                className={
+                  showSideBar
+                    ? 'is-active navbar-burger has-text-white'
+                    : 'navbar-burger has-text-white'
+                }
                 aria-label="menu"
                 aria-expanded="false"
                 data-target="navbarBasicExample"
-                onClick={() => setActive(!active)}>
+                onClick={() => setShowSideBar(!showSideBar)}>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
               </a>
             </div>
-            <AdminBurgerMenu
-              id="navbarBasicExample"
-              // className={active ? 'navbar-menu is-active' : 'navbar-menu'}
-            >
-              <div className="navbar-end is-flex-mobile">
+            <AdminBurgerMenu id="navbarBasicExample" className="navbar-menu">
+              <div className="navbar-end">
                 <span className="navbar-item has-text-white">
                   {userData.email}
                 </span>
@@ -159,7 +188,12 @@ const Header = () => {
                 </span>
               </div>
             </AdminBurgerMenu>
-          </AdminNav>
+          </nav>
+          {showSideBar && (
+            <div className="is-hidden-desktop">
+              <Sidebar showOnMobile />
+            </div>
+          )}
         </Container>
       )}
     </div>
