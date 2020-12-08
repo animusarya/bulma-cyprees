@@ -7,7 +7,7 @@ import { isNull } from 'lodash';
 const Container = styled.aside`
   background-color: #f4f4f6;
   height: 100%;
-  min-height: 100vh;
+  min-height: ${props => (props.showOnMobile ? '' : '100vh')};
   margin-bottom: 0px !important;
   li {
     cursor: pointer;
@@ -56,7 +56,7 @@ const LinkWrapper = ({ to, title, icon }) => {
   );
 };
 
-const Sidebar = () => {
+const Sidebar = ({ showOnMobile }) => {
   const userData = useStoreState(state => state.user.data);
   const activeProject = useStoreState(state => state.active.project);
   // const [isToggledOn, setToggle] = useState(false);
@@ -69,7 +69,9 @@ const Sidebar = () => {
   // const route = useRouteMatch('/admin/help');
 
   return (
-    <Container className="menu is-hidden-mobile">
+    <Container
+      showOnMobile={showOnMobile}
+      className={!showOnMobile ? 'menu is-hidden-mobile' : 'menu'}>
       {userData.type === 'superAdmin' && (
         <ul className="menu-list">
           <LinkWrapper title="Users" to="/super-admin/dashboard" />
