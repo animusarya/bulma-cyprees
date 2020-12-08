@@ -3,23 +3,25 @@ import styled from 'styled-components';
 
 const Group = styled.div`
   .control {
-    width: ${(props) => (props.fullWidth ? '100%' : '')} !important;
+    width: ${props => (props.fullWidth ? '100%' : '')} !important;
   }
   label {
-    width: ${(props) => (props.isWidth ? '10rem' : '')} !important;
+    width: ${props => (props.isWidth ? '10rem' : '')} !important;
   }
 `;
 
 const TextArea = styled.textarea`
   box-shadow: none;
-  border-top: ${(props) =>
+  border-top: ${props =>
     props.border ? '1px solid theme.borderColor' : 'none'};
-  border-left: ${(props) =>
+  border-left: ${props =>
     props.border ? '1px solid theme.borderColor' : 'none'};
-  border-right: ${(props) =>
+  border-right: ${props =>
     props.border ? '1px solid theme.borderColor' : 'none'};
-  border-radius: ${(props) => (props.hasRadius ? '5px' : '0')};
-  border-bottom: ${(props) => `1px solid ${props.theme.borderColor}`};
+  border-radius: ${props => (props.hasRadius ? '5px' : '0')};
+  border-bottom: ${props => `1px solid ${props.theme.borderColor}`};
+  border-top-right-radius: 7px !important;
+  border-top-left-radius: 7px !important;
 `;
 
 const TextAreaGroup = ({
@@ -33,13 +35,12 @@ const TextAreaGroup = ({
   <Group
     className={`field ${isHorizontal ? 'is-horizontal' : ''}`}
     fullWidth={fullWidth}
-    isWidth={isWidth}
-  >
-    {label &&
+    isWidth={isWidth}>
+    {label && (
       <div className="is-flex">
         <label className="label">{label}</label>
       </div>
-    }
+    )}
     <div className="control">
       <TextArea className="textarea" {...otherProps} />
       {errors && <p className="help is-danger">{errors}</p>}
