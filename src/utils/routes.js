@@ -13,7 +13,6 @@ import Register from '../pages/Register';
 import ForgotPassword from '../pages/ForgotPassword';
 import SetPassword from '../pages/SetPassword';
 import Test from '../pages/Test';
-import ProjectQuickView from '../pages/ProjectQuickView';
 
 import DashboardSuperAdmin from '../pages/super-admin/Dashboard';
 import Discounts from '../pages/super-admin/Discounts';
@@ -24,30 +23,20 @@ import HelpSuperAdmin from '../pages/super-admin/Help';
 
 import DashboardAdmin from '../pages/admin/Dashboard';
 import CreateProject from '../pages/admin/CreateProject';
-import ManageEmail from '../pages/admin/ManageEmail';
-import ClientNotifications from '../pages/admin/ClientNotifications';
-import Analytics from '../pages/admin/Analytics';
 import ProjectDashboard from '../pages/admin/ProjectDashboard';
-import ManageClients from '../pages/admin/ManageClients';
-import ManagePage from '../pages/admin/ManagePage';
 import Help from '../pages/admin/Help';
 import ProjectSetting from '../pages/admin/ProjectSetting';
 import ProjectSubscription from '../pages/admin/ProjectSubscription';
 import Settings from '../pages/admin/Settings';
 
-import DashboardClient from '../pages/client/Dashboard';
-import Page from '../pages/client/Page';
-import ClientSettings from '../pages/client/Settings';
-import AcceptInvitation from '../pages/client/AcceptInvitation';
-
 const PrivateRoute = ({ component: Component, access, ...rest }) => {
-  const isLoggedIn = useStoreState(state => state.isLoggedIn.value);
-  const user = useStoreState(state => state.user.data);
+  const isLoggedIn = useStoreState((state) => state.isLoggedIn.value);
+  const user = useStoreState((state) => state.user.data);
 
   return (
     <Route
       {...rest}
-      render={props => {
+      render={(props) => {
         if (!isLoggedIn) {
           return <Redirect to="/login" />;
         }
@@ -61,7 +50,7 @@ const PrivateRoute = ({ component: Component, access, ...rest }) => {
 };
 
 const Routes = () => (
-  <React.Fragment>
+  <>
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home} />
@@ -129,36 +118,6 @@ const Routes = () => (
         />
         <PrivateRoute
           exact
-          path="/admin/project/:id/pages/:pageId"
-          component={ManagePage}
-          access="admin"
-        />
-        <PrivateRoute
-          exact
-          path="/admin/project/:id/emails"
-          component={ManageEmail}
-          access="admin"
-        />
-        <PrivateRoute
-          exact
-          path="/admin/project/:id/notifications"
-          component={ClientNotifications}
-          access="admin"
-        />
-        <PrivateRoute
-          exact
-          path="/admin/project/:id/analytics"
-          component={Analytics}
-          access="admin"
-        />
-        <PrivateRoute
-          exact
-          path="/admin/project/:id/clients"
-          component={ManageClients}
-          access="admin"
-        />
-        <PrivateRoute
-          exact
           path="/admin/help"
           component={Help}
           access="admin"
@@ -181,36 +140,12 @@ const Routes = () => (
           component={Settings}
           access="admin"
         />
-        <PrivateRoute
-          exact
-          path="/client/dashboard"
-          component={DashboardClient}
-          access="client"
-        />
-        <PrivateRoute
-          exact
-          path="/client/page/:id"
-          component={Page}
-          access="client"
-        />
-        <PrivateRoute
-          exact
-          path="/client/settings"
-          component={ClientSettings}
-          access="client"
-        />
-        <Route
-          exact
-          path="/client/invite/:projectId/:clientEmail"
-          component={AcceptInvitation}
-        />
         <Route exact path="/test" component={Test} />
-        <Route exact path="/:slug" component={ProjectQuickView} />
         <Route component={Error404} />
       </Switch>
     </BrowserRouter>
     <GlobalStyle />
-  </React.Fragment>
+  </>
 );
 
 export default Routes;

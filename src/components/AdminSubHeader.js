@@ -5,10 +5,7 @@ import { useStoreState } from 'easy-peasy';
 import useProjectDetails from '../hooks/useProjectDetails';
 import useProjectUpdate from '../hooks/useProjectUpdate';
 import useProjectPages from '../hooks/useProjectPages';
-import AdminSubHeaderNav from './AdminSubHeaderNav';
 import { Button, Message } from './elements';
-import AddPageModal from './AddPageModal';
-import UploadImageModal from './UploadImageModal';
 import theme from '../utils/theme';
 
 import logoBg from '../assets/images/blank.png';
@@ -44,7 +41,7 @@ const Container = styled.div`
   }
 `;
 const NavbarMenu = styled.nav`
-  background-color: ${props => props.brandColor};
+  background-color: ${(props) => props.brandColor};
   .navbar-item {
     :hover {
       background: #ffffff10;
@@ -52,7 +49,7 @@ const NavbarMenu = styled.nav`
     }
   }
   button {
-    background: ${props =>
+    background: ${(props) =>
       props.brandColor ? props.brandColor : props.theme.menuBackgroundColor};
 
     :focus {
@@ -60,7 +57,7 @@ const NavbarMenu = styled.nav`
     }
   }
   .navbar-menu {
-    background: ${props => props.brandColor};
+    background: ${(props) => props.brandColor};
   }
   .navbar-burger span {
     color: #ffffff;
@@ -79,7 +76,7 @@ const Hero = styled.section`
     align-self: center;
   }
   .title {
-    color: ${props => props.brandColor};
+    color: ${(props) => props.brandColor};
   }
   .edit-banner {
     height: auto;
@@ -95,12 +92,12 @@ const AdminSubHeader = () => {
   const [active, setActive] = useState(false);
   const [addPageModal, setAddPageModal] = useState(false);
   const [uploadImageModal, setUploadImageModal] = useState(false);
-  const projectId = useStoreState(state => state.active.project);
+  const projectId = useStoreState((state) => state.active.project);
   const [project, resultProject] = useProjectDetails(projectId);
   const [executeUpdateProjectMutation, resUpdateProject] = useProjectUpdate();
   const [{ pages }, resultPages] = useProjectPages(projectId);
 
-  const handleBannerUpload = uploadResponse => {
+  const handleBannerUpload = (uploadResponse) => {
     executeUpdateProjectMutation({
       variables: {
         id: projectId,
@@ -132,23 +129,15 @@ const AdminSubHeader = () => {
             aria-expanded="false"
             data-target="navbarBasicExample"
             onClick={() => setActive(!active)}>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
           </button>
         </div>{' '}
         <div
           id="navbarBasicExample"
           className={active ? 'navbar-menu is-active' : 'navbar-menu'}>
-          <div className="navbar-start">
-            {pages.length > 0 && (
-              <AdminSubHeaderNav
-                project={project}
-                pages={pages}
-                brandColor={brandColor}
-              />
-            )}
-          </div>
+          <div className="navbar-start" />
           <div className="navbar-end">
             <a
               className="navbar-item has-text-white"
@@ -177,18 +166,6 @@ const AdminSubHeader = () => {
           </Button>
         </div>
       </Hero>
-      <UploadImageModal
-        heading="Upload Banner"
-        isActive={uploadImageModal}
-        onClose={() => setUploadImageModal(false)}
-        onResponse={handleBannerUpload}
-      />
-      <AddPageModal
-        isActive={addPageModal}
-        project={project}
-        handleChange={value => setAddPageModal(value)}
-        refetch={resultPages.refetch}
-      />
       {resUpdateProject.error && (
         <Message type="error">{resUpdateProject.error.message}</Message>
       )}

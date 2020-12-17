@@ -12,7 +12,6 @@ import CopyRight from '../../components/CopyRight';
 import AdminHeader from '../../components/AdminHeader';
 import AdminSubHeader from '../../components/AdminSubHeader';
 import ProjectDashboardHero from '../../components/ProjectDashboardHero';
-import ProjectPages from '../../components/ProjectPages';
 import { Message, Loading } from '../../components/elements';
 
 const Container = styled.div`
@@ -24,7 +23,7 @@ const Container = styled.div`
     }
   }
   span {
-    color: ${props => props.theme.primaryColor};
+    color: ${(props) => props.theme.primaryColor};
   }
   p {
     line-height: 1;
@@ -58,13 +57,7 @@ const ProjectDashboard = ({ match }) => {
             <div className="content">
               {pages.length === 0 ? (
                 <ProjectDashboardHero project={project} />
-              ) : (
-                <ProjectPages
-                  project={project}
-                  pages={pages}
-                  refetch={resultPages.refetch}
-                />
-              )}
+              ) : null}
             </div>
           </MainColumn>
         </div>

@@ -1,13 +1,15 @@
-# Intellishare
+# Reviews System
 
-> Frontend app for intellishare using ReactJs with batteries included.
+> Frontend app for Reviews System using ReactJs with batteries included.
 
 ## Requirements
+
 ```bash
 - [Node](https://nodejs.org) 4.x or better
 ```
 
 ## Stack
+
 ```bash
 - [React](http://facebook.github.io/react)
 - [create-react-app](https://github.com/facebook/create-react-app)

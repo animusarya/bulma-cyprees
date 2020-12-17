@@ -5,9 +5,9 @@ import schema from './schema';
 import config from '../utils/config';
 
 const store = createStore(schema, {
-  name: 'MyAwesomeStore',
+  name: 'ReviewsSystem',
   devTools: true,
-  reducerEnhancer: reducer =>
+  reducerEnhancer: (reducer) =>
     persistReducer(
       {
         key: config.projectKey,

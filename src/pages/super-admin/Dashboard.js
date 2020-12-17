@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
-import dayjs from 'dayjs';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -87,15 +86,14 @@ const Dashboard = () => {
                       <tr key={user.id}>
                         <td>
                           <LinkWrapper
-                            to={`/super-admin/client/${user.id}/projects`}
-                          >
+                            to={`/super-admin/client/${user.id}/projects`}>
                             {user.email}
                           </LinkWrapper>
                         </td>
                         <td>{user.profile && user.profile.fullName}</td>
                         <td>{user.profile && user.profile.companyName}</td>
                         <td>{user.profile && user.profile.telephone}</td>
-                        <td>{dayjs(user.createdAt).format('DD-MM-YYYY')}</td>
+                        <td>{user.createdAt}</td>
                       </tr>
                     ))}
                 </tbody>

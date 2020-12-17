@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { useQuery, useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
-import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 
@@ -61,9 +60,9 @@ const Container = styled.div`
 `;
 
 const LinkWrapper = styled(Link)`
-  color: ${props => props.theme.primaryColor};
+  color: ${(props) => props.theme.primaryColor};
   :hover {
-    color: ${props => props.theme.primaryColor};
+    color: ${(props) => props.theme.primaryColor};
   }
 `;
 
@@ -114,20 +113,14 @@ const ProjectsClient = ({ match }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {result.data.projects.map(project => (
+                  {result.data.projects.map((project) => (
                     <tr key={project.id}>
                       <td>
                         <strong>{project.name}</strong>
                       </td>
                       <td>£{project.subscriptionAmount}</td>
                       <td>{project.subscriptionDurationInMonths} months</td>
-                      <td>
-                        {dayjs(project.subscriptionStartsAt).isValid()
-                          ? dayjs(project.subscriptionStartsAt).format(
-                              'DD-MM-YYYY',
-                            )
-                          : null}
-                      </td>
+                      <td>{project.subscriptionStartsAt}</td>
                       <td className="is-uppercase actions">
                         <LinkWrapper
                           to={`/super-admin/client/${match.params.clientId}/project/${project.id}/info`}>
@@ -145,7 +138,7 @@ const ProjectsClient = ({ match }) => {
                               {
                                 buttons: ['Cancel', 'Confirm'],
                               },
-                            ).then(async value => {
+                            ).then(async (value) => {
                               if (value) {
                                 await executeMutationRenew({
                                   id: project.id,
@@ -165,7 +158,7 @@ const ProjectsClient = ({ match }) => {
                           onClick={() => {
                             swal('Are you confirm to delete this item?', {
                               buttons: ['Cancel', 'Confirm'],
-                            }).then(async value => {
+                            }).then(async (value) => {
                               if (value) {
                                 await executeMutationRemove({
                                   id: project.id,

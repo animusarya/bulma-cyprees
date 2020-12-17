@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { StoreProvider } from 'easy-peasy';
 import { PersistGate } from 'redux-persist/integration/react';
-import { DndProvider } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
 import { ApolloProvider } from '@apollo/client';
 
 import theme from './utils/theme';
@@ -22,9 +20,7 @@ const App = () => {
       <PersistGate loading={<Loading />} persistor={persistor}>
         <StoreProvider store={store}>
           <ThemeProvider theme={theme}>
-            <DndProvider backend={HTML5Backend}>
-              <Routes />
-            </DndProvider>
+            <Routes />
           </ThemeProvider>
         </StoreProvider>
       </PersistGate>

@@ -8,8 +8,6 @@ import Message from './Message';
 import Loading from './Loading';
 import TextAreaGroup from './TextArea';
 import SelectGroup from './SelectGroup';
-import Dropzone from './Dropzone';
-import WysiwygEditor from './WysiwygEditor';
 import CreditCardInput from './CreditCardInput';
 import ColorPicker from './ColorPicker';
 
@@ -24,8 +22,6 @@ export {
   Loading,
   TextAreaGroup,
   SelectGroup,
-  Dropzone,
-  WysiwygEditor,
   CreditCardInput,
   ColorPicker,
 };

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import { useStoreActions } from 'easy-peasy';
-import dayjs from 'dayjs';
 
 import { formatCurrency } from '../../utils/helpers';
 import Layout from '../../components/Layout';
@@ -57,7 +56,7 @@ const Dashboard = () => {
     fetchPolicy: 'network-only',
   });
   const updateProject = useStoreActions(
-    actions => actions.active.updateProject,
+    (actions) => actions.active.updateProject,
   );
 
   useEffect(() => {
@@ -95,7 +94,7 @@ const Dashboard = () => {
                 </div>
               </div>
             ) : (
-              <React.Fragment>
+              <>
                 <Heading>Dashboard</Heading>
                 <div className="columns">
                   <div className="column">
@@ -119,7 +118,7 @@ const Dashboard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {projects.map(project => (
+                    {projects.map((project) => (
                       <tr key={project.id}>
                         <td>
                           <Link to={`/admin/project/${project.id}/pages`}>
@@ -128,18 +127,12 @@ const Dashboard = () => {
                         </td>
                         <td>{formatCurrency(project.subscriptionAmount)}</td>
                         <td>{project.subscriptionName}</td>
-                        <td>
-                          {dayjs(project.subscriptionStartsAt).isValid()
-                            ? dayjs(project.subscriptionStartsAt).format(
-                                'DD-MM-YYYY',
-                              )
-                            : null}
-                        </td>
+                        <td>{project.subscriptionStartsAt}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
-              </React.Fragment>
+              </>
             )}
           </MainColumn>
         </div>
