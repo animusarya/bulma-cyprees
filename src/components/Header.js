@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useStoreState } from 'easy-peasy';
 import { Link } from 'react-router-dom';
 
-import logoAlt from '../assets/images/logo.svg';
+// import logoAlt from '../assets/images/logo.svg';
 import Sidebar from './Sidebar';
 
 const Container = styled.div`
@@ -52,10 +52,10 @@ const LinkWrapper = styled(Link)`
   }
 `;
 
-const Logo = styled.img`
-  width: 140px;
-  height: auto;
-`;
+// const Logo = styled.img`
+//   width: 140px;
+//   height: auto;
+// `;
 
 const Button = styled.button`
   background-color: transparent;
@@ -96,7 +96,7 @@ const Header = () => {
             aria-label="main navigation">
             <div className="navbar-brand">
               <LinkLogo className="navbar-item" to="/super-admin/dashboard">
-                <Logo src={logoAlt} alt="logo" />
+                <h1>Review our Services</h1>
               </LinkLogo>
               <a
                 role="button"
@@ -152,7 +152,7 @@ const Header = () => {
             aria-label="main navigation">
             <div className="navbar-brand">
               <Link className="navbar-item" to="/admin/dashboard">
-                <Logo src={logoAlt} alt="logo" />
+                <h1>Review our Services Logo</h1>
               </Link>
               <a
                 className={

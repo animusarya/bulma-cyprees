@@ -84,12 +84,12 @@ const Sidebar = ({ showOnMobile }) => {
         <ul className="menu-list">
           <LinkWrapper
             icon="fas fa-plus-circle"
-            title="Create Project"
-            to="/admin/project/create"
+            title="Get Started"
+            to="/user/guide"
           />
           <LinkWrapper
             icon="fas fa-folder-open"
-            title="Manage Projects"
+            title="Reviews"
             to="/admin/dashboard"
           />
 

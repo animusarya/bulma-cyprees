@@ -23,7 +23,8 @@ import Pricing from '../pages/super-admin/Pricing';
 import HelpSuperAdmin from '../pages/super-admin/Help';
 
 import DashboardAdmin from '../pages/admin/Dashboard';
-import CreateProject from '../pages/admin/CreateProject';
+// import CreateProject from '../pages/admin/CreateProject';
+import InstructionGuide from '../pages/admin/InstructionGuide';
 import ProjectDashboard from '../pages/admin/ProjectDashboard';
 import Help from '../pages/admin/Help';
 import ProjectSetting from '../pages/admin/ProjectSetting';
@@ -107,8 +108,8 @@ const Routes = () => (
         />
         <PrivateRoute
           exact
-          path="/admin/project/create"
-          component={CreateProject}
+          path="/user/guide"
+          component={InstructionGuide}
           access="admin"
         />
         <PrivateRoute

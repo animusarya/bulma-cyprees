@@ -41,13 +41,13 @@ import ClientSettings from '../pages/client/Settings';
 import AcceptInvitation from '../pages/client/AcceptInvitation';
 
 const PrivateRoute = ({ component: Component, access, ...rest }) => {
-  const isLoggedIn = useStoreState(state => state.isLoggedIn.value);
-  const user = useStoreState(state => state.user.data);
+  const isLoggedIn = useStoreState((state) => state.isLoggedIn.value);
+  const user = useStoreState((state) => state.user.data);
 
   return (
     <Route
       {...rest}
-      render={props => {
+      render={(props) => {
         if (!isLoggedIn) {
           return <Redirect to="/login" />;
         }
@@ -61,7 +61,7 @@ const PrivateRoute = ({ component: Component, access, ...rest }) => {
 };
 
 const Routes = () => (
-  <React.Fragment>
+  <>
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home} />
@@ -210,7 +210,7 @@ const Routes = () => (
       </Switch>
     </BrowserRouter>
     <GlobalStyle />
-  </React.Fragment>
+  </>
 );
 
 export default Routes;
