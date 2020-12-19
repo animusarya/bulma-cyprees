@@ -48,7 +48,7 @@ const ProjectSetting = ({ match }) => {
               <ProjectSettingForm
                 enableReinitialize
                 initialValues={project}
-                onSubmit={async data => {
+                onSubmit={async (data) => {
                   await executeMutation({
                     variables: { id: project.id, input: data },
                   });

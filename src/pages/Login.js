@@ -2,14 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
-import { useStoreActions, useStoreState } from 'easy-peasy';
+import { useStoreActions } from 'easy-peasy';
 
 import Seo from '../components/Seo';
 import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
 import LoginForm from '../components/LoginForm';
-import background from '../assets/images/intelliback.jpg';
-import logo from '../assets/images/logo2.png';
+// import background from '../assets/images/intelliback.jpg';
+// import logo from '../assets/images/logo2.png';
 
 const mutation = gql`
   mutation login($email: String!, $password: String!) {
@@ -41,7 +41,7 @@ const Container = styled.div`
 
 const ContentContainer = styled.div`
   h2 {
-    font-size: ${props => props.theme.fontSizeSuperLarge};
+    font-size: ${(props) => props.theme.fontSizeSuperLarge};
     margin-bottom: 2rem;
   }
 `;
@@ -57,19 +57,19 @@ const FormContainer = styled.div`
   }
 `;
 
-const Logo = styled.img`
-  max-height: 60px;
-  width: auto;
-  padding-bottom: 1rem;
-`;
+// const Logo = styled.img`
+//   max-height: 60px;
+//   width: auto;
+//   padding-bottom: 1rem;
+// `;
 
 const Login = () => {
   const [executeMutation, res] = useMutation(mutation);
   const togggleLoggedIn = useStoreActions(
-    actions => actions.isLoggedIn.togggle,
+    (actions) => actions.isLoggedIn.togggle,
   );
-  const updateUser = useStoreActions(actions => actions.user.update);
-  const activeProject = useStoreState(state => state.origin.project);
+  const updateUser = useStoreActions((actions) => actions.user.update);
+  // const activeProject = useStoreState((state) => state.origin.project);
 
   if (res.data && res.data.login) {
     const { jwt, user } = res.data.login;
@@ -88,7 +88,7 @@ const Login = () => {
   }
 
   return (
-    <Layout noContainer hasAuthNav activeProject={activeProject}>
+    <Layout noContainer hasAuthNav>
       <Container>
         <div className="login-page">
           <Seo title="Login" description="Some description here." />
@@ -114,11 +114,11 @@ const Login = () => {
                       </div>
                     </nav>
 
-                    {activeProject.logo ? (
+                    {/* {activeProject.logo ? (
                       <Logo src={activeProject.logo} alt={activeProject.name} />
                     ) : (
                       <Logo src={logo} alt="Intellishare" />
-                    )}
+                    )} */}
                     <ContentContainer>
                       <h2 className="has-text-weight-semibold is-size-5-mobile">
                         Log In
@@ -126,7 +126,7 @@ const Login = () => {
                     </ContentContainer>
                   </div>
                   <LoginForm
-                    onSubmit={data => executeMutation({ variables: data })}
+                    onSubmit={(data) => executeMutation({ variables: data })}
                   />
                   {res.error && (
                     <Message type="error">{res.error.message}</Message>

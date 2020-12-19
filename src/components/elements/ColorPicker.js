@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { SketchPicker, ChromePicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 import styled from 'styled-components';
 
 const Container = styled.div``;

@@ -49,7 +49,7 @@ const AdminUsers = ({ result, executeQuery }) => {
         </thead>
         {result.data && project.clients.length > 0 && (
           <tbody>
-            {project.clients.map(item => (
+            {project.clients.map((item) => (
               <tr key={item.id}>
                 <td>{item.email}</td>
                 <td className="has-text-right">
@@ -59,7 +59,7 @@ const AdminUsers = ({ result, executeQuery }) => {
                     onClick={() => {
                       swal('Are you sure you want to delete this user?', {
                         buttons: ['Cancel', 'Confirm'],
-                      }).then(async value => {
+                      }).then(async (value) => {
                         if (value) {
                           // console.log('item', item);
                           await executeMutationRemove({
@@ -81,7 +81,7 @@ const AdminUsers = ({ result, executeQuery }) => {
         )}
       </table>
       <AdminUsersForm
-        onSubmit={async data => {
+        onSubmit={async (data) => {
           await executeMutationAdd({
             variables: { id: project.id, input: data },
           });

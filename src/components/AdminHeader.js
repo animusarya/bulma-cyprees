@@ -78,6 +78,7 @@ const AdminHeader = () => {
       resultProject.refetch();
     });
   };
+  console.log(handleLogoUpload, isActive);
 
   return (
     <Container>

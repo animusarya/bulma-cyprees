@@ -76,8 +76,7 @@ const ProjectSubscription = ({ match, history }) => {
                     }
                   }
                 });
-              }}
-            >
+              }}>
               Delete Project
             </Button>
             {resRemove.error && (

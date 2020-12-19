@@ -10,7 +10,7 @@ const FormWrapper = styled.form`
   justify-content: space-between;
 `;
 
-const AdminUsersForm = props => {
+const AdminUsersForm = (props) => {
   const {
     values,
     touched,

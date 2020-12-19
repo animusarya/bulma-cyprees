@@ -6,7 +6,7 @@ import Cleave from 'cleave.js/react';
 
 import { InputGroup, Button } from './elements';
 
-const ProjectInfoForm = props => {
+const ProjectInfoForm = (props) => {
   const {
     values,
     touched,

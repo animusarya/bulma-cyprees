@@ -70,7 +70,7 @@ const CreateProject = () => {
   const { packages } = packagesData.data || {};
   const [executeMutationAdd, resAdd] = useMutation(createProjectMutation);
   const updateProject = useStoreActions(
-    actions => actions.active.updateProject,
+    (actions) => actions.active.updateProject,
   );
 
   useEffect(() => {
@@ -95,7 +95,7 @@ const CreateProject = () => {
                   <Title>01 Project Setup</Title>
                   <ProjectSetupForm
                     packages={packages}
-                    onSubmit={data => {
+                    onSubmit={(data) => {
                       setProject(data);
                       const selectedSubscription = find(packages, {
                         subscriptionPlanId: data.subscriptionPlanId,
@@ -113,7 +113,7 @@ const CreateProject = () => {
                   enableReinitialize
                   initialValues={project}
                   subscription={subscription}
-                  onSubmit={async data => {
+                  onSubmit={async (data) => {
                     const card = {
                       number: toString(data.paymentCardNumber),
                       expMonth: toString(data.paymentCardExpiryMonth),

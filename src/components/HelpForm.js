@@ -5,7 +5,7 @@ import * as yup from 'yup';
 
 import { InputGroup, Button } from './elements';
 
-const HelpForm = props => {
+const HelpForm = (props) => {
   const {
     values,
     touched,

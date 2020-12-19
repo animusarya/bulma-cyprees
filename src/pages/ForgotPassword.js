@@ -54,14 +54,14 @@ const FormContainer = styled.div`
 const ContentContainer = styled.div`
   padding-bottom: 2rem;
   h2 {
-    font-size: ${props => props.theme.fontSizeSuperLarge};
+    font-size: ${(props) => props.theme.fontSizeSuperLarge};
   }
   p {
     margin: 2rem 0;
   }
   a {
     :hover {
-      color: ${props => props.theme.primaryColor};
+      color: ${(props) => props.theme.primaryColor};
     }
   }
   .project {
@@ -78,10 +78,10 @@ const Logo = styled.img`
 const ForgotPassword = ({ match }) => {
   const [executeMutation, res] = useMutation(forgotPasswordMutation);
   const updateProject = useStoreActions(
-    actions => actions.origin.updateProject,
+    (actions) => actions.origin.updateProject,
   );
-  const activeProject = useStoreState(state => state.origin.project);
-  const { projectId, email } = match.params;
+  const activeProject = useStoreState((state) => state.origin.project);
+  const { projectId } = match.params;
 
   // fetch project data from api
   const [project] = useProjectGuestDetails({ projectId });
@@ -141,7 +141,7 @@ const ForgotPassword = ({ match }) => {
                     </ContentContainer>
                   </div>
                   <ForgotPasswordForm
-                    onSubmit={async data => {
+                    onSubmit={async (data) => {
                       await executeMutation({ variables: { input: data } });
                       swal('An email has been sent, please check your Inbox');
                     }}

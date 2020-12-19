@@ -12,7 +12,7 @@ const MarginContainer = styled.div`
   margin-top: 2.5rem;
 `;
 
-const RegisterForm = props => {
+const RegisterForm = (props) => {
   const {
     values,
     touched,
@@ -201,7 +201,7 @@ export default withFormik({
       .string()
       .required('This filed is required!')
       .label('Confirm password')
-      .test('passwords-match', 'Passwords not matched!', function(values) {
+      .test('passwords-match', 'Passwords not matched!', function (values) {
         return this.parent.password === values;
       }),
   }),

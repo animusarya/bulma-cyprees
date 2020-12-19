@@ -2,7 +2,7 @@ import currency from 'currency.js';
 
 import config from './config';
 
-export const formatCurrency = value =>
+export const formatCurrency = (value) =>
   currency(parseFloat(value), {
     symbol: `${config.currency}`,
     formatWithSymbol: true,

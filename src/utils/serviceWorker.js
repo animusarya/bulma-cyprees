@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import swal from 'sweetalert';
 // This optional code is used to register a service worker.
 // register() is not called by default.
@@ -59,6 +60,7 @@ function registerValidSW(swUrl, config) {
   navigator.serviceWorker
     .register(swUrl)
     .then((registration) => {
+      // eslint-disable-next-line no-param-reassign
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         if (installingWorker == null) {
@@ -120,6 +122,7 @@ function registerValidSW(swUrl, config) {
 
 function checkValidServiceWorker(swUrl, config) {
   // Check if the service worker can be found. If it can't reload the page.
+  // eslint-disable-next-line no-undef
   fetch(swUrl)
     .then((response) => {
       // Ensure service worker exists, and that we really are getting a JS file.

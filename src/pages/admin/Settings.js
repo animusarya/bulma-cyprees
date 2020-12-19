@@ -61,7 +61,7 @@ const Settings = () => {
               <SettingsForm
                 enableReinitialize
                 initialValues={me}
-                onSubmit={async data => {
+                onSubmit={async (data) => {
                   await executeMutation({ variables: { input: data } });
                   swal('Settings updated');
                 }}

@@ -46,7 +46,7 @@ const Container = styled.div`
   }
   input {
     border-radius: 0px;
-    border: 1px solid ${props => props.theme.primaryColor};
+    border: 1px solid ${(props) => props.theme.primaryColor};
   }
 `;
 
@@ -70,7 +70,7 @@ const HelpSuperAdmin = () => {
           <MainColumn>
             <Heading>Manage Help</Heading>
             <HelpForm
-              onSubmit={async data => {
+              onSubmit={async (data) => {
                 await executeMutation({ variables: { input: data } });
                 result.refetch();
               }}
@@ -83,7 +83,7 @@ const HelpSuperAdmin = () => {
               <Loading />
             ) : null}
             {result.data && result.data.support && (
-              <React.Fragment>
+              <>
                 {/* <Title marginTop="4rem">Videos</Title> */}
                 <table className="table is-fullwidth is-hoverable">
                   <thead>
@@ -93,7 +93,7 @@ const HelpSuperAdmin = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {result.data.support.map(item => (
+                    {result.data.support.map((item) => (
                       <tr key={item.id}>
                         <td>{item.name}</td>
                         <td className="is-uppercase actions has-text-right">
@@ -103,7 +103,7 @@ const HelpSuperAdmin = () => {
                             onClick={() => {
                               swal('Are you confirm to delete this item?', {
                                 buttons: ['Cancel', 'Confirm'],
-                              }).then(async value => {
+                              }).then(async (value) => {
                                 if (value) {
                                   await executeMutationRemove({
                                     variables: { id: item.id },
@@ -119,7 +119,7 @@ const HelpSuperAdmin = () => {
                     ))}
                   </tbody>
                 </table>
-              </React.Fragment>
+              </>
             )}
           </MainColumn>
         </div>

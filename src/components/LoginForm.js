@@ -10,12 +10,12 @@ import { InputGroup, Button } from './elements';
 const ResetPassword = styled.div`
   a {
     :hover {
-      color: ${props => props.theme.primaryColor};
+      color: ${(props) => props.theme.primaryColor};
     }
   }
 `;
 
-const LoginForm = props => {
+const LoginForm = (props) => {
   const {
     values,
     touched,

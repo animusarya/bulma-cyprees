@@ -1,24 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import logo from '../assets/images/logo2.png';
+// import logo from '../assets/images/logo2.png';
 
 const Container = styled.section`
   background-color: #0a253e;
   a {
     :hover {
-      color: ${props => props.theme.primaryColor};
+      color: ${(props) => props.theme.primaryColor};
     }
   }
 `;
 
-const Logo = styled.img`
-  max-height: 60px;
-  width: 50%;
-  height: auto;
-`;
+// const Logo = styled.img`
+//   max-height: 60px;
+//   width: 50%;
+//   height: auto;
+// `;
 
-const AuthFooter = ({ activeProject }) => (
+const AuthFooter = () => (
   <Container className="section">
     <div className="container">
       <div className="columns">

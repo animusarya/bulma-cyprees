@@ -4,7 +4,7 @@ import { useStoreState } from 'easy-peasy';
 
 import useProjectDetails from '../hooks/useProjectDetails';
 import useProjectUpdate from '../hooks/useProjectUpdate';
-import useProjectPages from '../hooks/useProjectPages';
+// import useProjectPages from '../hooks/useProjectPages';
 import { Button, Message } from './elements';
 import theme from '../utils/theme';
 
@@ -95,7 +95,7 @@ const AdminSubHeader = () => {
   const projectId = useStoreState((state) => state.active.project);
   const [project, resultProject] = useProjectDetails(projectId);
   const [executeUpdateProjectMutation, resUpdateProject] = useProjectUpdate();
-  const [{ pages }, resultPages] = useProjectPages(projectId);
+  // const [{ pages }, resultPages] = useProjectPages(projectId);
 
   const handleBannerUpload = (uploadResponse) => {
     executeUpdateProjectMutation({
@@ -108,6 +108,8 @@ const AdminSubHeader = () => {
       resultProject.refetch();
     });
   };
+
+  console.log(handleBannerUpload, addPageModal, uploadImageModal);
 
   const brandColor = project.brandColor
     ? project.brandColor

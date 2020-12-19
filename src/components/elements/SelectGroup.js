@@ -1,27 +1,28 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import styled from 'styled-components';
 
 const Group = styled.div`
   .control {
-    width: ${props => (props.fullWidth ? '100%' : '')} !important;
+    width: ${(props) => (props.fullWidth ? '100%' : '')} !important;
   }
   label {
-    width: ${props => (props.isWidth ? '10rem' : '')} !important;
+    width: ${(props) => (props.isWidth ? '10rem' : '')} !important;
   }
 `;
 
 const Input = styled.div`
   box-shadow: none;
-  border-top: ${props =>
+  border-top: ${(props) =>
     props.border ? '1px solid theme.borderColor' : 'none'};
-  border-left: ${props =>
+  border-left: ${(props) =>
     props.border ? '1px solid theme.borderColor' : 'none'};
-  border-right: ${props =>
+  border-right: ${(props) =>
     props.border ? '1px solid theme.borderColor' : 'none'};
-  border-radius: ${props => (props.hasRadius ? '5px' : '0')};
+  border-radius: ${(props) => (props.hasRadius ? '5px' : '0')};
   border-top-right-radius: 7px !important;
   border-top-left-radius: 7px !important;
-  border-bottom: ${props => `1px solid ${props.theme.borderColor}`};
+  border-bottom: ${(props) => `1px solid ${props.theme.borderColor}`};
   width: 100%;
   select {
     width: 100%;
@@ -48,7 +49,7 @@ const SelectGroup = ({
       <Input className="select">
         <select {...otherProps}>
           <option>{placeholder}...</option>
-          {options.map(option => (
+          {options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.title}
             </option>

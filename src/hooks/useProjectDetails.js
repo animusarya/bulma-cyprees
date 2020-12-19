@@ -46,10 +46,10 @@ const projectQuery = gql`
   }
 `;
 
-const useProjectDetails = projectId => {
+const useProjectDetails = (projectId) => {
   // set sidebar active project
   const updateProject = useStoreActions(
-    actions => actions.active.updateProject,
+    (actions) => actions.active.updateProject,
   );
 
   // fetch project data from api

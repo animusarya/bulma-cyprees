@@ -6,7 +6,7 @@ import Cleave from 'cleave.js/react';
 
 import { InputGroup, Button, TextAreaGroup, ColorPicker } from './elements';
 
-const ProjectSettingForm = props => {
+const ProjectSettingForm = (props) => {
   const {
     values,
     touched,
@@ -40,7 +40,8 @@ const ProjectSettingForm = props => {
         value={values.name}
         onChange={handleChange}
         onBlur={handleBlur}
-        className="input is-shadowless"></InputGroup>
+        className="input is-shadowless"
+      />
       <InputGroup
         fullWidth
         isWidth
@@ -93,7 +94,7 @@ const ProjectSettingForm = props => {
           label="Brand Colour"
           color={values.brandColor}
           selectBrandColor={values.brandColor}
-          onChange={val => setFieldValue('brandColor', val)}
+          onChange={(val) => setFieldValue('brandColor', val)}
         />
       </InputGroup>
       <TextAreaGroup

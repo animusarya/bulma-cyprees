@@ -63,7 +63,7 @@ const Container = styled.div`
   }
   input {
     border-radius: 0px;
-    border: 1px solid ${props => props.theme.primaryColor};
+    border: 1px solid ${(props) => props.theme.primaryColor};
   }
 `;
 
@@ -87,7 +87,7 @@ const Pricing = () => {
             <PricingForm
               enableReinitialize
               initialValues={editClient}
-              onSubmit={data => {
+              onSubmit={(data) => {
                 if (isEmpty(editClient)) {
                   // add item
                   setTimeout(() => {
@@ -119,18 +119,18 @@ const Pricing = () => {
               <Loading />
             ) : null}
             {result.data && result.data.packages && (
-              <React.Fragment>
+              <>
                 <Title marginTop="4rem">Plans</Title>
                 <table className="table is-fullwidth is-hoverable">
                   <thead>
                     <tr>
                       <th>Duration</th>
                       <th>Price</th>
-                      <th></th>
+                      {/* <th /> */}
                     </tr>
                   </thead>
                   <tbody>
-                    {result.data.packages.map(item => (
+                    {result.data.packages.map((item) => (
                       <tr key={item.id}>
                         <td>{item.name}</td>
                         <td>£{item.price}</td>
@@ -146,7 +146,7 @@ const Pricing = () => {
                     ))}
                   </tbody>
                 </table>
-              </React.Fragment>
+              </>
             )}
           </MainColumn>
         </div>

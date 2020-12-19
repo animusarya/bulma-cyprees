@@ -22,7 +22,7 @@ const Container = styled.section`
 //   width: auto;
 // `;
 
-const AuthHeader = ({ activeProject }) => (
+const AuthHeader = () => (
   <Container className="section">
     <div className="container">
       <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -41,14 +41,14 @@ const AuthHeader = ({ activeProject }) => (
             aria-label="menu"
             aria-expanded="false"
             data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
           </a>
         </div>
 
         <div id="navbarBasicExample" className="navbar-menu">
-          <div className="navbar-start"></div>
+          <div className="navbar-start" />
 
           <div className="navbar-end">
             <div className="navbar-item">

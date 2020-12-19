@@ -17,7 +17,7 @@ const pagesQuery = gql`
   }
 `;
 
-const useProjectPages = projectId => {
+const useProjectPages = (projectId) => {
   // fetch pages
   const [getPages, resultPages] = useLazyQuery(pagesQuery, {
     variables: { projectId },

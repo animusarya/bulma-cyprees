@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import config from '../utils/config';
 import useProjectGuestDetails from '../hooks/useProjectGuestDetails';
-import AuthHeader from './AuthHeader';
+// import AuthHeader from './AuthHeader';
 import AuthFooter from './AuthFooter';
 
 const Container = styled.div`
@@ -17,11 +17,11 @@ const Container = styled.div`
 `;
 
 const Layout = ({ children, noContainer, hasAuthNav, activeProject }) => {
-  const updateOrigin = useStoreActions(actions => actions.origin.update);
-  const origin = useStoreState(state => state.origin.value);
+  const updateOrigin = useStoreActions((actions) => actions.origin.update);
+  const origin = useStoreState((state) => state.origin.value);
   const [project] = useProjectGuestDetails({ domain: origin });
   const updateProject = useStoreActions(
-    actions => actions.origin.updateProject,
+    (actions) => actions.origin.updateProject,
   );
 
   useEffect(() => {

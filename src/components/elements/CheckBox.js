@@ -5,7 +5,7 @@ const Container = styled.div`
   input {
     height: 2.5rem;
     width: 2.5rem;
-    margin-left: ${props => props.margin};
+    margin-left: ${(props) => props.margin};
     @media only screen and (max-width: 600px) {
       margin-left: 0px;
     }
@@ -31,7 +31,7 @@ const CheckBox = ({ text, margin }) => (
       </div>
       <div className="column">
         <input type="checkbox" className="checkbox" />
-        <span className="checkmark"></span>
+        <span className="checkmark" />
       </div>
     </div>
   </Container>

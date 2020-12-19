@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Progress = styled.div`
@@ -8,7 +8,7 @@ const Progress = styled.div`
   .active {
     font-weight: bold;
     .progress {
-      background-color: ${props => props.theme.primaryColor} !important;
+      background-color: ${(props) => props.theme.primaryColor} !important;
       width: 100%;
     }
   }
@@ -39,24 +39,22 @@ const Progress = styled.div`
   }
 `;
 
-const ProgressBar = ({ activeStep }) => {
-  return (
-    <Progress>
-      <div className={`step one ${activeStep.stepOne ? 'active' : ''}`}>
-        <div className="progress" />
-        <span className="has-text-weight-bold">01. Project Setup</span>
-      </div>
+const ProgressBar = ({ activeStep }) => (
+  <Progress>
+    <div className={`step one ${activeStep.stepOne ? 'active' : ''}`}>
+      <div className="progress" />
+      <span className="has-text-weight-bold">01. Project Setup</span>
+    </div>
 
-      <div className={`step two ${activeStep.stepTwo ? 'active' : ''}`}>
-        <div className="progress" />
-        <span className="has-text-weight-bold">02. Payment</span>
-      </div>
-      <div className={`step three ${activeStep.stepThree ? 'active' : ''}`}>
-        <div className="progress" />
-        <span className="has-text-weight-bold">03. Confirmation</span>
-      </div>
-    </Progress>
-  );
-};
+    <div className={`step two ${activeStep.stepTwo ? 'active' : ''}`}>
+      <div className="progress" />
+      <span className="has-text-weight-bold">02. Payment</span>
+    </div>
+    <div className={`step three ${activeStep.stepThree ? 'active' : ''}`}>
+      <div className="progress" />
+      <span className="has-text-weight-bold">03. Confirmation</span>
+    </div>
+  </Progress>
+);
 
 export default ProgressBar;

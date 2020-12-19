@@ -9,12 +9,10 @@ const Container = styled.div`
   padding: 2rem 1rem;
 `;
 
-const Loading = ({ color }) => {
-  return (
-    <Container>
-      <ReactLoading type="spin" color={color || '#363636'} />
-    </Container>
-  );
-};
+const Loading = ({ color }) => (
+  <Container>
+    <ReactLoading type="spin" color={color || '#363636'} />
+  </Container>
+);
 
 export default Loading;

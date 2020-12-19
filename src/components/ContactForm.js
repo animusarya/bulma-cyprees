@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-const ContactForm = props => {
+const ContactForm = (props) => {
   const {
     values,
     touched,

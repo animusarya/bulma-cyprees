@@ -7,7 +7,7 @@ import { isNull } from 'lodash';
 const Container = styled.aside`
   background-color: #f4f4f6;
   height: 100%;
-  min-height: ${props => (props.showOnMobile ? '' : '100vh')};
+  min-height: ${(props) => (props.showOnMobile ? '' : '100vh')};
   margin-bottom: 0px !important;
   li {
     cursor: pointer;
@@ -49,7 +49,7 @@ const LinkWrapper = ({ to, title, icon }) => {
             : 'has-text-weight-medium is-flex'
         }
         to={to}>
-        <IconContainer>{icon && <Icon className={icon}></Icon>}</IconContainer>
+        <IconContainer>{icon && <Icon className={icon} />}</IconContainer>
         {title}
       </Link>
     </li>
@@ -57,8 +57,8 @@ const LinkWrapper = ({ to, title, icon }) => {
 };
 
 const Sidebar = ({ showOnMobile }) => {
-  const userData = useStoreState(state => state.user.data);
-  const activeProject = useStoreState(state => state.active.project);
+  const userData = useStoreState((state) => state.user.data);
+  const activeProject = useStoreState((state) => state.active.project);
   // const [isToggledOn, setToggle] = useState(false);
   // const toggle = () => setToggle(!isToggledOn);
   // const isCurrentRoute = routeName => {

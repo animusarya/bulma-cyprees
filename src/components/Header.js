@@ -7,15 +7,15 @@ import logoAlt from '../assets/images/logo.svg';
 import Sidebar from './Sidebar';
 
 const Container = styled.div`
-  background-color: ${props => props.theme.secondaryColor};
+  background-color: ${(props) => props.theme.secondaryColor};
   .navbar {
-    background-color: ${props => props.theme.secondaryColor};
+    background-color: ${(props) => props.theme.secondaryColor};
   }
   .navbar-item {
     background: transparent !important;
   }
   .navbar-end {
-    background-color: ${props => props.theme.secondaryColor};
+    background-color: ${(props) => props.theme.secondaryColor};
   }
   @media screen and (max-width: 1023px) {
     .navbar-menu {
@@ -24,20 +24,20 @@ const Container = styled.div`
   }
 `;
 
-const AdminNav = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  @media screen and (max-width: 768px) {
-    flex-direction: column-reverse;
-  }
-  .navbar-end {
-    justify-content: space-between;
-  }
-  .navbar-item {
-    padding-right: 0.2rem;
-  }
-`;
+// const AdminNav = styled.nav`
+//   display: flex;
+//   justify-content: space-between;
+//   width: 100%;
+//   @media screen and (max-width: 768px) {
+//     flex-direction: column-reverse;
+//   }
+//   .navbar-end {
+//     justify-content: space-between;
+//   }
+//   .navbar-item {
+//     padding-right: 0.2rem;
+//   }
+// `;
 
 const LinkLogo = styled(Link)`
   :hover {
@@ -68,7 +68,7 @@ const Button = styled.button`
 `;
 
 const AdminBurgerMenu = styled.div`
-  /* background: ${props => props.theme.menuBackgroundColor}; */
+  /* background: ${(props) => props.theme.menuBackgroundColor}; */
   .admin-nav-mobile {
     align-items: center;
     justify-content: space-between;
@@ -79,7 +79,7 @@ const AdminBurgerMenu = styled.div`
 
 const Header = () => {
   const [showSideBar, setShowSideBar] = useState(false);
-  const userData = useStoreState(state => state.user.data);
+  const userData = useStoreState((state) => state.user.data);
   const handleLogout = () => {
     window.localStorage.clear();
     window.location.reload(true);
@@ -104,9 +104,9 @@ const Header = () => {
                 aria-label="menu"
                 aria-expanded="false"
                 data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
+                <span aria-hidden="true" />
+                <span aria-hidden="true" />
+                <span aria-hidden="true" />
               </a>
             </div>
             <div className="navbar-menu">
@@ -114,7 +114,7 @@ const Header = () => {
                 <div className="navbar-item">
                   <div className="buttons">
                     <Button className="button" onClick={() => handleLogout()}>
-                      <i className="fas fa-power-off"></i>
+                      <i className="fas fa-power-off" />
                     </Button>
                   </div>
                 </div>
@@ -136,11 +136,11 @@ const Header = () => {
                 <div className="buttons">
                   <Button className="">
                     <LinkWrapper to="/admin/settings">
-                      <i className="fas fa-cog"></i>
+                      <i className="fas fa-cog" />
                     </LinkWrapper>
                   </Button>
                   <Button className="" onClick={() => handleLogout()}>
-                    <i className="fas fa-power-off"></i>
+                    <i className="fas fa-power-off" />
                   </Button>
                 </div>
               </span>
@@ -164,9 +164,9 @@ const Header = () => {
                 aria-expanded="false"
                 data-target="navbarBasicExample"
                 onClick={() => setShowSideBar(!showSideBar)}>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
+                <span aria-hidden="true" />
+                <span aria-hidden="true" />
+                <span aria-hidden="true" />
               </a>
             </div>
             <AdminBurgerMenu id="navbarBasicExample" className="navbar-menu">
@@ -178,11 +178,11 @@ const Header = () => {
                   <div className="buttons">
                     <Button className="button">
                       <LinkWrapper to="/admin/settings">
-                        <i className="fas fa-cog"></i>
+                        <i className="fas fa-cog" />
                       </LinkWrapper>
                     </Button>
                     <Button className="button" onClick={() => handleLogout()}>
-                      <i className="fas fa-power-off"></i>
+                      <i className="fas fa-power-off" />
                     </Button>
                   </div>
                 </span>

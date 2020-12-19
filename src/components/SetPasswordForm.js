@@ -5,7 +5,7 @@ import * as yup from 'yup';
 
 import { InputGroup, Button } from './elements';
 
-const SetPasswordForm = props => {
+const SetPasswordForm = (props) => {
   const {
     values,
     touched,

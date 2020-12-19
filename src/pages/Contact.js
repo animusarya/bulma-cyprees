@@ -27,7 +27,7 @@ const Contact = () => {
         <div className="container">
           <h1 className="title">Contact</h1>
           <ContactForm
-            onSubmit={data => executeMutation({ variables: data })}
+            onSubmit={(data) => executeMutation({ variables: data })}
           />
           {res.error && <Message type="error">{res.error.message}</Message>}
         </div>

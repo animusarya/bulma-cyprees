@@ -1,3 +1,5 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable array-callback-return */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
@@ -56,7 +58,7 @@ const discountQuery = gql`
     }
   }
 `;
-const ProjectSetupForm = props => {
+const ProjectSetupForm = (props) => {
   const {
     values,
     touched,
@@ -77,12 +79,14 @@ const ProjectSetupForm = props => {
   });
   const couponCodes = data && data.discounts ? data.discounts : [];
 
+  // eslint-disable-next-line consistent-return
   const applyCoupon = () => {
     if (!couponCode) {
       return null;
     }
     let discountPercentage = 0;
-    couponCodes.map(item => {
+    couponCodes.map((item) => {
+      // eslint-disable-next-line eqeqeq
       if (item.code == couponCode) {
         discountPercentage = item.percentage;
       }
@@ -340,7 +344,7 @@ const ProjectSetupForm = props => {
                 label="Do you have a discount code?"
                 name="discount"
                 type="text"
-                onChange={e => setCouponCode(e.target.value)}
+                onChange={(e) => setCouponCode(e.target.value)}
                 onBlur={handleBlur}
               />
             </div>
@@ -371,7 +375,7 @@ const ProjectSetupForm = props => {
               <Button disabled={isSubmitting}>Make Payment</Button>
             </div>
           </div>
-          <div className="notify"></div>
+          <div className="notify" />
         </div>
       </div>
     </Form>

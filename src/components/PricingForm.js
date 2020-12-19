@@ -5,7 +5,7 @@ import * as yup from 'yup';
 
 import { InputGroup, Button } from './elements';
 
-const PricingForm = props => {
+const PricingForm = (props) => {
   const {
     initialValues,
     values,

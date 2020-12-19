@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 import { InputGroup, Button } from './elements';
 
-const ForgotPasswordForm = props => {
+const ForgotPasswordForm = (props) => {
   const {
     values,
     touched,

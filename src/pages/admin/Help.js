@@ -38,7 +38,7 @@ const Help = () => {
           <MainColumn>
             <Heading>Help</Heading>
             <div className="columns">
-              {support.map(item => (
+              {support.map((item) => (
                 <div className="column" key={item.id}>
                   <Subtitle>{item.name}</Subtitle>
                   <section

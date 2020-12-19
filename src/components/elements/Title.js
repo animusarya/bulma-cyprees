@@ -10,11 +10,11 @@ const Container = styled.h2`
 
 const Title = ({ children, marginTop, marginbottom, fontSize }) => (
   <Container
-    className={`is-size-${fontSize ||
-      5} is-size-7-mobile has-text-weight-semibold`}
+    className={`is-size-${
+      fontSize || 5
+    } is-size-7-mobile has-text-weight-semibold`}
     marginTop={marginTop}
-    marginbottom={marginbottom}
-  >
+    marginbottom={marginbottom}>
     {children}
   </Container>
 );
