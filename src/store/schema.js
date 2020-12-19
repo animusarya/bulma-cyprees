@@ -13,6 +13,12 @@ const schema = {
       state.project = payload;
     }),
   },
+  active: {
+    project: null,
+    updateProject: action((state, payload) => {
+      state.project = payload;
+    }),
+  },
   isLoggedIn: {
     value: false,
     togggle: action((state, payload) => {

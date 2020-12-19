@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 export const elements = { mobileBreakpoint: 800, ipadBreakpoint: 1024 };
 
 const theme = {
-  primaryColor: '#79B5DB',
+  primaryColor: '#390256',
   secondaryColor: '#25313f',
   fontDark: '#25313f',
   borderColor: '#d4d6d5',
@@ -70,10 +70,12 @@ export const GlobalStyle = createGlobalStyle`
     flex-direction: row-reverse;
   }
   .swal-modal {
-    border-top-left-radius: 10px !important;
+    ${
+      '' /* border-top-left-radius: 10px !important;
     border-top-right-radius: 10px !important;
     border-bottom-left-radius: 0px !important;
-    border-bottom-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important; */
+    }
 }
   .button.is-primary.is-outlined[disabled] {
     background-color: #eee;
