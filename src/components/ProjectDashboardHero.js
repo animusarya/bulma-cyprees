@@ -1,20 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
-const ProjectDashboardHero = ({ project }) => (
+const ProjectDashboardHero = () => (
   <div className="hero-body">
     <div className="has-text-centered has-text-weight-medium">
-      <p className="title is-size-3 has-text-weight-normal">
-        Welcome to <strong className="has-text-weight-bold">Intelli</strong>
-        <span>Share</span>
-      </p>
+      <p>Welcome to Review Our Services.com</p>
       <div className="steps-title">
         <strong className="subtitle has-text-weight-bold is-size-4">
           Getting Started
         </strong>
       </div>
       <div className="subtitle is-6">
-        <p>
+        {/* <p>
           1. Insert your <strong className="has-text-weight-bold">logo</strong>{' '}
           and <strong className="has-text-weight-bold">banner</strong>
         </p>
@@ -38,7 +35,7 @@ const ProjectDashboardHero = ({ project }) => (
           <Link to={`/admin/project/${project.id}/clients`}>
             <strong className="has-text-weight-bold">Manage Clients</strong>
           </Link>
-        </p>
+        </p> */}
       </div>
     </div>
   </div>

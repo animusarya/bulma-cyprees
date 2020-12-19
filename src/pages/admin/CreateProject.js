@@ -14,7 +14,7 @@ import PaymentConfirmation from '../../components/PaymentConfirmation';
 import ProgressBar from '../../components/ProgressBar';
 import MainColumn from '../../components/MainColumn';
 import ProjectSetupForm from '../../components/ProjectSetupForm';
-import { Title, Message, Loading } from '../../components/elements';
+import { Message, Loading } from '../../components/elements';
 
 const packagesQuery = gql`
   query packages {
@@ -92,7 +92,6 @@ const CreateProject = () => {
               !activeStep.stepTwo &&
               !activeStep.stepThree && (
                 <div className="column is-half">
-                  <Title>01 Project Setup</Title>
                   <ProjectSetupForm
                     packages={packages}
                     onSubmit={(data) => {
@@ -108,7 +107,6 @@ const CreateProject = () => {
               )}
             {activeStep.stepOne && activeStep.stepTwo && !activeStep.stepThree && (
               <div className="column">
-                <Title>02 Payment</Title>
                 <PaymentForm
                   enableReinitialize
                   initialValues={project}

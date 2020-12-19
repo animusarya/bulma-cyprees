@@ -36,12 +36,12 @@ const PaymentConfirmation = ({ project }) => (
           Payment Successful
         </p>
         <p className="subtitle is-size-6 has-text-weight-semibold">
-          Your new Project has been setup.
+          Your new website review system has been setup.
         </p>
         <LinkStyled
           className="button is-primary is-large"
           to={`/admin/project/${project.id}/pages`}>
-          Go to your project
+          Go to your website
         </LinkStyled>
       </div>
     </div>

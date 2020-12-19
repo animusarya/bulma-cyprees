@@ -9,8 +9,8 @@ import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
-import AdminHeader from '../../components/AdminHeader';
-import AdminSubHeader from '../../components/AdminSubHeader';
+// import AdminHeader from '../../components/AdminHeader';
+// import AdminSubHeader from '../../components/AdminSubHeader';
 import ProjectDashboardHero from '../../components/ProjectDashboardHero';
 import { Message, Loading } from '../../components/elements';
 
@@ -47,8 +47,8 @@ const ProjectDashboard = ({ match }) => {
           <Sidebar />
         </div>
         <div className="column is-four-fifths">
-          <AdminHeader />
-          <AdminSubHeader />
+          {/* <AdminHeader />
+          <AdminSubHeader /> */}
           <MainColumn>
             {resultPages.error && (
               <Message type="error">{resultPages.error.message}</Message>

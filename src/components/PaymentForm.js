@@ -1,5 +1,4 @@
 /* eslint-disable eqeqeq */
-/* eslint-disable array-callback-return */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
@@ -12,7 +11,6 @@ import gql from 'graphql-tag';
 import { InputGroup, Button, SelectGroup } from './elements';
 import theme from '../utils/theme';
 import Subtitle from './elements/Subtitle';
-import { formatCurrency } from '../utils/helpers';
 
 const Form = styled.form`
   input {
@@ -59,7 +57,7 @@ const discountQuery = gql`
     }
   }
 `;
-const ProjectSetupForm = (props) => {
+const PaymentForm = (props) => {
   const {
     values,
     touched,
@@ -69,7 +67,6 @@ const ProjectSetupForm = (props) => {
     handleBlur,
     handleSubmit,
     subscription,
-    packages,
   } = props;
 
   const [couponCode, setCouponCode] = useState(false);
@@ -87,6 +84,7 @@ const ProjectSetupForm = (props) => {
       return null;
     }
     let discountPercentage = 0;
+    // eslint-disable-next-line array-callback-return
     couponCodes.map((item) => {
       // eslint-disable-next-line eqeqeq
       if (item.code == couponCode) {
@@ -301,29 +299,40 @@ const ProjectSetupForm = (props) => {
           </CvvContainer>
         </div>
         <div className="column">
-          <SelectGroup
+          <Subtitle>Website Name</Subtitle>
+          <InputGroup
+            readOnly
+            fullWidth
+            isWidth
+            border
+            placeholder="Project Arden"
+            name="projectName"
+            type="text"
+            value={values.projectName}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            errors={
+              errors.projectName && touched.projectName
+                ? errors.projectName
+                : undefined
+            }
+          />
+          <InputGroup
+            readOnly
             fullWidth
             isWidth
             border
             label="Payment Plan"
-            name="subscriptionPlanId"
-            value={values.subscriptionPlanId}
+            placeholder="Monthly | £30 | 6Months (£180) | Annually (£360)"
+            name="projectPlan"
+            type="text"
+            value={subscription.name}
             onChange={handleChange}
             onBlur={handleBlur}
             errors={
-              errors.subscriptionPlanId && touched.subscriptionPlanId
-                ? errors.subscriptionPlanId
+              errors.projectPlan && touched.projectPlan
+                ? errors.projectPlan
                 : undefined
-            }
-            options={
-              packages
-                ? packages.map((item) => ({
-                    value: item.subscriptionPlanId,
-                    title: `${item.name} - ${formatCurrency(item.price)} per ${
-                      item.durationInMonths
-                    } month`,
-                  }))
-                : []
             }
           />
           <div className="field is-grouped">
@@ -373,7 +382,7 @@ const ProjectSetupForm = (props) => {
   );
 };
 
-ProjectSetupForm.propTypes = {
+PaymentForm.propTypes = {
   values: PropTypes.object.isRequired,
   touched: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -384,7 +393,7 @@ ProjectSetupForm.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({
+  mapPropsToValues: ({ initialValues }) => ({
     country: '',
     addressLine1: '',
     addressLine2: '',
@@ -396,7 +405,7 @@ export default withFormik({
     paymentCardExpiryMonth: '',
     paymentCardExpiryYear: '',
     paymentCardCvv: '',
-    // projectName: initialValues.name || '',
+    projectName: initialValues.name || '',
     projectPlan: '',
   }),
   validationSchema: yup.object().shape({
@@ -422,4 +431,4 @@ export default withFormik({
     });
   },
   displayName: 'ProjectSetupForm', // helps with React DevTools
-})(ProjectSetupForm);
+})(PaymentForm);

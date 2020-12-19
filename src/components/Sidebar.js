@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
-// import { isNull } from 'lodash';
+import { isNull } from 'lodash';
 
 const Container = styled.aside`
   background-color: #f4f4f6;
@@ -58,7 +58,7 @@ const LinkWrapper = ({ to, title, icon }) => {
 
 const Sidebar = ({ showOnMobile }) => {
   const userData = useStoreState((state) => state.user.data);
-  // const activeProject = useStoreState((state) => state.active.project);
+  const activeProject = useStoreState((state) => state.active.project);
   // const [isToggledOn, setToggle] = useState(false);
   // const toggle = () => setToggle(!isToggledOn);
   // const isCurrentRoute = routeName => {
@@ -84,47 +84,37 @@ const Sidebar = ({ showOnMobile }) => {
         <ul className="menu-list">
           <LinkWrapper
             icon="fas fa-plus-circle"
-            title="Get Started"
-            to="/user/guide"
+            title="Create"
+            to="/user/create/website"
           />
           <LinkWrapper
-            icon="fas fa-folder-open"
-            title="Reviews"
-            to="/website/reviews"
+            icon="fas fa-plus-circle"
+            title="Dashboard"
+            to="/user/dashboard"
           />
-          <LinkWrapper
-            icon="fas fa-folder-open"
-            title="Style Reviews"
-            to="/website/styles"
-          />
-          <LinkWrapper
-            icon="fas fa-sync"
-            title="Subscriptions"
-            to="/website/subscription"
-          />
-          {/* {!isNull(activeProject) ? (
+          {!isNull(activeProject) ? (
             <div className="sub-items">
               <LinkWrapper
                 icon="fas fa-th-large"
-                title="Manage Pages"
+                title="Get Started"
                 to={`/admin/project/${activeProject}/pages`}
               />
               <LinkWrapper
                 icon="far fa-envelope"
-                title="Manage Emails"
-                to={`/admin/project/${activeProject}/emails`}
+                title="Reviews"
+                to={`/admin/project/${activeProject}/reviews`}
               />
               <LinkWrapper
                 icon="fas fa-user-friends"
-                title="Manage Clients"
-                to={`/admin/project/${activeProject}/clients`}
+                title="Style Reviews"
+                to={`/admin/project/${activeProject}/styles`}
               />
-              <LinkWrapper
+              {/* <LinkWrapper
                 icon="fas fa-bell"
                 title="Notifications"
                 to={`/admin/project/${activeProject}/notifications`}
-              />
-              <LinkWrapper
+              /> */}
+              {/* <LinkWrapper
                 icon="fas fa-chart-pie"
                 title="Analytics"
                 to={`/admin/project/${activeProject}/analytics`}
@@ -133,19 +123,19 @@ const Sidebar = ({ showOnMobile }) => {
                 icon="fas fa-cogs"
                 title="Project Settings"
                 to={`/admin/project/${activeProject}/settings`}
-              />
+              /> */}
               <LinkWrapper
                 icon="fas fa-sync"
                 title="Subscriptions"
                 to={`/admin/project/${activeProject}/subscription`}
               />
-              <LinkWrapper
+              {/* <LinkWrapper
                 icon="far fa-question-circle"
                 title="Help"
                 to="/admin/help"
-              />
+              /> */}
             </div>
-          ) : null} */}
+          ) : null}
         </ul>
       )}
       {userData.type === 'client' && (

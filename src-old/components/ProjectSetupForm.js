@@ -21,7 +21,7 @@ const Form = styled.form`
   }
 `;
 
-const infoIcon = <i className="fas fa-info-circle"></i>;
+const infoIcon = <i className="fas fa-info-circle" />;
 
 const ProjectSetupForm = (props) => {
   const {
@@ -54,9 +54,8 @@ const ProjectSetupForm = (props) => {
         fullWidth
         isWidth
         border
-        label="Project URL Slug"
-        errors={errors.slug && touched.slug ? errors.slug : undefined}
-      >
+        label="Website URL Slug"
+        errors={errors.slug && touched.slug ? errors.slug : undefined}>
         <Cleave
           placeholder="colliers"
           name="slug"

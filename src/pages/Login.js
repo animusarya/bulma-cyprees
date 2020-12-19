@@ -81,7 +81,7 @@ const Login = () => {
       if (user.type === 'superAdmin') {
         sendTo = '/super-admin/dashboard';
       } else if (user.type === 'admin') {
-        sendTo = '/admin/dashboard';
+        sendTo = '/user/guide';
       }
       window.location.replace(sendTo);
     }, 1000);

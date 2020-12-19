@@ -22,8 +22,8 @@ import ProjectInfo from '../pages/super-admin/ProjectInfo';
 import Pricing from '../pages/super-admin/Pricing';
 import HelpSuperAdmin from '../pages/super-admin/Help';
 
-// import DashboardAdmin from '../pages/admin/Dashboard';
-// import CreateProject from '../pages/admin/CreateProject';
+import DashboardAdmin from '../pages/admin/Dashboard';
+import CreateProject from '../pages/admin/CreateProject';
 import InstructionGuide from '../pages/admin/InstructionGuide';
 import Reviews from '../pages/admin/Reviews';
 import ReviewStyles from '../pages/admin/ReviewStyles';
@@ -104,13 +104,25 @@ const Routes = () => (
         />
         <PrivateRoute
           exact
-          path="/website/reviews"
+          path="/user/dashboard"
+          component={DashboardAdmin}
+          access="admin"
+        />
+        <PrivateRoute
+          exact
+          path="/user/create/website"
+          component={CreateProject}
+          access="admin"
+        />
+        <PrivateRoute
+          exact
+          path="/admin/project/:id/reviews"
           component={Reviews}
           access="admin"
         />
         <PrivateRoute
           exact
-          path="/website/styles"
+          path="/admin/project/:id/styles"
           component={ReviewStyles}
           access="admin"
         />
@@ -140,8 +152,7 @@ const Routes = () => (
         />
         <PrivateRoute
           exact
-          // path will be /website/:id/subscription
-          path="/website/subscription"
+          path="/admin/project/:id/subscription"
           component={ProjectSubscription}
           access="admin"
         />

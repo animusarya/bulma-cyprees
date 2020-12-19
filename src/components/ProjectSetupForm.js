@@ -5,8 +5,8 @@ import * as yup from 'yup';
 import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
 
-import { InputGroup, Button } from './elements';
-// import { formatCurrency } from '../utils/helpers';
+import { InputGroup, Button, SelectGroup } from './elements';
+import { formatCurrency } from '../utils/helpers';
 
 const Form = styled.form`
   input {
@@ -32,7 +32,7 @@ const ProjectSetupForm = (props) => {
     handleChange,
     handleBlur,
     handleSubmit,
-    // packages,
+    packages,
   } = props;
 
   return (
@@ -41,8 +41,8 @@ const ProjectSetupForm = (props) => {
         fullWidth
         isWidth
         border
-        label="Project Name"
-        placeholder="Project Arden"
+        label="Website Name"
+        placeholder="My Website"
         name="name"
         type="text"
         value={values.name}
@@ -54,7 +54,7 @@ const ProjectSetupForm = (props) => {
         fullWidth
         isWidth
         border
-        label="Project URL Slug"
+        label="Website URL Slug"
         errors={errors.slug && touched.slug ? errors.slug : undefined}>
         <Cleave
           placeholder="colliers"
@@ -63,7 +63,7 @@ const ProjectSetupForm = (props) => {
           value={values.slug}
           onChange={handleChange}
           onBlur={handleBlur}
-          options={{ prefix: 'website-reviews.online/' }}
+          // options={{ prefix: 'intellishare.online/' }}
           className="input is-shadowless"
         />
       </InputGroup>
@@ -74,7 +74,7 @@ const ProjectSetupForm = (props) => {
         label="Custom Domain Name"
         infoIcon={infoIcon}
         iconLabel="Please contact us to help you with this"
-        placeholder="www.projectname.co.uk"
+        placeholder="www.website-reviews.co.uk"
         name="customDomain"
         value={values.customDomain}
         onChange={handleChange}
@@ -85,7 +85,7 @@ const ProjectSetupForm = (props) => {
             : undefined
         }
       />
-      {/* <SelectGroup
+      <SelectGroup
         fullWidth
         isWidth
         border
@@ -109,7 +109,7 @@ const ProjectSetupForm = (props) => {
               }))
             : []
         }
-      /> */}
+      />
       <div className="field">
         <div className="is-pulled-right">
           <Button disabled={isSubmitting}>Continue</Button>
@@ -140,10 +140,8 @@ export default withFormik({
     name: yup.string().required('Name is required!'),
     slug: yup
       .string()
-      .required(
-        'Default URL is required! e.g: website-reviews.online/yourproject',
-      ),
-    customDomain: yup.string(),
+      .required('Default URL is required! e.g: example.online/yourproject'),
+    customDomain: yup.string().required('Domain is required!'),
     subscriptionPlanId: yup.string().required('Subscription is required!'),
   }),
 

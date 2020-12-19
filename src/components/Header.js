@@ -151,7 +151,7 @@ const Header = () => {
             role="navigation"
             aria-label="main navigation">
             <div className="navbar-brand">
-              <Link className="navbar-item" to="/website/reviews">
+              <Link className="navbar-item" to="/user/dashboard">
                 <h1>Review our Services Logo</h1>
               </Link>
               <a

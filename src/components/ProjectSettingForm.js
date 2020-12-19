@@ -47,7 +47,7 @@ const ProjectSettingForm = (props) => {
         isWidth
         border
         isHorizontal
-        label="Project URL Slug"
+        label="Website URL Slug"
         errors={errors.slug && touched.slug ? errors.slug : undefined}>
         <Cleave
           placeholder="colliers"

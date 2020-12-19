@@ -53,7 +53,7 @@ const Subscription = ({ project, history }) => {
   return (
     <div>
       {project.status === 'active' ? (
-        <React.Fragment>
+        <>
           <Heading>Current Subscription</Heading>
           <table className="table is-fullwidth">
             <thead>
@@ -89,13 +89,12 @@ const Subscription = ({ project, history }) => {
                   }
                 }
               });
-            }}
-          >
+            }}>
             Cancel Subscription
           </Button>
-        </React.Fragment>
+        </>
       ) : (
-        <React.Fragment>
+        <>
           <Heading>Renew subscription for {project.name}</Heading>
           <SelectGroup
             fullWidth
@@ -133,11 +132,10 @@ const Subscription = ({ project, history }) => {
                   }
                 }
               });
-            }}
-          >
+            }}>
             Renew Subscription
           </Button>
-        </React.Fragment>
+        </>
       )}
 
       {resCancel.error && (

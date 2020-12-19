@@ -43,12 +43,12 @@ const ProgressBar = ({ activeStep }) => (
   <Progress>
     <div className={`step one ${activeStep.stepOne ? 'active' : ''}`}>
       <div className="progress" />
-      <span className="has-text-weight-bold">01. Project Setup</span>
+      <span className="has-text-weight-bold">01. Website Details</span>
     </div>
 
     <div className={`step two ${activeStep.stepTwo ? 'active' : ''}`}>
       <div className="progress" />
-      <span className="has-text-weight-bold">02. Payment</span>
+      <span className="has-text-weight-bold">02. Make Payment</span>
     </div>
     <div className={`step three ${activeStep.stepThree ? 'active' : ''}`}>
       <div className="progress" />

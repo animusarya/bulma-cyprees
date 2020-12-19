@@ -98,7 +98,7 @@ const Dashboard = () => {
                 <Heading>Dashboard</Heading>
                 <div className="columns">
                   <div className="column">
-                    <Title>Projects</Title>
+                    <Title>Your Domains</Title>
                   </div>
                   {/* <div className="column is-one-fifth">
                     <input
