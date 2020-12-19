@@ -12,8 +12,8 @@ import Sidebar from '../../components/Sidebar';
 import CopyRight from '../../components/CopyRight';
 import MainColumn from '../../components/MainColumn';
 import { Message, Loading, Button, Heading } from '../../components/elements';
-import AdminHeader from '../../components/AdminHeader';
-import AdminSubHeader from '../../components/AdminSubHeader';
+// import AdminHeader from '../../components/AdminHeader';
+// import AdminSubHeader from '../../components/AdminSubHeader';
 // import Subscription from '../../components/Subscription';
 
 const removeProjectMutation = gql`
@@ -45,8 +45,8 @@ const ProjectSubscription = ({ match, history }) => {
           <Sidebar />
         </div>
         <div className="column">
-          <AdminHeader />
-          <AdminSubHeader />
+          {/* <AdminHeader />
+          <AdminSubHeader /> */}
           <MainColumn>
             <Heading>Subscriptions</Heading>
             {/* <Subscription project={project} /> */}

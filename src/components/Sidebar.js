@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
-import { isNull } from 'lodash';
+// import { isNull } from 'lodash';
 
 const Container = styled.aside`
   background-color: #f4f4f6;
@@ -58,7 +58,7 @@ const LinkWrapper = ({ to, title, icon }) => {
 
 const Sidebar = ({ showOnMobile }) => {
   const userData = useStoreState((state) => state.user.data);
-  const activeProject = useStoreState((state) => state.active.project);
+  // const activeProject = useStoreState((state) => state.active.project);
   // const [isToggledOn, setToggle] = useState(false);
   // const toggle = () => setToggle(!isToggledOn);
   // const isCurrentRoute = routeName => {
@@ -90,10 +90,19 @@ const Sidebar = ({ showOnMobile }) => {
           <LinkWrapper
             icon="fas fa-folder-open"
             title="Reviews"
-            to="/admin/dashboard"
+            to="/website/reviews"
           />
-
-          {!isNull(activeProject) ? (
+          <LinkWrapper
+            icon="fas fa-folder-open"
+            title="Style Reviews"
+            to="/website/styles"
+          />
+          <LinkWrapper
+            icon="fas fa-sync"
+            title="Subscriptions"
+            to="/website/subscription"
+          />
+          {/* {!isNull(activeProject) ? (
             <div className="sub-items">
               <LinkWrapper
                 icon="fas fa-th-large"
@@ -136,7 +145,7 @@ const Sidebar = ({ showOnMobile }) => {
                 to="/admin/help"
               />
             </div>
-          ) : null}
+          ) : null} */}
         </ul>
       )}
       {userData.type === 'client' && (
