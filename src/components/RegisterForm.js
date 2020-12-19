@@ -5,8 +5,8 @@ import * as yup from 'yup';
 import styled from 'styled-components';
 
 import { InputGroup, Button } from './elements';
-import NDAScroller from './NDAScroller';
-import Disclaimer from './Disclaimer';
+// import NDAScroller from './NDAScroller';
+// import Disclaimer from './Disclaimer';
 
 const MarginContainer = styled.div`
   margin-top: 2.5rem;
@@ -21,13 +21,9 @@ const RegisterForm = (props) => {
     handleChange,
     handleBlur,
     handleSubmit,
-    project,
     isAdminRegister,
   } = props;
-  const [ndaAccepted, setNdaAccepted] = useState(
-    !(!isAdminRegister && project.nda),
-  );
-  // console.log('ndaAccepted', ndaAccepted);
+  const [ndaAccepted, setNdaAccepted] = useState(!!isAdminRegister);
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
@@ -108,8 +104,8 @@ const RegisterForm = (props) => {
             : undefined
         }
       />
-      {project.nda && <NDAScroller data={project.nda} />}
-      {!isAdminRegister && project.nda && (
+      {/* {project.nda && <NDAScroller data={project.nda} />} */}
+      {!isAdminRegister && (
         <label className="checkbox">
           <input
             type="checkbox"
@@ -151,17 +147,6 @@ const RegisterForm = (props) => {
           )}
         </div>
       </div>
-      <Disclaimer
-        data={
-          project.disclaimer ? (
-            project.disclaimer
-          ) : (
-            <MarginContainer>
-              {/* © 2020. Website Reviews. All Rights Reserved. */}
-            </MarginContainer>
-          )
-        }
-      />
     </form>
   );
 };

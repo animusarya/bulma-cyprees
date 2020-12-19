@@ -12,7 +12,6 @@ import gql from 'graphql-tag';
 import { InputGroup, Button, SelectGroup } from './elements';
 import theme from '../utils/theme';
 import Subtitle from './elements/Subtitle';
-import { formatCurrency } from '../utils/helpers';
 
 const Form = styled.form`
   input {
@@ -69,7 +68,6 @@ const ProjectSetupForm = (props) => {
     handleBlur,
     handleSubmit,
     subscription,
-    packages,
   } = props;
 
   const [couponCode, setCouponCode] = useState(false);
@@ -301,29 +299,40 @@ const ProjectSetupForm = (props) => {
           </CvvContainer>
         </div>
         <div className="column">
-          <SelectGroup
+          <Subtitle>Project Summary</Subtitle>
+          <InputGroup
+            readOnly
             fullWidth
             isWidth
             border
-            label="Payment Plan"
-            name="subscriptionPlanId"
-            value={values.subscriptionPlanId}
+            placeholder="Project Arden"
+            name="projectName"
+            type="text"
+            value={values.projectName}
             onChange={handleChange}
             onBlur={handleBlur}
             errors={
-              errors.subscriptionPlanId && touched.subscriptionPlanId
-                ? errors.subscriptionPlanId
+              errors.projectName && touched.projectName
+                ? errors.projectName
                 : undefined
             }
-            options={
-              packages
-                ? packages.map((item) => ({
-                    value: item.subscriptionPlanId,
-                    title: `${item.name} - ${formatCurrency(item.price)} per ${
-                      item.durationInMonths
-                    } month`,
-                  }))
-                : []
+          />
+          <InputGroup
+            readOnly
+            fullWidth
+            isWidth
+            border
+            label="Project Plan"
+            placeholder="Monthly | £30 | 6Months (£180) | Annually (£360)"
+            name="projectPlan"
+            type="text"
+            value={subscription.name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            errors={
+              errors.projectPlan && touched.projectPlan
+                ? errors.projectPlan
+                : undefined
             }
           />
           <div className="field is-grouped">
@@ -332,7 +341,7 @@ const ProjectSetupForm = (props) => {
                 fullWidth
                 border
                 placeholder="Enter Discount code"
-                label="Discount Code"
+                label="Do you have a discount code?"
                 name="discount"
                 type="text"
                 onChange={(e) => setCouponCode(e.target.value)}
@@ -384,7 +393,7 @@ ProjectSetupForm.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({
+  mapPropsToValues: ({ initialValues }) => ({
     country: '',
     addressLine1: '',
     addressLine2: '',
@@ -396,7 +405,7 @@ export default withFormik({
     paymentCardExpiryMonth: '',
     paymentCardExpiryYear: '',
     paymentCardCvv: '',
-    // projectName: initialValues.name || '',
+    projectName: initialValues.name || '',
     projectPlan: '',
   }),
   validationSchema: yup.object().shape({

@@ -5,8 +5,8 @@ import * as yup from 'yup';
 import styled from 'styled-components';
 import Cleave from 'cleave.js/react';
 
-import { InputGroup, Button, SelectGroup } from './elements';
-import { formatCurrency } from '../utils/helpers';
+import { InputGroup, Button } from './elements';
+// import { formatCurrency } from '../utils/helpers';
 
 const Form = styled.form`
   input {
@@ -32,7 +32,7 @@ const ProjectSetupForm = (props) => {
     handleChange,
     handleBlur,
     handleSubmit,
-    packages,
+    // packages,
   } = props;
 
   return (
@@ -85,7 +85,7 @@ const ProjectSetupForm = (props) => {
             : undefined
         }
       />
-      <SelectGroup
+      {/* <SelectGroup
         fullWidth
         isWidth
         border
@@ -109,7 +109,7 @@ const ProjectSetupForm = (props) => {
               }))
             : []
         }
-      />
+      /> */}
       <div className="field">
         <div className="is-pulled-right">
           <Button disabled={isSubmitting}>Continue</Button>

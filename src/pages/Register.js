@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { toString } from 'lodash';
-import { useMutation } from '@apollo/client';
+import { find, toString } from 'lodash';
+import { useQuery, useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
-import { useStoreState } from 'easy-peasy';
 
 import Seo from '../components/Seo';
 import Layout from '../components/Layout';
@@ -98,6 +97,18 @@ const registerMutation = gql`
   }
 `;
 
+const packagesQuery = gql`
+  query packages {
+    packages {
+      id
+      subscriptionPlanId
+      name
+      durationInMonths
+      price
+    }
+  }
+`;
+
 const Register = ({ match }) => {
   const [activeStep, setActiveStep] = useState({
     stepOne: true,
@@ -114,9 +125,16 @@ const Register = ({ match }) => {
   const { projectId, email } = match.params;
   const isAdminRegister = !projectId;
 
-  console.log(setSubscription, res);
+  console.log(res);
 
-  const activeProject = useStoreState((state) => state.origin.project);
+  // const activeProject = useStoreState((state) => state.origin.project);
+  const packagesData = useQuery(packagesQuery, {
+    fetchPolicy: 'network-only',
+  });
+
+  const { packages } = packagesData.data || {};
+
+  console.log(packagesData, 'packagesData');
 
   // if (res.data && res.data.register) {
   //   const { jwt, user } = res.data.register;
@@ -163,7 +181,6 @@ const Register = ({ match }) => {
                           });
                           setActiveStep({ ...activeStep, stepTwo: true });
                         }}
-                        project={activeProject}
                         isAdminRegister={isAdminRegister}
                       />
                     </div>
@@ -175,8 +192,14 @@ const Register = ({ match }) => {
                       <PaymentForm
                         enableReinitialize
                         initialValues={project}
+                        packages={packages}
                         subscription={subscription}
                         onSubmit={async (data) => {
+                          setProject(data);
+                          const selectedSubscription = find(packages, {
+                            subscriptionPlanId: data.subscriptionPlanId,
+                          });
+                          setSubscription(selectedSubscription);
                           const card = {
                             number: toString(data.paymentCardNumber),
                             expMonth: toString(data.paymentCardExpiryMonth),
