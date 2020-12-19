@@ -63,7 +63,7 @@ const ProjectSetupForm = (props) => {
           value={values.slug}
           onChange={handleChange}
           onBlur={handleBlur}
-          options={{ prefix: 'intellishare.online/' }}
+          options={{ prefix: 'website-reviews.online/' }}
           className="input is-shadowless"
         />
       </InputGroup>
@@ -141,7 +141,7 @@ export default withFormik({
     slug: yup
       .string()
       .required(
-        'Default URL is required! e.g: intellishare.online/yourproject',
+        'Default URL is required! e.g: website-reviews.online/yourproject',
       ),
     customDomain: yup.string(),
     subscriptionPlanId: yup.string().required('Subscription is required!'),

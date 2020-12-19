@@ -46,7 +46,7 @@ const ProjectInfoForm = (props) => {
           value={values.slug}
           onChange={handleChange}
           onBlur={handleBlur}
-          options={{ prefix: 'intellishare.online/' }}
+          options={{ prefix: 'website-reviews.online/' }}
           className="input is-shadowless"
         />
       </InputGroup>

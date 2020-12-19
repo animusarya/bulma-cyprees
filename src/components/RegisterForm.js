@@ -157,7 +157,7 @@ const RegisterForm = (props) => {
             project.disclaimer
           ) : (
             <MarginContainer>
-              {/* © 2020. Intellishare. All Rights Reserved. */}
+              {/* © 2020. Website Reviews. All Rights Reserved. */}
             </MarginContainer>
           )
         }

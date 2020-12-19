@@ -24,7 +24,7 @@ const Footer = () => (
         </div>
         <div className="column">
           <p className="has-text-right is-size-7 has-text-white">
-            {new Date().getFullYear()} Intellishare. All Rights Reserved.
+            {new Date().getFullYear()} Website Reviews. All Rights Reserved.
           </p>
         </div>
       </div>

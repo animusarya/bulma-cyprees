@@ -7,7 +7,7 @@ const Container = styled.section`
   background-color: #0a253e;
   a {
     :hover {
-      color: ${props => props.theme.primaryColor};
+      color: ${(props) => props.theme.primaryColor};
     }
   }
 `;
@@ -24,7 +24,7 @@ const AuthFooter = ({ activeProject }) => (
       <div className="columns">
         <div className="column is-full has-text-centered">
           <p className="has-text-white">
-            © 2020 IntelliShare. All Rights Reserved.
+            © 2020 Website Reviews. All Rights Reserved.
           </p>
           <div>
             <a href="#">Privacy Policy</a>{' '}

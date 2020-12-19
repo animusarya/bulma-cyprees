@@ -138,7 +138,7 @@ const Register = ({ match }) => {
                     {activeProject.logo ? (
                       <Logo src={activeProject.logo} alt={activeProject.name} />
                     ) : (
-                      <Logo src={logo} alt="Intellishare" />
+                      <Logo src={logo} alt="Website Reviews" />
                     )}
                     <ContentContainer>
                       <h2 className="has-text-weight-semibold is-size-5-mobile">
@@ -146,7 +146,7 @@ const Register = ({ match }) => {
                       </h2>
                       <p className="is-size-6">
                         {/* Share your files and content and engage your clients. Do
-                        it all with Intellishare. Already have an account?{' '} */}
+                        it all with Website Reviews. Already have an account?{' '} */}
                         {/* <a className="has-text-weight-bold" href="/login">
                           Log in
                         </a> */}

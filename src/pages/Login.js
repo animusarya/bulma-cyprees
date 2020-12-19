@@ -117,7 +117,7 @@ const Login = () => {
                     {/* {activeProject.logo ? (
                       <Logo src={activeProject.logo} alt={activeProject.name} />
                     ) : (
-                      <Logo src={logo} alt="Intellishare" />
+                      <Logo src={logo} alt="Website Reviews" />
                     )} */}
                     <ContentContainer>
                       <h2 className="has-text-weight-semibold is-size-5-mobile">

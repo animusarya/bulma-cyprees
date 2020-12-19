@@ -31,7 +31,7 @@ const AuthHeader = ({ activeProject }) => (
             {/* {activeProject.logo ? (
               <Logo src={activeProject.logo} alt={activeProject.name} />
             ) : (
-              <Logo src={logo} alt="Intellishare" />
+              <Logo src={logo} alt="Website Reviews" />
             )} */}
           </a>
 
@@ -41,14 +41,14 @@ const AuthHeader = ({ activeProject }) => (
             aria-label="menu"
             aria-expanded="false"
             data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
           </a>
         </div>
 
         <div id="navbarBasicExample" className="navbar-menu">
-          <div className="navbar-start"></div>
+          <div className="navbar-start" />
 
           <div className="navbar-end">
             <div className="navbar-item">

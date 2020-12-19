@@ -31,7 +31,7 @@ const AuthHeader = () => (
             {/* {activeProject.logo ? (
               <Logo src={activeProject.logo} alt={activeProject.name} />
             ) : (
-              <Logo src={logo} alt="Intellishare" />
+              <Logo src={logo} alt="Website Reviews" />
             )} */}
           </a>
 

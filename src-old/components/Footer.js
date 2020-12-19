@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import logoAlt from '../assets/images/logo.svg';
 
 const Container = styled.div`
-  background-color: ${props => props.theme.secondaryColor};
+  background-color: ${(props) => props.theme.secondaryColor};
   margin-top: -2rem;
   .section {
     padding: 1rem 1.5rem 0.7rem 1.5rem;
@@ -24,7 +24,7 @@ const Footer = () => (
         </div>
         <div className="column">
           <p className="has-text-right is-size-7 has-text-white">
-            {new Date().getFullYear()} Intellishare. All Rights Reserved.
+            {new Date().getFullYear()} Website Reviews. All Rights Reserved.
           </p>
         </div>
       </div>

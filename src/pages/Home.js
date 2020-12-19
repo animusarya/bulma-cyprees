@@ -9,7 +9,7 @@ const Home = () => (
     <Seo title="Home" description="Some description here." />
     <section className="section">
       <div className="container">
-        <h1 className="header">Intellishare</h1>
+        <h1 className="header">Website Reviews</h1>
         <br />
         <Link to="/login">Login</Link>
         <br />
