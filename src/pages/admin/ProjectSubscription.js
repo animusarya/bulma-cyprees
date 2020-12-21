@@ -72,7 +72,7 @@ const ProjectSubscription = ({ match, history }) => {
                       variables: { id: project.id },
                     });
                     if (response.data.removeProject || !resRemove.loading) {
-                      history.push('/admin/dashboard');
+                      history.push('/user/dashboard');
                     }
                   }
                 });

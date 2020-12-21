@@ -10,7 +10,7 @@ const Container = styled.div`
 
 export default () => (
   <Container className="has-text-right is-size-7">
-    <i className="far fa-copyright" /> {new Date().getFullYear()} InteliShare
-    All Rights Reserved
+    <i className="far fa-copyright" /> {new Date().getFullYear()} Review Our
+    Services All Rights Reserved
   </Container>
 );

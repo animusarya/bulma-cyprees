@@ -88,52 +88,32 @@ const Sidebar = ({ showOnMobile }) => {
             to="/user/create/website"
           />
           <LinkWrapper
-            icon="fas fa-plus-circle"
+            icon="fas fa-th-large"
             title="Dashboard"
             to="/user/dashboard"
           />
           {!isNull(activeProject) ? (
             <div className="sub-items">
               <LinkWrapper
-                icon="fas fa-th-large"
+                icon="fas fa-hand-point-up"
                 title="Get Started"
                 to={`/admin/project/${activeProject}/pages`}
               />
               <LinkWrapper
-                icon="far fa-envelope"
+                icon="fas fa-folder-open"
                 title="Reviews"
                 to={`/admin/project/${activeProject}/reviews`}
               />
               <LinkWrapper
-                icon="fas fa-user-friends"
+                icon="fas fa-pen"
                 title="Style Reviews"
                 to={`/admin/project/${activeProject}/styles`}
               />
-              {/* <LinkWrapper
-                icon="fas fa-bell"
-                title="Notifications"
-                to={`/admin/project/${activeProject}/notifications`}
-              /> */}
-              {/* <LinkWrapper
-                icon="fas fa-chart-pie"
-                title="Analytics"
-                to={`/admin/project/${activeProject}/analytics`}
-              />
-              <LinkWrapper
-                icon="fas fa-cogs"
-                title="Project Settings"
-                to={`/admin/project/${activeProject}/settings`}
-              /> */}
               <LinkWrapper
                 icon="fas fa-sync"
                 title="Subscriptions"
                 to={`/admin/project/${activeProject}/subscription`}
               />
-              {/* <LinkWrapper
-                icon="far fa-question-circle"
-                title="Help"
-                to="/admin/help"
-              /> */}
             </div>
           ) : null}
         </ul>
