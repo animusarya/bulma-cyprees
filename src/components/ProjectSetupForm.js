@@ -21,7 +21,7 @@ const Form = styled.form`
   }
 `;
 
-const infoIcon = <i className="fas fa-info-circle" />;
+// const infoIcon = <i className="fas fa-info-circle" />;
 
 const ProjectSetupForm = (props) => {
   const {
@@ -71,9 +71,9 @@ const ProjectSetupForm = (props) => {
         fullWidth
         border
         type="text"
-        label="Custom Domain Name"
-        infoIcon={infoIcon}
-        iconLabel="Please contact us to help you with this"
+        label="Domain"
+        // infoIcon={infoIcon}
+        // iconLabel="Please contact us to help you with this"
         placeholder="www.website-reviews.co.uk"
         name="customDomain"
         value={values.customDomain}

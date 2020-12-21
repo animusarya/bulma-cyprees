@@ -7,6 +7,7 @@ import { GlobalStyle } from './theme';
 import Home from '../pages/Home';
 import Error404 from '../pages/404';
 import NotAllowed from '../pages/NotAllowed';
+import ClientReview from '../pages/ClientReview';
 import About from '../pages/About';
 import Contact from '../pages/Contact';
 import Login from '../pages/Login';
@@ -66,6 +67,7 @@ const Routes = () => (
         <Route exact path="/set-password/:token" component={SetPassword} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
         <Route exact path="/not-allowed" component={NotAllowed} />
+        <Route exact path="/submit-review" component={ClientReview} />
         <PrivateRoute
           exact
           path="/super-admin/dashboard"

@@ -56,6 +56,7 @@ const InputGroup = ({
   infoIcon,
   iconLabel,
   groupWidth,
+  labelInfo,
   ...otherProps
 }) => (
   <Group
@@ -66,7 +67,8 @@ const InputGroup = ({
     fullWidth={fullWidth}
     isWidth={isWidth}>
     <div className="is-flex">
-      {label && <label className="label">{label}</label>}
+      {label && <label className="label">{label}</label>}{' '}
+      {labelInfo && <p>{labelInfo}</p>}
       {infoIcon && (
         <IconContainer>
           {infoIcon}

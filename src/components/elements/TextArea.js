@@ -31,6 +31,7 @@ const TextAreaGroup = ({
   fullWidth,
   isWidth,
   isHorizontal,
+  labelInfo,
   ...otherProps
 }) => (
   <Group
@@ -40,6 +41,7 @@ const TextAreaGroup = ({
     {label && (
       <div className="is-flex">
         <label className="label">{label}</label>
+        {labelInfo && <p>{labelInfo}</p>}
       </div>
     )}
     <div className="control">
