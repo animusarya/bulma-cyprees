@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import { useQuery, useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import { find, toString } from 'lodash';
@@ -15,6 +16,12 @@ import ProgressBar from '../../components/ProgressBar';
 import MainColumn from '../../components/MainColumn';
 import ProjectSetupForm from '../../components/ProjectSetupForm';
 import { Message, Loading } from '../../components/elements';
+
+const Container = styled.div`
+  .title {
+    color: ${(props) => props.theme.primaryColor};
+  }
+`;
 
 const packagesQuery = gql`
   query packages {
@@ -85,13 +92,16 @@ const CreateProject = () => {
         <div className="column is-one-fifth">
           <Sidebar />
         </div>
-        <div className="column">
+        <Container className="column">
           <MainColumn>
             <ProgressBar activeStep={activeStep} />
             {activeStep.stepOne &&
               !activeStep.stepTwo &&
               !activeStep.stepThree && (
                 <div className="column is-half">
+                  <h2 className="has-text-weight-semibold is-size-4 title">
+                    Website Details
+                  </h2>
                   <ProjectSetupForm
                     packages={packages}
                     onSubmit={(data) => {
@@ -107,6 +117,9 @@ const CreateProject = () => {
               )}
             {activeStep.stepOne && activeStep.stepTwo && !activeStep.stepThree && (
               <div className="column">
+                <h2 className="has-text-weight-semibold is-size-4 title">
+                  Make Payment
+                </h2>
                 <PaymentForm
                   enableReinitialize
                   initialValues={project}
@@ -152,7 +165,7 @@ const CreateProject = () => {
             )}
             {resAdd.loading ? <Loading /> : null}
           </MainColumn>
-        </div>
+        </Container>
       </div>
       <CopyRight />
     </Layout>

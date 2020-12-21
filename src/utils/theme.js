@@ -4,7 +4,7 @@ export const elements = { mobileBreakpoint: 800, ipadBreakpoint: 1024 };
 
 const theme = {
   primaryColor: '#390256',
-  secondaryColor: '#25313f',
+  secondaryColor: '#FFC33C',
   fontDark: '#25313f',
   borderColor: '#d4d6d5',
   menuBackgroundColor: '#231f20',

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Container = styled.h2`
   margin-bottom: 2.4rem !important;
-  color: ${(props) => props.theme.secondaryColor};
+  color: ${(props) => props.theme.fontDark};
 `;
 
 const Heading = ({ children }) => (

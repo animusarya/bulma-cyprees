@@ -7,15 +7,15 @@ import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
 
 const Container = styled.div`
-  background-color: ${(props) => props.theme.secondaryColor};
+  background-color: ${(props) => props.theme.primaryColor};
   .navbar {
-    background-color: ${(props) => props.theme.secondaryColor};
+    background-color: ${(props) => props.theme.primaryColor};
   }
   .navbar-item {
     background: transparent !important;
   }
   .navbar-end {
-    background-color: ${(props) => props.theme.secondaryColor};
+    background-color: ${(props) => props.theme.primaryColor};
   }
   @media screen and (max-width: 1023px) {
     .navbar-menu {
@@ -46,9 +46,9 @@ const LinkLogo = styled(Link)`
 `;
 
 const LinkWrapper = styled(Link)`
-  color: #e8e9ea;
+  color: ${(props) => props.theme.secondaryColor};
   :hover {
-    color: #e8e9ea;
+    color: ${(props) => props.theme.secondaryColor};
   }
 `;
 
@@ -60,10 +60,10 @@ const LinkWrapper = styled(Link)`
 const Button = styled.button`
   background-color: transparent;
   border: transparent;
-  color: #e8e9ea;
+  color: ${(props) => props.theme.secondaryColor};
   margin-right: 0px !important;
   :hover {
-    color: #e8e9ea;
+    color: ${(props) => props.theme.secondaryColor};
   }
 `;
 
@@ -86,6 +86,8 @@ const Header = () => {
     window.location.replace('/');
   };
 
+  console.log(userData, 'userData');
+
   return (
     <div>
       {userData.type === 'superAdmin' && (
@@ -96,7 +98,7 @@ const Header = () => {
             aria-label="main navigation">
             <div className="navbar-brand">
               <LinkLogo className="navbar-item" to="/super-admin/dashboard">
-                <h1>Review our Services</h1>
+                <h1 className="has-text-white">Review our Services</h1>
               </LinkLogo>
               <a
                 role="button"
@@ -152,7 +154,7 @@ const Header = () => {
             aria-label="main navigation">
             <div className="navbar-brand">
               <Link className="navbar-item" to="/user/dashboard">
-                <h1>Review our Services Logo</h1>
+                <h1 className="has-text-white">Review our Services Logo</h1>
               </Link>
               <a
                 className={

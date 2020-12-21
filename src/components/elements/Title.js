@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Container = styled.h2`
   margin-bottom: ${(props) =>
     props.marginbottom ? props.marginbottom : '1.3rem'};
-  color: ${(props) => props.theme.secondaryColor};
+  color: ${(props) => props.theme.fontDark};
   margin-top: ${(props) => (props.marginTop ? props.marginTop : 'auto')};
 `;
 

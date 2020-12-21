@@ -11,7 +11,7 @@ import Seo from '../components/Seo';
 import Layout from '../components/Layout';
 import { Message } from '../components/elements';
 import ForgotPasswordForm from '../components/ForgotPasswordForm';
-import logo from '../assets/images/logo2.png';
+// import logo from '../assets/images/logo2.png';
 
 const forgotPasswordMutation = gql`
   mutation forgotPassword($input: ForgotPasswordInput!) {
@@ -120,10 +120,12 @@ const ForgotPassword = ({ match }) => {
                         </div>
                       </div>
                     </nav>
+
+                    {/* <Logo src={logo} alt="Website Reviews" /> */}
                     {activeProject.logo ? (
                       <Logo src={activeProject.logo} alt={activeProject.name} />
                     ) : (
-                      <Logo src={logo} alt="Website Reviews" />
+                      ''
                     )}
                     <ContentContainer className="is-flex">
                       {activeProject.name && (

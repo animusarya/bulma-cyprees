@@ -38,7 +38,7 @@ const removeFileMutation = gql`
 `;
 
 const TitleClientFiles = styled.span`
-  color: ${props => props.brandColor}!important;
+  color: ${(props) => props.brandColor}!important;
   @media only screen and (max-width: 768px) {
     word-break: break-all;
     width: 35%;
@@ -49,7 +49,7 @@ const SyncIcon = styled.img`
   width: 17px;
   height: auto;
   margin-top: 2px;
-  animation-name: ${props => (props.isLoading ? 'spin' : 'none')};
+  animation-name: ${(props) => (props.isLoading ? 'spin' : 'none')};
   animation-duration: 4000ms;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
@@ -87,7 +87,7 @@ const FileListItem = ({
   const ref = useRef(null);
   const [loading, setLoading] = useState(false);
   const [fileName, setFileName] = useState(file.displayName);
-  const me = useStoreState(state => state.user.data);
+  const me = useStoreState((state) => state.user.data);
   const [getFile, { loading: fileLoading, data: fileData }] = useLazyQuery(
     fileQuery,
     {
@@ -154,7 +154,7 @@ const FileListItem = ({
   });
   const [{ isDragging }, drag] = useDrag({
     item: { type: 'card', id, index },
-    collect: monitor => ({
+    collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   });
@@ -162,7 +162,7 @@ const FileListItem = ({
   drag(drop(ref));
   // drag n drop
 
-  const handleFileReplace = useCallback(data => {
+  const handleFileReplace = useCallback((data) => {
     executeUpdate({
       variables: {
         id,
@@ -213,7 +213,7 @@ const FileListItem = ({
       {isAdmin && (
         <td className="has-text-centered">
           <Button primary paddingless>
-            <i className="far fa-hand-pointer"></i>
+            <i className="far fa-hand-pointer" />
           </Button>
         </td>
       )}
@@ -221,9 +221,9 @@ const FileListItem = ({
         {isAdmin ? (
           <ContentEditable
             html={fileName}
-            onChange={e => setFileName(e.target.value)}
+            onChange={(e) => setFileName(e.target.value)}
             tagName="span"
-            onKeyDown={event => {
+            onKeyDown={(event) => {
               // eslint-disable-next-line no-unused-expressions
               event.key === 'Enter' && event.preventDefault();
             }}
@@ -290,7 +290,7 @@ const FileListItem = ({
             onClick={() => {
               swal('Are you confirm to delete this item?', {
                 buttons: ['Cancel', 'Confirm'],
-              }).then(async value => {
+              }).then(async (value) => {
                 if (value) {
                   await executeMutationDelete({
                     variables: { id: file.id },
@@ -299,7 +299,7 @@ const FileListItem = ({
                 }
               });
             }}>
-            <i className="far fa-trash-alt"></i>
+            <i className="far fa-trash-alt" />
           </Button>
         </td>
       )}
