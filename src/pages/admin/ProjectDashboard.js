@@ -9,13 +9,12 @@ import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
-// import AdminHeader from '../../components/AdminHeader';
 // import AdminSubHeader from '../../components/AdminSubHeader';
 import ProjectDashboardHero from '../../components/ProjectDashboardHero';
 import { Message, Loading } from '../../components/elements';
 
 const Container = styled.div`
-  .content {
+  /* .content {
     align-self: center;
     overflow: scroll !important;
     ::-webkit-scrollbar {
@@ -24,13 +23,13 @@ const Container = styled.div`
   }
   span {
     color: ${(props) => props.theme.primaryColor};
-  }
-  p {
+  } */
+  /* p {
     line-height: 1;
-  }
-  .steps-title {
+  } */
+  /* .steps-title {
     margin-bottom: 2%;
-  }
+  } */
 `;
 
 const ProjectDashboard = ({ match }) => {
@@ -47,19 +46,18 @@ const ProjectDashboard = ({ match }) => {
           <Sidebar />
         </div>
         <div className="column is-four-fifths">
-          {/* <AdminHeader />
-          <AdminSubHeader /> */}
           <MainColumn>
             {resultPages.error && (
               <Message type="error">{resultPages.error.message}</Message>
             )}
-            {resultPages.loading && <Loading />}
             <div className="content">
               {pages.length === 0 ? (
                 <ProjectDashboardHero project={project} />
               ) : null}
             </div>
           </MainColumn>
+
+          {resultPages.loading && <Loading />}
         </div>
       </Container>
       <CopyRight />
