@@ -39,9 +39,9 @@ const PaymentConfirmation = ({ project }) => (
           Your new website review system has been setup.
         </p>
         <LinkStyled
-          className="button is-primary is-large"
+          className="button is-primary is-large has-text-weight-bold"
           to={`/admin/project/${project.id}/pages`}>
-          Go to your website
+          Start Collecting Your Reviews
         </LinkStyled>
       </div>
     </div>
