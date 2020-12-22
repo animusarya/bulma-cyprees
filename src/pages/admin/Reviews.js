@@ -59,7 +59,7 @@ const Reviews = () => (
               <strong>Average Score:</strong> 4.9
             </p>
           </ReviewsStat>
-          <TableHeading className="columns">
+          <TableHeading className="columns is-flex">
             <div className="column is-1">
               <p>Name</p>
             </div>

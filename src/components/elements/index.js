@@ -11,6 +11,7 @@ import SelectGroup from './SelectGroup';
 import CreditCardInput from './CreditCardInput';
 import ColorPicker from './ColorPicker';
 import ReactDropdown from './ReactDropdown';
+import Dropzone from './Dropzone';
 
 export {
   InputGroup,
@@ -26,4 +27,5 @@ export {
   CreditCardInput,
   ColorPicker,
   ReactDropdown,
+  Dropzone,
 };
