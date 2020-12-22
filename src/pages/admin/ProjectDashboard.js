@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import useProjectDetails from '../../hooks/useProjectDetails';
-import useProjectPages from '../../hooks/useProjectPages';
+// import useProjectPages from '../../hooks/useProjectPages';
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import Header from '../../components/Header';
@@ -11,31 +11,13 @@ import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
 // import AdminSubHeader from '../../components/AdminSubHeader';
 import ProjectDashboardHero from '../../components/ProjectDashboardHero';
-import { Message, Loading } from '../../components/elements';
 
-const Container = styled.div`
-  /* .content {
-    align-self: center;
-    overflow: scroll !important;
-    ::-webkit-scrollbar {
-      display: none;
-    }
-  }
-  span {
-    color: ${(props) => props.theme.primaryColor};
-  } */
-  /* p {
-    line-height: 1;
-  } */
-  /* .steps-title {
-    margin-bottom: 2%;
-  } */
-`;
+const Container = styled.div``;
 
 const ProjectDashboard = ({ match }) => {
   const projectId = match.params.id;
   const [project] = useProjectDetails(projectId);
-  const [{ pages }, resultPages] = useProjectPages(projectId);
+  // const [{ pages }, resultPages] = useProjectPages(projectId);
 
   return (
     <Layout noContainer>
@@ -47,17 +29,10 @@ const ProjectDashboard = ({ match }) => {
         </div>
         <div className="column is-four-fifths">
           <MainColumn>
-            {resultPages.error && (
-              <Message type="error">{resultPages.error.message}</Message>
-            )}
             <div className="content">
-              {pages.length === 0 ? (
-                <ProjectDashboardHero project={project} />
-              ) : null}
+              <ProjectDashboardHero project={project} />
             </div>
           </MainColumn>
-
-          {resultPages.loading && <Loading />}
         </div>
       </Container>
       <CopyRight />

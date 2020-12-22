@@ -25,7 +25,6 @@ import HelpSuperAdmin from '../pages/super-admin/Help';
 
 import DashboardAdmin from '../pages/admin/Dashboard';
 import CreateProject from '../pages/admin/CreateProject';
-import InstructionGuide from '../pages/admin/InstructionGuide';
 import Reviews from '../pages/admin/Reviews';
 import ReviewStyles from '../pages/admin/ReviewStyles';
 import ProjectDashboard from '../pages/admin/ProjectDashboard';
@@ -126,12 +125,6 @@ const Routes = () => (
           exact
           path="/admin/project/:id/styles"
           component={ReviewStyles}
-          access="admin"
-        />
-        <PrivateRoute
-          exact
-          path="/user/guide"
-          component={InstructionGuide}
           access="admin"
         />
         <PrivateRoute

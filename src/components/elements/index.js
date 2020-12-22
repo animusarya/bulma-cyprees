@@ -10,6 +10,7 @@ import TextAreaGroup from './TextArea';
 import SelectGroup from './SelectGroup';
 import CreditCardInput from './CreditCardInput';
 import ColorPicker from './ColorPicker';
+import ReactDropdown from './ReactDropdown';
 
 export {
   InputGroup,
@@ -24,4 +25,5 @@ export {
   SelectGroup,
   CreditCardInput,
   ColorPicker,
+  ReactDropdown,
 };
