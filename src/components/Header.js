@@ -86,7 +86,7 @@ const Header = () => {
     window.location.replace('/');
   };
 
-  console.log(userData, 'userData');
+  // console.log(userData, 'userData');
 
   return (
     <div>
@@ -132,7 +132,7 @@ const Header = () => {
             className="navbar-menu is-active is-hidden-desktop">
             <div className="navbar-end is-flex admin-nav-mobile">
               <span className="navbar-item has-text-white is-size-7">
-                {userData.email}
+                {userData && userData.profile && userData.profile.companyName}
               </span>
               <span className="navbar-item has-text-white">
                 <div className="buttons">
@@ -174,7 +174,7 @@ const Header = () => {
             <AdminBurgerMenu id="navbarBasicExample" className="navbar-menu">
               <div className="navbar-end">
                 <span className="navbar-item has-text-white">
-                  {userData.email}
+                  {userData && userData.profile && userData.profile.companyName}
                 </span>
                 <span className="navbar-item has-text-white">
                   <div className="buttons">

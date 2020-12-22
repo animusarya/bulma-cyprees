@@ -38,7 +38,6 @@ const Container = styled.button`
 `;
 
 const Button = ({
-  className,
   children,
   secondary,
   primary,

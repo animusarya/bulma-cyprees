@@ -20,6 +20,9 @@ const registerMutation = gql`
         id
         email
         type
+        profile {
+          companyName
+        }
       }
     }
   }

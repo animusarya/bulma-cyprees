@@ -116,10 +116,15 @@ const RegisterForm = (props) => {
         </label>
       )}
       {isAdminRegister && (
-        <MarginContainer className="has-text-weight-semibold">
+        <MarginContainer className="has-text-weight-normal">
           By creating an account you agree to the website{' '}
-          <a href="#">terms and conditions</a> and our{' '}
-          <a href="#">privacy notice.</a>
+          <a href="#" className="has-text-weight-bold">
+            terms and conditions
+          </a>{' '}
+          and our{' '}
+          <a href="#" className="has-text-weight-bold">
+            privacy notice.
+          </a>
         </MarginContainer>
       )}
       <div className="field">

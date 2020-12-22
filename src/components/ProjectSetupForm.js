@@ -89,7 +89,7 @@ const ProjectSetupForm = (props) => {
         fullWidth
         isWidth
         border
-        label="Project Plan"
+        label="Select Plan"
         name="subscriptionPlanId"
         value={values.subscriptionPlanId}
         onChange={handleChange}

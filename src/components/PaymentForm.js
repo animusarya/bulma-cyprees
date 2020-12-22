@@ -11,6 +11,7 @@ import gql from 'graphql-tag';
 import { InputGroup, Button, SelectGroup } from './elements';
 import theme from '../utils/theme';
 import Subtitle from './elements/Subtitle';
+import stripe from '../assets/images/Secure-by-Stripe.png';
 
 const Form = styled.form`
   input {
@@ -39,6 +40,11 @@ const CvvContainer = styled.div`
   margin-top: -8px;
 `;
 
+const ButtonContainer = styled.div`
+  display: grid;
+  justify-content: flex-end;
+`;
+
 const countries = [
   {
     key: 1,
@@ -46,6 +52,7 @@ const countries = [
     value: 'united-kingdom',
   },
 ];
+
 const discountQuery = gql`
   query discounts {
     discounts {
@@ -57,6 +64,7 @@ const discountQuery = gql`
     }
   }
 `;
+
 const PaymentForm = (props) => {
   const {
     values,
@@ -351,7 +359,7 @@ const PaymentForm = (props) => {
             <p className="control">
               <button
                 type="button"
-                className="button is-primary"
+                className="button is-primary has-text-weight-bold"
                 onClick={applyCoupon}>
                 Apply
               </button>
@@ -370,12 +378,16 @@ const PaymentForm = (props) => {
               </p>
             </div>
           </div>
-          <div className="field">
+          <ButtonContainer className="field">
             <div className="is-pulled-right">
-              <Button disabled={isSubmitting}>Make Payment</Button>
+              <Button disabled={isSubmitting} fontWeight="bold">
+                Make Payment
+              </Button>
             </div>
-          </div>
-          <div className="notify" />
+            <div>
+              <img src={stripe} alt="Payment Secured by Stripe" width="180px" />
+            </div>
+          </ButtonContainer>
         </div>
       </div>
     </Form>

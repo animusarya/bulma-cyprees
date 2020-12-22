@@ -20,6 +20,7 @@ import { Message, Loading } from '../../components/elements';
 const Container = styled.div`
   .title {
     color: ${(props) => props.theme.primaryColor};
+    margin-bottom: 0.6rem !important;
   }
 `;
 

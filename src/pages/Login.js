@@ -19,6 +19,9 @@ const mutation = gql`
         id
         email
         type
+        profile {
+          companyName
+        }
       }
     }
   }
