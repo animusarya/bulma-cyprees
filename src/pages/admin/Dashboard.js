@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import { useStoreActions } from 'easy-peasy';
+import moment from 'moment';
 
 import { formatCurrency } from '../../utils/helpers';
 import Layout from '../../components/Layout';
@@ -127,7 +128,11 @@ const Dashboard = () => {
                         </td>
                         <td>{formatCurrency(project.subscriptionAmount)}</td>
                         <td>{project.subscriptionName}</td>
-                        <td>{project.subscriptionStartsAt}</td>
+                        <td>
+                          {moment(project.subscriptionStartsAt).format(
+                            'Do MMMM YYYY',
+                          )}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
