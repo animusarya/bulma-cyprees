@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -84,9 +83,7 @@ const Reviews = () => (
               <p>Action</p>
             </div>
           </TableHeading>
-          <ReviewItem />
-          <ReviewItem />
-          <ReviewItem />
+          {/* Add map when data available */}
           <ReviewItem />
           <ReviewItem />
         </MainColumn>

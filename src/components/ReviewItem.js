@@ -1,24 +1,7 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import styled from 'styled-components';
 
 import Rating from './Rating';
-
-// const Container = styled.div`
-//   :nth-child(even) {
-//     background-color: #f2f2f2;
-//   }
-//   .columns {
-//     margin-bottom: 0;
-//   }
-//   button {
-//     background: transparent;
-//     border: none;
-//     :focus:not(:active) {
-//       box-shadow: none;
-//     }
-//   }
-// `;
 
 const Wrapper = styled.div`
   :nth-child(even) {
