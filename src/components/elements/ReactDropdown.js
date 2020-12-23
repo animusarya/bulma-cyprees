@@ -19,7 +19,6 @@ const ReactDropdown = ({ onChange }) => {
     '36',
   ];
   const defaultOption = options[3];
-
   return (
     <Dropdown
       options={options}

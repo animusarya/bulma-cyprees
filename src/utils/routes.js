@@ -29,7 +29,6 @@ import Reviews from '../pages/admin/Reviews';
 import ReviewStyles from '../pages/admin/ReviewStyles';
 import ProjectDashboard from '../pages/admin/ProjectDashboard';
 import Help from '../pages/admin/Help';
-import ProjectSetting from '../pages/admin/ProjectSetting';
 import ProjectSubscription from '../pages/admin/ProjectSubscription';
 import Settings from '../pages/admin/Settings';
 
@@ -137,12 +136,6 @@ const Routes = () => (
           exact
           path="/admin/help"
           component={Help}
-          access="admin"
-        />
-        <PrivateRoute
-          exact
-          path="/admin/project/:id/settings"
-          component={ProjectSetting}
           access="admin"
         />
         <PrivateRoute

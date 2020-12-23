@@ -1,7 +1,7 @@
 import React from 'react';
 // create this screen with fully custom css using style components
 
-const Test = () => (
+const ReviewsFrame = () => (
   <div>
     <div className="container">
       <h1>Test page</h1>
@@ -9,4 +9,4 @@ const Test = () => (
   </div>
 );
 
-export default Test;
+export default ReviewsFrame;

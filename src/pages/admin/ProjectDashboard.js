@@ -9,7 +9,6 @@ import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
-// import AdminSubHeader from '../../components/AdminSubHeader';
 import ProjectDashboardHero from '../../components/ProjectDashboardHero';
 
 const Container = styled.div``;
