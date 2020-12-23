@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const Progress = styled.div`
   border-top: 1px solid #979797;
-  margin: 3rem 3.5rem;
+  margin: 3rem 0;
   .active {
     font-weight: bold;
     .progress {
