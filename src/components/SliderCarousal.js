@@ -40,7 +40,52 @@ const Container = styled.div`
     font-size: 20px;
     margin-top: -5px;
   }
+  .slick-track,
+  .slick-slider {
+    :focus {
+      outline: none;
+    }
+  }
 `;
+
+const reviews = [
+  {
+    id: 1,
+    title: 'Good job by team',
+    name: 'Danny',
+    country: 'Sevenoaks',
+    date: '12 Dec 2020',
+    comment:
+      ' Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
+  },
+  {
+    id: 2,
+    title: 'Good job by team',
+    name: 'Jenny',
+    country: 'Sevenoaks',
+    date: '15 Nov 2020',
+    comment:
+      ' Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
+  },
+  {
+    id: 3,
+    title: 'Good job by team',
+    name: 'Linda',
+    country: 'Spain',
+    date: '12 Oct 2020',
+    comment:
+      ' Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
+  },
+  {
+    id: 4,
+    title: 'Good job by team',
+    name: 'Mac',
+    country: 'Italy',
+    date: '01 Oct 2020',
+    comment:
+      ' Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
+  },
+];
 
 export default class PreviousNextMethods extends Component {
   constructor(props) {
@@ -68,23 +113,17 @@ export default class PreviousNextMethods extends Component {
     return (
       <Container>
         <Slider ref={(c) => (this.slider = c)} {...settings}>
-          <div key={1}>
-            <h3>Good job by team</h3>
-            <p className="date">12 December 2020</p>
-            <p className="user-comment">
-              &quot;Lorem Ipsum is simply dummy text of the printing and
-              typesetting industry. Lorem Ipsum has been the industry&apos;s
-              standard dummy text ever since the 1500s, when an unknown printer
-              took a galley of type and scrambled it to make a type specimen
-              book. It has survived not only five centuries, but also the leap
-              into electronic typesetting, remaining essentially unchanged. It
-              was popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.&rdquo;
-            </p>
-            <p className="user-name">Danny, Sevenoaks</p>
-          </div>
+          {reviews &&
+            reviews.map((review) => (
+              <div key={review.id}>
+                <h3>{review.title}</h3>
+                <p className="date">{review.date}</p>
+                <p className="user-comment">&quot;{review.comment}&rdquo;</p>
+                <p className="user-name">
+                  {review.name}, {review.country}
+                </p>
+              </div>
+            ))}
         </Slider>
         <div style={{ textAlign: 'center' }}>
           <button className="button" type="button" onClick={this.previous}>

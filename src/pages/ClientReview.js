@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import ClientReviewForm from '../components/ClientReviewForm';
 import Layout from '../components/Layout';
-import dummyLogo from '../assets/images/dummy-logo.jpg';
+import useProjectDetails from '../hooks/useProjectDetails';
 
 const Logo = styled.img`
   width: 150px;
@@ -18,8 +18,12 @@ const Bottom = styled.p`
   margin-top: 30px;
 `;
 
-const ClientReview = () => {
+const ClientReview = ({ match }) => {
   const handleSubmit = () => null;
+
+  const projectId = match.params.id;
+  const [project] = useProjectDetails(projectId);
+
   return (
     <Layout noContainer>
       <section className="section">
@@ -27,7 +31,13 @@ const ClientReview = () => {
           <div className="columns is-centered">
             <div className="column is-half">
               <div>
-                <Logo src={dummyLogo} alt="dummy-logo" />
+                {project && project.logo ? (
+                  <Logo src={project.logo} alt="dummy-logo" height="100px" />
+                ) : (
+                  <p className="is-size-3 has-text-weight-bold">
+                    {project.name}
+                  </p>
+                )}
               </div>
               <Description>
                 Hi, you have been invited to write a short review from

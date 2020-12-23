@@ -31,7 +31,7 @@ const ReviewsFrame = () => (
       <p>11 Reviews</p>
     </ScoreReview>
     <RatingContainer>
-      <Rating size={40} />
+      <Rating size={40} disabled count={5} />
     </RatingContainer>
     <SliderCarousal />
   </div>

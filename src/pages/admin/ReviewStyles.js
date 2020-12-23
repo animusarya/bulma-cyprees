@@ -25,7 +25,6 @@ const ReviewStyles = ({ match }) => {
   const projectId = match.params.id;
   const [project] = useProjectDetails(projectId);
   const [executeMutation, res] = useProjectUpdate();
-  console.log(project, executeMutation);
 
   return (
     <Layout noContainer>
