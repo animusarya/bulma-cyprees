@@ -40,6 +40,41 @@ const TableHeading = styled.div`
   }
 `;
 
+const reviews = [
+  {
+    id: 1,
+    name: 'Danny',
+    country: 'Sevenoaks',
+    date: '12 Dec 2020',
+    comment:
+      ' Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
+  },
+  {
+    id: 2,
+    name: 'Jenny',
+    country: 'Sevenoaks',
+    date: '15 Nov 2020',
+    comment:
+      ' Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
+  },
+  {
+    id: 3,
+    name: 'Linda',
+    country: 'Spain',
+    date: '12 Oct 2020',
+    comment:
+      ' Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
+  },
+  {
+    id: 4,
+    name: 'Mac',
+    country: 'Italy',
+    date: '01 Oct 2020',
+    comment:
+      ' Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
+  },
+];
+
 const Reviews = () => (
   <Layout noContainer>
     <Seo title="Dashboard Admin" description="List of Projects Here" />
@@ -84,8 +119,10 @@ const Reviews = () => (
             </div>
           </TableHeading>
           {/* Add map when data available */}
-          <ReviewItem />
-          <ReviewItem />
+          {reviews &&
+            reviews.map((review) => (
+              <ReviewItem review={review} key={review.id} />
+            ))}
         </MainColumn>
       </div>
     </Container>

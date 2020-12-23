@@ -19,13 +19,13 @@ const Wrapper = styled.div`
   }
 `;
 
-const ReviewItem = () => (
+const ReviewItem = ({ review }) => (
   <Wrapper className="columns">
     <div className="column">
       <div className="columns">
-        <div className="column is-1">Danny</div>
-        <div className="column is-1">Sevenoaks</div>
-        <div className="column is-2">12 Dec 2020</div>
+        <div className="column is-1">{review.name}</div>
+        <div className="column is-1">{review.country}</div>
+        <div className="column is-2">{review.date}</div>
         <div className="column is-1">
           <Rating />
         </div>
@@ -52,14 +52,7 @@ const ReviewItem = () => (
       </div>
       <div className="columns">
         <div className="column">
-          <p className="is-size-7">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry&apos;s standard dummy
-            text ever since the 1500s, when an unknown printer took a galley of
-            type and scrambled it to make a type specimen book. It has survived
-            not only five centuries, but also the leap into electronic
-            typesetting, remaining essentially unchanged.
-          </p>
+          <p className="is-size-7">{review.comment}</p>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useStoreState } from 'easy-peasy';
+import { Link } from 'react-router-dom';
 
 import useProjectDetails from '../hooks/useProjectDetails';
 import useProjectUpdate from '../hooks/useProjectUpdate';
@@ -110,9 +111,11 @@ const ProjectDashboardHero = () => {
             reviews to be displayed
           </p>
         </Description>
-        <a className="is-size-4 has-text-weight-semibold">
+        <Link
+          to="/submit-review"
+          className="is-size-4 has-text-weight-semibold">
           https://reviewourservices.com/designcity/
-        </a>
+        </Link>
         <Description className="is-flex">
           <strong>Step 3.</strong>
           <p>
