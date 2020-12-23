@@ -107,7 +107,7 @@ const Register = ({ match }) => {
     updateUser(user);
     setTimeout(() => {
       window.location.replace(
-        isAdminRegister ? '/admin/dashboard' : '/client/dashboard',
+        isAdminRegister ? '/user/dashboard' : '/client/dashboard',
       );
     }, 1000);
   }
