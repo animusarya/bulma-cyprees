@@ -21,7 +21,6 @@ const ClientReviewForm = (props) => {
     handleChange,
     handleBlur,
     handleSubmit,
-    isAdminRegister,
   } = props;
   return (
     <form onSubmit={handleSubmit}>
@@ -53,7 +52,13 @@ const ClientReviewForm = (props) => {
       />
       <div className="is-flex">
         <RatingTitle>Your Rating:</RatingTitle>
-        <Rating size={40} />
+        <Rating
+          size={40}
+          disabled
+          onChange={handleChange}
+          value={values.ratings}
+          count={5}
+        />
       </div>
       <InputGroup
         border
@@ -73,12 +78,10 @@ const ClientReviewForm = (props) => {
         label="Review Description:"
         name="email"
         labelInfo="(Max 500 characters)"
-        maxlength="500"
         value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={errors.email && touched.email ? errors.email : undefined}
-        readOnly={!isAdminRegister}
       />
 
       <div className="field">

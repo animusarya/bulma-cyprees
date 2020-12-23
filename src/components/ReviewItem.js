@@ -27,7 +27,7 @@ const ReviewItem = ({ review }) => (
         <div className="column is-1">{review.country}</div>
         <div className="column is-2">{review.date}</div>
         <div className="column is-1">
-          <Rating />
+          <Rating disabled count={5} />
         </div>
         <div className="column is-4" />
         <div className="column is-1">

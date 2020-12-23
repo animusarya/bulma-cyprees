@@ -14,31 +14,38 @@ const Description = styled.p`
   padding: 1rem 3rem 1rem 0rem;
 `;
 
-const ClientReview = () => (
-  <Layout noContainer>
-    <section className="section">
-      <div className="container">
-        <div className="columns is-centered">
-          <div className="column is-half">
-            <div>
-              <Logo src={dummyLogo} alt="dummy-logo" />
+const Bottom = styled.p`
+  margin-top: 30px;
+`;
+
+const ClientReview = () => {
+  const handleSubmit = () => null;
+  return (
+    <Layout noContainer>
+      <section className="section">
+        <div className="container">
+          <div className="columns is-centered">
+            <div className="column is-half">
+              <div>
+                <Logo src={dummyLogo} alt="dummy-logo" />
+              </div>
+              <Description>
+                Hi, you have been invited to write a short review from
+                DesignCity Ltd. Please be honest and accurate as possible about
+                your experience. They will process your review which might be
+                published on their website.{' '}
+              </Description>
+              <ClientReviewForm onSubmit={handleSubmit} />
+              <Bottom>
+                By submitting this review you are allowing this to be displayed
+                on their company website.
+              </Bottom>
             </div>
-            <Description>
-              Hi, you have been invited to write a short review from DesignCity
-              Ltd. Please be honest and accurate as possible about your
-              experience. They will process your review which might be published
-              on their website.{' '}
-            </Description>
-            <ClientReviewForm />
-            <p>
-              By submitting this review you are allowing this to be displayed on
-              their company website.
-            </p>
           </div>
         </div>
-      </div>
-    </section>
-  </Layout>
-);
+      </section>
+    </Layout>
+  );
+};
 
 export default ClientReview;

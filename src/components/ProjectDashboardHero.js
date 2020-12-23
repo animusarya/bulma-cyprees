@@ -64,6 +64,7 @@ const ProjectDashboardHero = () => {
   const projectId = useStoreState((state) => state.active.project);
   const [project, resultProject] = useProjectDetails(projectId);
   const [executeUpdateProjectMutation, resUpdateProject] = useProjectUpdate();
+  const activeProject = useStoreState((state) => state.active.project);
 
   const handleLogoUpload = (uploadResponse) => {
     executeUpdateProjectMutation({
@@ -112,7 +113,7 @@ const ProjectDashboardHero = () => {
           </p>
         </Description>
         <Link
-          to="/submit-review"
+          to={`/submit-review/${activeProject}`}
           className="is-size-4 has-text-weight-semibold">
           https://reviewourservices.com/designcity/
         </Link>

@@ -66,7 +66,7 @@ const Routes = () => (
         <Route exact path="/set-password/:token" component={SetPassword} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
         <Route exact path="/not-allowed" component={NotAllowed} />
-        <Route exact path="/submit-review" component={ClientReview} />
+        <Route exact path="/submit-review/:id" component={ClientReview} />
         <Route exact path="/reviews" component={ReviewsFrame} />
         <PrivateRoute
           exact
