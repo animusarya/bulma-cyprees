@@ -54,7 +54,7 @@ const ProjectSetupForm = (props) => {
         fullWidth
         isWidth
         border
-        label="Website URL Slug"
+        label="Domain"
         errors={errors.slug && touched.slug ? errors.slug : undefined}>
         <Cleave
           placeholder="colliers"
@@ -63,7 +63,7 @@ const ProjectSetupForm = (props) => {
           value={values.slug}
           onChange={handleChange}
           onBlur={handleBlur}
-          // options={{ prefix: 'intellishare.online/' }}
+          options={{ prefix: 'https://reviewourservices.com/' }}
           className="input is-shadowless"
         />
       </InputGroup>
@@ -71,7 +71,7 @@ const ProjectSetupForm = (props) => {
         fullWidth
         border
         type="text"
-        label="Domain"
+        label="Your Website"
         // infoIcon={infoIcon}
         // iconLabel="Please contact us to help you with this"
         placeholder="www.website-reviews.co.uk"
@@ -133,7 +133,7 @@ export default withFormik({
   mapPropsToValues: () => ({
     name: '',
     slug: '',
-    customDomain: '',
+    // customDomain: '',
     subscriptionPlanId: '',
   }),
   validationSchema: yup.object().shape({
@@ -141,7 +141,7 @@ export default withFormik({
     slug: yup
       .string()
       .required('Default URL is required! e.g: example.online/yourproject'),
-    customDomain: yup.string().required('Domain is required!'),
+    // customDomain: yup.string().required('Domain is required!'),
     subscriptionPlanId: yup.string().required('Subscription is required!'),
   }),
 
