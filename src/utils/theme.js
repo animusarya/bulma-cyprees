@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 export const elements = { mobileBreakpoint: 800, ipadBreakpoint: 1024 };
 
 const theme = {
-  primaryColor: '#390256',
+  primaryColor: '#3a0256',
   secondaryColor: '#FFC33C',
   fontDark: '#25313f',
   borderColor: '#d4d6d5',
