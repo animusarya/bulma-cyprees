@@ -88,8 +88,8 @@ const Dashboard = () => {
                     Thank you for registering, you are now signed in.
                   </p>
                   <Button>
-                    <LinkWrapper to="/admin/project/create">
-                      Create a new project
+                    <LinkWrapper to="/user/create/website">
+                      Add a new website for Reviews
                     </LinkWrapper>
                   </Button>
                 </div>
