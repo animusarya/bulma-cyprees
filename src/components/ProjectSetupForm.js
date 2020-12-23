@@ -63,7 +63,7 @@ const ProjectSetupForm = (props) => {
           value={values.slug}
           onChange={handleChange}
           onBlur={handleBlur}
-          options={{ prefix: 'https://reviewourservices.com/' }}
+          // options={{ prefix: 'https://reviewourservices.com/' }}
           className="input is-shadowless"
         />
       </InputGroup>
