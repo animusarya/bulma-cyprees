@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import logo from '../assets/images/logo-ros.svg';
 
@@ -20,9 +21,9 @@ const Logo = styled.img`
 const AuthHeader = () => (
   <Container className="navbar" role="navigation" aria-label="main navigation">
     <div className="navbar-brand">
-      <a className="navbar-item" to="/">
+      <Link className="navbar-item" to="/">
         <Logo src={logo} alt="Review our services logo" />
-      </a>
+      </Link>
     </div>
   </Container>
 );

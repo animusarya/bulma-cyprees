@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
-import { isNull } from 'lodash';
+// import { isNull } from 'lodash';
 
 const Container = styled.aside`
   background-color: #f4f4f6;
@@ -92,7 +92,27 @@ const Sidebar = ({ showOnMobile }) => {
             title="Dashboard"
             to="/user/dashboard"
           /> */}
-          {!isNull(activeProject) ? (
+          <LinkWrapper
+            icon="fas fa-hand-point-up"
+            title="Get Started"
+            to={`/admin/project/${activeProject}/pages`}
+          />
+          <LinkWrapper
+            icon="fas fa-folder-open"
+            title="Reviews"
+            to={`/admin/project/${activeProject}/reviews`}
+          />
+          <LinkWrapper
+            icon="fas fa-pen"
+            title="Style Reviews"
+            to={`/admin/project/${activeProject}/styles`}
+          />
+          <LinkWrapper
+            icon="fas fa-sync"
+            title="Subscriptions"
+            to={`/admin/project/${activeProject}/subscription`}
+          />
+          {/* {!isNull(activeProject) ? (
             <div className="sub-items">
               <LinkWrapper
                 icon="fas fa-hand-point-up"
@@ -115,7 +135,7 @@ const Sidebar = ({ showOnMobile }) => {
                 to={`/admin/project/${activeProject}/subscription`}
               />
             </div>
-          ) : null}
+          ) : null} */}
         </ul>
       )}
       {userData.type === 'client' && (
