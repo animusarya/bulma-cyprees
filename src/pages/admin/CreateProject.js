@@ -44,7 +44,7 @@ const packagesQuery = gql`
 const createProjectMutation = gql`
   mutation createProject(
     $name: String!
-    $slug: String!
+    $slug: String
     $customDomain: String!
     $subscriptionPlanId: String!
     $billingAddress: Address!

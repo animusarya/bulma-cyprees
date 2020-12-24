@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 import styled from 'styled-components';
-import Cleave from 'cleave.js/react';
 
 import { InputGroup, Button, SelectGroup } from './elements';
 import { formatCurrency } from '../utils/helpers';
@@ -52,29 +51,10 @@ const ProjectSetupForm = (props) => {
       />
       <InputGroup
         fullWidth
-        isWidth
-        border
-        label="Domain"
-        errors={errors.slug && touched.slug ? errors.slug : undefined}>
-        <Cleave
-          placeholder="colliers"
-          name="slug"
-          id="slug"
-          value={values.slug}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          // options={{ prefix: 'https://reviewourservices.com/' }}
-          className="input is-shadowless"
-        />
-      </InputGroup>
-      <InputGroup
-        fullWidth
         border
         type="text"
         label="Your Website"
-        // infoIcon={infoIcon}
-        // iconLabel="Please contact us to help you with this"
-        placeholder="www.website-reviews.co.uk"
+        placeholder="www.reviewourservices.co.uk"
         name="customDomain"
         value={values.customDomain}
         onChange={handleChange}
@@ -132,16 +112,12 @@ ProjectSetupForm.propTypes = {
 export default withFormik({
   mapPropsToValues: () => ({
     name: '',
-    slug: '',
-    // customDomain: '',
+    customDomain: '',
     subscriptionPlanId: '',
   }),
   validationSchema: yup.object().shape({
     name: yup.string().required('Name is required!'),
-    slug: yup
-      .string()
-      .required('Default URL is required! e.g: example.online/yourproject'),
-    // customDomain: yup.string().required('Domain is required!'),
+    customDomain: yup.string().required('Domain is required!'),
     subscriptionPlanId: yup.string().required('Subscription is required!'),
   }),
 

@@ -108,8 +108,8 @@ const ProjectDashboardHero = () => {
         <Description className="is-flex">
           <strong>Step 2.</strong>
           <p>
-            Add this code snippet to your website where you want your customer
-            reviews to be displayed
+            Email this link to your <strong>review request form</strong> for
+            your customer to complete.
           </p>
         </Description>
         <Link
@@ -120,8 +120,8 @@ const ProjectDashboardHero = () => {
         <Description className="is-flex">
           <strong>Step 3.</strong>
           <p>
-            Add this code snippet to your website where you want your customer
-            reviews to be displayed
+            Upload your logo here to appear on your{' '}
+            <strong>review request form.</strong>
           </p>
         </Description>
         <a onClick={() => setIsActive(true)}>
