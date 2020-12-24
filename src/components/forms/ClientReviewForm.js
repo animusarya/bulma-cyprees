@@ -124,7 +124,7 @@ export default withFormik({
     personName: yup.string().required('Name is required!'),
     location: yup.string().required('Location is required!'),
     reviewTitle: yup.string().required('Title is required!'),
-    comment: yup.string().required('Comment is required!'),
+    comment: yup.string().required('Review is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
