@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
+import Cleave from 'cleave.js/react';
 
-import { InputGroup, Button } from './elements';
+import { InputGroup, Button } from '../elements';
 
-const DiscountForm = (props) => {
+const ProjectInfoForm = (props) => {
   const {
     values,
     touched,
@@ -23,8 +24,8 @@ const DiscountForm = (props) => {
         fullWidth
         border
         isHorizontal
-        label="Discount Title"
-        placeholder="Summer Discount"
+        label="Project Name"
+        placeholder="Colliers"
         name="name"
         value={values.name}
         onChange={handleChange}
@@ -36,42 +37,64 @@ const DiscountForm = (props) => {
         isWidth
         border
         isHorizontal
-        label="Discount Code"
-        placeholder="SAVE50"
-        name="code"
-        value={values.code}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={errors.code && touched.code ? errors.code : undefined}
-      />
+        label="Website URL Slug"
+        errors={errors.slug && touched.slug ? errors.slug : undefined}>
+        <Cleave
+          placeholder="colliers"
+          name="slug"
+          id="slug"
+          value={values.slug}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          options={{ prefix: 'website-reviews.online/' }}
+          className="input is-shadowless"
+        />
+      </InputGroup>
       <InputGroup
-        fullWidth
         isWidth
+        fullWidth
         border
         isHorizontal
-        type="number"
-        label="Percentage"
-        placeholder="50"
-        name="percentage"
-        value={values.percentage}
+        label="Custom Domain Name"
+        placeholder="www.colliers.co.uk/arden"
+        name="customDomain"
+        value={values.customDomain}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
-          errors.percentage && touched.percentage
-            ? errors.percentage
+          errors.customDomain && touched.customDomain
+            ? errors.customDomain
+            : undefined
+        }
+      />
+      <InputGroup
+        readOnly
+        isWidth
+        fullWidth
+        border
+        isHorizontal
+        label="Project Size"
+        placeholder="5GB"
+        name="projectSize"
+        value={values.projectSize}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.projectSize && touched.projectSize
+            ? errors.projectSize
             : undefined
         }
       />
       <div className="field">
         <div className="is-pulled-right">
-          <Button disabled={isSubmitting}>Submit</Button>
+          <Button disabled={isSubmitting}>Save</Button>
         </div>
       </div>
     </form>
   );
 };
 
-DiscountForm.propTypes = {
+ProjectInfoForm.propTypes = {
   values: PropTypes.object.isRequired,
   touched: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -82,15 +105,15 @@ DiscountForm.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({
-    name: '',
-    code: '',
-    percentage: '',
+  mapPropsToValues: ({ initialValues }) => ({
+    name: initialValues.name || '',
+    slug: initialValues.slug || '',
+    customDomain: initialValues.customDomain || '',
+    percentage: initialValues.percentage || '',
   }),
   validationSchema: yup.object().shape({
     name: yup.string().required('Name is required!'),
-    code: yup.string().required('Code is required!'),
-    percentage: yup.string().required('Percentage is required!'),
+    slug: yup.string().required('Default URL is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
@@ -99,5 +122,5 @@ export default withFormik({
       setSubmitting(false);
     });
   },
-  displayName: 'DiscountForm', // helps with React DevTools
-})(DiscountForm);
+  displayName: 'ProjectInfoForm', // helps with React DevTools
+})(ProjectInfoForm);

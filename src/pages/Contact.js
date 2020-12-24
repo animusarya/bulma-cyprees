@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 
 import { Message } from '../components/elements';
 import Layout from '../components/Layout';
-import ContactForm from '../components/ContactForm';
+import { ContactForm } from '../components/forms';
 
 // TODO: attach when data available
 

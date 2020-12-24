@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-import { InputGroup, Button } from './elements';
+import { InputGroup, Button } from '../elements';
 
-const HelpForm = (props) => {
+const DiscountForm = (props) => {
   const {
     values,
     touched,
@@ -23,27 +23,43 @@ const HelpForm = (props) => {
         fullWidth
         border
         isHorizontal
+        label="Discount Title"
+        placeholder="Summer Discount"
         name="name"
-        label="Title"
-        placeholder="Video Title"
         value={values.name}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={errors.name && touched.name ? errors.name : undefined}
       />
       <InputGroup
-        isWidth
         fullWidth
+        isWidth
         border
         isHorizontal
-        name="embedCode"
-        label="Embed Code"
-        placeholder="Paste YouTube Video Link Here"
-        value={values.embedCode}
+        label="Discount Code"
+        placeholder="SAVE50"
+        name="code"
+        value={values.code}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={errors.code && touched.code ? errors.code : undefined}
+      />
+      <InputGroup
+        fullWidth
+        isWidth
+        border
+        isHorizontal
+        type="number"
+        label="Percentage"
+        placeholder="50"
+        name="percentage"
+        value={values.percentage}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
-          errors.embedCode && touched.embedCode ? errors.embedCode : undefined
+          errors.percentage && touched.percentage
+            ? errors.percentage
+            : undefined
         }
       />
       <div className="field">
@@ -55,7 +71,7 @@ const HelpForm = (props) => {
   );
 };
 
-HelpForm.propTypes = {
+DiscountForm.propTypes = {
   values: PropTypes.object.isRequired,
   touched: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -68,17 +84,20 @@ HelpForm.propTypes = {
 export default withFormik({
   mapPropsToValues: () => ({
     name: '',
-    embedCode: '',
+    code: '',
+    percentage: '',
   }),
   validationSchema: yup.object().shape({
-    name: yup.string().required('Video title is required!'),
-    embedCode: yup.string().required('Embed Code is required!'),
+    name: yup.string().required('Name is required!'),
+    code: yup.string().required('Code is required!'),
+    percentage: yup.string().required('Percentage is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
     // console.log('handle submit', values, props);
-    props.onSubmit(values);
-    setSubmitting(false);
+    props.onSubmit(values).finally(() => {
+      setSubmitting(false);
+    });
   },
-  displayName: 'HelpForm', // helps with React DevTools
-})(HelpForm);
+  displayName: 'DiscountForm', // helps with React DevTools
+})(DiscountForm);

@@ -4,9 +4,7 @@ import { withFormik } from 'formik';
 import * as yup from 'yup';
 import styled from 'styled-components';
 
-import { InputGroup, Button } from './elements';
-// import NDAScroller from './NDAScroller';
-// import Disclaimer from './Disclaimer';
+import { InputGroup, Button } from '../elements';
 
 const MarginContainer = styled.div`
   margin-top: 2.5rem;
@@ -104,7 +102,6 @@ const RegisterForm = (props) => {
             : undefined
         }
       />
-      {/* {project.nda && <NDAScroller data={project.nda} />} */}
       {!isAdminRegister && (
         <label className="checkbox">
           <input
@@ -197,7 +194,6 @@ export default withFormik({
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
-    // console.log('handle submit', values, props);
     props.onSubmit(values).finally(() => {
       setSubmitting(false);
     });

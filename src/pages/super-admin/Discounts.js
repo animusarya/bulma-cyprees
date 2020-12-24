@@ -17,7 +17,7 @@ import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
-import DiscountForm from '../../components/DiscountForm';
+import { DiscountForm } from '../../components/forms';
 
 const discountsQuery = gql`
   {

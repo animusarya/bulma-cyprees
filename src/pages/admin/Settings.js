@@ -10,7 +10,7 @@ import Sidebar from '../../components/Sidebar';
 import CopyRight from '../../components/CopyRight';
 import MainColumn from '../../components/MainColumn';
 import { Heading, Message, Loading } from '../../components/elements';
-import SettingsForm from '../../components/SettingsForm';
+import { SettingsForm } from '../../components/forms';
 
 const meQuery = gql`
   query me {

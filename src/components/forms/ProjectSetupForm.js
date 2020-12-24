@@ -4,8 +4,8 @@ import { withFormik } from 'formik';
 import * as yup from 'yup';
 import styled from 'styled-components';
 
-import { InputGroup, Button, SelectGroup } from './elements';
-import { formatCurrency } from '../utils/helpers';
+import { InputGroup, Button, SelectGroup } from '../elements';
+import { formatCurrency } from '../../utils/helpers';
 
 const Form = styled.form`
   input {
@@ -53,7 +53,7 @@ const ProjectSetupForm = (props) => {
         fullWidth
         border
         type="text"
-        label="Your Website"
+        label="Domain"
         placeholder="www.reviewourservices.co.uk"
         name="customDomain"
         value={values.customDomain}

@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 import Seo from '../components/Seo';
 import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
-import SetPasswordForm from '../components/SetPasswordForm';
+import { SetPasswordForm } from '../components/forms';
 import Footer from '../components/Footer';
 import loginBg from '../assets/images/login-bg.jpg';
 import logo from '../assets/images/logo.svg';

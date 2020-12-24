@@ -64,7 +64,6 @@ const ProjectDashboardHero = () => {
   const projectId = useStoreState((state) => state.active.project);
   const [project, resultProject] = useProjectDetails(projectId);
   const [executeUpdateProjectMutation, resUpdateProject] = useProjectUpdate();
-  const activeProject = useStoreState((state) => state.active.project);
 
   const handleLogoUpload = (uploadResponse) => {
     executeUpdateProjectMutation({
@@ -77,6 +76,8 @@ const ProjectDashboardHero = () => {
       resultProject.refetch();
     });
   };
+
+  console.log(project, 'project');
   return (
     <div className="">
       <div className="has-text-weight-medium">
@@ -113,9 +114,9 @@ const ProjectDashboardHero = () => {
           </p>
         </Description>
         <Link
-          to={`/submit-review/${activeProject}`}
+          to={`/submit-review/${projectId}`}
           className="is-size-4 has-text-weight-semibold">
-          https://reviewourservices.com/designcity/
+          {project.customDomain}
         </Link>
         <Description className="is-flex">
           <strong>Step 3.</strong>

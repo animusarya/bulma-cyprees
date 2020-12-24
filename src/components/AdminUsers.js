@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import swal from 'sweetalert';
 
 import { Button, Title, Message, Loading } from './elements';
-import AdminUsersForm from './AdminUsersForm';
+import { AdminUsersForm } from './forms';
 
 const addProjectClientMutation = gql`
   mutation addProjectClient($id: ID!, $input: ProjectClientInput!) {

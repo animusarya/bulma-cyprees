@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
-import ProjectInfoForm from '../../components/ProjectInfoForm';
+import { ProjectInfoForm } from '../../components/forms';
 import { Heading, Title, Message, Loading } from '../../components/elements';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';

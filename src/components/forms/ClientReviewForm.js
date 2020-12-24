@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-import { InputGroup, Button, TextAreaGroup } from './elements';
-import Rating from './Rating';
+import { InputGroup, Button, TextAreaGroup } from '../elements';
+import Rating from '../Rating';
 
 const RatingTitle = styled.p`
   align-self: center;

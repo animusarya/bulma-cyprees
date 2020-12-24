@@ -7,7 +7,7 @@ import { useStoreActions } from 'easy-peasy';
 import Seo from '../components/Seo';
 import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
-import LoginForm from '../components/LoginForm';
+import { LoginForm } from '../components/forms';
 // import background from '../assets/images/intelliback.jpg';
 // import logo from '../assets/images/logo2.png';
 

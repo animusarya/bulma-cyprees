@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-import { InputGroup, SelectGroup, Button } from './elements';
+import { InputGroup, Button } from '../elements';
 
-const PageForm = props => {
+const HelpForm = (props) => {
   const {
     values,
     touched,
@@ -19,44 +19,43 @@ const PageForm = props => {
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
-        isHorizontal
-        border
+        isWidth
         fullWidth
+        border
+        isHorizontal
         name="name"
         label="Title"
-        placeholder=""
+        placeholder="Video Title"
         value={values.name}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={errors.name && touched.name ? errors.name : undefined}
       />
-      <SelectGroup
-        isHorizontal
-        fullWidth
+      <InputGroup
         isWidth
+        fullWidth
         border
-        label="Type"
-        placeholder=""
-        name="type"
-        value={values.type}
+        isHorizontal
+        name="embedCode"
+        label="Embed Code"
+        placeholder="Paste YouTube Video Link Here"
+        value={values.embedCode}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={errors.type && touched.type ? errors.type : undefined}
-        options={[
-          { value: 'content', title: 'Content (Text Page)' },
-          { value: 'dataroom', title: 'Dataroom (File Sharing Page)' },
-        ]}
+        errors={
+          errors.embedCode && touched.embedCode ? errors.embedCode : undefined
+        }
       />
       <div className="field">
         <div className="is-pulled-right">
-          <Button disabled={isSubmitting}>Create Page</Button>
+          <Button disabled={isSubmitting}>Submit</Button>
         </div>
       </div>
     </form>
   );
 };
 
-PageForm.propTypes = {
+HelpForm.propTypes = {
   values: PropTypes.object.isRequired,
   touched: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -69,19 +68,17 @@ PageForm.propTypes = {
 export default withFormik({
   mapPropsToValues: () => ({
     name: '',
-    type: '',
+    embedCode: '',
   }),
   validationSchema: yup.object().shape({
-    name: yup.string().required('Title is required!'),
-    type: yup.string().required('Type is required!'),
+    name: yup.string().required('Video title is required!'),
+    embedCode: yup.string().required('Embed Code is required!'),
   }),
 
-  handleSubmit: (values, { setSubmitting, resetForm, props }) => {
+  handleSubmit: (values, { setSubmitting, props }) => {
     // console.log('handle submit', values, props);
-    props.onSubmit(values).finally(() => {
-      setSubmitting(false);
-      resetForm();
-    });
+    props.onSubmit(values);
+    setSubmitting(false);
   },
-  displayName: 'PageForm', // helps with React DevTools
-})(PageForm);
+  displayName: 'HelpForm', // helps with React DevTools
+})(HelpForm);

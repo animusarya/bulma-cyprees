@@ -3,14 +3,19 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-import { InputGroup, Button } from './elements';
+import { InputGroup, Button } from '../elements';
 
-const FormWrapper = styled.form`
-  justify-content: space-between;
+const ResetPassword = styled.div`
+  a {
+    :hover {
+      color: ${(props) => props.theme.primaryColor};
+    }
+  }
 `;
 
-const AdminUsersForm = (props) => {
+const LoginForm = (props) => {
   const {
     values,
     touched,
@@ -22,9 +27,10 @@ const AdminUsersForm = (props) => {
   } = props;
 
   return (
-    <FormWrapper onSubmit={handleSubmit} className="is-flex">
+    <form onSubmit={handleSubmit}>
       <InputGroup
         border
+        label="Email"
         name="email"
         placeholder="john@doe.com"
         value={values.email}
@@ -32,18 +38,38 @@ const AdminUsersForm = (props) => {
         onBlur={handleBlur}
         errors={errors.email && touched.email ? errors.email : undefined}
       />
+      <InputGroup
+        border
+        label="Password"
+        name="password"
+        type="password"
+        placeholder="*********"
+        value={values.password}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.password && touched.password ? errors.password : undefined
+        }
+      />
       <div className="field">
         <div className="control">
-          <Button secondary marginreq disabled={isSubmitting}>
-            ADD
+          <Button
+            marginTop
+            marginBottomNone
+            type="submit"
+            disabled={isSubmitting}>
+            <span className="has-text-weight-bold is-size-4">Log In</span>
           </Button>
         </div>
       </div>
-    </FormWrapper>
+      <ResetPassword>
+        <Link to="/forgot-password">Forgot Password?</Link>
+      </ResetPassword>
+    </form>
   );
 };
 
-AdminUsersForm.propTypes = {
+LoginForm.propTypes = {
   values: PropTypes.object.isRequired,
   touched: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -56,12 +82,14 @@ AdminUsersForm.propTypes = {
 export default withFormik({
   mapPropsToValues: () => ({
     email: '',
+    password: '',
   }),
   validationSchema: yup.object().shape({
     email: yup
       .string()
       .email('Invalid email address')
       .required('Email is required!'),
+    password: yup.string().required('Password is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
@@ -70,5 +98,5 @@ export default withFormik({
       setSubmitting(false);
     });
   },
-  displayName: 'AdminUsersForm', // helps with React DevTools
-})(AdminUsersForm);
+  displayName: 'LoginForm', // helps with React DevTools
+})(LoginForm);

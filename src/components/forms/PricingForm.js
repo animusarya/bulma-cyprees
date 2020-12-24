@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
-import Cleave from 'cleave.js/react';
 
-import { InputGroup, Button } from './elements';
+import { InputGroup, Button } from '../elements';
 
-const ProjectInfoForm = (props) => {
+const PricingForm = (props) => {
   const {
+    initialValues,
     values,
     touched,
     errors,
@@ -24,66 +24,47 @@ const ProjectInfoForm = (props) => {
         fullWidth
         border
         isHorizontal
-        label="Project Name"
-        placeholder="Colliers"
         name="name"
+        label="Package Name"
+        placeholder="Monthly/Bi-Annually/Annually"
         value={values.name}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={errors.name && touched.name ? errors.name : undefined}
       />
       <InputGroup
-        fullWidth
-        isWidth
-        border
-        isHorizontal
-        label="Website URL Slug"
-        errors={errors.slug && touched.slug ? errors.slug : undefined}>
-        <Cleave
-          placeholder="colliers"
-          name="slug"
-          id="slug"
-          value={values.slug}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          options={{ prefix: 'website-reviews.online/' }}
-          className="input is-shadowless"
-        />
-      </InputGroup>
-      <InputGroup
         isWidth
         fullWidth
         border
         isHorizontal
-        label="Custom Domain Name"
-        placeholder="www.colliers.co.uk/arden"
-        name="customDomain"
-        value={values.customDomain}
+        type="number"
+        name="durationInMonths"
+        label="Duration (in months)"
+        placeholder="6"
+        disabled={initialValues.durationInMonths}
+        value={values.durationInMonths}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
-          errors.customDomain && touched.customDomain
-            ? errors.customDomain
+          errors.durationInMonths && touched.durationInMonths
+            ? errors.durationInMonths
             : undefined
         }
       />
       <InputGroup
-        readOnly
         isWidth
         fullWidth
         border
         isHorizontal
-        label="Project Size"
-        placeholder="5GB"
-        name="projectSize"
-        value={values.projectSize}
+        type="number"
+        name="price"
+        label="Price (£)"
+        placeholder="100"
+        value={values.price}
+        disabled={initialValues.price}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={
-          errors.projectSize && touched.projectSize
-            ? errors.projectSize
-            : undefined
-        }
+        errors={errors.price && touched.price ? errors.price : undefined}
       />
       <div className="field">
         <div className="is-pulled-right">
@@ -94,7 +75,7 @@ const ProjectInfoForm = (props) => {
   );
 };
 
-ProjectInfoForm.propTypes = {
+PricingForm.propTypes = {
   values: PropTypes.object.isRequired,
   touched: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -107,13 +88,12 @@ ProjectInfoForm.propTypes = {
 export default withFormik({
   mapPropsToValues: ({ initialValues }) => ({
     name: initialValues.name || '',
-    slug: initialValues.slug || '',
-    customDomain: initialValues.customDomain || '',
-    percentage: initialValues.percentage || '',
+    durationInMonths: initialValues.durationInMonths || '',
+    price: initialValues.price || '',
   }),
   validationSchema: yup.object().shape({
-    name: yup.string().required('Name is required!'),
-    slug: yup.string().required('Default URL is required!'),
+    name: yup.string().required('Package Name is required!'),
+    price: yup.string().required('Price is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
@@ -122,5 +102,5 @@ export default withFormik({
       setSubmitting(false);
     });
   },
-  displayName: 'ProjectInfoForm', // helps with React DevTools
-})(ProjectInfoForm);
+  displayName: 'PricingForm', // helps with React DevTools
+})(PricingForm);

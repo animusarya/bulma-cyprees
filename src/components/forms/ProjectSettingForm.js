@@ -4,7 +4,7 @@ import { withFormik } from 'formik';
 import * as yup from 'yup';
 import styled from 'styled-components';
 
-import { InputGroup, Button, ColorPicker, ReactDropdown } from './elements';
+import { InputGroup, Button, ColorPicker, ReactDropdown } from '../elements';
 
 const Container = styled.div`
   .dropdown {

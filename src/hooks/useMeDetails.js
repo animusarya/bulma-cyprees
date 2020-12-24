@@ -11,18 +11,6 @@ const meQuery = gql`
         companyName
         telephone
       }
-      clientProject {
-        id
-        name
-        slug
-        logo
-        heroImage
-        disclaimer
-        brandColor
-        contactName
-        contactTelephone
-        contactEmail
-      }
     }
   }
 `;

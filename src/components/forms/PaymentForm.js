@@ -8,10 +8,9 @@ import Cleave from 'cleave.js/react';
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 
-import { InputGroup, Button, SelectGroup } from './elements';
-import theme from '../utils/theme';
-import Subtitle from './elements/Subtitle';
-import stripe from '../assets/images/Secure-by-Stripe.png';
+import { InputGroup, Button, SelectGroup, Subtitle } from '../elements';
+import theme from '../../utils/theme';
+import stripe from '../../assets/images/Secure-by-Stripe.png';
 
 const Form = styled.form`
   input {
@@ -442,5 +441,5 @@ export default withFormik({
       setSubmitting(false);
     });
   },
-  displayName: 'ProjectSetupForm', // helps with React DevTools
+  displayName: 'PaymentForm', // helps with React DevTools
 })(PaymentForm);

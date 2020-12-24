@@ -11,7 +11,7 @@ import Sidebar from '../../components/Sidebar';
 import CopyRight from '../../components/CopyRight';
 import MainColumn from '../../components/MainColumn';
 import { Heading, Message, Loading } from '../../components/elements';
-import ProjectSettingForm from '../../components/ProjectSettingForm';
+import { ProjectSettingForm } from '../../components/forms';
 
 const FormContainer = styled.div`
   margin-top: -70px;

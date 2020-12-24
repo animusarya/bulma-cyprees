@@ -2,20 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
-import { InputGroup, Button } from './elements';
+import { InputGroup, Button } from '../elements';
 
-const ResetPassword = styled.div`
-  a {
-    :hover {
-      color: ${(props) => props.theme.primaryColor};
-    }
-  }
-`;
-
-const LoginForm = (props) => {
+const SetPasswordForm = (props) => {
   const {
     values,
     touched,
@@ -29,18 +19,7 @@ const LoginForm = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
-        border
-        label="Email"
-        name="email"
-        placeholder="john@doe.com"
-        value={values.email}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={errors.email && touched.email ? errors.email : undefined}
-      />
-      <InputGroup
-        border
-        label="Password"
+        label="Password:"
         name="password"
         type="password"
         placeholder="*********"
@@ -51,25 +30,30 @@ const LoginForm = (props) => {
           errors.password && touched.password ? errors.password : undefined
         }
       />
+      <InputGroup
+        label="Repeat Password:"
+        name="confirmPassword"
+        type="password"
+        placeholder="*********"
+        value={values.confirmPassword}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.confirmPassword && touched.confirmPassword
+            ? errors.confirmPassword
+            : undefined
+        }
+      />
       <div className="field">
         <div className="control">
-          <Button
-            marginTop
-            marginBottomNone
-            type="submit"
-            disabled={isSubmitting}>
-            <span className="has-text-weight-bold is-size-4">Log In</span>
-          </Button>
+          <Button disabled={isSubmitting}>Set Password</Button>
         </div>
       </div>
-      <ResetPassword>
-        <Link to="/forgot-password">Forgot Password?</Link>
-      </ResetPassword>
     </form>
   );
 };
 
-LoginForm.propTypes = {
+SetPasswordForm.propTypes = {
   values: PropTypes.object.isRequired,
   touched: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -81,15 +65,21 @@ LoginForm.propTypes = {
 
 export default withFormik({
   mapPropsToValues: () => ({
-    email: '',
     password: '',
+    confirmPassword: '',
   }),
   validationSchema: yup.object().shape({
-    email: yup
+    password: yup
       .string()
-      .email('Invalid email address')
-      .required('Email is required!'),
-    password: yup.string().required('Password is required!'),
+      .required('Password is required!')
+      .min(2, 'Seems a bit short...'),
+    confirmPassword: yup
+      .string()
+      .required('This filed is required!')
+      .label('Confirm password')
+      .test('passwords-match', 'Passwords not matched!', function (values) {
+        return this.parent.password === values;
+      }),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
@@ -98,5 +88,5 @@ export default withFormik({
       setSubmitting(false);
     });
   },
-  displayName: 'LoginForm', // helps with React DevTools
-})(LoginForm);
+  displayName: 'SetPasswordForm', // helps with React DevTools
+})(SetPasswordForm);

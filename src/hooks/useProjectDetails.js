@@ -10,38 +10,19 @@ const projectQuery = gql`
       name
       slug
       logo
-      heroImage
       customDomain
       subscriptionName
       subscriptionDurationInMonths
       subscriptionAmount
       disclaimer
-      nda
-      brandColor
-      contactName
-      contactTelephone
-      contactEmail
-      welcomeEmailTemplate {
-        subject
-        body
-      }
-      clientEmailTemplate {
-        subject
-        body
-      }
-      clients {
-        id
-        email
-        status
-        hasAccess
-        notifyStatus
-        user {
-          id
-          profile {
-            fullName
-          }
-        }
-      }
+      starsColor
+      buttonsColor
+      reviewTitleSize
+      reviewTitleColor
+      reviewBodySize
+      reviewBodyColor
+      reviewAuthorSize
+      reviewAuthorColor
     }
   }
 `;

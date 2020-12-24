@@ -11,7 +11,7 @@ import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
-import HelpForm from '../../components/HelpForm';
+import { HelpForm } from '../../components/forms';
 
 const supportQuery = gql`
   {

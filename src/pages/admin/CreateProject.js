@@ -10,11 +10,10 @@ import Layout from '../../components/Layout';
 import Header from '../../components/Header';
 // import Sidebar from '../../components/Sidebar';
 import CopyRight from '../../components/CopyRight';
-import PaymentForm from '../../components/PaymentForm';
+import { PaymentForm, ProjectSetupForm } from '../../components/forms';
 import PaymentConfirmation from '../../components/PaymentConfirmation';
 import ProgressBar from '../../components/ProgressBar';
 import MainColumn from '../../components/MainColumn';
-import ProjectSetupForm from '../../components/ProjectSetupForm';
 import { Message, Loading } from '../../components/elements';
 
 const Section = styled.section`

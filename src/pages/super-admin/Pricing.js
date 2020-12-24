@@ -18,7 +18,7 @@ import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import MainColumn from '../../components/MainColumn';
 import CopyRight from '../../components/CopyRight';
-import PricingForm from '../../components/PricingForm';
+import { PricingForm } from '../../components/forms';
 
 const pricingsQuery = gql`
   {

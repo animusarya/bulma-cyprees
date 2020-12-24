@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import ClientReviewForm from '../components/ClientReviewForm';
+import { ClientReviewForm } from '../components/forms';
 import Layout from '../components/Layout';
 import useProjectDetails from '../hooks/useProjectDetails';
 

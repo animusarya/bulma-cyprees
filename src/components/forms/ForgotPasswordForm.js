@@ -4,7 +4,7 @@ import { withFormik } from 'formik';
 import * as yup from 'yup';
 // import styled from 'styled-components';
 
-import { InputGroup, Button } from './elements';
+import { InputGroup, Button } from '../elements';
 
 const ForgotPasswordForm = (props) => {
   const {

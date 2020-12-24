@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-import { InputGroup, Button } from './elements';
+import { InputGroup, Button } from '../elements';
 
 const SettingsForm = (props) => {
   const {
