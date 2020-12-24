@@ -1,66 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// import logo from '../assets/images/logo2.png';
+import logo from '../assets/images/logo-ros.svg';
 
-const Container = styled.section`
-  background-color: #0a253e;
-  padding: 1rem 1.5rem;
+const Container = styled.nav`
+  background-color: ${(props) => props.theme.primaryColor};
+  padding: 0rem 1.5rem;
   .navbar-item {
     background-color: transparent !important;
   }
-  .navbar {
-    background-color: #0a253e;
-  }
-  .button {
-    border-radius: 30px;
-  }
 `;
 
-// const Logo = styled.img`
-//   max-height: 60px;
-//   width: auto;
-// `;
+const Logo = styled.img`
+  width: 200px;
+  height: auto;
+  margin-left: -8px;
+`;
 
 const AuthHeader = () => (
-  <Container className="section">
-    <div className="container">
-      <nav className="navbar" role="navigation" aria-label="main navigation">
-        <div className="navbar-brand">
-          <a className="navbar-item" href="/">
-            {/* {activeProject.logo ? (
-              <Logo src={activeProject.logo} alt={activeProject.name} />
-            ) : (
-              <Logo src={logo} alt="Website Reviews" />
-            )} */}
-          </a>
-
-          <a
-            role="button"
-            className="navbar-burger burger"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample">
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
-          </a>
-        </div>
-
-        <div id="navbarBasicExample" className="navbar-menu">
-          <div className="navbar-start" />
-
-          <div className="navbar-end">
-            <div className="navbar-item">
-              <div className="buttons">
-                <a className="button is-primary">
-                  <strong>Request Demo</strong>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+  <Container className="navbar" role="navigation" aria-label="main navigation">
+    <div className="navbar-brand">
+      <a className="navbar-item" to="/">
+        <Logo src={logo} alt="Review our services logo" />
+      </a>
     </div>
   </Container>
 );

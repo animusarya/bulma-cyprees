@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useStoreState } from 'easy-peasy';
 import { Link } from 'react-router-dom';
 
-// import logoAlt from '../assets/images/logo.svg';
+import logo from '../assets/images/logo-ros.svg';
 import Sidebar from './Sidebar';
 
 const Container = styled.div`
@@ -24,21 +24,6 @@ const Container = styled.div`
   }
 `;
 
-// const AdminNav = styled.nav`
-//   display: flex;
-//   justify-content: space-between;
-//   width: 100%;
-//   @media screen and (max-width: 768px) {
-//     flex-direction: column-reverse;
-//   }
-//   .navbar-end {
-//     justify-content: space-between;
-//   }
-//   .navbar-item {
-//     padding-right: 0.2rem;
-//   }
-// `;
-
 const LinkLogo = styled(Link)`
   :hover {
     background: transparent !important;
@@ -52,10 +37,10 @@ const LinkWrapper = styled(Link)`
   }
 `;
 
-// const Logo = styled.img`
-//   width: 140px;
-//   height: auto;
-// `;
+const Logo = styled.img`
+  width: 200px;
+  height: auto;
+`;
 
 const Button = styled.button`
   background-color: transparent;
@@ -98,7 +83,7 @@ const Header = () => {
             aria-label="main navigation">
             <div className="navbar-brand">
               <LinkLogo className="navbar-item" to="/super-admin/dashboard">
-                <h1 className="has-text-white">Review our Services</h1>
+                <Logo src={logo} alt="Review our services logo" />
               </LinkLogo>
               <a
                 role="button"
@@ -154,7 +139,7 @@ const Header = () => {
             aria-label="main navigation">
             <div className="navbar-brand">
               <Link className="navbar-item" to="/user/dashboard">
-                <h1 className="has-text-white">Review our Services Logo</h1>
+                <Logo src={logo} alt="Review our services logo" />
               </Link>
               <a
                 className={

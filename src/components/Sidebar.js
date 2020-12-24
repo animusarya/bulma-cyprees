@@ -82,7 +82,7 @@ const Sidebar = ({ showOnMobile }) => {
       )}
       {userData.type === 'admin' && (
         <ul className="menu-list">
-          <LinkWrapper
+          {/* <LinkWrapper
             icon="fas fa-plus-circle"
             title="Create"
             to="/user/create/website"
@@ -91,7 +91,7 @@ const Sidebar = ({ showOnMobile }) => {
             icon="fas fa-th-large"
             title="Dashboard"
             to="/user/dashboard"
-          />
+          /> */}
           {!isNull(activeProject) ? (
             <div className="sub-items">
               <LinkWrapper
