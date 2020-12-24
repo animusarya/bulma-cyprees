@@ -8,7 +8,7 @@ import { useStoreActions } from 'easy-peasy';
 import Seo from '../../components/Seo';
 import Layout from '../../components/Layout';
 import Header from '../../components/Header';
-import Sidebar from '../../components/Sidebar';
+// import Sidebar from '../../components/Sidebar';
 import CopyRight from '../../components/CopyRight';
 import PaymentForm from '../../components/PaymentForm';
 import PaymentConfirmation from '../../components/PaymentConfirmation';
@@ -17,7 +17,12 @@ import MainColumn from '../../components/MainColumn';
 import ProjectSetupForm from '../../components/ProjectSetupForm';
 import { Message, Loading } from '../../components/elements';
 
+const Section = styled.section`
+  padding: 0rem 1.5rem;
+`;
+
 const Container = styled.div`
+  height: 100vh;
   .title {
     color: ${(props) => props.theme.primaryColor};
     margin-bottom: 0.6rem !important;
@@ -89,85 +94,93 @@ const CreateProject = () => {
     <Layout noContainer>
       <Seo title="Create Project" description="Create New Project" />
       <Header />
-      <div className="columns">
-        <div className="column is-one-fifth">
+      <Section className="section">
+        <div className="container">
+          <div className="columns">
+            {/* <div className="column is-one-fifth">
           <Sidebar />
+        </div> */}
+            <Container className="column">
+              <MainColumn>
+                <ProgressBar activeStep={activeStep} />
+                {activeStep.stepOne &&
+                  !activeStep.stepTwo &&
+                  !activeStep.stepThree && (
+                    <div className="column">
+                      <h2 className="has-text-weight-semibold is-size-4 title">
+                        Website Details
+                      </h2>
+                      <ProjectSetupForm
+                        packages={packages}
+                        onSubmit={(data) => {
+                          setProject(data);
+                          const selectedSubscription = find(packages, {
+                            subscriptionPlanId: data.subscriptionPlanId,
+                          });
+                          setSubscription(selectedSubscription);
+                          setActiveStep({ ...activeStep, stepTwo: true });
+                        }}
+                      />
+                    </div>
+                  )}
+                {activeStep.stepOne &&
+                  activeStep.stepTwo &&
+                  !activeStep.stepThree && (
+                    <div className="column">
+                      <h2 className="has-text-weight-semibold is-size-4 title">
+                        Make Payment
+                      </h2>
+                      <PaymentForm
+                        enableReinitialize
+                        initialValues={project}
+                        subscription={subscription}
+                        onSubmit={async (data) => {
+                          const card = {
+                            number: toString(data.paymentCardNumber),
+                            expMonth: toString(data.paymentCardExpiryMonth),
+                            expYear: toString(data.paymentCardExpiryYear),
+                            cvc: toString(data.paymentCardCvv),
+                          };
+
+                          const inputData = {
+                            ...project,
+                            card,
+                            billingAddress: {
+                              country: data.country,
+                              addressLine1: data.addressLine1,
+                              addressLine2: data.addressLine2,
+                              city: data.city,
+                              state: data.state,
+                              postcode: toString(data.postcode),
+                            },
+                          };
+
+                          // send success data to server
+                          const projectCreated = await executeMutationAdd({
+                            variables: inputData,
+                          });
+                          if (projectCreated.data.createProject) {
+                            setProject(projectCreated.data.createProject);
+                            setActiveStep({ ...activeStep, stepThree: true });
+                          }
+                        }}
+                      />
+                    </div>
+                  )}
+                {activeStep.stepOne &&
+                  activeStep.stepTwo &&
+                  activeStep.stepThree && (
+                    <PaymentConfirmation project={project} />
+                  )}
+                {resAdd.error && (
+                  <Message type="error">{resAdd.error.message}</Message>
+                )}
+                {resAdd.loading ? <Loading /> : null}
+              </MainColumn>
+            </Container>
+          </div>
         </div>
-        <Container className="column">
-          <MainColumn>
-            <ProgressBar activeStep={activeStep} />
-            {activeStep.stepOne &&
-              !activeStep.stepTwo &&
-              !activeStep.stepThree && (
-                <div className="column is-half">
-                  <h2 className="has-text-weight-semibold is-size-4 title">
-                    Website Details
-                  </h2>
-                  <ProjectSetupForm
-                    packages={packages}
-                    onSubmit={(data) => {
-                      setProject(data);
-                      const selectedSubscription = find(packages, {
-                        subscriptionPlanId: data.subscriptionPlanId,
-                      });
-                      setSubscription(selectedSubscription);
-                      setActiveStep({ ...activeStep, stepTwo: true });
-                    }}
-                  />
-                </div>
-              )}
-            {activeStep.stepOne && activeStep.stepTwo && !activeStep.stepThree && (
-              <div className="column">
-                <h2 className="has-text-weight-semibold is-size-4 title">
-                  Make Payment
-                </h2>
-                <PaymentForm
-                  enableReinitialize
-                  initialValues={project}
-                  subscription={subscription}
-                  onSubmit={async (data) => {
-                    const card = {
-                      number: toString(data.paymentCardNumber),
-                      expMonth: toString(data.paymentCardExpiryMonth),
-                      expYear: toString(data.paymentCardExpiryYear),
-                      cvc: toString(data.paymentCardCvv),
-                    };
-
-                    const inputData = {
-                      ...project,
-                      card,
-                      billingAddress: {
-                        country: data.country,
-                        addressLine1: data.addressLine1,
-                        addressLine2: data.addressLine2,
-                        city: data.city,
-                        state: data.state,
-                        postcode: toString(data.postcode),
-                      },
-                    };
-
-                    // send success data to server
-                    const projectCreated = await executeMutationAdd({
-                      variables: inputData,
-                    });
-                    if (projectCreated.data.createProject) {
-                      setProject(projectCreated.data.createProject);
-                      setActiveStep({ ...activeStep, stepThree: true });
-                    }
-                  }}
-                />
-              </div>
-            )}
-            {activeStep.stepOne &&
-              activeStep.stepTwo &&
-              activeStep.stepThree && <PaymentConfirmation project={project} />}
-            {resAdd.error && (
-              <Message type="error">{resAdd.error.message}</Message>
-            )}
-            {resAdd.loading ? <Loading /> : null}
-          </MainColumn>
-        </Container>
-      </div>
+      </Section>
       <CopyRight />
     </Layout>
   );

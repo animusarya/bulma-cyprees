@@ -107,7 +107,7 @@ const Register = ({ match }) => {
     updateUser(user);
     setTimeout(() => {
       window.location.replace(
-        isAdminRegister ? '/user/dashboard' : '/client/dashboard',
+        isAdminRegister ? '/user/create/website' : '/client/dashboard',
       );
     }, 1000);
   }
@@ -127,34 +127,13 @@ const Register = ({ match }) => {
                       role="navigation"
                       aria-label="main navigation">
                       <div id="navbarBasicExample" className="navbar-menu">
-                        <div className="navbar-end">
-                          {/* <div className="navbar-item has-text-black-bis has-text-right">
-                            {activeProject.name && (
-                              <h3 className="has-text-weight-bold is-size-3">
-                                {activeProject.name}
-                              </h3>
-                            )}
-                          </div> */}
-                        </div>
+                        <div className="navbar-end" />
                       </div>
                     </nav>
-                    {/* {activeProject.logo ? (
-                      <Logo src={activeProject.logo} alt={activeProject.name} />
-                    ) : (
-                      <Logo src={logo} alt="Website Reviews" />
-                    )} */}
-                    {/* <h1>Review Our Services</h1> */}
                     <ContentContainer>
                       <h2 className="has-text-weight-semibold is-size-5-mobile">
                         Create an Account
                       </h2>
-                      <p className="is-size-6">
-                        {/* Share your files and content and engage your clients. Do
-                        it all with Website Reviews. Already have an account?{' '} */}
-                        {/* <a className="has-text-weight-bold" href="/login">
-                          Log in
-                        </a> */}
-                      </p>
                     </ContentContainer>
                   </div>
                   <RegisterForm

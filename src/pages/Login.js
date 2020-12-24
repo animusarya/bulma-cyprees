@@ -72,7 +72,6 @@ const Login = () => {
     (actions) => actions.isLoggedIn.togggle,
   );
   const updateUser = useStoreActions((actions) => actions.user.update);
-  // const activeProject = useStoreState((state) => state.origin.project);
 
   if (res.data && res.data.login) {
     const { jwt, user } = res.data.login;
@@ -105,23 +104,9 @@ const Login = () => {
                       role="navigation"
                       aria-label="main navigation">
                       <div id="navbarBasicExample" className="navbar-menu">
-                        <div className="endnavbar-">
-                          {/* <div className="navbar-item has-text-black-bis has-text-right">
-                            {activeProject.name && (
-                              <h1 className="has-text-weight-bold">
-                                {activeProject.name}
-                              </h1>
-                            )}
-                          </div> */}
-                        </div>
+                        <div className="navbar-end" />
                       </div>
                     </nav>
-
-                    {/* {activeProject.logo ? (
-                      <Logo src={activeProject.logo} alt={activeProject.name} />
-                    ) : (
-                      <Logo src={logo} alt="Website Reviews" />
-                    )} */}
                     <ContentContainer>
                       <h2 className="has-text-weight-semibold is-size-5-mobile">
                         Log In
