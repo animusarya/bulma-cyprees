@@ -4,6 +4,14 @@ import ReactStars from 'react-rating-stars-component';
 
 const Container = styled.div`
   text-align: center;
+  :focus {
+    outline-width: 0;
+  }
+  .react-stars {
+    :focus {
+      outline-width: 0;
+    }
+  }
 `;
 
 const Rating = ({ size, value, disabled, count, onChange }) => (
@@ -13,7 +21,9 @@ const Rating = ({ size, value, disabled, count, onChange }) => (
         size={size}
         count={count || 1}
         half={false}
-        color2="#FED900"
+        activeColor="#ffd700"
+        emptyIcon={<i className="far fa-star" />}
+        fullIcon={<i className="fa fa-star" />}
         value={value === 0 ? 0 : 5}
       />
     ) : (
@@ -28,4 +38,5 @@ const Rating = ({ size, value, disabled, count, onChange }) => (
     )}
   </Container>
 );
+
 export default Rating;

@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useMutation } from '@apollo/client';
+import gql from 'graphql-tag';
 
 import { ClientReviewForm } from '../components/forms';
 import Layout from '../components/Layout';
 import useProjectDetails from '../hooks/useProjectDetails';
+import { Message } from '../components/elements';
 
 const Logo = styled.img`
   width: 150px;
@@ -18,11 +21,29 @@ const Bottom = styled.p`
   margin-top: 30px;
 `;
 
+const createReviewMutation = gql`
+  mutation createReview($input: ReviewInput!) {
+    createReview(input: $input) {
+      id
+      personName
+      location
+      reviewTitle
+      comment
+      rating
+      status
+      createdAt
+    }
+  }
+`;
+
 const ClientReview = ({ match }) => {
-  const handleSubmit = () => null;
+  // const handleSubmit = () => null;
+  const [executeMutation, res] = useMutation(createReviewMutation);
 
   const projectId = match.params.id;
   const [project] = useProjectDetails(projectId);
+
+  console.log(projectId, 'project');
 
   return (
     <Layout noContainer>
@@ -45,7 +66,15 @@ const ClientReview = ({ match }) => {
                 your experience. They will process your review which might be
                 published on their website.{' '}
               </Description>
-              <ClientReviewForm onSubmit={handleSubmit} />
+              <ClientReviewForm
+                projectId={projectId}
+                onSubmit={async (data) => {
+                  await executeMutation({
+                    variables: { projectId, input: data },
+                  });
+                }}
+              />
+              {res.error && <Message type="error">{res.error.message}</Message>}
               <Bottom>
                 By submitting this review you are allowing this to be displayed
                 on their company website.

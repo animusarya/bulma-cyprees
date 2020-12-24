@@ -21,67 +21,68 @@ const ClientReviewForm = (props) => {
     handleChange,
     handleBlur,
     handleSubmit,
+    setFieldValue,
   } = props;
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
         border
         label="Your Name:"
-        name="fullName"
+        name="personName"
         type="text"
-        value={values.fullName}
+        value={values.personName}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
-          errors.fullName && touched.fullName ? errors.fullName : undefined
+          errors.personName && touched.personName
+            ? errors.personName
+            : undefined
         }
       />
       <InputGroup
         border
         label="Your Location:"
-        name="companyName"
+        name="location"
         type="text"
-        value={values.companyName}
+        value={values.location}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
-          errors.companyName && touched.companyName
-            ? errors.companyName
-            : undefined
+          errors.location && touched.location ? errors.location : undefined
         }
       />
       <div className="is-flex">
         <RatingTitle>Your Rating:</RatingTitle>
         <Rating
           size={40}
-          disabled
-          onChange={handleChange}
-          value={values.ratings}
-          count={5}
+          value={values.rating}
+          onChange={(val) => setFieldValue('rating', val)}
         />
       </div>
       <InputGroup
         border
         label="Review Title:"
-        name="telephone"
+        name="reviewTitle"
         type="text"
         labelInfo="(Max 80 characters)"
-        value={values.telephone}
+        value={values.reviewTitle}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
-          errors.telephone && touched.telephone ? errors.telephone : undefined
+          errors.reviewTitle && touched.reviewTitle
+            ? errors.reviewTitle
+            : undefined
         }
       />
       <TextAreaGroup
         border
         label="Review Description:"
-        name="email"
+        name="comment"
         labelInfo="(Max 500 characters)"
-        value={values.email}
+        value={values.comment}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={errors.email && touched.email ? errors.email : undefined}
+        errors={errors.comment && touched.comment ? errors.comment : undefined}
       />
 
       <div className="field">
@@ -113,10 +114,17 @@ ClientReviewForm.propTypes = {
 
 export default withFormik({
   mapPropsToValues: () => ({
-    fullName: '',
+    personName: '',
+    location: '',
+    reviewTitle: '',
+    comment: '',
+    rating: 5,
   }),
   validationSchema: yup.object().shape({
-    fullName: yup.string().required('name is required!'),
+    personName: yup.string().required('Name is required!'),
+    location: yup.string().required('Location is required!'),
+    reviewTitle: yup.string().required('Title is required!'),
+    comment: yup.string().required('Comment is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
