@@ -31,7 +31,6 @@ const Rating = ({ size, value, disabled, count, onChange, activeColor }) => (
         count={5}
         size={size}
         half={false}
-        // color2="#FED900"
         activeColor={activeColor || '#ffd700'}
         emptyIcon={<i className="far fa-star" />}
         fullIcon={<i className="fa fa-star" />}

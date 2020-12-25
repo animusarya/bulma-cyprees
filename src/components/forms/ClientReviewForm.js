@@ -27,7 +27,6 @@ const ClientReviewForm = (props) => {
   } = props;
 
   const { buttonsColor, buttonsTextColor, starsColor } = project;
-  console.log(project, 'project');
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
