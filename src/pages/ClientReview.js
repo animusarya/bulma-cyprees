@@ -65,6 +65,7 @@ const ClientReview = ({ match }) => {
                 published on their website.{' '}
               </Description>
               <ClientReviewForm
+                project={project}
                 onSubmit={async (data) => {
                   await executeMutation({
                     variables: {

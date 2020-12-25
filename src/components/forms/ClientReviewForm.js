@@ -23,7 +23,11 @@ const ClientReviewForm = (props) => {
     handleBlur,
     handleSubmit,
     setFieldValue,
+    project,
   } = props;
+
+  const { buttonsColor, buttonsTextColor, starsColor } = project;
+  console.log(project, 'project');
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
@@ -56,6 +60,7 @@ const ClientReviewForm = (props) => {
         <RatingTitle>Your Rating:</RatingTitle>
         <Rating
           size={40}
+          activeColor={starsColor}
           value={values.rating}
           onChange={(val) => setFieldValue('rating', val)}
         />
@@ -89,6 +94,8 @@ const ClientReviewForm = (props) => {
       <div className="field">
         <div className="control">
           <Button
+            bgColor={buttonsColor}
+            buttonsTextColor={buttonsTextColor}
             marginTop
             marginBottomNone
             type="submit"

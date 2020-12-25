@@ -14,14 +14,14 @@ const Container = styled.div`
   }
 `;
 
-const Rating = ({ size, value, disabled, count, onChange }) => (
+const Rating = ({ size, value, disabled, count, onChange, activeColor }) => (
   <Container>
     {disabled ? (
       <ReactStars
         size={size}
         count={count || 1}
         half={false}
-        activeColor="#ffd700"
+        activeColor={activeColor || '#ffd700'}
         emptyIcon={<i className="far fa-star" />}
         fullIcon={<i className="fa fa-star" />}
         value={value === 0 ? 0 : 5}
@@ -31,7 +31,10 @@ const Rating = ({ size, value, disabled, count, onChange }) => (
         count={5}
         size={size}
         half={false}
-        color2="#FED900"
+        // color2="#FED900"
+        activeColor={activeColor || '#ffd700'}
+        emptyIcon={<i className="far fa-star" />}
+        fullIcon={<i className="fa fa-star" />}
         value={value}
         onChange={(val) => onChange(val)}
       />
