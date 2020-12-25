@@ -77,7 +77,7 @@ const ProjectDashboardHero = () => {
     });
   };
 
-  console.log(project, 'project');
+  // console.log(project, 'project');
   return (
     <div className="">
       <div className="has-text-weight-medium">

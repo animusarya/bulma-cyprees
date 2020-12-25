@@ -10,6 +10,7 @@ import Rating from '../Rating';
 const RatingTitle = styled.p`
   align-self: center;
   padding-right: 15px;
+  font-weight: bold;
 `;
 
 const ClientReviewForm = (props) => {

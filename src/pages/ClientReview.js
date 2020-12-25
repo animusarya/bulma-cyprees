@@ -22,24 +22,8 @@ const Bottom = styled.p`
 `;
 
 const createReviewMutation = gql`
-  mutation createReview(
-    $personName: String!
-    $location: String
-    $reviewTitle: String!
-    $comment: String!
-    $rating: Int!
-    $projectId: ID!
-  ) {
-    createReview(
-      input: {
-        personName: $personName
-        location: $location
-        reviewTitle: $reviewTitle
-        comment: $comment
-        rating: $rating
-        projectId: $projectId
-      }
-    ) {
+  mutation createReview($input: ReviewInput!) {
+    createReview(input: $input) {
       id
       personName
       location
@@ -92,7 +76,7 @@ const ClientReview = ({ match }) => {
                         reviewTitle: data.reviewTitle,
                         comment: data.comment,
                         rating: data.rating,
-                        projectId: projectId || undefined,
+                        project: projectId,
                       },
                     },
                   });
