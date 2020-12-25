@@ -10,7 +10,7 @@ const Container = styled.button`
     margin-top: ${(props) => (props.marginTop ? '2rem' : '')};
     border-color: transparent !important;
     color: ${(props) =>
-      props.paddingless ? props.theme.primaryColor : '#fff'};
+      props.buttonsTextColor ? props.buttonsTextColor : '#fff'};
     padding-left: ${(props) => (props.paddingless ? '0px' : '1.4em')};
     padding-right: ${(props) => (props.paddingless ? '0px' : '1.4em')};
     padding-top: ${(props) => (props.paddingless ? '0px' : '1.4em')};
@@ -20,19 +20,20 @@ const Container = styled.button`
     padding-top: ${(props) => (props.paddingless ? 'calc(0px)' : '')};
     height: ${(props) => (props.paddingless ? '2em' : '')};
     background-color: ${(props) =>
-      props.bgColor ? props.bgColor : props.theme.mainBrandColor};
+      props.bgColor ? props.bgColor : props.theme.primaryColor};
     font-weight: ${(props) => props.fontWeight};
     font-family: 'Poppins', sans-serif !important;
     font-size: ${(props) => (props.fontSize ? props.fontSize : '16px')};
     :hover {
       background: ${(props) =>
-        props.paddingless ? 'transparent' : props.theme.secondaryColor};
+        props.bgColor ? props.bgColor : props.theme.primaryColor};
       transition: 0.6s;
       color: ${(props) =>
-        props.paddingless ? props.theme.primaryColor : '#fff'};
+        props.buttonsTextColor ? props.buttonsTextColor : '#fff'};
     }
     :active {
-      background: ${(props) => props.theme.primaryColor};
+      background: ${(props) =>
+        props.bgColor ? props.bgColor : props.theme.primaryColor};
     }
   }
 `;
@@ -43,6 +44,7 @@ const Button = ({
   primary,
   loading,
   brandColor,
+  buttonsTextColor,
   ...otherProps
 }) => {
   let bgColor = theme.primaryColor;
@@ -57,6 +59,7 @@ const Button = ({
         secondary ? '' : 'is-primary is-outlined is-medium'
       } ${loading ? 'is-loading' : ''}`}
       bgColor={bgColor}
+      buttonsTextColor={buttonsTextColor}
       {...otherProps}>
       {children}
     </Container>

@@ -31,6 +31,9 @@ const ProjectSubscription = ({ match, history }) => {
   const [project] = useProjectDetails(projectId);
   const [executeMutationRemove, resRemove] = useMutation(removeProjectMutation);
 
+  // const { buttonsColor } = project;
+  // const { buttonsTextColor } = project;
+
   return (
     <Layout noContainer>
       <Seo
@@ -56,6 +59,7 @@ const ProjectSubscription = ({ match, history }) => {
               This will permanently delete your project.
             </Wrapper>
             <Button
+              primary
               onClick={() => {
                 swal(
                   'Are you confirm to cancel subscription of this project?',

@@ -213,7 +213,7 @@ export default withFormik({
     reviewBodyColor: initialValues.reviewBodyColor || '',
     reviewAuthorColor: initialValues.reviewAuthorColor || '',
     buttonsColor: initialValues.buttonsColor || '',
-    buttonsTextColor: initialValues.buttonsColor || '',
+    buttonsTextColor: initialValues.buttonsTextColor || '',
     reviewAuthorSize: initialValues.reviewAuthorSize || '',
     reviewTitleSize: initialValues.reviewTitleSize || '',
     reviewBodySize: initialValues.reviewBodySize || '',
