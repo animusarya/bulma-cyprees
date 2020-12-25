@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 
 import Rating from './Rating';
 
@@ -19,8 +20,9 @@ const Wrapper = styled.div`
   }
 `;
 
-const Comment = styled.div`
+const UserReview = styled.div`
   color: ${(props) => (props.color ? props.color : '#000000')};
+  font-size: ${(props) => (props.fontSize ? `${props.fontSize}px` : '16px')};
 `;
 
 const ReviewItem = ({
@@ -28,15 +30,23 @@ const ReviewItem = ({
   starsColor,
   reviewAuthorColor,
   reviewBodyColor,
+  reviewBodySize,
+  reviewAuthorSize,
 }) => (
   <Wrapper className="columns">
     <div className="column">
       <div className="columns">
-        <Comment className="column is-1" color={reviewAuthorColor}>
+        <UserReview
+          className="column is-1"
+          color={reviewAuthorColor}
+          fontSize={reviewAuthorSize}>
           {review.personName}
-        </Comment>
-        <Comment className="column is-1">{review.location}</Comment>
-        <div className="column is-2">{review.createdAt}</div>
+        </UserReview>
+        <UserReview className="column is-1">{review.location}</UserReview>
+        <div className="column is-2">
+          {' '}
+          {moment(review.createdAt).format('Do MMM YY')}
+        </div>
         <div className="column is-1">
           <Rating
             disabled
@@ -68,9 +78,12 @@ const ReviewItem = ({
       </div>
       <div className="columns">
         <div className="column">
-          <Comment className="is-size-7" color={reviewBodyColor}>
+          <UserReview
+            className="is-size-7"
+            color={reviewBodyColor}
+            fontSize={reviewBodySize}>
             {review.comment}
-          </Comment>
+          </UserReview>
         </div>
       </div>
     </div>

@@ -64,6 +64,7 @@ const ClientReviewForm = (props) => {
           onChange={(val) => setFieldValue('rating', val)}
         />
       </div>
+      {errors.rating && touched.rating ? errors.rating : undefined}
       <InputGroup
         border
         label="Review Title:"
@@ -132,12 +133,14 @@ export default withFormik({
     location: yup.string().required('Location is required!'),
     reviewTitle: yup.string().required('Title is required!'),
     comment: yup.string().required('Review is required!'),
+    rating: yup.number().required('Rating is required!'),
   }),
 
-  handleSubmit: (values, { setSubmitting, props }) => {
+  handleSubmit: (values, { setSubmitting, resetForm, props }) => {
     // console.log('handle submit', values, props);
     props.onSubmit(values).finally(() => {
       setSubmitting(false);
+      resetForm();
     });
   },
   displayName: 'ClientReviewForm', // helps with React DevTools

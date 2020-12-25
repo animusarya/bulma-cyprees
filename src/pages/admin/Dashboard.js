@@ -114,13 +114,6 @@ const Dashboard = () => {
                       <div className="column">
                         <Title>Your Websites</Title>
                       </div>
-                      {/* <div className="column is-one-fifth">
-                    <input
-                      className="input"
-                      type="text"
-                      placeholder="Search Project"
-                    />
-                  </div> */}
                     </div>
                     <table className="table is-fullwidth is-hoverable">
                       <thead>

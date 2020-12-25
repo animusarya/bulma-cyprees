@@ -14,7 +14,15 @@ const Container = styled.div`
   }
 `;
 
-const Rating = ({ size, value, disabled, count, onChange, activeColor }) => (
+const Rating = ({
+  size,
+  value,
+  disabled,
+  count,
+  onChange,
+  activeColor,
+  errors,
+}) => (
   <Container>
     {disabled ? (
       <ReactStars
@@ -38,6 +46,8 @@ const Rating = ({ size, value, disabled, count, onChange, activeColor }) => (
         onChange={(val) => onChange(val)}
       />
     )}
+
+    <div>{errors && <p className="help is-danger">{errors}</p>}</div>
   </Container>
 );
 

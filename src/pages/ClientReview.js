@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
+import swal from 'sweetalert';
 
 import { ClientReviewForm } from '../components/forms';
 import Layout from '../components/Layout';
@@ -79,6 +80,7 @@ const ClientReview = ({ match }) => {
                       },
                     },
                   });
+                  swal('Your Review is successfully submitted');
                 }}
               />
               {res.error && <Message type="error">{res.error.message}</Message>}
