@@ -50,7 +50,7 @@ const ReviewStyles = ({ match }) => {
                   await executeMutation({
                     variables: { id: project.id, input: data },
                   });
-                  swal('Project Settings updated').then(() =>
+                  swal('Website Review Settings updated').then(() =>
                     window.location.reload(),
                   );
                 }}

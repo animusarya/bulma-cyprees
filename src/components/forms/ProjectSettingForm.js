@@ -99,7 +99,7 @@ const ProjectSettingForm = (props) => {
         <Container className="is-flex">
           <div className="dropdown">
             <ReactDropdown
-              onChange={(value) => console.log('reviewBodySize', value.value)}
+              onChange={(value) => setFieldValue('reviewBodySize', value.value)}
               value={values.reviewBodySize || '16'}
             />
           </div>

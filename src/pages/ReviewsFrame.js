@@ -53,7 +53,6 @@ const ReviewsFrame = ({ match }) => {
 
   const reviewsData =
     reviews && reviews.data && reviews.data.reviews ? reviews.data.reviews : [];
-  console.log(project, 'project');
 
   return (
     <div>

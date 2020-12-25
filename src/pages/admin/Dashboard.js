@@ -102,7 +102,7 @@ const Dashboard = () => {
                       </p>
                       <Button>
                         <LinkWrapper to="/user/create/website">
-                          Add a new website for Reviews
+                          Add your website for Reviews
                         </LinkWrapper>
                       </Button>
                     </div>
