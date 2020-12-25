@@ -31,11 +31,7 @@ const ProjectSettingForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div style={{ height: '56px' }}>
-        {/* <div className="button-field is-pulled-right">
-          <Button disabled={isSubmitting}>Update</Button>
-        </div> */}
-      </div>
+      <div style={{ height: '56px' }} />
       <br />
       <InputGroup
         fullWidth
@@ -44,17 +40,17 @@ const ProjectSettingForm = (props) => {
         isHorizontal
         label="Stars Colour:"
         errors={
-          errors.brandColor && touched.brandColor
-            ? errors.brandColor
+          errors.starsColor && touched.starsColor
+            ? errors.starsColor
             : undefined
         }>
         <ColorPicker
-          name="brandColor"
-          id="brandColor"
-          label="Brand Colour"
-          color={values.brandColor}
-          selectBrandColor={values.brandColor}
-          onChange={(val) => setFieldValue('brandColor', val)}
+          name="starsColor"
+          id="starsColor"
+          label="Stars Colour"
+          color={values.starsColor}
+          selectColor={values.starsColor}
+          onChange={(val) => setFieldValue('starsColor', val)}
         />
       </InputGroup>
       <InputGroup
@@ -64,22 +60,27 @@ const ProjectSettingForm = (props) => {
         isHorizontal
         label="Review Title:"
         errors={
-          errors.brandColor && touched.brandColor
-            ? errors.brandColor
+          errors.reviewTitleColor && touched.reviewTitleColor
+            ? errors.reviewTitleColor
             : undefined
         }>
         <Container className="is-flex">
           <div className="dropdown">
-            <ReactDropdown />
+            <ReactDropdown
+              onChange={(value) =>
+                setFieldValue('reviewTitleSize', value.value)
+              }
+              value={values.reviewTitleSize || '16'}
+            />
           </div>
           <ColorContainer>
             <ColorPicker
-              name="brandColor"
-              id="brandColor"
-              label="Brand Colour"
-              color={values.brandColor}
-              selectBrandColor={values.brandColor}
-              onChange={(val) => setFieldValue('brandColor', val)}
+              name="reviewTitleColor"
+              id="reviewTitleColor"
+              label="Review Title Colour"
+              color={values.reviewTitleColor}
+              selectColor={values.reviewTitleColor}
+              onChange={(val) => setFieldValue('reviewTitleColor', val)}
             />
           </ColorContainer>
         </Container>
@@ -91,22 +92,25 @@ const ProjectSettingForm = (props) => {
         isHorizontal
         label="Review Body:"
         errors={
-          errors.brandColor && touched.brandColor
-            ? errors.brandColor
+          errors.reviewBodyColor && touched.reviewBodyColor
+            ? errors.reviewBodyColor
             : undefined
         }>
         <Container className="is-flex">
           <div className="dropdown">
-            <ReactDropdown />
+            <ReactDropdown
+              onChange={(value) => console.log('reviewBodySize', value.value)}
+              value={values.reviewBodySize || '16'}
+            />
           </div>
           <ColorContainer>
             <ColorPicker
-              name="brandColor"
-              id="brandColor"
-              label="Brand Colour"
-              color={values.brandColor}
-              selectBrandColor={values.brandColor}
-              onChange={(val) => setFieldValue('brandColor', val)}
+              name="reviewBodyColor"
+              id="reviewBodyColor"
+              label="Review Body Colour"
+              color={values.reviewBodyColor}
+              selectColor={values.reviewBodyColor}
+              onChange={(val) => setFieldValue('reviewBodyColor', val)}
             />
           </ColorContainer>
         </Container>
@@ -118,22 +122,27 @@ const ProjectSettingForm = (props) => {
         isHorizontal
         label="Author:"
         errors={
-          errors.brandColor && touched.brandColor
-            ? errors.brandColor
+          errors.reviewAuthorColor && touched.reviewAuthorColor
+            ? errors.reviewAuthorColor
             : undefined
         }>
         <Container className="is-flex">
           <div className="dropdown">
-            <ReactDropdown />
+            <ReactDropdown
+              onChange={(value) =>
+                setFieldValue('reviewAuthorSize', value.value)
+              }
+              value={values.reviewAuthorSize || '16'}
+            />
           </div>
           <ColorContainer>
             <ColorPicker
-              name="brandColor"
-              id="brandColor"
-              label="Brand Colour"
-              color={values.brandColor}
-              selectBrandColor={values.brandColor}
-              onChange={(val) => setFieldValue('brandColor', val)}
+              name="reviewAuthorColor"
+              id="reviewAuthorColor"
+              label="Review Author Colour"
+              color={values.reviewAuthorColor}
+              selectColor={values.reviewAuthorColor}
+              onChange={(val) => setFieldValue('reviewAuthorColor', val)}
             />
           </ColorContainer>
         </Container>
@@ -144,19 +153,39 @@ const ProjectSettingForm = (props) => {
         isWidth
         border
         isHorizontal
-        label="Buttons Colour:"
+        label="Buttons Background:"
         errors={
-          errors.brandColor && touched.brandColor
-            ? errors.brandColor
+          errors.buttonsColor && touched.buttonsColor
+            ? errors.buttonsColor
             : undefined
         }>
         <ColorPicker
-          name="brandColor"
-          id="brandColor"
-          label="Brand Colour"
-          color={values.brandColor}
-          selectBrandColor={values.brandColor}
-          onChange={(val) => setFieldValue('brandColor', val)}
+          name="buttonsColor"
+          id="buttonsColor"
+          label="Buttons Colour"
+          color={values.buttonsColor}
+          selectColor={values.buttonsColor}
+          onChange={(val) => setFieldValue('buttonsColor', val)}
+        />
+      </InputGroup>
+      <InputGroup
+        fullWidth
+        isWidth
+        border
+        isHorizontal
+        label="Buttons Text Colour:"
+        errors={
+          errors.buttonsTextColor && touched.buttonsTextColor
+            ? errors.buttonsTextColor
+            : undefined
+        }>
+        <ColorPicker
+          name="buttonsTextColor"
+          id="buttonsTextColor"
+          label="Buttons Text Colour"
+          color={values.buttonsTextColor}
+          selectColor={values.buttonsTextColor}
+          onChange={(val) => setFieldValue('buttonsTextColor', val)}
         />
       </InputGroup>
 
@@ -179,7 +208,15 @@ ProjectSettingForm.propTypes = {
 
 export default withFormik({
   mapPropsToValues: ({ initialValues }) => ({
-    brandColor: initialValues.brandColor || '',
+    starsColor: initialValues.starsColor || '',
+    reviewTitleColor: initialValues.reviewTitleColor || '',
+    reviewBodyColor: initialValues.reviewBodyColor || '',
+    reviewAuthorColor: initialValues.reviewAuthorColor || '',
+    buttonsColor: initialValues.buttonsColor || '',
+    buttonsTextColor: initialValues.buttonsColor || '',
+    reviewAuthorSize: initialValues.reviewAuthorSize || '',
+    reviewTitleSize: initialValues.reviewTitleSize || '',
+    reviewBodySize: initialValues.reviewBodySize || '',
   }),
   validationSchema: yup.object().shape({
     // name: yup.string().required('Name is required!'),

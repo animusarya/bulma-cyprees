@@ -17,6 +17,7 @@ const projectQuery = gql`
       disclaimer
       starsColor
       buttonsColor
+      buttonsTextColor
       reviewTitleSize
       reviewTitleColor
       reviewBodySize

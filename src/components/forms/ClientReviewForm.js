@@ -118,7 +118,7 @@ export default withFormik({
     location: '',
     reviewTitle: '',
     comment: '',
-    rating: 5,
+    rating: '',
   }),
   validationSchema: yup.object().shape({
     personName: yup.string().required('Name is required!'),

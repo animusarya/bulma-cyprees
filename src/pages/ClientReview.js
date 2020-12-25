@@ -22,8 +22,24 @@ const Bottom = styled.p`
 `;
 
 const createReviewMutation = gql`
-  mutation createReview($input: ReviewInput!) {
-    createReview(input: $input) {
+  mutation createReview(
+    $personName: String!
+    $location: String
+    $reviewTitle: String!
+    $comment: String!
+    $rating: Int!
+    $projectId: ID!
+  ) {
+    createReview(
+      input: {
+        personName: $personName
+        location: $location
+        reviewTitle: $reviewTitle
+        comment: $comment
+        rating: $rating
+        projectId: $projectId
+      }
+    ) {
       id
       personName
       location
@@ -67,10 +83,18 @@ const ClientReview = ({ match }) => {
                 published on their website.{' '}
               </Description>
               <ClientReviewForm
-                projectId={projectId}
                 onSubmit={async (data) => {
                   await executeMutation({
-                    variables: { projectId, input: data },
+                    variables: {
+                      input: {
+                        personName: data.personName,
+                        location: data.location,
+                        reviewTitle: data.reviewTitle,
+                        comment: data.comment,
+                        rating: data.rating,
+                        projectId: projectId || undefined,
+                      },
+                    },
                   });
                 }}
               />

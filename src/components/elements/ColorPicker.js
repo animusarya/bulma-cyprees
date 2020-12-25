@@ -30,15 +30,14 @@ class ColorPicker extends React.Component {
 
   render() {
     const { displayColorPicker, color, ...otherProps } = this.state;
-    const { selectBrandColor } = this.props;
+    const { selectColor } = this.props;
     const styles = {
       color: {
         width: '36px',
         height: '14px',
         borderRadius: '2px',
         background:
-          selectBrandColor ||
-          `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+          selectColor || `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
       },
       swatch: {
         padding: '5px',
