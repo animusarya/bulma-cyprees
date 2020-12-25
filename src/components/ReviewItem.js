@@ -19,15 +19,31 @@ const Wrapper = styled.div`
   }
 `;
 
-const ReviewItem = ({ review }) => (
+const Comment = styled.div`
+  color: ${(props) => (props.color ? props.color : '#000000')};
+`;
+
+const ReviewItem = ({
+  review,
+  starsColor,
+  reviewAuthorColor,
+  reviewBodyColor,
+}) => (
   <Wrapper className="columns">
     <div className="column">
       <div className="columns">
-        <div className="column is-1">{review.name}</div>
-        <div className="column is-1">{review.country}</div>
-        <div className="column is-2">{review.date}</div>
+        <Comment className="column is-1" color={reviewAuthorColor}>
+          {review.personName}
+        </Comment>
+        <Comment className="column is-1">{review.location}</Comment>
+        <div className="column is-2">{review.createdAt}</div>
         <div className="column is-1">
-          <Rating disabled count={5} />
+          <Rating
+            disabled
+            count={5}
+            value={review.rating}
+            activeColor={starsColor}
+          />
         </div>
         <div className="column is-4" />
         <div className="column is-1">
@@ -52,7 +68,9 @@ const ReviewItem = ({ review }) => (
       </div>
       <div className="columns">
         <div className="column">
-          <p className="is-size-7">{review.comment}</p>
+          <Comment className="is-size-7" color={reviewBodyColor}>
+            {review.comment}
+          </Comment>
         </div>
       </div>
     </div>

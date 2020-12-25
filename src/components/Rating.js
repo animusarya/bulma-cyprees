@@ -24,7 +24,7 @@ const Rating = ({ size, value, disabled, count, onChange, activeColor }) => (
         activeColor={activeColor || '#ffd700'}
         emptyIcon={<i className="far fa-star" />}
         fullIcon={<i className="fa fa-star" />}
-        value={value === 0 ? 0 : 5}
+        value={value === 0 ? 0 : value}
       />
     ) : (
       <ReactStars
