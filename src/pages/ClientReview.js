@@ -43,8 +43,6 @@ const ClientReview = ({ match }) => {
   const projectId = match.params.id;
   const [project] = useProjectDetails(projectId);
 
-  console.log(projectId, 'project');
-
   return (
     <Layout noContainer>
       <section className="section">
