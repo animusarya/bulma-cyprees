@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useQuery, useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
@@ -6,11 +7,15 @@ import swal from 'sweetalert';
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import Header from '../../components/Header';
-import Sidebar from '../../components/Sidebar';
+// import Sidebar from '../../components/Sidebar';
 import CopyRight from '../../components/CopyRight';
 import MainColumn from '../../components/MainColumn';
 import { Heading, Message, Loading } from '../../components/elements';
 import { SettingsForm } from '../../components/forms';
+
+const Container = styled.div`
+  height: 100vh;
+`;
 
 const meQuery = gql`
   query me {
@@ -50,28 +55,34 @@ const Settings = () => {
     <Layout noContainer>
       <Seo title="Settings" description="Update User info" />
       <Header />
-      <div className="columns">
-        <div className="column is-one-fifth">
+      <section className="section">
+        <div className="container">
+          <Container className="columns">
+            {/* <div className="column is-one-fifth">
           <Sidebar />
-        </div>
-        <div className="column">
-          <MainColumn paddingtop="1rem">
-            <Heading>Settings</Heading>
-            <div>
-              <SettingsForm
-                enableReinitialize
-                initialValues={me}
-                onSubmit={async (data) => {
-                  await executeMutation({ variables: { input: data } });
-                  swal('Settings updated');
-                }}
-              />
+        </div> */}
+            <div className="column">
+              <MainColumn paddingtop="1rem">
+                <Heading>Settings</Heading>
+                <div>
+                  <SettingsForm
+                    enableReinitialize
+                    initialValues={me}
+                    onSubmit={async (data) => {
+                      await executeMutation({ variables: { input: data } });
+                      swal('Settings updated');
+                    }}
+                  />
+                </div>
+                {res.error && (
+                  <Message type="error">{res.error.message}</Message>
+                )}
+                {res.loading ? <Loading /> : null}
+              </MainColumn>
             </div>
-            {res.error && <Message type="error">{res.error.message}</Message>}
-            {res.loading ? <Loading /> : null}
-          </MainColumn>
+          </Container>
         </div>
-      </div>
+      </section>
       <CopyRight />
     </Layout>
   );

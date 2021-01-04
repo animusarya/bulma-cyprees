@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useQuery, useMutation } from '@apollo/client';
@@ -126,7 +127,7 @@ const Pricing = () => {
                     <tr>
                       <th>Duration</th>
                       <th>Price</th>
-                      {/* <th /> */}
+                      <th />
                     </tr>
                   </thead>
                   <tbody>

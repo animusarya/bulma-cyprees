@@ -14,7 +14,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import ForgotPassword from '../pages/ForgotPassword';
 import SetPassword from '../pages/SetPassword';
-import ReviewsFrame from '../pages/ReviewsFrame';
+// import ReviewsFrame from '../pages/ReviewsFrame';
 import Test from '../pages/Test';
 
 import DashboardSuperAdmin from '../pages/super-admin/Dashboard';
@@ -67,7 +67,7 @@ const Routes = () => (
         <Route exact path="/forgot-password" component={ForgotPassword} />
         <Route exact path="/not-allowed" component={NotAllowed} />
         <Route exact path="/submit-review/:id" component={ClientReview} />
-        <Route exact path="/website-reviews/:id" component={ReviewsFrame} />
+        {/* <Route exact path="/website-reviews/:id" component={ReviewsFrame} /> */}
         <PrivateRoute
           exact
           path="/super-admin/dashboard"
