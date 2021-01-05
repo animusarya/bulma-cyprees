@@ -9,6 +9,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const Container = styled.div`
+  justify-content: center;
   h3 {
     font-weight: bold;
     text-align: center;
