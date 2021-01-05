@@ -10,8 +10,8 @@ import useProjectDetails from '../hooks/useProjectDetails';
 import { Message } from '../components/elements';
 
 const Logo = styled.img`
-  width: 150px;
-  height: auto;
+  width: auto;
+  height: 100px;
 `;
 
 const Description = styled.p`

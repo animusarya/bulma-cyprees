@@ -36,7 +36,7 @@ const CodeSnippet = styled.div`
 
 const Logo = styled.img`
   width: auto;
-  height: 80px;
+  height: 180px;
   max-height: initial !important;
   padding-top: 1.5rem;
 `;
