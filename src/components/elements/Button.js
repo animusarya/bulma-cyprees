@@ -10,7 +10,7 @@ const Container = styled.button`
     margin-top: ${(props) => (props.marginTop ? '2rem' : '')};
     border-color: transparent !important;
     color: ${(props) =>
-      props.buttonsTextColor ? props.buttonsTextColor : '#fff'};
+      props.buttonsTextColor ? props.buttonsTextColor : '#ffffff'};
     padding-left: ${(props) => (props.paddingless ? '0px' : '1.4em')};
     padding-right: ${(props) => (props.paddingless ? '0px' : '1.4em')};
     padding-top: ${(props) => (props.paddingless ? '0px' : '1.4em')};
@@ -29,7 +29,7 @@ const Container = styled.button`
         props.bgColor ? props.bgColor : props.theme.primaryColor};
       transition: 0.6s;
       color: ${(props) =>
-        props.buttonsTextColor ? props.buttonsTextColor : '#fff'};
+        props.buttonsTextColor ? props.buttonsTextColor : '#ffffff'};
     }
     :active {
       background: ${(props) =>
