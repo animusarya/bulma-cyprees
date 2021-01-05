@@ -92,19 +92,17 @@ const ProjectDashboardHero = () => {
           </p>
         </Description>
         <CodeSnippet className="has-text-weight-semibold">
-          <span>&lt;!-- ros-widget --&gt;</span>
+          <span>&lt;!-- reviews-services-widget --&gt;</span>
           <br />
           <a>
-            &lt;div class=&quot;ros-widget&quot; data-locale=&quot;en-GB&quot;
-            data-template-id=&quot;5613c9cde69ddc09340c6beb&quot;
-            data-businessunit-id=&quot;5aa00f348306060001af7ddf&quot;
-            data-style-height=&quot;100%&quot; data-style-width=&quot;100%&quot;
-            data-theme=&quot;light&quot; &gt; &lt;a
-            href=&quot;https://reviewourservices.com/review/designcity&quot;
-            target=&quot;_blank&quot;
-            rel=&quot;noopener&quot;&gt;&lt;/a&gt;&lt;/div&gt;
+            &lt;div id=&quot;reviews-system-widget&quot; data-project-id=&quot;
+            {projectId}&quot; data-style-height=&quot;100%&quot;
+            data-style-width=&quot;100%&quot;&gt; &lt;script
+            type=&quot;text/javascript&quot;
+            src=&quot;https://website-reviews-widget.netlify.app/website-reviews-widget.js&quot;&gt;
+            &lt;/script&gt; &lt;/div&gt;
           </a>
-          <p>&lt;!-- End ros-widget --&gt;</p>
+          <p>&lt;!-- End reviews-services-widget --&gt;</p>
         </CodeSnippet>
         <Description className="is-flex">
           <strong>Step 2.</strong>
