@@ -145,7 +145,7 @@ const Reviews = ({ match }) => {
           ) : (
             <EmptyComments>
               <p className="is-size-3 has-text-centered">
-                No Comment for your website is available yet.
+                No review for your website is available yet.
               </p>
             </EmptyComments>
           )}
