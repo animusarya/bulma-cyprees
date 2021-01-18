@@ -33,10 +33,11 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   .button.is-primary {
-    background-color: ${theme.primaryColor};
-    color: #ffffff;
+    background-color: ${theme.secondaryColor};
+    color: ${theme.primaryColor};
     :hover {
       background-color: ${theme.secondaryColor};
+    color: ${theme.primaryColor};
       transition: 0.6s;
     }
   }

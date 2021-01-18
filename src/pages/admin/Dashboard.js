@@ -51,9 +51,9 @@ const Container = styled.div`
 `;
 
 const LinkWrapper = styled(Link)`
-  color: #fff;
+  color: ${(props) => props.theme.primaryColor};
   :hover {
-    color: #fff;
+    color: ${(props) => props.theme.primaryColor};
   }
 `;
 
@@ -101,7 +101,9 @@ const Dashboard = () => {
                         Thank you for registering, you are now signed in.
                       </p>
                       <Button>
-                        <LinkWrapper to="/user/create/website">
+                        <LinkWrapper
+                          className="has-text-weight-bold"
+                          to="/user/create/website">
                           Add your website for Reviews
                         </LinkWrapper>
                       </Button>

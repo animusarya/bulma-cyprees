@@ -10,7 +10,9 @@ const Container = styled.button`
     margin-top: ${(props) => (props.marginTop ? '2rem' : '')};
     border-color: transparent !important;
     color: ${(props) =>
-      props.buttonsTextColor ? props.buttonsTextColor : '#ffffff'};
+      props.buttonsTextColor
+        ? props.theme.primaryColor
+        : props.theme.primaryColor};
     padding-left: ${(props) => (props.paddingless ? '0px' : '1.4em')};
     padding-right: ${(props) => (props.paddingless ? '0px' : '1.4em')};
     padding-top: ${(props) => (props.paddingless ? '0px' : '1.4em')};
@@ -20,20 +22,22 @@ const Container = styled.button`
     padding-top: ${(props) => (props.paddingless ? 'calc(0px)' : '')};
     height: ${(props) => (props.paddingless ? '2em' : '')};
     background-color: ${(props) =>
-      props.bgColor ? props.bgColor : props.theme.primaryColor};
+      props.bgColor ? props.bgColor : props.theme.secondaryColor};
     font-weight: ${(props) => props.fontWeight};
     font-family: 'Poppins', sans-serif !important;
     font-size: ${(props) => (props.fontSize ? props.fontSize : '16px')};
     :hover {
       background: ${(props) =>
-        props.bgColor ? props.bgColor : props.theme.primaryColor};
+        props.bgColor ? props.bgColor : props.theme.secondaryColor};
       transition: 0.6s;
       color: ${(props) =>
-        props.buttonsTextColor ? props.buttonsTextColor : '#ffffff'};
+        props.buttonsTextColor
+          ? props.buttonsTextColor
+          : props.theme.primaryColor};
     }
     :active {
       background: ${(props) =>
-        props.bgColor ? props.bgColor : props.theme.primaryColor};
+        props.bgColor ? props.bgColor : props.theme.secondaryColor};
     }
   }
 `;
@@ -47,7 +51,7 @@ const Button = ({
   buttonsTextColor,
   ...otherProps
 }) => {
-  let bgColor = theme.primaryColor;
+  let bgColor = theme.secondaryColor;
   if (primary) {
     bgColor = brandColor;
   }
@@ -55,7 +59,7 @@ const Button = ({
   return (
     <Container
       type="submit"
-      className={`button ${
+      className={`button has-text-weight-bold ${
         secondary ? '' : 'is-primary is-outlined is-medium'
       } ${loading ? 'is-loading' : ''}`}
       bgColor={bgColor}

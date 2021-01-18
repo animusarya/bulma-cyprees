@@ -21,7 +21,7 @@ const Container = styled.div`
 
 const LinkStyled = styled(Link)`
   :hover {
-    background-color: ${(props) => props.theme.primaryColor};
+    background-color: ${(props) => props.theme.secondaryColor};
   }
 `;
 
