@@ -23,18 +23,19 @@ const Container = styled.div`
     justify-content: center;
     padding-bottom: 30px;
   }
-  h1 {
-    color: ${(props) => props.theme.primaryColor};
-  }
 `;
 
 const ReviewsStat = styled.div`
-  padding: 1.5rem 0 1.5rem 0;
-  p:last-child {
-    margin-left: 18px;
-  }
+  color: ${(props) => props.theme.primaryColor};
 `;
 
+const AutoReviews = styled.div`
+  padding: 0 0 1.5rem 0;
+  .description {
+    font-size: 14px;
+    margin-top: 3px;
+  }
+`;
 const TableHeading = styled.div`
   background-color: ${(props) => props.theme.fontDark};
   p {
@@ -94,15 +95,20 @@ const Reviews = ({ match }) => {
         <div className="column is-four-fifths">
           {reviewsData.length > 0 ? (
             <MainColumn>
-              <h1 className="is-size-4 has-text-weight-bold">All Reviews</h1>
-              <ReviewsStat className="is-flex">
-                <p>
-                  <strong>Reviews:</strong> {reviewsData.length}
-                </p>
-                <p>
-                  <strong>Average Score:</strong> 4.9
-                </p>
+              <ReviewsStat className="is-size-4 ">
+                <span className="has-text-weight-bold">All Reviews:</span>{' '}
+                <span className="has-text-weight-medium">
+                  Total {reviewsData.length}, Average Score 4.9
+                </span>
               </ReviewsStat>
+              <AutoReviews>
+                <p className="has-text-weight-semibold">Turn on Auto Reviews</p>
+                <p className="description is-italic">
+                  (This will automatically add reviews to your website and you
+                  will be notified by email each time a review is added, you
+                  have ability to reply to all reviews)
+                </p>
+              </AutoReviews>
               <TableHeading className="columns is-flex">
                 <div className="column is-1">
                   <p>Name</p>

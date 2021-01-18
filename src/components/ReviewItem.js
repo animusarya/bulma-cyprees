@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 
@@ -32,62 +32,71 @@ const ReviewItem = ({
   reviewBodyColor,
   reviewBodySize,
   reviewAuthorSize,
-}) => (
-  <Wrapper className="columns">
-    <div className="column">
-      <div className="columns">
-        <UserReview
-          className="column is-1"
-          color={reviewAuthorColor}
-          fontSize={reviewAuthorSize}>
-          {review.personName}
-        </UserReview>
-        <UserReview className="column is-1">{review.location}</UserReview>
-        <div className="column is-2">
-          {' '}
-          {moment(review.createdAt).format('Do MMM YY')}
-        </div>
-        <div className="column is-1">
-          <Rating
-            disabled
-            count={5}
-            value={review.rating}
-            activeColor={starsColor}
-          />
-        </div>
-        <div className="column is-4" />
-        <div className="column is-1">
-          <button
-            className="button has-text-danger has-text-weight-bold"
-            type="button">
-            Delete
-          </button>
-        </div>
-        <div className="column is-1">
-          <button className="button has-text-weight-bold" type="button">
-            Live
-          </button>
-        </div>
-        <div className="column is-1">
-          <button
-            className="button has-text-success has-text-weight-bold"
-            type="button">
-            Submit
-          </button>
-        </div>
-      </div>
-      <div className="columns">
-        <div className="column">
+}) => {
+  const [active, setActive] = useState(false);
+  const toggle = () => {
+    setActive(!active);
+  };
+  return (
+    <Wrapper className="columns">
+      <div className="column">
+        <div className="columns">
           <UserReview
-            className="is-size-7"
-            color={reviewBodyColor}
-            fontSize={reviewBodySize}>
-            {review.comment}
+            className="column is-1"
+            color={reviewAuthorColor}
+            fontSize={reviewAuthorSize}>
+            {review.personName}
           </UserReview>
+          <UserReview className="column is-1">{review.location}</UserReview>
+          <div className="column is-2">
+            {' '}
+            {moment(review.createdAt).format('Do MMM YYYY')}
+          </div>
+          <div className="column is-1">
+            <Rating
+              disabled
+              count={5}
+              value={review.rating}
+              activeColor={starsColor}
+            />
+          </div>
+          <div className="column is-4" />
+          <div className="column is-1">
+            <button
+              className="button has-text-danger has-text-weight-bold"
+              type="button">
+              Delete
+            </button>
+          </div>
+          <div className="column is-1">
+            <button className="button has-text-weight-bold" type="button">
+              Live
+            </button>
+          </div>
+          <div className="column is-1">
+            <button
+              className="button has-text-success has-text-weight-bold"
+              type="button">
+              Submit
+            </button>
+          </div>
         </div>
+        <div className="columns">
+          <div className="column">
+            <UserReview
+              className="is-size-7"
+              color={reviewBodyColor}
+              fontSize={reviewBodySize}>
+              {review.comment}
+            </UserReview>
+          </div>
+        </div>
+        <a onClick={toggle} className="has-text-weight-bold">
+          {active ? '+ Reply' : '- Reply'}
+        </a>
       </div>
-    </div>
-  </Wrapper>
-);
+    </Wrapper>
+  );
+};
 
 export default ReviewItem;
