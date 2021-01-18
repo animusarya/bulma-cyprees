@@ -13,6 +13,12 @@ const RatingTitle = styled.p`
   font-weight: bold;
 `;
 
+const LocationContainer = styled.div`
+  .label:not(:last-child) {
+    margin-bottom: 0em;
+  }
+`;
+
 const ClientReviewForm = (props) => {
   const {
     values,
@@ -26,7 +32,7 @@ const ClientReviewForm = (props) => {
     project,
   } = props;
 
-  const { buttonsColor, buttonsTextColor, starsColor } = project;
+  const { starsColor } = project;
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
@@ -43,18 +49,39 @@ const ClientReviewForm = (props) => {
             : undefined
         }
       />
-      <InputGroup
-        border
-        label="Your Location:"
-        name="location"
-        type="text"
-        value={values.location}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={
-          errors.location && touched.location ? errors.location : undefined
-        }
-      />
+      <LocationContainer className="columns">
+        <div className="column">
+          <InputGroup
+            border
+            label="Your Location:"
+            name="location"
+            type="text"
+            value={values.location}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            errors={
+              errors.location && touched.location ? errors.location : undefined
+            }
+          />
+        </div>
+        <div className="column">
+          <InputGroup
+            border
+            label="Company Name:"
+            labelInfo="(if applicable)"
+            name="companyName"
+            type="text"
+            value={values.companyName}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            errors={
+              errors.companyName && touched.companyName
+                ? errors.companyName
+                : undefined
+            }
+          />
+        </div>
+      </LocationContainer>
       <div className="is-flex">
         <RatingTitle>Your Rating:</RatingTitle>
         <Rating
@@ -64,7 +91,9 @@ const ClientReviewForm = (props) => {
           onChange={(val) => setFieldValue('rating', val)}
         />
       </div>
-      {errors.rating && touched.rating ? errors.rating : undefined}
+      <p className="help is-danger">
+        {errors.rating && touched.rating ? errors.rating : undefined}
+      </p>
       <InputGroup
         border
         label="Review Title:"
@@ -94,8 +123,8 @@ const ClientReviewForm = (props) => {
       <div className="field">
         <div className="control">
           <Button
-            bgColor={buttonsColor}
-            buttonsTextColor={buttonsTextColor}
+            // bgColor={buttonsColor}
+            // buttonsTextColor={buttonsTextColor}
             marginTop
             marginBottomNone
             type="submit"
@@ -124,6 +153,7 @@ export default withFormik({
   mapPropsToValues: () => ({
     personName: '',
     location: '',
+    companyName: '',
     reviewTitle: '',
     comment: '',
     rating: '',
@@ -131,6 +161,7 @@ export default withFormik({
   validationSchema: yup.object().shape({
     personName: yup.string().required('Name is required!'),
     location: yup.string().required('Location is required!'),
+    companyName: yup.string().required('Company Name is required!'),
     reviewTitle: yup.string().required('Title is required!'),
     comment: yup.string().required('Review is required!'),
     rating: yup.number().required('Rating is required!'),

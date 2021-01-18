@@ -43,14 +43,16 @@ const Logo = styled.img`
 
 const Button = styled.button`
   color: ${(props) => props.theme.primaryColor};
-  border-color: ${(props) => props.theme.primaryColor};
+  background-color: ${(props) => props.theme.secondaryColor};
+  border-color: ${(props) => props.theme.secondaryColor};
+  border-radius: 6px;
   width: 12rem;
   height: 3.5rem;
   :hover,
   :focus,
   :active {
     color: ${(props) => props.theme.primaryColor};
-    border-color: ${(props) => props.theme.primaryColor};
+    border-color: ${(props) => props.theme.secondaryColor};
   }
   .is-focused:not(:active),
   :focus:not(:active) {
@@ -107,18 +109,6 @@ const ProjectDashboardHero = () => {
         <Description className="is-flex">
           <strong>Step 2.</strong>
           <p>
-            Email this link to your <strong>review request form</strong> for
-            your customer to complete.
-          </p>
-        </Description>
-        <Link
-          to={`/submit-review/${projectId}`}
-          className="is-size-4 has-text-weight-semibold">
-          {project.customDomain}
-        </Link>
-        <Description className="is-flex">
-          <strong>Step 3.</strong>
-          <p>
             Upload your logo here to appear on your{' '}
             <strong>review request form.</strong>
           </p>
@@ -132,6 +122,19 @@ const ProjectDashboardHero = () => {
             <Logo src={project.logo} alt="logo" />
           )}
         </a>
+
+        <Description className="is-flex">
+          <strong>Step 3.</strong>
+          <p>
+            Email this link to your <strong>review request form</strong> for
+            your customer to complete.
+          </p>
+        </Description>
+        <Link
+          to={`/submit-review/${projectId}`}
+          className="is-size-4 has-text-weight-semibold">
+          {project.customDomain}
+        </Link>
         <UploadImageModal
           heading="Upload Logo"
           isActive={isActive}

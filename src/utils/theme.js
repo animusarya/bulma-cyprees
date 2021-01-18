@@ -58,11 +58,11 @@ export const GlobalStyle = createGlobalStyle`
     justify-content: center;
   }
   .swal-button {
-    background-color: ${theme.primaryColor};
+    background-color: ${theme.secondaryColor};
     font-size: 16px;
   }
   .swal-button--cancel {
-    background-color: ${theme.primaryColor};
+    background-color: ${theme.secondaryColor};
     color: #ffffff;
   }
   .swal-footer {

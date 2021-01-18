@@ -45,7 +45,7 @@ const ClientReview = ({ match }) => {
   const [project] = useProjectDetails(projectId);
 
   return (
-    <Layout noContainer>
+    <Layout noContainer hasAuthNav>
       <section className="section">
         <div className="container">
           <div className="columns is-centered">
@@ -60,10 +60,10 @@ const ClientReview = ({ match }) => {
                 )}
               </div>
               <Description>
-                Hi, you have been invited to write a short review from
-                DesignCity Ltd. Please be honest and accurate as possible about
-                your experience. They will process your review which might be
-                published on their website.{' '}
+                Hi, you have been invited to write a short review from{' '}
+                <strong>{project.name}</strong>.<br /> Please be honest and
+                accurate as possible about your experience. They will process
+                your review which might be published on their website.{' '}
               </Description>
               <ClientReviewForm
                 project={project}
