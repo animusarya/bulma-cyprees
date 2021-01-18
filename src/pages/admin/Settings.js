@@ -26,6 +26,7 @@ const meQuery = gql`
         fullName
         companyName
         telephone
+        websiteAddress
       }
     }
   }
@@ -40,6 +41,7 @@ const settingMutation = gql`
         fullName
         companyName
         telephone
+        websiteAddress
       }
     }
   }
@@ -49,7 +51,7 @@ const Settings = () => {
   const meData = useQuery(meQuery, { fetchPolicy: 'cache-and-network' });
   const [executeMutation, res] = useMutation(settingMutation);
   const me = meData.data ? meData.data.me : {};
-  // console.log('res', me);
+  console.log('me data', me);
 
   return (
     <Layout noContainer>

@@ -55,6 +55,22 @@ const RegisterForm = (props) => {
       {isAdminRegister && (
         <InputGroup
           border
+          label="Website Address:"
+          name="websiteAddress"
+          type="text"
+          value={values.websiteAddress}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errors={
+            errors.websiteAddress && touched.websiteAddress
+              ? errors.websiteAddress
+              : undefined
+          }
+        />
+      )}
+      {isAdminRegister && (
+        <InputGroup
+          border
           label="Telephone:"
           name="telephone"
           type="text"
@@ -172,10 +188,14 @@ export default withFormik({
       ? initialValues.confirmPassword
       : '',
     companyName: initialValues.companyName ? initialValues.companyName : '',
+    websiteAddress: initialValues.websiteAddress
+      ? initialValues.websiteAddress
+      : '',
     telephone: initialValues.telephone ? initialValues.telephone : '',
   }),
   validationSchema: yup.object().shape({
     fullName: yup.string().required('name is required!'),
+    websiteAddress: yup.string().required('Website Address is required!'),
     email: yup
       .string()
       .email('Invalid email address')

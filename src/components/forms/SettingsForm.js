@@ -70,6 +70,23 @@ const SettingsForm = (props) => {
         isWidth
         border
         isHorizontal
+        label="Website Address:"
+        name="websiteAddress"
+        type="text"
+        value={values.websiteAddress}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.websiteAddress && touched.websiteAddress
+            ? errors.websiteAddress
+            : undefined
+        }
+      />
+      <InputGroup
+        fullWidth
+        isWidth
+        border
+        isHorizontal
         label="Telephone:"
         name="telephone"
         placeholder=""
@@ -104,6 +121,9 @@ export default withFormik({
     email: initialValues.email || '',
     fullName: initialValues.profile ? initialValues.profile.fullName : '',
     companyName: initialValues.profile ? initialValues.profile.companyName : '',
+    websiteAddress: initialValues.profile
+      ? initialValues.profile.websiteAddress
+      : '',
     telephone: initialValues.profile ? initialValues.profile.telephone : '',
   }),
   validationSchema: yup.object().shape({
@@ -113,6 +133,7 @@ export default withFormik({
       .required('Email is required!'),
     fullName: yup.string().required('Full Name is required!'),
     companyName: yup.string().required('Company name is required!'),
+    websiteAddress: yup.string().required('Website Address is required!'),
     telephone: yup.string().required('Telephone is required!'),
   }),
 
