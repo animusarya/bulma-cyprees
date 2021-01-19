@@ -8,7 +8,10 @@ const Container = styled.button`
   &&& {
     ${(props) => props.style};
     margin-top: ${(props) => (props.marginTop ? '2rem' : '')};
-    border-color: transparent !important;
+    border: ${(props) =>
+      props.hasBorder
+        ? ` 1px solid ${props.theme.primaryColor}`
+        : 'transparent'} !important;
     color: ${(props) =>
       props.buttonsTextColor
         ? props.theme.primaryColor
@@ -47,22 +50,25 @@ const Button = ({
   secondary,
   primary,
   loading,
-  brandColor,
   buttonsTextColor,
+  hasBorder,
   ...otherProps
 }) => {
   let bgColor = theme.secondaryColor;
   if (primary) {
-    bgColor = brandColor;
+    bgColor = theme.primaryColor;
+  } else if (hasBorder) {
+    bgColor = 'transparent';
   }
 
   return (
     <Container
       type="submit"
       className={`button has-text-weight-bold ${
-        secondary ? '' : 'is-primary is-outlined is-medium'
+        secondary ? '' : 'is-primary  is-medium'
       } ${loading ? 'is-loading' : ''}`}
       bgColor={bgColor}
+      hasBorder={hasBorder}
       buttonsTextColor={buttonsTextColor}
       {...otherProps}>
       {children}

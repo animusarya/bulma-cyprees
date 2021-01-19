@@ -35,6 +35,9 @@ const AutoReviews = styled.div`
     font-size: 14px;
     margin-top: 3px;
   }
+  span {
+    margin-left: 5px;
+  }
 `;
 const TableHeading = styled.div`
   background-color: ${(props) => props.theme.fontDark};
@@ -102,7 +105,12 @@ const Reviews = ({ match }) => {
                 </span>
               </ReviewsStat>
               <AutoReviews>
-                <p className="has-text-weight-semibold">Turn on Auto Reviews</p>
+                <label className="checkbox">
+                  <input type="checkbox" />
+                  <span className="has-text-weight-semibold">
+                    Turn on Auto Reviews
+                  </span>
+                </label>
                 <p className="description is-italic">
                   (This will automatically add reviews to your website and you
                   will be notified by email each time a review is added, you

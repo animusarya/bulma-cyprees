@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import AdminUsersForm from './AdminUsersForm';
 import ClientReviewForm from './ClientReviewForm';
+import CommentReplyForm from './CommentReplyForm';
 import ContactForm from './ContactForm';
 import DiscountForm from './DiscountForm';
 import ForgotPasswordForm from './ForgotPasswordForm';
@@ -18,6 +19,7 @@ import SettingsForm from './SettingsForm';
 export {
   AdminUsersForm,
   ClientReviewForm,
+  CommentReplyForm,
   ContactForm,
   DiscountForm,
   ForgotPasswordForm,

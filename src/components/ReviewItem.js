@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 
 import Rating from './Rating';
+import { CommentReplyForm } from './forms';
 
 const Wrapper = styled.div`
   :nth-child(even) {
@@ -18,6 +19,10 @@ const Wrapper = styled.div`
       box-shadow: none;
     }
   }
+`;
+
+const CommentReplyWrapper = styled.div`
+  margin-top: 15px;
 `;
 
 const UserReview = styled.div`
@@ -37,6 +42,8 @@ const ReviewItem = ({
   const toggle = () => {
     setActive(!active);
   };
+
+  console.log(active);
   return (
     <Wrapper className="columns">
       <div className="column">
@@ -92,8 +99,13 @@ const ReviewItem = ({
           </div>
         </div>
         <a onClick={toggle} className="has-text-weight-bold">
-          {active ? '+ Reply' : '- Reply'}
+          {active ? '- Reply' : '+ Reply'}
         </a>
+        {active ? (
+          <CommentReplyWrapper>
+            <CommentReplyForm />
+          </CommentReplyWrapper>
+        ) : null}
       </div>
     </Wrapper>
   );
