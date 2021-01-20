@@ -59,7 +59,7 @@ const ProjectSubscription = ({ match, history }) => {
               This will permanently delete your project.
             </Wrapper>
             <Button
-              primary
+              // primary
               onClick={() => {
                 swal(
                   'Are you confirm to cancel subscription of this project?',
