@@ -20,8 +20,6 @@ const Input = styled.div`
   border-right: ${(props) =>
     props.border ? '1px solid theme.borderColor' : 'none'};
   border-radius: ${(props) => (props.hasRadius ? '5px' : '0')};
-  /* border-top-right-radius: 7px !important;
-  border-top-left-radius: 7px !important; */
   border-bottom: ${(props) => `1px solid ${props.theme.borderColor}`};
   width: 100%;
   select {

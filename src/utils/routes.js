@@ -22,14 +22,12 @@ import Discounts from '../pages/super-admin/Discounts';
 import ClientProjects from '../pages/super-admin/ClientProjects';
 import ProjectInfo from '../pages/super-admin/ProjectInfo';
 import Pricing from '../pages/super-admin/Pricing';
-import HelpSuperAdmin from '../pages/super-admin/Help';
 
 import DashboardAdmin from '../pages/admin/Dashboard';
 import CreateProject from '../pages/admin/CreateProject';
 import Reviews from '../pages/admin/Reviews';
 import ReviewStyles from '../pages/admin/ReviewStyles';
 import ProjectDashboard from '../pages/admin/ProjectDashboard';
-import Help from '../pages/admin/Help';
 import ProjectSubscription from '../pages/admin/ProjectSubscription';
 import Settings from '../pages/admin/Settings';
 
@@ -72,12 +70,6 @@ const Routes = () => (
           exact
           path="/super-admin/dashboard"
           component={DashboardSuperAdmin}
-          access="superAdmin"
-        />
-        <PrivateRoute
-          exact
-          path="/super-admin/help"
-          component={HelpSuperAdmin}
           access="superAdmin"
         />
         <PrivateRoute
@@ -132,12 +124,6 @@ const Routes = () => (
           exact
           path="/admin/project/:id/pages"
           component={ProjectDashboard}
-          access="admin"
-        />
-        <PrivateRoute
-          exact
-          path="/admin/help"
-          component={Help}
           access="admin"
         />
         <PrivateRoute

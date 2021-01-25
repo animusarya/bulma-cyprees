@@ -21,8 +21,6 @@ const TextArea = styled.textarea`
     props.border ? '1px solid theme.borderColor' : 'none'};
   border-radius: ${(props) => (props.hasRadius ? '5px' : '0')};
   border-bottom: ${(props) => `1px solid ${props.theme.borderColor}`};
-  /* border-top-right-radius: 7px !important;
-  border-top-left-radius: 7px !important; */
 `;
 
 const TextAreaGroup = ({
