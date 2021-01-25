@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`
+const Container = styled.label`
+  margin: 14px 0px 32px 0px;
   input {
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 1.5rem;
+    width: 1.5rem;
     margin-left: ${(props) => props.margin};
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 768px) {
       margin-left: 0px;
     }
   }
@@ -21,19 +22,17 @@ const Container = styled.div`
     height: 25px;
     width: 25px;
   }
+  label {
+    margin-left: 7px;
+    align-self: center;
+  }
 `;
 
 const CheckBox = ({ text, margin }) => (
-  <Container margin={margin}>
-    <div className="columns is-horizontal is-mobile">
-      <div className="column is-1-desktop  has-text-left text has-text-weight-semibold">
-        <label className="checkbox">{text}</label>
-      </div>
-      <div className="column">
-        <input type="checkbox" className="checkbox" />
-        <span className="checkmark" />
-      </div>
-    </div>
+  <Container margin={margin} className="is-flex">
+    <input type="checkbox" className="checkbox" />
+    <span className="checkmark" />
+    <label className="checkbox">{text}</label>
   </Container>
 );
 

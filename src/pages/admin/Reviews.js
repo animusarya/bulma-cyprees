@@ -11,6 +11,7 @@ import CopyRight from '../../components/CopyRight';
 import MainColumn from '../../components/MainColumn';
 import ReviewItem from '../../components/ReviewItem';
 import useProjectDetails from '../../hooks/useProjectDetails';
+import { CheckBox } from '../../components/elements';
 
 const Container = styled.div`
   .subtitle {
@@ -29,16 +30,6 @@ const ReviewsStat = styled.div`
   color: ${(props) => props.theme.primaryColor};
 `;
 
-const AutoReviews = styled.div`
-  padding: 0 0 1.5rem 0;
-  .description {
-    font-size: 14px;
-    margin-top: 3px;
-  }
-  span {
-    margin-left: 5px;
-  }
-`;
 const TableHeading = styled.div`
   background-color: ${(props) => props.theme.fontDark};
   p {
@@ -104,19 +95,7 @@ const Reviews = ({ match }) => {
                   Total {reviewsData.length}, Average Score 4.9
                 </span>
               </ReviewsStat>
-              <AutoReviews>
-                <label className="checkbox">
-                  <input type="checkbox" />
-                  <span className="has-text-weight-semibold">
-                    Turn on Auto Reviews
-                  </span>
-                </label>
-                <p className="description is-italic">
-                  (This will automatically add reviews to your website and you
-                  will be notified by email each time a review is added, you
-                  have ability to reply to all reviews)
-                </p>
-              </AutoReviews>
+              <CheckBox text="Turn on Auto Reviews" />
               <TableHeading className="columns is-flex">
                 <div className="column is-1">
                   <p>Name</p>
