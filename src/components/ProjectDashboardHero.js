@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useStoreState } from 'easy-peasy';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 import useProjectDetails from '../hooks/useProjectDetails';
 import useProjectUpdate from '../hooks/useProjectUpdate';
 import UploadImageModal from './UploadImageModal';
 import { Message } from './elements';
 import config from '../utils/config';
+import ClipboardItem from './ClipboardItem';
 
 // import uploadLogoImg from '../assets/images/upload-logo.svg';
 
@@ -95,17 +96,22 @@ const ProjectDashboardHero = () => {
           </p>
         </Description>
         <CodeSnippet className="has-text-weight-semibold">
-          <span>&lt;!-- reviews-services-widget --&gt;</span>
+          <span className="is-size-6">
+            &lt;!-- reviews-services-widget --&gt;
+          </span>
           <br />
           <a>
-            &lt;div id=&quot;reviews-system-widget&quot; data-project-id=&quot;
-            {projectId}&quot; data-style-height=&quot;100%&quot;
-            data-style-width=&quot;100%&quot;&gt; &lt;script
-            type=&quot;text/javascript&quot;
-            src=&quot;https://website-reviews-widget.netlify.app/website-reviews-widget.js&quot;&gt;
-            &lt;/script&gt; &lt;/div&gt;
+            <ClipboardItem
+              size="6"
+              title={`<div id="reviews-system-widget" data-project-id="
+              ${projectId}" data-style-height="100%" data-style-width="100%"> <script type="text/javascript" src="https://website-reviews-widget.netlify.app/website-reviews-widget.js>
+              </script> </div>
+           `}
+            />
           </a>
-          <p>&lt;!-- End reviews-services-widget --&gt;</p>
+          <p className="is-size-6">
+            &lt;!-- End reviews-services-widget --&gt;
+          </p>
         </CodeSnippet>
         <Description className="is-flex">
           <strong>Step 2.</strong>
@@ -131,11 +137,15 @@ const ProjectDashboardHero = () => {
             your customer to complete.
           </p>
         </Description>
-        <Link
-          to={`/submit-review/${projectId}`}
+        <div
+          // to={`/submit-review/${projectId}`}
           className="is-size-4 has-text-weight-semibold">
-          {config.websiteUrl}/submit-review/{projectId}
-        </Link>
+          <ClipboardItem
+            size="4"
+            title={`${config.websiteUrl}/submit-review/${projectId}
+           `}
+          />
+        </div>
         <UploadImageModal
           heading="Upload Logo"
           isActive={isActive}
