@@ -94,7 +94,7 @@ export default withFormik({
 
   handleSubmit: (values, { setSubmitting, props }) => {
     // console.log('handle submit', values, props);
-    props.onSubmit(values).finally(() => {
+    props.onSubmit(values).then(() => {
       setSubmitting(false);
     });
   },
