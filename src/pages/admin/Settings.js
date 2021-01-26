@@ -51,7 +51,7 @@ const Settings = () => {
   const meData = useQuery(meQuery, { fetchPolicy: 'cache-and-network' });
   const [executeMutation, res] = useMutation(settingMutation);
   const me = meData.data ? meData.data.me : {};
-  console.log('me data', me);
+  console.log('me data', meData);
 
   return (
     <Layout noContainer>

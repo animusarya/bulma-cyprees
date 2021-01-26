@@ -21,7 +21,10 @@ const registerMutation = gql`
         email
         type
         profile {
+          fullName
           companyName
+          telephone
+          websiteAddress
         }
       }
     }
@@ -151,6 +154,7 @@ const Register = ({ match }) => {
                             fullName: data.fullName,
                             companyName: data.companyName,
                             telephone: data.telephone,
+                            websiteAddress: data.websiteAddress,
                           },
                         },
                       })
