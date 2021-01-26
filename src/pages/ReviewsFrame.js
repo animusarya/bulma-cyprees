@@ -45,7 +45,7 @@ const ReviewsFrame = ({ match }) => {
   const projectId = match.params.id;
   const [project] = useProjectDetails(projectId);
   const reviews = useQuery(reviewsQuery, {
-    fetchPolicy: 'network-only',
+    fetchPolicy: 'cache-and-network',
     variables: {
       projectId: project.id,
     },

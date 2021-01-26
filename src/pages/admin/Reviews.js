@@ -57,18 +57,40 @@ const reviewsQuery = gql`
   }
 `;
 
+const projectStatsQuery = gql`
+  query projectStats($id: ID!) {
+    projectStats(id: $id) {
+      avgRating
+    }
+  }
+`;
+
 const Reviews = ({ match }) => {
   const projectId = match.params.id;
   const [project] = useProjectDetails(projectId);
   const reviews = useQuery(reviewsQuery, {
-    fetchPolicy: 'network-only',
+    fetchPolicy: 'cache-and-network',
     variables: {
       projectId: project.id,
+    },
+  });
+  const projectStats = useQuery(projectStatsQuery, {
+    fetchPolicy: 'cache-and-network',
+    variables: {
+      id: project.id,
     },
   });
 
   const reviewsData =
     reviews && reviews.data && reviews.data.reviews ? reviews.data.reviews : [];
+
+  const projectStatCount =
+    projectStats &&
+    projectStats.data &&
+    projectStats.data.projectStats &&
+    projectStats.data.projectStats.avgRating
+      ? projectStats.data.projectStats.avgRating
+      : 0;
 
   const {
     starsColor,
@@ -92,7 +114,7 @@ const Reviews = ({ match }) => {
               <ReviewsStat className="is-size-4 ">
                 <span className="has-text-weight-bold">All Reviews:</span>{' '}
                 <span className="has-text-weight-medium">
-                  Total {reviewsData.length}, Average Score 4.9
+                  Total {reviewsData.length}, Average Score {projectStatCount}
                 </span>
               </ReviewsStat>
               <CheckBox text="Turn on Auto Reviews" />

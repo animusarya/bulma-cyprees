@@ -15,11 +15,12 @@ const Container = styled.div`
     text-align: inherit;
     color: #3a0256;
     display: flex;
+    padding: 0;
   }
 `;
 
 const ClipboardNotification = styled.div`
-  position: fixed;
+  position: absolute;
   right: 0;
   width: 4rem;
 `;

@@ -60,7 +60,7 @@ const LinkWrapper = styled(Link)`
 const Dashboard = () => {
   const history = useHistory();
   const resultProjects = useQuery(projectsQuery, {
-    fetchPolicy: 'network-only',
+    fetchPolicy: 'cache-and-network',
   });
   const updateProject = useStoreActions(
     (actions) => actions.active.updateProject,

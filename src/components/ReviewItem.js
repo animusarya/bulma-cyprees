@@ -43,7 +43,6 @@ const ReviewItem = ({
     setActive(!active);
   };
 
-  console.log(active);
   return (
     <Wrapper className="columns">
       <div className="column">
