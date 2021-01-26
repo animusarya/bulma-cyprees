@@ -69,24 +69,24 @@ const ReviewItem = ({
           </div>
           <div className="column is-4" />
           <div className="column is-1">
-            <button
-              className="button has-text-danger has-text-weight-bold"
-              type="button">
-              Delete
-            </button>
-          </div>
-          <div className="column is-1">
             <button className="button has-text-weight-bold" type="button">
               Live
             </button>
           </div>
           <div className="column is-1">
             <button
+              className="button has-text-danger has-text-weight-bold"
+              type="button">
+              Delete
+            </button>
+          </div>
+          {/* <div className="column is-1">
+            <button
               className="button has-text-success has-text-weight-bold"
               type="button">
               Submit
             </button>
-          </div>
+          </div> */}
         </div>
         <div className="columns">
           <div className="column">

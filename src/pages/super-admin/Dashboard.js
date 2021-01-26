@@ -66,7 +66,7 @@ const Dashboard = () => {
         </div>
         <div className="column is-four-fifths">
           <MainColumn>
-            <Heading>Clients</Heading>
+            <Heading>Users</Heading>
             {res.error && <Message type="error">{res.error.message}</Message>}
             {res.loading && <Loading />}
             {res.data && (

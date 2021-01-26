@@ -7,6 +7,7 @@ import useProjectDetails from '../hooks/useProjectDetails';
 import useProjectUpdate from '../hooks/useProjectUpdate';
 import UploadImageModal from './UploadImageModal';
 import { Message } from './elements';
+import config from '../utils/config';
 
 // import uploadLogoImg from '../assets/images/upload-logo.svg';
 
@@ -133,7 +134,7 @@ const ProjectDashboardHero = () => {
         <Link
           to={`/submit-review/${projectId}`}
           className="is-size-4 has-text-weight-semibold">
-          {project.customDomain}
+          {config.websiteUrl}/submit-review/{projectId}
         </Link>
         <UploadImageModal
           heading="Upload Logo"

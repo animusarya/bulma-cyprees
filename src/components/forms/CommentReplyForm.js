@@ -18,11 +18,11 @@ const CommentReplyForm = () => (
       // errors={errors.comment && touched.comment ? errors.comment : undefined}
     />
     <div className="field is-grouped is-pulled-right">
-      <p className="control">
+      {/* <p className="control">
         <Button hasBorder type="button">
           Delete Reply
         </Button>
-      </p>
+      </p> */}
       <p className="control">
         <Button type="button">Post Reply</Button>
       </p>

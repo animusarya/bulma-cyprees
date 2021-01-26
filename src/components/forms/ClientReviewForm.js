@@ -168,10 +168,15 @@ export default withFormik({
 
   handleSubmit: (values, { setSubmitting, resetForm, props }) => {
     // console.log('handle submit', values, props);
-    props.onSubmit(values).finally(() => {
-      setSubmitting(false);
-      resetForm();
-    });
+    props
+      .onSubmit(values)
+      .then(() => {
+        setSubmitting(false);
+        resetForm();
+      })
+      .catch(() => {
+        setSubmitting(false);
+      });
   },
   displayName: 'ClientReviewForm', // helps with React DevTools
 })(ClientReviewForm);

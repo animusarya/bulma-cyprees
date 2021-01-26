@@ -111,14 +111,14 @@ const Reviews = ({ match }) => {
                 </div>
                 <div className="column is-4" />
                 <div className="column is-1">
-                  <p>Action</p>
-                </div>
-                <div className="column is-1">
                   <p>Status</p>
                 </div>
                 <div className="column is-1">
                   <p>Action</p>
                 </div>
+                {/* <div className="column is-1">
+                  <p>Action</p>
+                </div> */}
               </TableHeading>
               {/* Add map when data available */}
               {reviewsData &&
