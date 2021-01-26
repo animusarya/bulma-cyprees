@@ -117,7 +117,7 @@ const Discounts = () => {
                       <td>{item.percentage}%</td>
                       <td className="has-text-right">
                         <Button
-                          primary
+                          hasNoBackground
                           paddingless
                           onClick={() => {
                             swal('Are you confirm to delete this item?', {

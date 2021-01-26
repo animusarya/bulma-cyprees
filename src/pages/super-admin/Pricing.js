@@ -137,7 +137,8 @@ const Pricing = () => {
                         <td>£{item.price}</td>
                         <td className="is-uppercase actions has-text-right">
                           <Button
-                            primary
+                            hasNoBackground
+                            // primary
                             paddingless
                             onClick={() => setEditClient(item)}>
                             EDIT

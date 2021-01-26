@@ -52,12 +52,15 @@ const Button = ({
   loading,
   buttonsTextColor,
   hasBorder,
+  hasNoBackground,
   ...otherProps
 }) => {
   let bgColor = theme.secondaryColor;
   if (primary) {
     bgColor = theme.primaryColor;
   } else if (hasBorder) {
+    bgColor = 'transparent';
+  } else if (hasNoBackground) {
     bgColor = 'transparent';
   }
 

@@ -98,7 +98,7 @@ const HelpSuperAdmin = () => {
                         <td>{item.name}</td>
                         <td className="is-uppercase actions has-text-right">
                           <Button
-                            primary
+                            hasNoBackground
                             paddingless
                             onClick={() => {
                               swal('Are you confirm to delete this item?', {

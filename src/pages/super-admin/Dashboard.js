@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -93,7 +94,7 @@ const Dashboard = () => {
                         <td>{user.profile && user.profile.fullName}</td>
                         <td>{user.profile && user.profile.companyName}</td>
                         <td>{user.profile && user.profile.telephone}</td>
-                        <td>{user.createdAt}</td>
+                        <td>{moment(user.createdAt).format('Do MMMM YYYY')}</td>
                       </tr>
                     ))}
                 </tbody>
