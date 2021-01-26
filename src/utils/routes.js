@@ -22,6 +22,7 @@ import Discounts from '../pages/super-admin/Discounts';
 import ClientProjects from '../pages/super-admin/ClientProjects';
 import ProjectInfo from '../pages/super-admin/ProjectInfo';
 import Pricing from '../pages/super-admin/Pricing';
+import HelpSuperAdmin from '../pages/super-admin/Help';
 
 import DashboardAdmin from '../pages/admin/Dashboard';
 import CreateProject from '../pages/admin/CreateProject';
@@ -30,6 +31,7 @@ import ReviewStyles from '../pages/admin/ReviewStyles';
 import ProjectDashboard from '../pages/admin/ProjectDashboard';
 import ProjectSubscription from '../pages/admin/ProjectSubscription';
 import Settings from '../pages/admin/Settings';
+import Help from '../pages/admin/Help';
 
 const PrivateRoute = ({ component: Component, access, ...rest }) => {
   const isLoggedIn = useStoreState((state) => state.isLoggedIn.value);
@@ -92,6 +94,12 @@ const Routes = () => (
         />
         <PrivateRoute
           exact
+          path="/super-admin/help"
+          component={HelpSuperAdmin}
+          access="superAdmin"
+        />
+        <PrivateRoute
+          exact
           path="/super-admin/discounts"
           component={Discounts}
           access="superAdmin"
@@ -136,6 +144,12 @@ const Routes = () => (
           exact
           path="/admin/settings"
           component={Settings}
+          access="admin"
+        />
+        <PrivateRoute
+          exact
+          path="/admin/help"
+          component={Help}
           access="admin"
         />
         <Route exact path="/test" component={Test} />

@@ -112,6 +112,11 @@ const Sidebar = ({ showOnMobile }) => {
             title="Subscriptions"
             to={`/admin/project/${activeProject}/subscription`}
           />
+          <LinkWrapper
+            icon="far fa-question-circle"
+            title="Help"
+            to="/admin/help"
+          />
           {/* {!isNull(activeProject) ? (
             <div className="sub-items">
               <LinkWrapper

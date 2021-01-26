@@ -5,6 +5,7 @@ import CommentReplyForm from './CommentReplyForm';
 import ContactForm from './ContactForm';
 import DiscountForm from './DiscountForm';
 import ForgotPasswordForm from './ForgotPasswordForm';
+import HelpForm from './HelpForm';
 import LoginForm from './LoginForm';
 import PaymentForm from './PaymentForm';
 import PricingForm from './PricingForm';
@@ -22,6 +23,7 @@ export {
   ContactForm,
   DiscountForm,
   ForgotPasswordForm,
+  HelpForm,
   LoginForm,
   PaymentForm,
   PricingForm,
