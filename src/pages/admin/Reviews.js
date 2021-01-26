@@ -68,7 +68,7 @@ const projectStatsQuery = gql`
 const Reviews = ({ match }) => {
   const projectId = match.params.id;
   const [project] = useProjectDetails(projectId);
-  const reviews = useQuery(reviewsQuery, {
+  const { data, refetch } = useQuery(reviewsQuery, {
     fetchPolicy: 'cache-and-network',
     variables: {
       projectId: project.id,
@@ -81,8 +81,7 @@ const Reviews = ({ match }) => {
     },
   });
 
-  const reviewsData =
-    reviews && reviews.data && reviews.data.reviews ? reviews.data.reviews : [];
+  const reviewsData = data && data.reviews ? data.reviews : [];
 
   const projectStatCount =
     projectStats &&
@@ -138,11 +137,7 @@ const Reviews = ({ match }) => {
                 <div className="column is-1">
                   <p className="has-text-centered">Action</p>
                 </div>
-                {/* <div className="column is-1">
-                  <p>Action</p>
-                </div> */}
               </TableHeading>
-              {/* Add map when data available */}
               {reviewsData &&
                 reviewsData.map((review) => (
                   <ReviewItem
@@ -154,6 +149,7 @@ const Reviews = ({ match }) => {
                     reviewTitleColor={reviewTitleColor}
                     reviewBodySize={reviewBodySize}
                     reviewAuthorSize={reviewAuthorSize}
+                    executeQuery={refetch}
                   />
                 ))}
             </MainColumn>

@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/client';
+import swal from 'sweetalert';
 
 import Rating from './Rating';
 import { CommentReplyForm } from './forms';
+import { Message } from './elements';
 
 const Wrapper = styled.div`
   :nth-child(even) {
@@ -30,6 +34,14 @@ const UserReview = styled.div`
   font-size: ${(props) => (props.fontSize ? `${props.fontSize}px` : '16px')};
 `;
 
+const removeReviewMutation = gql`
+  mutation removeReview($id: ID!) {
+    removeReview(id: $id) {
+      success
+    }
+  }
+`;
+
 const ReviewItem = ({
   review,
   starsColor,
@@ -37,8 +49,11 @@ const ReviewItem = ({
   reviewBodyColor,
   reviewBodySize,
   reviewAuthorSize,
+  executeQuery,
 }) => {
   const [active, setActive] = useState(false);
+
+  const [executeRemoveReview, resRemove] = useMutation(removeReviewMutation);
   const toggle = () => {
     setActive(!active);
   };
@@ -69,23 +84,35 @@ const ReviewItem = ({
           <div className="column is-2" />
           <div className="column is-1 has-text-centered">
             <button className="button has-text-weight-bold" type="button">
-              Live
+              {review.status}
             </button>
           </div>
+
+          {resRemove.error && (
+            <Message type="error">{resRemove.error.message}</Message>
+          )}
           <div className="column is-1 has-text-centered">
             <button
               className="button has-text-danger has-text-weight-bold"
-              type="button">
+              type="button"
+              onClick={() => {
+                swal('Are you sure you want to delete this user?', {
+                  buttons: ['Cancel', 'Confirm'],
+                }).then(async (value) => {
+                  if (value) {
+                    // console.log('item', item);
+                    await executeRemoveReview({
+                      variables: {
+                        id: review.id,
+                      },
+                    });
+                    executeQuery();
+                  }
+                });
+              }}>
               Delete
             </button>
           </div>
-          {/* <div className="column is-1">
-            <button
-              className="button has-text-success has-text-weight-bold"
-              type="button">
-              Submit
-            </button>
-          </div> */}
         </div>
         <div className="columns">
           <div className="column">
