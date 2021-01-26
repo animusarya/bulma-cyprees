@@ -48,17 +48,17 @@ const ReviewItem = ({
       <div className="column">
         <div className="columns">
           <UserReview
-            className="column is-1"
+            className="column is-2"
             color={reviewAuthorColor}
             fontSize={reviewAuthorSize}>
             {review.personName}
           </UserReview>
-          <UserReview className="column is-1">{review.location}</UserReview>
+          <UserReview className="column is-2">{review.location}</UserReview>
           <div className="column is-2">
             {' '}
             {moment(review.createdAt).format('Do MMM YYYY')}
           </div>
-          <div className="column is-1">
+          <div className="column is-2">
             <Rating
               disabled
               count={5}
@@ -66,13 +66,13 @@ const ReviewItem = ({
               activeColor={starsColor}
             />
           </div>
-          <div className="column is-4" />
-          <div className="column is-1">
+          <div className="column is-2" />
+          <div className="column is-1 has-text-centered">
             <button className="button has-text-weight-bold" type="button">
               Live
             </button>
           </div>
-          <div className="column is-1">
+          <div className="column is-1 has-text-centered">
             <button
               className="button has-text-danger has-text-weight-bold"
               type="button">

@@ -119,24 +119,24 @@ const Reviews = ({ match }) => {
               </ReviewsStat>
               <CheckBox text="Turn on Auto Reviews" />
               <TableHeading className="columns is-flex">
-                <div className="column is-1">
+                <div className="column is-2">
                   <p>Name</p>
                 </div>
-                <div className="column is-1">
+                <div className="column is-2">
                   <p>Location</p>
                 </div>
                 <div className="column is-2">
                   <p>Date</p>
                 </div>
-                <div className="column is-1">
+                <div className="column is-2">
                   <p>Rating</p>
                 </div>
-                <div className="column is-4" />
+                <div className="column is-2" />
                 <div className="column is-1">
-                  <p>Status</p>
+                  <p className="has-text-centered">Status</p>
                 </div>
                 <div className="column is-1">
-                  <p>Action</p>
+                  <p className="has-text-centered">Action</p>
                 </div>
                 {/* <div className="column is-1">
                   <p>Action</p>
