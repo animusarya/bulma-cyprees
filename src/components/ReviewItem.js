@@ -42,6 +42,14 @@ const removeReviewMutation = gql`
   }
 `;
 
+const updateReviewMutation = gql`
+  mutation updateReview($id: ID!, $input: ReviewUpdateInput!) {
+    updateReview(id: $id, input: $input) {
+      id
+    }
+  }
+`;
+
 const ReviewItem = ({
   review,
   starsColor,
@@ -54,6 +62,8 @@ const ReviewItem = ({
   const [active, setActive] = useState(false);
 
   const [executeRemoveReview, resRemove] = useMutation(removeReviewMutation);
+  const [executeUpdateReview, res] = useMutation(updateReviewMutation);
+
   const toggle = () => {
     setActive(!active);
   };
@@ -83,14 +93,34 @@ const ReviewItem = ({
           </div>
           <div className="column is-2" />
           <div className="column is-1 has-text-centered">
-            <button className="button has-text-weight-bold" type="button">
+            <button
+              className="button has-text-weight-bold"
+              type="button"
+              onClick={() => {
+                swal('Are you sure you want to live this comment?', {
+                  buttons: ['Cancel', 'Confirm'],
+                }).then(async (value) => {
+                  if (value) {
+                    await executeUpdateReview({
+                      variables: {
+                        id: review.id,
+                        input: {
+                          status: 'active',
+                        },
+                      },
+                    });
+                    executeQuery();
+                  }
+                });
+              }}>
               {review.status}
             </button>
           </div>
 
-          {resRemove.error && (
-            <Message type="error">{resRemove.error.message}</Message>
-          )}
+          {res.error ||
+            (resRemove.error && (
+              <Message type="error">{resRemove.error.message}</Message>
+            ))}
           <div className="column is-1 has-text-centered">
             <button
               className="button has-text-danger has-text-weight-bold"
