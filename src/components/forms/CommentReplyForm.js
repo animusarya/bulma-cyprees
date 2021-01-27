@@ -1,48 +1,52 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
-// import * as yup from 'yup';
 
 import { Button, TextAreaGroup } from '../elements';
 
-const CommentReplyForm = () => (
-  <form
-  // onSubmit={handleSubmit}
-  >
-    <TextAreaGroup
-      border
-      name="comment"
-      // value={values.comment}
-      // onChange={handleChange}
-      // onBlur={handleBlur}
-      // errors={errors.comment && touched.comment ? errors.comment : undefined}
-    />
-    <div className="field is-grouped is-pulled-right">
-      {/* <p className="control">
+const CommentReplyForm = (props) => {
+  const {
+    values,
+    isSubmitting,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+  } = props;
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <TextAreaGroup
+        border
+        name="adminReply"
+        value={values.adminReply}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+      <div className="field is-grouped is-pulled-right">
+        {/* <p className="control">
         <Button hasBorder type="button">
           Delete Reply
         </Button>
       </p> */}
-      <p className="control">
-        <Button type="button">Post Reply</Button>
-      </p>
-    </div>
-  </form>
-);
+        <p className="control">
+          <Button disabled={isSubmitting} type="button">
+            Post Reply
+          </Button>
+        </p>
+      </div>
+    </form>
+  );
+};
 
 export default withFormik({
-  mapPropsToValues: () => ({
-    comment: '',
+  mapPropsToValues: ({ initialValues }) => ({
+    adminReply: initialValues.adminReply || '',
   }),
-  // validationSchema: yup.object().shape({
-  //   comment: yup.string().required('Comment is required!'),
-  // }),
-  handleSubmit: (values, { setSubmitting, resetForm, props }) => {
-    // console.log('handle submit', values, props);
-    props.addContact(values);
-    setSubmitting(false);
 
-    resetForm();
+  handleSubmit: (values, { setSubmitting, props }) => {
+    // console.log('handle submit', values, props);
+    props.onSubmit(values).then(() => {
+      setSubmitting(false);
+    });
   },
   displayName: 'ContactUs', // helps with React DevTools
 })(CommentReplyForm);

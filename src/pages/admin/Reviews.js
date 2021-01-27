@@ -11,7 +11,7 @@ import CopyRight from '../../components/CopyRight';
 import MainColumn from '../../components/MainColumn';
 import ReviewItem from '../../components/ReviewItem';
 import useProjectDetails from '../../hooks/useProjectDetails';
-import { CheckBox } from '../../components/elements';
+import { AutoReviewsForm } from '../../components/forms';
 
 const Container = styled.div`
   .subtitle {
@@ -67,17 +67,18 @@ const projectStatsQuery = gql`
 
 const Reviews = ({ match }) => {
   const projectId = match.params.id;
-  const [project] = useProjectDetails(projectId);
-  const { data, refetch } = useQuery(reviewsQuery, {
+  const [project, refetch] = useProjectDetails(projectId);
+  const { data, refetch: reviewsRefetch } = useQuery(reviewsQuery, {
     fetchPolicy: 'cache-and-network',
     variables: {
-      projectId: project.id,
+      projectId,
     },
   });
+
   const projectStats = useQuery(projectStatsQuery, {
     fetchPolicy: 'cache-and-network',
     variables: {
-      id: project.id,
+      projectId,
     },
   });
 
@@ -91,14 +92,6 @@ const Reviews = ({ match }) => {
       ? projectStats.data.projectStats.avgRating
       : 0;
 
-  const {
-    starsColor,
-    reviewAuthorColor,
-    reviewBodyColor,
-    reviewTitleColor,
-    reviewBodySize,
-    reviewAuthorSize,
-  } = project;
   return (
     <Layout noContainer>
       <Seo title="Dashboard Admin" description="List of Projects Here" />
@@ -116,7 +109,7 @@ const Reviews = ({ match }) => {
                   Total {reviewsData.length}, Average Score {projectStatCount}
                 </span>
               </ReviewsStat>
-              <CheckBox text="Turn on Auto Reviews" />
+              <AutoReviewsForm project={project} refetch={refetch} />
               <TableHeading className="columns is-flex">
                 <div className="column is-2">
                   <p>Name</p>
@@ -143,13 +136,13 @@ const Reviews = ({ match }) => {
                   <ReviewItem
                     review={review}
                     key={review.id}
-                    starsColor={starsColor}
-                    reviewAuthorColor={reviewAuthorColor}
-                    reviewBodyColor={reviewBodyColor}
-                    reviewTitleColor={reviewTitleColor}
-                    reviewBodySize={reviewBodySize}
-                    reviewAuthorSize={reviewAuthorSize}
-                    executeQuery={refetch}
+                    starsColor={project.starsColor}
+                    reviewAuthorColor={project.reviewAuthorColor}
+                    reviewBodyColor={project.reviewBodyColor}
+                    reviewTitleColor={project.reviewTitleColor}
+                    reviewBodySize={project.reviewBodySize}
+                    reviewAuthorSize={project.reviewAuthorSize}
+                    executeQuery={reviewsRefetch}
                   />
                 ))}
             </MainColumn>

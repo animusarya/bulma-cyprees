@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import AdminUsersForm from './AdminUsersForm';
+import AutoReviewsForm from './AutoReviewsForm';
 import ClientReviewForm from './ClientReviewForm';
 import CommentReplyForm from './CommentReplyForm';
 import ContactForm from './ContactForm';
@@ -18,6 +19,7 @@ import SettingsForm from './SettingsForm';
 
 export {
   AdminUsersForm,
+  AutoReviewsForm,
   ClientReviewForm,
   CommentReplyForm,
   ContactForm,

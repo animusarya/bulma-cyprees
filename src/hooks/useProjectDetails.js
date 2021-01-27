@@ -24,6 +24,7 @@ const projectQuery = gql`
       reviewBodyColor
       reviewAuthorSize
       reviewAuthorColor
+      autoReviewApproval
     }
   }
 `;
@@ -35,7 +36,7 @@ const useProjectDetails = (projectId) => {
   );
 
   // fetch project data from api
-  const [getProject, resultProject] = useLazyQuery(projectQuery, {
+  const [getProject, resultProject, refetch] = useLazyQuery(projectQuery, {
     variables: { id: projectId },
     fetchPolicy: 'cache-and-network',
   });
@@ -55,7 +56,7 @@ const useProjectDetails = (projectId) => {
     updateProject(projectId);
   }, [projectId, updateProject]);
 
-  return [project, resultProject];
+  return [project, resultProject, refetch];
 };
 
 export default useProjectDetails;

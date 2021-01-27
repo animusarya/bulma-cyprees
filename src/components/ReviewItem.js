@@ -159,7 +159,19 @@ const ReviewItem = ({
         </a>
         {active ? (
           <CommentReplyWrapper>
-            <CommentReplyForm />
+            <CommentReplyForm
+              initialValues={review}
+              onSubmit={(data) =>
+                executeUpdateReview({
+                  variables: {
+                    id: review.id,
+                    input: {
+                      adminReply: data.adminReply,
+                    },
+                  },
+                })
+              }
+            />
           </CommentReplyWrapper>
         ) : null}
       </div>
