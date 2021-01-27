@@ -52,6 +52,7 @@ const reviewsQuery = gql`
       comment
       rating
       status
+      adminReply
       createdAt
     }
   }
@@ -109,7 +110,7 @@ const Reviews = ({ match }) => {
                   Total {reviewsData.length}, Average Score {projectStatCount}
                 </span>
               </ReviewsStat>
-              <AutoReviewsForm project={project} refetch={refetch} />
+              <AutoReviewsForm project={project} />
               <TableHeading className="columns is-flex">
                 <div className="column is-2">
                   <p>Name</p>

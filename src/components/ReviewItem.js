@@ -34,6 +34,10 @@ const UserReview = styled.div`
   font-size: ${(props) => (props.fontSize ? `${props.fontSize}px` : '16px')};
 `;
 
+const PendingText = styled.p`
+  color: ${(props) => props.theme.primaryColor};
+`;
+
 const removeReviewMutation = gql`
   mutation removeReview($id: ID!) {
     removeReview(id: $id) {
@@ -46,6 +50,7 @@ const updateReviewMutation = gql`
   mutation updateReview($id: ID!, $input: ReviewUpdateInput!) {
     updateReview(id: $id, input: $input) {
       id
+      comment
     }
   }
 `;
@@ -66,6 +71,32 @@ const ReviewItem = ({
 
   const toggle = () => {
     setActive(!active);
+  };
+
+  const handleSubmit = (data) => {
+    // console.log(data, 'data');
+    let value = '';
+    if (data.function === 'submit') {
+      value = data.adminReply;
+    }
+    swal(
+      `Are you sure you want to ${
+        data.function === 'submit' ? 'post reply to' : 'delete'
+      } this comment?`,
+      {
+        buttons: ['Cancel', 'Confirm'],
+      },
+    ).then(async () => {
+      await executeUpdateReview({
+        variables: {
+          id: review.id,
+          input: {
+            adminReply: value,
+          },
+        },
+      });
+      executeQuery();
+    });
   };
 
   return (
@@ -113,14 +144,20 @@ const ReviewItem = ({
                   }
                 });
               }}>
-              {review.status}
+              {review.status === 'active' ? (
+                <p className="has-text-success">Active</p>
+              ) : (
+                <PendingText>Pending</PendingText>
+              )}
             </button>
           </div>
 
-          {res.error ||
-            (resRemove.error && (
-              <Message type="error">{resRemove.error.message}</Message>
-            ))}
+          {resRemove.error && (
+            <Message type="error">{resRemove.error.message}</Message>
+          )}
+          {res.error && (
+            <Message type="error">{resRemove.error.message}</Message>
+          )}
           <div className="column is-1 has-text-centered">
             <button
               className="button has-text-danger has-text-weight-bold"
@@ -159,19 +196,7 @@ const ReviewItem = ({
         </a>
         {active ? (
           <CommentReplyWrapper>
-            <CommentReplyForm
-              initialValues={review}
-              onSubmit={(data) =>
-                executeUpdateReview({
-                  variables: {
-                    id: review.id,
-                    input: {
-                      adminReply: data.adminReply,
-                    },
-                  },
-                })
-              }
-            />
+            <CommentReplyForm initialValues={review} onSubmit={handleSubmit} />
           </CommentReplyWrapper>
         ) : null}
       </div>
