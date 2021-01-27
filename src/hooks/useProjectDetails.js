@@ -36,7 +36,7 @@ const useProjectDetails = (projectId) => {
   );
 
   // fetch project data from api
-  const [getProject, resultProject, refetch] = useLazyQuery(projectQuery, {
+  const [getProject, resultProject] = useLazyQuery(projectQuery, {
     variables: { id: projectId },
     fetchPolicy: 'cache-and-network',
   });
@@ -56,7 +56,7 @@ const useProjectDetails = (projectId) => {
     updateProject(projectId);
   }, [projectId, updateProject]);
 
-  return [project, resultProject, refetch];
+  return [project, resultProject];
 };
 
 export default useProjectDetails;

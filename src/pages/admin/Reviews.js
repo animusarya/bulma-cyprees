@@ -67,7 +67,7 @@ const projectStatsQuery = gql`
 
 const Reviews = ({ match }) => {
   const projectId = match.params.id;
-  const [project, refetch] = useProjectDetails(projectId);
+  const [project] = useProjectDetails(projectId);
   const { data, refetch: reviewsRefetch } = useQuery(reviewsQuery, {
     fetchPolicy: 'cache-and-network',
     variables: {
