@@ -79,7 +79,7 @@ const Reviews = ({ match }) => {
   const projectStats = useQuery(projectStatsQuery, {
     fetchPolicy: 'cache-and-network',
     variables: {
-      projectId,
+      id: projectId,
     },
   });
 

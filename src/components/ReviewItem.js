@@ -128,7 +128,7 @@ const ReviewItem = ({
               className="button has-text-weight-bold"
               type="button"
               onClick={() => {
-                swal('Are you sure you want to live this comment?', {
+                swal('Are you sure?', {
                   buttons: ['Cancel', 'Confirm'],
                 }).then(async (value) => {
                   if (value) {
@@ -136,7 +136,8 @@ const ReviewItem = ({
                       variables: {
                         id: review.id,
                         input: {
-                          status: 'active',
+                          status:
+                            review.status === 'active' ? 'pending' : 'active',
                         },
                       },
                     });
