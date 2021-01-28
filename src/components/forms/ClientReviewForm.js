@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import { InputGroup, Button, TextAreaGroup } from '../elements';
 import Rating from '../Rating';
@@ -33,6 +34,8 @@ const ClientReviewForm = (props) => {
   } = props;
 
   const { starsColor } = project;
+  const recaptchaRef = useRef();
+
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
@@ -118,6 +121,10 @@ const ClientReviewForm = (props) => {
         onChange={handleChange}
         onBlur={handleBlur}
         errors={errors.comment && touched.comment ? errors.comment : undefined}
+      />
+      <ReCAPTCHA
+        ref={recaptchaRef}
+        sitekey="6LeEaD8aAAAAAFc71DBg4djlXiqjWloAEtF2_KVl"
       />
 
       <div className="field">
