@@ -125,13 +125,17 @@ const ClientReviewForm = (props) => {
       <ReCAPTCHA
         ref={recaptchaRef}
         sitekey="6LeEaD8aAAAAAFc71DBg4djlXiqjWloAEtF2_KVl"
+        onChange={(response) => {
+          setFieldValue('recaptcha', response);
+        }}
       />
+      {errors.recaptcha && touched.recaptcha && (
+        <p className="help is-danger">{errors.recaptcha}</p>
+      )}
 
       <div className="field">
         <div className="control">
           <Button
-            // bgColor={buttonsColor}
-            // buttonsTextColor={buttonsTextColor}
             marginTop
             marginBottomNone
             type="submit"
@@ -164,6 +168,7 @@ export default withFormik({
     reviewTitle: '',
     comment: '',
     rating: '',
+    recaptcha: '',
   }),
   validationSchema: yup.object().shape({
     personName: yup.string().required('Name is required!'),
@@ -171,6 +176,7 @@ export default withFormik({
     reviewTitle: yup.string().required('Title is required!'),
     comment: yup.string().required('Review is required!'),
     rating: yup.number().required('Rating is required!'),
+    recaptcha: yup.string().required('recaptcha is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, resetForm, props }) => {
