@@ -9,6 +9,10 @@
 ```
 username: test@test.com
 password: test12
+
+Super Admin
+username: owner@owner.com
+password: owner12
 ```
 
 ## Requirements
