@@ -2,6 +2,15 @@
 
 > Frontend app for Reviews System using ReactJs with batteries included.
 
+## To Test App
+
+- [Go to Website](https://web.reviewourservice.com/)
+
+```
+username: test@test.com
+password: test12
+```
+
 ## Requirements
 
 ```bash
