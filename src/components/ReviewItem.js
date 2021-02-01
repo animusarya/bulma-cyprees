@@ -55,15 +55,7 @@ const updateReviewMutation = gql`
   }
 `;
 
-const ReviewItem = ({
-  review,
-  starsColor,
-  reviewAuthorColor,
-  reviewBodyColor,
-  reviewBodySize,
-  reviewAuthorSize,
-  executeQuery,
-}) => {
+const ReviewItem = ({ review, starsColor, executeQuery }) => {
   const [active, setActive] = useState(false);
 
   const [executeRemoveReview, resRemove] = useMutation(removeReviewMutation);
@@ -103,12 +95,7 @@ const ReviewItem = ({
     <Wrapper className="columns">
       <div className="column">
         <div className="columns">
-          <UserReview
-            className="column is-2"
-            color={reviewAuthorColor}
-            fontSize={reviewAuthorSize}>
-            {review.personName}
-          </UserReview>
+          <UserReview className="column is-2">{review.personName}</UserReview>
           <UserReview className="column is-2">{review.location}</UserReview>
           <div className="column is-2">
             {' '}
@@ -184,12 +171,7 @@ const ReviewItem = ({
         </div>
         <div className="columns">
           <div className="column">
-            <UserReview
-              className="is-size-7"
-              color={reviewBodyColor}
-              fontSize={reviewBodySize}>
-              {review.comment}
-            </UserReview>
+            <UserReview className="is-size-6">{review.comment}</UserReview>
           </div>
         </div>
         <a onClick={toggle} className="has-text-weight-bold">
