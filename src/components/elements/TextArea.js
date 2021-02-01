@@ -30,7 +30,7 @@ const TextAreaGroup = ({
   isWidth,
   isHorizontal,
   labelInfo,
-  readonly,
+  readOnly,
   ...otherProps
 }) => (
   <Group
@@ -44,7 +44,7 @@ const TextAreaGroup = ({
       </div>
     )}
     <div className="control">
-      <TextArea className="textarea" {...otherProps} readOnly={readonly} />
+      <TextArea className="textarea" {...otherProps} readOnly={readOnly} />
       {errors && <p className="help is-danger">{errors}</p>}
     </div>
   </Group>

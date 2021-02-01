@@ -23,8 +23,8 @@ const userQuery = gql`
 `;
 
 const clientProjectsQuery = gql`
-  query projects($clientId: ID!) {
-    projects(clientId: $clientId) {
+  query projects {
+    projects {
       id
       name
       subscriptionAmount
@@ -68,12 +68,10 @@ const LinkWrapper = styled(Link)`
 
 const ProjectsClient = ({ match }) => {
   const resultUser = useQuery(userQuery, {
-    variables: { id: match.params.clientId },
     fetchPolicy: 'cache-and-network',
   });
 
   const result = useQuery(clientProjectsQuery, {
-    variables: { clientId: match.params.clientId },
     fetchPolicy: 'cache-and-network',
   });
   const [executeMutationRemove, resRemove] = useMutation(removeProjectMutation);

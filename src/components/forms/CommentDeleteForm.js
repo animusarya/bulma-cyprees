@@ -15,7 +15,7 @@ const CommentDeleteForm = (props) => {
         value={values.adminReply}
         onChange={handleChange}
         onBlur={handleBlur}
-        readonly
+        readOnly
       />
       <div className="field is-grouped is-pulled-right">
         <p className="control">
