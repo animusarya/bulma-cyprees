@@ -55,7 +55,12 @@ const updateReviewMutation = gql`
   }
 `;
 
-const ReviewItem = ({ review, starsColor, executeQuery }) => {
+const ReviewItem = ({
+  review,
+  starsColor,
+  executeQuery,
+  projectStatsRefetch,
+}) => {
   const [active, setActive] = useState(false);
 
   const [executeRemoveReview, resRemove] = useMutation(removeReviewMutation);
@@ -88,6 +93,7 @@ const ReviewItem = ({ review, starsColor, executeQuery }) => {
         },
       });
       executeQuery();
+      projectStatsRefetch();
     });
   };
 
@@ -129,6 +135,7 @@ const ReviewItem = ({ review, starsColor, executeQuery }) => {
                       },
                     });
                     executeQuery();
+                    projectStatsRefetch();
                   }
                 });
               }}>
@@ -162,6 +169,7 @@ const ReviewItem = ({ review, starsColor, executeQuery }) => {
                       },
                     });
                     executeQuery();
+                    projectStatsRefetch();
                   }
                 });
               }}>

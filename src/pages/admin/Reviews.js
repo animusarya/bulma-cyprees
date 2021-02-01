@@ -76,21 +76,24 @@ const Reviews = ({ match }) => {
     },
   });
 
-  const projectStats = useQuery(projectStatsQuery, {
-    fetchPolicy: 'cache-and-network',
-    variables: {
-      id: projectId,
+  const { data: projectStats, refetch: projectStatsRefetch } = useQuery(
+    projectStatsQuery,
+    {
+      fetchPolicy: 'cache-and-network',
+      variables: {
+        id: projectId,
+      },
     },
-  });
+  );
 
   const reviewsData = data && data.reviews ? data.reviews : [];
 
   const projectStatCount =
     projectStats &&
-    projectStats.data &&
-    projectStats.data.projectStats &&
-    projectStats.data.projectStats.avgRating
-      ? projectStats.data.projectStats.avgRating
+    projectStats &&
+    projectStats.projectStats &&
+    projectStats.projectStats.avgRating
+      ? projectStats.projectStats.avgRating
       : 0;
 
   return (
@@ -144,6 +147,7 @@ const Reviews = ({ match }) => {
                     reviewBodySize={project.reviewBodySize}
                     reviewAuthorSize={project.reviewAuthorSize}
                     executeQuery={reviewsRefetch}
+                    projectStatsRefetch={projectStatsRefetch}
                   />
                 ))}
             </MainColumn>
