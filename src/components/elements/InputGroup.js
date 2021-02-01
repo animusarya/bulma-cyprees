@@ -13,6 +13,10 @@ const Group = styled.div`
   }
 `;
 
+const LabelWrapper = styled.div`
+  justify-content: space-between;
+`;
+
 const Input = styled.input`
   box-shadow: none;
   border-top: ${(props) =>
@@ -55,6 +59,8 @@ const InputGroup = ({
   iconLabel,
   groupWidth,
   labelInfo,
+  maxlength,
+  counter,
   ...otherProps
 }) => (
   <Group
@@ -64,23 +70,32 @@ const InputGroup = ({
     groupWidth={groupWidth}
     fullWidth={fullWidth}
     isWidth={isWidth}>
-    <div className="is-flex">
-      {label && <label className="label">{label}</label>}{' '}
-      {labelInfo && <p>{labelInfo}</p>}
-      {infoIcon && (
-        <IconContainer>
-          {infoIcon}
-          <span className="tooltiptext is-size-7">{iconLabel}</span>
-        </IconContainer>
+    <LabelWrapper className="is-flex is-justify-content-space-between">
+      <span className="is-flex">
+        {label && <label className="label">{label}</label>}{' '}
+        {labelInfo && <p>{labelInfo}</p>}
+        {infoIcon && (
+          <IconContainer>
+            {infoIcon}
+            <span className="tooltiptext is-size-7">{iconLabel}</span>
+          </IconContainer>
+        )}
+      </span>
+      {maxlength && (
+        <p>
+          {counter || 0} / {maxlength}
+        </p>
       )}
-    </div>
+    </LabelWrapper>
     {hasAddons && (
       <p className="control">
         <span className="button is-static">@gmail.com</span>
       </p>
     )}
     <div className="control">
-      {children || <Input className="input" {...otherProps} />}
+      {children || (
+        <Input className="input" {...otherProps} maxLength={maxlength} />
+      )}
       {errors && <p className="help is-danger">{errors}</p>}
     </div>
   </Group>

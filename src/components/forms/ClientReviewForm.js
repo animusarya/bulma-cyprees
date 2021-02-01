@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 import ReCAPTCHA from 'react-google-recaptcha';
+import TextareaCounter from 'react-textarea-counter';
 
-import { InputGroup, Button, TextAreaGroup } from '../elements';
+import { InputGroup, Button } from '../elements';
 import Rating from '../Rating';
 
 const RatingTitle = styled.p`
@@ -18,6 +19,10 @@ const LocationContainer = styled.div`
   .label:not(:last-child) {
     margin-bottom: 0em;
   }
+`;
+
+const ReviewError = styled.p`
+  margin-top: -20px;
 `;
 
 const ClientReviewForm = (props) => {
@@ -103,6 +108,8 @@ const ClientReviewForm = (props) => {
         name="reviewTitle"
         type="text"
         labelInfo="(Max 80 characters)"
+        maxlength={80}
+        counter={values.reviewTitle.length}
         value={values.reviewTitle}
         onChange={handleChange}
         onBlur={handleBlur}
@@ -112,16 +119,20 @@ const ClientReviewForm = (props) => {
             : undefined
         }
       />
-      <TextAreaGroup
-        border
-        label="Review Description:"
+      <label>
+        <span className="has-text-weight-semibold">Review Description:</span>
+        (Max 500 characters)
+      </label>
+      <TextareaCounter
+        countLimit={500}
         name="comment"
-        labelInfo="(Max 500 characters)"
-        value={values.comment}
+        initialValue={values.comment}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={errors.comment && touched.comment ? errors.comment : undefined}
       />
+      <ReviewError className="help is-danger">
+        {errors.comment && touched.comment ? errors.comment : undefined}
+      </ReviewError>
       <ReCAPTCHA
         ref={recaptchaRef}
         sitekey="6LeEaD8aAAAAAFc71DBg4djlXiqjWloAEtF2_KVl"
@@ -132,7 +143,6 @@ const ClientReviewForm = (props) => {
       {errors.recaptcha && touched.recaptcha && (
         <p className="help is-danger">{errors.recaptcha}</p>
       )}
-
       <div className="field">
         <div className="control">
           <Button

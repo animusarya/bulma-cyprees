@@ -10055,6 +10055,11 @@ react-slick@^0.27.13:
     lodash.debounce "^4.0.8"
     resize-observer-polyfill "^1.5.0"
 
+react-textarea-counter@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-textarea-counter/-/react-textarea-counter-1.0.0.tgz#ebe726c7a807c8b8ceb4d802ea39b2d7e7ad0fa0"
+  integrity sha512-ZVKZ9EfaKmGgz5RwY3+kcKSNJuNBSGsaMWcbbo1E61wVFNWUViuyUhu8ABia/nMS8nSrFy3GQYS1Yyg/BtDeIA==
+
 react@^17.0.1:
   version "17.0.1"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.1.tgz#6e0600416bd57574e3f86d92edba3d9008726127"
