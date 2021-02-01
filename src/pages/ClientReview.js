@@ -63,7 +63,7 @@ const ClientReview = ({ match }) => {
                 Hi, you have been invited to write a short review from{' '}
                 <strong>{project.name}</strong>.<br /> Please be honest and
                 accurate as possible about your experience. They will process
-                your review which might be published on their website.{' '}
+                your review which might be published on their website1.{' '}
               </Description>
               <ClientReviewForm
                 project={project}
