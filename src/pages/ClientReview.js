@@ -81,6 +81,7 @@ const ClientReview = ({ match }) => {
                     },
                   });
                   swal('Your Review is successfully submitted');
+                  window.reload();
                 }}
               />
               {res.error && <Message type="error">{res.error.message}</Message>}
