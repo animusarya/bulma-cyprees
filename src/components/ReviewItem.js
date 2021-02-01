@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/client';
 import swal from 'sweetalert';
 
 import Rating from './Rating';
-import { CommentReplyForm } from './forms';
+import { CommentReplyForm, CommentDeleteForm } from './forms';
 import { Message } from './elements';
 
 const Wrapper = styled.div`
@@ -70,32 +70,33 @@ const ReviewItem = ({
     setActive(!active);
   };
 
-  const handleSubmit = (data) => {
-    // console.log(data, 'data');
-    let value = '';
-    if (data.function === 'submit') {
-      value = data.adminReply;
-    }
-    swal(
-      `Are you sure you want to ${
-        data.function === 'submit' ? 'post reply to' : 'delete'
-      } this comment?`,
-      {
-        buttons: ['Cancel', 'Confirm'],
-      },
-    ).then(async () => {
-      await executeUpdateReview({
-        variables: {
-          id: review.id,
-          input: {
-            adminReply: value,
-          },
-        },
-      });
-      executeQuery();
-      projectStatsRefetch();
-    });
-  };
+  console.log(review, 'review');
+
+  // const handleSubmit = (data) => {
+  //   // console.log(data, 'data');
+  //   let value = '';
+  //   if (data.function === 'submit') {
+  //     value = data.adminReply;
+  //   }
+  //   swal(
+  //     `Are you sure you want to ${
+  //       data.function === 'submit' ? 'post reply to' : 'delete'
+  //     } this comment?`,
+  //     {
+  //       buttons: ['Cancel', 'Confirm'],
+  //     },
+  //   ).then(async () => {
+  //     await executeUpdateReview({
+  //       variables: {
+  //         id: review.id,
+  //         input: {
+  //           adminReply: value,
+  //         },
+  //       },
+  //     });
+  //     executeQuery();
+  //   });
+  // };
 
   return (
     <Wrapper className="columns">
@@ -150,15 +151,13 @@ const ReviewItem = ({
           {resRemove.error && (
             <Message type="error">{resRemove.error.message}</Message>
           )}
-          {res.error && (
-            <Message type="error">{resRemove.error.message}</Message>
-          )}
+          {res.error && <Message type="error">{res.error.message}</Message>}
           <div className="column is-1 has-text-centered">
             <button
               className="button has-text-danger has-text-weight-bold"
               type="button"
               onClick={() => {
-                swal('Are you sure you want to delete this user?', {
+                swal('Are you sure you want to delete this review?', {
                   buttons: ['Cancel', 'Confirm'],
                 }).then(async (value) => {
                   if (value) {
@@ -187,7 +186,49 @@ const ReviewItem = ({
         </a>
         {active ? (
           <CommentReplyWrapper>
-            <CommentReplyForm initialValues={review} onSubmit={handleSubmit} />
+            {review.adminReply ? (
+              <CommentDeleteForm
+                initialValues={review}
+                onSubmit={() => {
+                  swal(
+                    `Are you sure you want to delete reply to this comment?`,
+                    {
+                      buttons: ['Cancel', 'Confirm'],
+                    },
+                  ).then(async () => {
+                    await executeUpdateReview({
+                      variables: {
+                        id: review.id,
+                        input: {
+                          adminReply: '',
+                        },
+                      },
+                    });
+                    executeQuery();
+                  });
+                }}
+              />
+            ) : (
+              <CommentReplyForm
+                onSubmit={(formData) => {
+                  swal(`Are you sure you want to post reply to this comment?`, {
+                    buttons: ['Cancel', 'Confirm'],
+                  }).then(async (value) => {
+                    if (value) {
+                      await executeUpdateReview({
+                        variables: {
+                          id: review.id,
+                          input: {
+                            adminReply: formData.adminReply,
+                          },
+                        },
+                      });
+                      executeQuery();
+                    }
+                  });
+                }}
+              />
+            )}
           </CommentReplyWrapper>
         ) : null}
       </div>

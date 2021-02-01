@@ -2,6 +2,7 @@
 import AdminUsersForm from './AdminUsersForm';
 import AutoReviewsForm from './AutoReviewsForm';
 import ClientReviewForm from './ClientReviewForm';
+import CommentDeleteForm from './CommentDeleteForm';
 import CommentReplyForm from './CommentReplyForm';
 import ContactForm from './ContactForm';
 import DiscountForm from './DiscountForm';
@@ -21,6 +22,7 @@ export {
   AdminUsersForm,
   AutoReviewsForm,
   ClientReviewForm,
+  CommentDeleteForm,
   CommentReplyForm,
   ContactForm,
   DiscountForm,
