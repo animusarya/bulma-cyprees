@@ -70,34 +70,6 @@ const ReviewItem = ({
     setActive(!active);
   };
 
-  console.log(review, 'review');
-
-  // const handleSubmit = (data) => {
-  //   // console.log(data, 'data');
-  //   let value = '';
-  //   if (data.function === 'submit') {
-  //     value = data.adminReply;
-  //   }
-  //   swal(
-  //     `Are you sure you want to ${
-  //       data.function === 'submit' ? 'post reply to' : 'delete'
-  //     } this comment?`,
-  //     {
-  //       buttons: ['Cancel', 'Confirm'],
-  //     },
-  //   ).then(async () => {
-  //     await executeUpdateReview({
-  //       variables: {
-  //         id: review.id,
-  //         input: {
-  //           adminReply: value,
-  //         },
-  //       },
-  //     });
-  //     executeQuery();
-  //   });
-  // };
-
   return (
     <Wrapper className="columns">
       <div className="column">
