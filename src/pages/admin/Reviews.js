@@ -141,11 +141,6 @@ const Reviews = ({ match }) => {
                     review={review}
                     key={review.id}
                     starsColor={project.starsColor}
-                    reviewAuthorColor={project.reviewAuthorColor}
-                    reviewBodyColor={project.reviewBodyColor}
-                    reviewTitleColor={project.reviewTitleColor}
-                    reviewBodySize={project.reviewBodySize}
-                    reviewAuthorSize={project.reviewAuthorSize}
                     executeQuery={reviewsRefetch}
                     projectStatsRefetch={projectStatsRefetch}
                   />
