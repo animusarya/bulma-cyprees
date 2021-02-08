@@ -103,9 +103,7 @@ const ProjectDashboardHero = () => {
           <a>
             <ClipboardItem
               size="6"
-              title={`<div id="reviews-system-widget" data-project-id="
-              ${projectId}" data-style-height="100%" data-style-width="100%"> <script type="text/javascript" src="https://website-reviews-widget.netlify.app/website-reviews-widget.js>
-              </script> </div>
+              title={`<div id="reviews-system-widget" data-project-id="${projectId}" data-style-height="100%" data-style-width="100%"> <script type="text/javascript" src="https://website-reviews-widget.netlify.app/website-reviews-widget.js"></script> </div>
            `}
             />
           </a>
