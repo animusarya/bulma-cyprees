@@ -22,7 +22,7 @@ const AutoReviewsForm = ({ project }) => {
     const result = await executeMutation({
       variables: {
         id: project.id,
-        input: { autoReviewApproval: !checked },
+        input: { autoReviewApproval: checked }, // !checked if turn auto reviews on
       },
     });
     if (result.data) {
