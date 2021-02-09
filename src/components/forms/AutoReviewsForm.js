@@ -14,7 +14,8 @@ const updateProjectMutation = gql`
 `;
 
 const AutoReviewsForm = ({ project }) => {
-  const [checked, setChecked] = useState(project.autoReviewApproval);
+  // const [checked, setChecked] = useState(project.autoReviewApproval);
+  const [checked, setChecked] = useState(true);
 
   const [executeMutation] = useMutation(updateProjectMutation);
 
