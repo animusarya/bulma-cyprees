@@ -64,6 +64,7 @@ const FormContainer = styled.div`
 const ContentContainer = styled.div`
   h2 {
     font-size: ${(props) => props.theme.fontSizeSuperLarge};
+    color: ${(props) => props.theme.primaryColor};
   }
   p {
     margin: 2rem 0;

@@ -46,6 +46,7 @@ const ContentContainer = styled.div`
   h2 {
     font-size: ${(props) => props.theme.fontSizeSuperLarge};
     margin-bottom: 2rem;
+    color: ${(props) => props.theme.primaryColor};
   }
 `;
 

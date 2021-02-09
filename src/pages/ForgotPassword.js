@@ -55,6 +55,7 @@ const ContentContainer = styled.div`
   padding-bottom: 2rem;
   h2 {
     font-size: ${(props) => props.theme.fontSizeSuperLarge};
+    color: ${(props) => props.theme.primaryColor};
   }
   p {
     margin: 2rem 0;

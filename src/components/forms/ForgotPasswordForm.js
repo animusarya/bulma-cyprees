@@ -36,7 +36,7 @@ const ForgotPasswordForm = (props) => {
             marginTop
             marginBottomNone
             disabled={isSubmitting}>
-            <span className="has-text-weight-bold has-text-light is-size-4">
+            <span className="has-text-weight-bold is-size-4">
               Reset Password
             </span>
           </Button>

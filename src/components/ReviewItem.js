@@ -38,13 +38,13 @@ const PendingText = styled.p`
   color: ${(props) => props.theme.primaryColor};
 `;
 
-const removeReviewMutation = gql`
-  mutation removeReview($id: ID!) {
-    removeReview(id: $id) {
-      success
-    }
-  }
-`;
+// const removeReviewMutation = gql`
+//   mutation removeReview($id: ID!) {
+//     removeReview(id: $id) {
+//       success
+//     }
+//   }
+// `;
 
 const updateReviewMutation = gql`
   mutation updateReview($id: ID!, $input: ReviewUpdateInput!) {
@@ -63,7 +63,7 @@ const ReviewItem = ({
 }) => {
   const [active, setActive] = useState(false);
 
-  const [executeRemoveReview, resRemove] = useMutation(removeReviewMutation);
+  // const [executeRemoveReview, resRemove] = useMutation(removeReviewMutation);
   const [executeUpdateReview, res] = useMutation(updateReviewMutation);
 
   const toggle = () => {
@@ -89,7 +89,7 @@ const ReviewItem = ({
             />
           </div>
           <div className="column is-2" />
-          <div className="column is-1 has-text-centered">
+          <div className="column is-2 has-text-centered">
             <button
               className="button has-text-weight-bold"
               type="button"
@@ -120,11 +120,11 @@ const ReviewItem = ({
             </button>
           </div>
 
-          {resRemove.error && (
+          {/* {resRemove.error && (
             <Message type="error">{resRemove.error.message}</Message>
-          )}
+          )} */}
           {res.error && <Message type="error">{res.error.message}</Message>}
-          <div className="column is-1 has-text-centered">
+          {/* <div className="column is-1 has-text-centered">
             <button
               className="button has-text-danger has-text-weight-bold"
               type="button"
@@ -146,7 +146,7 @@ const ReviewItem = ({
               }}>
               Delete
             </button>
-          </div>
+          </div> */}
         </div>
         <div className="columns">
           <div className="column">

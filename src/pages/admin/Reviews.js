@@ -128,12 +128,12 @@ const Reviews = ({ match }) => {
                   <p>Rating</p>
                 </div>
                 <div className="column is-2" />
-                <div className="column is-1">
+                <div className="column is-2">
                   <p className="has-text-centered">Status</p>
                 </div>
-                <div className="column is-1">
+                {/* <div className="column is-1">
                   <p className="has-text-centered">Action</p>
-                </div>
+                </div> */}
               </TableHeading>
               {reviewsData &&
                 reviewsData.map((review) => (
