@@ -1,90 +1,57 @@
 import React from 'react';
-import styled from 'styled-components';
-import { useQuery, useMutation } from '@apollo/client';
-import gql from 'graphql-tag';
 import swal from 'sweetalert';
 
+import useProjectDetails from '../../hooks/useProjectDetails';
+import useProjectUpdate from '../../hooks/useProjectUpdate';
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import Header from '../../components/Header';
-// import Sidebar from '../../components/Sidebar';
+import Sidebar from '../../components/Sidebar';
 import CopyRight from '../../components/CopyRight';
 import MainColumn from '../../components/MainColumn';
 import { Heading, Message, Loading } from '../../components/elements';
-import { SettingsForm } from '../../components/forms';
+import {
+  AutoReviewsForm,
+  ReviewStartSettingForm,
+} from '../../components/forms';
 
-const Container = styled.div`
-  height: 100vh;
-`;
+const Settings = ({ match }) => {
+  const projectId = match.params.id;
+  const [project] = useProjectDetails(projectId);
+  const [executeMutation, res] = useProjectUpdate();
 
-const meQuery = gql`
-  query me {
-    me {
-      id
-      email
-      profile {
-        fullName
-        companyName
-        telephone
-        websiteAddress
-      }
-    }
-  }
-`;
-
-const settingMutation = gql`
-  mutation updateMe($input: UpdateUserInput!) {
-    updateMe(input: $input) {
-      id
-      email
-      profile {
-        fullName
-        companyName
-        telephone
-        websiteAddress
-      }
-    }
-  }
-`;
-
-const Settings = () => {
-  const meData = useQuery(meQuery, { fetchPolicy: 'cache-and-network' });
-  const [executeMutation, res] = useMutation(settingMutation);
-  const me = meData.data ? meData.data.me : {};
-  // console.log('me data', meData);
+  console.log(project, 'project');
 
   return (
     <Layout noContainer>
-      <Seo title="Settings" description="Update User info" />
+      <Seo
+        title="Project Subscription"
+        description="Manage Subscription of Projects"
+      />
       <Header />
-      <section className="section">
-        <div className="container">
-          <Container className="columns">
-            {/* <div className="column is-one-fifth">
+      <div className="columns">
+        <div className="column is-one-fifth">
           <Sidebar />
-        </div> */}
-            <div className="column">
-              <MainColumn paddingtop="1rem">
-                <Heading>Settings</Heading>
-                <div>
-                  <SettingsForm
-                    enableReinitialize
-                    initialValues={me}
-                    onSubmit={async (data) => {
-                      await executeMutation({ variables: { input: data } });
-                      swal('Settings updated');
-                    }}
-                  />
-                </div>
-                {res.error && (
-                  <Message type="error">{res.error.message}</Message>
-                )}
-                {res.loading ? <Loading /> : null}
-              </MainColumn>
-            </div>
-          </Container>
         </div>
-      </section>
+        <div className="column">
+          <MainColumn>
+            <Heading>Settings</Heading>
+            <AutoReviewsForm project={project} />
+            <ReviewStartSettingForm
+              initialValues={project}
+              onSubmit={async (data) => {
+                await executeMutation({
+                  variables: { id: project.id, input: data },
+                });
+                swal('Settings updated').then(() => window.location.reload());
+              }}
+            />
+          </MainColumn>
+
+          {res.error && <Message type="error">{res.error.message}</Message>}
+          {res.loading ? <Loading /> : null}
+        </div>
+      </div>
       <CopyRight />
     </Layout>
   );

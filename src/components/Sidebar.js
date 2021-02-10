@@ -102,6 +102,7 @@ const Sidebar = ({ showOnMobile }) => {
             title="Reviews"
             to={`/admin/project/${activeProject}/reviews`}
           />
+
           <LinkWrapper
             icon="fas fa-pen"
             title="Style Reviews"
@@ -111,6 +112,11 @@ const Sidebar = ({ showOnMobile }) => {
             icon="fas fa-sync"
             title="Subscriptions"
             to={`/admin/project/${activeProject}/subscription`}
+          />
+          <LinkWrapper
+            icon="fa fa-cog"
+            title="Settings"
+            to={`/admin/settings/${activeProject}`}
           />
           <LinkWrapper
             icon="far fa-question-circle"

@@ -142,7 +142,7 @@ const Routes = () => (
         />
         <PrivateRoute
           exact
-          path="/admin/settings"
+          path="/admin/settings/:id"
           component={Settings}
           access="admin"
         />

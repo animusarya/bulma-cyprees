@@ -11,7 +11,7 @@ import CopyRight from '../../components/CopyRight';
 import MainColumn from '../../components/MainColumn';
 import ReviewItem from '../../components/ReviewItem';
 import useProjectDetails from '../../hooks/useProjectDetails';
-import { AutoReviewsForm } from '../../components/forms';
+// import { AutoReviewsForm } from '../../components/forms';
 
 const Container = styled.div`
   .subtitle {
@@ -28,6 +28,7 @@ const Container = styled.div`
 
 const ReviewsStat = styled.div`
   color: ${(props) => props.theme.primaryColor};
+  padding-bottom: 2rem;
 `;
 
 const TableHeading = styled.div`
@@ -113,7 +114,7 @@ const Reviews = ({ match }) => {
                   Total {reviewsData.length}, Average Score {projectStatCount}
                 </span>
               </ReviewsStat>
-              <AutoReviewsForm project={project} />
+              {/* <AutoReviewsForm project={project} /> */}
               <TableHeading className="columns is-flex">
                 <div className="column is-2">
                   <p>Name</p>

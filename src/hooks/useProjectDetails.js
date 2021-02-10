@@ -25,6 +25,7 @@ const projectQuery = gql`
       reviewAuthorSize
       reviewAuthorColor
       autoReviewApproval
+      displayRating
     }
   }
 `;

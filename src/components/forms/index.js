@@ -15,6 +15,7 @@ import ProjectInfoForm from './ProjectInfoForm';
 import ProjectSettingForm from './ProjectSettingForm';
 import ProjectSetupForm from './ProjectSetupForm';
 import RegisterForm from './RegisterForm';
+import ReviewStartSettingForm from './ReviewStartSettingForm';
 import SetPasswordForm from './SetPasswordForm';
 import SettingsForm from './SettingsForm';
 
@@ -35,6 +36,7 @@ export {
   ProjectSettingForm,
   ProjectSetupForm,
   RegisterForm,
+  ReviewStartSettingForm,
   SetPasswordForm,
   SettingsForm,
 };
