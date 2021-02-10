@@ -28,13 +28,14 @@ const Container = styled.label`
   }
 `;
 
-const CheckBox = ({ text, margin, checked, onClick }) => (
+const CheckBox = ({ text, margin, checked, onClick, disabled }) => (
   <Container margin={margin} className="is-flex">
     <input
       type="checkbox"
       className="checkbox"
       checked={checked}
       onClick={onClick}
+      disabled={disabled}
     />
     <span className="checkmark" />
     <label className="checkbox">{text}</label>

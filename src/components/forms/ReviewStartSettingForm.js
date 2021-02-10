@@ -24,6 +24,7 @@ const ReviewStarSettingForm = (props) => {
     handleSubmit,
     setFieldValue,
   } = props;
+  // console.log(values, 'values');
 
   return (
     <form onSubmit={handleSubmit}>
@@ -80,7 +81,9 @@ export default withFormik({
 
   handleSubmit: (values, { setSubmitting, props }) => {
     // console.log('handle submit', values, props);
-    props.onSubmit(values);
+    props.onSubmit({
+      displayRating: parseFloat(values.displayRating),
+    });
     setSubmitting(false);
   },
   displayName: 'ReviewStarSettingForm', // helps with React DevTools

@@ -16,6 +16,7 @@ const updateProjectMutation = gql`
 const AutoReviewsForm = ({ project }) => {
   // const [checked, setChecked] = useState(project.autoReviewApproval);
   const [checked, setChecked] = useState(true);
+  // console.log(checked, 'checked');
 
   const [executeMutation] = useMutation(updateProjectMutation);
 
@@ -23,7 +24,7 @@ const AutoReviewsForm = ({ project }) => {
     const result = await executeMutation({
       variables: {
         id: project.id,
-        input: { autoReviewApproval: checked }, // !checked if turn auto reviews on
+        input: { autoReviewApproval: !checked }, // !checked if turn auto reviews on
       },
     });
     if (result.data) {
@@ -33,6 +34,7 @@ const AutoReviewsForm = ({ project }) => {
 
   return (
     <CheckBox
+      disabled
       text="Turn on Auto Reviews"
       checked={checked}
       onClick={() => handleSubmit()}
