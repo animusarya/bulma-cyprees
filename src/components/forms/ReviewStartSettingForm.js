@@ -50,7 +50,7 @@ const ReviewStarSettingForm = (props) => {
         </Container>
       </InputGroup>
       <p className="is-size-7">
-        * This will display review above selected rating
+        * Minimum Rating reviews you want to display for your website
       </p>
 
       <div className="button-field" style={{ marginTop: '2rem' }}>
