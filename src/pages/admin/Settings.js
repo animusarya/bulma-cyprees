@@ -42,7 +42,7 @@ const Settings = ({ match }) => {
                 await executeMutation({
                   variables: { id: project.id, input: data },
                 });
-                swal('Settings updated').then(() => window.location.reload());
+                swal('Settings updated');
               }}
             />
           </MainColumn>

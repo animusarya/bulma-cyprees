@@ -19,12 +19,13 @@ const ReviewStarSettingForm = (props) => {
     touched,
     errors,
     isSubmitting,
-    // handleChange,
-    // handleBlur,
     handleSubmit,
     setFieldValue,
   } = props;
   // console.log(values, 'values');
+  // fetch project data from api
+
+  // console.log(projectId, 'projectId');
 
   return (
     <form onSubmit={handleSubmit}>
@@ -44,13 +45,13 @@ const ReviewStarSettingForm = (props) => {
             <StartsDropdown
               starts
               onChange={(value) => setFieldValue('displayRating', value.value)}
-              value={values.displayRating || '1'}
+              value={values.displayRating}
             />
           </div>
         </Container>
       </InputGroup>
       <p className="is-size-7">
-        * Minimum Rating reviews you want to display for your website
+        * Minimum Rating of reviews you want to display for your website
       </p>
 
       <div className="button-field" style={{ marginTop: '2rem' }}>
@@ -72,11 +73,13 @@ ReviewStarSettingForm.propTypes = {
 
 export default withFormik({
   mapPropsToValues: ({ initialValues }) => ({
-    displayRating: initialValues.displayRating || '',
+    displayRating:
+      initialValues && initialValues.displayRating
+        ? initialValues.displayRating
+        : '1',
   }),
   validationSchema: yup.object().shape({
-    // name: yup.string().required('Name is required!'),
-    // slug: yup.string().required('slug is required!'),
+    // displayRating: yup.string().required('Display Rating is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
