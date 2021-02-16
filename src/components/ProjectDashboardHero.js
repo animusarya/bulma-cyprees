@@ -131,8 +131,8 @@ const ProjectDashboardHero = () => {
         <Description className="is-flex">
           <strong>Step 3.</strong>
           <p>
-            Email this link to your <strong>review request form</strong> for
-            your customer to complete.
+            Simply email this link to your <strong>review form</strong> for your
+            customer to complete.
           </p>
         </Description>
         <div
