@@ -4,6 +4,9 @@ import Clipboard from 'react-clipboard.js';
 
 const Container = styled.div`
   overflow: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
   body,
   button,
   input,

@@ -22,7 +22,7 @@ const ReviewStarSettingForm = (props) => {
     handleSubmit,
     setFieldValue,
   } = props;
-  // console.log(values, 'values');
+  console.log(values, 'values');
   // fetch project data from api
 
   // console.log(projectId, 'projectId');

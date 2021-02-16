@@ -7,12 +7,16 @@ import { Link } from 'react-router-dom';
 
 import { InputGroup, Button } from '../elements';
 
-const ResetPassword = styled.div`
+const ResetPassword = styled.span`
   a {
     :hover {
       color: ${(props) => props.theme.primaryColor};
     }
   }
+`;
+
+const Spacer = styled.span`
+  margin: 0px 8px;
 `;
 
 const LoginForm = (props) => {
@@ -62,9 +66,18 @@ const LoginForm = (props) => {
           </Button>
         </div>
       </div>
-      <ResetPassword>
-        <Link to="/forgot-password">Forgot Password?</Link>
-      </ResetPassword>
+      <div className="is-flex">
+        <p>
+          Need account?{' '}
+          <ResetPassword>
+            <Link to="/register">Create an account</Link>
+          </ResetPassword>
+        </p>{' '}
+        <Spacer>|</Spacer>
+        <ResetPassword>
+          <Link to="/forgot-password">Forgot Password</Link>
+        </ResetPassword>
+      </div>
     </form>
   );
 };

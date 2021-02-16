@@ -34,9 +34,9 @@ const UserReview = styled.div`
   font-size: ${(props) => (props.fontSize ? `${props.fontSize}px` : '16px')};
 `;
 
-const PendingText = styled.p`
-  color: ${(props) => props.theme.primaryColor};
-`;
+// const PendingText = styled.p`
+//   color: ${(props) => props.theme.primaryColor};
+// `;
 
 // const removeReviewMutation = gql`
 //   mutation removeReview($id: ID!) {
@@ -59,7 +59,7 @@ const ReviewItem = ({
   review,
   starsColor,
   executeQuery,
-  projectStatsRefetch,
+  // projectStatsRefetch,
 }) => {
   const [active, setActive] = useState(false);
 
@@ -73,7 +73,7 @@ const ReviewItem = ({
   return (
     <Wrapper className="columns">
       <div className="column">
-        <div className="columns">
+        <div className="columns is-flex-mobile">
           <UserReview className="column is-2">{review.personName}</UserReview>
           <UserReview className="column is-2">{review.location}</UserReview>
           <div className="column is-2">
@@ -81,15 +81,18 @@ const ReviewItem = ({
             {moment(review.createdAt).format('Do MMM YYYY')}
           </div>
           <div className="column is-2">
-            <Rating
-              disabled
-              count={5}
-              value={review.rating}
-              activeColor={starsColor}
-            />
+            {starsColor && (
+              <Rating
+                disabled
+                edit={false}
+                count={5}
+                value={review.rating}
+                activeColor={starsColor}
+              />
+            )}
           </div>
           <div className="column is-2" />
-          <div className="column is-2 has-text-centered">
+          {/* <div className="column is-2 has-text-centered">
             <button
               className="button has-text-weight-bold"
               type="button"
@@ -113,12 +116,12 @@ const ReviewItem = ({
                 });
               }}>
               {review.status === 'active' ? (
-                <p className="has-text-success">Active</p>
+                <p className="has-text-success">Request Removal</p>
               ) : (
-                <PendingText>Pending</PendingText>
+                <PendingText>Removal Pending</PendingText>
               )}
             </button>
-          </div>
+          </div> */}
 
           {/* {resRemove.error && (
             <Message type="error">{resRemove.error.message}</Message>

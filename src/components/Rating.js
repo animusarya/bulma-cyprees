@@ -8,6 +8,9 @@ const Container = styled.div`
     outline-width: 0;
   }
   .react-stars {
+    @media only screen and (max-width: 768px) {
+      display: flex;
+    }
     :focus {
       outline-width: 0;
     }
@@ -22,6 +25,7 @@ const Rating = ({
   onChange,
   activeColor,
   errors,
+  edit,
 }) => (
   <Container>
     {disabled ? (
@@ -29,6 +33,7 @@ const Rating = ({
         size={size}
         count={count || 1}
         half={false}
+        edit={edit}
         activeColor={activeColor || '#ffd700'}
         emptyIcon={<i className="far fa-star" />}
         fullIcon={<i className="fa fa-star" />}

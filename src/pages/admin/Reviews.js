@@ -108,7 +108,7 @@ const Reviews = ({ match }) => {
         <div className="column is-four-fifths">
           {reviewsData.length > 0 ? (
             <MainColumn>
-              <ReviewsStat className="is-size-4 ">
+              <ReviewsStat className="is-size-4 is-size-6-mobile">
                 <span className="has-text-weight-bold">All Reviews:</span>{' '}
                 <span className="has-text-weight-medium">
                   Total {reviewsData.length}, Average Score {projectStatCount}
@@ -130,7 +130,7 @@ const Reviews = ({ match }) => {
                 </div>
                 <div className="column is-2" />
                 <div className="column is-2">
-                  <p className="has-text-centered">Status</p>
+                  {/* <p className="has-text-centered">Status</p> */}
                 </div>
                 {/* <div className="column is-1">
                   <p className="has-text-centered">Action</p>
