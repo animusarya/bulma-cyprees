@@ -14,10 +14,10 @@ import stripe from '../../assets/images/Secure-by-Stripe.png';
 
 const Form = styled.form`
   input {
-    border-color: ${theme.primaryColor};
+    /* border-color: ${theme.primaryColor}; */
     box-shadow: none;
     :hover {
-      border-color: ${theme.primaryColor};
+      /* border-color: ${theme.primaryColor}; */
     }
   }
   .columns {

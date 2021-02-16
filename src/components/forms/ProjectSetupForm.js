@@ -9,10 +9,10 @@ import { formatCurrency } from '../../utils/helpers';
 
 const Form = styled.form`
   input {
-    border-color: ${(propsInput) => propsInput.theme.primaryColor};
+    /* border-color: ${(propsInput) => propsInput.theme.primaryColor}; */
     box-shadow: none;
     :hover {
-      border-color: ${(propsInput) => propsInput.theme.primaryColor};
+      /* border-color: ${(propsInput) => propsInput.theme.primaryColor}; */
     }
   }
   .columns {
@@ -33,8 +33,6 @@ const ProjectSetupForm = (props) => {
     handleSubmit,
     packages,
   } = props;
-
-  console.log(values, 'values');
 
   return (
     <Form onSubmit={handleSubmit}>
