@@ -47,6 +47,10 @@ const IconContainer = styled.div`
   }
 `;
 
+const LabelInfo = styled.p`
+  margin-left: 8px;
+`;
+
 const InputGroup = ({
   label,
   errors,
@@ -73,7 +77,7 @@ const InputGroup = ({
     <LabelWrapper className="is-flex is-justify-content-space-between">
       <span className="is-flex">
         {label && <label className="label">{label}</label>}{' '}
-        {labelInfo && <p>{labelInfo}</p>}
+        {labelInfo && <LabelInfo>{labelInfo}</LabelInfo>}
         {infoIcon && (
           <IconContainer>
             {infoIcon}

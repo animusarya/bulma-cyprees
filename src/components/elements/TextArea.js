@@ -27,6 +27,10 @@ const LabelWrapper = styled.div`
   justify-content: space-between;
 `;
 
+const LabelInfo = styled.p`
+  margin-left: 8px;
+`;
+
 const TextAreaGroup = ({
   label,
   errors,
@@ -47,7 +51,7 @@ const TextAreaGroup = ({
       {label && (
         <div className="is-flex">
           <label className="label">{label}</label>
-          {labelInfo && <p>{labelInfo}</p>}
+          {labelInfo && <LabelInfo>{labelInfo}</LabelInfo>}
         </div>
       )}
       {maxLength && (

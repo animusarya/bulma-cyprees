@@ -35,6 +35,7 @@ const ClientReviewForm = (props) => {
 
   const { starsColor } = project;
   const recaptchaRef = useRef();
+  console.log(project, 'project');
 
   return (
     <form onSubmit={handleSubmit}>
@@ -87,12 +88,14 @@ const ClientReviewForm = (props) => {
       </LocationContainer>
       <div className="is-flex">
         <RatingTitle>Your Rating:</RatingTitle>
-        <Rating
-          size={40}
-          activeColor={starsColor}
-          value={values.rating}
-          onChange={(val) => setFieldValue('rating', val)}
-        />
+        {project.starsColor && (
+          <Rating
+            size={40}
+            activeColor={starsColor}
+            value={values.rating}
+            onChange={(val) => setFieldValue('rating', val)}
+          />
+        )}
       </div>
       <p className="help is-danger">
         {errors.rating && touched.rating ? errors.rating : undefined}
@@ -142,6 +145,10 @@ const ClientReviewForm = (props) => {
           <Button
             marginTop
             marginBottomNone
+            hasBgColor={project.buttonsColor}
+            buttonsTextColor={
+              project.buttonsTextColor ? project.buttonsTextColor : '#ffffff'
+            }
             type="submit"
             disabled={isSubmitting}>
             <span className="has-text-weight-bold is-size-4">
@@ -172,7 +179,7 @@ export default withFormik({
     reviewTitle: '',
     comment: '',
     rating: '',
-    // recaptcha: '',
+    recaptcha: '',
   }),
   validationSchema: yup.object().shape({
     personName: yup.string().required('Name is required!'),
@@ -180,7 +187,7 @@ export default withFormik({
     reviewTitle: yup.string().required('Title is required!'),
     comment: yup.string().required('Review is required!'),
     rating: yup.number().required('Rating is required!'),
-    // recaptcha: yup.string().required('recaptcha is required!'),
+    recaptcha: yup.string().required('recaptcha is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, resetForm, props }) => {

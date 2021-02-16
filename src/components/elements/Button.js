@@ -14,7 +14,7 @@ const Container = styled.button`
         : 'transparent'} !important;
     color: ${(props) =>
       props.buttonsTextColor
-        ? props.theme.primaryColor
+        ? props.buttonsTextColor
         : props.theme.primaryColor};
     padding-left: ${(props) => (props.paddingless ? '0px' : '1.4em')};
     padding-right: ${(props) => (props.paddingless ? '0px' : '1.4em')};
@@ -53,6 +53,7 @@ const Button = ({
   buttonsTextColor,
   hasBorder,
   hasNoBackground,
+  hasBgColor,
   ...otherProps
 }) => {
   let bgColor = theme.secondaryColor;
@@ -62,6 +63,8 @@ const Button = ({
     bgColor = 'transparent';
   } else if (hasNoBackground) {
     bgColor = 'transparent';
+  } else if (hasBgColor) {
+    bgColor = hasBgColor;
   }
 
   return (
