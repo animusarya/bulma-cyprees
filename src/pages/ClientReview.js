@@ -80,8 +80,10 @@ const ClientReview = ({ match }) => {
                       },
                     },
                   });
-                  swal('Your Review is successfully submitted');
-                  window.location.reload();
+                  swal('Thank you for submitting your review.');
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 3000);
                 }}
               />
               {res.error && <Message type="error">{res.error.message}</Message>}

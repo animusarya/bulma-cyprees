@@ -104,6 +104,7 @@ const ClientReviewForm = (props) => {
         type="text"
         labelInfo="(Max 80 characters)"
         maxLength={80}
+        placeholder="EXAMPLE: Great service at an affordable price"
         counter={values.reviewTitle.length}
         value={values.reviewTitle}
         onChange={handleChange}
@@ -171,7 +172,7 @@ export default withFormik({
     reviewTitle: '',
     comment: '',
     rating: '',
-    recaptcha: '',
+    // recaptcha: '',
   }),
   validationSchema: yup.object().shape({
     personName: yup.string().required('Name is required!'),
@@ -179,7 +180,7 @@ export default withFormik({
     reviewTitle: yup.string().required('Title is required!'),
     comment: yup.string().required('Review is required!'),
     rating: yup.number().required('Rating is required!'),
-    recaptcha: yup.string().required('recaptcha is required!'),
+    // recaptcha: yup.string().required('recaptcha is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, resetForm, props }) => {
