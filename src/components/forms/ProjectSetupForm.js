@@ -34,6 +34,8 @@ const ProjectSetupForm = (props) => {
     packages,
   } = props;
 
+  console.log(values, 'values');
+
   return (
     <Form onSubmit={handleSubmit}>
       <InputGroup

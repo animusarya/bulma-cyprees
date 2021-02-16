@@ -31,6 +31,7 @@ import ReviewStyles from '../pages/admin/ReviewStyles';
 import ProjectDashboard from '../pages/admin/ProjectDashboard';
 import ProjectSubscription from '../pages/admin/ProjectSubscription';
 import Settings from '../pages/admin/Settings';
+import ProjectSettings from '../pages/admin/ProjectSettings';
 import Help from '../pages/admin/Help';
 
 const PrivateRoute = ({ component: Component, access, ...rest }) => {
@@ -142,7 +143,13 @@ const Routes = () => (
         />
         <PrivateRoute
           exact
-          path="/admin/settings/:id"
+          path="/admin/project-settings/:id"
+          component={ProjectSettings}
+          access="admin"
+        />
+        <PrivateRoute
+          exact
+          path="/admin/settings"
           component={Settings}
           access="admin"
         />

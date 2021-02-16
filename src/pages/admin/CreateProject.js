@@ -89,6 +89,8 @@ const CreateProject = () => {
     updateProject(null);
   }, []);
 
+  console.log(packages, 'packages');
+
   return (
     <Layout noContainer>
       <Seo title="Create Project" description="Create New Project" />

@@ -116,7 +116,7 @@ const Sidebar = ({ showOnMobile }) => {
           <LinkWrapper
             icon="fa fa-cog"
             title="Settings"
-            to={`/admin/settings/${activeProject}`}
+            to={`/admin/project-settings/${activeProject}`}
           />
           <LinkWrapper
             icon="far fa-question-circle"
