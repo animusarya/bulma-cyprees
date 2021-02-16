@@ -59,7 +59,7 @@ const InputGroup = ({
   iconLabel,
   groupWidth,
   labelInfo,
-  maxlength,
+  maxLength,
   counter,
   ...otherProps
 }) => (
@@ -81,9 +81,9 @@ const InputGroup = ({
           </IconContainer>
         )}
       </span>
-      {maxlength && (
+      {maxLength && (
         <p>
-          {counter || 0} / {maxlength}
+          {counter || 0} / {maxLength}
         </p>
       )}
     </LabelWrapper>
@@ -94,7 +94,7 @@ const InputGroup = ({
     )}
     <div className="control">
       {children || (
-        <Input className="input" {...otherProps} maxLength={maxlength} />
+        <Input className="input" {...otherProps} maxLength={maxLength} />
       )}
       {errors && <p className="help is-danger">{errors}</p>}
     </div>

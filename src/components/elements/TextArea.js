@@ -23,6 +23,10 @@ const TextArea = styled.textarea`
   border-bottom: ${(props) => `1px solid ${props.theme.borderColor}`};
 `;
 
+const LabelWrapper = styled.div`
+  justify-content: space-between;
+`;
+
 const TextAreaGroup = ({
   label,
   errors,
@@ -31,20 +35,34 @@ const TextAreaGroup = ({
   isHorizontal,
   labelInfo,
   readOnly,
+  maxLength,
+  counter,
   ...otherProps
 }) => (
   <Group
     className={`field ${isHorizontal ? 'is-horizontal' : ''}`}
     fullWidth={fullWidth}
     isWidth={isWidth}>
-    {label && (
-      <div className="is-flex">
-        <label className="label">{label}</label>
-        {labelInfo && <p>{labelInfo}</p>}
-      </div>
-    )}
+    <LabelWrapper className="is-flex">
+      {label && (
+        <div className="is-flex">
+          <label className="label">{label}</label>
+          {labelInfo && <p>{labelInfo}</p>}
+        </div>
+      )}
+      {maxLength && (
+        <p>
+          {counter || 0} / {maxLength}
+        </p>
+      )}
+    </LabelWrapper>
     <div className="control">
-      <TextArea className="textarea" {...otherProps} readOnly={readOnly} />
+      <TextArea
+        className="textarea"
+        {...otherProps}
+        readOnly={readOnly}
+        maxLength={maxLength}
+      />
       {errors && <p className="help is-danger">{errors}</p>}
     </div>
   </Group>

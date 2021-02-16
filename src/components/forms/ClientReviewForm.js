@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 import ReCAPTCHA from 'react-google-recaptcha';
-import TextareaCounter from 'react-textarea-counter';
 
-import { InputGroup, Button } from '../elements';
+import { InputGroup, Button, TextAreaGroup } from '../elements';
 import Rating from '../Rating';
 
 const RatingTitle = styled.p`
@@ -19,10 +18,6 @@ const LocationContainer = styled.div`
   .label:not(:last-child) {
     margin-bottom: 0em;
   }
-`;
-
-const ReviewError = styled.p`
-  margin-top: -20px;
 `;
 
 const ClientReviewForm = (props) => {
@@ -108,7 +103,7 @@ const ClientReviewForm = (props) => {
         name="reviewTitle"
         type="text"
         labelInfo="(Max 80 characters)"
-        maxlength={80}
+        maxLength={80}
         counter={values.reviewTitle.length}
         value={values.reviewTitle}
         onChange={handleChange}
@@ -119,20 +114,18 @@ const ClientReviewForm = (props) => {
             : undefined
         }
       />
-      <label>
-        <span className="has-text-weight-semibold">Review Description:</span>
-        (Max 500 characters)
-      </label>
-      <TextareaCounter
-        countLimit={500}
+      <TextAreaGroup
+        border
+        label="Review Description:"
+        labelInfo="(Max 500 characters)"
+        maxLength={500}
         name="comment"
-        initialValue={values.comment}
+        counter={values.comment.length}
+        value={values.comment}
         onChange={handleChange}
         onBlur={handleBlur}
+        errors={errors.comment && touched.comment ? errors.comment : undefined}
       />
-      <ReviewError className="help is-danger">
-        {errors.comment && touched.comment ? errors.comment : undefined}
-      </ReviewError>
       <ReCAPTCHA
         ref={recaptchaRef}
         sitekey="6LeEaD8aAAAAAFc71DBg4djlXiqjWloAEtF2_KVl"
