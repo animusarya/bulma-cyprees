@@ -127,7 +127,6 @@ const ProjectDashboardHero = () => {
             <Logo src={project.logo} alt="logo" />
           )}
         </a>
-
         <Description className="is-flex">
           <strong>Step 3.</strong>
           <p>
@@ -144,6 +143,13 @@ const ProjectDashboardHero = () => {
            `}
           />
         </div>
+        <Description className="is-flex">
+          <strong>Step 4.</strong>
+          <p>
+            Style your reviews under <strong>Style Reviews</strong> in the left
+            menu to be in line with your websites brand.
+          </p>
+        </Description>
         <UploadImageModal
           heading="Upload Logo"
           isActive={isActive}
