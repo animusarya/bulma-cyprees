@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Clipboard from 'react-clipboard.js';
 
 const Container = styled.div`
+  overflow: scroll;
   body,
   button,
   input,
@@ -23,6 +24,9 @@ const ClipboardNotification = styled.div`
   position: absolute;
   right: 0;
   width: 4rem;
+  @media only screen and (max-width: 768px) {
+    position: relative;
+  }
 `;
 
 const ClipboardItem = ({ title, size }) => {

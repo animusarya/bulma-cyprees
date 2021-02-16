@@ -88,11 +88,10 @@ const ProjectDashboardHero = () => {
         <WelcomeText className="is-size-4 has-text-weight-semibold">
           Welcome to Review Our Services<span>.com</span>
         </WelcomeText>
-        <Description className="is-flex">
-          <strong>Step 1.</strong>
+        <Description>
           <p>
-            Add this code snippet to your website where you want your customer
-            reviews to be displayed
+            <strong className="step">Step 1.</strong> Add this code snippet to
+            your website where you want your customer reviews to be displayed
           </p>
         </Description>
         <CodeSnippet className="has-text-weight-semibold">
@@ -111,10 +110,9 @@ const ProjectDashboardHero = () => {
             &lt;!-- End reviews-services-widget --&gt;
           </p>
         </CodeSnippet>
-        <Description className="is-flex">
-          <strong>Step 2.</strong>
+        <Description>
           <p>
-            Upload your logo here to appear on your{' '}
+            <strong>Step 2.</strong> Upload your logo here to appear on your{' '}
             <strong>review request form.</strong>
           </p>
         </Description>
@@ -127,11 +125,10 @@ const ProjectDashboardHero = () => {
             <Logo src={project.logo} alt="logo" />
           )}
         </a>
-        <Description className="is-flex">
-          <strong>Step 3.</strong>
+        <Description>
           <p>
-            Simply email this link to your <strong>review form</strong> for your
-            customer to complete.
+            <strong>Step 3.</strong> Simply email this link to your{' '}
+            <strong>review form</strong> for your customer to complete.
           </p>
         </Description>
         <div
@@ -143,11 +140,11 @@ const ProjectDashboardHero = () => {
            `}
           />
         </div>
-        <Description className="is-flex">
-          <strong>Step 4.</strong>
+        <Description>
           <p>
-            Style your reviews under <strong>Style Reviews</strong> in the left
-            menu to be in line with your websites brand.
+            <strong>Step 4.</strong> Style your reviews under{' '}
+            <strong>Style Reviews</strong> in the left menu to be in line with
+            your websites brand.
           </p>
         </Description>
         <UploadImageModal
