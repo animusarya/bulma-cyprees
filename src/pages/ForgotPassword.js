@@ -52,7 +52,7 @@ const FormContainer = styled.div`
 `;
 
 const ContentContainer = styled.div`
-  padding-bottom: 2rem;
+  margin-bottom: 32px;
   h2 {
     font-size: ${(props) => props.theme.fontSizeSuperLarge};
     color: ${(props) => props.theme.primaryColor};

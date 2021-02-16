@@ -43,6 +43,7 @@ const Container = styled.div`
 `;
 
 const ContentContainer = styled.div`
+  margin-bottom: 32px;
   h2 {
     font-size: ${(props) => props.theme.fontSizeSuperLarge};
     margin-bottom: 2rem;
