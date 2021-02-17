@@ -11,7 +11,6 @@ import Seo from '../components/Seo';
 import Layout from '../components/Layout';
 import { Message } from '../components/elements';
 import { ForgotPasswordForm } from '../components/forms';
-// import logo from '../assets/images/logo2.png';
 
 const forgotPasswordMutation = gql`
   mutation forgotPassword($input: ForgotPasswordInput!) {

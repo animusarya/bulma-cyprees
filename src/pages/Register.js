@@ -10,7 +10,6 @@ import Seo from '../components/Seo';
 import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
 import { RegisterForm } from '../components/forms';
-// import logo from '../assets/images/logo2.png';
 
 const registerMutation = gql`
   mutation register($input: RegisterInput) {

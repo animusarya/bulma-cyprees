@@ -9,7 +9,6 @@ import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
 import { LoginForm } from '../components/forms';
 // import background from '../assets/images/intelliback.jpg';
-// import logo from '../assets/images/logo2.png';
 
 const mutation = gql`
   mutation login($email: String!, $password: String!) {

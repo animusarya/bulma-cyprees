@@ -52,7 +52,7 @@ const ClientReview = ({ match }) => {
             <div className="column is-half">
               <div>
                 {project && project.logo ? (
-                  <Logo src={project.logo} alt="dummy-logo" height="100px" />
+                  <Logo src={project.logo} alt="project-logo" height="100px" />
                 ) : (
                   <p className="is-size-3 has-text-weight-bold">
                     {project.name}

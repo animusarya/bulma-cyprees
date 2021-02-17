@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// import logo from '../assets/images/logo2.png';
-
 const Container = styled.section`
   background-color: #f4f4f6;
   padding: 1rem 1.5rem;
