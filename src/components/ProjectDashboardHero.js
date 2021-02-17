@@ -136,7 +136,7 @@ const ProjectDashboardHero = () => {
           className="is-size-4 has-text-weight-semibold">
           <ClipboardItem
             size="4"
-            title={`${config.websiteUrl}/submit-review/${projectId}
+            title={`${config.websiteUrl}/submit-review/${project.slug}
            `}
           />
         </div>

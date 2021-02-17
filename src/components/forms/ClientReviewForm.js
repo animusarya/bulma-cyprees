@@ -35,7 +35,7 @@ const ClientReviewForm = (props) => {
 
   const { starsColor } = project;
   const recaptchaRef = useRef();
-  console.log(project, 'project');
+  // console.log(project, 'project');
 
   return (
     <form onSubmit={handleSubmit}>

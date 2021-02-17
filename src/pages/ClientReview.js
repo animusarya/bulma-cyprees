@@ -41,8 +41,8 @@ const ClientReview = ({ match }) => {
   // const handleSubmit = () => null;
   const [executeMutation, res] = useMutation(createReviewMutation);
 
-  const projectId = match.params.id;
-  const [project] = useProjectDetails(projectId);
+  const projectSlug = match.params.slug;
+  const [project] = useProjectDetails(undefined, projectSlug);
 
   return (
     <Layout noContainer hasAuthNav>
@@ -61,9 +61,16 @@ const ClientReview = ({ match }) => {
               </div>
               <Description>
                 Hi, you have been invited to write a short review from{' '}
-                <strong>{project.name}</strong>.<br /> Please be honest and
-                accurate as possible about your experience. They will process
-                your review which might be published on their website.{' '}
+                <strong>
+                  {project.createdBy &&
+                  project.createdBy.profile &&
+                  project.createdBy.profile.companyName
+                    ? project.createdBy.profile.companyName
+                    : project.name}
+                </strong>
+                .<br /> Please be honest and accurate as possible about your
+                experience. They will process your review which might be
+                published on their website.{' '}
               </Description>
               <ClientReviewForm
                 project={project}
@@ -76,7 +83,7 @@ const ClientReview = ({ match }) => {
                         reviewTitle: data.reviewTitle,
                         comment: data.comment,
                         rating: data.rating,
-                        project: projectId,
+                        project: project.id,
                       },
                     },
                   });

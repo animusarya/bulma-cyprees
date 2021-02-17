@@ -23,7 +23,7 @@ const userQuery = gql`
 `;
 
 const projectQuery = gql`
-  query project($id: ID!) {
+  query project($id: ID) {
     project(id: $id) {
       id
       name

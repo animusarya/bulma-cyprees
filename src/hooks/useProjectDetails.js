@@ -4,8 +4,8 @@ import { useLazyQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 
 const projectQuery = gql`
-  query project($id: ID!) {
-    project(id: $id) {
+  query project($id: ID, $slug: String) {
+    project(id: $id, slug: $slug) {
       id
       name
       slug
@@ -26,11 +26,17 @@ const projectQuery = gql`
       reviewAuthorColor
       autoReviewApproval
       displayRating
+      createdBy {
+        id
+        profile {
+          companyName
+        }
+      }
     }
   }
 `;
 
-const useProjectDetails = (projectId) => {
+const useProjectDetails = (projectId, slug) => {
   // set sidebar active project
   const updateProject = useStoreActions(
     (actions) => actions.active.updateProject,
@@ -38,7 +44,7 @@ const useProjectDetails = (projectId) => {
 
   // fetch project data from api
   const [getProject, resultProject] = useLazyQuery(projectQuery, {
-    variables: { id: projectId },
+    variables: { id: projectId, slug },
     fetchPolicy: 'cache-and-network',
   });
 
@@ -48,10 +54,10 @@ const useProjectDetails = (projectId) => {
       : {};
 
   useEffect(() => {
-    if (projectId) {
+    if (projectId || slug) {
       getProject();
     }
-  }, [projectId, getProject]);
+  }, [projectId, slug, getProject]);
 
   useEffect(() => {
     updateProject(projectId);
