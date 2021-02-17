@@ -67,6 +67,17 @@ const createProjectMutation = gql`
   }
 `;
 
+const meQuery = gql`
+  query me {
+    me {
+      id
+      profile {
+        websiteAddress
+      }
+    }
+  }
+`;
+
 const CreateProject = () => {
   const [activeStep, setActiveStep] = useState({
     stepOne: true,
@@ -76,6 +87,8 @@ const CreateProject = () => {
   const [project, setProject] = useState({});
   const [subscription, setSubscription] = useState({});
 
+  console.log(project, 'project');
+
   const packagesData = useQuery(packagesQuery, {
     fetchPolicy: 'network-only',
   });
@@ -84,6 +97,16 @@ const CreateProject = () => {
   const updateProject = useStoreActions(
     (actions) => actions.active.updateProject,
   );
+  const meData = useQuery(meQuery, { fetchPolicy: 'cache-and-network' });
+
+  const me =
+    meData &&
+    meData.data &&
+    meData.data.me &&
+    meData.data.me.profile &&
+    meData.data.me.profile.websiteAddress
+      ? meData.data.me.profile.websiteAddress
+      : '';
 
   useEffect(() => {
     updateProject(null);
@@ -110,9 +133,13 @@ const CreateProject = () => {
                         Website Details
                       </h2>
                       <ProjectSetupForm
+                        me={me}
                         packages={packages}
                         onSubmit={(data) => {
-                          setProject(data);
+                          setProject({
+                            ...data,
+                            customDomain: me,
+                          });
                           const selectedSubscription = find(packages, {
                             subscriptionPlanId: data.subscriptionPlanId,
                           });
@@ -130,6 +157,7 @@ const CreateProject = () => {
                         Make Payment
                       </h2>
                       <PaymentForm
+                        me={me}
                         enableReinitialize
                         initialValues={project}
                         subscription={subscription}

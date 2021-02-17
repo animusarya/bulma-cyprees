@@ -32,6 +32,7 @@ const ProjectSetupForm = (props) => {
     handleBlur,
     handleSubmit,
     packages,
+    me,
   } = props;
 
   return (
@@ -56,7 +57,8 @@ const ProjectSetupForm = (props) => {
         label="Domain"
         placeholder="www.reviewourservices.co.uk"
         name="customDomain"
-        value={values.customDomain}
+        value={me}
+        disabled
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
@@ -112,12 +114,10 @@ ProjectSetupForm.propTypes = {
 export default withFormik({
   mapPropsToValues: () => ({
     name: '',
-    customDomain: '',
     subscriptionPlanId: '',
   }),
   validationSchema: yup.object().shape({
     name: yup.string().required('Name is required!'),
-    customDomain: yup.string().required('Domain is required!'),
     subscriptionPlanId: yup.string().required('Subscription is required!'),
   }),
 

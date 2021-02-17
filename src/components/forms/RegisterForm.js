@@ -55,7 +55,7 @@ const RegisterForm = (props) => {
       {isAdminRegister && (
         <InputGroup
           border
-          label="Website Address:"
+          label="Domain Name:"
           name="websiteAddress"
           type="text"
           value={values.websiteAddress}
