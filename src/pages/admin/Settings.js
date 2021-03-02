@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useQuery, useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
+import { Link } from 'react-router-dom';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -15,6 +16,13 @@ import { SettingsForm } from '../../components/forms';
 
 const Container = styled.div`
   height: 100vh;
+`;
+
+const BackIconWrapper = styled.div`
+  svg:not(:root).svg-inline--fa {
+    font-size: 2rem;
+    margin-right: 10rem;
+  }
 `;
 
 const meQuery = gql`
@@ -51,7 +59,7 @@ const Settings = () => {
   const meData = useQuery(meQuery, { fetchPolicy: 'cache-and-network' });
   const [executeMutation, res] = useMutation(settingMutation);
   const me = meData.data ? meData.data.me : {};
-  // console.log('me data', meData);
+  // console.log('me data', meData.data.me.profile);
 
   return (
     <Layout noContainer>
@@ -65,7 +73,12 @@ const Settings = () => {
         </div> */}
             <div className="column">
               <MainColumn paddingtop="1rem">
-                <Heading>Settings</Heading>
+                <BackIconWrapper className="is-flex">
+                  <Link to="/user/dashboard">
+                    <i className="fas fa-long-arrow-alt-left" />
+                  </Link>
+                  <Heading>Settings</Heading>
+                </BackIconWrapper>
                 <div>
                   <SettingsForm
                     enableReinitialize
