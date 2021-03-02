@@ -29,6 +29,7 @@ const createReviewMutation = gql`
       personName
       location
       reviewTitle
+      companyName
       comment
       rating
       status
@@ -81,6 +82,7 @@ const ClientReview = ({ match }) => {
                         personName: data.personName,
                         location: data.location,
                         reviewTitle: data.reviewTitle,
+                        companyName: data.companyName,
                         comment: data.comment,
                         rating: data.rating,
                         project: project.id,

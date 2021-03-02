@@ -55,6 +55,7 @@ const reviewsQuery = gql`
       status
       adminReply
       createdAt
+      companyName
     }
   }
 `;
