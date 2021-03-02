@@ -149,8 +149,8 @@ const MyDropzone = ({ onUpload, isPublic, children, handleLoading }) => {
   return (
     <Container {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
       <input {...getInputProps()} />
-      <p>+ Drag n drop some files here</p>
-      <small>or click to select files</small>
+      <p>+ Drag n drop your project logo here</p>
+      <small>or click to select logo</small>
       {loading && <Loading />}
       {error && <small className="has-text-danger">{error}</small>}
     </Container>
