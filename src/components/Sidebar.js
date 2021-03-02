@@ -109,14 +109,14 @@ const Sidebar = ({ showOnMobile }) => {
             to={`/admin/project/${activeProject}/styles`}
           />
           <LinkWrapper
-            icon="fas fa-sync"
-            title="Subscriptions"
-            to={`/admin/project/${activeProject}/subscription`}
-          />
-          <LinkWrapper
             icon="fa fa-cog"
             title="Settings"
             to={`/admin/project-settings/${activeProject}`}
+          />
+          <LinkWrapper
+            icon="fas fa-sync"
+            title="Subscriptions"
+            to={`/admin/project/${activeProject}/subscription`}
           />
           <LinkWrapper
             icon="far fa-question-circle"

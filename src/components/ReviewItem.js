@@ -34,6 +34,10 @@ const UserReview = styled.div`
   font-size: ${(props) => (props.fontSize ? `${props.fontSize}px` : '16px')};
 `;
 
+const CommentWrapper = styled.div`
+  margin: 1rem 0;
+`;
+
 // const PendingText = styled.p`
 //   color: ${(props) => props.theme.primaryColor};
 // `;
@@ -151,10 +155,14 @@ const ReviewItem = ({
             </button>
           </div> */}
         </div>
+
         <div className="columns">
-          <div className="column">
+          <CommentWrapper className="column">
+            <UserReview className="has-text-weight-bold">
+              {review.reviewTitle}
+            </UserReview>
             <UserReview className="is-size-6">{review.comment}</UserReview>
-          </div>
+          </CommentWrapper>
         </div>
         <a onClick={toggle} className="has-text-weight-bold">
           {active ? '- Reply' : '+ Reply'}
