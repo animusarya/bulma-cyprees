@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useStoreState } from 'easy-peasy';
 import { Link } from 'react-router-dom';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/client';
 
 import logo from '../assets/images/logo-ros.svg';
 import Sidebar from './Sidebar';
@@ -62,6 +64,17 @@ const AdminBurgerMenu = styled.div`
   }
 `;
 
+const meQuery = gql`
+  query me {
+    me {
+      id
+      profile {
+        companyName
+      }
+    }
+  }
+`;
+
 const Header = () => {
   const [showSideBar, setShowSideBar] = useState(false);
   const userData = useStoreState((state) => state.user.data);
@@ -71,7 +84,15 @@ const Header = () => {
     window.location.replace('/');
   };
 
-  // console.log(userData, 'userData');
+  const meData = useQuery(meQuery, { fetchPolicy: 'cache-and-network' });
+  const meCompanyName =
+    meData &&
+    meData.data &&
+    meData.data.me &&
+    meData.data.me.profile &&
+    meData.data.me.profile.companyName
+      ? meData.data.me.profile.companyName
+      : '';
 
   return (
     <div>
@@ -117,7 +138,7 @@ const Header = () => {
             className="navbar-menu is-active is-hidden-desktop">
             <div className="navbar-end is-flex admin-nav-mobile">
               <span className="navbar-item has-text-white is-size-7">
-                {userData && userData.profile && userData.profile.companyName}
+                {meCompanyName}
               </span>
               <span className="navbar-item has-text-white">
                 <div className="buttons">
@@ -159,7 +180,7 @@ const Header = () => {
             <AdminBurgerMenu id="navbarBasicExample" className="navbar-menu">
               <div className="navbar-end">
                 <span className="navbar-item has-text-white">
-                  {userData && userData.profile && userData.profile.companyName}
+                  {meCompanyName}
                 </span>
                 <span className="navbar-item has-text-white">
                   <div className="buttons">
