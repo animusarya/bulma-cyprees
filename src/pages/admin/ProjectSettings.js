@@ -1,24 +1,24 @@
 import React from 'react';
-// import swal from 'sweetalert';
+import swal from 'sweetalert';
 
 import useProjectDetails from '../../hooks/useProjectDetails';
-// import useProjectUpdate from '../../hooks/useProjectUpdate';
+import useProjectUpdate from '../../hooks/useProjectUpdate';
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import CopyRight from '../../components/CopyRight';
 import MainColumn from '../../components/MainColumn';
-import { Heading } from '../../components/elements';
+import { Heading, Message, Loading } from '../../components/elements';
 import {
   AutoReviewsForm,
-  // ReviewStartSettingForm,
+  ReviewStartSettingForm,
 } from '../../components/forms';
 
 const ProjectSettings = ({ match }) => {
   const projectId = match.params.id;
   const [project] = useProjectDetails(projectId);
-  // const [executeMutation, res] = useProjectUpdate();
+  const [executeMutation, res] = useProjectUpdate();
   // console.log(project, 'project');
 
   return (
@@ -34,9 +34,9 @@ const ProjectSettings = ({ match }) => {
         </div>
         <div className="column">
           <MainColumn>
-            <Heading>Settings</Heading>
+            <Heading>Project Settings</Heading>
             <AutoReviewsForm project={project} />
-            {/* <ReviewStartSettingForm
+            <ReviewStartSettingForm
               initialValues={project}
               onSubmit={async (data) => {
                 await executeMutation({
@@ -44,11 +44,11 @@ const ProjectSettings = ({ match }) => {
                 });
                 swal('Settings updated');
               }}
-            /> */}
+            />
           </MainColumn>
 
-          {/* {res.error && <Message type="error">{res.error.message}</Message>}
-          {res.loading ? <Loading /> : null} */}
+          {res.error && <Message type="error">{res.error.message}</Message>}
+          {res.loading ? <Loading /> : null}
         </div>
       </div>
       <CopyRight />
