@@ -132,7 +132,7 @@ const ClientReviewForm = (props) => {
       />
       <ReCAPTCHA
         ref={recaptchaRef}
-        sitekey="6LeEaD8aAAAAAFc71DBg4djlXiqjWloAEtF2_KVl"
+        sitekey="6Le4cHIaAAAAAOIdPjobB3d82VEGegRAT3Y-fmDS"
         onChange={(response) => {
           setFieldValue('recaptcha', response);
         }}
