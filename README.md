@@ -1,14 +1,14 @@
-# Reviews System
+# Rdgazing
 
 > Frontend app for Reviews System using ReactJs with batteries included.
 
 ## To Test App
 
-- [Go to Website](https://web.reviewourservice.com/)
+- [Go to Website](https://www.rdglazing.app/login)
 
 ```
-username: test@test.com
-password: test12
+Username admin
+Password A6uyr**321
 
 Super Admin
 username: owner@owner.com
