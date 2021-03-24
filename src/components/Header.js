@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/client';
 
-import logo from '../assets/images/logo-ros.svg';
+import logo from '../assets/images/logo.png';
 import Sidebar from './Sidebar';
 
 const Container = styled.div`
@@ -40,7 +40,7 @@ const LinkWrapper = styled(Link)`
 `;
 
 const Logo = styled.img`
-  width: 200px;
+  width: 150px;
   height: auto;
 `;
 
@@ -104,7 +104,7 @@ const Header = () => {
             aria-label="main navigation">
             <div className="navbar-brand">
               <LinkLogo className="navbar-item" to="/super-admin/dashboard">
-                <Logo src={logo} alt="Review our services logo" />
+                <Logo src={logo} alt="Rd-glazing logo" />
               </LinkLogo>
               <a
                 role="button"
@@ -160,7 +160,7 @@ const Header = () => {
             aria-label="main navigation">
             <div className="navbar-brand">
               <Link className="navbar-item" to="/user/dashboard">
-                <Logo src={logo} alt="Review our services logo" />
+                <Logo src={logo} alt="Rd-glazing logo" />
               </Link>
               <a
                 className={

@@ -9,7 +9,7 @@ import { Message, Loading } from '../components/elements';
 import { SetPasswordForm } from '../components/forms';
 import Footer from '../components/Footer';
 import loginBg from '../assets/images/login-bg.jpg';
-import logo from '../assets/images/logo.svg';
+import logo from '../assets/images/logo.png';
 
 const setPasswordMutation = gql`
   mutation setNewPassword($token: String!, $password: String!) {

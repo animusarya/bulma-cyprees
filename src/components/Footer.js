@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import logoAlt from '../assets/images/logo.svg';
+import logoAlt from '../assets/images/logo.png';
 
 const Container = styled.div`
   background-color: ${(props) => props.theme.secondaryColor};
