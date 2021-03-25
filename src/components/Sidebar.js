@@ -14,7 +14,8 @@ const Container = styled.aside`
     :hover {
       background-color: #e2e4e6;
     }
-    a {
+    a,
+    .logout-button {
       padding: 0.8em 1em;
     }
   }
@@ -52,6 +53,11 @@ const LinkWrapper = ({ to, title, icon }) => {
         <IconContainer>{icon && <Icon className={icon} />}</IconContainer>
         {title}
       </Link>
+      <ul className="has-children">
+        <li>
+          <a>Members</a>
+        </li>
+      </ul>
     </li>
   );
 };
@@ -59,6 +65,12 @@ const LinkWrapper = ({ to, title, icon }) => {
 const Sidebar = ({ showOnMobile }) => {
   const userData = useStoreState((state) => state.user.data);
   const activeProject = useStoreState((state) => state.active.project);
+
+  const handleLogout = () => {
+    window.localStorage.clear();
+    window.location.reload(true);
+    window.location.replace('/');
+  };
   // const [isToggledOn, setToggle] = useState(false);
   // const toggle = () => setToggle(!isToggledOn);
   // const isCurrentRoute = routeName => {
@@ -82,34 +94,24 @@ const Sidebar = ({ showOnMobile }) => {
       )}
       {userData.type === 'admin' && (
         <ul className="menu-list">
-          {/* <LinkWrapper
-            icon="fas fa-plus-circle"
-            title="Create"
-            to="/user/create/website"
-          />
           <LinkWrapper
-            icon="fas fa-th-large"
-            title="Dashboard"
-            to="/user/dashboard"
-          /> */}
-          <LinkWrapper
-            icon="fas fa-hand-point-up"
-            title="Get Started"
+            icon="fas fa-bars"
+            title="Jobs"
             to={`/admin/project/${activeProject}/pages`}
           />
           <LinkWrapper
-            icon="fas fa-folder-open"
+            icon="far fa-calendar-times"
             title="Reviews"
             to={`/admin/project/${activeProject}/reviews`}
           />
 
           <LinkWrapper
-            icon="fas fa-pen"
+            icon="fas fa-bars"
             title="Style Reviews"
             to={`/admin/project/${activeProject}/styles`}
           />
           <LinkWrapper
-            icon="fa fa-cog"
+            icon="fas fa-bars"
             title="Settings"
             to={`/admin/project-settings/${activeProject}`}
           />
@@ -118,35 +120,17 @@ const Sidebar = ({ showOnMobile }) => {
             title="Subscriptions"
             to={`/admin/project/${activeProject}/subscription`}
           />
-          <LinkWrapper
-            icon="far fa-question-circle"
-            title="Help"
-            to="/admin/help"
-          />
-          {/* {!isNull(activeProject) ? (
-            <div className="sub-items">
-              <LinkWrapper
-                icon="fas fa-hand-point-up"
-                title="Get Started"
-                to={`/admin/project/${activeProject}/pages`}
-              />
-              <LinkWrapper
-                icon="fas fa-folder-open"
-                title="Reviews"
-                to={`/admin/project/${activeProject}/reviews`}
-              />
-              <LinkWrapper
-                icon="fas fa-pen"
-                title="Style Reviews"
-                to={`/admin/project/${activeProject}/styles`}
-              />
-              <LinkWrapper
-                icon="fas fa-sync"
-                title="Subscriptions"
-                to={`/admin/project/${activeProject}/subscription`}
-              />
+
+          <li>
+            <div
+              className="has-text-weight-bold is-active is-flex logout-button"
+              onClick={() => handleLogout()}>
+              <IconContainer>
+                <Icon className="fas fa-power-off" />
+              </IconContainer>
+              Log Out
             </div>
-          ) : null} */}
+          </li>
         </ul>
       )}
       {userData.type === 'client' && (

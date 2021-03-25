@@ -42,6 +42,7 @@
     "react-scripts": "^4.0.1",
     "react-slick": "^0.27.13",
     "redux-persist": "^6.0.0",
+    "resize-observer-polyfill": "^1.5.1",
     "slick-carousel": "^1.8.1",
     "stripe": "^8.129.0",
     "styled-components": "^5.2.1",

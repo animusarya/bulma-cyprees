@@ -1,4 +1,4 @@
-# Rdgazing
+# Rd glazing
 
 > Frontend app for Reviews System using ReactJs with batteries included.
 
