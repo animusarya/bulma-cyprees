@@ -6,16 +6,29 @@ const theme = {
   mainBrandColor: '#313a46',
   primaryColor: '#3a0256',
   secondaryColor: '#FFC33C',
-  tertiary: '',
-  fontDark: '#25313f',
-  borderColor: '#d4d6d5',
+  tertiary: '#313a46',
+  backgroundColor: '#313a46',
   menuBackgroundColor: '#2a2d38',
+  secondaryBackground: '#37414f',
+  borderColor: '#424e5e',
+
+  // Font color
+  fontDark: '#25313f',
+  textColorLight: '#b5c6cc', // has-text-grey-lighter
+
+  // Font Size
   fontSizeSuperLarge: '30px',
   fontSizeExtraLarge: '26px',
   fontSizeLarge: '20px',
   fontSizeMedium: '18px',
-  fontSize: '16px',
-  fontSizeSmall: '14px',
+  fontSize: '16px', // is-size-6
+  fontSizeSmall: '14px', // is-size-8
+  fontSizeExtraSmall: '12px', // is-size-7
+
+  // Font Weight
+  fontWeightNormal: 400,
+  fontWeightLighter: 500,
+  fontWeightBold: 600,
 };
 
 export default theme;
@@ -71,6 +84,16 @@ export const GlobalStyle = createGlobalStyle`
     display: flex;
     justify-content: center;
     flex-direction: row-reverse;
+  }
+  .has-text-grey-lighter {
+    color:${theme.textColorLight} !important
+  }
+
+  .is-size-8 {
+    font-size: ${theme.fontSizeSmall}
+  }
+  .has-text-weight-semibold {
+    font-weight: 500!important;
   }
 
   .button.is-primary.is-outlined[disabled] {

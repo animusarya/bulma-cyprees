@@ -7,48 +7,21 @@ const Group = styled.div`
   .control {
     width: ${(props) => (props.fullWidth ? '100%' : '')} !important;
   }
-  label {
-    width: ${(props) => (props.isWidth ? '12rem' : '')} !important;
-    align-self: flex-end;
-  }
-`;
-
-const LabelWrapper = styled.div`
-  justify-content: space-between;
 `;
 
 const Input = styled.input`
-  box-shadow: none;
-  border-top: ${(props) =>
-    props.border ? '1px solid theme.borderColor' : 'none'};
-  border-left: ${(props) =>
-    props.border ? '1px solid theme.borderColor' : 'none'};
-  border-right: ${(props) =>
-    props.border ? '1px solid theme.borderColor' : 'none'};
-  border-radius: ${(props) => (props.hasRadius ? '5px' : '0')};
-  border-bottom: ${(props) => `1px solid ${props.theme.borderColor}`};
-`;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid ${(props) => props.theme.borderColor};
+  border-radius: ${(props) => (props.hasRadius ? '0.4rem' : '0.2rem')};
+  background-color: ${(props) => props.theme.secondaryBackground};
 
-const IconContainer = styled.div`
-  margin-left: 15px;
-  .tooltiptext {
-    visibility: hidden;
-    width: 180px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-  }
-  :hover .tooltiptext {
-    visibility: visible;
+  ::placeholder {
+    color: ${(props) => props.theme.textColorLight};
   }
 `;
 
-const LabelInfo = styled.p`
-  margin-left: 8px;
+const Label = styled.label`
+  font-size: ${(props) => props.theme.fontSizeSmall};
 `;
 
 const InputGroup = ({
@@ -59,10 +32,7 @@ const InputGroup = ({
   isHorizontal,
   hasAddons,
   children,
-  infoIcon,
-  iconLabel,
   groupWidth,
-  labelInfo,
   maxLength,
   counter,
   ...otherProps
@@ -74,31 +44,25 @@ const InputGroup = ({
     groupWidth={groupWidth}
     fullWidth={fullWidth}
     isWidth={isWidth}>
-    <LabelWrapper className="is-flex is-justify-content-space-between">
-      <span className="is-flex">
-        {label && <label className="label">{label}</label>}{' '}
-        {labelInfo && <LabelInfo>{labelInfo}</LabelInfo>}
-        {infoIcon && (
-          <IconContainer>
-            {infoIcon}
-            <span className="tooltiptext is-size-7">{iconLabel}</span>
-          </IconContainer>
-        )}
-      </span>
-      {maxLength && (
-        <p>
-          {counter || 0} / {maxLength}
-        </p>
-      )}
-    </LabelWrapper>
-    {hasAddons && (
-      <p className="control">
-        <span className="button is-static">@gmail.com</span>
+    {label && (
+      <Label className="label has-text-grey-lighter has-text-weight-semibold">
+        {label}
+      </Label>
+    )}
+
+    {maxLength && (
+      <p>
+        {counter || 0} / {maxLength}
       </p>
     )}
+
     <div className="control">
       {children || (
-        <Input className="input" {...otherProps} maxLength={maxLength} />
+        <Input
+          className="input is-size-8 has-text-grey-lighter"
+          {...otherProps}
+          maxLength={maxLength}
+        />
       )}
       {errors && <p className="help is-danger">{errors}</p>}
     </div>

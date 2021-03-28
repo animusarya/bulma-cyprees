@@ -2,22 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { InputGroup, Button } from '../elements';
-
-const ResetPassword = styled.span`
-  a {
-    :hover {
-      color: ${(props) => props.theme.primaryColor};
-    }
-  }
-`;
-
-const Spacer = styled.span`
-  margin: 0px 8px;
-`;
 
 const LoginForm = (props) => {
   const {
@@ -34,9 +21,9 @@ const LoginForm = (props) => {
     <form onSubmit={handleSubmit}>
       <InputGroup
         border
-        label="Email"
+        label="Username"
         name="email"
-        placeholder="john@doe.com"
+        placeholder="Enter your username"
         value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}
@@ -47,7 +34,7 @@ const LoginForm = (props) => {
         label="Password"
         name="password"
         type="password"
-        placeholder="*********"
+        placeholder="Enter your password"
         value={values.password}
         onChange={handleChange}
         onBlur={handleBlur}
@@ -55,9 +42,15 @@ const LoginForm = (props) => {
           errors.password && touched.password ? errors.password : undefined
         }
       />
+      <Link
+        className="has-text-grey-lighter is-pulled-right is-size-7 mb-4"
+        to="/forgot-password">
+        Forgot your password?
+      </Link>
       <div className="field">
         <div className="control">
           <Button
+            fullWidth
             marginTop
             marginBottomNone
             type="submit"
@@ -65,18 +58,6 @@ const LoginForm = (props) => {
             <span className="has-text-weight-bold is-size-4">Log In</span>
           </Button>
         </div>
-      </div>
-      <div className="is-flex">
-        <p>
-          Need account?{' '}
-          <ResetPassword>
-            <Link to="/register">Create an account</Link>
-          </ResetPassword>
-        </p>{' '}
-        <Spacer>|</Spacer>
-        <ResetPassword>
-          <Link to="/forgot-password">Forgot Password</Link>
-        </ResetPassword>
       </div>
     </form>
   );

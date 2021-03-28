@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import { useStoreActions } from 'easy-peasy';
@@ -8,7 +10,36 @@ import Seo from '../components/Seo';
 import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
 import { LoginForm } from '../components/forms';
-// import background from '../assets/images/intelliback.jpg';
+
+// images
+import Image from '../assets/images/rd-glazing-login.jpg';
+import Logo from '../assets/images/logo.png';
+
+const Container = styled.section`
+  position: absolute;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  background-image: url(${Image});
+  background-position: center;
+
+  .card-content {
+    position: absolute;
+    right: 0;
+    width: 540px;
+    height: 100%;
+    margin: 0;
+    background-color: ${(props) => props.theme.backgroundColor};
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+`;
+
+const ImageWrapper = styled.img`
+  width: 100%;
+`;
 
 const mutation = gql`
   mutation login($email: String!, $password: String!) {
@@ -25,47 +56,6 @@ const mutation = gql`
     }
   }
 `;
-
-const Container = styled.div`
-  .login-page {
-    width: 52%;
-    margin-right: auto;
-    margin-left: auto;
-    @media only screen and (max-width: 768px) {
-      width: 100%;
-    }
-  }
-  .hero-body {
-    align-items: flex-start !important;
-    padding: 0 !important;
-  }
-`;
-
-const ContentContainer = styled.div`
-  margin-bottom: 32px;
-  h2 {
-    font-size: ${(props) => props.theme.fontSizeSuperLarge};
-    margin-bottom: 2rem;
-    color: ${(props) => props.theme.primaryColor};
-  }
-`;
-
-const FormContainer = styled.div`
-  padding: 0 3rem;
-  .navbar-item {
-    display: grid;
-  }
-  h1 {
-    font-size: 2.3rem;
-    margin-top: -1rem;
-  }
-`;
-
-// const Logo = styled.img`
-//   max-height: 60px;
-//   width: auto;
-//   padding-bottom: 1rem;
-// `;
 
 const Login = () => {
   const [executeMutation, res] = useMutation(mutation);
@@ -91,42 +81,24 @@ const Login = () => {
   }
 
   return (
-    <Layout noContainer hasAuthNav>
-      <Container>
-        <div className="login-page">
-          <Seo title="Login" description="Some description here." />
-          <section className="hero is-fullheight">
-            <div className="hero-body">
-              <div className="container">
-                <FormContainer>
-                  <div>
-                    <nav
-                      className="navbar"
-                      role="navigation"
-                      aria-label="main navigation">
-                      <div id="navbarBasicExample" className="navbar-menu">
-                        <div className="navbar-end" />
-                      </div>
-                    </nav>
-                    <ContentContainer>
-                      <h2 className="has-text-weight-semibold is-size-5-mobile">
-                        Log In
-                      </h2>
-                    </ContentContainer>
-                  </div>
-                  <LoginForm
-                    onSubmit={(data) => executeMutation({ variables: data })}
-                  />
-                  {res.error && (
-                    <Message type="error">{res.error.message}</Message>
-                  )}
-                  {res.loading ? <Loading /> : null}
-                </FormContainer>
-              </div>
+    <Layout noContainer>
+      <div className="login-page">
+        <Seo title="Login" description="Some description here." />
+        <Container>
+          <div className="card-content p-5">
+            <div className="account-box card-box shadow-none p-4 mt-2">
+              <Link to="/login">
+                <ImageWrapper className="pb-3" src={Logo} alt="login" />
+              </Link>
+              <LoginForm
+                onSubmit={(data) => executeMutation({ variables: data })}
+              />
+              {res.error && <Message type="error">{res.error.message}</Message>}
+              {res.loading ? <Loading /> : null}
             </div>
-          </section>
-        </div>
-      </Container>
+          </div>
+        </Container>
+      </div>
     </Layout>
   );
 };

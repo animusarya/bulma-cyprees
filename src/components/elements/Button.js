@@ -54,6 +54,7 @@ const Button = ({
   hasBorder,
   hasNoBackground,
   hasBgColor,
+  fullWidth,
   ...otherProps
 }) => {
   let bgColor = theme.secondaryColor;
@@ -71,8 +72,8 @@ const Button = ({
     <Container
       type="submit"
       className={`button has-text-weight-bold ${
-        secondary ? '' : 'is-primary  is-medium'
-      } ${loading ? 'is-loading' : ''}`}
+        secondary ? '' : 'is-primary is-medium'
+      } ${loading ? 'is-loading' : ''} ${fullWidth ? 'is-fullwidth' : ''}`}
       bgColor={bgColor}
       hasBorder={hasBorder}
       buttonsTextColor={buttonsTextColor}

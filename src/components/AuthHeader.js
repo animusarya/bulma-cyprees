@@ -6,15 +6,16 @@ import logo from '../assets/images/logo.png';
 
 const Container = styled.nav`
   background-color: ${(props) => props.theme.primaryColor};
-  padding: 0rem 1.5rem;
+  padding: 1rem 1.5rem;
   .navbar-item {
     background-color: transparent !important;
   }
 `;
 
 const Logo = styled.img`
-  width: 200px;
+  width: auto;
   height: auto;
+  max-height: 2.75re !important;
   margin-left: -8px;
 `;
 
