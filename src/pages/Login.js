@@ -41,6 +41,11 @@ const ImageWrapper = styled.img`
   width: 100%;
 `;
 
+const Bottom = styled.p`
+  position: relative;
+  top: 0;
+`;
+
 const mutation = gql`
   mutation login($email: String!, $password: String!) {
     login(input: { email: $email, password: $password }) {
@@ -88,7 +93,7 @@ const Login = () => {
           <div className="card-content p-5">
             <div className="account-box card-box shadow-none p-4 mt-2">
               <Link to="/login">
-                <ImageWrapper className="pb-3" src={Logo} alt="login" />
+                <ImageWrapper className="pb-3 mt-1" src={Logo} alt="login" />
               </Link>
               <LoginForm
                 onSubmit={(data) => executeMutation({ variables: data })}
@@ -96,6 +101,7 @@ const Login = () => {
               {res.error && <Message type="error">{res.error.message}</Message>}
               {res.loading ? <Loading /> : null}
             </div>
+            <Bottom className="has-text-white">hello world</Bottom>
           </div>
         </Container>
       </div>

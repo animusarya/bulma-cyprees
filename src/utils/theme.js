@@ -5,16 +5,19 @@ export const elements = { mobileBreakpoint: 800, ipadBreakpoint: 1024 };
 const theme = {
   mainBrandColor: '#313a46',
   primaryColor: '#3a0256',
-  secondaryColor: '#FFC33C',
+  secondaryColor: '#029da8',
   tertiary: '#313a46',
   backgroundColor: '#313a46',
   menuBackgroundColor: '#2a2d38',
   secondaryBackground: '#37414f',
   borderColor: '#424e5e',
 
+  buttonColor: '#8d9bca',
+
   // Font color
   fontDark: '#25313f',
   textColorLight: '#b5c6cc', // has-text-grey-lighter
+  textColorWhite: '#fff',
 
   // Font Size
   fontSizeSuperLarge: '30px',
@@ -48,16 +51,18 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   .button.is-primary {
-    background-color: ${theme.secondaryColor};
-    color: ${theme.primaryColor};
+    transition: 0.6s;
+    background-color: ${theme.buttonColor};
+    color: ${theme.textColorWhite};
     :hover {
+      border: 1px solid ${theme.secondaryColor};
       background-color: ${theme.secondaryColor};
-    color: ${theme.primaryColor};
+      color: ${theme.textColorWhite};
       transition: 0.6s;
     }
   }
   .button.is-info {
-    background-color: ${theme.secondaryColor};
+    background-color: ${theme.buttonColor};
     :hover {
       background-color: #11161d;
     }
