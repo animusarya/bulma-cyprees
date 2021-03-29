@@ -2,9 +2,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import theme from '../../utils/theme';
+// import theme from '../../utils/theme';
 
 const Container = styled.button`
+  border-radius: ${(props) => (props.danger ? '4px' : '')} !important;
+  padding: 3px 6px;
   &&& {
     ${(props) => props.style};
     margin-top: ${(props) => (props.marginTop ? '2rem' : '')};
@@ -12,44 +14,35 @@ const Container = styled.button`
       props.paddingless || props.marginBottomNone ? '0px' : '2rem'};
     transition: 0.6s;
   }
+  :not(.is-rounded) {
+    border-radius: 6px;
+  }
 `;
 
 const Button = ({
   children,
   secondary,
-  primary,
   loading,
   buttonsTextColor,
-  hasBorder,
-  hasNoBackground,
-  hasBgColor,
   fullWidth,
+  danger,
+  primary,
   ...otherProps
-}) => {
-  let bgColor = theme.buttonColor;
-  if (primary) {
-    bgColor = theme.primaryColor;
-  } else if (hasBorder) {
-    bgColor = 'transparent';
-  } else if (hasNoBackground) {
-    bgColor = 'transparent';
-  } else if (hasBgColor) {
-    bgColor = hasBgColor;
-  }
-
-  return (
-    <Container
-      type="submit"
-      className={`button has-text-weight-semibold is-size-8 ${
-        secondary ? '' : 'is-primary'
-      } ${loading ? 'is-loading' : ''} ${fullWidth ? 'is-fullwidth' : ''}`}
-      bgColor={bgColor}
-      hasBorder={hasBorder}
-      buttonsTextColor={buttonsTextColor}
-      {...otherProps}>
-      {children}
-    </Container>
-  );
-};
+}) => (
+  <Container
+    type="submit"
+    className={`button has-text-weight-semibold is-size-8 ${
+      secondary ? 'is-secondary' : ''
+    }
+    ${primary ? 'is-primary ' : ''}
+    ${danger ? 'is-danger is-small' : ''}
+    ${loading ? 'is-loading' : ''}
+    ${fullWidth ? 'is-fullwidth' : ''}`}
+    danger={danger}
+    buttonsTextColor={buttonsTextColor}
+    {...otherProps}>
+    {children}
+  </Container>
+);
 
 export default Button;

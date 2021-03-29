@@ -21,7 +21,7 @@ const ForgotPasswordForm = (props) => {
     <form onSubmit={handleSubmit}>
       <InputGroup
         border
-        label="Email"
+        label="Your Email Address"
         name="email"
         placeholder="john@doe.com"
         value={values.email}
@@ -29,19 +29,10 @@ const ForgotPasswordForm = (props) => {
         onBlur={handleBlur}
         errors={errors.email && touched.email ? errors.email : undefined}
       />
-      <div className="field">
-        <div className="control">
-          <Button
-            type="submit"
-            marginTop
-            marginBottomNone
-            disabled={isSubmitting}>
-            <span className="has-text-weight-bold is-size-4">
-              Reset Password
-            </span>
-          </Button>
-        </div>
-      </div>
+
+      <Button danger type="submit" disabled={isSubmitting}>
+        <span className="has-text-weight-bold">Submit</span>
+      </Button>
     </form>
   );
 };

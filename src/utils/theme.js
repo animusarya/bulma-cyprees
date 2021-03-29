@@ -10,19 +10,21 @@ const theme = {
   backgroundColor: '#313a46',
   menuBackgroundColor: '#2a2d38',
   secondaryBackground: '#37414f',
+  tertiaryBackground: '#ECF1F4;',
+  forgotPasswordBackground: '#95A5AE', // has-background-grey-light
   borderColor: '#424e5e',
-
+  dangerColor: '#e11842',
   buttonColor: '#8d9bca',
 
   // Font color
   fontDark: '#25313f',
   textColorLight: '#b5c6cc', // has-text-grey-lighter
-  textColorWhite: '#fff',
+  textColorWhite: '#fff', // has-text-white
 
   // Font Size
   fontSizeSuperLarge: '30px',
-  fontSizeExtraLarge: '26px',
-  fontSizeLarge: '20px',
+  fontSizeExtraLarge: '24px', // is-size-4
+  fontSizeLarge: '20px', // is-size-5
   fontSizeMedium: '18px',
   fontSize: '16px', // is-size-6
   fontSizeSmall: '14px', // is-size-8
@@ -92,6 +94,9 @@ export const GlobalStyle = createGlobalStyle`
   }
   .has-text-grey-lighter {
     color:${theme.textColorLight} !important
+  }
+  .has-background-grey-light {
+    background-color: ${theme.forgotPasswordBackground}!important;
   }
 
   .is-size-8 {
