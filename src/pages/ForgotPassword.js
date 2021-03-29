@@ -107,10 +107,6 @@ const ForgotPassword = ({ match }) => {
       </div>
       <footer className="content has-text-centered p-2 has-background-grey-dark is-size-7 has-text-white">
         Script Executed in 0.0398 seconds
-        <br />
-        <a className="has-text-white" href="https://ellislab.com/">
-          Powered by ExpressionEngine
-        </a>
       </footer>
     </Layout>
   );
