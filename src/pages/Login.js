@@ -42,8 +42,10 @@ const ImageWrapper = styled.img`
 `;
 
 const Bottom = styled.p`
-  position: relative;
-  top: 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 2rem;
 `;
 
 const mutation = gql`
@@ -101,7 +103,9 @@ const Login = () => {
               {res.error && <Message type="error">{res.error.message}</Message>}
               {res.loading ? <Loading /> : null}
             </div>
-            <Bottom className="has-text-white">hello world</Bottom>
+            <Bottom className="has-text-grey-lighter has-text-centered is-size-8">
+              Version 1.01 : 2020 © All rights reserved
+            </Bottom>
           </div>
         </Container>
       </div>
