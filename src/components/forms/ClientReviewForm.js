@@ -144,7 +144,6 @@ const ClientReviewForm = (props) => {
         <div className="control">
           <Button
             marginTop
-            marginBottomNone
             hasBgColor={project.buttonsColor}
             buttonsTextColor={
               project.buttonsTextColor ? project.buttonsTextColor : '#ffffff'

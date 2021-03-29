@@ -8,6 +8,7 @@ const theme = {
   secondaryColor: '#029da8',
   tertiary: '#313a46',
   backgroundColor: '#313a46',
+  primaryBackgroundColor: '#2a2d38', // has-background-grey-dark
   menuBackgroundColor: '#2a2d38',
   secondaryBackground: '#37414f',
   tertiaryBackground: '#ECF1F4;',
@@ -97,6 +98,9 @@ export const GlobalStyle = createGlobalStyle`
   }
   .has-background-grey-light {
     background-color: ${theme.forgotPasswordBackground}!important;
+  }
+  .has-background-grey-dark {
+    background-color: ${theme.primaryBackgroundColor}!important;
   }
 
   .is-size-8 {

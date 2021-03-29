@@ -31,7 +31,12 @@ const TopNavigation = styled.h1`
 const BottomNavigation = styled.h2`
   background: ${(props) => props.theme.tertiaryBackground};
   padding: 5px 27px;
-  a:hover {
+`;
+
+const LinkStyled = styled(Link)`
+  color: ${(props) => props.theme.fontDark};
+  font-size: ${(props) => props.theme.fontSizeExtraSmall};
+  :hover {
     transition: 0.5s;
     color: ${(props) => props.theme.dangerColor};
     text-decoration: underline;
@@ -69,11 +74,11 @@ const ForgotPassword = ({ match }) => {
         Request password reset
       </TopNavigation>
       <BottomNavigation className="subtitle is-7 has-text-black is-flex">
-        <Link to="/">RD Glazing</Link>
+        <LinkStyled to="/">RD Glazing</LinkStyled>
         <span>&nbsp;&nbsp;&gt;&nbsp;&nbsp;</span>{' '}
         <p className="has-text-weight-bold">Request password reset</p>
       </BottomNavigation>
-      <div className="section">
+      <div className="section pt-0">
         <div className="container">
           <div className="columns is-centered">
             <div className="column is-6">
@@ -93,12 +98,20 @@ const ForgotPassword = ({ match }) => {
                   {res.error && (
                     <Message type="error">{res.error.message}</Message>
                   )}
+                  <LinkStyled to="/login">Back to Login</LinkStyled>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <footer className="content has-text-centered p-2 has-background-grey-dark is-size-7 has-text-white">
+        Script Executed in 0.0398 seconds
+        <br />
+        <a className="has-text-white" href="https://ellislab.com/">
+          Powered by ExpressionEngine
+        </a>
+      </footer>
     </Layout>
   );
 };

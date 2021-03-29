@@ -143,11 +143,7 @@ const RegisterForm = (props) => {
       <div className="field">
         <div className="control">
           {isAdminRegister ? (
-            <Button
-              marginTop
-              marginBottomNone
-              type="submit"
-              disabled={isSubmitting}>
+            <Button marginTop type="submit" disabled={isSubmitting}>
               <span className="has-text-weight-bold is-size-4">
                 Create Account
               </span>
@@ -155,7 +151,6 @@ const RegisterForm = (props) => {
           ) : (
             <Button
               marginTop
-              marginBottomNone
               type="submit"
               disabled={!ndaAccepted || isSubmitting}>
               <span className="has-text-weight-bold is-size-4">

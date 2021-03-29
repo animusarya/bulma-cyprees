@@ -10,8 +10,7 @@ const Container = styled.button`
   &&& {
     ${(props) => props.style};
     margin-top: ${(props) => (props.marginTop ? '2rem' : '')};
-    margin-bottom: ${(props) =>
-      props.paddingless || props.marginBottomNone ? '0px' : '2rem'};
+    margin-bottom: ${(props) => (props.marginBottom ? '2rem' : '')};
     transition: 0.6s;
   }
   :not(.is-rounded) {

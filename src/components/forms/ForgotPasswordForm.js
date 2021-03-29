@@ -18,7 +18,7 @@ const ForgotPasswordForm = (props) => {
   } = props;
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="mb-4" onSubmit={handleSubmit}>
       <InputGroup
         border
         label="Your Email Address"
