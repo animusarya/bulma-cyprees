@@ -102,6 +102,9 @@ export const GlobalStyle = createGlobalStyle`
   .has-background-grey-dark {
     background-color: ${theme.primaryBackgroundColor}!important;
   }
+  .has-background-white-ter {
+    background-color: #F4F6F6 !important;
+  }
 
   .is-size-8 {
     font-size: ${theme.fontSizeSmall}

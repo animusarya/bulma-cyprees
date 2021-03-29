@@ -88,7 +88,7 @@ const ForgotPassword = ({ match }) => {
                     Request password reset
                   </p>
                 </CardHeader>
-                <div className="card-content">
+                <div className="card-content has-background-white-ter">
                   <ForgotPasswordForm
                     onSubmit={async (data) => {
                       await executeMutation({ variables: { input: data } });
