@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import styled from 'styled-components';
 
 import config from '../utils/config';
+
 import { Sidebar } from './sidebar';
 
 const Container = styled.div``;

@@ -7,7 +7,6 @@ import { isEmpty } from 'lodash';
 
 import useProjectGuestDetails from '../hooks/useProjectGuestDetails';
 import Seo from '../components/Seo';
-import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
 import { RegisterForm } from '../components/forms';
 
@@ -76,12 +75,6 @@ const ContentContainer = styled.div`
   }
 `;
 
-// const Logo = styled.img`
-//   max-height: 60px;
-//   width: auto;
-//   padding-bottom: 1rem;
-// `;
-
 const Register = ({ match }) => {
   const [executeMutation, res] = useMutation(registerMutation);
   const togggleLoggedIn = useStoreActions(
@@ -117,63 +110,61 @@ const Register = ({ match }) => {
   }
 
   return (
-    <Layout noContainer hasAuthNav activeProject={activeProject}>
-      <Container>
-        <div className="register-page">
-          <Seo title="Registration" description="Register Yourself Here" />
-          <section className="hero is-fullheight">
-            <div className="hero-body">
-              <div className="container">
-                <FormContainer>
-                  <div>
-                    <nav
-                      className="navbar"
-                      role="navigation"
-                      aria-label="main navigation">
-                      <div id="navbarBasicExample" className="navbar-menu">
-                        <div className="navbar-end" />
-                      </div>
-                    </nav>
-                    <ContentContainer>
-                      <h2 className="has-text-weight-semibold is-size-5-mobile">
-                        Create an Account
-                      </h2>
-                    </ContentContainer>
-                  </div>
-                  <RegisterForm
-                    enableReinitialize
-                    initialValues={{
-                      email: email || '',
-                    }}
-                    onSubmit={(data) =>
-                      executeMutation({
-                        variables: {
-                          input: {
-                            email: data.email,
-                            password: data.password,
-                            projectId: projectId || undefined,
-                            fullName: data.fullName,
-                            companyName: data.companyName,
-                            telephone: data.telephone,
-                            websiteAddress: data.websiteAddress,
-                          },
+    <Container>
+      <div className="register-page">
+        <Seo title="Registration" description="Register Yourself Here" />
+        <section className="hero is-fullheight">
+          <div className="hero-body">
+            <div className="container">
+              <FormContainer>
+                <div>
+                  <nav
+                    className="navbar"
+                    role="navigation"
+                    aria-label="main navigation">
+                    <div id="navbarBasicExample" className="navbar-menu">
+                      <div className="navbar-end" />
+                    </div>
+                  </nav>
+                  <ContentContainer>
+                    <h2 className="has-text-weight-semibold is-size-5-mobile">
+                      Create an Account
+                    </h2>
+                  </ContentContainer>
+                </div>
+                <RegisterForm
+                  enableReinitialize
+                  initialValues={{
+                    email: email || '',
+                  }}
+                  onSubmit={(data) =>
+                    executeMutation({
+                      variables: {
+                        input: {
+                          email: data.email,
+                          password: data.password,
+                          projectId: projectId || undefined,
+                          fullName: data.fullName,
+                          companyName: data.companyName,
+                          telephone: data.telephone,
+                          websiteAddress: data.websiteAddress,
                         },
-                      })
-                    }
-                    project={activeProject}
-                    isAdminRegister={isAdminRegister}
-                  />
-                  {res.error && (
-                    <Message type="error">{res.error.message}</Message>
-                  )}
-                  {res.loading ? <Loading /> : null}
-                </FormContainer>
-              </div>
+                      },
+                    })
+                  }
+                  project={activeProject}
+                  isAdminRegister={isAdminRegister}
+                />
+                {res.error && (
+                  <Message type="error">{res.error.message}</Message>
+                )}
+                {res.loading ? <Loading /> : null}
+              </FormContainer>
             </div>
-          </section>
-        </div>
-      </Container>
-    </Layout>
+          </div>
+        </section>
+      </div>
+    </Container>
   );
 };
 

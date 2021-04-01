@@ -7,7 +7,6 @@ import gql from 'graphql-tag';
 import { useStoreActions } from 'easy-peasy';
 
 import Seo from '../components/Seo';
-import Layout from '../components/Layout';
 import { Message, Loading } from '../components/elements';
 import { LoginForm } from '../components/forms';
 
@@ -82,28 +81,26 @@ const Login = () => {
   }
 
   return (
-    <Layout noContainer>
-      <div className="login-page">
-        <Seo title="Login" description="Some description here." />
-        <Container>
-          <div className="card-content p-5">
-            <div className="account-box card-box shadow-none p-4 mt-2">
-              <Link to="/login">
-                <ImageWrapper className="pb-3 mt-1" src={Logo} alt="login" />
-              </Link>
-              <LoginForm
-                onSubmit={(data) => executeMutation({ variables: data })}
-              />
-              {res.error && <Message type="error">{res.error.message}</Message>}
-              {res.loading ? <Loading /> : null}
-            </div>
-            <Bottom className="has-text-grey-lighter has-text-centered is-size-8">
-              Version 1.01 : 2020 © All rights reserved
-            </Bottom>
+    <div className="login-page">
+      <Seo title="Login" description="Some description here." />
+      <Container>
+        <div className="card-content p-5">
+          <div className="account-box card-box shadow-none p-4 mt-2">
+            <Link to="/login">
+              <ImageWrapper className="pb-3 mt-1" src={Logo} alt="login" />
+            </Link>
+            <LoginForm
+              onSubmit={(data) => executeMutation({ variables: data })}
+            />
+            {res.error && <Message type="error">{res.error.message}</Message>}
+            {res.loading ? <Loading /> : null}
           </div>
-        </Container>
-      </div>
-    </Layout>
+          <Bottom className="has-text-grey-lighter has-text-centered is-size-8">
+            Version 1.01 : 2020 © All rights reserved
+          </Bottom>
+        </div>
+      </Container>
+    </div>
   );
 };
 

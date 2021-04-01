@@ -5,7 +5,6 @@ import Title from './Title';
 import Message from './Message';
 import Loading from './Loading';
 import TextAreaGroup from './TextArea';
-import ReactDropdown from './ReactDropdown';
 import Dropzone from './Dropzone';
 
 export {
@@ -16,6 +15,5 @@ export {
   Message,
   Loading,
   TextAreaGroup,
-  ReactDropdown,
   Dropzone,
 };
