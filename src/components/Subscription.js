@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 import { withRouter } from 'react-router-dom';
 
 import { formatCurrency } from '../utils/helpers';
-import { Heading, Button, Message, Loading, SelectGroup } from './elements';
+import { Heading, Button, Message, Loading } from './elements';
 
 const packagesQuery = gql`
   query packages {
@@ -96,23 +96,7 @@ const Subscription = ({ project, history }) => {
       ) : (
         <>
           <Heading>Renew subscription for {project.name}</Heading>
-          <SelectGroup
-            fullWidth
-            isWidth
-            border
-            placeholder="Monthly | £30 | 6Months (£180) | Annually (£360)"
-            name="subscriptionPlanId"
-            value={subscriptionPlanId}
-            onChange={(e) => setSubscriptionPlanId(e.target.value)}
-            options={
-              packages
-                ? packages.map((item) => ({
-                    value: item.subscriptionPlanId,
-                    title: `${item.name} - £${item.price} per ${item.durationInMonths} month`,
-                  }))
-                : []
-            }
-          />
+
           <Button
             secondary
             disabled={subscriptionPlanId === ''}

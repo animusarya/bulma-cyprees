@@ -88,11 +88,7 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${theme.secondaryColor};
     color: #ffffff;
   }
-  .swal-footer {
-    display: flex;
-    justify-content: center;
-    flex-direction: row-reverse;
-  }
+
   .has-text-grey-lighter {
     color:${theme.textColorLight} !important
   }

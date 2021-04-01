@@ -6,12 +6,9 @@ import { GlobalStyle } from './theme';
 
 import Home from '../pages/Home';
 import Error404 from '../pages/404';
-import NotAllowed from '../pages/NotAllowed';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import ForgotPassword from '../pages/ForgotPassword';
-import SetPassword from '../pages/SetPassword';
-// import ReviewsFrame from '../pages/ReviewsFrame';
 import Test from '../pages/Test';
 import Jobs from '../pages/admin/Jobs';
 import RegisterJob from '../pages/admin/RegisterJob';
@@ -45,9 +42,7 @@ const Routes = () => (
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/register/:projectId/:email" component={Register} />
-        <Route exact path="/set-password/:token" component={SetPassword} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
-        <Route exact path="/not-allowed" component={NotAllowed} />
         <PrivateRoute
           exact
           path="/jobs/:status"

@@ -5,7 +5,7 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 import { IconContext } from 'react-icons/lib';
-import SubMenu from './sidebar/SubMenu';
+import SubMenu from './SubMenu';
 
 const Nav = styled.div`
   background: #15171c;
