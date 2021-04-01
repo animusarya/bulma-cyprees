@@ -12,6 +12,7 @@ const Container = styled.div`
   background-color: ${(props) => props.theme.primaryColor};
   .navbar {
     background-color: ${(props) => props.theme.primaryColor};
+    display: none;
   }
   .navbar-item {
     background: transparent !important;
@@ -132,7 +133,7 @@ const Header = () => {
         </Container>
       )}
       {userData.type === 'admin' && (
-        <Container>
+        <Container className="is-hidden-desktop">
           <AdminBurgerMenu
             id="navbarBasicExample"
             className="navbar-menu is-active is-hidden-desktop">

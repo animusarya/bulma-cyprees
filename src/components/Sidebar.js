@@ -1,144 +1,122 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link, useRouteMatch } from 'react-router-dom';
-import { useStoreState } from 'easy-peasy';
-// import { isNull } from 'lodash';
+import { Link } from 'react-router-dom';
+import * as FaIcons from 'react-icons/fa';
+import * as AiIcons from 'react-icons/ai';
+import * as IoIcons from 'react-icons/io';
+import { IconContext } from 'react-icons/lib';
+import SubMenu from './sidebar/SubMenu';
 
-const Container = styled.aside`
-  background-color: #f4f4f6;
-  height: 100%;
-  min-height: ${(props) => (props.showOnMobile ? '' : '100vh')};
-  margin-bottom: 0px !important;
-  li {
-    cursor: pointer;
-    :hover {
-      background-color: #e2e4e6;
-    }
-    a,
-    .logout-button {
-      padding: 0.8em 1em;
-    }
-  }
-  .sub-items {
-    a {
-      :hover {
-        background-color: #e1e1e4;
-      }
-    }
-  }
-  .menu-list a.is-active {
-    background-color: #e2e4e6 !important;
-    color: #4a4a4a;
+const Nav = styled.div`
+  background: #15171c;
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+const NavIcon = styled(Link)`
+  color: red;
+  margin-left: 2rem;
+  font-size: 2rem;
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+const SidebarNav = styled.nav`
+  background: black;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  transition: 350ms;
+  z-index: 10;
+  @media only screen and (max-width: 768px) {
+    left: ${({ sidebar }) => (sidebar ? '0' : '-100%')};
   }
 `;
 
-const IconContainer = styled.div`
-  width: 30px;
-  margin-left: 10px;
+const SidebarWrap = styled.div`
+  width: 100%;
 `;
 
-const Icon = styled.i``;
+const ImageWrapper = styled.div`
+  height: 70px;
+  margin: 1rem 1rem 1rem 1rem;
+  align-items: center;
+  display: flex;
+`;
 
-const LinkWrapper = ({ to, title, icon }) => {
-  const route = useRouteMatch(to);
+const sidebarData = [
+  {
+    title: 'Overview',
+    path: '#',
+    icon: <AiIcons.AiFillHome />,
+
+    subNav: [
+      {
+        title: 'Revenue',
+        path: '/super-admin/dashboard',
+        icon: <IoIcons.IoIosPaper />,
+      },
+    ],
+  },
+  {
+    title: 'Reports',
+    path: '#',
+    icon: <IoIcons.IoIosPaper />,
+
+    subNav: [
+      {
+        title: 'Reports 2',
+        path: '/',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'sub-nav',
+      },
+      {
+        title: 'Reports 3',
+        path: '/super-admin/dashboard',
+        icon: <IoIcons.IoIosPaper />,
+      },
+    ],
+  },
+];
+
+const Sidebar = () => {
+  const [sidebar, setSidebar] = useState(false);
+  const showSidebar = () => setSidebar(!sidebar);
+
   return (
-    <li>
-      <Link
-        className={
-          route
-            ? 'has-text-weight-bold is-active is-flex'
-            : 'has-text-weight-medium is-flex'
-        }
-        to={to}>
-        <IconContainer>{icon && <Icon className={icon} />}</IconContainer>
-        {title}
-      </Link>
-      <ul className="has-children">
-        <li>
-          <a>Members</a>
-        </li>
-      </ul>
-    </li>
-  );
-};
+    <>
+      <IconContext.Provider className="love" value={{ color: '#fff' }}>
+        <Nav>
+          <NavIcon to="#">
+            <FaIcons.FaBars onClick={showSidebar} />
+          </NavIcon>{' '}
+        </Nav>
 
-const Sidebar = ({ showOnMobile }) => {
-  const userData = useStoreState((state) => state.user.data);
-  const activeProject = useStoreState((state) => state.active.project);
+        <SidebarNav sidebar={sidebar}>
+          <SidebarWrap>
+            <NavIcon className="is-hidden-desktop" to="#">
+              <AiIcons.AiOutlineClose onClick={showSidebar} />
+            </NavIcon>
+            <ImageWrapper>
+              <img
+                src="https://rdglazing.app/assets/images/logo-light.png"
+                alt="logo"
+              />
+            </ImageWrapper>
 
-  const handleLogout = () => {
-    window.localStorage.clear();
-    window.location.reload(true);
-    window.location.replace('/');
-  };
-  // const [isToggledOn, setToggle] = useState(false);
-  // const toggle = () => setToggle(!isToggledOn);
-  // const isCurrentRoute = routeName => {
-  //   // const route = useRouteMatch(routeName);
-  //   // return !isNull(route) ? (route.isExact ? 'is-active' : '') : '';
-  //   return '';
-  // };
-  // const route = useRouteMatch('/admin/help');
-
-  return (
-    <Container
-      showOnMobile={showOnMobile}
-      className={!showOnMobile ? 'menu is-hidden-mobile' : 'menu'}>
-      {userData.type === 'superAdmin' && (
-        <ul className="menu-list">
-          <LinkWrapper title="Users" to="/super-admin/dashboard" />
-          <LinkWrapper title="Set Pricing" to="/super-admin/pricing" />
-          <LinkWrapper title="Discount Codes" to="/super-admin/discounts" />
-          <LinkWrapper title="Manage Help" to="/super-admin/help" />
-        </ul>
-      )}
-      {userData.type === 'admin' && (
-        <ul className="menu-list">
-          <LinkWrapper
-            icon="fas fa-bars"
-            title="Jobs"
-            to={`/admin/project/${activeProject}/pages`}
-          />
-          <LinkWrapper
-            icon="far fa-calendar-times"
-            title="Reviews"
-            to={`/admin/project/${activeProject}/reviews`}
-          />
-
-          <LinkWrapper
-            icon="fas fa-bars"
-            title="Style Reviews"
-            to={`/admin/project/${activeProject}/styles`}
-          />
-          <LinkWrapper
-            icon="fas fa-bars"
-            title="Settings"
-            to={`/admin/project-settings/${activeProject}`}
-          />
-          <LinkWrapper
-            icon="fas fa-sync"
-            title="Subscriptions"
-            to={`/admin/project/${activeProject}/subscription`}
-          />
-
-          <li>
-            <div
-              className="has-text-weight-bold is-active is-flex logout-button"
-              onClick={() => handleLogout()}>
-              <IconContainer>
-                <Icon className="fas fa-power-off" />
-              </IconContainer>
-              Log Out
-            </div>
-          </li>
-        </ul>
-      )}
-      {userData.type === 'client' && (
-        <ul className="menu-list">
-          <LinkWrapper title="Files" to="/client/dashboard" />
-        </ul>
-      )}
-    </Container>
+            {sidebarData.map((item) => (
+              <SubMenu item={item} key={item} />
+            ))}
+          </SidebarWrap>
+        </SidebarNav>
+      </IconContext.Provider>
+    </>
   );
 };
 

@@ -3,7 +3,10 @@
   "extends": ["airbnb", "prettier", "prettier/react"],
   "plugins": ["prettier"],
   "rules": {
-    "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],
+    "no-unused-vars": [
+      "error",
+      { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
+    ],
     "func-names": 0,
     "prettier/prettier": [
       "error",
@@ -21,6 +24,7 @@
         "extensions": [".js", ".jsx"]
       }
     ],
+    "react/jsx-props-no-spreading": "off",
     "react/prop-types": 0,
     "no-underscore-dangle": 0,
     "react/prefer-stateless-function": 0,
