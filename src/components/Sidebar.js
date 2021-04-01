@@ -57,7 +57,7 @@ const sidebarData = [
     subNav: [
       {
         title: 'Add jobs',
-        path: '/jobs',
+        path: '/job/register',
         icon: <IoIcons.IoIosPaper />,
       },
       {
@@ -77,7 +77,7 @@ const sidebarData = [
       },
       {
         title: 'View Archived Jobs',
-        path: '/jobs/archived',
+        path: '/job/5656565565',
         icon: <IoIcons.IoIosPaper />,
       },
     ],

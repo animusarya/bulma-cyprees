@@ -14,6 +14,8 @@ import SetPassword from '../pages/SetPassword';
 // import ReviewsFrame from '../pages/ReviewsFrame';
 import Test from '../pages/Test';
 import Jobs from '../pages/admin/Jobs';
+import RegisterJob from '../pages/admin/RegisterJob';
+import Job from '../pages/admin/Job';
 
 const PrivateRoute = ({ component: Component, access, ...rest }) => {
   const isLoggedIn = useStoreState((state) => state.isLoggedIn.value);
@@ -46,11 +48,23 @@ const Routes = () => (
         <Route exact path="/set-password/:token" component={SetPassword} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
         <Route exact path="/not-allowed" component={NotAllowed} />
-
         <PrivateRoute
           exact
           path="/jobs/:status"
           component={Jobs}
+          access="admin"
+        />
+        <PrivateRoute
+          exact
+          path="/job/register"
+          component={RegisterJob}
+          access="admin"
+        />
+        <PrivateRoute exact path="/job/:id" component={Job} access="admin" />
+        <PrivateRoute
+          exact
+          path="/job/export/:id"
+          component={Job}
           access="admin"
         />
 
