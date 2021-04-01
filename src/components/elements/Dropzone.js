@@ -37,7 +37,7 @@ const getColor = (props) => {
   if (props.isDragActive) {
     return '#2196f3';
   }
-  return theme.primaryColor;
+  return theme.mainBrandColor;
 };
 
 const Container = styled.div`
@@ -51,7 +51,7 @@ const Container = styled.div`
   border-color: ${(props) => getColor(props)};
   border-style: dashed;
   background-color: #fafafa;
-  color: ${(props) => props.theme.primaryColor};
+  color: ${(props) => props.theme.mainBrandColor};
   outline: none;
   transition: border 0.24s ease-in-out;
   margin-bottom: 20px;

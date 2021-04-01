@@ -6,7 +6,6 @@ import * as RiIcons from 'react-icons/ri';
 
 const SidebarLink = styled(Link)`
   display: flex;
-  color: red;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
@@ -18,11 +17,9 @@ const SidebarLabel = styled.span`
 `;
 
 const DropdownLink = styled(Link)`
-  background: #414757;
   height: 60px;
   display: flex;
   align-items: center;
-  color: #f5f5f5;
   font-size: 12px;
 `;
 
@@ -34,9 +31,11 @@ const SubMenu = ({ item }) => {
   return (
     <>
       <SidebarLink to={item.path} onClick={item.subNav && showSubNav}>
-        <div>
+        <div className="has-text-primary-light">
           {item.icon}
-          <SidebarLabel>{item.title}</SidebarLabel>
+          <SidebarLabel className="has-text-primary-light">
+            {item.title}
+          </SidebarLabel>
         </div>
         <div>
           {item.subNav && subNav ? (
@@ -48,8 +47,10 @@ const SubMenu = ({ item }) => {
       </SidebarLink>
       {subNav &&
         item.subNav.map((item1) => (
-          <DropdownLink to={item1.path} key={item1.title}>
-            {item1.icon}
+          <DropdownLink
+            className="has-text-primary-light"
+            to={item1.path}
+            key={item1.title}>
             <SidebarLabel>{item1.title}</SidebarLabel>
           </DropdownLink>
         ))}

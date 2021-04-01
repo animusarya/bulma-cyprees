@@ -4,7 +4,6 @@ export const elements = { mobileBreakpoint: 800, ipadBreakpoint: 1024 };
 
 const theme = {
   mainBrandColor: '#313a46',
-  primaryColor: '#3a0256',
   secondaryColor: '#029da8',
   tertiary: '#313a46',
   backgroundColor: '#313a46',
@@ -22,6 +21,8 @@ const theme = {
   fontDark: '#25313f',
   textColorLight: '#b5c6cc', // has-text-grey-lighter
   textColorWhite: '#fff', // has-text-white
+  textColorGrey: '#98abb9', // has-text-primary-light
+  textColorBlueLight: '#909ecc', // :hover has-text-primary-light
 
   // Font Size
   fontSizeSuperLarge: '30px',
@@ -71,24 +72,6 @@ export const GlobalStyle = createGlobalStyle`
       background-color: #11161d;
     }
   }
-  a {
-    color: ${theme.primaryColor};
-  }
-  a.has-text-white:focus, a.has-text-white:hover {
-    color: #ffffff!important;
-  }
-  .swal-button-container {
-    display: flex;
-    justify-content: center;
-  }
-  .swal-button {
-    background-color: ${theme.secondaryColor};
-    font-size: 16px;
-  }
-  .swal-button--cancel {
-    background-color: ${theme.secondaryColor};
-    color: #ffffff;
-  }
 
   .has-text-grey-lighter {
     color:${theme.textColorLight} !important
@@ -103,11 +86,20 @@ export const GlobalStyle = createGlobalStyle`
     background-color: #F4F6F6 !important;
   }
 
+  .has-text-primary-light,
+  a.has-text-primary-light:focus, a.has-text-primary-light:hover {
+    color: ${theme.textColorGrey} !important;
+    :hover {
+      color: ${theme.textColorBlueLight} !important;
+      transition: all 0.4s;
+    }
+  }
+
   .is-size-8 {
     font-size: ${theme.fontSizeSmall}
   }
   .has-text-weight-semibold {
-    font-weight: 500!important;
+    font-weight: 500 !important;
   }
 
   .button.is-primary.is-outlined[disabled] {
