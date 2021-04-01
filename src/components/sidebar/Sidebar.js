@@ -8,8 +8,7 @@ import { IconContext } from 'react-icons/lib';
 import SubMenu from './SubMenu';
 
 const Nav = styled.div`
-  background: #15171c;
-  height: 80px;
+  background: #2a2d38;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -26,27 +25,19 @@ const NavIcon = styled(Link)`
 `;
 
 const SidebarNav = styled.nav`
-  background: black;
-  top: 0;
+  background: ${(props) => props.theme.sidebarBackground};
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  transition: 350ms;
-  z-index: 10;
+  transition: 500ms;
   @media only screen and (max-width: 768px) {
-    left: ${({ sidebar }) => (sidebar ? '0' : '-100%')};
+    left: ${({ sidebar }) => (sidebar ? '0' : '100%')};
+    position: absolute;
+    width: 220px;
   }
 `;
 
-const SidebarWrap = styled.div`
-  width: 100%;
-`;
-
-const ImageWrapper = styled.div`
-  height: 70px;
-  margin: 1rem 1rem 1rem 1rem;
-  align-items: center;
-  display: flex;
+const ImageWrapper = styled.figure`
+  width: auto !important;
+  padding: 1.2rem;
 `;
 
 const sidebarData = [
@@ -108,33 +99,26 @@ const Sidebar = () => {
   const showSidebar = () => setSidebar(!sidebar);
 
   return (
-    <>
-      <IconContext.Provider className="love" value={{ color: '#fff' }}>
-        <Nav className="is-hidden-desktop">
-          <NavIcon to="#">
-            <FaIcons.FaBars onClick={showSidebar} />
-          </NavIcon>{' '}
-        </Nav>
-
-        <SidebarNav sidebar={sidebar}>
-          <SidebarWrap>
-            <NavIcon className="is-hidden-desktop" to="#">
-              <AiIcons.AiOutlineClose onClick={showSidebar} />
-            </NavIcon>
-            <ImageWrapper>
-              <img
-                src="https://rdglazing.app/assets/images/logo-light.png"
-                alt="logo"
-              />
-            </ImageWrapper>
-
-            {sidebarData.map((item) => (
-              <SubMenu item={item} key={item.title} />
-            ))}
-          </SidebarWrap>
-        </SidebarNav>
-      </IconContext.Provider>
-    </>
+    <IconContext.Provider value={{ color: '#fff' }}>
+      <Nav className="is-hidden-desktop">
+        <NavIcon to="#">
+          <FaIcons.FaBars onClick={showSidebar} />
+        </NavIcon>
+      </Nav>
+      <SidebarNav sidebar={sidebar}>
+        <div>
+          <ImageWrapper className="is-hidden-mobile">
+            <img
+              src="https://rdglazing.app/assets/images/logo-light.png"
+              alt="logo"
+            />
+          </ImageWrapper>
+          {sidebarData.map((item) => (
+            <SubMenu item={item} key={item.title} />
+          ))}
+        </div>
+      </SidebarNav>
+    </IconContext.Provider>
   );
 };
 

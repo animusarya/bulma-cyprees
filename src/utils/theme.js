@@ -9,7 +9,8 @@ const theme = {
   tertiary: '#313a46',
   backgroundColor: '#313a46',
   primaryBackgroundColor: '#2a2d38', // has-background-grey-dark
-  menuBackgroundColor: '#2a2d38',
+  menuBackgroundColor: '#313541',
+  sidebarBackground: '#313541',
   secondaryBackground: '#37414f',
   tertiaryBackground: '#ECF1F4;',
   forgotPasswordBackground: '#95A5AE', // has-background-grey-light
