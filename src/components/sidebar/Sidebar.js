@@ -29,6 +29,7 @@ const NavIcon = styled(Link)`
 const SidebarNav = styled.nav`
   background: ${(props) => props.theme.sidebarBackground};
   height: 100vh;
+  overflow: auto;
   transition: 500ms;
   @media only screen and (max-width: 768px) {
     left: ${({ sidebar }) => (sidebar ? '0' : '100%')};
