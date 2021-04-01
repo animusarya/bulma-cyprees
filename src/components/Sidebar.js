@@ -18,7 +18,7 @@ const Nav = styled.div`
 const NavIcon = styled(Link)`
   color: red;
   margin-left: 2rem;
-  font-size: 2rem;
+  font-size: 1rem;
   height: 80px;
   display: flex;
   justify-content: flex-start;
@@ -31,7 +31,6 @@ const SidebarNav = styled.nav`
   height: 100vh;
   display: flex;
   justify-content: center;
-  position: fixed;
   transition: 350ms;
   z-index: 10;
   @media only screen and (max-width: 768px) {
@@ -52,14 +51,33 @@ const ImageWrapper = styled.div`
 
 const sidebarData = [
   {
-    title: 'Overview',
+    title: 'Jobs',
     path: '#',
     icon: <AiIcons.AiFillHome />,
-
     subNav: [
       {
-        title: 'Revenue',
-        path: '/super-admin/dashboard',
+        title: 'Add jobs',
+        path: '/jobs',
+        icon: <IoIcons.IoIosPaper />,
+      },
+      {
+        title: 'View Open Jobs',
+        path: '/jobs/open',
+        icon: <IoIcons.IoIosPaper />,
+      },
+      {
+        title: 'View Revisit Jobs',
+        path: '/jobs/revisit',
+        icon: <IoIcons.IoIosPaper />,
+      },
+      {
+        title: 'View Closed Jobs',
+        path: '/jobs/closed',
+        icon: <IoIcons.IoIosPaper />,
+      },
+      {
+        title: 'View Archived Jobs',
+        path: '/jobs/archived',
         icon: <IoIcons.IoIosPaper />,
       },
     ],
@@ -92,7 +110,7 @@ const Sidebar = () => {
   return (
     <>
       <IconContext.Provider className="love" value={{ color: '#fff' }}>
-        <Nav>
+        <Nav className="is-hidden-desktop">
           <NavIcon to="#">
             <FaIcons.FaBars onClick={showSidebar} />
           </NavIcon>{' '}
@@ -111,7 +129,7 @@ const Sidebar = () => {
             </ImageWrapper>
 
             {sidebarData.map((item) => (
-              <SubMenu item={item} key={item} />
+              <SubMenu item={item} key={item.title} />
             ))}
           </SidebarWrap>
         </SidebarNav>

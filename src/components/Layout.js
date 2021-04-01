@@ -1,39 +1,33 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Helmet from 'react-helmet';
-import { useStoreActions } from 'easy-peasy';
-// import { isEmpty } from 'lodash';
+import styled from 'styled-components';
 
 import config from '../utils/config';
-// import useProjectGuestDetails from '../hooks/useProjectGuestDetails';
-import AuthHeader from './AuthHeader';
-import AuthFooter from './AuthFooter';
+import Footer from './Footer';
+import Header from './Header';
+import Sidebar from './Sidebar';
+import MainColumn from './MainColumn';
 
-const Layout = ({ children, hasAuthNav, activeProject }) => {
-  const updateOrigin = useStoreActions((actions) => actions.origin.update);
-  // const origin = useStoreState((state) => state.origin.value);
-  // const [project] = useProjectGuestDetails({ domain: origin });
-  // const updateProject = useStoreActions(
-  //   (actions) => actions.origin.updateProject,
-  // );
+const Container = styled.div``;
 
-  useEffect(() => {
-    updateOrigin(window.location.origin);
-  }, [updateOrigin]);
+const Wrapper = styled.div``;
+const Layout = ({ children, showFooter }) => (
+  <Container>
+    <Helmet title={config.siteName} />
+    <Header />
 
-  // useEffect(() => {
-  //   if (!isEmpty(project)) {
-  //     updateProject(project);
-  //   }
-  // }, [project, updateProject]);
-
-  return (
-    <>
-      <Helmet title={config.siteName} />
-      {hasAuthNav && <AuthHeader activeProject={activeProject} />}
-      {children}
-      {hasAuthNav && <AuthFooter activeProject={activeProject} />}
-    </>
-  );
-};
+    <Wrapper className="columns">
+      <div className="column px-0 left-column is-2">
+        <Sidebar />
+      </div>
+      <div className="column is-10 right-column">
+        <MainColumn>
+          {children}
+          {showFooter && <Footer />}
+        </MainColumn>
+      </div>
+    </Wrapper>
+  </Container>
+);
 
 export default Layout;

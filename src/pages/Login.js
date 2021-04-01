@@ -77,13 +77,7 @@ const Login = () => {
     togggleLoggedIn(true);
     updateUser(user);
     setTimeout(() => {
-      let sendTo = '/client/dashboard';
-      if (user.type === 'superAdmin') {
-        sendTo = '/super-admin/dashboard';
-      } else if (user.type === 'admin') {
-        sendTo = '/user/dashboard';
-      }
-      window.location.replace(sendTo);
+      window.location.replace('/jobs/all');
     }, 1000);
   }
 
