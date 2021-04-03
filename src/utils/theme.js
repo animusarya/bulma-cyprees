@@ -37,6 +37,11 @@ const theme = {
   fontWeightNormal: 400,
   fontWeightLighter: 500,
   fontWeightBold: 600,
+
+  // Font family
+
+  primaryFontFamily: "'Roboto', sans-serif",
+  secondaryFontFamily: "'Rubik', sans-serif",
 };
 
 export default theme;
@@ -45,7 +50,7 @@ export const GlobalStyle = createGlobalStyle`
   body {
     height: 100vh;
     color: ${theme.fontDark} !important;
-    font-family: 'Poppins', sans-serif !important;
+    font-family: ${theme.primaryFontFamily};
   }
   #root {
     height: 100vh;
