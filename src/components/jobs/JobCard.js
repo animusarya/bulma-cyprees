@@ -30,7 +30,7 @@ const JobCard = () => (
     <div className="card-content">
       <Heading>Jobs</Heading>
       <div className="columns">
-        <div className="column is-6">
+        <div className="column is-half">
           <label className="label">Show entries</label>
           <SelectContainer className="select is-small">
             <select>
@@ -41,7 +41,7 @@ const JobCard = () => (
             </select>
           </SelectContainer>
         </div>
-        <div className="column is-6">
+        <div className="column is-half-mobile is-2-widescreen">
           <div className="field">
             <InputGroup smallInput label="Search:" type="text" />
           </div>
