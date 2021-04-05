@@ -118,8 +118,22 @@ export const GlobalStyle = createGlobalStyle`
   }
   label {
     color: ${theme.textColorLight} !important;
+    font-weight: 500 !important;
   }
   .select:not(.is-multiple):not(.is-loading)::after {
     border-color: ${(props) => props.theme.textColorLight} !important;
+  }
+  .table-wrapper {
+  overflow: auto;
+  border-radius: 10px;
+}
+td {
+    font-weight: 400 !important;
+    padding: 1.3rem !important;
+    background: ${theme.backgroundColor} !important;
+    border-top: 1px solid ${theme.borderColorLight} !important;
+    border-bottom: 1px solid ${theme.borderColorLight} !important;
+    border-bottom-width: 1px !important;
+    color: ${theme.darkAccent} !important;
   }
 `;

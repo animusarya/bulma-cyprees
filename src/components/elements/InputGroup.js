@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -14,7 +13,6 @@ const Input = styled.input`
   border: 1px solid ${(props) => props.theme.borderColor};
   border-radius: ${(props) => (props.hasRadius ? '0.4rem' : '0.2rem')};
   background-color: ${(props) => props.theme.secondaryBackground};
-
   ::placeholder {
     color: ${(props) => props.theme.textColorLight};
   }
@@ -36,6 +34,7 @@ const InputGroup = ({
   groupWidth,
   maxLength,
   counter,
+  smallInput,
   ...otherProps
 }) => (
   <Group
@@ -63,7 +62,9 @@ const InputGroup = ({
     <div className="control">
       {children || (
         <Input
-          className="input is-size-8 has-text-grey-lighter"
+          className={`input is-size-8 has-text-grey-lighter ${
+            smallInput ? 'is-small' : ''
+          }`}
           {...otherProps}
           maxLength={maxLength}
         />

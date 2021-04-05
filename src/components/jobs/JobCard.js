@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Heading from '../elements/Heading';
+import { Heading, InputGroup } from '../elements';
+import JobTable from './JobTable';
 
 const Container = styled.div`
-  background-color: ${(props) => props.theme.secondaryColor};
+  background-color: ${(props) => props.theme.mainBrandColor};
   label {
     color: ${(props) => props.theme.textColorLight};
+    font-size: ${(props) => props.theme.fontSizeSmall};
   }
 `;
 
@@ -33,12 +35,19 @@ const JobCard = () => (
           <SelectContainer className="select is-small">
             <select>
               <option>Select dropdown</option>
-              <option>With options</option>
+              <option>10</option>
+              <option>25</option>
+              <option>100</option>
             </select>
           </SelectContainer>
         </div>
-        <div className="column is-6">hello</div>
+        <div className="column is-6">
+          <div className="field">
+            <InputGroup smallInput label="Search:" type="text" />
+          </div>
+        </div>
       </div>
+      <JobTable />
     </div>
   </Container>
 );
