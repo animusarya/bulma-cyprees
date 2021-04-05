@@ -8,6 +8,7 @@ import { useStoreActions } from 'easy-peasy';
 
 import Seo from '../components/Seo';
 import { Message, Loading } from '../components/elements';
+
 import { LoginForm } from '../components/forms';
 
 // images
@@ -85,7 +86,7 @@ const Login = () => {
       <Seo title="Login" description="Some description here." />
       <Container>
         <div className="card-content p-5">
-          <div className="account-box card-box shadow-none p-4 mt-2">
+          <div className="p-4 mt-2">
             <Link to="/login">
               <ImageWrapper className="pb-3 mt-1" src={Logo} alt="login" />
             </Link>

@@ -9,7 +9,7 @@ const RegisterJob = () => (
   // console.log(match.params);
   <Layout>
     <Container>
-      <h1> Register New job</h1>
+      <h1>Register New job</h1>
     </Container>
   </Layout>
 );

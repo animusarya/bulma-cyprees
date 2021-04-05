@@ -11,10 +11,10 @@ import Logo from '../../assets/images/logo.png';
 import SubMenu from './SubMenu';
 
 const Nav = styled.div`
-  background: #2a2d38;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  background: ${(props) => props.theme.primaryBackgroundColor};
 `;
 
 const NavIcon = styled(Link)`
@@ -28,7 +28,7 @@ const NavIcon = styled(Link)`
 
 const SidebarNav = styled.nav`
   background: ${(props) => props.theme.sidebarBackground};
-  height: 100vh;
+  height: 100%;
   overflow: auto;
   transition: 500ms;
   @media only screen and (max-width: 768px) {

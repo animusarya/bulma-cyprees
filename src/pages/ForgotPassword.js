@@ -68,7 +68,7 @@ const ForgotPassword = ({ match }) => {
   }, [project]);
 
   return (
-    <Layout noContainer>
+    <Layout>
       <Seo title="Forgot Password" />
       <TopNavigation className="title is-4 has-text-white">
         Request password reset

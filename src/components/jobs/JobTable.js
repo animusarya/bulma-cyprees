@@ -1,21 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const Container = styled.div`
-  overflow: auto;
-  margin-bottom: 1.5rem;
-
-  table {
-    width: 100%;
-  }
-  tr,
-  th {
-    color: ${(props) => props.theme.textColorWhite} !important;
-    border-bottom: 2px solid ${(props) => props.theme.borderColor};
-    border-top: 1px solid ${(props) => props.theme.borderColor};
-    background-color: ${(props) => props.theme.backgroundColor};
-  }
-`;
 
 const tableData = [
   {
@@ -53,10 +36,38 @@ const tableData = [
     assigned: 'Richard',
     status: true,
   },
+  {
+    jobNumber: 10284,
+    site: 'The Stables',
+    dueDate: '29/09/20',
+    assigned: 'Richard',
+    status: true,
+  },
+  {
+    jobNumber: 100824,
+    site: 'The Stables',
+    dueDate: '29/09/20',
+    assigned: 'Richard',
+    status: true,
+  },
+  {
+    jobNumber: 102084,
+    site: 'The Stables',
+    dueDate: '29/09/20',
+    assigned: 'Richard',
+    status: true,
+  },
+  {
+    jobNumber: 102084,
+    site: 'The Stables',
+    dueDate: '29/09/20',
+    assigned: 'Richard',
+    status: true,
+  },
 ];
 
 const JobTable = () => (
-  <Container className="table-container">
+  <div className="table-container">
     <table className="table">
       <thead>
         <tr>
@@ -77,7 +88,7 @@ const JobTable = () => (
             <td>{item.assigned}</td>
             <td>{item.status ? 'Open' : 'Closed'}</td>
             <td>
-              <button type="button" className="button">
+              <button type="button" className="button is-primary">
                 View
               </button>
             </td>
@@ -85,7 +96,7 @@ const JobTable = () => (
         ))}
       </tbody>
     </table>
-  </Container>
+  </div>
 );
 
 export default JobTable;

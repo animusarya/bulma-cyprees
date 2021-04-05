@@ -5,7 +5,6 @@ export const elements = { mobileBreakpoint: 800, ipadBreakpoint: 1024 };
 const theme = {
   mainBrandColor: '#313a46',
   secondaryColor: '#394452',
-  tertiary: '#313a46',
   backgroundColor: '#313a46',
   primaryBackgroundColor: '#2a2d38', // has-background-grey-dark
   menuBackgroundColor: '#313541',
@@ -57,26 +56,15 @@ export const GlobalStyle = createGlobalStyle`
   #root {
     height: 100vh;
   }
-  .table {
-    thead {
-      background-color: #ecedf0;
-    }
-  }
   .button.is-primary {
     transition: 0.6s;
     background-color: ${theme.buttonColor};
     color: ${theme.textColorWhite};
     :hover {
-      border: 1px solid ${theme.secondaryColor};
-      background-color: ${theme.secondaryColor};
+      border: 1px solid #029da8;
+      background-color: #029da8;
       color: ${theme.textColorWhite};
       transition: 0.6s;
-    }
-  }
-  .button.is-info {
-    background-color: ${theme.buttonColor};
-    :hover {
-      background-color: #11161d;
     }
   }
 
@@ -111,11 +99,6 @@ export const GlobalStyle = createGlobalStyle`
   .has-text-weight-semibold {
     font-weight: 500 !important;
   }
-
-  .button.is-primary.is-outlined[disabled] {
-    background-color: #eee;
-    color: #666;
-  }
   label {
     color: ${theme.textColorLight} !important;
     font-weight: 500 !important;
@@ -123,17 +106,25 @@ export const GlobalStyle = createGlobalStyle`
   .select:not(.is-multiple):not(.is-loading)::after {
     border-color: ${(props) => props.theme.textColorLight} !important;
   }
-  .table-wrapper {
-  overflow: auto;
-  border-radius: 10px;
-}
-td {
-    font-weight: 400 !important;
-    padding: 1.3rem !important;
-    background: ${theme.backgroundColor} !important;
-    border-top: 1px solid ${theme.borderColorLight} !important;
-    border-bottom: 1px solid ${theme.borderColorLight} !important;
-    border-bottom-width: 1px !important;
-    color: ${theme.darkAccent} !important;
+
+  // Table Properties
+  .table-container {
+    overflow: auto;
+    margin-bottom: 1.5rem;
+  }
+  table {
+    width: 100%;
+  }
+  tr,
+  th,
+  td {
+    vertical-align: middle;
+    color: ${(props) => props.theme.textColorWhite} !important;
+    border-bottom: 2px solid ${(props) => props.theme.borderColor};
+    border-top: 1px solid ${(props) => props.theme.borderColor};
+    background-color: ${(props) => props.theme.backgroundColor};
+  }
+  th {
+    border-width: 0px 0 1px !important;
   }
 `;
