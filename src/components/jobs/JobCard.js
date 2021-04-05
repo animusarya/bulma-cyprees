@@ -41,7 +41,7 @@ const JobCard = () => (
             </select>
           </SelectContainer>
         </div>
-        <div className="column is-half-mobile is-2-widescreen">
+        <div className="column is-half-mobile is-2-desktop is-3-tablet">
           <div className="field">
             <InputGroup smallInput label="Search:" type="text" />
           </div>

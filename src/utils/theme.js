@@ -108,12 +108,10 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   // Table Properties
+
   .table-container {
     overflow: auto;
     margin-bottom: 1.5rem;
-  }
-  table {
-    width: 100%;
   }
   tr,
   th,

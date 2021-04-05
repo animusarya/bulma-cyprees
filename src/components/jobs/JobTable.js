@@ -68,7 +68,7 @@ const tableData = [
 
 const JobTable = () => (
   <div className="table-container">
-    <table className="table">
+    <table className="table is-fullwidth">
       <thead>
         <tr>
           <th>Job Number</th>
