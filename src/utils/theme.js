@@ -4,7 +4,7 @@ export const elements = { mobileBreakpoint: 800, ipadBreakpoint: 1024 };
 
 const theme = {
   mainBrandColor: '#313a46',
-  secondaryColor: '#029da8',
+  secondaryColor: '#394452',
   tertiary: '#313a46',
   backgroundColor: '#313a46',
   primaryBackgroundColor: '#2a2d38', // has-background-grey-dark
@@ -14,11 +14,13 @@ const theme = {
   tertiaryBackground: '#ECF1F4;',
   forgotPasswordBackground: '#95A5AE', // has-background-grey-light
   borderColor: '#424e5e',
+  secondaryBorderColor: '#394452',
   dangerColor: '#e11842',
   buttonColor: '#8d9bca',
 
   // Font color
   fontDark: '#25313f',
+  fontExtraDark: '#6c757d',
   textColorLight: '#b5c6cc', // has-text-grey-lighter
   textColorWhite: '#fff', // has-text-white
   textColorGrey: '#98abb9', // has-text-primary-light
@@ -99,6 +101,9 @@ export const GlobalStyle = createGlobalStyle`
       transition: all 0.4s;
     }
   }
+  .is-family-secondary {
+    font-family: ${theme.secondaryFontFamily} !important;
+  }
 
   .is-size-8 {
     font-size: ${theme.fontSizeSmall}
@@ -110,5 +115,11 @@ export const GlobalStyle = createGlobalStyle`
   .button.is-primary.is-outlined[disabled] {
     background-color: #eee;
     color: #666;
+  }
+  label {
+    color: ${theme.textColorLight} !important;
+  }
+  .select:not(.is-multiple):not(.is-loading)::after {
+    border-color: ${(props) => props.theme.textColorLight} !important;
   }
 `;

@@ -1,16 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
 
+import JobCard from '../../components/jobs/JobCard';
 import Layout from '../../components/Layout';
 
-const Container = styled.div``;
-
-const Jobs = ({ match }) => (
+const Jobs = () => (
   // console.log(match.params);
   <Layout>
-    <Container>
-      <h1> {match.params ? match.params.status : 'hello wolrd'}</h1>
-    </Container>
+    <JobCard />
   </Layout>
 );
 export default Jobs;

@@ -5,12 +5,9 @@ import Layout from '../../components/Layout';
 
 const Container = styled.div``;
 
-const Job = ({ match }) => (
-  // console.log(match.params);
+const Job = () => (
   <Layout>
-    <Container>
-      <h1> {match.params ? match.params.id : 'hello wolrd'}</h1>
-    </Container>
+    <Container>hello</Container>
   </Layout>
 );
 export default Job;

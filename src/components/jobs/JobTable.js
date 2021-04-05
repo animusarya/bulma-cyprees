@@ -7,7 +7,7 @@ const Container = styled.div`
   }
 `;
 
-const Layout = () => (
+const JobTable = () => (
   <Container>
     <div className="columns">
       <div className="column is-10 right-column pb-0">Jobs</div>
@@ -15,4 +15,4 @@ const Layout = () => (
   </Container>
 );
 
-export default Layout;
+export default JobTable;

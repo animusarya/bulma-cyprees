@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.h2`
-  margin-bottom: 2.4rem !important;
   color: ${(props) => props.theme.fontDark};
+  border-bottom: 1px solid ${(props) => props.theme.secondaryBorderColor};
 `;
 
 const Heading = ({ children }) => (
-  <Container className="is-size-4 has-text-weight-semibold">
+  <Container className="title is-3 has-text-grey-lighter pb-3 has-text-weight-semibold">
     {children}
   </Container>
 );
