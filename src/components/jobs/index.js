@@ -1,4 +1,4 @@
-import JobCard from './JobCard';
 import JobTable from './JobTable';
+import AddJob from './AddJob';
 
-export { JobCard, JobTable };
+export { JobTable, AddJob };

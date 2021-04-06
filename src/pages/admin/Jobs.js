@@ -1,12 +1,14 @@
 import React from 'react';
 
-import JobCard from '../../components/jobs/JobCard';
 import Layout from '../../components/Layout';
+import { JobTable } from '../../components/jobs';
+import DashboardMenu from '../../components/global/DashboardMenu';
 
 const Jobs = () => (
-  // console.log(match.params);
   <Layout>
-    <JobCard />
+    <DashboardMenu hasSearchMenu heading="Jobs">
+      <JobTable />
+    </DashboardMenu>
   </Layout>
 );
 export default Jobs;

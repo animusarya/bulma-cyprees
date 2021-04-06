@@ -1,14 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 import { InputGroup, Button } from '../elements';
-
-const MarginContainer = styled.div`
-  margin-top: 2.5rem;
-`;
 
 const RegisterForm = (props) => {
   const {
@@ -21,7 +17,6 @@ const RegisterForm = (props) => {
     handleSubmit,
     isAdminRegister,
   } = props;
-  const [ndaAccepted, setNdaAccepted] = useState(!!isAdminRegister);
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
@@ -118,46 +113,12 @@ const RegisterForm = (props) => {
             : undefined
         }
       />
-      {!isAdminRegister && (
-        <label className="checkbox">
-          <input
-            type="checkbox"
-            defaultChecked={ndaAccepted}
-            onChange={() => setNdaAccepted(!ndaAccepted)}
-          />{' '}
-          <strong>I Accept the above Non Disclosure Agreement</strong>
-        </label>
-      )}
-      {isAdminRegister && (
-        <MarginContainer className="has-text-weight-normal">
-          By creating an account you agree to the website{' '}
-          <a href="#" className="has-text-weight-bold">
-            terms and conditions
-          </a>{' '}
-          and our{' '}
-          <a href="#" className="has-text-weight-bold">
-            privacy notice.
-          </a>
-        </MarginContainer>
-      )}
-      <div className="field">
+
+      <div className="field is-pulled-right">
         <div className="control">
-          {isAdminRegister ? (
-            <Button marginTop type="submit" disabled={isSubmitting}>
-              <span className="has-text-weight-bold is-size-4">
-                Create Account
-              </span>
-            </Button>
-          ) : (
-            <Button
-              marginTop
-              type="submit"
-              disabled={!ndaAccepted || isSubmitting}>
-              <span className="has-text-weight-bold is-size-4">
-                Create Account
-              </span>
-            </Button>
-          )}
+          <Button primary type="submit" disabled={isSubmitting}>
+            <span className="has-text-weight-bold">Submit</span>
+          </Button>
         </div>
       </div>
     </form>

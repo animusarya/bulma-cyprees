@@ -7,7 +7,6 @@ import { GlobalStyle } from './theme';
 import Home from '../pages/Home';
 import Error404 from '../pages/404';
 import Login from '../pages/Login';
-import Register from '../pages/Register';
 import ForgotPassword from '../pages/ForgotPassword';
 import Test from '../pages/Test';
 import Jobs from '../pages/admin/Jobs';
@@ -40,8 +39,6 @@ const Routes = () => (
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/register/:projectId/:email" component={Register} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
         <PrivateRoute
           exact
