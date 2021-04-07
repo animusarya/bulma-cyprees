@@ -109,7 +109,7 @@ const RegisterForm = (props) => {
             : undefined
         }
       />
-      <div className="mb-3 is-flex is-justify-content-flex-end	">
+      <div className="mt-3 mb-3">
         <Button primary type="submit" disabled={isSubmitting}>
           <span className="has-text-weight-bold">Submit</span>
         </Button>

@@ -10,7 +10,6 @@ import { isEmpty } from 'lodash';
 
 import useProjectGuestDetails from '../hooks/useProjectGuestDetails';
 import Seo from '../components/Seo';
-import Layout from '../components/Layout';
 import { Message } from '../components/elements';
 import { ForgotPasswordForm } from '../components/forms';
 
@@ -44,13 +43,6 @@ const LinkStyled = styled(Link)`
   }
 `;
 
-const CardHeader = styled.header`
-  :first-child {
-    border-top-left-radius: 0.9rem;
-    border-top-right-radius: 0.9rem;
-  }
-`;
-
 const ForgotPassword = ({ match }) => {
   const [executeMutation, res] = useMutation(forgotPasswordMutation);
   const updateProject = useStoreActions(
@@ -68,7 +60,7 @@ const ForgotPassword = ({ match }) => {
   }, [project]);
 
   return (
-    <Layout>
+    <>
       <Seo title="Forgot Password" />
       <TopNavigation className="title is-4 has-text-white">
         Request password reset
@@ -83,11 +75,11 @@ const ForgotPassword = ({ match }) => {
           <div className="columns is-centered">
             <div className="column is-6">
               <div className="card">
-                <CardHeader className="card-header has-background-grey-light">
+                <header className="card-header has-background-grey-light">
                   <p className="title is-5 card-header-title has-text-white">
                     Request password reset
                   </p>
-                </CardHeader>
+                </header>
                 <div className="card-content has-background-white-ter">
                   <ForgotPasswordForm
                     onSubmit={async (data) => {
@@ -108,7 +100,7 @@ const ForgotPassword = ({ match }) => {
       <footer className="content has-text-centered p-2 has-background-grey-dark is-size-7 has-text-white">
         Script Executed in 0.0398 seconds
       </footer>
-    </Layout>
+    </>
   );
 };
 

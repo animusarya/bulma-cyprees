@@ -10,42 +10,15 @@ import Seo from '../components/Seo';
 import { Message, Loading } from '../components/elements';
 
 import { LoginForm } from '../components/forms';
-
-// images
-import Image from '../assets/images/rd-glazing-login.jpg';
 import Logo from '../assets/images/logo.png';
 
 const Container = styled.section`
-  position: absolute;
-  background-size: cover;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  background-image: url(${Image});
-  background-position: center;
-
-  .card-content {
-    position: absolute;
-    right: 0;
-    width: 540px;
-    height: 100%;
-    margin: 0;
-    background-color: ${(props) => props.theme.backgroundColor};
-    @media (max-width: 768px) {
-      width: 100%;
-    }
-  }
+  height: 100vh;
+  background-color: ${(props) => props.theme.backgroundColor};
 `;
 
 const ImageWrapper = styled.img`
   width: 100%;
-`;
-
-const Bottom = styled.p`
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  margin-bottom: 2rem;
 `;
 
 const mutation = gql`
@@ -84,21 +57,30 @@ const Login = () => {
   return (
     <div className="login-page">
       <Seo title="Login" description="Some description here." />
-      <Container>
-        <div className="card-content p-5">
-          <div className="p-4 mt-2">
-            <Link to="/login">
-              <ImageWrapper className="pb-3 mt-1" src={Logo} alt="login" />
-            </Link>
-            <LoginForm
-              onSubmit={(data) => executeMutation({ variables: data })}
-            />
-            {res.error && <Message type="error">{res.error.message}</Message>}
-            {res.loading ? <Loading /> : null}
+      <Container className="section">
+        <div className="container">
+          <div className="columns is-centered">
+            <div className="column is-6">
+              <div className="card-content p-5">
+                <div className="p-4 mt-2">
+                  <Link to="/login">
+                    <ImageWrapper
+                      className="pb-3 mt-1"
+                      src={Logo}
+                      alt="login"
+                    />
+                  </Link>
+                  <LoginForm
+                    onSubmit={(data) => executeMutation({ variables: data })}
+                  />
+                  {res.error && (
+                    <Message type="error">{res.error.message}</Message>
+                  )}
+                  {res.loading ? <Loading /> : null}
+                </div>
+              </div>
+            </div>
           </div>
-          <Bottom className="has-text-grey-lighter has-text-centered is-size-8">
-            Version 1.01 : 2020 © All rights reserved
-          </Bottom>
         </div>
       </Container>
     </div>
