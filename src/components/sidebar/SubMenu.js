@@ -1,8 +1,9 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import * as RiIcons from 'react-icons/ri';
+import { findIndex } from 'lodash';
 
 const SidebarLink = styled(Link)`
   display: flex;
@@ -27,13 +28,20 @@ const DropdownLink = styled(Link)`
       : `${props.theme.secondaryColor}50`};
 `;
 
-const SubMenu = ({ item, test }) => {
-  const [subNav, setSubNav] = useState(test);
-  const showSubNav = () => setSubNav(!subNav);
+const SubMenu = ({ item }) => {
+  const [subNav, setSubNav] = useState(false);
+  const currentPath = useLocation().pathname;
+
+  useEffect(() => {
+    const index = findIndex(item.subNav, { path: currentPath });
+    if (index >= 0 || currentPath === '/jobs/all') {
+      setSubNav(true);
+    }
+  }, [item]);
 
   return (
     <>
-      <SidebarLink to={item.path} onClick={item.subNav && showSubNav}>
+      <SidebarLink to={item.path} onClick={() => setSubNav(!subNav)}>
         <div className="has-text-white is-align-items-center is-flex">
           {item.icon}
           <SidebarLabel className="has-text-white">{item.title}</SidebarLabel>
@@ -48,6 +56,7 @@ const SubMenu = ({ item, test }) => {
         item.subNav.map((item1) => (
           <DropdownLink
             className="has-text-white child pl-6"
+            active={useRouteMatch(item1.path)}
             to={item1.path}
             key={item1.title}>
             <SidebarLabel>{item1.title}</SidebarLabel>

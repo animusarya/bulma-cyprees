@@ -48,7 +48,6 @@ const sidebarData = [
     title: 'Jobs',
     path: '#',
     icon: <AiIcons.AiOutlineMenu />,
-    test: true,
     subNav: [
       {
         title: 'Add jobs',
@@ -76,7 +75,7 @@ const sidebarData = [
     title: 'Reports',
     path: '#',
     icon: <AiIcons.AiOutlineMenu />,
-    test: false,
+
     subNav: [
       {
         title: 'Reports 2',
@@ -104,7 +103,7 @@ const Sidebar = () => (
           <img src={Logo} alt="logo" />
         </ImageWrapper>
         {sidebarData.map((item) => (
-          <SubMenu item={item} key={item.title} test={item.test} />
+          <SubMenu item={item} key={item.title} />
         ))}
       </div>
     </SidebarNav>
