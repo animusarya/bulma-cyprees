@@ -14,7 +14,7 @@ const Input = styled.input`
   border-radius: ${(props) => (props.hasRadius ? '0.4rem' : '0.2rem')};
   background-color: ${(props) => props.theme.secondaryBackground};
   ::placeholder {
-    color: ${(props) => props.theme.textColorLight};
+    color: ${(props) => props.theme.fontExtraDark};
   }
 `;
 

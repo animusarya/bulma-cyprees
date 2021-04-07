@@ -34,12 +34,12 @@ const SubMenu = ({ item, test }) => {
   return (
     <>
       <SidebarLink to={item.path} onClick={item.subNav && showSubNav}>
-        <div className="has-text-black is-align-items-center is-flex">
+        <div className="has-text-white is-align-items-center is-flex">
           {item.icon}
-          <SidebarLabel className="has-text-black">{item.title}</SidebarLabel>
+          <SidebarLabel className="has-text-white">{item.title}</SidebarLabel>
         </div>
         {item.subNav && subNav ? (
-          <RiIcons.RiArrowDownSFill />
+          <RiIcons.RiArrowDownSFill className="hello" />
         ) : item.subNav ? (
           <RiIcons.RiArrowRightSFill />
         ) : null}
@@ -47,7 +47,7 @@ const SubMenu = ({ item, test }) => {
       {subNav &&
         item.subNav.map((item1) => (
           <DropdownLink
-            className="has-text-black child pl-6"
+            className="has-text-white child pl-6"
             to={item1.path}
             key={item1.title}>
             <SidebarLabel>{item1.title}</SidebarLabel>

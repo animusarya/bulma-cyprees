@@ -14,7 +14,7 @@ const SelectContainer = styled.div`
   select {
     background-color: ${(props) => props.theme.secondaryColor};
     border: 1px solid ${(props) => props.theme.borderColor};
-    color: ${(props) => props.theme.textColorLight} !important;
+    color: ${(props) => props.theme.fontExtraDark} !important;
 
     :focus,
     :hover {

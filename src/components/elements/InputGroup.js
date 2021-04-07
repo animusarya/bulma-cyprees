@@ -14,7 +14,7 @@ const Input = styled.input`
   border-radius: ${(props) => (props.hasRadius ? '0.4rem' : '0.2rem')};
   background-color: #f4f5f7;
   ::placeholder {
-    color: ${(props) => props.theme.textColorLight};
+    color: ${(props) => props.theme.fontExtraDark};
   }
 `;
 
@@ -46,7 +46,7 @@ const InputGroup = ({
       {label && (
         <Label
           className={`label has-text-weight-semibold mb-2 ${
-            darkLabel ? 'has-text-black' : 'has-text-grey-lighter'
+            darkLabel ? 'has-text-black' : 'has-text-black'
           }`}>
           {label}
         </Label>
@@ -55,9 +55,7 @@ const InputGroup = ({
     <div className="control">
       {children || (
         <Input
-          className={`input is-size-8 has-text-grey-lighter ${
-            smallInput ? 'is-small' : ''
-          }`}
+          className={`input is-size-8 ${smallInput ? 'is-small' : ''}`}
           {...otherProps}
           maxLength={maxLength}
         />

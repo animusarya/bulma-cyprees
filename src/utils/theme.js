@@ -19,8 +19,7 @@ const theme = {
 
   // Font color
   fontDark: '#25313f',
-  fontExtraDark: '#6c757d',
-  textColorLight: '#000', // has-text-grey-lighter
+  fontExtraDark: '#000000',
   textColorWhite: '#fff', // has-text-white
   textColorGrey: '#98abb9', // has-text-primary-light
   textColorBlueLight: '#909ecc', // :hover has-text-primary-light
@@ -60,16 +59,17 @@ export const GlobalStyle = createGlobalStyle`
     transition: 0.6s;
     background-color: ${theme.buttonColor};
     color: ${theme.textColorWhite};
+    border: 2px solid ${theme.buttonColor};
     :hover {
-      border: 1px solid #4896FC;
-      background-color: #4896FC;
+      border: 2px solid ${theme.buttonColor};
+      background-color: transparent;
       color: ${theme.textColorWhite};
       transition: 0.6s;
     }
   }
 
   .has-text-grey-lighter {
-    color:${theme.textColorLight} !important
+    color:${theme.textColorWhite} !important
   }
   .has-background-grey-light {
     background-color: ${theme.forgotPasswordBackground}!important;
@@ -100,11 +100,11 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 500 !important;
   }
   label {
-    color: ${theme.textColorLight} !important;
+    color: ${theme.textColorWhite} !important;
     font-weight: 500 !important;
   }
   .select:not(.is-multiple):not(.is-loading)::after {
-    border-color: ${(props) => props.theme.textColorLight} !important;
+    border-color: ${(props) => props.theme.textColorWhite} !important;
   }
 
   // Table Properties

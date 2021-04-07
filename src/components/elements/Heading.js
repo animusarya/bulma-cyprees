@@ -7,7 +7,7 @@ const Container = styled.h2`
 `;
 
 const Heading = ({ children }) => (
-  <Container className="title is-3 has-text-grey-lighter pb-3 has-text-weight-semibold">
+  <Container className="title is-3 has-text-black pb-3 has-text-weight-semibold">
     {children}
   </Container>
 );
