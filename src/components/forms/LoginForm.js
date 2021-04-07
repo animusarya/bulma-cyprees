@@ -20,17 +20,17 @@ const LoginForm = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
-        border
-        label="Username"
+        lightLabel
+        label="Email"
         name="email"
-        placeholder="Enter your username"
+        placeholder="Enter your email"
         value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={errors.email && touched.email ? errors.email : undefined}
       />
       <InputGroup
-        border
+        lightLabel
         label="Password"
         name="password"
         type="password"

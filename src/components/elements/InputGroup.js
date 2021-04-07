@@ -27,7 +27,7 @@ const InputGroup = ({
   errors,
   fullWidth,
   isHorizontal,
-  darkLabel,
+  lightLabel,
   hasAddons,
   children,
   groupWidth,
@@ -46,7 +46,7 @@ const InputGroup = ({
       {label && (
         <Label
           className={`label has-text-weight-semibold mb-2 ${
-            darkLabel ? 'has-text-black' : 'has-text-black'
+            lightLabel ? 'has-text-white' : 'has-text-black'
           }`}>
           {label}
         </Label>
