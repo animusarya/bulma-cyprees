@@ -67,7 +67,7 @@ const sidebarData = [
       },
       {
         title: 'View Archived Jobs',
-        path: '/job/5656565565',
+        path: '/jobs/archived',
       },
     ],
   },
