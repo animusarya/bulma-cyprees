@@ -1,3 +1,5 @@
+//  Remove all code
+
 import React from 'react';
 import styled from 'styled-components';
 
@@ -22,7 +24,7 @@ const Label = styled.label`
   font-size: ${(props) => props.theme.fontSizeSmall};
 `;
 
-const InputGroup = ({
+const Select = ({
   label,
   errors,
   fullWidth,
@@ -67,4 +69,4 @@ const InputGroup = ({
   </Group>
 );
 
-export default InputGroup;
+export default Select;
