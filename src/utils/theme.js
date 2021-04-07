@@ -63,7 +63,7 @@ export const GlobalStyle = createGlobalStyle`
     :hover {
       border: 2px solid ${theme.buttonColor};
       background-color: transparent;
-      color: ${theme.textColorWhite};
+      color: ${theme.fontExtraDark};
       transition: 0.6s;
     }
   }
