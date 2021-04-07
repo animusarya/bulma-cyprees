@@ -11,7 +11,7 @@ const Container = styled.div`
 
 const Loading = ({ color }) => (
   <Container>
-    <ReactLoading type="spin" color={color || '#363636'} />
+    <ReactLoading type="spin" color={color || '#fff'} />
   </Container>
 );
 

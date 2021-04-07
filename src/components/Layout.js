@@ -50,7 +50,7 @@ const Layout = ({ children }) => (
           </h1>
           <div className="is-flex">
             <Link
-              to="/"
+              to="#"
               className="is-size-6 has-text-black ha-text-weight-bold">
               Jobs
             </Link>
