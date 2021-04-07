@@ -8,9 +8,9 @@ const darkAccent = '#000000';
 export const elements = { mobileBreakpoint: 800, ipadBreakpoint: 1024 };
 
 const theme = {
-  mainBrandColor, // Use has-background-info-light for backgrounds
+  mainBrandColor,
+  // Use has-background-info-light for backgrounds
   // Accent colors can be used to bring attention to design elements
-  // by contrasting with the rest of the palette.
   darkAccent,
   // Use this color as the background for your dark-on-light designs,
   lightAccent,
