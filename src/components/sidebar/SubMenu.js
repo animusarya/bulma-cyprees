@@ -24,8 +24,8 @@ const DropdownLink = styled(Link)`
   font-size: 16px;
   background-color: ${(props) =>
     props.active
-      ? `${props.theme.mainBrandColor}`
-      : `${props.theme.secondaryColor}50`};
+      ? `${props.theme.secondaryColor}50`
+      : `${props.theme.mainBrandColor}`};
 `;
 
 const SubMenu = ({ item }) => {
