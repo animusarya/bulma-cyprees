@@ -20,8 +20,8 @@ const RegisterForm = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
-        border
-        label="Full Name:"
+        fullWidth
+        label="Customer"
         name="fullName"
         type="text"
         value={values.fullName}
@@ -33,7 +33,6 @@ const RegisterForm = (props) => {
       />
       {isAdminRegister && (
         <InputGroup
-          border
           label="Company Name:"
           name="companyName"
           type="text"
@@ -49,7 +48,6 @@ const RegisterForm = (props) => {
       )}
       {isAdminRegister && (
         <InputGroup
-          border
           label="Domain Name:"
           name="websiteAddress"
           type="text"
@@ -65,7 +63,6 @@ const RegisterForm = (props) => {
       )}
       {isAdminRegister && (
         <InputGroup
-          border
           label="Telephone:"
           name="telephone"
           type="text"
@@ -78,7 +75,6 @@ const RegisterForm = (props) => {
         />
       )}
       <InputGroup
-        border
         label="Email:"
         name="email"
         value={values.email}
@@ -113,13 +109,10 @@ const RegisterForm = (props) => {
             : undefined
         }
       />
-
-      <div className="field is-pulled-right">
-        <div className="control">
-          <Button primary type="submit" disabled={isSubmitting}>
-            <span className="has-text-weight-bold">Submit</span>
-          </Button>
-        </div>
+      <div className="mb-3 is-flex is-justify-content-flex-end	">
+        <Button primary type="submit" disabled={isSubmitting}>
+          <span className="has-text-weight-bold">Submit</span>
+        </Button>
       </div>
     </form>
   );

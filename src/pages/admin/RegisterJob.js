@@ -66,7 +66,7 @@ const Register = ({ match }) => {
 
   return (
     <Layout>
-      <DashboardMenu>
+      <DashboardMenu heading="Add Job">
         <Seo title="Registration" description="Register Job Here" />
         <RegisterForm
           enableReinitialize

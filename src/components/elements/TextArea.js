@@ -40,7 +40,6 @@ const TextAreaGroup = ({
   labelInfo,
   readOnly,
   maxLength,
-  counter,
   ...otherProps
 }) => (
   <Group
@@ -53,11 +52,6 @@ const TextAreaGroup = ({
           <label className="label">{label}</label>
           {labelInfo && <LabelInfo>{labelInfo}</LabelInfo>}
         </div>
-      )}
-      {maxLength && (
-        <p>
-          {counter || 0} / {maxLength}
-        </p>
       )}
     </LabelWrapper>
     <div className="control">

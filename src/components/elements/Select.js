@@ -45,7 +45,7 @@ const InputGroup = ({
       className={`${isHorizontal ? 'field-label is-align-self-center' : ''}`}>
       {label && (
         <Label
-          className={`label has-text-weight-semibold mb-2 ${
+          className={`label has-text-weight-semibold ${
             darkLabel ? 'has-text-black' : 'has-text-grey-lighter'
           }`}>
           {label}
