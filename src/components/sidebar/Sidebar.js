@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -48,6 +48,7 @@ const sidebarData = [
     title: 'Jobs',
     path: '#',
     icon: <AiIcons.AiOutlineMenu />,
+    test: true,
     subNav: [
       {
         title: 'Add jobs',
@@ -75,6 +76,7 @@ const sidebarData = [
     title: 'Reports',
     path: '#',
     icon: <AiIcons.AiOutlineMenu />,
+    test: false,
     subNav: [
       {
         title: 'Reports 2',
@@ -89,29 +91,24 @@ const sidebarData = [
   },
 ];
 
-const Sidebar = () => {
-  const [sidebar, setSidebar] = useState(false);
-  const showSidebar = () => setSidebar(!sidebar);
-
-  return (
-    <IconContext.Provider value={{ color: '#fff' }}>
-      <Nav className="is-hidden-desktop">
-        <NavIcon className="has-text-primary-light" to="#">
-          <FaIcons.FaBars onClick={showSidebar} />
-        </NavIcon>
-      </Nav>
-      <SidebarNav sidebar={sidebar}>
-        <div>
-          <ImageWrapper className="is-hidden-mobile">
-            <img src={Logo} alt="logo" />
-          </ImageWrapper>
-          {sidebarData.map((item) => (
-            <SubMenu item={item} key={item.title} />
-          ))}
-        </div>
-      </SidebarNav>
-    </IconContext.Provider>
-  );
-};
+const Sidebar = () => (
+  <IconContext.Provider value={{ color: '#fff' }}>
+    <Nav className="is-hidden-desktop">
+      <NavIcon className="has-text-primary-light" to="#">
+        <FaIcons.FaBars />
+      </NavIcon>
+    </Nav>
+    <SidebarNav>
+      <div>
+        <ImageWrapper className="is-hidden-mobile">
+          <img src={Logo} alt="logo" />
+        </ImageWrapper>
+        {sidebarData.map((item) => (
+          <SubMenu item={item} key={item.title} test={item.test} />
+        ))}
+      </div>
+    </SidebarNav>
+  </IconContext.Provider>
+);
 
 export default Sidebar;

@@ -8,7 +8,7 @@ import { Sidebar } from './sidebar';
 
 const Container = styled.div`
   .right-column {
-    background: ${(props) => props.theme.primaryBackgroundColor};
+    background: #f4f5f7;
   }
   .column.is-10 {
     padding: 22px 22px;

@@ -9,7 +9,7 @@ const SidebarLink = styled(Link)`
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  font-size: 14px;
+  font-size: 16px;
 `;
 
 const SidebarLabel = styled.span`
@@ -20,22 +20,23 @@ const DropdownLink = styled(Link)`
   height: 60px;
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 16px;
+  background-color: ${(props) =>
+    props.active
+      ? `${props.theme.mainBrandColor}`
+      : `${props.theme.secondaryColor}50`};
 `;
 
-const SubMenu = ({ item }) => {
-  const [subNav, setSubNav] = useState(false);
-
+const SubMenu = ({ item, test }) => {
+  const [subNav, setSubNav] = useState(test);
   const showSubNav = () => setSubNav(!subNav);
 
   return (
     <>
       <SidebarLink to={item.path} onClick={item.subNav && showSubNav}>
-        <div className="has-text-primary-light is-align-items-center is-flex">
+        <div className="has-text-black is-align-items-center is-flex">
           {item.icon}
-          <SidebarLabel className="has-text-primary-light">
-            {item.title}
-          </SidebarLabel>
+          <SidebarLabel className="has-text-black">{item.title}</SidebarLabel>
         </div>
         {item.subNav && subNav ? (
           <RiIcons.RiArrowDownSFill />
@@ -46,7 +47,7 @@ const SubMenu = ({ item }) => {
       {subNav &&
         item.subNav.map((item1) => (
           <DropdownLink
-            className="has-text-primary-light child pl-6"
+            className="has-text-black child pl-6"
             to={item1.path}
             key={item1.title}>
             <SidebarLabel>{item1.title}</SidebarLabel>

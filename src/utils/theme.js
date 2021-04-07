@@ -3,24 +3,24 @@ import { createGlobalStyle } from 'styled-components';
 export const elements = { mobileBreakpoint: 800, ipadBreakpoint: 1024 };
 
 const theme = {
-  mainBrandColor: '#313a46',
-  secondaryColor: '#394452',
+  mainBrandColor: '#4896FC',
+  secondaryColor: '#f4f5f7',
   backgroundColor: '#313a46',
   primaryBackgroundColor: '#2a2d38', // has-background-grey-dark
   menuBackgroundColor: '#313541',
-  sidebarBackground: '#313541',
+  sidebarBackground: '#4896FC',
   secondaryBackground: '#37414f',
   tertiaryBackground: '#ECF1F4;',
   forgotPasswordBackground: '#95A5AE', // has-background-grey-light
-  borderColor: '#424e5e',
-  secondaryBorderColor: '#394452',
+  borderColor: '#fff',
+  secondaryBorderColor: '#f4f5f7',
   dangerColor: '#e11842',
-  buttonColor: '#8d9bca',
+  buttonColor: '#4896FC',
 
   // Font color
   fontDark: '#25313f',
   fontExtraDark: '#6c757d',
-  textColorLight: '#b5c6cc', // has-text-grey-lighter
+  textColorLight: '#000', // has-text-grey-lighter
   textColorWhite: '#fff', // has-text-white
   textColorGrey: '#98abb9', // has-text-primary-light
   textColorBlueLight: '#909ecc', // :hover has-text-primary-light
@@ -61,8 +61,8 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${theme.buttonColor};
     color: ${theme.textColorWhite};
     :hover {
-      border: 1px solid #029da8;
-      background-color: #029da8;
+      border: 1px solid #4896FC;
+      background-color: #4896FC;
       color: ${theme.textColorWhite};
       transition: 0.6s;
     }
@@ -117,10 +117,10 @@ export const GlobalStyle = createGlobalStyle`
   th,
   td {
     vertical-align: middle;
-    color: ${(props) => props.theme.textColorWhite} !important;
-    border-bottom: 2px solid ${(props) => props.theme.borderColor};
-    border-top: 1px solid ${(props) => props.theme.borderColor};
-    background-color: ${(props) => props.theme.backgroundColor};
+    color: #000 !important;
+    border-bottom: 2px solid #f4f5f7;
+    border-top: 2px solid #f4f5f7;
+    background-color: #fff;
   }
   th {
     border-width: 0px 0 1px !important;

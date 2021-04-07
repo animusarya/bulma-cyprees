@@ -4,13 +4,18 @@ import styled from 'styled-components';
 import { Heading, InputGroup } from '../elements';
 
 const Container = styled.div`
-  background-color: ${(props) => props.theme.mainBrandColor};
+  background-color: #fff;
 `;
 const SelectContainer = styled.div`
+  option {
+    background: #4896fc;
+    color: #fff !important;
+  }
   select {
     background-color: ${(props) => props.theme.secondaryColor};
     border: 1px solid ${(props) => props.theme.borderColor};
     color: ${(props) => props.theme.textColorLight} !important;
+
     :focus,
     :hover {
       border-color: ${(props) => props.theme.borderColor};
@@ -38,7 +43,12 @@ const DashboardMenu = ({ heading, children, hasSearchMenu }) => (
           </div>
           <div className="column is-half-mobile is-2-desktop is-3-tablet">
             <div className="field">
-              <InputGroup smallInput label="Search:" type="text" />
+              <InputGroup
+                placeholder="Search..."
+                smallInput
+                label="Search:"
+                type="text"
+              />
             </div>
           </div>
         </div>

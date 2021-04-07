@@ -12,7 +12,7 @@ const Input = styled.input`
   padding: 0.45rem 0.9rem;
   border: 1px solid ${(props) => props.theme.borderColor};
   border-radius: ${(props) => (props.hasRadius ? '0.4rem' : '0.2rem')};
-  background-color: ${(props) => props.theme.secondaryBackground};
+  background-color: #f4f5f7;
   ::placeholder {
     color: ${(props) => props.theme.textColorLight};
   }
