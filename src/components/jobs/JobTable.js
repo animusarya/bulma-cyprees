@@ -66,7 +66,7 @@ const tableData = [
   },
 ];
 
-const JobTable = () => (
+const JobTable = ({ status }) => (
   <div className="table-container">
     <table className="table is-fullwidth">
       <thead>
@@ -86,7 +86,7 @@ const JobTable = () => (
             <td>{item.site} </td>
             <td>{item.dueDate}</td>
             <td>{item.assigned}</td>
-            <td>{item.status ? 'Open' : 'Closed'}</td>
+            <td>{status}</td>
             <td>
               <button type="button" className="button is-primary">
                 View
