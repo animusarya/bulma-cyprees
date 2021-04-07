@@ -13,8 +13,7 @@ import { LoginForm } from '../components/forms';
 import Logo from '../assets/images/logo.png';
 
 const Container = styled.section`
-  height: 100vh;
-  background-color: ${(props) => props.theme.backgroundColor};
+  background-color: ${(props) => props.theme.mainBrandColor};
 `;
 
 const ImageWrapper = styled.img`
@@ -57,11 +56,11 @@ const Login = () => {
   return (
     <div className="login-page">
       <Seo title="Login" description="Some description here." />
-      <Container className="section">
-        <div className="container">
-          <div className="columns is-centered">
-            <div className="column is-6">
-              <div className="card-content p-5">
+      <Container className="hero is-fullheight">
+        <div className="hero-body">
+          <div className="container">
+            <div className="column is-4 is-offset-4">
+              <div className="box p-5">
                 <div className="p-4 mt-2">
                   <Link to="/login">
                     <ImageWrapper

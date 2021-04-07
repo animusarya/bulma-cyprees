@@ -21,17 +21,6 @@ const forgotPasswordMutation = gql`
   }
 `;
 
-const TopNavigation = styled.h1`
-  padding: 0 27px;
-  background: ${(props) => props.theme.backgroundColor};
-  line-height: 52px;
-`;
-
-const BottomNavigation = styled.h2`
-  background: ${(props) => props.theme.tertiaryBackground};
-  padding: 5px 27px;
-`;
-
 const LinkStyled = styled(Link)`
   color: ${(props) => props.theme.fontDark};
   font-size: ${(props) => props.theme.fontSizeExtraSmall};
@@ -62,44 +51,39 @@ const ForgotPassword = ({ match }) => {
   return (
     <>
       <Seo title="Forgot Password" />
-      <TopNavigation className="title is-4 has-text-white">
-        Request password reset
-      </TopNavigation>
-      <BottomNavigation className="subtitle is-7 has-text-black is-flex">
-        <LinkStyled to="/">RD Glazing</LinkStyled>
-        <span>&nbsp;&nbsp;&gt;&nbsp;&nbsp;</span>{' '}
-        <p className="has-text-weight-bold">Request password reset</p>
-      </BottomNavigation>
-      <div className="section pt-0">
+      <div className="section">
         <div className="container">
-          <div className="columns is-centered">
-            <div className="column is-6">
-              <div className="card">
-                <header className="card-header has-background-grey-light">
-                  <p className="title is-5 card-header-title has-text-white">
-                    Request password reset
-                  </p>
-                </header>
-                <div className="card-content has-background-white-ter">
-                  <ForgotPasswordForm
-                    onSubmit={async (data) => {
-                      await executeMutation({ variables: { input: data } });
-                      swal('An email has been sent, please check your Inbox');
-                    }}
-                  />
-                  {res.error && (
-                    <Message type="error">{res.error.message}</Message>
-                  )}
-                  <LinkStyled to="/login">Back to Login</LinkStyled>
+          <div className="section pt-0">
+            <div className="container">
+              <div className="columns is-centered">
+                <div className="column is-6">
+                  <div className="card">
+                    <header className="card-header has-background-info-light">
+                      <p className="title is-5 card-header-title has-text-white">
+                        Request password reset
+                      </p>
+                    </header>
+                    <div className="card-content">
+                      <ForgotPasswordForm
+                        onSubmit={async (data) => {
+                          await executeMutation({ variables: { input: data } });
+                          swal(
+                            'An email has been sent, please check your Inbox',
+                          );
+                        }}
+                      />
+                      {res.error && (
+                        <Message type="error">{res.error.message}</Message>
+                      )}
+                      <LinkStyled to="/login">Back to Login</LinkStyled>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <footer className="content has-text-centered p-2 has-background-grey-dark is-size-7 has-text-white">
-        Script Executed in 0.0398 seconds
-      </footer>
     </>
   );
 };

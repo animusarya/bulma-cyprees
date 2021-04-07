@@ -8,31 +8,14 @@ import { Sidebar } from './sidebar';
 
 const Container = styled.div`
   .right-column {
-    background: #f4f5f7;
-  }
-
-  .column.is-2,
-  .column.is-2-tablet {
-    @media screen and (min-width: 769px) {
-      width: 20%;
-    }
-  }
-  @media screen and (min-width: 769px) {
-    .column.is-10,
-    .column.is-10-tablet {
-      width: 80%;
-    }
-  }
-
-  .column.is-10 {
-    padding: 22px 22px;
+    background: ${(props) => props.theme.lightAccent};
   }
 `;
 
 const Navbar = styled.nav`
   background: transparent;
   .icons {
-    color: ${(props) => props.theme.fontExtraDark};
+    color: ${(props) => props.theme.fontDark};
   }
 `;
 
@@ -40,11 +23,11 @@ const Layout = ({ children }) => (
   <Container>
     <Helmet title={config.siteName} />
     <div className="columns mr-0">
-      <div className="column is-2 left-column pb-0 pr-0">
+      <div className="column is-one-fifth is-paddingless">
         <Sidebar />
       </div>
-      <div className="column is-10 right-column pb-0">
-        <Navbar className="py-3">
+      <div className="column right-column pb-0 p-5">
+        <Navbar className="py-4">
           <h1 className="title is-5 mb-1 has-text-black ha-text-weight-bold">
             Dashboard
           </h1>

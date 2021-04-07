@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Container = styled.h2`
   color: ${(props) => props.theme.fontDark};
-  border-bottom: 2px solid ${(props) => props.theme.secondaryBorderColor};
+  border-bottom: 2px solid ${(props) => props.theme.borderColor};
 `;
 
 const Heading = ({ children }) => (

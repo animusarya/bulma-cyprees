@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
-// import styled from 'styled-components';
 
 import { InputGroup, Button } from '../elements';
 
@@ -31,8 +30,8 @@ const ForgotPasswordForm = (props) => {
         errors={errors.email && touched.email ? errors.email : undefined}
       />
 
-      <Button danger type="submit" disabled={isSubmitting}>
-        <span className="has-text-weight-bold">Submit</span>
+      <Button primary type="submit" disabled={isSubmitting}>
+        <span>Submit</span>
       </Button>
     </form>
   );

@@ -20,7 +20,6 @@ const LoginForm = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
-        lightLabel
         label="Email"
         name="email"
         placeholder="Enter your email"
@@ -30,7 +29,6 @@ const LoginForm = (props) => {
         errors={errors.email && touched.email ? errors.email : undefined}
       />
       <InputGroup
-        lightLabel
         label="Password"
         name="password"
         type="password"

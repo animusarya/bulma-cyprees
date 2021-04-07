@@ -14,12 +14,12 @@ const Nav = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background: ${(props) => props.theme.primaryBackgroundColor};
+  background: ${(props) => props.theme.mainBrandColor};
 `;
 
 const NavIcon = styled(Link)`
-  margin-left: 2rem;
-  font-size: 1rem;
+  margin-left: 2rem; //for mobile
+  font-size: ${(props) => props.theme.fontSizeMedium};
   height: 80px;
   display: flex;
   justify-content: flex-start;
@@ -27,7 +27,7 @@ const NavIcon = styled(Link)`
 `;
 
 const SidebarNav = styled.nav`
-  background: ${(props) => props.theme.sidebarBackground};
+  background: ${(props) => props.theme.mainBrandColor};
   height: 100%;
   overflow: auto;
   transition: 500ms;
@@ -93,7 +93,7 @@ const sidebarData = [
 const Sidebar = () => (
   <IconContext.Provider value={{ color: '#fff' }}>
     <Nav className="is-hidden-desktop">
-      <NavIcon className="has-text-primary-light" to="#">
+      <NavIcon className="has-text-black" to="#">
         <FaIcons.FaBars />
       </NavIcon>
     </Nav>

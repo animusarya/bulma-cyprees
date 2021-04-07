@@ -4,17 +4,17 @@ import styled from 'styled-components';
 import { Heading, InputGroup } from '../elements';
 
 const Container = styled.div`
-  background-color: #fff;
+  background-color: ${(props) => props.theme.primaryBackground};
 `;
 const SelectContainer = styled.div`
   option {
-    background: #4896fc;
-    color: #fff !important;
+    background: ${(props) => props.theme.mainBrandColor};
+    color: ${(props) => props.theme.textColorWhite};
   }
   select {
     background-color: ${(props) => props.theme.secondaryColor};
     border: 1px solid ${(props) => props.theme.borderColor};
-    color: ${(props) => props.theme.fontExtraDark} !important;
+    color: ${(props) => props.theme.fontDark} !important;
 
     :focus,
     :hover {
