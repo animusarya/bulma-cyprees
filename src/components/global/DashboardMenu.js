@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Heading, InputGroup } from '../elements';
+import Pagination from './Pagination';
 
 const Container = styled.div`
   background-color: ${(props) => props.theme.primaryBackground};
@@ -31,7 +32,7 @@ const DashboardMenu = ({ heading, children, hasSearchMenu }) => (
       {hasSearchMenu && (
         <div className="columns">
           <div className="column is-half">
-            <label className="label">Show entries</label>
+            <label className="label has-text-black">Show entries</label>
             <SelectContainer className="select is-small">
               <select>
                 <option>Select dropdown</option>
@@ -55,6 +56,7 @@ const DashboardMenu = ({ heading, children, hasSearchMenu }) => (
       )}
       {children}
     </div>
+    <Pagination />
   </Container>
 );
 

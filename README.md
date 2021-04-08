@@ -1,6 +1,6 @@
 # Rd glazing
 
-> Frontend app for Reviews System using ReactJs with batteries included.
+> Frontend app for Rd-glazing System using ReactJs with batteries included.
 
 ## To Test App
 
