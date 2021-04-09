@@ -15,6 +15,10 @@ const TextArea = styled.textarea`
   ::placeholder {
     color: ${(props) => props.theme.fontDark};
   }
+  :focus {
+    border-color: ${(props) => props.theme.secondaryColor} !important;
+    box-shadow: none !important;
+  }
 `;
 
 const LabelWrapper = styled.div`
