@@ -1,4 +1,4 @@
-# Rd glazing
+# RD glazing
 
 > Frontend app for Rd-glazing System using ReactJs with batteries included.
 
