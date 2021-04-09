@@ -4,8 +4,9 @@ import Heading from './Heading';
 import Title from './Title';
 import Message from './Message';
 import Loading from './Loading';
-import TextAreaGroup from './TextArea';
+import TextArea from './TextArea';
 import Dropzone from './Dropzone';
+import Select from './Select';
 
 export {
   InputGroup,
@@ -14,6 +15,7 @@ export {
   Title,
   Message,
   Loading,
-  TextAreaGroup,
+  TextArea,
   Dropzone,
+  Select,
 };

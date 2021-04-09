@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -21,6 +20,10 @@ const TextArea = styled.textarea`
     props.border ? '1px solid theme.borderColor' : 'none'};
   border-radius: ${(props) => (props.hasRadius ? '5px' : '0')};
   border-bottom: ${(props) => `1px solid ${props.theme.borderColor}`};
+  background-color: ${(props) => props.theme.secondaryBackground};
+  ::placeholder {
+    color: ${(props) => props.theme.textColorLight};
+  }
 `;
 
 const LabelWrapper = styled.div`

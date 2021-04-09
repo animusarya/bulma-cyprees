@@ -75,7 +75,6 @@ const sidebarData = [
     title: 'Reports',
     path: '#',
     icon: <AiIcons.AiOutlineMenu />,
-
     subNav: [
       {
         title: 'Reports 2',
@@ -85,6 +84,25 @@ const sidebarData = [
       {
         title: 'Reports 3',
         path: '/super-admin/dashboard',
+      },
+    ],
+  },
+  {
+    title: 'Customers',
+    path: '#',
+    icon: <AiIcons.AiOutlineMenu />,
+    subNav: [
+      {
+        title: 'View All',
+        path: '/customers',
+      },
+      {
+        title: 'Add New Customer',
+        path: '/customer/add-customer',
+      },
+      {
+        title: 'Add New Site',
+        path: '/customer/add-site',
       },
     ],
   },
