@@ -75,9 +75,9 @@ const Login = () => {
                   {res.error && (
                     <Message type="error">{res.error.message}</Message>
                   )}
-                  {res.loading ? <Loading /> : null}
                 </div>
               </div>
+              {res.loading ? <Loading /> : null}
             </div>
           </div>
         </div>
