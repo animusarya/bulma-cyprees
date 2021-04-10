@@ -18,6 +18,7 @@
     "currency.js": "^2.0.3",
     "easy-peasy": "^4.0.1",
     "formik": "^2.2.6",
+    "fuse.js": "^6.4.6",
     "graphql": "^15.4.0",
     "graphql-tag": "^2.11.0",
     "isomorphic-fetch": "^3.0.0",
