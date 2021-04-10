@@ -11,6 +11,7 @@
     "prettier/prettier": [
       "error",
       {
+        "endOfLine":"auto",   //for windows
         "singleQuote": true,
         "trailingComma": "all",
         "bracketSpacing": true,

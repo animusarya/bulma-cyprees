@@ -16,6 +16,10 @@ const Input = styled.input`
   ::placeholder {
     color: ${(props) => props.theme.fontDark};
   }
+  :focus {
+    border-color: ${(props) => props.theme.secondaryColor} !important;
+    box-shadow: none !important;
+  }
 `;
 
 const Label = styled.label`

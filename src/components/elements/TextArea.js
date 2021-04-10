@@ -5,24 +5,19 @@ const Group = styled.div`
   .control {
     width: ${(props) => (props.fullWidth ? '100%' : '')} !important;
   }
-  label {
-    width: ${(props) => (props.isWidth ? '10rem' : '')} !important;
-  }
 `;
 
 const TextArea = styled.textarea`
-  box-shadow: none;
-  border-top: ${(props) =>
-    props.border ? '1px solid theme.borderColor' : 'none'};
-  border-left: ${(props) =>
-    props.border ? '1px solid theme.borderColor' : 'none'};
-  border-right: ${(props) =>
-    props.border ? '1px solid theme.borderColor' : 'none'};
-  border-radius: ${(props) => (props.hasRadius ? '5px' : '0')};
-  border-bottom: ${(props) => `1px solid ${props.theme.borderColor}`};
-  background-color: ${(props) => props.theme.secondaryBackground};
+  padding: 0.45rem 0.9rem;
+  border: 1px solid ${(props) => props.theme.borderColor};
+  border-radius: ${(props) => (props.hasRadius ? '0.4rem' : '0.2rem')};
+  background-color: ${(props) => props.theme.secondaryColor};
   ::placeholder {
-    color: ${(props) => props.theme.textColorLight};
+    color: ${(props) => props.theme.fontDark};
+  }
+  :focus {
+    border-color: ${(props) => props.theme.secondaryColor} !important;
+    box-shadow: none !important;
   }
 `;
 
@@ -32,6 +27,10 @@ const LabelWrapper = styled.div`
 
 const LabelInfo = styled.p`
   margin-left: 8px;
+`;
+
+const Label = styled.label`
+  font-size: ${(props) => props.theme.fontSizeSmall};
 `;
 
 const TextAreaGroup = ({
@@ -52,7 +51,9 @@ const TextAreaGroup = ({
     <LabelWrapper className="is-flex">
       {label && (
         <div className="is-flex">
-          <label className="label">{label}</label>
+          <Label className="label has-text-weight-semibold has-text-black mb-2">
+            {label}
+          </Label>
           {labelInfo && <LabelInfo>{labelInfo}</LabelInfo>}
         </div>
       )}
