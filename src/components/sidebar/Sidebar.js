@@ -72,22 +72,6 @@ const sidebarData = [
     ],
   },
   {
-    title: 'Reports',
-    path: '#',
-    icon: <AiIcons.AiOutlineMenu />,
-    subNav: [
-      {
-        title: 'Reports 2',
-        path: '/',
-        cName: 'sub-nav',
-      },
-      {
-        title: 'Reports 3',
-        path: '/super-admin/dashboard',
-      },
-    ],
-  },
-  {
     title: 'Customers',
     path: '#',
     icon: <AiIcons.AiOutlineMenu />,
