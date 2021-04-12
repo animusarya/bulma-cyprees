@@ -36,7 +36,7 @@ const DashboardMenu = ({
 }) => (
   <Container className="card">
     <div className="card-content">
-      <Heading>{heading}</Heading>
+      {heading && <Heading>{heading}</Heading>}
       {hasSearchMenu && (
         <div className="columns">
           <div className="column is-half">
