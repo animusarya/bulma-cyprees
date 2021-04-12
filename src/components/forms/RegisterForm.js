@@ -2,9 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
-// import styled from 'styled-components';
 
-import { InputGroup, Button } from '../elements';
+import { InputGroup, Button, Select, TextArea } from '../elements';
+
+const customerList = [
+  { id: 1, value: '--' },
+  { id: 2, value: 'Able' },
+  { id: 3, value: 'Autosmart International Ltd' },
+  { id: 4, value: 'BandM' },
+  { id: 5, value: 'Belvoir' },
+  { id: 6, value: 'Cambian' },
+];
+
+const siteList = [
+  { id: 1, value: '--' },
+  { id: 2, value: 'Norton canes' },
+  { id: 3, value: 'Autosmart International Ltd  -  Lichfield' },
+];
+
+const jobAssignList = [
+  { id: 1, value: '--' },
+  { id: 2, value: 'AaronBowli' },
+  { id: 3, value: 'AaronDrury' },
+];
 
 const RegisterForm = (props) => {
   const {
@@ -15,101 +35,101 @@ const RegisterForm = (props) => {
     handleChange,
     handleBlur,
     handleSubmit,
-    isAdminRegister,
   } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <InputGroup
-        fullWidth
+      <Select
         label="Customer"
-        name="fullName"
+        name="customerName"
+        options={customerList}
         type="text"
-        value={values.fullName}
+        value={values.customerName}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
-          errors.fullName && touched.fullName ? errors.fullName : undefined
-        }
-      />
-      {isAdminRegister && (
-        <InputGroup
-          label="Company Name:"
-          name="companyName"
-          type="text"
-          value={values.companyName}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          errors={
-            errors.companyName && touched.companyName
-              ? errors.companyName
-              : undefined
-          }
-        />
-      )}
-      {isAdminRegister && (
-        <InputGroup
-          label="Domain Name:"
-          name="websiteAddress"
-          type="text"
-          value={values.websiteAddress}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          errors={
-            errors.websiteAddress && touched.websiteAddress
-              ? errors.websiteAddress
-              : undefined
-          }
-        />
-      )}
-      {isAdminRegister && (
-        <InputGroup
-          label="Telephone:"
-          name="telephone"
-          type="text"
-          value={values.telephone}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          errors={
-            errors.telephone && touched.telephone ? errors.telephone : undefined
-          }
-        />
-      )}
-      <InputGroup
-        label="Email:"
-        name="email"
-        value={values.email}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={errors.email && touched.email ? errors.email : undefined}
-        readOnly={!isAdminRegister}
-      />
-      <InputGroup
-        border
-        label="Password:"
-        name="password"
-        type="password"
-        value={values.password}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={
-          errors.password && touched.password ? errors.password : undefined
-        }
-      />
-      <InputGroup
-        border
-        label="Confirm Password:"
-        name="confirmPassword"
-        type="password"
-        value={values.confirmPassword}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={
-          errors.confirmPassword && touched.confirmPassword
-            ? errors.confirmPassword
+          errors.customerName && touched.customerName
+            ? errors.customerName
             : undefined
         }
       />
-      <div className="mt-3 mb-3">
+      <Select
+        label="Site"
+        name="siteName"
+        options={siteList}
+        type="text"
+        value={values.siteName}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.siteName && touched.siteName ? errors.siteName : undefined
+        }
+      />
+
+      <InputGroup
+        label="Job Number"
+        name="jobNumber"
+        type="text"
+        value={values.jobNumber}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.jobNumber && touched.jobNumber ? errors.jobNumber : undefined
+        }
+      />
+      <InputGroup
+        label="Customer Reference"
+        name="customerReference"
+        type="text"
+        value={values.customerReference}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.customerReference && touched.customerReference
+            ? errors.customerReference
+            : undefined
+        }
+      />
+      <TextArea
+        label="Description"
+        name="description"
+        type="text"
+        value={values.description}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.description && touched.description
+            ? errors.description
+            : undefined
+        }
+      />
+      <TextArea
+        label="Internal Notes"
+        name="internalNotes"
+        type="text"
+        value={values.internalNotes}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.internalNotes && touched.internalNotes
+            ? errors.internalNotes
+            : undefined
+        }
+      />
+      <Select
+        label="Job Assigned to"
+        name="jobAssignedTo"
+        options={jobAssignList}
+        type="text"
+        value={values.jobAssignedTo}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.jobAssignedTo && touched.jobAssignedTo
+            ? errors.jobAssignedTo
+            : undefined
+        }
+      />
+      <div className="mb-3 is-flex is-justify-content-flex-end">
         <Button primary type="submit" disabled={isSubmitting}>
           <span className="has-text-weight-bold">Submit</span>
         </Button>
@@ -129,37 +149,23 @@ RegisterForm.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: ({ initialValues }) => ({
-    fullName: initialValues.fullName ? initialValues.fullName : '',
-    email: initialValues.email ? initialValues.email : '',
-    password: initialValues.password ? initialValues.password : '',
-    confirmPassword: initialValues.confirmPassword
-      ? initialValues.confirmPassword
-      : '',
-    companyName: initialValues.companyName ? initialValues.companyName : '',
-    websiteAddress: initialValues.websiteAddress
-      ? initialValues.websiteAddress
-      : '',
-    telephone: initialValues.telephone ? initialValues.telephone : '',
+  mapPropsToValues: () => ({
+    customerName: '',
+    siteName: '',
+    jobNumber: '',
+    customerReference: '',
+    description: '',
+    internalNotes: '',
+    jobAssignedTo: '',
   }),
   validationSchema: yup.object().shape({
-    fullName: yup.string().required('name is required!'),
-    websiteAddress: yup.string().required('Website Address is required!'),
-    email: yup
-      .string()
-      .email('Invalid email address')
-      .required('Email is required!'),
-    password: yup
-      .string()
-      .required('Password is required!')
-      .min(6, 'Seems a bit short...'),
-    confirmPassword: yup
-      .string()
-      .required('This filed is required!')
-      .label('Confirm password')
-      .test('passwords-match', 'Passwords not matched!', function (values) {
-        return this.parent.password === values;
-      }),
+    customerName: yup.string().required('Customer Name is required!'),
+    siteName: yup.string().required('Site Name is required!'),
+    jobNumber: yup.string().required('Job Number is required!'),
+    customerReference: yup.string().required('Customer Reference is required!'),
+    description: yup.string(),
+    internalNotes: yup.string(),
+    jobAssignedTo: yup.string(),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
