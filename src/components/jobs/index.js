@@ -1,4 +1,4 @@
 import JobTable from './JobTable';
-import AddJob from './AddJob';
 
-export { JobTable, AddJob };
+// eslint-disable-next-line import/prefer-default-export
+export { JobTable };

@@ -3,7 +3,16 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-import { InputGroup, Button } from '../elements';
+import { InputGroup, Button, Select, TextArea } from '../elements';
+
+const customerList = [
+  { id: 1, value: 'Select...' },
+  { id: 2, value: 'Able' },
+  { id: 3, value: 'Autosmart International Ltd' },
+  { id: 4, value: 'BandM' },
+  { id: 5, value: 'Belvoir' },
+  { id: 6, value: 'Cambian' },
+];
 
 const AddNewCustomerForm = (props) => {
   const {
@@ -17,22 +26,62 @@ const AddNewCustomerForm = (props) => {
   } = props;
 
   return (
-    <form className="mb-4" onSubmit={handleSubmit}>
-      <InputGroup
-        darkLabel
-        border
-        label="Your Email Address"
-        name="email"
-        placeholder="john@doe.com"
-        value={values.email}
+    <form onSubmit={handleSubmit}>
+      <Select
+        label="Customer"
+        name="customerName"
+        options={customerList}
+        type="text"
+        value={values.customerName}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={errors.email && touched.email ? errors.email : undefined}
+        errors={
+          errors.customerName && touched.customerName
+            ? errors.customerName
+            : undefined
+        }
       />
 
-      <Button danger type="submit" disabled={isSubmitting}>
-        <span className="has-text-weight-bold">Submit</span>
-      </Button>
+      <InputGroup
+        label="Site Name"
+        name="siteName"
+        type="text"
+        value={values.siteName}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.siteName && touched.siteName ? errors.siteName : undefined
+        }
+      />
+      <InputGroup
+        label="Address"
+        name="address"
+        type="text"
+        value={values.address}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={errors.address && touched.address ? errors.address : undefined}
+      />
+
+      <TextArea
+        label="Internal Notes"
+        name="internalNotes"
+        type="text"
+        value={values.internalNotes}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.internalNotes && touched.internalNotes
+            ? errors.internalNotes
+            : undefined
+        }
+      />
+
+      <div className="mt-5">
+        <Button primary type="submit" disabled={isSubmitting}>
+          <span className="has-text-weight-bold">Submit</span>
+        </Button>
+      </div>
     </form>
   );
 };
@@ -49,17 +98,19 @@ AddNewCustomerForm.propTypes = {
 
 export default withFormik({
   mapPropsToValues: () => ({
-    email: '',
+    customerName: '',
+    siteName: '',
+    address: '',
+    internalNotes: '',
   }),
   validationSchema: yup.object().shape({
-    email: yup
-      .string()
-      .email('Invalid email address')
-      .required('Email is required!'),
+    customerName: yup.string().required('Customer Name is required!'),
+    siteName: yup.string().required('Site Name is required!'),
+    address: yup.string().required('Address is required!'),
+    internalNotes: yup.string(),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
-    // console.log('handle submit', values, props);
     props.onSubmit(values).then(() => {
       setSubmitting(false);
     });
