@@ -3,30 +3,16 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-import { InputGroup, Button, Select, TextArea } from '../elements';
+import { InputGroup, Button, TextArea, Select, Dropzone } from '../elements';
 
-const customerList = [
-  { id: 1, value: '--' },
-  { id: 2, value: 'Able' },
-  { id: 3, value: 'Autosmart International Ltd' },
-  { id: 4, value: 'BandM' },
-  { id: 5, value: 'Belvoir' },
-  { id: 6, value: 'Cambian' },
+const companyList = [
+  { id: 1, value: 'Company One' },
+  { id: 2, value: 'Company Two' },
+  { id: 3, value: 'Company Three' },
+  { id: 4, value: 'Company Four' },
 ];
 
-const siteList = [
-  { id: 1, value: '--' },
-  { id: 2, value: 'Norton canes' },
-  { id: 3, value: 'Autosmart International Ltd  -  Lichfield' },
-];
-
-const jobAssignList = [
-  { id: 1, value: '--' },
-  { id: 2, value: 'AaronBowli' },
-  { id: 3, value: 'AaronDrury' },
-];
-
-const RegisterForm = (props) => {
+const EditJobForm = (props) => {
   const {
     values,
     touched,
@@ -35,36 +21,10 @@ const RegisterForm = (props) => {
     handleChange,
     handleBlur,
     handleSubmit,
+    onResponse,
   } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <Select
-        label="Customer"
-        name="customerName"
-        options={customerList}
-        type="text"
-        value={values.customerName}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={
-          errors.customerName && touched.customerName
-            ? errors.customerName
-            : undefined
-        }
-      />
-      <Select
-        label="Site"
-        name="siteName"
-        options={siteList}
-        type="text"
-        value={values.siteName}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={
-          errors.siteName && touched.siteName ? errors.siteName : undefined
-        }
-      />
-
       <InputGroup
         label="Job Number"
         name="jobNumber"
@@ -115,21 +75,51 @@ const RegisterForm = (props) => {
             : undefined
         }
       />
-      <Select
-        label="Job Assigned to"
-        name="jobAssignedTo"
-        options={jobAssignList}
+
+      <div className="box">
+        <Dropzone isPublic onUpload={onResponse} />
+      </div>
+      <InputGroup
+        label="Payment Terms"
+        name="paymentTerms"
         type="text"
-        value={values.jobAssignedTo}
+        value={values.paymentTerms}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
-          errors.jobAssignedTo && touched.jobAssignedTo
-            ? errors.jobAssignedTo
+          errors.paymentTerms && touched.paymentTerms
+            ? errors.paymentTerms
             : undefined
         }
       />
-      <div className="mb-3 is-flex is-justify-content-flex-end">
+      <TextArea
+        label="Internal Notes"
+        name="internalNotes"
+        type="text"
+        value={values.internalNotes}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.internalNotes && touched.internalNotes
+            ? errors.internalNotes
+            : undefined
+        }
+      />
+      <Select
+        label="Company Name:"
+        name="companyName"
+        options={companyList}
+        type="text"
+        value={values.companyName}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.companyName && touched.companyName
+            ? errors.companyName
+            : undefined
+        }
+      />
+      <div className="mb-3 is-flex is-justify-content-flex-end	">
         <Button primary type="submit" disabled={isSubmitting}>
           <span className="has-text-weight-bold">Submit</span>
         </Button>
@@ -138,7 +128,7 @@ const RegisterForm = (props) => {
   );
 };
 
-RegisterForm.propTypes = {
+EditJobForm.propTypes = {
   values: PropTypes.object.isRequired,
   touched: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -150,22 +140,20 @@ RegisterForm.propTypes = {
 
 export default withFormik({
   mapPropsToValues: () => ({
-    customerName: '',
-    siteName: '',
     jobNumber: '',
     customerReference: '',
     description: '',
     internalNotes: '',
-    jobAssignedTo: '',
+    address: '',
+    paymentTerms: '',
   }),
   validationSchema: yup.object().shape({
-    customerName: yup.string(),
-    siteName: yup.string(),
     jobNumber: yup.string().required('Job Number is required!'),
-    customerReference: yup.string().required('Customer Reference is required!'),
+    customerReference: yup.string(),
     description: yup.string(),
+    address: yup.string().required('Address is required!'),
+    paymentTerms: yup.string().required('Payment Terms is required!'),
     internalNotes: yup.string(),
-    jobAssignedTo: yup.string(),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
@@ -173,5 +161,5 @@ export default withFormik({
       setSubmitting(false);
     });
   },
-  displayName: 'RegisterForm', // helps with React DevTools
-})(RegisterForm);
+  displayName: 'EditJobForm', // helps with React DevTools
+})(EditJobForm);

@@ -7,6 +7,7 @@ import Loading from './Loading';
 import TextArea from './TextArea';
 import Dropzone from './Dropzone';
 import Select from './Select';
+import GoogleMap from './GoogleMap';
 
 export {
   InputGroup,
@@ -18,4 +19,5 @@ export {
   TextArea,
   Dropzone,
   Select,
+  GoogleMap,
 };

@@ -1,21 +1,17 @@
 import React from 'react';
 
-import { useParams } from 'react-router-dom';
 import Layout from '../../components/Layout';
-import { JobTable } from '../../components/jobs';
 import DashboardMenu from '../../components/global/DashboardMenu';
 
-const EditJobs = () => {
-  const { status } = useParams();
+import { GoogleMap } from '../../components/elements';
+import { EditJobForm } from '../../components/forms';
 
-  const heading = status === 'revisit' ? 'Jobs that need Revisit' : 'Jobs';
-
-  return (
-    <Layout>
-      <DashboardMenu hasSearchMenu heading={heading}>
-        <JobTable status={status} />
-      </DashboardMenu>
-    </Layout>
-  );
-};
+const EditJobs = () => (
+  <Layout>
+    <DashboardMenu>
+      <GoogleMap />
+      <EditJobForm />
+    </DashboardMenu>
+  </Layout>
+);
 export default EditJobs;

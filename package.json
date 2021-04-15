@@ -4,14 +4,20 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "CI= react-scripts build",
-    "test": "react-scripts test",
+    "test-old": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --fix --ext .jsx,.js src/*.js src/**/*.js",
     "lint-two": "NODE_ENV=production lint-staged",
-    "deploy": "vercel --prod"
+    "deploy": "vercel --prod",
+    "cypress:start": "BROWSER=none react-scripts -r @cypress/instrument-cra start",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test": "start-server-and-test cypress:start http://localhost:3000 cypress:run",
+    "test:open": "start-server-and-test cypress:start http://localhost:3000 cypress:open"
   },
   "dependencies": {
     "@apollo/client": "^3.3.6",
+    "@react-google-maps/api": "^2.1.1",
     "@sentry/browser": "^5.29.1",
     "add": "^2.0.6",
     "axios": "^0.21.0",
@@ -29,6 +35,7 @@
     "react-clipboard.js": "^2.0.16",
     "react-dom": "^17.0.1",
     "react-dropzone": "^11.2.4",
+    "react-google-maps": "^9.4.5",
     "react-google-recaptcha": "^2.1.0",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.2.0",
@@ -36,6 +43,7 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
+    "recompose": "^0.30.0",
     "redux-persist": "^6.0.0",
     "stripe": "^8.129.0",
     "styled-components": "^5.2.1",
@@ -44,6 +52,8 @@
     "yup": "^0.32.8"
   },
   "devDependencies": {
+    "@cypress/instrument-cra": "^1.4.0",
+    "cypress": "^7.1.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-import": "^2.22.1",
@@ -52,7 +62,8 @@
     "husky": "^4.3.6",
     "lint-staged": "^10.5.3",
     "prettier": "^2.2.1",
-    "pretty-quick": "^3.1.0"
+    "pretty-quick": "^3.1.0",
+    "start-server-and-test": "^1.12.1"
   },
   "browserslist": [
     ">0.2%",

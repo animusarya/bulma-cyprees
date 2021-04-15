@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function JobTable(props) {
   const { status, tableData } = props;
@@ -25,9 +26,9 @@ function JobTable(props) {
               <td>{item.assigned}</td>
               <td>{status}</td>
               <td>
-                <button type="button" className="button is-primary">
+                <Link to="/edit:12345" className="button is-primary">
                   View
-                </button>
+                </Link>
               </td>
             </tr>
           ))}

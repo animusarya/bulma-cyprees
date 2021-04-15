@@ -1,160 +1,77 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { useMutation } from '@apollo/client';
-import gql from 'graphql-tag';
+
 import styled from 'styled-components';
-import randomstring from 'randomstring';
 
-import { uploadFile } from '../../utils/upload';
-import Loading from './Loading';
-import theme from '../../utils/theme';
+const Thumb = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
-const signedUploadUrlMutation = gql`
-  mutation signedUploadUrl(
-    $fileName: String!
-    $fileType: String!
-    $isPublic: Boolean
-  ) {
-    signedUploadUrl(
-      fileName: $fileName
-      fileType: $fileType
-      isPublic: $isPublic
-    ) {
-      signedUrl
-      fileUrl
-    }
+const ThumbInner = styled.div`
+  overflow: hidden;
+`;
+
+const Image = styled.img`
+  width: auto;
+  height: 120px;
+`;
+
+const DropzoneWrapper = styled.section`
+  .dropzone {
+    border: ${(props) => props.theme.borderColor};
+    border-style: dashed;
+    background-color: ${(props) => props.theme.background};
+    outline: none;
   }
 `;
 
-const getColor = (props) => {
-  if (props.isDragAccept) {
-    return '#00e676';
-  }
-  if (props.isDragReject) {
-    return '#ff1744';
-  }
-  if (props.isDragActive) {
-    return '#2196f3';
-  }
-  return theme.mainBrandColor;
-};
-
-const Container = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  border-width: 2px;
-  border-radius: 2px;
-  border-color: ${(props) => getColor(props)};
-  border-style: dashed;
-  background-color: #fafafa;
-  color: ${(props) => props.theme.mainBrandColor};
-  outline: none;
-  transition: border 0.24s ease-in-out;
-  margin-bottom: 20px;
-  cursor: pointer;
-`;
-
-const MyDropzone = ({ onUpload, isPublic, children, handleLoading }) => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(undefined);
-  const [executeUploadMutation] = useMutation(signedUploadUrlMutation);
-
-  useEffect(() => {
-    if (handleLoading) {
-      handleLoading(loading);
-    }
-  }, [loading]);
-
-  const onDrop = (acceptedFiles) => {
-    setLoading(true);
-    setError(undefined);
-
-    if (acceptedFiles.length > 0) {
-      acceptedFiles.map(async (file) => {
-        try {
-          const variables = {
-            fileName: `${randomstring.generate(3)}-${file.name}`,
-            fileType: file.type,
-          };
-
-          // get signed url from aws s3
-          const signedUploadUrl = await executeUploadMutation({
-            variables: {
-              ...variables,
-              isPublic: isPublic || false,
-            },
-          });
-          if (signedUploadUrl.data.error) {
-            console.log('upload error', signedUploadUrl.data.error);
-            return;
-          }
-
-          const { signedUrl, fileUrl } = await signedUploadUrl.data
-            .signedUploadUrl;
-
-          // return;
-          const options = {
-            headers: {
-              'Content-Type': file.type,
-            },
-          };
-
-          const result = await uploadFile(signedUrl, file, options);
-          console.log('upload success', result);
-
-          // upload success
-          onUpload({ ...variables, url: fileUrl });
-          setLoading(false);
-          // eslint-disable-next-line no-shadow
-        } catch (error) {
-          console.log('upload error', error);
-          setLoading(false);
-        }
-      });
-    }
-  };
-
-  const onDropRejected = (data) => {
-    if (data.length > 0) {
-      setError('Please upload files smaller than 5mb');
-      setLoading(false);
-    }
-  };
-
-  const {
-    getRootProps,
-    getInputProps,
-    isDragActive,
-    isDragAccept,
-    isDragReject,
-  } = useDropzone({
-    onDrop,
-    onDropRejected,
-    maxSize: 5000000,
+function Dropzone() {
+  const [files, setFiles] = useState([]);
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: 'image/*',
+    onDrop: (acceptedFiles) => {
+      setFiles(
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          }),
+        ),
+      );
+    },
   });
 
-  if (children) {
-    return (
-      <span {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
-        <input {...getInputProps()} />
-        {children}
-      </span>
-    );
-  }
+  const thumbs = files.map((file) => (
+    <Thumb key={file.name}>
+      <ThumbInner>
+        <Image src={file.preview} alt="images" />
+      </ThumbInner>
+    </Thumb>
+  ));
+
+  useEffect(
+    () => () => {
+      // Make sure to revoke the data uris to avoid memory leaks
+      files.forEach((file) => URL.revokeObjectURL(file.preview));
+    },
+    [files],
+  );
 
   return (
-    <Container {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
-      <input {...getInputProps()} />
-      <p>+ Drag n drop your project logo here</p>
-      <small>or click to select logo</small>
-      {loading && <Loading />}
-      {error && <small className="has-text-danger">{error}</small>}
-    </Container>
+    <DropzoneWrapper className="container">
+      <label className="label has-text-weight-semibold mb-2 has-text-black">
+        Hello
+      </label>
+      <div
+        {...getRootProps({
+          className: 'dropzone p-5 is-flex is-justify-content-center',
+        })}>
+        <input {...getInputProps()} />
+        <p>Drag & drop some files here, or click to select files</p>
+      </div>
+      <aside className="mt-4">{thumbs}</aside>
+    </DropzoneWrapper>
   );
-};
+}
 
-export default MyDropzone;
+export default Dropzone;

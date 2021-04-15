@@ -11,7 +11,6 @@ import ForgotPassword from '../pages/ForgotPassword';
 import Test from '../pages/Test';
 import Jobs from '../pages/admin/Jobs';
 import RegisterJob from '../pages/admin/RegisterJob';
-import Job from '../pages/admin/Job';
 import EditJob from '../pages/admin/EditJob';
 import Customer from '../pages/admin/Customer';
 import AddNewCustomers from '../pages/admin/AddNewCustomers';
@@ -58,17 +57,8 @@ const Routes = () => (
         />
         <PrivateRoute
           exact
-          path="/jobs/edit:id"
+          path="/edit:id"
           component={EditJob}
-          access="admin"
-        />
-
-        <PrivateRoute exact path="/job/:id" component={Job} access="admin" />
-
-        <PrivateRoute
-          exact
-          path="/job/export/:id"
-          component={Job}
           access="admin"
         />
         <PrivateRoute
