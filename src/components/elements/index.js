@@ -8,6 +8,7 @@ import TextArea from './TextArea';
 import Dropzone from './Dropzone';
 import Select from './Select';
 import GoogleMap from './GoogleMap';
+import Modal from './Modal';
 
 export {
   InputGroup,
@@ -20,4 +21,5 @@ export {
   Dropzone,
   Select,
   GoogleMap,
+  Modal,
 };

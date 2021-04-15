@@ -36,6 +36,7 @@ const RegisterForm = (props) => {
     handleBlur,
     handleSubmit,
   } = props;
+
   return (
     <form onSubmit={handleSubmit}>
       <Select
