@@ -60,7 +60,7 @@ function Dropzone() {
   return (
     <DropzoneWrapper className="container">
       <label className="label has-text-weight-semibold mb-2 has-text-black">
-        Hello
+        Before Picture
       </label>
       <div
         {...getRootProps({

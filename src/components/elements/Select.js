@@ -14,18 +14,19 @@ const SelectInput = styled.div`
       border-color: ${(props) => props.theme.secondaryColor} !important;
       box-shadow: none !important;
     }
-    label {
-      font-size: ${(props) => props.theme.fontSizeSmall};
-    }
   }
+`;
+
+const Label = styled.label`
+  font-size: ${(props) => props.theme.fontSizeSmall} !important;
 `;
 
 const Select = ({ placeholder, options, errors, label, ...otherProps }) => (
   <SelectInput className="field">
     {label && (
-      <label className="label has-text-weight-semibold has-text-black mb-2">
+      <Label className="label has-text-weight-semibold has-text-black mb-2">
         {label}
-      </label>
+      </Label>
     )}
     <div className="control">
       <div className="select is-fullwidth  is-expanded has-text-grey-lighter">

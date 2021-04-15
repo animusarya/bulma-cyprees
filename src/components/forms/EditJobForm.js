@@ -21,7 +21,6 @@ const EditJobForm = (props) => {
     handleChange,
     handleBlur,
     handleSubmit,
-    onResponse,
   } = props;
   return (
     <form onSubmit={handleSubmit}>
@@ -75,10 +74,7 @@ const EditJobForm = (props) => {
             : undefined
         }
       />
-
-      <div className="box">
-        <Dropzone isPublic onUpload={onResponse} />
-      </div>
+      <Dropzone />
       <InputGroup
         label="Payment Terms"
         name="paymentTerms"

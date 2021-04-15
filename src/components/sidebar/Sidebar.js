@@ -86,6 +86,21 @@ const sidebarData = [
       },
     ],
   },
+  {
+    title: 'Users/Contractors ',
+    path: '#',
+    icon: <AiIcons.AiOutlineMenu />,
+    subNav: [
+      {
+        title: 'View All',
+        path: '/users',
+      },
+      {
+        title: 'Add New Customer',
+        path: '/user/new',
+      },
+    ],
+  },
 ];
 
 const Sidebar = () => (
