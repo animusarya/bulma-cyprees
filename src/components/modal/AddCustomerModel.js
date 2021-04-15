@@ -1,10 +1,10 @@
 import React from 'react';
 import { Modal } from '../elements';
-import { AddNewCustomerForm } from '../forms';
+import { AddJobCustomerForm } from '../forms';
 
 const AddCustomerModel = ({ onClose, isActive, onSubmit }) => (
   <Modal isActive={isActive} onClose={onClose} title="Add New">
-    <AddNewCustomerForm onClose={onClose} onSubmit={onSubmit} />
+    <AddJobCustomerForm onClose={onClose} onSubmit={onSubmit} />
   </Modal>
 );
 

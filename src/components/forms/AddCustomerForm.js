@@ -3,16 +3,9 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-import { InputGroup, Button, TextArea, Select } from '../elements';
+import { InputGroup, Button, TextArea } from '../elements';
 
-const companyList = [
-  { id: 1, value: 'Company One' },
-  { id: 2, value: 'Company Two' },
-  { id: 3, value: 'Company Three' },
-  { id: 4, value: 'Company Four' },
-];
-
-const AddSiteForm = (props) => {
+const AddCustomerForm = (props) => {
   const {
     values,
     touched,
@@ -24,10 +17,9 @@ const AddSiteForm = (props) => {
   } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <Select
+      <InputGroup
         label="Company Name:"
         name="companyName"
-        options={companyList}
         type="text"
         value={values.companyName}
         onChange={handleChange}
@@ -107,7 +99,7 @@ const AddSiteForm = (props) => {
   );
 };
 
-AddSiteForm.propTypes = {
+AddCustomerForm.propTypes = {
   values: PropTypes.object.isRequired,
   touched: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -132,7 +124,7 @@ export default withFormik({
     storeNumber: yup.string().required('Store Number is required!'),
     address: yup.string().required('Address is required!'),
     paymentTerms: yup.string().required('Payment Terms is required!'),
-    internalNotes: yup.string().required('Note is required!'),
+    internalNotes: yup.string(),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
@@ -140,5 +132,5 @@ export default withFormik({
       setSubmitting(false);
     });
   },
-  displayName: 'AddSiteForm', // helps with React DevTools
-})(AddSiteForm);
+  displayName: 'AddCustomerForm', // helps with React DevTools
+})(AddCustomerForm);

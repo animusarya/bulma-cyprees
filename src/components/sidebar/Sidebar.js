@@ -84,10 +84,6 @@ const sidebarData = [
         title: 'Add New Customer',
         path: '/customer/add-customer',
       },
-      {
-        title: 'Add New Site',
-        path: '/customer/add-site',
-      },
     ],
   },
 ];

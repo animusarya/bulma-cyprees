@@ -103,19 +103,6 @@ const RegisterForm = (props) => {
             : undefined
         }
       />
-      <TextArea
-        label="Internal Notes"
-        name="internalNotes"
-        type="text"
-        value={values.internalNotes}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={
-          errors.internalNotes && touched.internalNotes
-            ? errors.internalNotes
-            : undefined
-        }
-      />
       <Select
         label="Job Assigned to"
         name="jobAssignedTo"
@@ -130,6 +117,20 @@ const RegisterForm = (props) => {
             : undefined
         }
       />
+      <TextArea
+        label="Internal Notes"
+        name="internalNotes"
+        type="text"
+        value={values.internalNotes}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.internalNotes && touched.internalNotes
+            ? errors.internalNotes
+            : undefined
+        }
+      />
+
       <div className="mb-3 is-flex is-justify-content-flex-end">
         <Button primary type="submit" disabled={isSubmitting}>
           <span className="has-text-weight-bold">Submit</span>

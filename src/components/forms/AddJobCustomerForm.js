@@ -14,7 +14,7 @@ const customerList = [
   { id: 6, value: 'Cambian' },
 ];
 
-const AddNewCustomerForm = (props) => {
+const AddJobCustomerForm = (props) => {
   const {
     values,
     touched,
@@ -86,7 +86,7 @@ const AddNewCustomerForm = (props) => {
   );
 };
 
-AddNewCustomerForm.propTypes = {
+AddJobCustomerForm.propTypes = {
   values: PropTypes.object.isRequired,
   touched: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -115,5 +115,5 @@ export default withFormik({
       setSubmitting(false);
     });
   },
-  displayName: 'AddNewCustomerForm', // helps with React DevTools
-})(AddNewCustomerForm);
+  displayName: 'AddJobCustomerForm', // helps with React DevTools
+})(AddJobCustomerForm);

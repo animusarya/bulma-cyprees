@@ -13,7 +13,6 @@ import Jobs from '../pages/admin/Jobs';
 import RegisterJob from '../pages/admin/RegisterJob';
 import EditJob from '../pages/admin/EditJob';
 import Customer from '../pages/admin/Customer';
-import AddNewCustomers from '../pages/admin/AddNewCustomers';
 import AddNewSite from '../pages/admin/AddNewSite';
 
 const PrivateRoute = ({ component: Component, access, ...rest }) => {
@@ -70,12 +69,6 @@ const Routes = () => (
         <PrivateRoute
           exact
           path="/customer/add-customer"
-          component={AddNewCustomers}
-          access="admin"
-        />
-        <PrivateRoute
-          exact
-          path="/customer/add-site"
           component={AddNewSite}
           access="admin"
         />
