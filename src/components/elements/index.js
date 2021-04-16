@@ -9,6 +9,8 @@ import Dropzone from './Dropzone';
 import Select from './Select';
 import GoogleMap from './GoogleMap';
 import Modal from './Modal';
+import NameSelectInput from './NameSelectInput';
+import SignaturePad from './SignaturePad';
 
 export {
   InputGroup,
@@ -22,4 +24,6 @@ export {
   Select,
   GoogleMap,
   Modal,
+  NameSelectInput,
+  SignaturePad,
 };

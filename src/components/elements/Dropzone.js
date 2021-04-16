@@ -31,7 +31,8 @@ const Label = styled.label`
   font-size: ${(props) => props.theme.fontSizeSmall};
 `;
 
-function Dropzone() {
+function Dropzone(props) {
+  const { label } = props;
   const [files, setFiles] = useState([]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
@@ -65,14 +66,19 @@ function Dropzone() {
   return (
     <DropzoneWrapper className="container">
       <Label className="label has-text-weight-semibold mb-2 has-text-black">
-        Before Picture
+        {label}
       </Label>
       <div
         {...getRootProps({
-          className: 'dropzone p-5 is-flex is-justify-content-center',
+          className: 'dropzone p-5',
         })}>
         <input {...getInputProps()} />
-        <p>Drag & drop some files here, or click to select files</p>
+        <div className="has-text-centered">
+          <p>Drag & Drop your file or Browse</p>
+          <small className="is-size-7 has-text-grey">
+            Make sure your documents visible and clear
+          </small>
+        </div>
       </div>
       <aside className="mt-4">{thumbs}</aside>
     </DropzoneWrapper>

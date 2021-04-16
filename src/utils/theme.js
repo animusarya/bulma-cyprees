@@ -98,8 +98,9 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   label {
-    color: ${theme.textColorWhite} !important;
+    color: ${theme.fontDark} !important;
     font-weight: 500 !important;
+    font-size: ${theme.fontSizeSmall} !important;
   }
   .select:not(.is-multiple):not(.is-loading)::after {
     border-color: ${theme.fontDark} !important;

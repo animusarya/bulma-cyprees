@@ -41,7 +41,7 @@ const LoginForm = (props) => {
         }
       />
       <Link
-        className="has-text-grey-lighter is-pulled-right is-size-7 mb-4"
+        className="has-text-black is-pulled-right is-size-7 mb-4"
         to="/forgot-password">
         Forgot your password?
       </Link>
