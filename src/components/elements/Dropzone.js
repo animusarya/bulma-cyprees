@@ -23,7 +23,12 @@ const DropzoneWrapper = styled.section`
     border-style: dashed;
     background-color: ${(props) => props.theme.background};
     outline: none;
+    cursor: pointer;
   }
+`;
+
+const Label = styled.label`
+  font-size: ${(props) => props.theme.fontSizeSmall};
 `;
 
 function Dropzone() {
@@ -59,9 +64,9 @@ function Dropzone() {
 
   return (
     <DropzoneWrapper className="container">
-      <label className="label has-text-weight-semibold mb-2 has-text-black">
+      <Label className="label has-text-weight-semibold mb-2 has-text-black">
         Before Picture
-      </label>
+      </Label>
       <div
         {...getRootProps({
           className: 'dropzone p-5 is-flex is-justify-content-center',

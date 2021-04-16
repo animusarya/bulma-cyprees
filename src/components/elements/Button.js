@@ -23,6 +23,7 @@ const Button = ({
 }) => (
   <Container
     type="submit"
+    disable={loading}
     className={`button has-text-weight-semibold is-size-8 ${
       secondary ? 'is-secondary' : ''
     }

@@ -1,4 +1,4 @@
 import JobTable from './JobTable';
+import SurveyItem from './SurveyItem';
 
-// eslint-disable-next-line import/prefer-default-export
-export { JobTable };
+export { JobTable, SurveyItem };

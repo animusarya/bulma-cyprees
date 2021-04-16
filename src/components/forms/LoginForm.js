@@ -47,7 +47,7 @@ const LoginForm = (props) => {
       </Link>
       <div className="field">
         <div className="control">
-          <Button primary fullWidth type="submit" disabled={isSubmitting}>
+          <Button primary fullWidth type="submit" loading={isSubmitting}>
             <span className="is-size-8">Sign In</span>
           </Button>
         </div>

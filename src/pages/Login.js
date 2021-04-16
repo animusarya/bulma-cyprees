@@ -7,7 +7,7 @@ import gql from 'graphql-tag';
 import { useStoreActions } from 'easy-peasy';
 
 import Seo from '../components/Seo';
-import { Message, Loading } from '../components/elements';
+import { Message } from '../components/elements';
 
 import { LoginForm } from '../components/forms';
 import Logo from '../assets/images/logo.png';
@@ -77,7 +77,6 @@ const Login = () => {
                   )}
                 </div>
               </div>
-              {res.loading ? <Loading /> : null}
             </div>
           </div>
         </div>

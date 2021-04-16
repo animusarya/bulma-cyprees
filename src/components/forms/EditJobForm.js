@@ -22,6 +22,7 @@ const EditJobForm = (props) => {
     handleBlur,
     handleSubmit,
   } = props;
+
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
@@ -61,20 +62,9 @@ const EditJobForm = (props) => {
             : undefined
         }
       />
-      <TextArea
-        label="Internal Notes"
-        name="internalNotes"
-        type="text"
-        value={values.internalNotes}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={
-          errors.internalNotes && touched.internalNotes
-            ? errors.internalNotes
-            : undefined
-        }
-      />
+
       <Dropzone />
+
       <InputGroup
         label="Payment Terms"
         name="paymentTerms"
@@ -85,19 +75,6 @@ const EditJobForm = (props) => {
         errors={
           errors.paymentTerms && touched.paymentTerms
             ? errors.paymentTerms
-            : undefined
-        }
-      />
-      <TextArea
-        label="Internal Notes"
-        name="internalNotes"
-        type="text"
-        value={values.internalNotes}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={
-          errors.internalNotes && touched.internalNotes
-            ? errors.internalNotes
             : undefined
         }
       />
@@ -115,7 +92,21 @@ const EditJobForm = (props) => {
             : undefined
         }
       />
-      <div className="mb-3 is-flex is-justify-content-flex-end	">
+      <TextArea
+        label="Internal Notes"
+        name="internalNotes"
+        type="text"
+        value={values.internalNotes}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.internalNotes && touched.internalNotes
+            ? errors.internalNotes
+            : undefined
+        }
+      />
+
+      <div className="mb-3 mt-5">
         <Button primary type="submit" disabled={isSubmitting}>
           <span className="has-text-weight-bold">Submit</span>
         </Button>

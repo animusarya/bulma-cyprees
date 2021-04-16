@@ -57,7 +57,7 @@ const Routes = () => (
         />
         <PrivateRoute
           exact
-          path="/edit:id"
+          path="/job/edit:id"
           component={EditJob}
           access="admin"
         />
@@ -75,7 +75,13 @@ const Routes = () => (
         />
         <PrivateRoute
           exact
-          path="/user/new"
+          path="/contractors"
+          component="contractors_list"
+          access="admin"
+        />
+        <PrivateRoute
+          exact
+          path="/contractor/new"
           component={AddUser}
           access="admin"
         />

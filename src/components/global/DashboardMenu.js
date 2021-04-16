@@ -8,6 +8,7 @@ import Searchbar from './Searchbar';
 const Container = styled.div`
   background-color: ${(props) => props.theme.primaryBackground};
 `;
+
 const SelectContainer = styled.div`
   option {
     background: ${(props) => props.theme.mainBrandColor};

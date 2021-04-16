@@ -87,17 +87,17 @@ const sidebarData = [
     ],
   },
   {
-    title: 'Users/Contractors ',
+    title: 'Contractors ',
     path: '#',
     icon: <AiIcons.AiOutlineMenu />,
     subNav: [
       {
         title: 'View All',
-        path: '/users',
+        path: '/contractors',
       },
       {
-        title: 'Add New Customer',
-        path: '/user/new',
+        title: 'Add New Contractor',
+        path: '/contractor/new',
       },
     ],
   },

@@ -10,7 +10,7 @@ import Layout from '../../components/Layout';
 import { Message, Loading } from '../../components/elements';
 import { RegisterForm } from '../../components/forms';
 import DashboardMenu from '../../components/global/DashboardMenu';
-import AddCustomerModel from '../../components/modal/AddCustomerModel';
+import { AddCustomerModel } from '../../components/modal';
 
 const registerMutation = gql`
   mutation register($input: RegisterInput) {
