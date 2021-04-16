@@ -65,7 +65,7 @@ const InputGroup = ({
         />
       )}
       {errors && <p className="help is-danger">{errors}</p>}
-    </div>{' '}
+    </div>
   </Group>
 );
 

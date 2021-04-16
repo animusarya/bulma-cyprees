@@ -34,7 +34,6 @@ const theme = {
   textColorWhite: '#ffffff', // has-text-white
 
   // Font Size
-  fontSizeSuperLarge: '30px',
   fontSizeExtraLarge: '24px', // is-size-4
   fontSizeLarge: '20px', // is-size-5
   fontSizeMedium: '18px',

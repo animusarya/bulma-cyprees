@@ -20,7 +20,7 @@ const Modal = ({ isActive, onClose, title, children }) => (
     <div className={`modal ${isActive ? 'is-active' : ''}`}>
       <div className="modal-background" />
       <div className="modal-content">
-        <div className="has-background-white inner-wrapper px-6 pt-5 pb-6">
+        <div className="has-background-white inner-wrapper px-5 pt-5 pb-6">
           <div className="has-text-right">
             {onClose && (
               <button
