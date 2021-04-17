@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
@@ -6,13 +6,12 @@ import * as yup from 'yup';
 
 import { Select, Heading } from '../elements';
 
-const FormWrapper = styled.form`
+const FormWrapper = styled.div`
   border: 1px solid ${(props) => props.theme.borderColor};
   box-shadow: none !important;
 `;
 
 const riskAssessmentList = [
-  { id: 1, value: '-- Select --' },
   { id: 2, value: 'Access & Egress From Site' },
   {
     id: 3,
@@ -39,13 +38,18 @@ const RiskAssessment = (props) => {
     // isSubmitting,
     handleChange,
     handleBlur,
-    handleSubmit,
+    onChange,
   } = props;
 
+  useEffect(() => {
+    onChange(values);
+  }, [values]);
+
   return (
-    <FormWrapper className="box" onSubmit={handleSubmit}>
+    <FormWrapper className="box">
       <Heading>Risk Assessment</Heading>
       <Select
+        placeholder="--select--"
         label="Access & Egress From Site"
         name="accessSiteEgress"
         options={riskAssessmentList}
@@ -62,6 +66,7 @@ const RiskAssessment = (props) => {
       <Select
         label="Working At Height"
         name="workingAtHeight"
+        placeholder="--select--"
         options={riskAssessmentList}
         type="text"
         value={values.workingAtHeight}
@@ -76,6 +81,7 @@ const RiskAssessment = (props) => {
       <Select
         label="Use Of Lifting/pulling Gear"
         name="gears"
+        placeholder="--select--"
         options={riskAssessmentList}
         type="text"
         value={values.gears}
@@ -94,7 +100,6 @@ RiskAssessment.propTypes = {
   // isSubmitting: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleBlur: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
 };
 
 export default withFormik({
@@ -104,15 +109,10 @@ export default withFormik({
     gears: '',
   }),
   validationSchema: yup.object().shape({
-    accessSiteEgress: yup.string(),
-    workingAtHeight: yup.string(),
-    gears: yup.string(),
+    accessSiteEgress: yup.string().required('required'),
+    workingAtHeight: yup.string().required('required'),
+    gears: yup.string().required('required'),
   }),
 
-  handleSubmit: (values, { setSubmitting, props }) => {
-    props.onSubmit(values).then(() => {
-      setSubmitting(false);
-    });
-  },
   displayName: 'RiskAssessment', // helps with React DevTools
 })(RiskAssessment);

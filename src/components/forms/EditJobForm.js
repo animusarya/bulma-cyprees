@@ -87,7 +87,7 @@ const EditJobForm = (props) => {
       />
 
       <Dropzone label="Before Picture" />
-      <RiskAssessment />
+      <RiskAssessment onChange={(val) => console.log(val)} />
       <Dropzone label="Job File Upload" />
 
       <NameSelectInput
