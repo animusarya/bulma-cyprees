@@ -10,7 +10,7 @@ const SidebarLink = styled(Link)`
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  font-size: 16px;
+  font-size: ${(props) => props.theme.fontSize};
 `;
 
 const SidebarLabel = styled.span`
@@ -21,7 +21,7 @@ const DropdownLink = styled(Link)`
   height: 60px;
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: ${(props) => props.theme.fontSize};
   background-color: ${(props) =>
     props.active
       ? `${props.theme.secondaryColor}50`
