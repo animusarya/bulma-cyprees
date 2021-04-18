@@ -35,16 +35,17 @@ const RegisterForm = (props) => {
     handleChange,
     handleBlur,
     handleSubmit,
+    setFieldValue,
   } = props;
 
   return (
     <form onSubmit={handleSubmit}>
       <NameSelectInput
+        label="Customer"
         name="name"
         value={values.name}
         onBlur={handleBlur}
-        // onChange={(value) => setFieldValue('name', value)}
-        label="Customer"
+        onChange={(value) => setFieldValue('name', value)}
         options={
           allCustomerNames
             ? allCustomerNames.map((item) => ({
@@ -167,12 +168,14 @@ RegisterForm.propTypes = {
 
 export default withFormik({
   mapPropsToValues: () => ({
+    name: '',
     jobNumber: '',
     customerReference: '',
     description: '',
     internalNotes: '',
   }),
   validationSchema: yup.object().shape({
+    name: yup.object().required('Name is required!'),
     jobNumber: yup.string().required('Job Number is required!'),
     customerReference: yup.string().required('Customer Reference is required!'),
     description: yup.string(),

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function ContractorTable(props) {
   const { contractorData } = props;
@@ -23,11 +24,11 @@ function ContractorTable(props) {
               <td>{item.address} </td>
               <td>{item.telephone}</td>
               <td>
-                <button type="button" className="button is-primary">
+                <Link to="/contractor/edit:12345" className="button is-primary">
                   <span className="icon is-small">
                     <i className="fas fa-eye" />
                   </span>
-                </button>
+                </Link>
               </td>
             </tr>
           ))}

@@ -17,6 +17,7 @@ import AddCustomer from '../pages/admin/AddCustomer';
 import EditCustomer from '../pages/admin/EditCustomer';
 import Contractor from '../pages/admin/Contractor';
 import AddContractor from '../pages/admin/AddContractor';
+import EditContractor from '../pages/admin/EditContractor';
 
 const PrivateRoute = ({ component: Component, access, ...rest }) => {
   const isLoggedIn = useStoreState((state) => state.isLoggedIn.value);
@@ -83,7 +84,6 @@ const Routes = () => (
           component={EditCustomer}
           access="admin"
         />
-
         <PrivateRoute
           exact
           path="/contractors"
@@ -94,6 +94,12 @@ const Routes = () => (
           exact
           path="/contractor/new"
           component={AddContractor}
+          access="admin"
+        />
+        <PrivateRoute
+          exact
+          path="/contractor/edit:id"
+          component={EditContractor}
           access="admin"
         />
 
