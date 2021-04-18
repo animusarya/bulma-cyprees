@@ -6,7 +6,7 @@ import { AddContractorForm } from '../../components/forms';
 
 const AddContractor = () => (
   <Layout>
-    <DashboardMenu heading="Add Contractor">
+    <DashboardMenu heading="Add New Contractor">
       <AddContractorForm />
     </DashboardMenu>
   </Layout>
