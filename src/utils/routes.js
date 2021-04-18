@@ -14,8 +14,9 @@ import RegisterJob from '../pages/admin/RegisterJob';
 import EditJob from '../pages/admin/EditJob';
 import Customer from '../pages/admin/Customer';
 import AddCustomer from '../pages/admin/AddCustomer';
-import AddContractor from '../pages/admin/AddContractor';
+import EditCustomer from '../pages/admin/EditCustomer';
 import Contractor from '../pages/admin/Contractor';
+import AddContractor from '../pages/admin/AddContractor';
 
 const PrivateRoute = ({ component: Component, access, ...rest }) => {
   const isLoggedIn = useStoreState((state) => state.isLoggedIn.value);
@@ -44,6 +45,7 @@ const Routes = () => (
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
+
         <PrivateRoute
           exact
           path="/jobs/:status"
@@ -62,6 +64,7 @@ const Routes = () => (
           component={EditJob}
           access="admin"
         />
+
         <PrivateRoute
           exact
           path="/customers"
@@ -76,6 +79,13 @@ const Routes = () => (
         />
         <PrivateRoute
           exact
+          path="/customer/edit:id"
+          component={EditCustomer}
+          access="admin"
+        />
+
+        <PrivateRoute
+          exact
           path="/contractors"
           component={Contractor}
           access="admin"
@@ -86,6 +96,7 @@ const Routes = () => (
           component={AddContractor}
           access="admin"
         />
+
         <Route exact path="/test" component={Test} />
         <Route component={Error404} />
       </Switch>

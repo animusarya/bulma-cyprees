@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function CustomerTable(props) {
   const { customerData } = props;
@@ -23,11 +24,11 @@ function CustomerTable(props) {
               <td>{item.address} </td>
               <td>{item.storeNumber}</td>
               <td>
-                <button type="button" className="button is-primary">
+                <Link to="/customer/edit:12345" className="button is-primary">
                   <span className="icon is-small">
                     <i className="fas fa-eye" />
                   </span>
-                </button>
+                </Link>
               </td>
             </tr>
           ))}

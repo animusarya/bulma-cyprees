@@ -18,14 +18,7 @@ const Layout = ({ children }) => (
       <div className="column is-one-fifth is-paddingless">
         <Sidebar />
       </div>
-      <div className="column right-column pb-0 p-5">
-        {/* <Navbar className="">
-          <h1 className="title is-5 mb-1 has-text-black ha-text-weight-bold">
-            Dashboard
-          </h1>
-        </Navbar> */}
-        {children}
-      </div>
+      <div className="column right-column pb-0 p-5">{children}</div>
     </div>
   </Container>
 );

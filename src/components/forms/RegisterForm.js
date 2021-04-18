@@ -3,15 +3,9 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-import {
-  InputGroup,
-  Button,
-  Select,
-  TextArea,
-  NameSelectInput,
-} from '../elements';
+import { InputGroup, Button, TextArea, NameSelectInput } from '../elements';
 
-const allNames = [
+const allCustomerNames = [
   { name: 'Dharmveer' },
   { name: 'Karanbir' },
   { name: 'Kunal' },
@@ -20,13 +14,16 @@ const allNames = [
 ];
 
 const siteList = [
-  { id: 2, siteName: 'Norton canes' },
-  { id: 3, siteName: 'Autosmart International Ltd  -  Lichfield' },
+  { siteName: 'Norton canes' },
+  { siteName: 'Autosmart International Ltd  -  Lichfield' },
 ];
 
 const jobAssignList = [
-  { id: 2, value: 'AaronBowli' },
-  { id: 3, value: 'AaronDrury' },
+  { jobAssignedTo: 'Obama' },
+  { jobAssignedTo: 'Dan' },
+  { jobAssignedTo: 'Julia' },
+  { jobAssignedTo: 'Richard' },
+  { jobAssignedTo: 'Mark' },
 ];
 
 const RegisterForm = (props) => {
@@ -49,8 +46,8 @@ const RegisterForm = (props) => {
         // onChange={(value) => setFieldValue('name', value)}
         label="Customer"
         options={
-          allNames
-            ? allNames.map((item) => ({
+          allCustomerNames
+            ? allCustomerNames.map((item) => ({
                 value: item.name,
                 label: item.name,
               }))
@@ -114,21 +111,27 @@ const RegisterForm = (props) => {
             : undefined
         }
       />
-      <Select
-        placeholder="Select..."
-        label="Job Assigned to"
+      <NameSelectInput
         name="jobAssignedTo"
-        options={jobAssignList}
-        type="text"
         value={values.jobAssignedTo}
-        onChange={handleChange}
         onBlur={handleBlur}
+        // onChange={(value) => setFieldValue('name', value)}
+        label="Job Assigned to:"
+        options={
+          jobAssignList
+            ? jobAssignList.map((item) => ({
+                value: item.jobAssignedTo,
+                label: item.jobAssignedTo,
+              }))
+            : []
+        }
         errors={
           errors.jobAssignedTo && touched.jobAssignedTo
             ? errors.jobAssignedTo
             : undefined
         }
       />
+
       <TextArea
         label="Internal Notes"
         name="internalNotes"
@@ -168,14 +171,12 @@ export default withFormik({
     customerReference: '',
     description: '',
     internalNotes: '',
-    jobAssignedTo: '',
   }),
   validationSchema: yup.object().shape({
     jobNumber: yup.string().required('Job Number is required!'),
     customerReference: yup.string().required('Customer Reference is required!'),
     description: yup.string(),
     internalNotes: yup.string(),
-    jobAssignedTo: yup.string(),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {

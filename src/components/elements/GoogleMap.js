@@ -26,8 +26,9 @@ const MyMapComponent = compose(
 
 const enhance = _.identity;
 
-const MyGoogleMap = () => [
+const MyGoogleMap = ({ label }) => [
   <div className="mb-5">
+    {label && <label className="label has-text-weight-semibold">{label}</label>}
     <MyMapComponent key="map" />
   </div>,
 ];

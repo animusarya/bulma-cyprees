@@ -11,10 +11,9 @@ import {
   Dropzone,
   NameSelectInput,
   SignaturePad,
-  DatePicker,
-  Heading,
 } from '../elements';
 import RiskAssessment from './RiskAssessment';
+import { DueDateBox } from '../jobs';
 
 const companyList = [
   { value: 'Company One' },
@@ -199,11 +198,7 @@ const EditJobForm = (props) => {
         onBlur={handleBlur}
         errors={errors.status && touched.status ? errors.status : undefined}
       />
-      <div className="box box-wrapper">
-        <Heading>Due Date</Heading>
-        <DatePicker label="Starts" />
-        <DatePicker label="Ends" />
-      </div>
+      <DueDateBox />
 
       <div className="mb-3 mt-5">
         <Button primary type="submit" disabled={isSubmitting}>

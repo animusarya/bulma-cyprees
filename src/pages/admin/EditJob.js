@@ -13,7 +13,7 @@ const EditJobs = () => {
   return (
     <Layout>
       <DashboardMenu>
-        <GoogleMap />
+        <GoogleMap label="Location" />
         <button
           className="button is-primary mb-4"
           type="submit"
