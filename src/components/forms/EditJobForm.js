@@ -11,6 +11,7 @@ import {
   Dropzone,
   NameSelectInput,
   SignaturePad,
+  DatePicker,
 } from '../elements';
 import RiskAssessment from './RiskAssessment';
 
@@ -198,6 +199,8 @@ const EditJobForm = (props) => {
         onBlur={handleBlur}
         errors={errors.status && touched.status ? errors.status : undefined}
       />
+      <DatePicker label="Starts" />
+      <DatePicker label="Ends" />
 
       <div className="mb-3 mt-5">
         <Button primary type="submit" disabled={isSubmitting}>

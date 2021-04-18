@@ -33,6 +33,7 @@
     "randomstring": "^1.1.5",
     "react": "^17.0.1",
     "react-clipboard.js": "^2.0.16",
+    "react-datetime-picker": "^3.2.0",
     "react-dom": "^17.0.1",
     "react-dropzone": "^11.2.4",
     "react-google-maps": "^9.4.5",

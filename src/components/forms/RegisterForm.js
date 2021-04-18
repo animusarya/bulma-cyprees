@@ -3,15 +3,21 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-import { InputGroup, Button, Select, TextArea } from '../elements';
+import {
+  InputGroup,
+  Button,
+  Select,
+  TextArea,
+  NameSelectInput,
+} from '../elements';
 
-const customerList = [
-  { id: 1, value: '--' },
-  { id: 2, value: 'Able' },
-  { id: 3, value: 'Autosmart International Ltd' },
-  { id: 4, value: 'BandM' },
-  { id: 5, value: 'Belvoir' },
-  { id: 6, value: 'Cambian' },
+const customerNameList = [
+  { customerName: 'Kunal' },
+  { customerName: 'Dharmveer' },
+  { customerName: 'Taniya' },
+  { customerName: 'Manisha' },
+  { customerName: 'Saurav' },
+  { customerName: 'Vishal' },
 ];
 
 const siteList = [
@@ -39,20 +45,27 @@ const RegisterForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Select
+      <NameSelectInput
         label="Customer"
         name="customerName"
-        options={customerList}
-        type="text"
         value={values.customerName}
-        onChange={handleChange}
         onBlur={handleBlur}
+        // onChange={(value) => setFieldValue('name', value)}
+        options={
+          customerNameList
+            ? customerNameList.map((item) => ({
+                value: item.customerName,
+                label: item.customerName,
+              }))
+            : []
+        }
         errors={
           errors.customerName && touched.customerName
             ? errors.customerName
             : undefined
         }
       />
+
       <Select
         label="Site"
         name="siteName"

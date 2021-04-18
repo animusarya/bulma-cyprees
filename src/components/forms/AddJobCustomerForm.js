@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-import { InputGroup, Button, Select, TextArea } from '../elements';
+import { InputGroup, Button, TextArea, NameSelectInput } from '../elements';
 
-const customerList = [
-  { id: 1, value: 'Select...' },
-  { id: 2, value: 'Able' },
-  { id: 3, value: 'Autosmart International Ltd' },
-  { id: 4, value: 'BandM' },
-  { id: 5, value: 'Belvoir' },
-  { id: 6, value: 'Cambian' },
+const customerName = [
+  { id: 1, name: 'Select...' },
+  { id: 2, name: 'Able' },
+  { id: 3, name: 'Autosmart International Ltd' },
+  { id: 4, name: 'BandM' },
+  { id: 5, name: 'Belvoir' },
+  { id: 6, name: 'Cambian' },
 ];
 
 const AddJobCustomerForm = (props) => {
@@ -27,19 +27,21 @@ const AddJobCustomerForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Select
-        label="Customer"
-        name="customerName"
-        options={customerList}
-        type="text"
-        value={values.customerName}
-        onChange={handleChange}
+      <NameSelectInput
+        name="name"
+        value={values.name}
         onBlur={handleBlur}
-        errors={
-          errors.customerName && touched.customerName
-            ? errors.customerName
-            : undefined
+        // onChange={(value) => setFieldValue('name', value)}
+        label="Customer"
+        options={
+          customerName
+            ? customerName.map((item) => ({
+                value: item.name,
+                label: item.name,
+              }))
+            : []
         }
+        errors={errors.name && touched.name ? errors.name : undefined}
       />
 
       <InputGroup

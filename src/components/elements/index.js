@@ -11,6 +11,7 @@ import GoogleMap from './GoogleMap';
 import Modal from './Modal';
 import NameSelectInput from './NameSelectInput';
 import SignaturePad from './SignaturePad';
+import DatePicker from './DatePicker';
 
 export {
   InputGroup,
@@ -26,4 +27,5 @@ export {
   Modal,
   NameSelectInput,
   SignaturePad,
+  DatePicker,
 };
