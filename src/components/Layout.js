@@ -11,13 +11,6 @@ const Container = styled.div`
   }
 `;
 
-const Navbar = styled.nav`
-  background: transparent;
-  .icons {
-    color: ${(props) => props.theme.fontDark};
-  }
-`;
-
 const Layout = ({ children }) => (
   <Container>
     <Helmet title={config.siteName} />
@@ -26,11 +19,11 @@ const Layout = ({ children }) => (
         <Sidebar />
       </div>
       <div className="column right-column pb-0 p-5">
-        <Navbar className="py-4">
+        {/* <Navbar className="">
           <h1 className="title is-5 mb-1 has-text-black ha-text-weight-bold">
             Dashboard
           </h1>
-        </Navbar>
+        </Navbar> */}
         {children}
       </div>
     </div>

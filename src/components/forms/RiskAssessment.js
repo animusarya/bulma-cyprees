@@ -43,7 +43,7 @@ const RiskAssessment = (props) => {
     <div className="box box-wrapper">
       <Heading>Risk Assessment</Heading>
       <Select
-        placeholder="--select--"
+        placeholder="Select..."
         label="Access & Egress From Site"
         name="accessSiteEgress"
         options={riskAssessmentList}
@@ -60,7 +60,7 @@ const RiskAssessment = (props) => {
       <Select
         label="Working At Height"
         name="workingAtHeight"
-        placeholder="--select--"
+        placeholder="Select..."
         options={riskAssessmentList}
         type="text"
         value={values.workingAtHeight}
@@ -75,7 +75,7 @@ const RiskAssessment = (props) => {
       <Select
         label="Use Of Lifting/pulling Gear"
         name="gears"
-        placeholder="--select--"
+        placeholder="Select..."
         options={riskAssessmentList}
         type="text"
         value={values.gears}

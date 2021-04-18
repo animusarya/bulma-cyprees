@@ -115,7 +115,7 @@ const RegisterForm = (props) => {
         }
       />
       <Select
-        placeholder="--select--"
+        placeholder="Select..."
         label="Job Assigned to"
         name="jobAssignedTo"
         options={jobAssignList}

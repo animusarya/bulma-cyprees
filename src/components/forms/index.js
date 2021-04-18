@@ -3,7 +3,7 @@ import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import EditJobForm from './EditJobForm';
 import AddJobCustomerForm from './AddJobCustomerForm';
-import AddUserForm from './AddUserForm';
+import AddContractorForm from './AddContractorForm';
 
 export {
   ForgotPasswordForm,
@@ -11,5 +11,5 @@ export {
   RegisterForm,
   EditJobForm,
   AddJobCustomerForm,
-  AddUserForm,
+  AddContractorForm,
 };

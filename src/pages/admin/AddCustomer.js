@@ -6,7 +6,7 @@ import AddCustomerForm from '../../components/forms/AddCustomerForm';
 
 const AddCustomer = () => (
   <Layout>
-    <DashboardMenu>
+    <DashboardMenu heading="Add New Customer">
       <AddCustomerForm onSubmit={(formData) => console.log(formData)} />
     </DashboardMenu>
   </Layout>

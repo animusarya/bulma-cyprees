@@ -6,12 +6,12 @@ import * as yup from 'yup';
 import { InputGroup, Button, TextArea, NameSelectInput } from '../elements';
 
 const customerName = [
-  { id: 1, name: 'Select...' },
-  { id: 2, name: 'Able' },
-  { id: 3, name: 'Autosmart International Ltd' },
-  { id: 4, name: 'BandM' },
-  { id: 5, name: 'Belvoir' },
-  { id: 6, name: 'Cambian' },
+  { name: 'Kunal' },
+  { name: 'Dharmveer' },
+  { name: 'Taniya' },
+  { name: 'Saurav' },
+  { name: 'Manisha' },
+  { name: 'Vishal' },
 ];
 
 const AddJobCustomerForm = (props) => {

@@ -1,27 +1,27 @@
 import React from 'react';
 
-function CustomerTable(props) {
-  const { customerData } = props;
+function ContractorTable(props) {
+  const { contractorData } = props;
 
   return (
     <div className="table-container">
       <table className="table is-fullwidth">
         <thead>
           <tr>
-            <th>Customer</th>
-            <th>Site</th>
+            <th>Contractor</th>
+            <th>Accounts Name</th>
             <th>Address</th>
-            <th>Store No.</th>
+            <th>Telephone</th>
             <th>Edit</th>
           </tr>
         </thead>
         <tbody>
-          {customerData.map((item) => (
-            <tr key={item.storeNumber}>
-              <td>{item.customer}</td>
-              <td>{item.site}</td>
+          {contractorData.map((item) => (
+            <tr key={item.telephone}>
+              <td>{item.name}</td>
+              <td>{item.accountName}</td>
               <td>{item.address} </td>
-              <td>{item.storeNumber}</td>
+              <td>{item.telephone}</td>
               <td>
                 <button type="button" className="button is-primary">
                   <span className="icon is-small">
@@ -37,4 +37,4 @@ function CustomerTable(props) {
   );
 }
 
-export default CustomerTable;
+export default ContractorTable;

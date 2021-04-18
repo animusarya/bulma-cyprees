@@ -6,13 +6,12 @@ import * as yup from 'yup';
 import { InputGroup, Button, Select } from '../elements';
 
 const groupList = [
-  { id: 1, value: 'Company One' },
-  { id: 2, value: 'Company Two' },
-  { id: 3, value: 'Company Three' },
-  { id: 4, value: 'Company Four' },
+  { id: 1, value: 'Admin' },
+  { id: 2, value: 'Contractor' },
+  { id: 2, value: 'Internal' },
 ];
 
-const AddUserForm = (props) => {
+const AddContractorForm = (props) => {
   const {
     values,
     touched,
@@ -36,6 +35,7 @@ const AddUserForm = (props) => {
         }
       />
       <Select
+        placeholder="Select..."
         label="Group"
         name="group"
         options={groupList}
@@ -137,7 +137,7 @@ const AddUserForm = (props) => {
   );
 };
 
-AddUserForm.propTypes = {
+AddContractorForm.propTypes = {
   values: PropTypes.object.isRequired,
   touched: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -178,5 +178,5 @@ export default withFormik({
       setSubmitting(false);
     });
   },
-  displayName: 'AddUserForm', // helps with React DevTools
-})(AddUserForm);
+  displayName: 'AddContractorForm', // helps with React DevTools
+})(AddContractorForm);

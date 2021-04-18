@@ -8,66 +8,66 @@ import DashboardMenu from '../../components/global/DashboardMenu';
 
 const tableData = [
   {
-    jobNumber: 120081,
+    jobNumber: 12001,
     site: 'Stables',
     dueDate: '29/09/20',
-    assigned: 'Richard',
+    assigned: 'Obama',
     status: true,
   },
   {
-    jobNumber: 90082,
+    jobNumber: 12002,
     site: 'Tables',
     dueDate: '29/09/20',
-    assigned: 'Richard',
+    assigned: 'Dan',
     status: true,
   },
   {
-    jobNumber: 90083,
+    jobNumber: 12003,
     site: 'Anger Menu',
     dueDate: '29/09/20',
-    assigned: 'Richard',
+    assigned: 'Julia',
     status: true,
   },
   {
-    jobNumber: 70084,
+    jobNumber: 12004,
     site: 'Smart Stables',
     dueDate: '29/09/20',
     assigned: 'Richard',
     status: true,
   },
   {
-    jobNumber: 70085,
+    jobNumber: 12005,
     site: 'Micky',
     dueDate: '29/09/20',
-    assigned: 'Richard',
+    assigned: 'Mark',
     status: true,
   },
   {
-    jobNumber: 10284,
+    jobNumber: 12006,
     site: 'The Stables',
     dueDate: '9/09/20',
-    assigned: 'Richard',
+    assigned: 'Steve',
     status: true,
   },
   {
-    jobNumber: 600824,
+    jobNumber: 12007,
     site: 'The Stables',
     dueDate: '29/09/20',
-    assigned: 'Richard',
+    assigned: 'Kel',
     status: true,
   },
   {
-    jobNumber: 3020384,
+    jobNumber: 12008,
     site: 'The Stables',
     dueDate: '29/09/20',
-    assigned: 'Richard',
+    assigned: 'Maxwell',
     status: true,
   },
   {
-    jobNumber: 20290084,
+    jobNumber: 12009,
     site: 'The Stables',
     dueDate: '19/09/20',
-    assigned: 'Richard',
+    assigned: 'Harry',
     status: true,
   },
 ];
@@ -77,7 +77,7 @@ const Jobs = () => {
   const heading = status === 'revisit' ? 'Jobs that need Revisit' : 'Jobs';
   const [query, setUpdateQuery] = useState('');
   const fuse = new Fuse(tableData, {
-    keys: ['jobNumber', 'site', 'dueDate'],
+    keys: ['jobNumber', 'site', 'dueDate', 'assigned'],
     includeScore: true,
   });
 
