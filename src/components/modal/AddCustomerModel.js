@@ -3,7 +3,7 @@ import { Modal } from '../elements';
 import { AddJobCustomerForm } from '../forms';
 
 const AddCustomerModel = ({ onClose, isActive, onSubmit }) => (
-  <Modal isActive={isActive} onClose={onClose} title="Add New">
+  <Modal isActive={isActive} onClose={onClose} title="Add New Customer">
     <AddJobCustomerForm onClose={onClose} onSubmit={onSubmit} />
   </Modal>
 );

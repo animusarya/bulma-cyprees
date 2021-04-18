@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import DateTimePicker from 'react-datetime-picker';
@@ -12,9 +12,7 @@ const DatePickerWrapper = styled.div`
 `;
 
 function DatePicker(props) {
-  const { label } = props;
-  const [value, onChange] = useState(new Date());
-
+  const { label, onChange, value } = props;
   return (
     <>
       {label && (
