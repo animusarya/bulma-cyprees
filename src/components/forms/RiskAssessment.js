@@ -1,15 +1,9 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
 import { Select, Heading } from '../elements';
-
-const FormWrapper = styled.div`
-  border: 1px solid ${(props) => props.theme.borderColor};
-  box-shadow: none !important;
-`;
 
 const riskAssessmentList = [
   { id: 2, value: 'Access & Egress From Site' },
@@ -46,7 +40,7 @@ const RiskAssessment = (props) => {
   }, [values]);
 
   return (
-    <FormWrapper className="box">
+    <div className="box box-wrapper">
       <Heading>Risk Assessment</Heading>
       <Select
         placeholder="--select--"
@@ -89,7 +83,7 @@ const RiskAssessment = (props) => {
         onBlur={handleBlur}
         errors={errors.gears && touched.gears ? errors.gears : undefined}
       />
-    </FormWrapper>
+    </div>
   );
 };
 

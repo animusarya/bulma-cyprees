@@ -70,10 +70,10 @@ const Register = ({ match }) => {
       <DashboardMenu heading="Add Job">
         <Seo title="Registration" description="Register Job Here" />
         <button
-          className="button is-primary mb-4"
+          className="button is-small is-primary mb-4"
           type="submit"
           onClick={() => setOpenModel(!openModel)}>
-          Add New Customer
+          New Customer
         </button>
         <AddCustomerModel
           isActive={openModel}

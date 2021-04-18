@@ -129,4 +129,8 @@ export const GlobalStyle = createGlobalStyle`
   th {
     border-width: 0px 0 1px !important;
   }
+  .box-wrapper {
+    border: 1px solid ${theme.borderColor};
+    box-shadow: none !important;
+  }
 `;

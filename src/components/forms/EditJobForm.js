@@ -12,28 +12,29 @@ import {
   NameSelectInput,
   SignaturePad,
   DatePicker,
+  Heading,
 } from '../elements';
 import RiskAssessment from './RiskAssessment';
 
 const companyList = [
-  { id: 1, value: 'Company One' },
-  { id: 2, value: 'Company Two' },
-  { id: 3, value: 'Company Three' },
-  { id: 4, value: 'Company Four' },
+  { value: 'Company One' },
+  { value: 'Company Two' },
+  { value: 'Company Three' },
+  { value: 'Company Four' },
 ];
 
 const allNames = [
-  { id: 1, name: 'Dharmveer' },
-  { id: 2, name: 'Karanbir' },
-  { id: 3, name: 'Kunal' },
-  { id: 4, name: 'Vishal' },
-  { id: 4, name: 'Taniya' },
+  { name: 'Dharmveer' },
+  { name: 'Karanbir' },
+  { name: 'Kunal' },
+  { name: 'Vishal' },
+  { name: 'Taniya' },
 ];
 
 const statusType = [
-  { id: 1, value: 'Open' },
-  { id: 2, value: 'Closed' },
-  { id: 3, value: 'Archived' },
+  { value: 'Open' },
+  { value: 'Closed' },
+  { value: 'Archived' },
 ];
 
 const EditJobForm = (props) => {
@@ -163,7 +164,6 @@ const EditJobForm = (props) => {
             : undefined
         }
       />
-
       <label className="label">Revisit Required</label>
       <div className="control">
         <label className="radio has-text-black">
@@ -199,8 +199,11 @@ const EditJobForm = (props) => {
         onBlur={handleBlur}
         errors={errors.status && touched.status ? errors.status : undefined}
       />
-      <DatePicker label="Starts" />
-      <DatePicker label="Ends" />
+      <div className="box box-wrapper">
+        <Heading>Due Date</Heading>
+        <DatePicker label="Starts" />
+        <DatePicker label="Ends" />
+      </div>
 
       <div className="mb-3 mt-5">
         <Button primary type="submit" disabled={isSubmitting}>

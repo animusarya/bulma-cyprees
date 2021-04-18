@@ -11,23 +11,20 @@ import {
   NameSelectInput,
 } from '../elements';
 
-const customerNameList = [
-  { customerName: 'Kunal' },
-  { customerName: 'Dharmveer' },
-  { customerName: 'Taniya' },
-  { customerName: 'Manisha' },
-  { customerName: 'Saurav' },
-  { customerName: 'Vishal' },
+const allNames = [
+  { name: 'Dharmveer' },
+  { name: 'Karanbir' },
+  { name: 'Kunal' },
+  { name: 'Vishal' },
+  { name: 'Taniya' },
 ];
 
 const siteList = [
-  { id: 1, value: '--' },
-  { id: 2, value: 'Norton canes' },
-  { id: 3, value: 'Autosmart International Ltd  -  Lichfield' },
+  { id: 2, siteName: 'Norton canes' },
+  { id: 3, siteName: 'Autosmart International Ltd  -  Lichfield' },
 ];
 
 const jobAssignList = [
-  { id: 1, value: '--' },
   { id: 2, value: 'AaronBowli' },
   { id: 3, value: 'AaronDrury' },
 ];
@@ -46,34 +43,35 @@ const RegisterForm = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <NameSelectInput
-        label="Customer"
-        name="customerName"
-        value={values.customerName}
+        name="name"
+        value={values.name}
         onBlur={handleBlur}
         // onChange={(value) => setFieldValue('name', value)}
+        label="Customer"
         options={
-          customerNameList
-            ? customerNameList.map((item) => ({
-                value: item.customerName,
-                label: item.customerName,
+          allNames
+            ? allNames.map((item) => ({
+                value: item.name,
+                label: item.name,
               }))
             : []
         }
-        errors={
-          errors.customerName && touched.customerName
-            ? errors.customerName
-            : undefined
-        }
+        errors={errors.name && touched.name ? errors.name : undefined}
       />
-
-      <Select
-        label="Site"
+      <NameSelectInput
         name="siteName"
-        options={siteList}
-        type="text"
         value={values.siteName}
-        onChange={handleChange}
         onBlur={handleBlur}
+        // onChange={(value) => setFieldValue('name', value)}
+        label="Site"
+        options={
+          siteList
+            ? siteList.map((item) => ({
+                value: item.siteName,
+                label: item.siteName,
+              }))
+            : []
+        }
         errors={
           errors.siteName && touched.siteName ? errors.siteName : undefined
         }
@@ -117,6 +115,7 @@ const RegisterForm = (props) => {
         }
       />
       <Select
+        placeholder="--select--"
         label="Job Assigned to"
         name="jobAssignedTo"
         options={jobAssignList}
@@ -165,8 +164,6 @@ RegisterForm.propTypes = {
 
 export default withFormik({
   mapPropsToValues: () => ({
-    customerName: '',
-    siteName: '',
     jobNumber: '',
     customerReference: '',
     description: '',
@@ -174,8 +171,6 @@ export default withFormik({
     jobAssignedTo: '',
   }),
   validationSchema: yup.object().shape({
-    customerName: yup.string(),
-    siteName: yup.string(),
     jobNumber: yup.string().required('Job Number is required!'),
     customerReference: yup.string().required('Customer Reference is required!'),
     description: yup.string(),
