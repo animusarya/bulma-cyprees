@@ -9,6 +9,9 @@ const Container = styled.div`
   .right-column {
     background: ${(props) => props.theme.lightAccent};
   }
+  .column.is-one-fifth {
+    /* min-height: 80vh; */
+  }
 `;
 
 const Layout = ({ children }) => (

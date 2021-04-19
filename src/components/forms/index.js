@@ -6,6 +6,7 @@ import AddJobCustomerForm from './AddJobCustomerForm';
 import AddContractorForm from './AddContractorForm';
 import EditCustomerForm from './EditCustomerForm';
 import EditContractorForm from './EditContractorForm';
+import FrameSurveyForm from './FrameSurveyForm';
 
 export {
   ForgotPasswordForm,
@@ -16,4 +17,5 @@ export {
   AddContractorForm,
   EditCustomerForm,
   EditContractorForm,
+  FrameSurveyForm,
 };

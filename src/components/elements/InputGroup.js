@@ -14,7 +14,7 @@ const Input = styled.input`
   border-radius: ${(props) => (props.hasRadius ? '0.4rem' : '0.2rem')};
   background-color: ${(props) => props.theme.secondaryColor};
   ::placeholder {
-    color: ${(props) => props.theme.fontDark};
+    color: ${(props) => props.theme.placeholderColor};
   }
   :focus {
     border-color: ${(props) => props.theme.secondaryColor} !important;
