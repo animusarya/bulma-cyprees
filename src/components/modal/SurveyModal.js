@@ -10,8 +10,12 @@ const SurveyModal = ({ onClose, isActive }) => (
     <SurveyItem title="Frame Survey">
       <FrameSurveyForm />
     </SurveyItem>
-    <SurveyItem title="Frame Glass">form1</SurveyItem>
-    <SurveyItem title="Frame Glass">form1</SurveyItem>
+    <SurveyItem title="Frame Glass">
+      <FrameSurveyForm />
+    </SurveyItem>
+    <SurveyItem title="Glass Survey">
+      <FrameSurveyForm />
+    </SurveyItem>
   </Modal>
 );
 
