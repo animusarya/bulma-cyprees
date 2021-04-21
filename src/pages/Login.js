@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import { useStoreActions } from 'easy-peasy';
 
 import Seo from '../components/Seo';
-import { Message } from '../components/elements';
 
 import { LoginForm } from '../components/forms';
 import Logo from '../assets/images/logo.png';
@@ -28,17 +28,14 @@ const mutation = gql`
         id
         email
         type
-        profile {
-          companyName
-        }
       }
     }
   }
 `;
 
-const Login = () => {
+const Login = ({ history }) => {
   const [executeMutation, res] = useMutation(mutation);
-  const togggleLoggedIn = useStoreActions(
+  const toggleLoggedIn = useStoreActions(
     (actions) => actions.isLoggedIn.togggle,
   );
   const updateUser = useStoreActions((actions) => actions.user.update);
@@ -46,12 +43,21 @@ const Login = () => {
   if (res.data && res.data.login) {
     const { jwt, user } = res.data.login;
     window.localStorage.setItem('token', jwt);
-    togggleLoggedIn(true);
+    toggleLoggedIn(true);
     updateUser(user);
     setTimeout(() => {
-      window.location.replace('/jobs/all');
+      history.push('/jobs/all');
     }, 1000);
   }
+
+  useEffect(() => {
+    if (res.error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: res.error.message,
+      });
+  }, [res.error]);
 
   return (
     <div className="login-page">
@@ -72,9 +78,6 @@ const Login = () => {
                   <LoginForm
                     onSubmit={(data) => executeMutation({ variables: data })}
                   />
-                  {res.error && (
-                    <Message type="error">{res.error.message}</Message>
-                  )}
                 </div>
               </div>
             </div>

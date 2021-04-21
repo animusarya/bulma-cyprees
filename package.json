@@ -52,6 +52,7 @@
     "stripe": "^8.129.0",
     "styled-components": "^5.2.1",
     "sweetalert": "^2.1.2",
+    "sweetalert2": "^10.16.5",
     "yarn": "^1.22.10",
     "yup": "^0.32.8"
   },

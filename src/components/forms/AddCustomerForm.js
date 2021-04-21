@@ -4,6 +4,7 @@ import { withFormik } from 'formik';
 import * as yup from 'yup';
 
 import { InputGroup, Button, TextArea } from '../elements';
+import AddressForm from './AddressForm';
 
 const AddCustomerForm = (props) => {
   const {
@@ -14,6 +15,7 @@ const AddCustomerForm = (props) => {
     handleChange,
     handleBlur,
     handleSubmit,
+    setFieldValue,
   } = props;
   return (
     <form onSubmit={handleSubmit}>
@@ -31,21 +33,44 @@ const AddCustomerForm = (props) => {
         }
       />
       <InputGroup
-        label="Site Name"
-        name="siteName"
+        label="Account Email"
+        name="accountsEmail"
         type="text"
-        value={values.siteName}
+        value={values.accountsEmail}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
-          errors.siteName && touched.siteName ? errors.siteName : undefined
+          errors.accountsEmail && touched.accountsEmail
+            ? errors.accountsEmail
+            : undefined
         }
       />
       <InputGroup
-        label="Store Number:"
-        name="storeNumber"
+        label="Jobs Email"
+        name="jobsEmail"
         type="text"
-        value={values.storeNumber}
+        value={values.jobsEmail}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.jobsEmail && touched.jobsEmail ? errors.jobsEmail : undefined
+        }
+      />
+      <h1>Address Info</h1>
+      <InputGroup
+        label="Name"
+        name="location.name"
+        type="text"
+        value={values.location.name}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={errors.name && touched.name ? errors.name : undefined}
+      />
+      <InputGroup
+        label="Store Number:"
+        name="location.storeNumber"
+        type="text"
+        value={values.location.storeNumber}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
@@ -54,14 +79,8 @@ const AddCustomerForm = (props) => {
             : undefined
         }
       />
-      <TextArea
-        label="Address"
-        name="address"
-        type="text"
-        value={values.address}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={errors.address && touched.address ? errors.address : undefined}
+      <AddressForm
+        onChange={(value) => setFieldValue('location.address', value)}
       />
 
       <InputGroup
@@ -91,7 +110,7 @@ const AddCustomerForm = (props) => {
         }
       />
       <div className="mb-3 mt-4">
-        <Button primary type="submit" disabled={isSubmitting}>
+        <Button primary type="submit" loading={isSubmitting}>
           <span className="has-text-weight-bold">Submit</span>
         </Button>
       </div>
@@ -112,22 +131,43 @@ AddCustomerForm.propTypes = {
 export default withFormik({
   mapPropsToValues: () => ({
     companyName: '',
+    accountsEmail: '',
+    jobsEmail: '',
     siteName: '',
     storeNumber: '',
-    address: '',
+    location: {
+      name: '',
+      storeNumber: '',
+      address: {
+        addressLine1: '',
+        addressLine2: '',
+        city: '',
+        state: '',
+        country: '',
+        postcode: '',
+      },
+    },
     paymentTerms: '',
     internalNotes: '',
   }),
   validationSchema: yup.object().shape({
     companyName: yup.string().required('Company Name is required!'),
-    siteName: yup.string().required('Site Name is required!'),
-    storeNumber: yup.string().required('Store Number is required!'),
-    address: yup.string().required('Address is required!'),
+    accountsEmail: yup
+      .string()
+      .email('Invalid email address')
+      .required('Account Email is required!'),
+    jobsEmail: yup
+      .string()
+      .email('Invalid email address')
+      .required('Jobs Email is required!'),
+    // siteName: yup.string().required('Site Name is required!'),
+
     paymentTerms: yup.string().required('Payment Terms is required!'),
     internalNotes: yup.string(),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
+    console.log(values);
     props.onSubmit(values).then(() => {
       setSubmitting(false);
     });
