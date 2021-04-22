@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Fuse from 'fuse.js';
 import { useParams } from 'react-router-dom';
 
+import Seo from '../../components/Seo';
 import Layout from '../../components/Layout';
 import { JobTable } from '../../components/jobs';
 import DashboardMenu from '../../components/global/DashboardMenu';
@@ -93,6 +94,8 @@ const Jobs = () => {
 
   return (
     <Layout>
+      <Seo title="Job page" description="View All Jobs" />
+
       <DashboardMenu
         value={query}
         onChange={onSearch}

@@ -14,32 +14,23 @@ const EditContractorForm = (props) => {
     handleChange,
     handleBlur,
     handleSubmit,
+    data,
   } = props;
-
+  console.log(data, 'helllo');
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
-        label="User Name"
-        name="userName"
+        label="Email"
+        name="email"
         type="text"
-        value={values.userName}
+        value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={
-          errors.userName && touched.userName ? errors.userName : undefined
-        }
+        errors={errors.email && touched.email ? errors.email : undefined}
       />
-      <InputGroup
-        label="Address"
-        name="address"
-        type="text"
-        value={values.address}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={errors.address && touched.address ? errors.address : undefined}
-      />
+
       <div className="mt-5">
-        <Button primary type="submit" disabled={isSubmitting}>
+        <Button primary type="submit" loading={isSubmitting}>
           <span className="has-text-weight-bold">Submit</span>
         </Button>
       </div>
@@ -59,12 +50,10 @@ EditContractorForm.propTypes = {
 
 export default withFormik({
   mapPropsToValues: () => ({
-    userName: '',
-    address: '',
+    email: '',
   }),
   validationSchema: yup.object().shape({
-    userName: yup.string().required('Username is required!'),
-    address: yup.string().required('Address is required!'),
+    email: yup.string(),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {

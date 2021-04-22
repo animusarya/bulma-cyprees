@@ -67,8 +67,8 @@ const Register = ({ match }) => {
   const [openModel, setOpenModel] = useState(false);
   return (
     <Layout>
+      <Seo title="Registration" description="Register Job Here" />
       <DashboardMenu heading="Add Job">
-        <Seo title="Registration" description="Register Job Here" />
         <button
           className="button is-small is-primary mb-4"
           type="submit"

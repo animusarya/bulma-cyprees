@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 
 import Layout from '../../components/Layout';
+import Seo from '../../components/Seo';
 import CustomerTable from '../../components/customers/CustomerTable';
 import DashboardMenu from '../../components/global/DashboardMenu';
 import { Loading, EmptyState } from '../../components/elements';
@@ -40,6 +41,8 @@ const Customer = () => {
   const allCustomers = data && data.allCustomers ? data.allCustomers : {};
   return (
     <Layout>
+      <Seo title="Customers" description="View all customers" />
+
       <DashboardMenu hasSearchMenu heading="Customer">
         {loading && !data && <Loading />}
         <div className="has-text-centered mb-5">

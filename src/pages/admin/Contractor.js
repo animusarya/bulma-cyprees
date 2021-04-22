@@ -3,8 +3,9 @@ import Swal from 'sweetalert2';
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 
-import { Loading, EmptyState } from '../../components/elements';
 import Layout from '../../components/Layout';
+import Seo from '../../components/Seo';
+import { Loading, EmptyState } from '../../components/elements';
 import ContractorTable from '../../components/contractor/ContractorTable';
 import DashboardMenu from '../../components/global/DashboardMenu';
 
@@ -42,6 +43,8 @@ const Contractor = () => {
   const allUsers = data && data.allUsers ? data.allUsers : {};
   return (
     <Layout>
+      <Seo title="Contractors" description="View all contractors" />
+
       <DashboardMenu hasSearchMenu heading="Contractor">
         {loading && !data && <Loading />}
         <div className="has-text-centered mb-5">

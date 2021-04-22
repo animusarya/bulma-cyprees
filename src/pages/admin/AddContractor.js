@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import Swal from 'sweetalert2';
+import Seo from '../../components/Seo';
 
 import Layout from '../../components/Layout';
 import DashboardMenu from '../../components/global/DashboardMenu';
@@ -62,6 +63,8 @@ const AddContractor = ({ history }) => {
 
   return (
     <Layout>
+      <Seo title="Add New Contractor" description="Add new contractor page" />
+
       <DashboardMenu heading="Add New Contractor">
         <AddContractorForm onSubmit={handleSubmit} />
       </DashboardMenu>

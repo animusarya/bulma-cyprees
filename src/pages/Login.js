@@ -61,7 +61,7 @@ const Login = ({ history }) => {
 
   return (
     <div className="login-page">
-      <Seo title="Login" description="Some description here." />
+      <Seo title="Login" description="Admin login" />
       <Container className="hero is-fullheight">
         <div className="hero-body">
           <div className="container">
