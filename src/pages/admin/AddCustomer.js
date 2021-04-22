@@ -41,8 +41,6 @@ const AddCustomer = ({ history }) => {
     history.push(`/customer/edit:${res.data.insertCustomer.id}`);
   }
 
-  console.log(res.data);
-
   const handleSubmit = async (formData) => {
     const resp = await executeMutation({
       variables: { input: formData },

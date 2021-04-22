@@ -12,6 +12,7 @@ import Modal from './Modal';
 import NameSelectInput from './NameSelectInput';
 import SignaturePad from './SignaturePad';
 import DatePicker from './DatePicker';
+import EmptyState from './EmptyState';
 
 export {
   InputGroup,
@@ -28,4 +29,5 @@ export {
   NameSelectInput,
   SignaturePad,
   DatePicker,
+  EmptyState,
 };
