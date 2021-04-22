@@ -1,65 +1,55 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Swal from 'sweetalert2';
+import { useQuery } from '@apollo/client';
+import gql from 'graphql-tag';
 
+import { Loading, EmptyState } from '../../components/elements';
 import Layout from '../../components/Layout';
 import ContractorTable from '../../components/contractor/ContractorTable';
 import DashboardMenu from '../../components/global/DashboardMenu';
 
-const contractorData = [
-  {
-    name: 'Obama',
-    accountName: 'Stables',
-    address: '1 CHURCH CLOSE, MARCHINGTON, UTTOXETER, ST148NQ	',
-    telephone: '12345678301',
-  },
-  {
-    name: 'Dan',
-    accountName: 'Stables',
-    address: '1 CHURCH CLOSE, MARCHINGTON, UTTOXETER, ST148NQ	',
-    telephone: '12345678302',
-  },
-  {
-    name: 'Julia',
-    accountName: 'Stables',
-    address: '1 CHURCH CLOSE, MARCHINGTON, UTTOXETER, ST148NQ	',
-    telephone: '12345678303',
-  },
-  {
-    name: 'Richard',
-    accountName: 'Stables',
-    address: '1 CHURCH, MARCHINGTON, UTTOXETER, ST148NQ	',
-    telephone: '12345678304',
-  },
-  {
-    name: 'Mark',
-    accountName: 'Stables',
-    address: '1 CHURCH CLOSE, MARCHINGTON, UTTOXETER, ST148NQ	',
-    telephone: '12345678305',
-  },
-  {
-    name: 'Steve',
-    accountName: 'Stables',
-    address: '1 CHURCH CLOSE, MARCHINGTON, UTTOXETER, ST148NQ	',
-    telephone: '12345678306',
-  },
-  {
-    name: 'Maxwell',
-    accountName: 'Stables',
-    address: '1 CHURCH CLOSE, MARCHINGTON, UTTOXETER, ST148NQ	',
-    telephone: '12345678307',
-  },
-  {
-    name: 'Kel',
-    accountName: 'Stables',
-    address: '1 CHURCH CLOSE, MARCHINGTON, UTTOXETER, ST148NQ	',
-    telephone: '1234567838',
-  },
-];
+const allUserQuery = gql`
+  query allUsers {
+    allUsers {
+      id
+      email
+      telephone
+      status
+      type
+      profile {
+        fullName
+      }
+      account {
+        accountAddress
+      }
+    }
+  }
+`;
 
-const Contractor = () => (
-  <Layout>
-    <DashboardMenu hasSearchMenu heading="Contractor">
-      <ContractorTable contractorData={contractorData} />
-    </DashboardMenu>
-  </Layout>
-);
+const Contractor = () => {
+  const { data, error, loading } = useQuery(allUserQuery, {
+    fetchPolicy: 'cache-and-network',
+  });
+  useEffect(() => {
+    if (error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: error.message,
+      });
+  }, [error]);
+
+  const allUsers = data && data.allUsers ? data.allUsers : {};
+  return (
+    <Layout>
+      <DashboardMenu hasSearchMenu heading="Contractor">
+        {loading && !data && <Loading />}
+        <div className="has-text-centered mb-5">
+          {allUsers.length === 0 && !loading && <EmptyState />}
+        </div>
+        {allUsers && allUsers.length > 0 && <ContractorTable data={allUsers} />}
+      </DashboardMenu>
+    </Layout>
+  );
+};
 export default Contractor;

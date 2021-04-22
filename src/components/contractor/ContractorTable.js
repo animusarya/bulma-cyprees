@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function ContractorTable(props) {
-  const { contractorData } = props;
-
+const ContractorTable = ({ data }) => {
+  if (!data) {
+    return null;
+  }
   return (
     <div className="table-container">
       <table className="table is-fullwidth">
@@ -13,18 +14,24 @@ function ContractorTable(props) {
             <th>Accounts Name</th>
             <th>Address</th>
             <th>Telephone</th>
+            <th>Type</th>
+            <th>Status</th>
             <th>Edit</th>
           </tr>
         </thead>
         <tbody>
-          {contractorData.map((item) => (
-            <tr key={item.telephone}>
-              <td>{item.name}</td>
-              <td>{item.accountName}</td>
-              <td>{item.address} </td>
+          {data.map((item) => (
+            <tr key={item.id}>
+              <td>{item.email}</td>
+              <td>{item && item.profile ? item.profile.fullName : ''}</td>
+              <td>{item && item.account ? item.account.accountAddress : ''}</td>
               <td>{item.telephone}</td>
+              <td>{item.type}</td>
+              <td>{item.status}</td>
               <td>
-                <Link to="/contractor/edit:12345" className="button is-primary">
+                <Link
+                  to={`/contractor/edit:${item.id}`}
+                  className="button is-primary">
                   <span className="icon is-small">
                     <i className="fas fa-eye" />
                   </span>
@@ -36,6 +43,6 @@ function ContractorTable(props) {
       </table>
     </div>
   );
-}
+};
 
 export default ContractorTable;
