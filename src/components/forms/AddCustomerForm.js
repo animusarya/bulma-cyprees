@@ -1,4 +1,5 @@
 import React from 'react';
+
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
@@ -21,16 +22,12 @@ const AddCustomerForm = (props) => {
     <form onSubmit={handleSubmit}>
       <InputGroup
         label="Company Name:"
-        name="companyName"
+        name="name"
         type="text"
-        value={values.companyName}
+        value={values.name}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={
-          errors.companyName && touched.companyName
-            ? errors.companyName
-            : undefined
-        }
+        errors={errors.name && touched.name ? errors.name : undefined}
       />
       <InputGroup
         label="Account Email"
@@ -59,28 +56,25 @@ const AddCustomerForm = (props) => {
       <h1>Address Info</h1>
       <InputGroup
         label="Name"
-        name="location.name"
+        name="locations.name"
         type="text"
-        value={values.location.name}
+        value={values.locations.name}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={errors.name && touched.name ? errors.name : undefined}
       />
       <InputGroup
         label="Store Number:"
-        name="location.storeNumber"
+        name="locations.number"
         type="text"
-        value={values.location.storeNumber}
+        value={values.locations.number}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={
-          errors.storeNumber && touched.storeNumber
-            ? errors.storeNumber
-            : undefined
-        }
+        errors={errors.number && touched.number ? errors.number : undefined}
       />
       <AddressForm
-        onChange={(value) => setFieldValue('location.address', value)}
+        onChange={(value) => setFieldValue('locations.address', value)}
+        handleSubmit={handleSubmit}
       />
 
       <InputGroup
@@ -130,14 +124,12 @@ AddCustomerForm.propTypes = {
 
 export default withFormik({
   mapPropsToValues: () => ({
-    companyName: '',
+    name: '',
     accountsEmail: '',
     jobsEmail: '',
-    siteName: '',
-    storeNumber: '',
-    location: {
+    locations: {
       name: '',
-      storeNumber: '',
+      number: '',
       address: {
         addressLine1: '',
         addressLine2: '',
@@ -151,7 +143,7 @@ export default withFormik({
     internalNotes: '',
   }),
   validationSchema: yup.object().shape({
-    companyName: yup.string().required('Company Name is required!'),
+    name: yup.string().required('Company Name is required!'),
     accountsEmail: yup
       .string()
       .email('Invalid email address')
@@ -160,14 +152,10 @@ export default withFormik({
       .string()
       .email('Invalid email address')
       .required('Jobs Email is required!'),
-    // siteName: yup.string().required('Site Name is required!'),
-
     paymentTerms: yup.string().required('Payment Terms is required!'),
-    internalNotes: yup.string(),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
-    console.log(values);
     props.onSubmit(values).then(() => {
       setSubmitting(false);
     });

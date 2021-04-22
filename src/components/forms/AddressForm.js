@@ -6,9 +6,18 @@ import * as yup from 'yup';
 import { InputGroup, GoogleMap } from '../elements';
 
 const AddressForm = (props) => {
-  const { values, touched, errors, handleChange, handleBlur, onChange } = props;
+  const {
+    values,
+    touched,
+    errors,
+    handleChange,
+    handleBlur,
+    onChange,
+    handleSubmit,
+  } = props;
   useEffect(() => {
     onChange(values);
+    handleSubmit();
   }, [values]);
 
   return (
@@ -109,10 +118,5 @@ export default withFormik({
     country: yup.string().required('Country is required!'),
   }),
 
-  handleSubmit: (values, { setSubmitting, props }) => {
-    props.onSubmit(values).then(() => {
-      setSubmitting(false);
-    });
-  },
   displayName: 'AddressForm', // helps with React DevTools
 })(AddressForm);
