@@ -25,6 +25,9 @@ const insertUserMutation = gql`
         accountAddress
         accountTelephone
       }
+      profile {
+        fullName
+      }
     }
   }
 `;

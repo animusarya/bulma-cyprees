@@ -32,7 +32,17 @@ const AddContractorForm = (props) => {
         onBlur={handleBlur}
         errors={errors.email && touched.email ? errors.email : undefined}
       />
-
+      <InputGroup
+        label="Profile Name"
+        name="fullName"
+        type="text"
+        value={values.fullName}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.fullName && touched.fullName ? errors.fullName : undefined
+        }
+      />
       <InputGroup
         label="Telephone"
         name="telephone"
@@ -68,7 +78,6 @@ const AddContractorForm = (props) => {
             : undefined
         }
       />
-
       <InputGroup
         label="Registration Number"
         name="registrationNumber"
@@ -106,7 +115,6 @@ const AddContractorForm = (props) => {
             : undefined
         }
       />
-
       <InputGroup
         label="Accounts Telephone"
         name="accountTelephone"
@@ -166,6 +174,7 @@ AddContractorForm.propTypes = {
 export default withFormik({
   mapPropsToValues: () => ({
     email: '',
+    fullName: '',
     telephone: '',
     status: '',
     accountEmail: '',
@@ -194,6 +203,8 @@ export default withFormik({
       .required('Account Email is required!'),
     accountAddress: yup.string().required('Account address is required!'),
     accountTelephone: yup.string().required('Account telephone is required!'),
+    fullName: yup.string().required('Name is required!'),
+
     password: yup
       .string()
       .required('Password is required!')
@@ -213,6 +224,9 @@ export default withFormik({
         accountNumber: values.accountNumber,
         accountAddress: values.accountAddress,
         accountTelephone: values.accountTelephone,
+      },
+      profile: {
+        fullName: values.fullName,
       },
     });
     setSubmitting(false);

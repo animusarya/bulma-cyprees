@@ -11,6 +11,7 @@ const ContractorTable = ({ data }) => {
         <thead>
           <tr>
             <th>Contractor</th>
+            <th>Profile Name</th>
             <th>Address</th>
             <th>Telephone</th>
             <th>Type</th>
@@ -22,6 +23,7 @@ const ContractorTable = ({ data }) => {
           {data.map((item) => (
             <tr key={item.id}>
               <td>{item.email}</td>
+              <td>{item && item.profile ? item.profile.fullName : ''}</td>
               <td>{item && item.account ? item.account.accountAddress : ''}</td>
               <td>{item.telephone}</td>
               <td>{item.type}</td>
