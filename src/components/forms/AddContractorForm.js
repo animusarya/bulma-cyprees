@@ -6,9 +6,9 @@ import * as yup from 'yup';
 import { InputGroup, Button, Select } from '../elements';
 
 const groupList = [
-  { id: 1, value: 'Admin' },
-  { id: 2, value: 'Contractor' },
-  { id: 2, value: 'Internal' },
+  { id: 1, value: 'active' },
+  { id: 2, value: 'notActive' },
+  { id: 3, value: 'archived' },
 ];
 
 const AddContractorForm = (props) => {
@@ -24,49 +24,13 @@ const AddContractorForm = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
-        label="Username"
-        name="userName"
-        type="text"
-        value={values.userName}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={
-          errors.userName && touched.userName ? errors.userName : undefined
-        }
-      />
-      <Select
-        placeholder="Select..."
-        label="Group"
-        name="group"
-        options={groupList}
-        type="text"
-        value={values.group}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={errors.group && touched.group ? errors.group : undefined}
-      />
-      <InputGroup
-        label="Email Address"
+        label="Email"
         name="email"
         type="text"
         value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={errors.email && touched.email ? errors.email : undefined}
-      />
-
-      <InputGroup
-        label="Screen Name"
-        name="screenName"
-        type="text"
-        value={values.screenName}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={
-          errors.screenName && touched.screenName
-            ? errors.screenName
-            : undefined
-        }
       />
 
       <InputGroup
@@ -80,6 +44,18 @@ const AddContractorForm = (props) => {
           errors.telephone && touched.telephone ? errors.telephone : undefined
         }
       />
+      <Select
+        placeholder="Select..."
+        label="Status"
+        name="status"
+        options={groupList}
+        type="text"
+        value={values.status}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={errors.status && touched.status ? errors.status : undefined}
+      />
+
       <InputGroup
         label="Registration Number"
         name="registrationNumber"
@@ -105,15 +81,54 @@ const AddContractorForm = (props) => {
         }
       />
       <InputGroup
-        label="Accounts Name"
-        name="accountName"
+        label="Accounts Number"
+        name="accountNumber"
         type="text"
-        value={values.accountName}
+        value={values.accountNumber}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
-          errors.accountName && touched.accountName
-            ? errors.accountName
+          errors.accountNumber && touched.accountNumber
+            ? errors.accountNumber
+            : undefined
+        }
+      />
+      <InputGroup
+        label="Accounts Email"
+        name="accountEmail"
+        type="text"
+        value={values.accountEmail}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.accountEmail && touched.accountEmail
+            ? errors.accountEmail
+            : undefined
+        }
+      />
+      <InputGroup
+        label="Accounts Telephone"
+        name="accountTelephone"
+        type="text"
+        value={values.accountTelephone}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.accountTelephone && touched.accountTelephone
+            ? errors.accountTelephone
+            : undefined
+        }
+      />
+      <InputGroup
+        label="Account Address"
+        name="accountAddress"
+        type="text"
+        value={values.accountAddress}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.accountAddress && touched.accountAddress
+            ? errors.accountAddress
             : undefined
         }
       />
@@ -149,28 +164,36 @@ AddContractorForm.propTypes = {
 
 export default withFormik({
   mapPropsToValues: () => ({
-    userName: '',
-    group: '',
     email: '',
-    password: '',
-    screenName: '',
     telephone: '',
+    status: '',
     registrationNumber: '',
     vatNumber: '',
-    accountName: '',
+    accountNumber: '',
+    accountEmail: '',
+    accountAddress: '',
+    accountTelephone: '',
+    password: '',
   }),
   validationSchema: yup.object().shape({
-    userName: yup.string().required('UserName is required!'),
-    group: yup.string().required('Group is required!'),
-    email: yup.string().required('Email is required!'),
-    password: yup.string().required('Password is required!'),
-    screenName: yup.string().required('Screen Name is required!'),
+    email: yup
+      .string()
+      .email('Invalid email address')
+      .required('Email is required!'),
+    status: yup.string().required('Status is required!'),
     telephone: yup.string().required('telephone is required!'),
     registrationNumber: yup
       .string()
       .required('Registration Number is required!'),
     vatNumber: yup.string().required('VAT Number is required!'),
-    accountName: yup.string().required('Account Name is required!'),
+    accountNumber: yup.string().required('Account Number is required!'),
+    accountEmail: yup
+      .string()
+      .email('Invalid email address')
+      .required('Account Email is required!'),
+    accountAddress: yup.string().required('Account address is required!'),
+    accountTelephone: yup.string().required('Account telephone is required!'),
+    password: yup.string().required('Password is required!'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
