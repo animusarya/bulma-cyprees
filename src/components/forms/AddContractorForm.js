@@ -55,12 +55,25 @@ const AddContractorForm = (props) => {
         onBlur={handleBlur}
         errors={errors.status && touched.status ? errors.status : undefined}
       />
+      <InputGroup
+        label="Accounts Email"
+        name="account.accountEmail"
+        type="text"
+        value={values.account.accountEmail}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.accountEmail && touched.accountEmail
+            ? errors.accountEmail
+            : undefined
+        }
+      />
 
       <InputGroup
         label="Registration Number"
-        name="registrationNumber"
+        name="account.registrationNumber"
         type="text"
-        value={values.registrationNumber}
+        value={values.account.registrationNumber}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
@@ -71,9 +84,9 @@ const AddContractorForm = (props) => {
       />
       <InputGroup
         label="VAT Number"
-        name="vatNumber"
+        name="account.vatNumber"
         type="text"
-        value={values.vatNumber}
+        value={values.account.vatNumber}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
@@ -82,9 +95,9 @@ const AddContractorForm = (props) => {
       />
       <InputGroup
         label="Accounts Number"
-        name="accountNumber"
+        name="account.accountNumber"
         type="text"
-        value={values.accountNumber}
+        value={values.account.accountNumber}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
@@ -93,24 +106,12 @@ const AddContractorForm = (props) => {
             : undefined
         }
       />
-      <InputGroup
-        label="Accounts Email"
-        name="accountEmail"
-        type="text"
-        value={values.accountEmail}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={
-          errors.accountEmail && touched.accountEmail
-            ? errors.accountEmail
-            : undefined
-        }
-      />
+
       <InputGroup
         label="Accounts Telephone"
-        name="accountTelephone"
+        name="account.accountTelephone"
         type="text"
-        value={values.accountTelephone}
+        value={values.account.accountTelephone}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
@@ -121,9 +122,9 @@ const AddContractorForm = (props) => {
       />
       <InputGroup
         label="Account Address"
-        name="accountAddress"
+        name="account.accountAddress"
         type="text"
-        value={values.accountAddress}
+        value={values.account.accountAddress}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
@@ -144,7 +145,7 @@ const AddContractorForm = (props) => {
         }
       />
       <div className="mb-3 mt-5">
-        <Button primary type="submit" disabled={isSubmitting}>
+        <Button primary type="submit" loading={isSubmitting}>
           <span className="has-text-weight-bold">Submit</span>
         </Button>
       </div>
@@ -167,12 +168,14 @@ export default withFormik({
     email: '',
     telephone: '',
     status: '',
-    registrationNumber: '',
-    vatNumber: '',
-    accountNumber: '',
-    accountEmail: '',
-    accountAddress: '',
-    accountTelephone: '',
+    account: {
+      accountEmail: '',
+      registrationNumber: '',
+      vatNumber: '',
+      accountNumber: '',
+      accountAddress: '',
+      accountTelephone: '',
+    },
     password: '',
   }),
   validationSchema: yup.object().shape({
@@ -182,18 +185,21 @@ export default withFormik({
       .required('Email is required!'),
     status: yup.string().required('Status is required!'),
     telephone: yup.string().required('telephone is required!'),
-    registrationNumber: yup
+    // registrationNumber: yup
+    //   .string()
+    //   .required('Registration Number is required!'),
+    // vatNumber: yup.string().required('VAT Number is required!'),
+    // accountNumber: yup.string().required('Account Number is required!'),
+    // accountEmail: yup
+    //   .string()
+    //   .email('Invalid email address')
+    //   .required('Account Email is required!'),
+    // accountAddress: yup.string().required('Account address is required!'),
+    // accountTelephone: yup.string().required('Account telephone is required!'),
+    password: yup
       .string()
-      .required('Registration Number is required!'),
-    vatNumber: yup.string().required('VAT Number is required!'),
-    accountNumber: yup.string().required('Account Number is required!'),
-    accountEmail: yup
-      .string()
-      .email('Invalid email address')
-      .required('Account Email is required!'),
-    accountAddress: yup.string().required('Account address is required!'),
-    accountTelephone: yup.string().required('Account telephone is required!'),
-    password: yup.string().required('Password is required!'),
+      .required('Password is required!')
+      .min(6, 'Password is too short - should be 6 chars minimum'),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
