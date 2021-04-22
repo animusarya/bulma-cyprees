@@ -14,6 +14,9 @@ const insertUserMutation = gql`
       email
       telephone
       status
+      profile {
+        fullName
+      }
       account {
         registrationNumber
         vatNumber
@@ -21,9 +24,6 @@ const insertUserMutation = gql`
         accountEmail
         accountAddress
         accountTelephone
-      }
-      profile {
-        fullName
       }
     }
   }

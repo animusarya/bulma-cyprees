@@ -57,9 +57,9 @@ const AddContractorForm = (props) => {
       />
       <InputGroup
         label="Accounts Email"
-        name="account.accountEmail"
+        name="accountEmail"
         type="text"
-        value={values.account.accountEmail}
+        value={values.accountEmail}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
@@ -71,9 +71,9 @@ const AddContractorForm = (props) => {
 
       <InputGroup
         label="Registration Number"
-        name="account.registrationNumber"
+        name="registrationNumber"
         type="text"
-        value={values.account.registrationNumber}
+        value={values.registrationNumber}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
@@ -84,9 +84,9 @@ const AddContractorForm = (props) => {
       />
       <InputGroup
         label="VAT Number"
-        name="account.vatNumber"
+        name="vatNumber"
         type="text"
-        value={values.account.vatNumber}
+        value={values.vatNumber}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
@@ -95,9 +95,9 @@ const AddContractorForm = (props) => {
       />
       <InputGroup
         label="Accounts Number"
-        name="account.accountNumber"
+        name="accountNumber"
         type="text"
-        value={values.account.accountNumber}
+        value={values.accountNumber}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
@@ -109,9 +109,9 @@ const AddContractorForm = (props) => {
 
       <InputGroup
         label="Accounts Telephone"
-        name="account.accountTelephone"
+        name="accountTelephone"
         type="text"
-        value={values.account.accountTelephone}
+        value={values.accountTelephone}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
@@ -122,9 +122,9 @@ const AddContractorForm = (props) => {
       />
       <InputGroup
         label="Account Address"
-        name="account.accountAddress"
+        name="accountAddress"
         type="text"
-        value={values.account.accountAddress}
+        value={values.accountAddress}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
@@ -168,14 +168,12 @@ export default withFormik({
     email: '',
     telephone: '',
     status: '',
-    account: {
-      accountEmail: '',
-      registrationNumber: '',
-      vatNumber: '',
-      accountNumber: '',
-      accountAddress: '',
-      accountTelephone: '',
-    },
+    accountEmail: '',
+    registrationNumber: '',
+    vatNumber: '',
+    accountNumber: '',
+    accountAddress: '',
+    accountTelephone: '',
     password: '',
   }),
   validationSchema: yup.object().shape({
@@ -185,17 +183,17 @@ export default withFormik({
       .required('Email is required!'),
     status: yup.string().required('Status is required!'),
     telephone: yup.string().required('telephone is required!'),
-    // registrationNumber: yup
-    //   .string()
-    //   .required('Registration Number is required!'),
-    // vatNumber: yup.string().required('VAT Number is required!'),
-    // accountNumber: yup.string().required('Account Number is required!'),
-    // accountEmail: yup
-    //   .string()
-    //   .email('Invalid email address')
-    //   .required('Account Email is required!'),
-    // accountAddress: yup.string().required('Account address is required!'),
-    // accountTelephone: yup.string().required('Account telephone is required!'),
+    registrationNumber: yup
+      .string()
+      .required('Registration Number is required!'),
+    vatNumber: yup.string().required('VAT Number is required!'),
+    accountNumber: yup.string().required('Account Number is required!'),
+    accountEmail: yup
+      .string()
+      .email('Invalid email address')
+      .required('Account Email is required!'),
+    accountAddress: yup.string().required('Account address is required!'),
+    accountTelephone: yup.string().required('Account telephone is required!'),
     password: yup
       .string()
       .required('Password is required!')
@@ -203,9 +201,21 @@ export default withFormik({
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
-    props.onSubmit(values).then(() => {
-      setSubmitting(false);
+    props.onSubmit({
+      email: values.email,
+      password: values.password,
+      telephone: values.telephone,
+      status: values.status,
+      account: {
+        accountEmail: values.accountEmail,
+        registrationNumber: values.registrationNumber,
+        vatNumber: values.vatNumber,
+        accountNumber: values.accountNumber,
+        accountAddress: values.accountAddress,
+        accountTelephone: values.accountTelephone,
+      },
     });
+    setSubmitting(false);
   },
-  displayName: 'AddContractorForm', // helps with React DevTools
+  displayName: 'AddContractorForm',
 })(AddContractorForm);
