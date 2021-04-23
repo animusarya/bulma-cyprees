@@ -30,7 +30,7 @@ const ContractorTable = ({ data }) => {
               <td>{item.status}</td>
               <td>
                 <Link
-                  to={`/contractor/edit:${item.id}`}
+                  to={`/contractor/edit/${item.id}`}
                   className="button is-primary">
                   <span className="icon is-small">
                     <i className="fas fa-eye" />

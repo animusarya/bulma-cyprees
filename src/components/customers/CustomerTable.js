@@ -36,7 +36,7 @@ const CustomerTable = ({ data }) => (
 
               <td>
                 <Link
-                  to={`/customer/edit:${item.id}`}
+                  to={`/customer/edit/:${item.id}`}
                   className="button is-primary">
                   <span className="icon is-small">
                     <i className="fas fa-eye" />

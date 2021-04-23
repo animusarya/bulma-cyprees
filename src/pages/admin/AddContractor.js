@@ -44,7 +44,7 @@ const AddContractor = ({ history }) => {
   }, [res.error]);
 
   if (res.data && res.data.insertUser) {
-    history.push(`/contractor/edit:${res.data.insertUser.id}`);
+    history.push(`/contractor/edit/${res.data.insertUser.id}`);
   }
 
   const handleSubmit = async (formData) => {

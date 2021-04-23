@@ -26,7 +26,7 @@ function JobTable(props) {
               <td>{item.assigned}</td>
               <td>{status}</td>
               <td>
-                <Link to="/job/edit:12345" className="button is-primary">
+                <Link to="/job/edit/:12345" className="button is-primary">
                   View
                 </Link>
               </td>

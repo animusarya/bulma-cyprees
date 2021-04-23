@@ -38,7 +38,7 @@ const AddCustomer = ({ history }) => {
   }, [res.error]);
 
   if (res.data && res.data.insertCustomer) {
-    history.push(`/customer/edit:${res.data.insertCustomer.id}`);
+    history.push(`/customer/edit/:${res.data.insertCustomer.id}`);
   }
 
   const handleSubmit = async (formData) => {
