@@ -214,7 +214,20 @@ export default withFormik({
 
   handleSubmit: (values, { setSubmitting, props }) => {
     props.onSubmit({
-      values,
+      email: values.email,
+      telephone: values.telephone,
+      status: values.status,
+      profile: {
+        fullName: values.fullName,
+      },
+      account: {
+        registrationNumber: values.registrationNumber,
+        vatNumber: values.vatNumber,
+        accountNumber: values.accountNumber,
+        accountEmail: values.accountEmail,
+        accountAddress: values.accountAddress,
+        accountTelephone: values.accountTelephone,
+      },
     });
     setSubmitting(false);
   },
