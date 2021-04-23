@@ -20,6 +20,7 @@ const theme = {
   // Use as the text color for dark-on-light designs,
   // or as the background for inverted designs.
   primaryBackground: '#ffffff',
+  placeholderColor: '#b5c6cc',
   secondaryColor: lightAccent,
   backgroundColor: darkShades,
 
@@ -34,7 +35,6 @@ const theme = {
   textColorWhite: '#ffffff', // has-text-white
 
   // Font Size
-  fontSizeSuperLarge: '30px',
   fontSizeExtraLarge: '24px', // is-size-4
   fontSizeLarge: '20px', // is-size-5
   fontSizeMedium: '18px',
@@ -99,8 +99,9 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   label {
-    color: ${theme.textColorWhite} !important;
+    color: ${theme.fontDark} !important;
     font-weight: 500 !important;
+    font-size: ${theme.fontSizeSmall} !important;
   }
   .select:not(.is-multiple):not(.is-loading)::after {
     border-color: ${theme.fontDark} !important;
@@ -128,5 +129,9 @@ export const GlobalStyle = createGlobalStyle`
   }
   th {
     border-width: 0px 0 1px !important;
+  }
+  .box-wrapper {
+    border: 1px solid ${theme.borderColor};
+    box-shadow: none !important;
   }
 `;

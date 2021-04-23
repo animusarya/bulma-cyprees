@@ -1,21 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { useParams } from 'react-router-dom';
 import Layout from '../../components/Layout';
-import { JobTable } from '../../components/jobs';
 import DashboardMenu from '../../components/global/DashboardMenu';
+import Seo from '../../components/Seo';
+
+import { GoogleMap } from '../../components/elements';
+import { EditJobForm } from '../../components/forms';
+import { SurveyModal } from '../../components/modal';
 
 const EditJobs = () => {
-  const { status } = useParams();
-
-  const heading = status === 'revisit' ? 'Jobs that need Revisit' : 'Jobs';
+  const [openModel, setOpenModel] = useState(false);
 
   return (
     <Layout>
-      <DashboardMenu hasSearchMenu heading={heading}>
-        <JobTable status={status} />
+      <Seo title="Edit Job Page" description="Edit job page data" />
+      <DashboardMenu>
+        <GoogleMap label="Location" />
+        <button
+          className="button is-primary mb-4"
+          type="submit"
+          onClick={() => setOpenModel(!openModel)}>
+          Survey
+        </button>
+        <SurveyModal
+          isActive={openModel}
+          onSubmit={() => setOpenModel(!openModel)}
+          onClose={() => setOpenModel(!openModel)}
+        />
+        <EditJobForm />
       </DashboardMenu>
     </Layout>
   );
 };
+
 export default EditJobs;

@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Heading, InputGroup } from '../elements';
+import { Heading } from '../elements';
 import Pagination from './Pagination';
+import Searchbar from './Searchbar';
 
 const Container = styled.div`
   background-color: ${(props) => props.theme.primaryBackground};
 `;
+
 const SelectContainer = styled.div`
   option {
     background: ${(props) => props.theme.mainBrandColor};
@@ -25,10 +27,17 @@ const SelectContainer = styled.div`
   }
 `;
 
-const DashboardMenu = ({ heading, children, hasSearchMenu }) => (
+const DashboardMenu = ({
+  heading,
+  children,
+  hasSearchMenu,
+  pagination,
+  value,
+  onChange,
+}) => (
   <Container className="card">
     <div className="card-content">
-      <Heading>{heading}</Heading>{' '}
+      {heading && <Heading>{heading}</Heading>}
       {hasSearchMenu && (
         <div className="columns">
           <div className="column is-half">
@@ -44,19 +53,14 @@ const DashboardMenu = ({ heading, children, hasSearchMenu }) => (
           </div>
           <div className="column is-half-mobile is-2-desktop is-3-tablet">
             <div className="field">
-              <InputGroup
-                placeholder="Search..."
-                smallInput
-                label="Search:"
-                type="text"
-              />
+              <Searchbar value={value} onChange={onChange} />
             </div>
           </div>
         </div>
       )}
       {children}
     </div>
-    <Pagination />
+    {pagination && <Pagination />}
   </Container>
 );
 

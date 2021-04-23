@@ -41,13 +41,13 @@ const LoginForm = (props) => {
         }
       />
       <Link
-        className="has-text-grey-lighter is-pulled-right is-size-7 mb-4"
+        className="has-text-black is-pulled-right is-size-7 mb-4"
         to="/forgot-password">
         Forgot your password?
       </Link>
       <div className="field">
         <div className="control">
-          <Button primary fullWidth type="submit" disabled={isSubmitting}>
+          <Button primary fullWidth type="submit" loading={isSubmitting}>
             <span className="is-size-8">Sign In</span>
           </Button>
         </div>
@@ -80,7 +80,6 @@ export default withFormik({
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
-    // console.log('handle submit', values, props);
     props.onSubmit(values).then(() => {
       setSubmitting(false);
     });

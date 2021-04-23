@@ -11,11 +11,13 @@ import ForgotPassword from '../pages/ForgotPassword';
 import Test from '../pages/Test';
 import Jobs from '../pages/admin/Jobs';
 import RegisterJob from '../pages/admin/RegisterJob';
-import Job from '../pages/admin/Job';
 import EditJob from '../pages/admin/EditJob';
 import Customer from '../pages/admin/Customer';
-import AddNewCustomers from '../pages/admin/AddNewCustomers';
-import AddNewSite from '../pages/admin/AddNewSite';
+import AddCustomer from '../pages/admin/AddCustomer';
+import EditCustomer from '../pages/admin/EditCustomer';
+import Contractor from '../pages/admin/Contractor';
+import AddContractor from '../pages/admin/AddContractor';
+import EditContractor from '../pages/admin/EditContractor';
 
 const PrivateRoute = ({ component: Component, access, ...rest }) => {
   const isLoggedIn = useStoreState((state) => state.isLoggedIn.value);
@@ -44,6 +46,7 @@ const Routes = () => (
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
+
         <PrivateRoute
           exact
           path="/jobs/:status"
@@ -58,19 +61,11 @@ const Routes = () => (
         />
         <PrivateRoute
           exact
-          path="/jobs/edit:id"
+          path="/job/edit:id"
           component={EditJob}
           access="admin"
         />
 
-        <PrivateRoute exact path="/job/:id" component={Job} access="admin" />
-
-        <PrivateRoute
-          exact
-          path="/job/export/:id"
-          component={Job}
-          access="admin"
-        />
         <PrivateRoute
           exact
           path="/customers"
@@ -80,13 +75,31 @@ const Routes = () => (
         <PrivateRoute
           exact
           path="/customer/add-customer"
-          component={AddNewCustomers}
+          component={AddCustomer}
           access="admin"
         />
         <PrivateRoute
           exact
-          path="/customer/add-site"
-          component={AddNewSite}
+          path="/customer/edit:id"
+          component={EditCustomer}
+          access="admin"
+        />
+        <PrivateRoute
+          exact
+          path="/contractors"
+          component={Contractor}
+          access="admin"
+        />
+        <PrivateRoute
+          exact
+          path="/contractor/new"
+          component={AddContractor}
+          access="admin"
+        />
+        <PrivateRoute
+          exact
+          path="/contractor/edit:id"
+          component={EditContractor}
           access="admin"
         />
 

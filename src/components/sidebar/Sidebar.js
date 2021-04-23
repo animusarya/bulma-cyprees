@@ -72,22 +72,6 @@ const sidebarData = [
     ],
   },
   {
-    title: 'Reports',
-    path: '#',
-    icon: <AiIcons.AiOutlineMenu />,
-    subNav: [
-      {
-        title: 'Reports 2',
-        path: '/',
-        cName: 'sub-nav',
-      },
-      {
-        title: 'Reports 3',
-        path: '/super-admin/dashboard',
-      },
-    ],
-  },
-  {
     title: 'Customers',
     path: '#',
     icon: <AiIcons.AiOutlineMenu />,
@@ -100,9 +84,20 @@ const sidebarData = [
         title: 'Add New Customer',
         path: '/customer/add-customer',
       },
+    ],
+  },
+  {
+    title: 'Contractors ',
+    path: '#',
+    icon: <AiIcons.AiOutlineMenu />,
+    subNav: [
       {
-        title: 'Add New Site',
-        path: '/customer/add-site',
+        title: 'View All',
+        path: '/contractors',
+      },
+      {
+        title: 'Add New Contractor',
+        path: '/contractor/new',
       },
     ],
   },

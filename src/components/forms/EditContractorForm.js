@@ -5,7 +5,7 @@ import * as yup from 'yup';
 
 import { InputGroup, Button } from '../elements';
 
-const AddJobForm = (props) => {
+const EditContractorForm = (props) => {
   const {
     values,
     touched,
@@ -14,30 +14,31 @@ const AddJobForm = (props) => {
     handleChange,
     handleBlur,
     handleSubmit,
+    data,
   } = props;
-
+  console.log(data, 'helllo');
   return (
-    <form className="mb-4" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <InputGroup
-        darkLabel
-        border
-        label="Your Email Address"
+        label="Email"
         name="email"
-        placeholder="john@doe.com"
+        type="text"
         value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={errors.email && touched.email ? errors.email : undefined}
       />
 
-      <Button danger type="submit" disabled={isSubmitting}>
-        <span className="has-text-weight-bold">Submit</span>
-      </Button>
+      <div className="mt-5">
+        <Button primary type="submit" loading={isSubmitting}>
+          <span className="has-text-weight-bold">Submit</span>
+        </Button>
+      </div>
     </form>
   );
 };
 
-AddJobForm.propTypes = {
+EditContractorForm.propTypes = {
   values: PropTypes.object.isRequired,
   touched: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -52,17 +53,13 @@ export default withFormik({
     email: '',
   }),
   validationSchema: yup.object().shape({
-    email: yup
-      .string()
-      .email('Invalid email address')
-      .required('Email is required!'),
+    email: yup.string(),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
-    // console.log('handle submit', values, props);
     props.onSubmit(values).then(() => {
       setSubmitting(false);
     });
   },
-  displayName: 'AddJobForm', // helps with React DevTools
-})(AddJobForm);
+  displayName: 'EditContractorForm', // helps with React DevTools
+})(EditContractorForm);

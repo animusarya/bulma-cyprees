@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-import { InputGroup, Button, TextArea, Select } from '../elements';
+import { InputGroup, Button, TextArea, Select, GoogleMap } from '../elements';
 
 const companyList = [
-  { id: 1, value: 'Company One' },
-  { id: 2, value: 'Company Two' },
-  { id: 3, value: 'Company Three' },
-  { id: 4, value: 'Company Four' },
+  { value: 'Company One' },
+  { value: 'Company Two' },
+  { value: 'Company Three' },
+  { value: 'Company Four' },
 ];
 
-const AddSiteForm = (props) => {
+const EditCustomerForm = (props) => {
   const {
     values,
     touched,
@@ -22,9 +22,11 @@ const AddSiteForm = (props) => {
     handleBlur,
     handleSubmit,
   } = props;
+
   return (
     <form onSubmit={handleSubmit}>
       <Select
+        placeholder="Select..."
         label="Company Name:"
         name="companyName"
         options={companyList}
@@ -50,7 +52,7 @@ const AddSiteForm = (props) => {
         }
       />
       <InputGroup
-        label="Store Number:"
+        label="Store Number"
         name="storeNumber"
         type="text"
         value={values.storeNumber}
@@ -62,7 +64,7 @@ const AddSiteForm = (props) => {
             : undefined
         }
       />
-      <TextArea
+      <InputGroup
         label="Address"
         name="address"
         type="text"
@@ -73,18 +75,20 @@ const AddSiteForm = (props) => {
       />
 
       <InputGroup
-        label="Payment Terms"
-        name="paymentTerms"
+        label="Contact Email"
+        name="contactEmail"
         type="text"
-        value={values.paymentTerms}
+        value={values.contactEmail}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
-          errors.paymentTerms && touched.paymentTerms
-            ? errors.paymentTerms
+          errors.contactEmail && touched.contactEmail
+            ? errors.contactEmail
             : undefined
         }
       />
+      <GoogleMap label="Location" />
+
       <TextArea
         label="Internal Notes"
         name="internalNotes"
@@ -98,7 +102,8 @@ const AddSiteForm = (props) => {
             : undefined
         }
       />
-      <div className="mb-3 is-flex is-justify-content-flex-end	">
+
+      <div className="mb-3 mt-5">
         <Button primary type="submit" disabled={isSubmitting}>
           <span className="has-text-weight-bold">Submit</span>
         </Button>
@@ -107,7 +112,7 @@ const AddSiteForm = (props) => {
   );
 };
 
-AddSiteForm.propTypes = {
+EditCustomerForm.propTypes = {
   values: PropTypes.object.isRequired,
   touched: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -123,7 +128,8 @@ export default withFormik({
     siteName: '',
     storeNumber: '',
     address: '',
-    paymentTerms: '',
+    location: '',
+    contactEmail: '',
     internalNotes: '',
   }),
   validationSchema: yup.object().shape({
@@ -131,8 +137,9 @@ export default withFormik({
     siteName: yup.string().required('Site Name is required!'),
     storeNumber: yup.string().required('Store Number is required!'),
     address: yup.string().required('Address is required!'),
-    paymentTerms: yup.string().required('Payment Terms is required!'),
-    internalNotes: yup.string().required('Note is required!'),
+    location: yup.string().required('Location is required!'),
+    contactEmail: yup.string().required('Contact Email is required!'),
+    internalNotes: yup.string(),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
@@ -140,5 +147,5 @@ export default withFormik({
       setSubmitting(false);
     });
   },
-  displayName: 'AddSiteForm', // helps with React DevTools
-})(AddSiteForm);
+  displayName: 'EditCustomerForm', // helps with React DevTools
+})(EditCustomerForm);

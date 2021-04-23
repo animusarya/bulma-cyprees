@@ -2,9 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
-// import styled from 'styled-components';
 
-import { InputGroup, Button } from '../elements';
+import { InputGroup, Button, TextArea, NameSelectInput } from '../elements';
+
+const allCustomerNames = [
+  { name: 'Dharmveer' },
+  { name: 'Karanbir' },
+  { name: 'Kunal' },
+  { name: 'Vishal' },
+  { name: 'Taniya' },
+];
+
+const siteList = [
+  { siteName: 'Norton canes' },
+  { siteName: 'Autosmart International Ltd  -  Lichfield' },
+];
+
+const jobAssignList = [
+  { jobAssignedTo: 'Obama' },
+  { jobAssignedTo: 'Dan' },
+  { jobAssignedTo: 'Julia' },
+  { jobAssignedTo: 'Richard' },
+  { jobAssignedTo: 'Mark' },
+];
 
 const RegisterForm = (props) => {
   const {
@@ -15,101 +35,119 @@ const RegisterForm = (props) => {
     handleChange,
     handleBlur,
     handleSubmit,
-    isAdminRegister,
+    setFieldValue,
   } = props;
+
   return (
     <form onSubmit={handleSubmit}>
-      <InputGroup
-        fullWidth
+      <NameSelectInput
         label="Customer"
-        name="fullName"
+        name="name"
+        value={values.name}
+        onBlur={handleBlur}
+        onChange={(value) => setFieldValue('name', value)}
+        options={
+          allCustomerNames
+            ? allCustomerNames.map((item) => ({
+                value: item.name,
+                label: item.name,
+              }))
+            : []
+        }
+        errors={errors.name && touched.name ? errors.name : undefined}
+      />
+      <NameSelectInput
+        name="siteName"
+        value={values.siteName}
+        onBlur={handleBlur}
+        // onChange={(value) => setFieldValue('name', value)}
+        label="Site"
+        options={
+          siteList
+            ? siteList.map((item) => ({
+                value: item.siteName,
+                label: item.siteName,
+              }))
+            : []
+        }
+        errors={
+          errors.siteName && touched.siteName ? errors.siteName : undefined
+        }
+      />
+
+      <InputGroup
+        label="Job Number"
+        name="jobNumber"
         type="text"
-        value={values.fullName}
+        value={values.jobNumber}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
-          errors.fullName && touched.fullName ? errors.fullName : undefined
-        }
-      />
-      {isAdminRegister && (
-        <InputGroup
-          label="Company Name:"
-          name="companyName"
-          type="text"
-          value={values.companyName}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          errors={
-            errors.companyName && touched.companyName
-              ? errors.companyName
-              : undefined
-          }
-        />
-      )}
-      {isAdminRegister && (
-        <InputGroup
-          label="Domain Name:"
-          name="websiteAddress"
-          type="text"
-          value={values.websiteAddress}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          errors={
-            errors.websiteAddress && touched.websiteAddress
-              ? errors.websiteAddress
-              : undefined
-          }
-        />
-      )}
-      {isAdminRegister && (
-        <InputGroup
-          label="Telephone:"
-          name="telephone"
-          type="text"
-          value={values.telephone}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          errors={
-            errors.telephone && touched.telephone ? errors.telephone : undefined
-          }
-        />
-      )}
-      <InputGroup
-        label="Email:"
-        name="email"
-        value={values.email}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={errors.email && touched.email ? errors.email : undefined}
-        readOnly={!isAdminRegister}
-      />
-      <InputGroup
-        border
-        label="Password:"
-        name="password"
-        type="password"
-        value={values.password}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={
-          errors.password && touched.password ? errors.password : undefined
+          errors.jobNumber && touched.jobNumber ? errors.jobNumber : undefined
         }
       />
       <InputGroup
-        border
-        label="Confirm Password:"
-        name="confirmPassword"
-        type="password"
-        value={values.confirmPassword}
+        label="Customer Reference"
+        name="customerReference"
+        type="text"
+        value={values.customerReference}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
-          errors.confirmPassword && touched.confirmPassword
-            ? errors.confirmPassword
+          errors.customerReference && touched.customerReference
+            ? errors.customerReference
             : undefined
         }
       />
-      <div className="mt-3 mb-3">
+      <TextArea
+        label="Description"
+        name="description"
+        type="text"
+        value={values.description}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.description && touched.description
+            ? errors.description
+            : undefined
+        }
+      />
+      <NameSelectInput
+        name="jobAssignedTo"
+        value={values.jobAssignedTo}
+        onBlur={handleBlur}
+        // onChange={(value) => setFieldValue('name', value)}
+        label="Job Assigned to:"
+        options={
+          jobAssignList
+            ? jobAssignList.map((item) => ({
+                value: item.jobAssignedTo,
+                label: item.jobAssignedTo,
+              }))
+            : []
+        }
+        errors={
+          errors.jobAssignedTo && touched.jobAssignedTo
+            ? errors.jobAssignedTo
+            : undefined
+        }
+      />
+
+      <TextArea
+        label="Internal Notes"
+        name="internalNotes"
+        type="text"
+        value={values.internalNotes}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.internalNotes && touched.internalNotes
+            ? errors.internalNotes
+            : undefined
+        }
+      />
+
+      <div className="mb-3 mt-4">
         <Button primary type="submit" disabled={isSubmitting}>
           <span className="has-text-weight-bold">Submit</span>
         </Button>
@@ -129,37 +167,19 @@ RegisterForm.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: ({ initialValues }) => ({
-    fullName: initialValues.fullName ? initialValues.fullName : '',
-    email: initialValues.email ? initialValues.email : '',
-    password: initialValues.password ? initialValues.password : '',
-    confirmPassword: initialValues.confirmPassword
-      ? initialValues.confirmPassword
-      : '',
-    companyName: initialValues.companyName ? initialValues.companyName : '',
-    websiteAddress: initialValues.websiteAddress
-      ? initialValues.websiteAddress
-      : '',
-    telephone: initialValues.telephone ? initialValues.telephone : '',
+  mapPropsToValues: () => ({
+    name: '',
+    jobNumber: '',
+    customerReference: '',
+    description: '',
+    internalNotes: '',
   }),
   validationSchema: yup.object().shape({
-    fullName: yup.string().required('name is required!'),
-    websiteAddress: yup.string().required('Website Address is required!'),
-    email: yup
-      .string()
-      .email('Invalid email address')
-      .required('Email is required!'),
-    password: yup
-      .string()
-      .required('Password is required!')
-      .min(6, 'Seems a bit short...'),
-    confirmPassword: yup
-      .string()
-      .required('This filed is required!')
-      .label('Confirm password')
-      .test('passwords-match', 'Passwords not matched!', function (values) {
-        return this.parent.password === values;
-      }),
+    name: yup.object().required('Name is required!'),
+    jobNumber: yup.string().required('Job Number is required!'),
+    customerReference: yup.string().required('Customer Reference is required!'),
+    description: yup.string(),
+    internalNotes: yup.string(),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {

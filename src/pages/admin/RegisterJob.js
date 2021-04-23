@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import { useStoreActions, useStoreState } from 'easy-peasy';
@@ -10,6 +10,7 @@ import Layout from '../../components/Layout';
 import { Message, Loading } from '../../components/elements';
 import { RegisterForm } from '../../components/forms';
 import DashboardMenu from '../../components/global/DashboardMenu';
+import { AddCustomerModel } from '../../components/modal';
 
 const registerMutation = gql`
   mutation register($input: RegisterInput) {
@@ -63,11 +64,23 @@ const Register = ({ match }) => {
       );
     }, 1000);
   }
-
+  const [openModel, setOpenModel] = useState(false);
   return (
     <Layout>
+      <Seo title="Registration" description="Register Job Here" />
       <DashboardMenu heading="Add Job">
-        <Seo title="Registration" description="Register Job Here" />
+        <button
+          className="button is-small is-primary mb-4"
+          type="submit"
+          onClick={() => setOpenModel(!openModel)}>
+          New Customer
+        </button>
+        <AddCustomerModel
+          isActive={openModel}
+          onSubmit={() => setOpenModel(!openModel)}
+          onClose={() => setOpenModel(!openModel)}
+        />
+
         <RegisterForm
           enableReinitialize
           initialValues={{
