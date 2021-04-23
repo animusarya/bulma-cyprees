@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-import { InputGroup, Button, TextArea } from '../elements';
+import { InputGroup, Button, TextArea, Heading } from '../elements';
 import AddressForm from './AddressForm';
 
 const AddCustomerForm = (props) => {
@@ -53,29 +53,31 @@ const AddCustomerForm = (props) => {
           errors.jobsEmail && touched.jobsEmail ? errors.jobsEmail : undefined
         }
       />
-      <h1>Address Info</h1>
-      <InputGroup
-        label="Name"
-        name="locations.name"
-        type="text"
-        value={values.locations.name}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={errors.name && touched.name ? errors.name : undefined}
-      />
-      <InputGroup
-        label="Store Number:"
-        name="locations.number"
-        type="text"
-        value={values.locations.number}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={errors.number && touched.number ? errors.number : undefined}
-      />
-      <AddressForm
-        onChange={(value) => setFieldValue('locations.address', value)}
-        handleSubmit={handleSubmit}
-      />
+      <div className="box box-wrapper">
+        <Heading>Address Info</Heading>
+        <InputGroup
+          label="Name"
+          name="locations.name"
+          type="text"
+          value={values.locations.name}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errors={errors.name && touched.name ? errors.name : undefined}
+        />
+        <InputGroup
+          label="Store Number:"
+          name="locations.number"
+          type="text"
+          value={values.locations.number}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errors={errors.number && touched.number ? errors.number : undefined}
+        />
+        <AddressForm
+          onChange={(value) => setFieldValue('locations.address', value)}
+          handleSubmit={handleSubmit}
+        />
+      </div>
 
       <InputGroup
         label="Payment Terms"
@@ -90,6 +92,7 @@ const AddCustomerForm = (props) => {
             : undefined
         }
       />
+
       <TextArea
         label="Internal Notes"
         name="internalNotes"

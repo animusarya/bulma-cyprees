@@ -10,6 +10,7 @@ const statusType = [
   { value: 'notActive' },
   { value: 'archived' },
 ];
+
 const userType = [{ value: 'contractor' }, { value: 'admin' }];
 
 const EditContractorForm = (props) => {
