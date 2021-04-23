@@ -212,24 +212,27 @@ export default withFormik({
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
-    props.onSubmit({
-      email: values.email,
-      password: values.password,
-      telephone: values.telephone,
-      status: values.status,
-      account: {
-        accountEmail: values.accountEmail,
-        registrationNumber: values.registrationNumber,
-        vatNumber: values.vatNumber,
-        accountNumber: values.accountNumber,
-        accountAddress: values.accountAddress,
-        accountTelephone: values.accountTelephone,
-      },
-      profile: {
-        fullName: values.fullName,
-      },
-    });
-    setSubmitting(false);
+    props
+      .onSubmit({
+        email: values.email,
+        password: values.password,
+        telephone: values.telephone,
+        status: values.status,
+        account: {
+          accountEmail: values.accountEmail,
+          registrationNumber: values.registrationNumber,
+          vatNumber: values.vatNumber,
+          accountNumber: values.accountNumber,
+          accountAddress: values.accountAddress,
+          accountTelephone: values.accountTelephone,
+        },
+        profile: {
+          fullName: values.fullName,
+        },
+      })
+      .then(() => {
+        setSubmitting(false);
+      });
   },
   displayName: 'AddContractorForm',
 })(AddContractorForm);
