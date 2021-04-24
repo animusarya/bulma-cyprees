@@ -3,8 +3,13 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-// import { InputGroup, Button, TextArea, GoogleMap } from '../elements';
-import { InputGroup, Button } from '../elements';
+import { InputGroup, Button, Select, TextArea, GoogleMap } from '../elements';
+
+const statusType = [
+  { value: 'active' },
+  { value: 'notActive' },
+  { value: 'archived' },
+];
 
 const EditCustomerForm = (props) => {
   const {
@@ -52,52 +57,29 @@ const EditCustomerForm = (props) => {
           errors.jobsEmail && touched.jobsEmail ? errors.jobsEmail : undefined
         }
       />
-      {/* <InputGroup
-        label="Site Name"
-        name="siteName"
-        type="text"
-        value={values.siteName}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={
-          errors.siteName && touched.siteName ? errors.siteName : undefined
-        }
-      />
       <InputGroup
-        label="Store Number"
-        name="storeNumber"
+        label="Payment Terms"
+        name="paymentTerms"
         type="text"
-        value={values.storeNumber}
+        value={values.paymentTerms}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
-          errors.storeNumber && touched.storeNumber
-            ? errors.storeNumber
+          errors.paymentTerms && touched.paymentTerms
+            ? errors.paymentTerms
             : undefined
         }
       />
-      <InputGroup
-        label="Address"
-        name="address"
+      <Select
+        placeholder="Select..."
+        label="Status"
+        name="status"
+        options={statusType}
         type="text"
-        value={values.address}
+        value={values.status}
         onChange={handleChange}
         onBlur={handleBlur}
-        errors={errors.address && touched.address ? errors.address : undefined}
-      />
-
-      <InputGroup
-        label="Contact Email"
-        name="contactEmail"
-        type="text"
-        value={values.contactEmail}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errors={
-          errors.contactEmail && touched.contactEmail
-            ? errors.contactEmail
-            : undefined
-        }
+        errors={errors.status && touched.status ? errors.status : undefined}
       />
       <GoogleMap label="Location" />
 
@@ -113,7 +95,7 @@ const EditCustomerForm = (props) => {
             ? errors.internalNotes
             : undefined
         }
-      /> */}
+      />
       <div className="mb-3 mt-5">
         <Button primary type="submit" loading={isSubmitting}>
           <span className="has-text-weight-bold">Submit</span>
@@ -142,12 +124,10 @@ export default withFormik({
 
     jobsEmail: initialValues.jobsEmail ? initialValues.jobsEmail : '',
     paymentTerms: initialValues.paymentTerms ? initialValues.paymentTerms : '',
-
-    // paymentTerms: '',
-    // address: '',
-    // location: '',
-    // contactEmail: '',
-    // internalNotes: '',
+    status: initialValues.status ? initialValues.status : '',
+    internalNotes: initialValues.internalNotes
+      ? initialValues.internalNotes
+      : '',
   }),
 
   validationSchema: yup.object().shape({
@@ -160,13 +140,9 @@ export default withFormik({
       .string()
       .email('Invalid email')
       .required('Jobs Email is required!'),
-    paymentTerms: yup.string().required('Jobs Email is required!'),
-
-    // storeNumber: yup.string().required('Store Number is required!'),
-    // address: yup.string().required('Address is required!'),
-    // location: yup.string().required('Location is required!'),
-    // contactEmail: yup.string().required('Contact Email is required!'),
-    // internalNotes: yup.string(),
+    paymentTerms: yup.string().required('Payment Terms is required!'),
+    status: yup.string().required('Status is required!'),
+    internalNotes: yup.string(),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {

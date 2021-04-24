@@ -19,6 +19,9 @@ const userQuery = gql`
       name
       accountsEmail
       jobsEmail
+      paymentTerms
+      internalNotes
+      status
     }
   }
 `;
