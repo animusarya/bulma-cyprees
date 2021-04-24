@@ -3,14 +3,8 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-import { InputGroup, Button, TextArea, Select, GoogleMap } from '../elements';
-
-const companyList = [
-  { value: 'Company One' },
-  { value: 'Company Two' },
-  { value: 'Company Three' },
-  { value: 'Company Four' },
-];
+// import { InputGroup, Button, TextArea, GoogleMap } from '../elements';
+import { InputGroup, Button } from '../elements';
 
 const EditCustomerForm = (props) => {
   const {
@@ -25,22 +19,40 @@ const EditCustomerForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Select
-        placeholder="Select..."
-        label="Company Name:"
-        name="companyName"
-        options={companyList}
+      <InputGroup
+        label="Company Name"
+        name="name"
         type="text"
-        value={values.companyName}
+        value={values.name}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={errors.name && touched.name ? errors.name : undefined}
+      />
+      <InputGroup
+        label="Account Email"
+        name="accountsEmail"
+        type="text"
+        value={values.accountsEmail}
         onChange={handleChange}
         onBlur={handleBlur}
         errors={
-          errors.companyName && touched.companyName
-            ? errors.companyName
+          errors.accountsEmail && touched.accountsEmail
+            ? errors.accountsEmail
             : undefined
         }
       />
       <InputGroup
+        label="Job Email"
+        name="jobsEmail"
+        type="text"
+        value={values.jobsEmail}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={
+          errors.jobsEmail && touched.jobsEmail ? errors.jobsEmail : undefined
+        }
+      />
+      {/* <InputGroup
         label="Site Name"
         name="siteName"
         type="text"
@@ -101,10 +113,9 @@ const EditCustomerForm = (props) => {
             ? errors.internalNotes
             : undefined
         }
-      />
-
+      /> */}
       <div className="mb-3 mt-5">
-        <Button primary type="submit" disabled={isSubmitting}>
+        <Button primary type="submit" loading={isSubmitting}>
           <span className="has-text-weight-bold">Submit</span>
         </Button>
       </div>
@@ -123,23 +134,39 @@ EditCustomerForm.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({
-    companyName: '',
-    siteName: '',
-    storeNumber: '',
-    address: '',
-    location: '',
-    contactEmail: '',
-    internalNotes: '',
+  mapPropsToValues: ({ initialValues }) => ({
+    name: initialValues.name ? initialValues.name : '',
+    accountsEmail: initialValues.accountsEmail
+      ? initialValues.accountsEmail
+      : '',
+
+    jobsEmail: initialValues.jobsEmail ? initialValues.jobsEmail : '',
+    paymentTerms: initialValues.paymentTerms ? initialValues.paymentTerms : '',
+
+    // paymentTerms: '',
+    // address: '',
+    // location: '',
+    // contactEmail: '',
+    // internalNotes: '',
   }),
+
   validationSchema: yup.object().shape({
-    companyName: yup.string().required('Company Name is required!'),
-    siteName: yup.string().required('Site Name is required!'),
-    storeNumber: yup.string().required('Store Number is required!'),
-    address: yup.string().required('Address is required!'),
-    location: yup.string().required('Location is required!'),
-    contactEmail: yup.string().required('Contact Email is required!'),
-    internalNotes: yup.string(),
+    name: yup.string().required('name is required!'),
+    accountsEmail: yup
+      .string()
+      .email('Invalid email')
+      .required('Account Email is required!'),
+    jobsEmail: yup
+      .string()
+      .email('Invalid email')
+      .required('Jobs Email is required!'),
+    paymentTerms: yup.string().required('Jobs Email is required!'),
+
+    // storeNumber: yup.string().required('Store Number is required!'),
+    // address: yup.string().required('Address is required!'),
+    // location: yup.string().required('Location is required!'),
+    // contactEmail: yup.string().required('Contact Email is required!'),
+    // internalNotes: yup.string(),
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
