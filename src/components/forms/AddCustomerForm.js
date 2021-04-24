@@ -54,7 +54,7 @@ const AddCustomerForm = (props) => {
         }
       />
       <div className="box box-wrapper">
-        <Heading>Address Info</Heading>
+        <Heading small>Address Information</Heading>
         <InputGroup
           label="Name"
           name="locations.name"
