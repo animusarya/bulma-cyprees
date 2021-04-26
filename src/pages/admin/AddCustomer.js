@@ -58,7 +58,6 @@ const AddCustomer = ({ history }) => {
   return (
     <Layout>
       <Seo title="Add New Customer" description="Add new customers page" />
-
       <DashboardMenu heading="Add New Customer">
         <AddCustomerForm onSubmit={handleSubmit} />
       </DashboardMenu>

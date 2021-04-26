@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
-import { withFormik } from 'formik';
+import { withFormik, FieldArray } from 'formik';
 import * as yup from 'yup';
 
 import { InputGroup, Button, TextArea, Heading } from '../elements';
-import AddressForm from './AddressForm';
+import { AddLocationModal } from '../modal';
 
 const AddCustomerForm = (props) => {
   const {
@@ -16,8 +16,12 @@ const AddCustomerForm = (props) => {
     handleChange,
     handleBlur,
     handleSubmit,
-    setFieldValue,
   } = props;
+
+  const [locationVariant, setLocationVariant] = useState('');
+
+  const [openModel, setOpenModel] = useState(false);
+  console.log(values.locations);
   return (
     <form onSubmit={handleSubmit}>
       <InputGroup
@@ -53,29 +57,59 @@ const AddCustomerForm = (props) => {
           errors.jobsEmail && touched.jobsEmail ? errors.jobsEmail : undefined
         }
       />
+
       <div className="box box-wrapper">
-        <Heading small>Address Information</Heading>
-        <InputGroup
-          label="Name"
-          name="locations.name"
-          type="text"
-          value={values.locations.name}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          errors={errors.name && touched.name ? errors.name : undefined}
+        <Heading small>Add Location</Heading>
+        <FieldArray
+          name="locations"
+          render={(arrayHelpers) => (
+            <>
+              <AddLocationModal
+                locationVariant={locationVariant}
+                handleBlur={handleBlur}
+                values={values}
+                arrayHelpers={arrayHelpers}
+                setLocationVariant={setLocationVariant}
+              />
+              <div>
+                {values.locations.map(
+                  (val, { index }) =>
+                    val && (
+                      <span className="tag is-success" key={index}>
+                        {val.name}
+                        <button
+                          type="button"
+                          label="button"
+                          onClick={() => arrayHelpers.remove(index)}
+                          className="delete is-small"
+                        />
+                      </span>
+                    ),
+                )}
+              </div>
+            </>
+          )}
         />
-        <InputGroup
-          label="Store Number:"
-          name="locations.number"
-          type="text"
-          value={values.locations.number}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          errors={errors.number && touched.number ? errors.number : undefined}
-        />
-        <AddressForm
-          onChange={(value) => setFieldValue('locations.address', value)}
-          handleSubmit={handleSubmit}
+
+        <button
+          onClick={() => setOpenModel(!openModel)}
+          className="button is-small is-primary mb-4"
+          type="button">
+          Add Location
+        </button>
+
+        <FieldArray
+          name="locations"
+          render={(arrayHelpers) => (
+            <AddLocationModal
+              isActive={openModel}
+              onClose={() => setOpenModel(!openModel)}
+              onSubmit={(data) => {
+                arrayHelpers.push(data);
+                setOpenModel(!openModel);
+              }}
+            />
+          )}
         />
       </div>
 
@@ -126,24 +160,13 @@ AddCustomerForm.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({
-    name: '',
-    accountsEmail: '',
-    jobsEmail: '',
-    locations: {
-      name: '',
-      number: '',
-      address: {
-        addressLine1: '',
-        addressLine2: '',
-        city: '',
-        state: '',
-        country: '',
-        postcode: '',
-      },
-    },
-    paymentTerms: '',
-    internalNotes: '',
+  mapPropsToValues: ({ initialValues }) => ({
+    name: initialValues ? initialValues.name : '',
+    accountsEmail: initialValues ? initialValues.accountsEmail : '',
+    jobsEmail: initialValues ? initialValues.jobsEmail : '',
+    internalNotes: initialValues ? initialValues.internalNotes : '',
+    paymentTerms: initialValues ? initialValues.paymentTerms : '',
+    locations: [],
   }),
   validationSchema: yup.object().shape({
     name: yup.string().required('Company Name is required!'),
@@ -159,6 +182,7 @@ export default withFormik({
   }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
+    console.log(values);
     props.onSubmit(values).then(() => {
       setSubmitting(false);
     });
