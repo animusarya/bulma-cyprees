@@ -58,6 +58,8 @@ const AddCustomerForm = (props) => {
         }
       />
 
+      {/* Add Location Section */}
+
       <div className="box box-wrapper">
         <Heading small>Add Location</Heading>
         <button
@@ -123,7 +125,6 @@ const AddCustomerForm = (props) => {
           )}
         />
       </div>
-
       <InputGroup
         label="Payment Terms"
         name="paymentTerms"
@@ -137,7 +138,6 @@ const AddCustomerForm = (props) => {
             : undefined
         }
       />
-
       <TextArea
         label="Internal Notes"
         name="internalNotes"
