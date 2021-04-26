@@ -60,6 +60,12 @@ const AddCustomerForm = (props) => {
 
       <div className="box box-wrapper">
         <Heading small>Add Location</Heading>
+        <button
+          onClick={() => setOpenModel(!openModel)}
+          className="button is-small is-primary mb-4"
+          type="button">
+          Add Location
+        </button>
         <FieldArray
           name="locations"
           render={(arrayHelpers) => (
@@ -71,32 +77,37 @@ const AddCustomerForm = (props) => {
                 arrayHelpers={arrayHelpers}
                 setLocationVariant={setLocationVariant}
               />
-              <div>
-                {values.locations.map(
-                  (val, { index }) =>
-                    val && (
-                      <span className="tag is-success" key={index}>
-                        {val.name}
-                        <button
-                          type="button"
-                          label="button"
-                          onClick={() => arrayHelpers.remove(index)}
-                          className="delete is-small"
-                        />
-                      </span>
-                    ),
-                )}
+              <div className="table-container">
+                <table className="table is-fullwidth">
+                  <tbody>
+                    {values.locations.map((val, { index }) => (
+                      <tr key={index}>
+                        <td> {val.name}</td>
+                        <td> {val.number}</td>
+                        <td> {val.name}</td>
+                        <td> {val.name}</td>
+                        <td> {val.name}</td>
+                        <td> {val.name}</td>
+
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => arrayHelpers.remove(index)}
+                            className="button is-small is-danger is-outlined">
+                            <span>Delete</span>
+                            <span className="icon is-small">
+                              <i className="fas fa-times" />
+                            </span>
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </>
           )}
         />
-
-        <button
-          onClick={() => setOpenModel(!openModel)}
-          className="button is-small is-primary mb-4"
-          type="button">
-          Add Location
-        </button>
 
         <FieldArray
           name="locations"
