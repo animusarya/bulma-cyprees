@@ -38,7 +38,7 @@ const AddCustomer = ({ history }) => {
   }, [res.error]);
 
   if (res.data && res.data.insertCustomer) {
-    history.push(`/customer/edit:${res.data.insertCustomer.id}`);
+    history.push(`/customer/edit/${res.data.insertCustomer.id}`);
   }
 
   const handleSubmit = async (formData) => {
@@ -58,7 +58,6 @@ const AddCustomer = ({ history }) => {
   return (
     <Layout>
       <Seo title="Add New Customer" description="Add new customers page" />
-
       <DashboardMenu heading="Add New Customer">
         <AddCustomerForm onSubmit={handleSubmit} />
       </DashboardMenu>

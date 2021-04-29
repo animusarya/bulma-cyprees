@@ -19,6 +19,29 @@ import Contractor from '../pages/admin/Contractor';
 import AddContractor from '../pages/admin/AddContractor';
 import EditContractor from '../pages/admin/EditContractor';
 
+const PublicRoute = ({ component: Component, ...rest }) => {
+  const isLoggedIn = useStoreState((state) => state.isLoggedIn.value);
+  // const user = useStoreState((state) => state.user.data);
+
+  return (
+    <Route
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...rest}
+      render={(props) => {
+        const redirectTo = '/jobs/all';
+        // if (user.type === 'customer') {
+        //   redirectTo = '/distributer/dashboard';
+        // }
+        if (isLoggedIn) {
+          return <Redirect to={redirectTo} />;
+        }
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        return <Component {...props} />;
+      }}
+    />
+  );
+};
+
 const PrivateRoute = ({ component: Component, access, ...rest }) => {
   const isLoggedIn = useStoreState((state) => state.isLoggedIn.value);
   const user = useStoreState((state) => state.user.data);
@@ -44,7 +67,7 @@ const Routes = () => (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
+        <PublicRoute exact path="/login" component={Login} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
 
         <PrivateRoute
@@ -61,7 +84,7 @@ const Routes = () => (
         />
         <PrivateRoute
           exact
-          path="/job/edit:id"
+          path="/job/edit/:id"
           component={EditJob}
           access="admin"
         />
@@ -80,7 +103,7 @@ const Routes = () => (
         />
         <PrivateRoute
           exact
-          path="/customer/edit:id"
+          path="/customer/edit/:id"
           component={EditCustomer}
           access="admin"
         />
@@ -98,7 +121,7 @@ const Routes = () => (
         />
         <PrivateRoute
           exact
-          path="/contractor/edit:id"
+          path="/contractor/edit/:id"
           component={EditContractor}
           access="admin"
         />

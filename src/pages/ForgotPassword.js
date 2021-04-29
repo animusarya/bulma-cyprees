@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { useStoreActions } from 'easy-peasy';
+// import { useStoreActions } from 'easy-peasy';
 import gql from 'graphql-tag';
 import swal from 'sweetalert';
-import { isEmpty } from 'lodash';
+// import { isEmpty } from 'lodash';
 
-import useProjectGuestDetails from '../hooks/useProjectGuestDetails';
 import Seo from '../components/Seo';
 import { Message } from '../components/elements';
 import { ForgotPasswordForm } from '../components/forms';
@@ -32,21 +31,21 @@ const LinkStyled = styled(Link)`
   }
 `;
 
-const ForgotPassword = ({ match }) => {
+const ForgotPassword = () => {
   const [executeMutation, res] = useMutation(forgotPasswordMutation);
-  const updateProject = useStoreActions(
-    (actions) => actions.origin.updateProject,
-  );
-  const { projectId } = match.params;
+  // const updateProject = useStoreActions(
+  //   (actions) => actions.origin.updateProject,
+  // );
+  // const { projectId } = match.params;
 
-  // fetch project data from api
-  const [project] = useProjectGuestDetails({ projectId });
+  // // fetch project data from api
+  // const [project] = useProjectGuestDetails({ projectId });
 
-  useEffect(() => {
-    if (!isEmpty(project)) {
-      updateProject(project);
-    }
-  }, [project]);
+  // useEffect(() => {
+  //   if (!isEmpty(project)) {
+  //     updateProject(project);
+  //   }
+  // }, [project]);
 
   return (
     <>

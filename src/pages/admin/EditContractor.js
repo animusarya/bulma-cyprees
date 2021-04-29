@@ -12,25 +12,43 @@ import { EditContractorForm } from '../../components/forms';
 import { Loading } from '../../components/elements';
 
 const userQuery = gql`
-  query user {
-    user {
+  query user($id: ID!) {
+    user(id: $id) {
       id
       email
+      telephone
+      status
+      type
+      profile {
+        fullName
+      }
+      account {
+        registrationNumber
+        vatNumber
+        accountNumber
+        accountEmail
+        accountAddress
+        accountTelephone
+      }
     }
   }
 `;
 
 const updateUserMutation = gql`
-  mutation updateUser($input: UserInput!) {
-    updateUser(input: $input) {
+  mutation updateUser($id: ID!, $input: UserInput!) {
+    updateUser(id: $id, input: $input) {
       id
     }
   }
 `;
 
-const EditContractor = ({ history }) => {
+const EditContractor = ({ match, history }) => {
+  const { id } = match.params;
   const { data, loading, error } = useQuery(userQuery, {
     fetchPolicy: 'cache-and-network',
+    variables: {
+      id,
+    },
   });
   const userData = data && data.user ? data.user : {};
 
@@ -57,12 +75,21 @@ const EditContractor = ({ history }) => {
 
   const handleSubmit = async (formData) => {
     const resp = await executeMutation({
-      variables: { input: formData },
+      variables: {
+        id,
+        input: formData,
+      },
     });
     if (resp) {
       Swal.fire({
         icon: 'success',
-        title: 'Customer added successfully',
+        title: 'Update successful!',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown',
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp',
+        },
         showConfirmButton: false,
         timer: 1500,
       });
@@ -72,10 +99,15 @@ const EditContractor = ({ history }) => {
   return (
     <Layout>
       <Seo title="Edit Contractor Page" description="Edit Contractor data" />
-
       <DashboardMenu heading="Edit Contractor">
-        {loading && !data && <Loading />}
-        <EditContractorForm onSubmit={handleSubmit} data={userData} />
+        {loading ? (
+          <Loading />
+        ) : (
+          <EditContractorForm
+            onSubmit={handleSubmit}
+            initialValues={userData}
+          />
+        )}
       </DashboardMenu>
     </Layout>
   );

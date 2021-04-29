@@ -63,7 +63,7 @@ const sidebarData = [
       },
       {
         title: 'View Closed Jobs',
-        path: '/jobs/closed',
+        path: '/jobs/close',
       },
       {
         title: 'View Archived Jobs',

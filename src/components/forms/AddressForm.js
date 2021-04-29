@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-import { InputGroup, GoogleMap } from '../elements';
+// import { InputGroup, GoogleMap } from '../elements';
+import { InputGroup, Button } from '../elements';
 
 const AddressForm = (props) => {
   const {
@@ -12,17 +13,31 @@ const AddressForm = (props) => {
     errors,
     handleChange,
     handleBlur,
-    onChange,
     handleSubmit,
   } = props;
-  useEffect(() => {
-    onChange(values);
-    handleSubmit();
-  }, [values]);
 
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <InputGroup
+        label="Name"
+        name="name"
+        type="text"
+        value={values.name}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={errors.name && touched.name ? errors.name : undefined}
+      />
+      <InputGroup
+        label="Store Number:"
+        name="number"
+        type="text"
+        value={values.number}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errors={errors.number && touched.number ? errors.number : undefined}
+      />
+
+      {/* <InputGroup
         label="Address Line 1"
         name="addressLine1"
         type="text"
@@ -88,7 +103,13 @@ const AddressForm = (props) => {
       />
 
       <GoogleMap label="Location" />
-    </div>
+      */}
+      <div className="mt-5">
+        <Button primary onClick={handleSubmit}>
+          <span className="has-text-weight-bold">Submit</span>
+        </Button>
+      </div>
+    </form>
   );
 };
 
@@ -101,22 +122,40 @@ AddressForm.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({
-    addressLine1: '',
-    addressLine2: '',
-    city: '',
-    state: '',
-    postcode: '',
-    country: '',
+  mapPropsToValues: ({ initialValues }) => ({
+    name: initialValues ? initialValues.name : '',
+    number: initialValues ? initialValues.number : '',
+
+    // addressLine1: '',
+    // addressLine2: '',
+    // city: '',
+    // state: '',
+    // postcode: '',
+    // country: '',
   }),
   validationSchema: yup.object().shape({
-    addressLine1: yup.string().required('Address Line 1 is required!'),
-    addressLine2: yup.string(),
-    city: yup.string().required('City is required!'),
-    state: yup.string().required('State is required!'),
-    postcode: yup.string().required('Postcode is required!'),
-    country: yup.string().required('Country is required!'),
+    name: yup.string().required('Name is required!'),
+    number: yup.string().required('Number is required!'),
+
+    // addressLine1: yup.string().required('Address Line 1 is required!'),
+    // addressLine2: yup.string(),
+    // city: yup.string().required('City is required!'),
+    // state: yup.string().required('State is required!'),
+    // postcode: yup.string().required('Postcode is required!'),
+    // country: yup.string().required('Country is required!'),
   }),
 
+  handleSubmit: (values, { setSubmitting, resetForm, props }) => {
+    // console.log('handle submit', values, props);
+    props
+      .onSubmit(values)
+      .then(() => {
+        setSubmitting(false);
+        resetForm();
+      })
+      .catch(() => {
+        setSubmitting(false);
+      });
+  },
   displayName: 'AddressForm', // helps with React DevTools
 })(AddressForm);

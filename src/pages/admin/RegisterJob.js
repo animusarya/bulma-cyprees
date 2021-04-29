@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import { useStoreActions, useStoreState } from 'easy-peasy';
-import { isEmpty } from 'lodash';
 
-import useProjectGuestDetails from '../../hooks/useProjectGuestDetails';
 import Seo from '../../components/Seo';
 import Layout from '../../components/Layout';
 import { Message, Loading } from '../../components/elements';
@@ -37,21 +35,12 @@ const Register = ({ match }) => {
     (actions) => actions.isLoggedIn.togggle,
   );
   const updateUser = useStoreActions((actions) => actions.user.update);
-  const updateProject = useStoreActions(
-    (actions) => actions.origin.updateProject,
-  );
+
   const activeProject = useStoreState((state) => state.origin.project);
   const { projectId, email } = match.params;
   const isAdminRegister = !projectId;
 
   // fetch project data from api
-  const [project] = useProjectGuestDetails({ projectId });
-
-  useEffect(() => {
-    if (!isEmpty(project)) {
-      updateProject(project);
-    }
-  }, [project]);
 
   if (res.data && res.data.register) {
     const { jwt, user } = res.data.register;

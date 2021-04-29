@@ -1,41 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function JobTable(props) {
-  const { status, tableData } = props;
+import * as dayjs from 'dayjs';
 
-  return (
-    <div className="table-container">
-      <table className="table is-fullwidth">
-        <thead>
-          <tr>
-            <th>Job Number</th>
-            <th>Customer - Site</th>
-            <th>Due</th>
-            <th>Assigned</th>
-            <th>Status</th>
-            <th>View</th>
+const JobTable = ({ tableData: data }) => (
+  <div className="table-container">
+    <table className="table is-fullwidth">
+      <thead>
+        <tr>
+          <th>Job Number</th>
+          <th>Customer - Site</th>
+          <th>Due</th>
+          <th>Assigned</th>
+          <th>Status</th>
+          <th>View</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((item) => (
+          <tr key={item.id}>
+            <td>{item.code}</td>
+            <td>{item.customer.name} </td>
+
+            <td> {dayjs(item.dueDate).format('DD / MM / YYYY')}</td>
+            <td>{item.assigned}</td>
+            <td>{item.status}</td>
+            <td>
+              <Link to={`/job/edit/${item.id}`} className="button is-primary">
+                View
+              </Link>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {tableData.map((item) => (
-            <tr key={item.jobNumber}>
-              <td>{item.jobNumber}</td>
-              <td>{item.site} </td>
-              <td>{item.dueDate}</td>
-              <td>{item.assigned}</td>
-              <td>{status}</td>
-              <td>
-                <Link to="/job/edit:12345" className="button is-primary">
-                  View
-                </Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
 
 export default JobTable;
