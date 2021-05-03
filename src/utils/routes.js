@@ -28,7 +28,7 @@ const PublicRoute = ({ component: Component, ...rest }) => {
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...rest}
       render={(props) => {
-        const redirectTo = '/jobs/all';
+        const redirectTo = '/jobs/open';
         // if (user.type === 'customer') {
         //   redirectTo = '/distributer/dashboard';
         // }

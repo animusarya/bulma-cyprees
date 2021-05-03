@@ -3,16 +3,7 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-import { InputGroup, Button, TextArea, NameSelectInput } from '../elements';
-
-const customerName = [
-  { name: 'Kunal' },
-  { name: 'Dharmveer' },
-  { name: 'Taniya' },
-  { name: 'Saurav' },
-  { name: 'Manisha' },
-  { name: 'Vishal' },
-];
+import { InputGroup, Button, TextArea } from '../elements';
 
 const AddJobCustomerForm = (props) => {
   const {
@@ -27,23 +18,15 @@ const AddJobCustomerForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <NameSelectInput
+      <InputGroup
+        label="Customer Name"
         name="name"
+        type="text"
         value={values.name}
+        onChange={handleChange}
         onBlur={handleBlur}
-        // onChange={(value) => setFieldValue('name', value)}
-        label="Customer"
-        options={
-          customerName
-            ? customerName.map((item) => ({
-                value: item.name,
-                label: item.name,
-              }))
-            : []
-        }
         errors={errors.name && touched.name ? errors.name : undefined}
       />
-
       <InputGroup
         label="Site Name"
         name="siteName"
@@ -100,13 +83,13 @@ AddJobCustomerForm.propTypes = {
 
 export default withFormik({
   mapPropsToValues: () => ({
-    customerName: '',
+    name: '',
     siteName: '',
     address: '',
     internalNotes: '',
   }),
   validationSchema: yup.object().shape({
-    customerName: yup.string().required('Customer Name is required!'),
+    name: yup.string().required('Customer Name is required!'),
     siteName: yup.string().required('Site Name is required!'),
     address: yup.string().required('Address is required!'),
     internalNotes: yup.string(),
