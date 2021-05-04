@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
@@ -18,6 +17,8 @@ import EditCustomer from '../pages/admin/EditCustomer';
 import Contractor from '../pages/admin/Contractor';
 import AddContractor from '../pages/admin/AddContractor';
 import EditContractor from '../pages/admin/EditContractor';
+
+import ContractorDashboard from '../pages/contractor/Dashboard';
 
 const PublicRoute = ({ component: Component, ...rest }) => {
   const isLoggedIn = useStoreState((state) => state.isLoggedIn.value);
@@ -69,7 +70,6 @@ const Routes = () => (
         <Route exact path="/" component={Home} />
         <PublicRoute exact path="/login" component={Login} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
-
         <PrivateRoute
           exact
           path="/jobs/:status"
@@ -88,7 +88,6 @@ const Routes = () => (
           component={EditJob}
           access="admin"
         />
-
         <PrivateRoute
           exact
           path="/customers"
@@ -124,6 +123,12 @@ const Routes = () => (
           path="/contractor/edit/:id"
           component={EditContractor}
           access="admin"
+        />
+        <PrivateRoute
+          exact
+          path="/contractor/dashboard"
+          component={ContractorDashboard}
+          access="admin" // FIXME: Change admin access to contractor.
         />
 
         <Route exact path="/test" component={Test} />
