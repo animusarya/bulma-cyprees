@@ -17,8 +17,7 @@ const useSearchFilter = (filter) => {
 
   const results = fuse.search(searchQuery);
 
-  const characterResults =
-    searchQuery !== '' ? results.map((character) => character.item) : allData;
+  const characterResults = results.map((character) => character.item);
 
   const onSearch = ({ currentTarget }) => {
     if (currentTarget.value.length > 0) {
