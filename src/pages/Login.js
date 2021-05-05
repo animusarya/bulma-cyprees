@@ -46,7 +46,7 @@ const Login = ({ history }) => {
     toggleLoggedIn(true);
     updateUser(user);
     setTimeout(() => {
-      history.push('/jobs/all');
+      history.push('/jobs/open');
     }, 1000);
   }
 

@@ -14,13 +14,16 @@ const Container = styled.div`
   }
 `;
 
-const Layout = ({ children }) => (
+const Layout = ({ children, hideSidebar }) => (
   <Container>
     <Helmet title={config.siteName} />
+
     <div className="columns mr-0">
-      <div className="column is-one-fifth is-paddingless">
-        <Sidebar />
-      </div>
+      {!hideSidebar && (
+        <div className="column is-one-fifth is-paddingless">
+          <Sidebar />
+        </div>
+      )}
       <div className="column right-column pb-0 p-5">{children}</div>
     </div>
   </Container>

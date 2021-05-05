@@ -8,11 +8,22 @@ const Container = styled.h2`
     props.small ? props.theme.fontSizeLarge : props.theme.fontSizeExtraLarge};
 `;
 
-const Heading = ({ children, small }) => (
+const Line = styled.div`
+  height: 3px;
+  width: 80px;
+  background-color: ${(props) => props.theme.mainBrandColor};
+  margin: 0.5rem auto 0.5rem auto;
+`;
+
+const Heading = ({ children, small, centered, ...otherProps }) => (
   <Container
-    className="title has-text-black pb-3 has-text-weight-semibold"
-    small={small}>
+    small={small}
+    className={`title has-text-black pb-3 has-text-weight-semibold ${
+      centered ? 'has-text-centered' : ''
+    }  `}
+    {...otherProps}>
     {children}
+    {centered && <Line />}
   </Container>
 );
 

@@ -48,6 +48,7 @@ const Jobs = () => {
   // const onSearch = ({ currentTarget }) => {
   //   setUpdateQuery(currentTarget.value);
   // };
+
   const { data, error, loading } = useQuery(allJobsQuery, {
     fetchPolicy: 'cache-and-network',
     variables: {
@@ -75,7 +76,6 @@ const Jobs = () => {
       <DashboardMenu
         // value={query}
         // onChange={onSearch}
-        // onChange={(filters) => onSearch(filters, tableData)}
         hasSearchMenu
         heading={heading}>
         {loading && !data && <Loading />}

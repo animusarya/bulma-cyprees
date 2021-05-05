@@ -34,7 +34,7 @@ const SubMenu = ({ item }) => {
 
   useEffect(() => {
     const index = findIndex(item.subNav, { path: currentPath });
-    if (index >= 0 || currentPath === '/jobs/all') {
+    if (index >= 0 || currentPath === '/jobs/open') {
       setSubNav(true);
     }
   }, [item]);
