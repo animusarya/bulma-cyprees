@@ -26,7 +26,6 @@ const PublicRoute = ({ component: Component, ...rest }) => {
 
   return (
     <Route
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...rest}
       render={(props) => {
         const redirectTo = '/jobs/open';
@@ -36,7 +35,6 @@ const PublicRoute = ({ component: Component, ...rest }) => {
         if (isLoggedIn) {
           return <Redirect to={redirectTo} />;
         }
-        // eslint-disable-next-line react/jsx-props-no-spreading
         return <Component {...props} />;
       }}
     />
