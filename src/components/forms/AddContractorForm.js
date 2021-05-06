@@ -144,7 +144,7 @@ const AddContractorForm = (props) => {
       <InputGroup
         label="Password"
         name="password"
-        type="text"
+        type="password"
         value={values.password}
         onChange={handleChange}
         onBlur={handleBlur}
