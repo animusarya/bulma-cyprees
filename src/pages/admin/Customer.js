@@ -8,6 +8,7 @@ import Seo from '../../components/Seo';
 import CustomerTable from '../../components/customers/CustomerTable';
 import DashboardMenu from '../../components/global/DashboardMenu';
 import { Loading, EmptyState } from '../../components/elements';
+import useSearchFilter from '../../hooks/useSearchFilter';
 
 const allCustomersQuery = gql`
   query allCustomers {
@@ -26,6 +27,11 @@ const allCustomersQuery = gql`
 `;
 
 const Customer = () => {
+  const [filteredData, { onSearch, setAllData }] = useSearchFilter(['name']);
+  // const [searchQuery, setSearchQuery] = useState('');
+
+  // console.log(searchQuery, 'searchQuery');
+
   const { data, error, loading } = useQuery(allCustomersQuery, {
     fetchPolicy: 'cache-and-network',
   });
@@ -38,18 +44,20 @@ const Customer = () => {
       });
   }, [error]);
 
-  const allCustomers = data && data.allCustomers ? data.allCustomers : {};
+  useEffect(() => {
+    if (data && !loading) setAllData(data.allCustomers);
+  }, [data]);
+
   return (
     <Layout>
       <Seo title="Customers" description="View all customers" />
-
-      <DashboardMenu hasSearchMenu heading="Customer">
+      <DashboardMenu hasSearchMenu heading="Customer" onChange={onSearch}>
         {loading && !data && <Loading />}
         <div className="has-text-centered mb-5">
-          {allCustomers.length === 0 && !loading && <EmptyState />}
+          {filteredData.length === 0 && !loading && <EmptyState />}
         </div>
-        {allCustomers && allCustomers.length > 0 && (
-          <CustomerTable data={allCustomers} />
+        {filteredData && filteredData.length > 0 && (
+          <CustomerTable data={filteredData} />
         )}
       </DashboardMenu>
     </Layout>

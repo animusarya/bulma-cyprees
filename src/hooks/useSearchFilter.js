@@ -1,26 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Fuse from 'fuse.js';
 
-const useSearchFilter = () => {
-  const [query, setUpdateQuery] = useState('');
+const useSearchFilter = (filter) => {
+  const [searchQuery, setSearchQuery] = useState('');
   const [allData, setAllData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+
+  useEffect(() => {
+    setFilteredData(allData);
+  }, [allData]);
+
   const fuse = new Fuse(allData, {
-    keys: ['jobNumber', 'site', 'dueDate', 'assigned'],
+    keys: filter,
     includeScore: true,
   });
 
-  const results = fuse.search(query);
+  const results = fuse.search(searchQuery);
 
-  const characterResults =
-    query !== '' ? results.map((character) => character.item) : allData;
-
-  console.log(characterResults, query);
+  const characterResults = results.map((character) => character.item);
 
   const onSearch = ({ currentTarget }) => {
-    setUpdateQuery(currentTarget.value);
-    setAllData(characterResults);
+    if (currentTarget.value.length > 0) {
+      setSearchQuery(currentTarget.value);
+      setFilteredData(characterResults);
+    } else {
+      setFilteredData(allData);
+    }
   };
 
-  return [allData, query, { onSearch, setAllData }];
+  return [filteredData, { onSearch, setAllData }];
 };
 export default useSearchFilter;

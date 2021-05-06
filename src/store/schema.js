@@ -21,7 +21,7 @@ const schema = {
   },
   isLoggedIn: {
     value: false,
-    togggle: action((state, payload) => {
+    toggle: action((state, payload) => {
       state.value = payload;
     }),
   },

@@ -7,6 +7,7 @@ import Searchbar from './Searchbar';
 
 const Container = styled.div`
   background-color: ${(props) => props.theme.primaryBackground};
+  min-height: 100vh;
 `;
 
 const SelectContainer = styled.div`

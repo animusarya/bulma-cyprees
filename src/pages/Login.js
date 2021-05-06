@@ -36,7 +36,7 @@ const mutation = gql`
 const Login = ({ history }) => {
   const [executeMutation, res] = useMutation(mutation);
   const toggleLoggedIn = useStoreActions(
-    (actions) => actions.isLoggedIn.togggle,
+    (actions) => actions.isLoggedIn.toggle,
   );
   const updateUser = useStoreActions((actions) => actions.user.update);
 

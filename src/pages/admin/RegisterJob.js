@@ -31,8 +31,8 @@ const registerMutation = gql`
 
 const Register = ({ match }) => {
   const [executeMutation, res] = useMutation(registerMutation);
-  const togggleLoggedIn = useStoreActions(
-    (actions) => actions.isLoggedIn.togggle,
+  const toggleLoggedIn = useStoreActions(
+    (actions) => actions.isLoggedIn.toggle,
   );
   const updateUser = useStoreActions((actions) => actions.user.update);
 
@@ -45,7 +45,7 @@ const Register = ({ match }) => {
   if (res.data && res.data.register) {
     const { jwt, user } = res.data.register;
     window.localStorage.setItem('token', jwt);
-    togggleLoggedIn(true);
+    toggleLoggedIn(true);
     updateUser(user);
     setTimeout(() => {
       window.location.replace(
