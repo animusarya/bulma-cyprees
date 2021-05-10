@@ -1,18 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { TableHead } from '../elements';
+
+const tableHeadData = [
+  { name: 'Customer' },
+  { name: 'Address' },
+  { name: 'Email Address' },
+  { name: 'Store No.' },
+  { name: 'Edit' },
+];
+
 const CustomerTable = ({ data }) => (
   <div className="table-container">
     <table className="table is-fullwidth">
-      <thead>
-        <tr>
-          <th>Customer</th>
-          <th>Address</th>
-          <th>Email Address</th>
-          <th>Store No.</th>
-          <th>Edit</th>
-        </tr>
-      </thead>
+      <TableHead tableHeadData={tableHeadData} />
       <tbody>
         {data &&
           data.map((item) => (

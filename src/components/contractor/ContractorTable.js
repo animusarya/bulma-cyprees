@@ -1,6 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { TableHead } from '../elements';
+
+const tableHeadData = [
+  { name: 'Contractor' },
+  { name: 'Profile Name' },
+  { name: 'Address' },
+  { name: 'Telephone' },
+  { name: 'Type' },
+  { name: 'Status' },
+  { name: 'Edit' },
+];
+
 const ContractorTable = ({ data }) => {
   if (!data) {
     return null;
@@ -8,17 +20,7 @@ const ContractorTable = ({ data }) => {
   return (
     <div className="table-container">
       <table className="table is-fullwidth">
-        <thead>
-          <tr>
-            <th>Contractor</th>
-            <th>Profile Name</th>
-            <th>Address</th>
-            <th>Telephone</th>
-            <th>Type</th>
-            <th>Status</th>
-            <th>Edit</th>
-          </tr>
-        </thead>
+        <TableHead tableHeadData={tableHeadData} />
         <tbody>
           {data.map((item) => (
             <tr key={item.id}>
