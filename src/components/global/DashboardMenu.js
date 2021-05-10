@@ -52,7 +52,7 @@ const DashboardMenu = ({
               </select>
             </SelectContainer>
           </div>
-          <div className="column is-half-mobile is-2-desktop is-3-tablet">
+          <div className="column is-half">
             <div className="field">
               <Searchbar value={value} onChange={onChange} />
             </div>

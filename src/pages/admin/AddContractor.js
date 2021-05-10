@@ -32,6 +32,7 @@ const insertUserMutation = gql`
     }
   }
 `;
+
 const AddContractor = ({ history }) => {
   const [executeMutation, res] = useMutation(insertUserMutation);
   useEffect(() => {

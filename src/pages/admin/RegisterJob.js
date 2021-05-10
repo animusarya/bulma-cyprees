@@ -75,8 +75,8 @@ const Register = ({ match }) => {
           initialValues={{
             email: email || '',
           }}
-          onSubmit={(data) =>
-            executeMutation({
+          onSubmit={async (data) => {
+            await executeMutation({
               variables: {
                 input: {
                   email: data.email,
@@ -88,8 +88,8 @@ const Register = ({ match }) => {
                   websiteAddress: data.websiteAddress,
                 },
               },
-            })
-          }
+            });
+          }}
           project={activeProject}
           isAdminRegister={isAdminRegister}
         />
