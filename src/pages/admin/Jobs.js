@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Swal from 'sweetalert2';
 
-// import Fuse from 'fuse.js';
+import useSearchFilter from '../../hooks/useSearchFilter';
 
 import Seo from '../../components/Seo';
 import Layout from '../../components/Layout';
@@ -29,25 +29,15 @@ const allJobsQuery = gql`
 `;
 
 const Jobs = () => {
+  const [filteredData, { onSearch, setAllData }] = useSearchFilter([
+    'code',
+    'dueDate',
+    'customer.name',
+  ]);
+
   const { status } = useParams();
 
   const heading = status === 'revisit' ? 'Jobs that need Revisit' : 'Jobs';
-
-  // const [query, setUpdateQuery] = useState('');
-  // const fuse = new Fuse(tableData, {
-  //   keys: ['jobNumber', 'site', 'dueDate', 'assigned'],
-  //   includeScore: true,
-  // });
-
-  // const results = fuse.search(query);
-
-  // const allJobs = query
-  //   ? results.map((character) => character.item)
-  //   : tableData;
-
-  // const onSearch = ({ currentTarget }) => {
-  //   setUpdateQuery(currentTarget.value);
-  // };
 
   const { data, error, loading } = useQuery(allJobsQuery, {
     fetchPolicy: 'cache-and-network',
@@ -67,23 +57,20 @@ const Jobs = () => {
       });
   }, [error]);
 
-  const allJobs = data && data.allJobs ? data.allJobs : {};
+  useEffect(() => {
+    if (data && !loading) setAllData(data.allJobs);
+  }, [data]);
 
   return (
     <Layout>
       <Seo title="Job page" description="View All Jobs" />
-
-      <DashboardMenu
-        // value={query}
-        // onChange={onSearch}
-        hasSearchMenu
-        heading={heading}>
+      <DashboardMenu onChange={onSearch} hasSearchMenu heading={heading}>
         {loading && !data && <Loading />}
         <div className="has-text-centered mb-5">
-          {allJobs.length === 0 && !loading && <EmptyState />}
+          {filteredData.length === 0 && !loading && <EmptyState />}
         </div>
-        {allJobs && allJobs.length > 0 && (
-          <JobTable tableData={allJobs} status={status} />
+        {filteredData && filteredData.length > 0 && (
+          <JobTable tableData={filteredData} status={status} />
         )}
       </DashboardMenu>
     </Layout>
