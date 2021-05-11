@@ -27,14 +27,17 @@ const allCustomersQuery = gql`
 `;
 
 const Customer = () => {
-  const [filteredData, { onSearch, setAllData }] = useSearchFilter(['name']);
-  // const [searchQuery, setSearchQuery] = useState('');
-
-  // console.log(searchQuery, 'searchQuery');
+  const [filteredData, { onSearch, setAllData }] = useSearchFilter([
+    'name',
+    'accountsEmail',
+    'locations.number',
+    'locations.address.addressLine1',
+  ]);
 
   const { data, error, loading } = useQuery(allCustomersQuery, {
     fetchPolicy: 'cache-and-network',
   });
+
   useEffect(() => {
     if (error)
       Swal.fire({

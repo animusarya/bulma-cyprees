@@ -11,6 +11,7 @@ const Container = styled.div`
 `;
 
 const SelectContainer = styled.div`
+  width: 100%;
   option {
     background: ${(props) => props.theme.mainBrandColor};
     color: ${(props) => props.theme.textColorWhite};
@@ -19,6 +20,7 @@ const SelectContainer = styled.div`
     background-color: ${(props) => props.theme.secondaryColor};
     border: 1px solid ${(props) => props.theme.borderColor};
     color: ${(props) => props.theme.fontDark} !important;
+    width: 100%;
 
     :focus,
     :hover {
