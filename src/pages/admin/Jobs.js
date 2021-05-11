@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import Swal from 'sweetalert2';
 
@@ -24,6 +24,18 @@ const allJobsQuery = gql`
         id
         name
       }
+      contractor {
+        id
+      }
+    }
+  }
+`;
+
+const updateJobMutation = gql`
+  mutation updateJob($id: ID!, $input: JobInput!) {
+    updateJob(id: $id, input: $input) {
+      id
+      status
     }
   }
 `;
@@ -35,11 +47,12 @@ const Jobs = () => {
     'customer.name',
   ]);
 
-  const { status } = useParams();
+  const [executeMutation, res] = useMutation(updateJobMutation);
 
+  const { status } = useParams();
   const heading = status === 'revisit' ? 'Jobs that need Revisit' : 'Jobs';
 
-  const { data, error, loading } = useQuery(allJobsQuery, {
+  const { data, error, loading, refetch } = useQuery(allJobsQuery, {
     fetchPolicy: 'cache-and-network',
     variables: {
       filters: {
@@ -61,6 +74,52 @@ const Jobs = () => {
     if (data && !loading) setAllData(data.allJobs);
   }, [data]);
 
+  useEffect(() => {
+    if (res.error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: res.error.message,
+      });
+    if (error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: error.message,
+      });
+  }, [res.error, error]);
+
+  const handleUpdateJob = async (formData) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const resp = await executeMutation({
+          variables: {
+            id: formData.id,
+            input: {
+              customer: formData.customer,
+              contractor: formData.contractor,
+              startDate: formData.startDate,
+              dueDate: formData.dueDate,
+              status: formData.status,
+            },
+          },
+        });
+        if (resp) {
+          refetch();
+          Swal.fire('Deleted!', 'Job deleted successfully', 'success');
+        }
+      }
+    });
+  };
+
   return (
     <Layout>
       <Seo title="Job page" description="View All Jobs" />
@@ -70,7 +129,11 @@ const Jobs = () => {
           {filteredData.length === 0 && !loading && <EmptyState />}
         </div>
         {filteredData && filteredData.length > 0 && (
-          <JobTable tableData={filteredData} status={status} />
+          <JobTable
+            tableData={filteredData}
+            status={status}
+            handleRemove={handleUpdateJob}
+          />
         )}
       </DashboardMenu>
     </Layout>

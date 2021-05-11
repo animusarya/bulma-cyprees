@@ -15,7 +15,7 @@ const tableHeadData = [
   { name: '' },
 ];
 
-const JobTable = ({ tableData: data }) => (
+const JobTable = ({ tableData: data, handleRemove }) => (
   <div className="table-container">
     <table className="table is-fullwidth">
       <TableHead tableHeadData={tableHeadData} />
@@ -44,7 +44,21 @@ const JobTable = ({ tableData: data }) => (
               </Link>
             </td>
             <td className="is-size-4">
-              <RiDeleteBin5Line />
+              <button
+                className="delete-button is-size-6"
+                type="submit"
+                onClick={() =>
+                  handleRemove({
+                    id: item.id,
+                    customer: item.customer.id,
+                    contractor: item.contractor.id,
+                    startDate: item.startDate || '12-12-2021',
+                    dueDate: item.dueDate,
+                    status: 'archived',
+                  })
+                }>
+                <RiDeleteBin5Line />
+              </button>
             </td>
           </tr>
         ))}

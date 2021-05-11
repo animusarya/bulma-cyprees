@@ -30,4 +30,5 @@ const useSearchFilter = (filter) => {
 
   return [filteredData, { onSearch, setAllData }];
 };
+
 export default useSearchFilter;
