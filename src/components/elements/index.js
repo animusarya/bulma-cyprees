@@ -13,6 +13,7 @@ import NameSelectInput from './NameSelectInput';
 import SignaturePad from './SignaturePad';
 import DatePicker from './DatePicker';
 import EmptyState from './EmptyState';
+import TableHead from './TableHead';
 
 export {
   InputGroup,
@@ -30,4 +31,5 @@ export {
   SignaturePad,
   DatePicker,
   EmptyState,
+  TableHead,
 };

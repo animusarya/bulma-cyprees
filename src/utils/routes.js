@@ -126,7 +126,7 @@ const Routes = () => (
           exact
           path="/contractor/dashboard"
           component={ContractorDashboard}
-          access="admin" // FIXME: Change admin access to contractor.
+          access="contractor"
         />
 
         <Route exact path="/test" component={Test} />

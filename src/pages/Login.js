@@ -76,7 +76,9 @@ const Login = ({ history }) => {
                     />
                   </Link>
                   <LoginForm
-                    onSubmit={(data) => executeMutation({ variables: data })}
+                    onSubmit={async (data) => {
+                      await executeMutation({ variables: data });
+                    }}
                   />
                 </div>
               </div>

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
+import useSearchFilter from '../../hooks/useSearchFilter';
 
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
@@ -28,9 +29,18 @@ const allUserQuery = gql`
 `;
 
 const Contractor = () => {
+  const [filteredData, { onSearch, setAllData }] = useSearchFilter([
+    'profile.fullName',
+    'email',
+    'telephone',
+    'status',
+    'account.accountAddress',
+  ]);
+
   const { data, error, loading } = useQuery(allUserQuery, {
     fetchPolicy: 'cache-and-network',
   });
+
   useEffect(() => {
     if (error)
       Swal.fire({
@@ -40,17 +50,22 @@ const Contractor = () => {
       });
   }, [error]);
 
-  const allUsers = data && data.allUsers ? data.allUsers : {};
+  useEffect(() => {
+    if (data && !loading) setAllData(data.allUsers);
+  }, [data]);
+
   return (
     <Layout>
       <Seo title="Contractors" description="View all contractors" />
 
-      <DashboardMenu hasSearchMenu heading="Contractor">
+      <DashboardMenu hasSearchMenu heading="Contractor" onChange={onSearch}>
         {loading && !data && <Loading />}
         <div className="has-text-centered mb-5">
-          {allUsers.length === 0 && !loading && <EmptyState />}
+          {filteredData.length === 0 && !loading && <EmptyState />}
         </div>
-        {allUsers && allUsers.length > 0 && <ContractorTable data={allUsers} />}
+        {filteredData && filteredData.length > 0 && (
+          <ContractorTable data={filteredData} />
+        )}
       </DashboardMenu>
     </Layout>
   );

@@ -140,7 +140,9 @@ const Sidebar = () => {
           <LogoutWrapper onClick={() => toggleLoggedIn(false)} className="ml-5">
             <div className="has-text-white is-align-items-center is-flex">
               <BiIcons.BiLogOutCircle />
-              <SidebarLabel className="has-text-white">Logout</SidebarLabel>
+              <SidebarLabel className="has-text-white is-clickable">
+                Logout
+              </SidebarLabel>
             </div>
           </LogoutWrapper>
         </div>
