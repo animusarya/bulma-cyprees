@@ -1,10 +1,10 @@
-# RD glazing
+# Test
 
-> Frontend app for Rd-glazing System using ReactJs with batteries included.
+> Frontend app for Rd-test System using ReactJs with batteries included.
 
 ## To Test App
 
-- [Go to Website](https://www.rdglazing.app/login)
+- [Go to Website](https://www.rdtest.app/login)
 
 ```
 Username admin

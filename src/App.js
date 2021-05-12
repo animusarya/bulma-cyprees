@@ -8,7 +8,6 @@ import theme from './utils/theme';
 import apolloClient from './utils/apolloClient';
 import { store, persistor } from './store';
 import Routes from './utils/routes';
-import { Loading } from './components/elements';
 
 const App = () => {
   useEffect(() => {
@@ -17,7 +16,7 @@ const App = () => {
 
   return (
     <ApolloProvider client={apolloClient}>
-      <PersistGate loading={<Loading />} persistor={persistor}>
+      <PersistGate persistor={persistor}>
         <StoreProvider store={store}>
           <ThemeProvider theme={theme}>
             <Routes />
