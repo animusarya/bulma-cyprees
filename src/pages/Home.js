@@ -10,25 +10,26 @@ const Home = () => (
         <form>
           <div>
             <label className="label">Name</label>
-            <input className="input" required name="name" id="email" />
-          </div>
-          <div>
-            <label className="label">Email</label>
-            <input className="input" required name="email" id="email" />
-          </div>
-          <div>
-            <label className="label">Your message</label>
-            <textarea
-              className="textarea"
-              id="message"
-              name="message"
+            <input
+              className="input is-first-input"
               required
+              name="name"
+              id="email"
             />
           </div>
           <div>
-            <button className="button" type="submit">
+            <label className="label">Email</label>
+            <input
+              className="input is-second-input"
+              required
+              name="email"
+              id="email"
+            />
+          </div>
+          <div>
+            <a href="/test" className="button login-button" type="submit">
               SEND
-            </button>
+            </a>
           </div>
         </form>
       </div>{' '}
