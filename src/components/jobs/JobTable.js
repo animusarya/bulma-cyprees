@@ -43,16 +43,16 @@ const JobTable = ({ tableData: data, handleRemove }) => (
                 View
               </Link>
             </td>
-            <td className="is-size-4">
+            <td>
               <button
-                className="delete-button is-size-6"
+                className="button"
                 type="submit"
                 onClick={() =>
                   handleRemove({
                     id: item.id,
                     customer: item.customer.id,
                     contractor: item.contractor.id,
-                    startDate: item.startDate || '12-12-2021',
+                    startDate: item.startDate || '12-12-2021', // FIXME:
                     dueDate: item.dueDate,
                     status: 'archived',
                   })
