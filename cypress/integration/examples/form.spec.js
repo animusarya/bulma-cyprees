@@ -19,6 +19,7 @@ context('Home', () => {
     cy.get('.is-second-input')
       .type('dharmveer-bangar')
       .should('have.value', 'dharmveer-bangar');
-    cy.get('.login-button').click();
+
+    cy.get('.signup-button').click();
   });
 });

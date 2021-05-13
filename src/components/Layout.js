@@ -2,6 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import config from '../utils/config';
+import Header from './Header';
 
 const Container = styled.div`
   .right-column {
@@ -12,15 +13,12 @@ const Container = styled.div`
   }
 `;
 
-const Layout = ({ children, hideSidebar }) => (
+const Layout = ({ children }) => (
   <Container>
     <Helmet title={config.siteName} />
-
-    <div className="columns mr-0">
-      {!hideSidebar && (
-        <div className="column is-one-fifth is-paddingless">helllo </div>
-      )}
-      <div className="column right-column pb-0 p-5">{children}</div>
+    <Header />
+    <div className="">
+      <div className="">{children}</div>
     </div>
   </Container>
 );
