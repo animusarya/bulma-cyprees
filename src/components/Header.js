@@ -84,11 +84,7 @@ const Header = () => {
             <button
               type="button"
               href="/"
-              className={
-                isActive
-                  ? 'is-active navbar-burger  mt-5'
-                  : 'navbar-burger  mt-5'
-              }
+              className={isActive ? 'is-active navbar-burger' : 'navbar-burger'}
               aria-label="menu"
               aria-expanded="false"
               data-target="navbarBasicExample"
@@ -122,7 +118,7 @@ const Header = () => {
                 Gallery
               </a>
               <a
-                href="/"
+                href="/contact"
                 className="navbar-item has-text-weight-normal is-size-4  p-5 animated-line">
                 Contact
               </a>
